@@ -6,6 +6,7 @@ on:
     
 permissions:
   contents: read
+  id-token: write
 
 jobs:
   build:
@@ -26,17 +27,26 @@ jobs:
 
     - name: Restore dependencies
       run: dotnet restore
+      working-directory: ./
 
     - name: Build
       run: dotnet build -c Release --no-restore /p:Version=${VERSION}
+      working-directory: ./
 
     - name: Test
       run: dotnet test --no-build -c Release --verbosity normal /p:Version=${VERSION}
+      working-directory: ./
 
     - name: Pack nugets
       run: dotnet pack -c Release --no-build --output ./releases /p:Version=${VERSION}
       working-directory: ./
 
+    - name: NuGet login
+      uses: NuGet/login@v1
+      id: login
+      with:
+        user: ${{ secrets.NUGET_USER }}
+
     - name: Push (Nikcio.OpenApiCodeGen) to NuGet
-      run: dotnet nuget push "Nikcio.OpenApiCodeGen.${VERSION}.nupkg" --api-key ${{secrets.NUGET_API_TOKEN}} --source https://api.nuget.org/v3/index.json
+      run: dotnet nuget push "Nikcio.OpenApiCodeGen.${VERSION}.nupkg" --api-key ${{steps.login.outputs.NUGET_API_KEY}} --source https://api.nuget.org/v3/index.json
       working-directory: ./releases
