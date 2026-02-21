@@ -1,0 +1,45 @@
+name: "Bug report"
+description: "File a bug report to help improve this package."
+labels: "bug"
+body:
+- type: markdown
+  attributes:
+    value: |
+      Thanks for taking the time to report this issue as thoroughly as possible.
+- type: input
+  id: "PackageVersion"
+  attributes:
+    label: "Which Nikcio.OpenApiCodeGen version are you using? For example: 3.2.0"
+    description: "Use the `openapi-codegen --version` command in your project to find the version."
+  validations:
+    required: true
+- type: textarea
+  id: "summary"
+  attributes:
+    label: "Bug summary"
+    description: "Write a summary of the bug."
+    description: "Remember that you can format code and logs nicely with the `<>` button"
+    placeholder: >
+      Try to pinpoint it as much as possible.
+      
+      Try to state the actual problem, and not just what you think the solution might be.
+  validations:
+    required: true
+- type: textarea
+  attributes:
+    label: "Steps to reproduce"
+    id: "reproduction"
+    description: "How can we reproduce the problem on a OpenAPI specification?"
+    placeholder: >
+      Please include Minimal OpenAPI specification, any links, screenshots, stack-traces, etc.
+  validations:
+    required: true
+- type: textarea
+  attributes:
+    label: "Expected result / actual result"
+    id: "result"
+    description: "What did you expect that would happen and what is the actual result of the above steps?"
+    placeholder: >
+      Describe the intended/desired outcome after you did the steps mentioned.
+      
+      Describe the behaviour of the bug

@@ -41,6 +41,8 @@ public class ApiDirectoryTests : IAsyncLifetime
     [MemberData(nameof(GetAllApis))]
     public async Task GenerateFromSpecAsync(string apiId, string specUrl)
     {
+        ArgumentNullException.ThrowIfNull(apiId);
+
         // Download spec
         using HttpResponseMessage response = await Http.GetAsync(specUrl, TestContext.Current.CancellationToken).ConfigureAwait(true);
         response.EnsureSuccessStatusCode();
@@ -85,12 +87,16 @@ public class ApiDirectoryTests : IAsyncLifetime
         _initLock.Wait();
         try
         {
+#pragma warning disable CA1508 // Avoid dead conditional code
             if (_apis != null)
             {
                 return _apis;
             }
+#pragma warning restore CA1508 // Avoid dead conditional code
 
+#pragma warning disable VSTHRD002 // Avoid problematic synchronous waits
             _apis = FetchApiListAsync().GetAwaiter().GetResult();
+#pragma warning restore VSTHRD002 // Avoid problematic synchronous waits
             return _apis;
         }
         finally
@@ -109,7 +115,9 @@ public class ApiDirectoryTests : IAsyncLifetime
         await _initLock.WaitAsync().ConfigureAwait(true);
         try
         {
+#pragma warning disable CA1508 // Avoid dead conditional code
             _apis ??= await FetchApiListAsync().ConfigureAwait(true);
+#pragma warning restore CA1508 // Avoid dead conditional code
         }
         finally
         {
@@ -175,5 +183,5 @@ public class ApiDirectoryTests : IAsyncLifetime
         return new string(sanitized);
     }
 
-    private record ApiEntry(string Id, string SpecUrl);
+    private sealed record ApiEntry(string Id, string SpecUrl);
 }
