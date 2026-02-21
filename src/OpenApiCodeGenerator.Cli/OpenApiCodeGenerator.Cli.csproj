@@ -15,7 +15,7 @@
     <PackageTags>openapi;codegen;csharp;code-generator;swagger;rest-api;dotnet-tool</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageIcon>logo.png</PackageIcon>
-    <PackageProjectUrl>https://openapi.nikcio.com</PackageProjectUrl>
+    <PackageProjectUrl>https://nikcio-labs.github.io/openapi-code-generator/</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Nikcio-labs/openapi-code-generator</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageReadmeFile>README.md</PackageReadmeFile>

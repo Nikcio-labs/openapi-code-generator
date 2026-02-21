@@ -11,7 +11,7 @@
 </p>
 
 <p align="center">
-  <a href="https://openapi.nikcio.com">Documentation</a> •
+  <a href="https://nikcio-labs.github.io/openapi-code-generator">Documentation</a> •
   <a href="#installation">Installation</a> •
   <a href="#quick-start">Quick Start</a> •
   <a href="CHANGELOG.md">Changelog</a>
