@@ -9,6 +9,16 @@ export default defineConfig({
 	integrations: [
 		starlight({
 			title: 'OpenAPI Code Generator',
+			description: 'A fast, opinionated C# code generator that transforms OpenAPI 3.x specifications into modern C# records, enums, and type aliases.',
+			head: [
+				{
+					tag: 'meta',
+					attrs: {
+						name: 'google-site-verification',
+						content: 'aAvqHpzAD8nHnD8OBmwCTNlwzooPa89X_i_b6j3d7J8',
+					},
+				},
+			],
 			social: [
 				{ icon: 'github', label: 'GitHub', href: 'https://github.com/Nikcio-labs/openapi-code-generator' },
 			],
