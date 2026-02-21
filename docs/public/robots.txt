@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://nikcio-labs.github.io/openapi-code-generator/sitemap-index.xml
