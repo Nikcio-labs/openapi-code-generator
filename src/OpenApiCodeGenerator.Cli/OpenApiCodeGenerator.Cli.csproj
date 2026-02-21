@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AssemblyName>OpenApiCodeGen</AssemblyName>
+
+    <!-- NuGet Package -->
+    <PackageId>Nikcio.OpenApiCodeGen</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>Nikcio</Authors>
+    <Description>A fast, opinionated C# code generator for OpenAPI specifications. Generates records, enums, and type aliases from OpenAPI 3.x schemas.</Description>
+    <PackageTags>openapi;codegen;csharp;code-generator;swagger;rest-api;dotnet-tool</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageIcon>logo.png</PackageIcon>
+    <PackageProjectUrl>https://openapi.nikcio.com</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Nikcio-labs/openapi-code-generator</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <Copyright>Copyright (c) 2026 Nikolaj Brask-Nielsen</Copyright>
+
+    <!-- dotnet tool -->
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>openapi-codegen</ToolCommandName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OpenApiCodeGenerator\OpenApiCodeGenerator.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\logo.png" Pack="true" PackagePath="\" />
+    <None Include="..\..\README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+</Project>

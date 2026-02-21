@@ -1,0 +1,1000 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "Umbraco CMS Management API",
+        "description": "A realistic CMS management API specification for testing, inspired by Umbraco's API patterns.",
+        "version": "14.0.0"
+    },
+    "paths": {},
+    "components": {
+        "schemas": {
+            "PagedViewModel": {
+                "type": "object",
+                "description": "A paged result set",
+                "required": [
+                    "total",
+                    "items"
+                ],
+                "properties": {
+                    "total": {
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Total count of items"
+                    },
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "object"
+                        },
+                        "description": "The items in this page"
+                    }
+                }
+            },
+            "ContentItemResponseModel": {
+                "type": "object",
+                "description": "Response model for a content item",
+                "required": [
+                    "id",
+                    "contentType",
+                    "values",
+                    "variants",
+                    "urls"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "description": "The unique identifier"
+                    },
+                    "contentType": {
+                        "$ref": "#/components/schemas/ContentTypeReferenceModel"
+                    },
+                    "values": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ContentValueModel"
+                        },
+                        "description": "The content values"
+                    },
+                    "variants": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ContentVariantModel"
+                        },
+                        "description": "The content variants"
+                    },
+                    "urls": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ContentUrlModel"
+                        }
+                    },
+                    "template": {
+                        "$ref": "#/components/schemas/TemplateReferenceModel"
+                    },
+                    "isTrashed": {
+                        "type": "boolean",
+                        "description": "Indicates if the content is trashed"
+                    },
+                    "parent": {
+                        "$ref": "#/components/schemas/ContentItemReferenceModel"
+                    },
+                    "sortOrder": {
+                        "type": "integer",
+                        "format": "int32",
+                        "description": "Sort order"
+                    },
+                    "createDate": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "Creation date"
+                    },
+                    "updateDate": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "Last update date"
+                    }
+                }
+            },
+            "ContentTypeReferenceModel": {
+                "type": "object",
+                "description": "Reference to a content type",
+                "required": [
+                    "id",
+                    "alias",
+                    "icon"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "alias": {
+                        "type": "string"
+                    },
+                    "icon": {
+                        "type": "string"
+                    }
+                }
+            },
+            "ContentValueModel": {
+                "type": "object",
+                "description": "A content property value",
+                "required": [
+                    "alias",
+                    "editorAlias"
+                ],
+                "properties": {
+                    "culture": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "Culture code (null for invariant)"
+                    },
+                    "segment": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "Segment (null for default)"
+                    },
+                    "alias": {
+                        "type": "string",
+                        "description": "Property alias"
+                    },
+                    "editorAlias": {
+                        "type": "string",
+                        "description": "Property editor alias"
+                    },
+                    "value": {
+                        "description": "The property value",
+                        "nullable": true
+                    }
+                }
+            },
+            "ContentVariantModel": {
+                "type": "object",
+                "description": "A content variant (culture/segment combination)",
+                "required": [
+                    "name",
+                    "state"
+                ],
+                "properties": {
+                    "culture": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "Culture code"
+                    },
+                    "segment": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "Segment identifier"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Variant name"
+                    },
+                    "publishDate": {
+                        "type": "string",
+                        "format": "date-time",
+                        "nullable": true,
+                        "description": "When this variant was published"
+                    },
+                    "state": {
+                        "$ref": "#/components/schemas/ContentVariantState"
+                    }
+                }
+            },
+            "ContentVariantState": {
+                "type": "string",
+                "description": "State of a content variant",
+                "enum": [
+                    "Draft",
+                    "Published",
+                    "PublishedPendingChanges",
+                    "NotCreated"
+                ]
+            },
+            "ContentUrlModel": {
+                "type": "object",
+                "description": "A URL associated with content",
+                "required": [
+                    "culture",
+                    "url"
+                ],
+                "properties": {
+                    "culture": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "Culture for this URL"
+                    },
+                    "url": {
+                        "type": "string",
+                        "description": "The URL path"
+                    },
+                    "isDefault": {
+                        "type": "boolean",
+                        "description": "Whether this is the default URL"
+                    }
+                }
+            },
+            "TemplateReferenceModel": {
+                "type": "object",
+                "description": "A reference to a template",
+                "required": [
+                    "id"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "alias": {
+                        "type": "string"
+                    }
+                }
+            },
+            "ContentItemReferenceModel": {
+                "type": "object",
+                "description": "A reference to a content item",
+                "required": [
+                    "id"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    }
+                }
+            },
+            "CreateContentRequestModel": {
+                "type": "object",
+                "description": "Request model for creating content",
+                "required": [
+                    "contentType",
+                    "values",
+                    "variants"
+                ],
+                "properties": {
+                    "contentType": {
+                        "$ref": "#/components/schemas/ContentTypeReferenceModel"
+                    },
+                    "values": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ContentValueModel"
+                        }
+                    },
+                    "variants": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ContentVariantModel"
+                        }
+                    },
+                    "parent": {
+                        "$ref": "#/components/schemas/ContentItemReferenceModel"
+                    },
+                    "template": {
+                        "$ref": "#/components/schemas/TemplateReferenceModel"
+                    }
+                }
+            },
+            "UpdateContentRequestModel": {
+                "type": "object",
+                "description": "Request model for updating content",
+                "required": [
+                    "values",
+                    "variants"
+                ],
+                "properties": {
+                    "values": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ContentValueModel"
+                        }
+                    },
+                    "variants": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ContentVariantModel"
+                        }
+                    },
+                    "template": {
+                        "$ref": "#/components/schemas/TemplateReferenceModel"
+                    }
+                }
+            },
+            "MediaItemResponseModel": {
+                "type": "object",
+                "description": "Response model for a media item",
+                "required": [
+                    "id",
+                    "mediaType",
+                    "values",
+                    "variants",
+                    "urls"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "mediaType": {
+                        "$ref": "#/components/schemas/ContentTypeReferenceModel"
+                    },
+                    "values": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ContentValueModel"
+                        }
+                    },
+                    "variants": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ContentVariantModel"
+                        }
+                    },
+                    "urls": {
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "format": "uri"
+                        }
+                    },
+                    "isTrashed": {
+                        "type": "boolean"
+                    },
+                    "createDate": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updateDate": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                }
+            },
+            "ContentTypeResponseModel": {
+                "type": "object",
+                "description": "Full content type definition",
+                "required": [
+                    "id",
+                    "alias",
+                    "name",
+                    "properties",
+                    "compositions",
+                    "allowedContentTypes"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "alias": {
+                        "type": "string",
+                        "description": "Content type alias"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Content type name"
+                    },
+                    "description": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "Content type description"
+                    },
+                    "icon": {
+                        "type": "string",
+                        "description": "Icon identifier"
+                    },
+                    "allowedAsRoot": {
+                        "type": "boolean",
+                        "description": "Whether this content type can be created at root"
+                    },
+                    "variesByCulture": {
+                        "type": "boolean",
+                        "description": "Whether content of this type varies by culture"
+                    },
+                    "variesBySegment": {
+                        "type": "boolean",
+                        "description": "Whether content of this type varies by segment"
+                    },
+                    "isElement": {
+                        "type": "boolean",
+                        "description": "Whether this is an element type"
+                    },
+                    "properties": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/PropertyTypeModel"
+                        }
+                    },
+                    "compositions": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/CompositionModel"
+                        }
+                    },
+                    "allowedContentTypes": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/AllowedContentTypeModel"
+                        }
+                    },
+                    "containers": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/PropertyGroupModel"
+                        }
+                    }
+                }
+            },
+            "PropertyTypeModel": {
+                "type": "object",
+                "description": "Defines a property type within a content type",
+                "required": [
+                    "id",
+                    "alias",
+                    "name",
+                    "dataType"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "alias": {
+                        "type": "string",
+                        "description": "Property alias"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Property name"
+                    },
+                    "description": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "Property description"
+                    },
+                    "dataType": {
+                        "$ref": "#/components/schemas/DataTypeReferenceModel"
+                    },
+                    "isMandatory": {
+                        "type": "boolean",
+                        "description": "Whether this property is mandatory"
+                    },
+                    "mandatoryMessage": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "Validation message when mandatory"
+                    },
+                    "regEx": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "Validation regex pattern"
+                    },
+                    "regExMessage": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "Validation message for regex"
+                    },
+                    "variesByCulture": {
+                        "type": "boolean"
+                    },
+                    "variesBySegment": {
+                        "type": "boolean"
+                    },
+                    "sortOrder": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "appearance": {
+                        "$ref": "#/components/schemas/PropertyTypeAppearanceModel"
+                    }
+                }
+            },
+            "DataTypeReferenceModel": {
+                "type": "object",
+                "description": "Reference to a data type",
+                "required": [
+                    "id"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    }
+                }
+            },
+            "PropertyTypeAppearanceModel": {
+                "type": "object",
+                "description": "Controls the visual appearance of a property type",
+                "properties": {
+                    "labelOnTop": {
+                        "type": "boolean",
+                        "description": "Whether the label is displayed on top"
+                    }
+                }
+            },
+            "CompositionModel": {
+                "type": "object",
+                "description": "A content type composition",
+                "required": [
+                    "contentType",
+                    "compositionType"
+                ],
+                "properties": {
+                    "contentType": {
+                        "$ref": "#/components/schemas/ContentTypeReferenceModel"
+                    },
+                    "compositionType": {
+                        "$ref": "#/components/schemas/CompositionType"
+                    }
+                }
+            },
+            "CompositionType": {
+                "type": "string",
+                "description": "Type of composition",
+                "enum": [
+                    "Composition",
+                    "Inheritance"
+                ]
+            },
+            "AllowedContentTypeModel": {
+                "type": "object",
+                "description": "An allowed child content type",
+                "required": [
+                    "id",
+                    "sortOrder"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "sortOrder": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                }
+            },
+            "PropertyGroupModel": {
+                "type": "object",
+                "description": "A container/group for properties (tab or group)",
+                "required": [
+                    "id",
+                    "name",
+                    "type",
+                    "sortOrder"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Group name"
+                    },
+                    "type": {
+                        "$ref": "#/components/schemas/PropertyGroupType"
+                    },
+                    "sortOrder": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "alias": {
+                        "type": "string",
+                        "description": "Group alias"
+                    }
+                }
+            },
+            "PropertyGroupType": {
+                "type": "string",
+                "description": "Container type for property groups",
+                "enum": [
+                    "Group",
+                    "Tab"
+                ]
+            },
+            "UserResponseModel": {
+                "type": "object",
+                "description": "User account model",
+                "required": [
+                    "id",
+                    "email",
+                    "userName",
+                    "name",
+                    "state",
+                    "userGroups"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "email": {
+                        "type": "string",
+                        "format": "email"
+                    },
+                    "userName": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "language": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "avatarUrls": {
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "format": "uri"
+                        }
+                    },
+                    "state": {
+                        "$ref": "#/components/schemas/UserState"
+                    },
+                    "lastLoginDate": {
+                        "type": "string",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "lastPasswordChangeDate": {
+                        "type": "string",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "failedLoginAttempts": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "createDate": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updateDate": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "userGroups": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/UserGroupReferenceModel"
+                        }
+                    },
+                    "documentStartNodeIds": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/DocumentStartNode"
+                        }
+                    },
+                    "mediaStartNodeIds": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/MediaStartNode"
+                        }
+                    }
+                }
+            },
+            "UserState": {
+                "type": "string",
+                "description": "User account state",
+                "enum": [
+                    "Active",
+                    "Disabled",
+                    "LockedOut",
+                    "Invited",
+                    "Inactive"
+                ]
+            },
+            "UserGroupReferenceModel": {
+                "type": "object",
+                "description": "Reference to a user group",
+                "required": [
+                    "id"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    }
+                }
+            },
+            "DocumentStartNode": {
+                "type": "object",
+                "description": "Document start node for user access",
+                "required": [
+                    "id"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    }
+                }
+            },
+            "MediaStartNode": {
+                "type": "object",
+                "description": "Media start node for user access",
+                "required": [
+                    "id"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    }
+                }
+            },
+            "ServerInformationModel": {
+                "type": "object",
+                "description": "Server information and runtime details",
+                "required": [
+                    "version",
+                    "assemblyVersion"
+                ],
+                "properties": {
+                    "version": {
+                        "type": "string",
+                        "description": "Application version"
+                    },
+                    "assemblyVersion": {
+                        "type": "string",
+                        "description": "Assembly file version"
+                    },
+                    "baseUrl": {
+                        "type": "string",
+                        "format": "uri",
+                        "description": "The base URL of the server"
+                    },
+                    "runtimeMode": {
+                        "$ref": "#/components/schemas/RuntimeMode"
+                    },
+                    "serverStatus": {
+                        "$ref": "#/components/schemas/ServerStatus"
+                    }
+                }
+            },
+            "RuntimeMode": {
+                "type": "string",
+                "description": "Runtime execution mode",
+                "enum": [
+                    "BackofficeDevelopment",
+                    "Development",
+                    "Production"
+                ]
+            },
+            "ServerStatus": {
+                "type": "string",
+                "description": "Current server status",
+                "enum": [
+                    "Unknown",
+                    "Running",
+                    "Install",
+                    "Upgrade"
+                ]
+            },
+            "ProblemDetails": {
+                "type": "object",
+                "description": "Standard RFC 7807 problem details",
+                "required": [
+                    "type",
+                    "title",
+                    "status"
+                ],
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "format": "uri",
+                        "description": "A URI reference that identifies the problem type"
+                    },
+                    "title": {
+                        "type": "string",
+                        "description": "A short human-readable summary"
+                    },
+                    "status": {
+                        "type": "integer",
+                        "format": "int32",
+                        "description": "HTTP status code"
+                    },
+                    "detail": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "A human-readable explanation"
+                    },
+                    "instance": {
+                        "type": "string",
+                        "format": "uri",
+                        "nullable": true,
+                        "description": "A URI reference for the specific occurrence"
+                    },
+                    "errors": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Validation errors keyed by field name"
+                    },
+                    "extensions": {
+                        "type": "object",
+                        "additionalProperties": true,
+                        "description": "Additional problem details"
+                    }
+                }
+            },
+            "TreeItemResponseModel": {
+                "type": "object",
+                "description": "A tree node item",
+                "required": [
+                    "id",
+                    "name",
+                    "type",
+                    "hasChildren"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Node name"
+                    },
+                    "type": {
+                        "type": "string",
+                        "description": "Node type"
+                    },
+                    "icon": {
+                        "type": "string",
+                        "description": "Node icon"
+                    },
+                    "hasChildren": {
+                        "type": "boolean",
+                        "description": "Whether this node has children"
+                    },
+                    "parent": {
+                        "$ref": "#/components/schemas/ContentItemReferenceModel"
+                    },
+                    "isContainer": {
+                        "type": "boolean",
+                        "description": "Whether this node is a container"
+                    },
+                    "noAccess": {
+                        "type": "boolean",
+                        "description": "Whether the user has no access to this node"
+                    }
+                }
+            },
+            "HealthCheckGroupResponseModel": {
+                "type": "object",
+                "description": "A group of health checks",
+                "required": [
+                    "name",
+                    "checks"
+                ],
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "Name of the health check group"
+                    },
+                    "checks": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/HealthCheckModel"
+                        },
+                        "description": "Health checks in this group"
+                    }
+                }
+            },
+            "HealthCheckModel": {
+                "type": "object",
+                "description": "A single health check",
+                "required": [
+                    "id",
+                    "name"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Health check name"
+                    },
+                    "description": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "Health check description"
+                    },
+                    "group": {
+                        "type": "string",
+                        "description": "Health check group name"
+                    }
+                }
+            },
+            "HealthCheckResultResponseModel": {
+                "type": "object",
+                "description": "Result of a health check execution",
+                "required": [
+                    "id",
+                    "results"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "results": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/HealthCheckResultModel"
+                        }
+                    }
+                }
+            },
+            "HealthCheckResultModel": {
+                "type": "object",
+                "description": "A single health check result entry",
+                "required": [
+                    "message",
+                    "resultType"
+                ],
+                "properties": {
+                    "message": {
+                        "type": "string",
+                        "description": "Result message"
+                    },
+                    "resultType": {
+                        "$ref": "#/components/schemas/HealthCheckResultType"
+                    },
+                    "actions": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/HealthCheckActionModel"
+                        }
+                    }
+                }
+            },
+            "HealthCheckResultType": {
+                "type": "string",
+                "description": "Health check result type",
+                "enum": [
+                    "Success",
+                    "Warning",
+                    "Error",
+                    "Info"
+                ]
+            },
+            "HealthCheckActionModel": {
+                "type": "object",
+                "description": "An action that can be taken to fix a health check issue",
+                "required": [
+                    "name"
+                ],
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "Action name"
+                    },
+                    "description": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "Action description"
+                    },
+                    "alias": {
+                        "type": "string",
+                        "description": "Action alias"
+                    },
+                    "isRemediation": {
+                        "type": "boolean",
+                        "description": "Whether this action attempts to fix the issue"
+                    }
+                }
+            }
+        }
+    }
+}

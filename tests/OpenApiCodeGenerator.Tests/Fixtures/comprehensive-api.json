@@ -1,0 +1,691 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "Test API - Comprehensive Schema Coverage",
+        "description": "A test OpenAPI specification covering all schema features for C# code generation testing.",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/users": {
+            "get": {
+                "summary": "List users",
+                "operationId": "listUsers",
+                "responses": {
+                    "200": {
+                        "description": "A list of users",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/User"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "User": {
+                "type": "object",
+                "description": "A user in the system",
+                "required": [
+                    "id",
+                    "name",
+                    "email",
+                    "status"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int32",
+                        "description": "Unique user identifier"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The user's full name"
+                    },
+                    "email": {
+                        "type": "string",
+                        "format": "email",
+                        "description": "The user's email address"
+                    },
+                    "age": {
+                        "type": "integer",
+                        "format": "int32",
+                        "description": "The user's age"
+                    },
+                    "status": {
+                        "$ref": "#/components/schemas/UserStatus"
+                    },
+                    "address": {
+                        "$ref": "#/components/schemas/Address"
+                    },
+                    "tags": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "User tags"
+                    },
+                    "metadata": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string"
+                        },
+                        "description": "Arbitrary metadata"
+                    },
+                    "createdAt": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "When the user was created"
+                    },
+                    "updatedAt": {
+                        "type": "string",
+                        "format": "date-time",
+                        "nullable": true,
+                        "description": "When the user was last updated"
+                    },
+                    "profilePicture": {
+                        "type": "string",
+                        "format": "uri",
+                        "nullable": true,
+                        "description": "URL to the user's profile picture"
+                    },
+                    "score": {
+                        "type": "number",
+                        "format": "double",
+                        "description": "User score"
+                    },
+                    "isActive": {
+                        "type": "boolean",
+                        "description": "Whether the user is active"
+                    }
+                }
+            },
+            "UserStatus": {
+                "type": "string",
+                "description": "The status of a user",
+                "enum": [
+                    "active",
+                    "inactive",
+                    "banned",
+                    "pending"
+                ]
+            },
+            "Address": {
+                "type": "object",
+                "description": "A physical address",
+                "required": [
+                    "street",
+                    "city",
+                    "country"
+                ],
+                "properties": {
+                    "street": {
+                        "type": "string",
+                        "description": "Street address"
+                    },
+                    "city": {
+                        "type": "string",
+                        "description": "City name"
+                    },
+                    "state": {
+                        "type": "string",
+                        "description": "State or province"
+                    },
+                    "zipCode": {
+                        "type": "string",
+                        "description": "ZIP or postal code"
+                    },
+                    "country": {
+                        "type": "string",
+                        "description": "Country code (ISO 3166-1 alpha-2)"
+                    }
+                }
+            },
+            "PaginatedResponse": {
+                "type": "object",
+                "description": "A paginated response wrapper",
+                "required": [
+                    "items",
+                    "total",
+                    "page",
+                    "pageSize"
+                ],
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/User"
+                        },
+                        "description": "The items in the current page"
+                    },
+                    "total": {
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Total number of items"
+                    },
+                    "page": {
+                        "type": "integer",
+                        "format": "int32",
+                        "description": "Current page number"
+                    },
+                    "pageSize": {
+                        "type": "integer",
+                        "format": "int32",
+                        "description": "Number of items per page"
+                    }
+                }
+            },
+            "ErrorResponse": {
+                "type": "object",
+                "description": "Standard error response",
+                "required": [
+                    "code",
+                    "message"
+                ],
+                "properties": {
+                    "code": {
+                        "type": "integer",
+                        "format": "int32",
+                        "description": "Error code"
+                    },
+                    "message": {
+                        "type": "string",
+                        "description": "Error message"
+                    },
+                    "details": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "Additional error details"
+                    },
+                    "errors": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ValidationError"
+                        },
+                        "description": "Validation errors"
+                    }
+                }
+            },
+            "ValidationError": {
+                "type": "object",
+                "description": "A single validation error",
+                "required": [
+                    "field",
+                    "message"
+                ],
+                "properties": {
+                    "field": {
+                        "type": "string",
+                        "description": "The field that failed validation"
+                    },
+                    "message": {
+                        "type": "string",
+                        "description": "Validation error message"
+                    },
+                    "code": {
+                        "type": "string",
+                        "description": "Validation error code"
+                    }
+                }
+            },
+            "Pet": {
+                "type": "object",
+                "description": "Base pet object",
+                "required": [
+                    "name",
+                    "petType"
+                ],
+                "discriminator": {
+                    "propertyName": "petType",
+                    "mapping": {
+                        "cat": "#/components/schemas/Cat",
+                        "dog": "#/components/schemas/Dog"
+                    }
+                },
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "Pet name"
+                    },
+                    "petType": {
+                        "type": "string",
+                        "description": "Type of pet"
+                    }
+                }
+            },
+            "Cat": {
+                "description": "A cat",
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/Pet"
+                    },
+                    {
+                        "type": "object",
+                        "required": [
+                            "indoor"
+                        ],
+                        "properties": {
+                            "indoor": {
+                                "type": "boolean",
+                                "description": "Whether the cat lives indoors"
+                            },
+                            "declawed": {
+                                "type": "boolean",
+                                "description": "Whether the cat is declawed"
+                            }
+                        }
+                    }
+                ]
+            },
+            "Dog": {
+                "description": "A dog",
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/Pet"
+                    },
+                    {
+                        "type": "object",
+                        "required": [
+                            "breed"
+                        ],
+                        "properties": {
+                            "breed": {
+                                "type": "string",
+                                "description": "Dog breed"
+                            },
+                            "goodBoy": {
+                                "type": "boolean",
+                                "description": "Is the dog a good boy?"
+                            }
+                        }
+                    }
+                ]
+            },
+            "Shape": {
+                "description": "A geometric shape (oneOf example)",
+                "oneOf": [
+                    {
+                        "$ref": "#/components/schemas/Circle"
+                    },
+                    {
+                        "$ref": "#/components/schemas/Rectangle"
+                    },
+                    {
+                        "$ref": "#/components/schemas/Triangle"
+                    }
+                ],
+                "discriminator": {
+                    "propertyName": "shapeType",
+                    "mapping": {
+                        "circle": "#/components/schemas/Circle",
+                        "rectangle": "#/components/schemas/Rectangle",
+                        "triangle": "#/components/schemas/Triangle"
+                    }
+                }
+            },
+            "Circle": {
+                "type": "object",
+                "description": "A circle shape",
+                "required": [
+                    "shapeType",
+                    "radius"
+                ],
+                "properties": {
+                    "shapeType": {
+                        "type": "string"
+                    },
+                    "radius": {
+                        "type": "number",
+                        "format": "double",
+                        "description": "Circle radius"
+                    }
+                }
+            },
+            "Rectangle": {
+                "type": "object",
+                "description": "A rectangle shape",
+                "required": [
+                    "shapeType",
+                    "width",
+                    "height"
+                ],
+                "properties": {
+                    "shapeType": {
+                        "type": "string"
+                    },
+                    "width": {
+                        "type": "number",
+                        "format": "double",
+                        "description": "Rectangle width"
+                    },
+                    "height": {
+                        "type": "number",
+                        "format": "double",
+                        "description": "Rectangle height"
+                    }
+                }
+            },
+            "Triangle": {
+                "type": "object",
+                "description": "A triangle shape",
+                "required": [
+                    "shapeType",
+                    "base",
+                    "height"
+                ],
+                "properties": {
+                    "shapeType": {
+                        "type": "string"
+                    },
+                    "base": {
+                        "type": "number",
+                        "format": "double",
+                        "description": "Triangle base length"
+                    },
+                    "height": {
+                        "type": "number",
+                        "format": "double",
+                        "description": "Triangle height"
+                    }
+                }
+            },
+            "NotificationPreference": {
+                "description": "Notification settings (anyOf example)",
+                "anyOf": [
+                    {
+                        "$ref": "#/components/schemas/EmailNotification"
+                    },
+                    {
+                        "$ref": "#/components/schemas/SmsNotification"
+                    }
+                ]
+            },
+            "EmailNotification": {
+                "type": "object",
+                "description": "Email notification settings",
+                "required": [
+                    "emailAddress"
+                ],
+                "properties": {
+                    "emailAddress": {
+                        "type": "string",
+                        "format": "email",
+                        "description": "Email address to send notifications to"
+                    },
+                    "htmlFormat": {
+                        "type": "boolean",
+                        "description": "Whether to send HTML format emails"
+                    }
+                }
+            },
+            "SmsNotification": {
+                "type": "object",
+                "description": "SMS notification settings",
+                "required": [
+                    "phoneNumber"
+                ],
+                "properties": {
+                    "phoneNumber": {
+                        "type": "string",
+                        "description": "Phone number for SMS notifications"
+                    }
+                }
+            },
+            "HttpStatusCode": {
+                "type": "integer",
+                "description": "HTTP status code",
+                "enum": [
+                    200,
+                    201,
+                    204,
+                    400,
+                    401,
+                    403,
+                    404,
+                    500
+                ]
+            },
+            "Priority": {
+                "type": "string",
+                "description": "Task priority level",
+                "enum": [
+                    "low",
+                    "medium",
+                    "high",
+                    "critical"
+                ]
+            },
+            "FileUpload": {
+                "type": "object",
+                "description": "File upload metadata",
+                "required": [
+                    "fileName",
+                    "contentType",
+                    "size"
+                ],
+                "properties": {
+                    "fileName": {
+                        "type": "string",
+                        "description": "Name of the uploaded file"
+                    },
+                    "contentType": {
+                        "type": "string",
+                        "description": "MIME type"
+                    },
+                    "size": {
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "File size in bytes"
+                    },
+                    "checksum": {
+                        "type": "string",
+                        "description": "File checksum (MD5)"
+                    },
+                    "uploadedAt": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "Upload timestamp"
+                    }
+                }
+            },
+            "NullableFields": {
+                "type": "object",
+                "description": "Object with various nullable fields for testing",
+                "required": [
+                    "requiredNullable",
+                    "requiredNonNullable"
+                ],
+                "properties": {
+                    "requiredNullable": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "Required but can be null"
+                    },
+                    "requiredNonNullable": {
+                        "type": "string",
+                        "description": "Required and cannot be null"
+                    },
+                    "optionalNullable": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "Optional and can be null"
+                    },
+                    "optionalNonNullable": {
+                        "type": "string",
+                        "description": "Optional, will be null if not provided"
+                    }
+                }
+            },
+            "StringFormats": {
+                "type": "object",
+                "description": "Object demonstrating various string format mappings",
+                "required": [
+                    "dateTime",
+                    "date",
+                    "uuid",
+                    "uri"
+                ],
+                "properties": {
+                    "dateTime": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "A date-time value"
+                    },
+                    "date": {
+                        "type": "string",
+                        "format": "date",
+                        "description": "A date value"
+                    },
+                    "uuid": {
+                        "type": "string",
+                        "format": "uuid",
+                        "description": "A UUID value"
+                    },
+                    "uri": {
+                        "type": "string",
+                        "format": "uri",
+                        "description": "A URI value"
+                    },
+                    "plainString": {
+                        "type": "string",
+                        "description": "A plain string"
+                    },
+                    "byteString": {
+                        "type": "string",
+                        "format": "byte",
+                        "description": "Base64 encoded bytes"
+                    }
+                }
+            },
+            "NumericTypes": {
+                "type": "object",
+                "description": "Object demonstrating various numeric type mappings",
+                "required": [
+                    "int32Value",
+                    "int64Value",
+                    "floatValue",
+                    "doubleValue"
+                ],
+                "properties": {
+                    "int32Value": {
+                        "type": "integer",
+                        "format": "int32",
+                        "description": "A 32-bit integer"
+                    },
+                    "int64Value": {
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "A 64-bit integer"
+                    },
+                    "floatValue": {
+                        "type": "number",
+                        "format": "float",
+                        "description": "A float value"
+                    },
+                    "doubleValue": {
+                        "type": "number",
+                        "format": "double",
+                        "description": "A double value"
+                    },
+                    "plainInteger": {
+                        "type": "integer",
+                        "description": "An integer without explicit format"
+                    },
+                    "plainNumber": {
+                        "type": "number",
+                        "description": "A number without explicit format"
+                    }
+                }
+            },
+            "ArrayTypes": {
+                "type": "object",
+                "description": "Object demonstrating various array types",
+                "required": [
+                    "stringArray",
+                    "intArray"
+                ],
+                "properties": {
+                    "stringArray": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Array of strings"
+                    },
+                    "intArray": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int32"
+                        },
+                        "description": "Array of integers"
+                    },
+                    "objectArray": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/User"
+                        },
+                        "description": "Array of User objects"
+                    },
+                    "nestedArray": {
+                        "type": "array",
+                        "items": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "Nested array of strings"
+                    },
+                    "nullableArray": {
+                        "type": "array",
+                        "nullable": true,
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Nullable array of strings"
+                    }
+                }
+            },
+            "DictionaryTypes": {
+                "type": "object",
+                "description": "Object demonstrating dictionary/map types",
+                "required": [
+                    "simpleMap"
+                ],
+                "properties": {
+                    "simpleMap": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string"
+                        },
+                        "description": "Simple string-to-string map"
+                    },
+                    "complexMap": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "$ref": "#/components/schemas/User"
+                        },
+                        "description": "Map of string to User"
+                    }
+                }
+            },
+            "EmptyObject": {
+                "type": "object",
+                "description": "An empty object with no properties"
+            },
+            "ObjectId": {
+                "type": "string",
+                "format": "uuid",
+                "description": "A type alias for a UUID identifier"
+            }
+        }
+    }
+}

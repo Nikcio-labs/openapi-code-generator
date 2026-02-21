@@ -1,0 +1,13 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/OpenApiCodeGenerator/OpenApiCodeGenerator.csproj" />
+    <Project Path="src/OpenApiCodeGenerator.Cli/OpenApiCodeGenerator.Cli.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/OpenApiCodeGenerator.Tests/OpenApiCodeGenerator.Tests.csproj" />
+    <Project Path="tests/OpenApiCodeGenerator.IntegrationTests/OpenApiCodeGenerator.IntegrationTests.csproj" />
+  </Folder>
+  <Folder Name="/examples/">
+    <Project Path="examples/OpenApiCodeGenerator.Examples/OpenApiCodeGenerator.Examples.csproj" />
+  </Folder>
+</Solution>
