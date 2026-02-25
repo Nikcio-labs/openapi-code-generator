@@ -1,0 +1,21 @@
+{
+	"name": "openapi-code-generator",
+	"private": true,
+	"type": "module",
+	"engines": {
+		"node": ">=24.0.0",
+		"pnpm": ">=10.30.2",
+		"npm": "please-use-pnpm"
+	},
+	"scripts": {
+		"docs:dev": "pnpm --filter docs dev",
+		"docs:build": "pnpm --filter docs build",
+		"docs:preview": "pnpm --filter docs preview",
+		"format": "biome format --write",
+		"lint": "biome check",
+		"check": "biome check --write"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "2.4.4"
+	}
+}
