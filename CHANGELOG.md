@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1] (2026-03-14)
+
+### Changes
+
+- Bumps Microsoft.OpenApi from 3.3.1 to 3.4.0
+- Bumps Microsoft.OpenApi.YamlReader from 3.3.1 to 3.4.0
+
 ## [1.0.0] (2026-02-21)
 
 ### Added
