@@ -9,7 +9,7 @@
 
     <!-- NuGet Package -->
     <PackageId>Nikcio.OpenApiCodeGen</PackageId>
-    <Version>1.0.0</Version>
+    <Version>1.0.1</Version>
     <Authors>Nikcio</Authors>
     <Description>A fast, opinionated C# code generator for OpenAPI specifications. Generates records, enums, and type aliases from OpenAPI 3.x schemas.</Description>
     <PackageTags>openapi;codegen;csharp;code-generator;swagger;rest-api;dotnet-tool</PackageTags>
