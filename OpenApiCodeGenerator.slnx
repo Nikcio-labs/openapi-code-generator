@@ -7,6 +7,9 @@
     <Project Path="tests/OpenApiCodeGenerator.Tests/OpenApiCodeGenerator.Tests.csproj" />
     <Project Path="tests/OpenApiCodeGenerator.IntegrationTests/OpenApiCodeGenerator.IntegrationTests.csproj" />
   </Folder>
+  <Folder Name="/benchmarks/">
+    <Project Path="benchmarks/OpenApiCodeGenerator.Benchmarks/OpenApiCodeGenerator.Benchmarks.csproj" />
+  </Folder>
   <Folder Name="/examples/">
     <Project Path="examples/OpenApiCodeGenerator.Examples/OpenApiCodeGenerator.Examples.csproj" />
   </Folder>
