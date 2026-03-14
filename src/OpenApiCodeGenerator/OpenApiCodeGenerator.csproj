@@ -15,5 +15,6 @@
   <ItemGroup>
     <InternalsVisibleTo Include="OpenApiCodeGenerator.Tests"/>
     <InternalsVisibleTo Include="OpenApiCodeGenerator.IntegrationTests" />
+    <InternalsVisibleTo Include="OpenApiCodeGenerator.Benchmarks" />
   </ItemGroup>
 </Project>
