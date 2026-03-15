@@ -65,7 +65,7 @@ internal class TypeResolver
         // Handle $ref (Reference) — in v3, references are OpenApiSchemaReference objects
         if (schema is OpenApiSchemaReference schemaRef)
         {
-            string refTypeName = NameHelper.ToTypeName(schemaRef.Reference.Id);
+            string refTypeName = NameHelper.ToTypeName(schemaRef.Reference.Id, _options.ModelPrefix);
             return nullable ? refTypeName + "?" : refTypeName;
         }
 
@@ -181,14 +181,14 @@ internal class TypeResolver
         return "object";
     }
 
-    private static string ResolveAllOf(IOpenApiSchema schema, bool nullable)
+    private string ResolveAllOf(IOpenApiSchema schema, bool nullable)
     {
         // Common pattern: allOf with a single $ref (possibly + additional properties)
         // Return the $ref type name
         OpenApiSchemaReference? refSchema = schema.AllOf!.OfType<OpenApiSchemaReference>().FirstOrDefault();
         if (refSchema != null)
         {
-            string typeName = NameHelper.ToTypeName(refSchema.Reference.Id);
+            string typeName = NameHelper.ToTypeName(refSchema.Reference.Id, _options.ModelPrefix);
             return nullable ? typeName + "?" : typeName;
         }
 

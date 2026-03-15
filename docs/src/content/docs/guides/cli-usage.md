@@ -43,6 +43,16 @@ By default, generated code uses the `GeneratedModels` namespace. Override it wit
 openapi-codegen spec.yaml -o Models.cs -n MyApp.Api.Models
 ```
 
+## Prefixing Model Types
+
+Use `--model-prefix` to prepend a prefix to every generated model type name:
+
+```bash
+openapi-codegen spec.yaml -o Models.cs --model-prefix Api
+```
+
+The prefix must start with a letter or underscore and can contain only letters, digits, or underscores.
+
 ## Disabling Features
 
 Toggle individual features off with `--no-*` flags:

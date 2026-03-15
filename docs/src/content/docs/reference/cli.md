@@ -64,6 +64,14 @@ C# namespace for the generated types.
 openapi-codegen spec.yaml -o Models.cs -n MyApp.Api.Models
 ```
 
+### `--model-prefix <prefix>`
+
+Prefix every generated model type name. The prefix must start with a letter or underscore and can contain only letters, digits, or underscores.
+
+```bash
+openapi-codegen spec.yaml -o Models.cs --model-prefix Api
+```
+
 ### `--no-doc-comments`
 
 Disable generation of XML documentation comments from OpenAPI descriptions.
@@ -143,6 +151,9 @@ openapi-codegen petstore.yaml -o Models.cs
 
 # Custom namespace
 openapi-codegen petstore.yaml -o Models.cs -n PetStore.Models
+
+# Prefix generated model types
+openapi-codegen petstore.yaml -o Models.cs --model-prefix Api
 
 # From URL with all options disabled
 openapi-codegen https://example.com/api.json \

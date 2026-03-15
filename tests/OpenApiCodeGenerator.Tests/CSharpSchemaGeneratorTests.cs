@@ -217,6 +217,23 @@ public class CSharpSchemaGeneratorTests
         Assert.Equal(openBraces, closeBraces);
     }
 
+    [Fact]
+    public void Generate_ComprehensiveApi_WithModelPrefix_PrefixesGeneratedTypes()
+    {
+        var generator = new CSharpSchemaGenerator(new GeneratorOptions
+        {
+            GenerateFileHeader = false,
+            Namespace = "Prefixed",
+            ModelPrefix = "Api"
+        });
+        string result = generator.GenerateFromFile(GetFixturePath("comprehensive-api.json"));
+
+        Assert.Contains("public record ApiUser", result, StringComparison.Ordinal);
+        Assert.Contains("public enum ApiUserStatus", result, StringComparison.Ordinal);
+        Assert.Contains("public record ApiCat : ApiPet", result, StringComparison.Ordinal);
+        Assert.Contains("public record ApiAddress", result, StringComparison.Ordinal);
+    }
+
     #endregion
 
     #region Umbraco Management API Fixture

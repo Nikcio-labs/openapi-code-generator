@@ -83,6 +83,7 @@ OPTIONS:
     -i, --input <path>          Input OpenAPI spec file or URL
     -o, --output <path>         Output C# file path
     -n, --namespace <name>      C# namespace (default: GeneratedModels)
+        --model-prefix <prefix> Prefix every generated model type name
         --no-doc-comments       Disable XML doc comment generation
         --no-header             Disable auto-generated file header
         --no-default-non-nullable  Don't treat defaults as non-nullable
@@ -103,6 +104,7 @@ using OpenApiCodeGenerator;
 var generator = new CSharpSchemaGenerator(new GeneratorOptions
 {
     Namespace = "MyApp.Models",
+    ModelPrefix = "Api",
     GenerateDocComments = true
 });
 

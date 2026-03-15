@@ -132,11 +132,11 @@ internal class CSharpCodeEmitter
             if (valueGroups.Count == 1)
             {
                 // All inline enums with this name have identical values → single enum
-                string resolvedName = baseName;
+                string resolvedName = NameHelper.ApplyTypePrefix(baseName, _options.ModelPrefix);
                 if (usedNames.Contains(resolvedName))
                 {
                     // Conflict with a top-level type; differentiate
-                    resolvedName = FindUniqueName(baseName, usedNames);
+                    resolvedName = FindUniqueName(resolvedName, usedNames);
                 }
                 usedNames.Add(resolvedName);
                 foreach ((string SchemaName, string PropertyName, string EnumTypeName, List<string> Values, IOpenApiSchema Schema) in valueGroups[0])
@@ -314,7 +314,7 @@ internal class CSharpCodeEmitter
 
     private void EmitEnum(string schemaName, IOpenApiSchema schema, string? typeNameOverride = null)
     {
-        string typeName = typeNameOverride ?? NameHelper.ToTypeName(schemaName);
+        string typeName = typeNameOverride ?? NameHelper.ToTypeName(schemaName, _options.ModelPrefix);
 
         EmitDocComment(schema.Description);
 
@@ -391,7 +391,7 @@ internal class CSharpCodeEmitter
 
     private void EmitRecord(string schemaName, IOpenApiSchema schema, string? typeNameOverride = null)
     {
-        string typeName = typeNameOverride ?? NameHelper.ToTypeName(schemaName);
+        string typeName = typeNameOverride ?? NameHelper.ToTypeName(schemaName, _options.ModelPrefix);
 
         // Collect all properties (including from allOf)
         Dictionary<string, IOpenApiSchema> properties = CollectProperties(schema);
@@ -405,7 +405,7 @@ internal class CSharpCodeEmitter
             OpenApiSchemaReference? refSchema = schema.AllOf.OfType<OpenApiSchemaReference>().FirstOrDefault();
             if (refSchema?.Reference?.Id != null)
             {
-                baseType = NameHelper.ToTypeName(refSchema.Reference.Id);
+                baseType = NameHelper.ToTypeName(refSchema.Reference.Id, _options.ModelPrefix);
                 basePropertyNames = CollectBasePropertyNames(refSchema);
             }
         }
@@ -463,7 +463,7 @@ internal class CSharpCodeEmitter
         string typeName;
         if (propertySchema is OpenApiSchemaReference propRef && propRef.Reference.Id is not null)
         {
-            string refTypeName = NameHelper.ToTypeName(propRef.Reference.Id);
+            string refTypeName = NameHelper.ToTypeName(propRef.Reference.Id, _options.ModelPrefix);
             typeName = isRequired ? refTypeName : refTypeName + "?";
         }
         else if (TypeResolver.IsEnum(propertySchema) && !_allSchemas.Values.Contains(propertySchema))
@@ -552,19 +552,19 @@ internal class CSharpCodeEmitter
                     return $"\"{strVal.Replace("\"", "\\\"", StringComparison.Ordinal)}\"";
                 }
 
-                if (schema.Format == "date-time" && DateTime.TryParse(strVal, null, DateTimeStyles.AdjustToUniversal, out DateTime dt))
+                if (schema.Format == "date-time" && DateTimeOffset.TryParse(strVal, CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind, out DateTimeOffset dto))
                 {
-                    return $"DateTime.Parse(\"{dt.ToString("o", CultureInfo.InvariantCulture)}\", null, DateTimeStyles.AdjustToUniversal)";
+                    return $"DateTimeOffset.Parse(\"{dto.ToString("O", CultureInfo.InvariantCulture)}\", CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind)";
                 }
 
-                if (schema.Format == "date" && DateTime.TryParse(strVal, null, DateTimeStyles.None, out DateTime d))
+                if (schema.Format == "date" && DateOnly.TryParse(strVal, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateOnly dateOnly))
                 {
-                    return $"DateTime.Parse(\"{d:yyyy-MM-dd}\")";
+                    return $"DateOnly.ParseExact(\"{dateOnly:yyyy-MM-dd}\", \"yyyy-MM-dd\", CultureInfo.InvariantCulture)";
                 }
 
-                if (schema.Format == "time" && TimeSpan.TryParse(strVal, out TimeSpan ts))
+                if (schema.Format == "time" && TimeOnly.TryParse(strVal, CultureInfo.InvariantCulture, DateTimeStyles.None, out TimeOnly timeOnly))
                 {
-                    return $"TimeSpan.Parse(\"{ts:c}\")";
+                    return $"TimeOnly.Parse(\"{timeOnly.ToString("O", CultureInfo.InvariantCulture)}\", CultureInfo.InvariantCulture)";
                 }
 
                 if (schema.Format == "uuid" && Guid.TryParse(strVal, out Guid guid))
@@ -625,7 +625,7 @@ internal class CSharpCodeEmitter
         // Check top-level schemas for a matching enum
         foreach ((string? name, IOpenApiSchema? schema) in _allSchemas)
         {
-            if (NameHelper.ToTypeName(name) == typeName && TypeResolver.IsEnum(schema))
+            if (NameHelper.ToTypeName(name, _options.ModelPrefix) == typeName && TypeResolver.IsEnum(schema))
             {
                 return true;
             }
@@ -641,7 +641,7 @@ internal class CSharpCodeEmitter
 
     private void EmitTypeAlias(string schemaName, IOpenApiSchema schema, string? typeNameOverride = null)
     {
-        string typeName = typeNameOverride ?? NameHelper.ToTypeName(schemaName);
+        string typeName = typeNameOverride ?? NameHelper.ToTypeName(schemaName, _options.ModelPrefix);
         string resolvedType = _typeResolver.ResolveUnderlyingType(schema);
 
         EmitDocComment(schema.Description);
@@ -662,7 +662,7 @@ internal class CSharpCodeEmitter
 
     private void EmitUnionType(string schemaName, IOpenApiSchema schema, string? typeNameOverride = null)
     {
-        string typeName = typeNameOverride ?? NameHelper.ToTypeName(schemaName);
+        string typeName = typeNameOverride ?? NameHelper.ToTypeName(schemaName, _options.ModelPrefix);
         IList<IOpenApiSchema> variants = schema.OneOf ?? schema.AnyOf ?? [];
 
         EmitDocComment(schema.Description);
@@ -690,7 +690,7 @@ internal class CSharpCodeEmitter
         {
             foreach ((string? key, OpenApiSchemaReference? schemaRef) in discriminator.Mapping)
             {
-                mapping[key] = NameHelper.ToTypeName(schemaRef.Reference.Id);
+                mapping[key] = NameHelper.ToTypeName(schemaRef.Reference.Id, _options.ModelPrefix);
             }
         }
         else
@@ -707,7 +707,7 @@ internal class CSharpCodeEmitter
                         continue;
                     }
 
-                    mapping[name] = NameHelper.ToTypeName(name);
+                    mapping[name] = NameHelper.ToTypeName(name, _options.ModelPrefix);
                 }
             }
         }
@@ -728,7 +728,7 @@ internal class CSharpCodeEmitter
         // Collect the variant type names for documentation
         var variantNames = variants
             .OfType<OpenApiSchemaReference>()
-            .Select(v => NameHelper.ToTypeName(v.Reference.Id))
+            .Select(v => NameHelper.ToTypeName(v.Reference.Id, _options.ModelPrefix))
             .ToList();
 
         if (variantNames.Count > 0)
@@ -743,7 +743,7 @@ internal class CSharpCodeEmitter
         {
             foreach (OpenApiSchemaReference variant in variants.OfType<OpenApiSchemaReference>())
             {
-                string derivedName = NameHelper.ToTypeName(variant.Reference.Id);
+                string derivedName = NameHelper.ToTypeName(variant.Reference.Id, _options.ModelPrefix);
                 AppendLine($"[JsonDerivedType(typeof({derivedName}), \"{variant.Reference.Id}\")]");
             }
         }
@@ -761,14 +761,14 @@ internal class CSharpCodeEmitter
     /// In each collision group, the most "natural" schema name keeps the clean PascalCase
     /// type name, and others get meaningfully differentiated names.
     /// </summary>
-    private static Dictionary<string, string> ResolveTypeNameCollisions(IEnumerable<string> schemaNames)
+    private Dictionary<string, string> ResolveTypeNameCollisions(IEnumerable<string> schemaNames)
     {
         var result = new Dictionary<string, string>();
         var usedNames = new HashSet<string>(StringComparer.Ordinal);
 
         // Group schema names by their PascalCase type name
         var groups = schemaNames
-            .Select(name => (Original: name, PascalName: NameHelper.ToTypeName(name)))
+            .Select(name => (Original: name, PascalName: NameHelper.ToTypeName(name, prefix: null)))
             .GroupBy(x => x.PascalName)
             .ToList();
 
@@ -779,7 +779,7 @@ internal class CSharpCodeEmitter
 
             if (members.Count == 1)
             {
-                result[members[0].Original] = pascalName;
+                result[members[0].Original] = NameHelper.ApplyTypePrefix(pascalName, _options.ModelPrefix);
                 usedNames.Add(pascalName);
                 continue;
             }
@@ -788,14 +788,14 @@ internal class CSharpCodeEmitter
             var sorted = members.OrderBy(m => NameHelper.NaturalnessScore(m.Original, pascalName)).ToList();
 
             // Winner gets the clean name
-            result[sorted[0].Original] = pascalName;
+            result[sorted[0].Original] = NameHelper.ApplyTypePrefix(pascalName, _options.ModelPrefix);
             usedNames.Add(pascalName);
 
             // Others get differentiated names
             for (int i = 1; i < sorted.Count; i++)
             {
                 string differentiated = NameHelper.ToDifferentiatedName(sorted[i].Original, pascalName, usedNames);
-                result[sorted[i].Original] = differentiated;
+                result[sorted[i].Original] = NameHelper.ApplyTypePrefix(differentiated, _options.ModelPrefix);
                 usedNames.Add(differentiated);
             }
         }

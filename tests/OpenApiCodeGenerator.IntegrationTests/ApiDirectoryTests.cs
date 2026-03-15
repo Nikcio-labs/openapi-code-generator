@@ -51,7 +51,7 @@ public class ApiDirectoryTests : IAsyncLifetime
 
         var generator = new CSharpSchemaGenerator(new GeneratorOptions
         {
-            Namespace = "Generated." + NameHelper.ToTypeName(apiId),
+            Namespace = "Generated." + NameHelper.ToTypeName(apiId, prefix: null),
             GenerateDocComments = true,
             GenerateFileHeader = true,
         });

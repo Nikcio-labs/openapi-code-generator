@@ -15,6 +15,8 @@ public sealed class CSharpSchemaGenerator
 
     public CSharpSchemaGenerator(GeneratorOptions options)
     {
+        ArgumentNullException.ThrowIfNull(options);
+        options.Validate();
         _options = options;
     }
 

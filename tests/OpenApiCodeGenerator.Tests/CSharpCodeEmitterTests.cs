@@ -189,6 +189,53 @@ public class CSharpCodeEmitterTests
         Assert.Contains("public Address? AlternativeAddress { get; init; }", result, StringComparison.Ordinal);
     }
 
+    [Fact]
+    public void Emit_WithModelPrefix_PrefixesGeneratedTypeDeclarationsAndReferences()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["Order"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Required = new HashSet<string> { "status", "address" },
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["status"] = new OpenApiSchema
+                    {
+                        Type = JsonSchemaType.String,
+                        Enum = new List<JsonNode>
+                        {
+                            (JsonNode)"pending",
+                            (JsonNode)"complete"
+                        }
+                    },
+                    ["address"] = new OpenApiSchemaReference("Address")
+                }
+            },
+            ["Address"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["city"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                }
+            }
+        };
+
+        string result = Generate(schemas, new GeneratorOptions
+        {
+            GenerateFileHeader = false,
+            Namespace = "TestModels",
+            ModelPrefix = "Api"
+        });
+
+        Assert.Contains("public enum ApiStatus", result, StringComparison.Ordinal);
+        Assert.Contains("public record ApiOrder", result, StringComparison.Ordinal);
+        Assert.Contains("public record ApiAddress", result, StringComparison.Ordinal);
+        Assert.Contains("public required ApiStatus Status { get; init; }", result, StringComparison.Ordinal);
+        Assert.Contains("public required ApiAddress Address { get; init; }", result, StringComparison.Ordinal);
+    }
+
     #endregion
 
     #region Enum Generation
@@ -1318,7 +1365,7 @@ public class CSharpCodeEmitterTests
     }
 
     [Fact]
-    public void Emit_DefaultDateTimeString_EmitsDateTimeParse()
+    public void Emit_DefaultDateTimeString_EmitsDateTimeOffsetParse()
     {
         var schemas = new Dictionary<string, IOpenApiSchema>
         {
@@ -1339,12 +1386,12 @@ public class CSharpCodeEmitterTests
 
         string result = Generate(schemas);
 
-        Assert.Contains("DateTime.Parse(", result, StringComparison.Ordinal);
-        Assert.Contains("DateTimeStyles.AdjustToUniversal", result, StringComparison.Ordinal);
+        Assert.Contains("DateTimeOffset.Parse(", result, StringComparison.Ordinal);
+        Assert.Contains("DateTimeStyles.RoundtripKind", result, StringComparison.Ordinal);
     }
 
     [Fact]
-    public void Emit_DefaultDateString_EmitsDateParse()
+    public void Emit_DefaultDateString_EmitsDateOnlyParse()
     {
         var schemas = new Dictionary<string, IOpenApiSchema>
         {
@@ -1365,11 +1412,11 @@ public class CSharpCodeEmitterTests
 
         string result = Generate(schemas);
 
-        Assert.Contains("DateTime.Parse(\"2025-06-15\")", result, StringComparison.Ordinal);
+        Assert.Contains("DateOnly.ParseExact(\"2025-06-15\", \"yyyy-MM-dd\", CultureInfo.InvariantCulture)", result, StringComparison.Ordinal);
     }
 
     [Fact]
-    public void Emit_DefaultTimeString_EmitsTimeSpanParse()
+    public void Emit_DefaultTimeString_EmitsTimeOnlyParse()
     {
         var schemas = new Dictionary<string, IOpenApiSchema>
         {
@@ -1390,7 +1437,7 @@ public class CSharpCodeEmitterTests
 
         string result = Generate(schemas);
 
-        Assert.Contains("TimeSpan.Parse(\"12:30:00\")", result, StringComparison.Ordinal);
+        Assert.Contains("TimeOnly.Parse(\"12:30:00.0000000\", CultureInfo.InvariantCulture)", result, StringComparison.Ordinal);
     }
 
     [Fact]

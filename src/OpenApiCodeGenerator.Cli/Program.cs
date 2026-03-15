@@ -23,6 +23,7 @@ static async Task<int> RunAsync(string[] args)
     string? inputPath = null;
     string? outputPath = null;
     string namespaceName = "GeneratedModels";
+    string? modelPrefix = null;
     bool docComments = true;
     bool fileHeader = true;
     bool defaultNonNullable = true;
@@ -42,6 +43,9 @@ static async Task<int> RunAsync(string[] args)
                 break;
             case "--namespace" or "-n":
                 namespaceName = GetNextArg(args, ref i, "--namespace");
+                break;
+            case "--model-prefix":
+                modelPrefix = GetNextArg(args, ref i, "--model-prefix");
                 break;
             case "--no-doc-comments":
                 docComments = false;
@@ -87,6 +91,28 @@ static async Task<int> RunAsync(string[] args)
         return 1;
     }
 
+    var options = new GeneratorOptions
+    {
+        Namespace = namespaceName,
+        GenerateDocComments = docComments,
+        GenerateFileHeader = fileHeader,
+        ModelPrefix = modelPrefix,
+        DefaultNonNullable = defaultNonNullable,
+        UseImmutableArrays = immutableArrays,
+        UseImmutableDictionaries = immutableDictionaries,
+        AddDefaultValuesToProperties = addDefaultValuesToProperties,
+    };
+
+    try
+    {
+        options.Validate();
+    }
+    catch (ArgumentException ex)
+    {
+        await Console.Error.WriteLineAsync($"Error: {ex.Message}").ConfigureAwait(false);
+        return 1;
+    }
+
     // Support reading from URL
     Stream inputStream;
     HttpClient? httpClient = null;
@@ -107,22 +133,13 @@ static async Task<int> RunAsync(string[] args)
             await Console.Error.WriteLineAsync($"Error: Input file not found: {inputPath}").ConfigureAwait(false);
             return 1;
         }
-        using Stream _ = inputStream = File.OpenRead(inputPath);
+#pragma warning disable CA2000 // Dispose objects before losing scope
+        inputStream = File.OpenRead(inputPath);
+#pragma warning restore CA2000 // Dispose objects before losing scope
     }
 
     try
     {
-        var options = new GeneratorOptions
-        {
-            Namespace = namespaceName,
-            GenerateDocComments = docComments,
-            GenerateFileHeader = fileHeader,
-            DefaultNonNullable = defaultNonNullable,
-            UseImmutableArrays = immutableArrays,
-            UseImmutableDictionaries = immutableDictionaries,
-            AddDefaultValuesToProperties = addDefaultValuesToProperties,
-        };
-
         var generator = new CSharpSchemaGenerator(options);
         string code = generator.GenerateFromStream(inputStream);
 
@@ -142,6 +159,11 @@ static async Task<int> RunAsync(string[] args)
         }
 
         return 0;
+    }
+    catch (ArgumentException ex)
+    {
+        await Console.Error.WriteLineAsync($"Error: {ex.Message}").ConfigureAwait(false);
+        return 1;
     }
     catch (InvalidOperationException ex)
     {
@@ -192,6 +214,7 @@ static void PrintUsage()
             -i, --input <path>          Input OpenAPI spec file or URL
             -o, --output <path>         Output C# file path
             -n, --namespace <name>      C# namespace (default: GeneratedModels)
+                --model-prefix <prefix> Prefix every generated model type name
                 --no-doc-comments       Disable XML doc comment generation
                 --no-header             Disable auto-generated file header
                 --no-default-non-nullable  Don't treat defaults as non-nullable
@@ -203,7 +226,7 @@ static void PrintUsage()
 
         EXAMPLES:
             openapi-codegen petstore.yaml -o Models.cs
-            openapi-codegen https://petstore3.swagger.io/api/v3/openapi.json -o PetStore.cs -n MyApp.Models
+            openapi-codegen https://petstore3.swagger.io/api/v3/openapi.json -o PetStore.cs -n MyApp.Models --model-prefix PetStore
             openapi-codegen spec.yaml --mutable-arrays --mutable-dictionaries
         """);
 }

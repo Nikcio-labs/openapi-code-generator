@@ -23,7 +23,7 @@ public class NameHelperTests
     [InlineData("  ", "UnknownType")]
     public void ToTypeName_ConvertsCorrectly(string input, string expected)
     {
-        string result = NameHelper.ToTypeName(input);
+        string result = NameHelper.ToTypeName(input, prefix: null);
         Assert.Equal(expected, result);
     }
 
@@ -32,8 +32,38 @@ public class NameHelperTests
     [InlineData("#/components/schemas/user-profile", "UserProfile")]
     public void ToTypeName_HandlesRefPaths(string input, string expected)
     {
-        string result = NameHelper.ToTypeName(input);
+        string result = NameHelper.ToTypeName(input, prefix: null);
         Assert.Equal(expected, result);
+        Assert.DoesNotContain('/', result);
+    }
+
+    [Theory]
+    [InlineData("User", "Api", "ApiUser")]
+    [InlineData("#/components/schemas/user-profile", "Generated", "GeneratedUserProfile")]
+    public void ToTypeName_AppliesPrefix(string input, string prefix, string expected)
+    {
+        string result = NameHelper.ToTypeName(input, prefix);
+        Assert.Equal(expected, result);
+    }
+
+    [Theory]
+    [InlineData("Api")]
+    [InlineData("_Models")]
+    [InlineData("MyPrefix2")]
+    public void ValidateTypeNamePrefix_AcceptsValidPrefixes(string prefix)
+    {
+        string result = NameHelper.ValidateTypeNamePrefix(prefix);
+        Assert.Equal(prefix, result);
+    }
+
+    [Theory]
+    [InlineData("1Api")]
+    [InlineData("api-prefix")]
+    [InlineData("api prefix")]
+    [InlineData(" ")]
+    public void ValidateTypeNamePrefix_RejectsInvalidPrefixes(string prefix)
+    {
+        Assert.Throws<ArgumentException>(() => NameHelper.ValidateTypeNamePrefix(prefix));
     }
 
     [Theory]

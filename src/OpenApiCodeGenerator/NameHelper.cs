@@ -1,3 +1,4 @@
+using System.Collections.Concurrent;
 using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -9,7 +10,11 @@ namespace OpenApiCodeGenerator;
 /// </summary>
 internal static partial class NameHelper
 {
-    private static readonly HashSet<string> CSharpKeywords =
+    private const string UnknownTypeName = "UnknownType";
+    private const string UnknownName = "Unknown";
+    private static readonly ConcurrentDictionary<string, string> _validatedPrefixes = new();
+
+    internal static HashSet<string> CSharpKeywords { get; } =
     [
         "abstract", "as", "base", "bool", "break", "byte", "case", "catch", "char",
         "checked", "class", "const", "continue", "decimal", "default", "delegate",
@@ -24,19 +29,20 @@ internal static partial class NameHelper
     ];
 
     /// <summary>
-    /// Convert an OpenAPI schema name to a valid C# type name (PascalCase).
+    /// Convert an OpenAPI schema name to a valid C# type name (PascalCase)
+    /// and optionally prepend a model prefix.
     /// </summary>
-    public static string ToTypeName(string? schemaName)
+    public static string ToTypeName(string? schemaName, string? prefix)
     {
         if (string.IsNullOrWhiteSpace(schemaName))
         {
-            return "UnknownType";
+            return ApplyTypePrefix(UnknownTypeName, prefix);
         }
 
         // Handle $ref-style paths like "#/components/schemas/MyType"
         if (schemaName.Contains('/', StringComparison.Ordinal))
         {
-            schemaName = schemaName.Split('/').Last();
+            schemaName = schemaName.Split('/')[^1];
         }
 
         string result = ToPascalCase(schemaName);
@@ -44,7 +50,7 @@ internal static partial class NameHelper
 
         if (result.Length == 0)
         {
-            return "UnknownType";
+            return ApplyTypePrefix(UnknownTypeName, prefix);
         }
 
         // Ensure starts with letter or underscore
@@ -53,7 +59,43 @@ internal static partial class NameHelper
             result = "_" + result;
         }
 
-        return EscapeKeyword(result);
+        return ApplyTypePrefix(EscapeKeyword(result), prefix);
+    }
+
+    /// <summary>
+    /// Validates a model prefix before it is prepended to generated type names.
+    /// </summary>
+    public static string ValidateTypeNamePrefix(string prefix)
+    {
+        return _validatedPrefixes.GetOrAdd(prefix, p =>
+        {
+            ArgumentException.ThrowIfNullOrWhiteSpace(p);
+
+            if (!IsIdentifierStart(p[0]))
+            {
+                throw new ArgumentException("Model prefix must start with a letter or underscore.", nameof(prefix));
+            }
+
+            if (p.Any(ch => !IsIdentifierPart(ch)))
+            {
+                throw new ArgumentException("Model prefix must contain only letters, digits, or underscores.", nameof(prefix));
+            }
+
+            return p;
+        });
+    }
+
+    /// <summary>
+    /// Prepends a validated prefix to a generated type name.
+    /// </summary>
+    public static string ApplyTypePrefix(string typeName, string? prefix)
+    {
+        if (string.IsNullOrEmpty(prefix))
+        {
+            return typeName;
+        }
+
+        return ValidateTypeNamePrefix(prefix) + typeName;
     }
 
     /// <summary>
@@ -65,7 +107,7 @@ internal static partial class NameHelper
     {
         if (string.IsNullOrWhiteSpace(propertyName))
         {
-            return "Unknown";
+            return UnknownName;
         }
 
         string result = ToPascalCase(propertyName);
@@ -73,7 +115,7 @@ internal static partial class NameHelper
 
         if (result.Length == 0)
         {
-            return "Unknown";
+            return UnknownName;
         }
 
         if (char.IsDigit(result[0]))
@@ -99,7 +141,7 @@ internal static partial class NameHelper
     {
         if (string.IsNullOrWhiteSpace(value))
         {
-            return "Unknown";
+            return UnknownName;
         }
 
         string result = ToPascalCase(value);
@@ -107,7 +149,7 @@ internal static partial class NameHelper
 
         if (result.Length == 0)
         {
-            return "Unknown";
+            return UnknownName;
         }
 
         if (char.IsDigit(result[0]))
@@ -251,6 +293,16 @@ internal static partial class NameHelper
 
         // Other transformations (camelCase → PascalCase, etc.)
         return 2;
+    }
+
+    internal static bool IsIdentifierStart(char value)
+    {
+        return value == '_' || char.IsLetter(value);
+    }
+
+    internal static bool IsIdentifierPart(char value)
+    {
+        return value == '_' || char.IsLetterOrDigit(value);
     }
 
     /// <summary>
