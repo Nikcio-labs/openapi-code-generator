@@ -1,3 +1,4 @@
+using System.Collections.Concurrent;
 using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -11,6 +12,7 @@ internal static partial class NameHelper
 {
     private const string UnknownTypeName = "UnknownType";
     private const string UnknownName = "Unknown";
+    private static readonly ConcurrentDictionary<string, string> _validatedPrefixes = new();
 
     internal static HashSet<string> CSharpKeywords { get; } =
     [
@@ -65,19 +67,22 @@ internal static partial class NameHelper
     /// </summary>
     public static string ValidateTypeNamePrefix(string prefix)
     {
-        ArgumentException.ThrowIfNullOrWhiteSpace(prefix);
-
-        if (!IsIdentifierStart(prefix[0]))
+        return _validatedPrefixes.GetOrAdd(prefix, p =>
         {
-            throw new ArgumentException("Model prefix must start with a letter or underscore.", nameof(prefix));
-        }
+            ArgumentException.ThrowIfNullOrWhiteSpace(p);
 
-        if (prefix.Any(ch => !IsIdentifierPart(ch)))
-        {
-            throw new ArgumentException("Model prefix must contain only letters, digits, or underscores.", nameof(prefix));
-        }
+            if (!IsIdentifierStart(p[0]))
+            {
+                throw new ArgumentException("Model prefix must start with a letter or underscore.", nameof(prefix));
+            }
 
-        return prefix;
+            if (p.Any(ch => !IsIdentifierPart(ch)))
+            {
+                throw new ArgumentException("Model prefix must contain only letters, digits, or underscores.", nameof(prefix));
+            }
+
+            return p;
+        });
     }
 
     /// <summary>
