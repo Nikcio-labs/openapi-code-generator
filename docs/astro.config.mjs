@@ -5,8 +5,8 @@ import { defineConfig } from "astro/config";
 
 // https://astro.build/config
 export default defineConfig({
-	site: "https://nikcio-labs.github.io",
-	base: "/openapi-code-generator/",
+	site: "https://openapi.nikcio.com",
+	base: "/",
 	integrations: [
 		starlight({
 			title: "OpenAPI Code Generator",
