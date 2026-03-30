@@ -279,6 +279,26 @@ public class TypeResolverTests
     }
 
     [Fact]
+    public void RequiresBinaryStreamTypeAliasJsonConverter_BinaryStringAlias_ReturnsTrue()
+    {
+        TypeResolver resolver = CreateResolver();
+        var schema = new OpenApiSchema { Type = JsonSchemaType.String, Format = "binary" };
+
+        Assert.True(resolver.RequiresBinaryStreamTypeAliasJsonConverter(schema));
+        Assert.False(resolver.UsesGenericTypeAliasJsonConverter(schema));
+    }
+
+    [Fact]
+    public void UsesGenericTypeAliasJsonConverter_UuidAlias_ReturnsTrue()
+    {
+        TypeResolver resolver = CreateResolver();
+        var schema = new OpenApiSchema { Type = JsonSchemaType.String, Format = "uuid" };
+
+        Assert.True(resolver.UsesGenericTypeAliasJsonConverter(schema));
+        Assert.False(resolver.RequiresBinaryStreamTypeAliasJsonConverter(schema));
+    }
+
+    [Fact]
     public void IsTypeAlias_ObjectWithProperties_ReturnsFalse()
     {
         var schema = new OpenApiSchema

@@ -13,7 +13,7 @@ public class CSharpSchemaGeneratorTests
         return Path.Combine(AppContext.BaseDirectory, "Fixtures", fileName);
     }
 
-    private static string[] GetSerializationLines(string generatedCode, string programSource)
+    private static async Task<string[]> GetSerializationLinesAsync(string generatedCode, string programSource)
     {
         string tempRoot = Path.Combine(
             AppContext.BaseDirectory,
@@ -27,48 +27,66 @@ public class CSharpSchemaGeneratorTests
 
         Directory.CreateDirectory(tempRoot);
 
-        string generatedPath = Path.Combine(tempRoot, "Generated.cs");
-        string programPath = Path.Combine(tempRoot, "Program.cs");
-        string projectPath = Path.Combine(tempRoot, "SerializationHarness.csproj");
-
-        File.WriteAllText(generatedPath, generatedCode);
-        File.WriteAllText(programPath, programSource);
-        File.WriteAllText(projectPath, """
-            <Project Sdk="Microsoft.NET.Sdk">
-              <PropertyGroup>
-                <OutputType>Exe</OutputType>
-                <TargetFramework>net10.0</TargetFramework>
-                <ImplicitUsings>enable</ImplicitUsings>
-                <Nullable>enable</Nullable>
-              </PropertyGroup>
-            </Project>
-            """);
-
-        using var process = new Process
+        try
         {
-            StartInfo = new ProcessStartInfo
+            string generatedPath = Path.Combine(tempRoot, "Generated.cs");
+            string programPath = Path.Combine(tempRoot, "Program.cs");
+            string projectPath = Path.Combine(tempRoot, "SerializationHarness.csproj");
+
+            await File.WriteAllTextAsync(generatedPath, generatedCode).ConfigureAwait(false);
+            await File.WriteAllTextAsync(programPath, programSource).ConfigureAwait(false);
+            await File.WriteAllTextAsync(projectPath, """
+                <Project Sdk="Microsoft.NET.Sdk">
+                  <PropertyGroup>
+                    <OutputType>Exe</OutputType>
+                    <TargetFramework>net10.0</TargetFramework>
+                    <ImplicitUsings>enable</ImplicitUsings>
+                    <Nullable>enable</Nullable>
+                  </PropertyGroup>
+                </Project>
+                """).ConfigureAwait(false);
+
+            using var process = new Process
             {
-                FileName = "dotnet",
-                Arguments = $"run --project \"{projectPath}\" -v q --nologo",
-                WorkingDirectory = tempRoot,
-                RedirectStandardOutput = true,
-                RedirectStandardError = true,
-                UseShellExecute = false,
-                CreateNoWindow = true,
+                StartInfo = new ProcessStartInfo
+                {
+                    FileName = "dotnet",
+                    Arguments = $"run --project \"{projectPath}\" -v q --nologo",
+                    WorkingDirectory = tempRoot,
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true,
+                    UseShellExecute = false,
+                    CreateNoWindow = true,
+                }
+            };
+
+            process.Start();
+
+            Task<string> standardOutputTask = process.StandardOutput.ReadToEndAsync();
+            Task<string> standardErrorTask = process.StandardError.ReadToEndAsync();
+
+            await Task.WhenAll(
+                standardOutputTask,
+                standardErrorTask,
+                process.WaitForExitAsync()).ConfigureAwait(false);
+
+            string standardOutput = await standardOutputTask.ConfigureAwait(false);
+            string standardError = await standardErrorTask.ConfigureAwait(false);
+
+            Assert.True(
+                process.ExitCode == 0,
+                $"Generated serialization harness failed with exit code {process.ExitCode}.{Environment.NewLine}STDOUT:{Environment.NewLine}{standardOutput}{Environment.NewLine}STDERR:{Environment.NewLine}{standardError}");
+
+            return standardOutput
+                .Split(["\r\n", "\n"], StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+        }
+        finally
+        {
+            if (Directory.Exists(tempRoot))
+            {
+                Directory.Delete(tempRoot, recursive: true);
             }
-        };
-
-        process.Start();
-        string standardOutput = process.StandardOutput.ReadToEnd();
-        string standardError = process.StandardError.ReadToEnd();
-        process.WaitForExit();
-
-        Assert.True(
-            process.ExitCode == 0,
-            $"Generated serialization harness failed with exit code {process.ExitCode}.{Environment.NewLine}STDOUT:{Environment.NewLine}{standardOutput}{Environment.NewLine}STDERR:{Environment.NewLine}{standardError}");
-
-        return standardOutput
-            .Split(["\r\n", "\n"], StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+        }
     }
 
     #region Comprehensive API Fixture
@@ -259,7 +277,7 @@ public class CSharpSchemaGeneratorTests
     }
 
     [Fact]
-    public void Generate_FromText_TypeAliasWrapper_RoundTripsWithSystemTextJsonDefaults()
+    public async Task Generate_FromText_TypeAliasWrapper_RoundTripsWithSystemTextJsonDefaults()
     {
         const string spec = """
                         {
@@ -292,21 +310,21 @@ public class CSharpSchemaGeneratorTests
         });
 
         string generatedCode = generator.GenerateFromText(spec);
-        string[] lines = GetSerializationLines(generatedCode, """
-                        using System.Text.Json;
-                        using GeneratedModels;
+        string[] lines = await GetSerializationLinesAsync(generatedCode, """
+                using System.Text.Json;
+                using GeneratedModels;
 
-                        Alert? alert = JsonSerializer.Deserialize<Alert>("{\"createdAt\":\"2024-01-02T03:04:05Z\"}");
-                        Console.WriteLine(alert?.CreatedAt.Value.ToString("O"));
-                        Console.WriteLine(JsonSerializer.Serialize(alert));
-                        """);
+                Alert? alert = JsonSerializer.Deserialize<Alert>("{\"createdAt\":\"2024-01-02T03:04:05Z\"}");
+                Console.WriteLine(alert?.CreatedAt.Value.ToString("O"));
+                Console.WriteLine(JsonSerializer.Serialize(alert));
+                """);
 
         Assert.Equal("2024-01-02T03:04:05.0000000+00:00", lines[^2]);
         Assert.Equal("{\"createdAt\":\"2024-01-02T03:04:05+00:00\"}", lines[^1]);
     }
 
     [Fact]
-    public void Generate_FromText_RecordAndEnum_RoundTripWithSystemTextJsonDefaults()
+    public async Task Generate_FromText_RecordAndEnum_RoundTripWithSystemTextJsonDefaults()
     {
         const string spec = """
                         {
@@ -339,21 +357,71 @@ public class CSharpSchemaGeneratorTests
         });
 
         string generatedCode = generator.GenerateFromText(spec);
-        string[] lines = GetSerializationLines(generatedCode, """
-                        using System.Text.Json;
-                        using GeneratedModels;
+        string[] lines = await GetSerializationLinesAsync(generatedCode, """
+                using System.Text.Json;
+                using GeneratedModels;
 
-                        User? user = JsonSerializer.Deserialize<User>("{\"id\":7,\"name\":\"Ada\",\"status\":\"active\"}");
-                        Console.WriteLine($"{user?.Id}|{user?.Name}|{user?.Status}");
-                        Console.WriteLine(JsonSerializer.Serialize(user));
-                        """);
+                User? user = JsonSerializer.Deserialize<User>("{\"id\":7,\"name\":\"Ada\",\"status\":\"active\"}");
+                Console.WriteLine($"{user?.Id}|{user?.Name}|{user?.Status}");
+                Console.WriteLine(JsonSerializer.Serialize(user));
+                """);
 
         Assert.Equal("7|Ada|Active", lines[^2]);
         Assert.Equal("{\"id\":7,\"name\":\"Ada\",\"status\":\"active\"}", lines[^1]);
     }
 
     [Fact]
-    public void Generate_ComprehensiveApi_AllOfDerivedRecord_RoundTripsWithSystemTextJsonDefaults()
+    public async Task Generate_FromText_BinaryTypeAlias_RoundTripsWithSystemTextJsonDefaults()
+    {
+        const string spec = """
+                        {
+                            "openapi": "3.0.3",
+                            "info": { "title": "Binary Alias Test", "version": "1.0.0" },
+                            "components": {
+                                "schemas": {
+                                    "FileContent": {
+                                        "type": "string",
+                                        "format": "binary"
+                                    },
+                                    "Attachment": {
+                                        "type": "object",
+                                        "required": ["content"],
+                                        "properties": {
+                                            "content": {
+                                                "$ref": "#/components/schemas/FileContent"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        """;
+
+        var generator = new CSharpSchemaGenerator(new GeneratorOptions
+        {
+            GenerateFileHeader = false,
+            Namespace = "GeneratedModels"
+        });
+
+        string generatedCode = generator.GenerateFromText(spec);
+        string[] lines = await GetSerializationLinesAsync(generatedCode, """
+            using System.IO;
+            using System.Text;
+            using System.Text.Json;
+            using GeneratedModels;
+
+            Attachment? attachment = JsonSerializer.Deserialize<Attachment>("{\"content\":\"aGVsbG8=\"}");
+            using var reader = new StreamReader(attachment!.Content.Value, Encoding.UTF8, detectEncodingFromByteOrderMarks: true, bufferSize: 1024, leaveOpen: true);
+            Console.WriteLine(reader.ReadToEnd());
+            Console.WriteLine(JsonSerializer.Serialize(attachment));
+            """);
+
+        Assert.Equal("hello", lines[^2]);
+        Assert.Equal("{\"content\":\"aGVsbG8=\"}", lines[^1]);
+    }
+
+    [Fact]
+    public async Task Generate_ComprehensiveApi_AllOfDerivedRecord_RoundTripsWithSystemTextJsonDefaults()
     {
         var generator = new CSharpSchemaGenerator(new GeneratorOptions
         {
@@ -362,21 +430,21 @@ public class CSharpSchemaGeneratorTests
         });
 
         string generatedCode = generator.GenerateFromFile(GetFixturePath("comprehensive-api.json"));
-        string[] lines = GetSerializationLines(generatedCode, """
-                    using System.Text.Json;
-                    using GeneratedModels;
+        string[] lines = await GetSerializationLinesAsync(generatedCode, """
+                using System.Text.Json;
+                using GeneratedModels;
 
-                    Cat? cat = JsonSerializer.Deserialize<Cat>("{\"name\":\"Milo\",\"petType\":\"cat\",\"indoor\":true,\"declawed\":false}");
-                    Console.WriteLine($"{cat?.Name}|{cat?.PetType}|{cat?.Indoor}|{cat?.Declawed}");
-                    Console.WriteLine(JsonSerializer.Serialize(cat));
-                    """);
+                Cat? cat = JsonSerializer.Deserialize<Cat>("{\"name\":\"Milo\",\"petType\":\"cat\",\"indoor\":true,\"declawed\":false}");
+                Console.WriteLine($"{cat?.Name}|{cat?.PetType}|{cat?.Indoor}|{cat?.Declawed}");
+                Console.WriteLine(JsonSerializer.Serialize(cat));
+                """);
 
         Assert.Equal("Milo|cat|True|False", lines[^2]);
         Assert.Equal("{\"indoor\":true,\"declawed\":false,\"name\":\"Milo\",\"petType\":\"cat\"}", lines[^1]);
     }
 
     [Fact]
-    public void Generate_ComprehensiveApi_OneOfDiscriminatedUnion_DefaultSystemTextJsonReportsUnsupportedDerivedType()
+    public async Task Generate_ComprehensiveApi_OneOfDiscriminatedUnion_DefaultSystemTextJsonReportsUnsupportedDerivedType()
     {
         var generator = new CSharpSchemaGenerator(new GeneratorOptions
         {
@@ -385,23 +453,23 @@ public class CSharpSchemaGeneratorTests
         });
 
         string generatedCode = generator.GenerateFromFile(GetFixturePath("comprehensive-api.json"));
-        string[] lines = GetSerializationLines(generatedCode, """
-                    using System;
-                    using System.Text.Json;
-                    using GeneratedModels;
+        string[] lines = await GetSerializationLinesAsync(generatedCode, """
+                using System;
+                using System.Text.Json;
+                using GeneratedModels;
 
-                    try
-                    {
-                        Shape? shape = JsonSerializer.Deserialize<Shape>("{\"shapeType\":\"circle\",\"radius\":2.5}");
-                        Console.WriteLine(shape?.GetType().Name ?? "<null>");
-                        Console.WriteLine(JsonSerializer.Serialize(shape));
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine(ex.GetType().Name);
-                        Console.WriteLine(ex.Message);
-                    }
-                    """);
+                try
+                {
+                    Shape? shape = JsonSerializer.Deserialize<Shape>("{\"shapeType\":\"circle\",\"radius\":2.5}");
+                    Console.WriteLine(shape?.GetType().Name ?? "<null>");
+                    Console.WriteLine(JsonSerializer.Serialize(shape));
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.GetType().Name);
+                    Console.WriteLine(ex.Message);
+                }
+                """);
 
         Assert.Equal("InvalidOperationException", lines[^2]);
         Assert.Contains("not a supported derived type", lines[^1], StringComparison.Ordinal);
@@ -409,7 +477,7 @@ public class CSharpSchemaGeneratorTests
     }
 
     [Fact]
-    public void Generate_ComprehensiveApi_AnyOfUnion_DefaultSystemTextJsonReportsUnsupportedDerivedType()
+    public async Task Generate_ComprehensiveApi_AnyOfUnion_DefaultSystemTextJsonReportsUnsupportedDerivedType()
     {
         var generator = new CSharpSchemaGenerator(new GeneratorOptions
         {
@@ -418,23 +486,23 @@ public class CSharpSchemaGeneratorTests
         });
 
         string generatedCode = generator.GenerateFromFile(GetFixturePath("comprehensive-api.json"));
-        string[] lines = GetSerializationLines(generatedCode, """
-                    using System;
-                    using System.Text.Json;
-                    using GeneratedModels;
+        string[] lines = await GetSerializationLinesAsync(generatedCode, """
+                using System;
+                using System.Text.Json;
+                using GeneratedModels;
 
-                    try
-                    {
-                        NotificationPreference? preference = JsonSerializer.Deserialize<NotificationPreference>("{\"email\":\"ada@example.com\",\"enabled\":true}");
-                        Console.WriteLine(preference?.GetType().Name ?? "<null>");
-                        Console.WriteLine(JsonSerializer.Serialize(preference));
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine(ex.GetType().Name);
-                        Console.WriteLine(ex.Message);
-                    }
-                    """);
+                try
+                {
+                    NotificationPreference? preference = JsonSerializer.Deserialize<NotificationPreference>("{\"email\":\"ada@example.com\",\"enabled\":true}");
+                    Console.WriteLine(preference?.GetType().Name ?? "<null>");
+                    Console.WriteLine(JsonSerializer.Serialize(preference));
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.GetType().Name);
+                    Console.WriteLine(ex.Message);
+                }
+                """);
 
         Assert.Equal("InvalidOperationException", lines[^2]);
         Assert.Contains("not a supported derived type", lines[^1], StringComparison.Ordinal);

@@ -519,6 +519,27 @@ public class CSharpCodeEmitterTests
     }
 
     [Fact]
+    public void Emit_BinaryTypeAlias_UsesSpecializedStreamConverter()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["FileContent"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.String,
+                Format = "binary"
+            }
+        };
+
+        string result = Generate(schemas);
+
+        Assert.Contains("using System;", result, StringComparison.Ordinal);
+        Assert.Contains("using System.IO;", result, StringComparison.Ordinal);
+        Assert.Contains("file sealed class OpenApiGeneratedBinaryStreamTypeAliasJsonConverter<TAlias> : JsonConverter<TAlias>", result, StringComparison.Ordinal);
+        Assert.Contains("[JsonConverter(typeof(OpenApiGeneratedBinaryStreamTypeAliasJsonConverter<FileContent>))]", result, StringComparison.Ordinal);
+        Assert.Contains("public readonly record struct FileContent(Stream Value) : IOpenApiGeneratedTypeAlias<FileContent, Stream>", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
     public void Emit_WithInlinePrimitiveTypeAliases_InlinesAliasUsagesAndSkipsWrapperType()
     {
         var schemas = new Dictionary<string, IOpenApiSchema>

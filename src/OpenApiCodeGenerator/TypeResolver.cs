@@ -60,6 +60,16 @@ internal class TypeResolver
         return baseType;
     }
 
+    public bool UsesGenericTypeAliasJsonConverter(IOpenApiSchema schema)
+    {
+        return IsTypeAlias(schema) && !RequiresBinaryStreamTypeAliasJsonConverter(schema);
+    }
+
+    public bool RequiresBinaryStreamTypeAliasJsonConverter(IOpenApiSchema schema)
+    {
+        return IsTypeAlias(schema) && string.Equals(ResolveUnderlyingType(schema), "Stream", StringComparison.Ordinal);
+    }
+
     private string ResolveCore(IOpenApiSchema schema, bool nullable)
     {
         // Handle $ref (Reference) — in v3, references are OpenApiSchemaReference objects
