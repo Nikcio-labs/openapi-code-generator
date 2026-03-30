@@ -258,10 +258,10 @@ public class CSharpSchemaGeneratorTests
         Assert.Contains("public readonly record struct ObjectId(Guid Value) : IOpenApiGeneratedTypeAlias<ObjectId, Guid>", result, StringComparison.Ordinal);
     }
 
-        [Fact]
-        public void Generate_FromText_TypeAliasWrapper_RoundTripsWithSystemTextJsonDefaults()
-        {
-                const string spec = """
+    [Fact]
+    public void Generate_FromText_TypeAliasWrapper_RoundTripsWithSystemTextJsonDefaults()
+    {
+        const string spec = """
                         {
                             "openapi": "3.0.3",
                             "info": { "title": "Alias Test", "version": "1.0.0" },
@@ -285,14 +285,14 @@ public class CSharpSchemaGeneratorTests
                         }
                         """;
 
-                var generator = new CSharpSchemaGenerator(new GeneratorOptions
-                {
-                        GenerateFileHeader = false,
-                        Namespace = "GeneratedModels"
-                });
+        var generator = new CSharpSchemaGenerator(new GeneratorOptions
+        {
+            GenerateFileHeader = false,
+            Namespace = "GeneratedModels"
+        });
 
-                string generatedCode = generator.GenerateFromText(spec);
-                string[] lines = GetSerializationLines(generatedCode, """
+        string generatedCode = generator.GenerateFromText(spec);
+        string[] lines = GetSerializationLines(generatedCode, """
                         using System.Text.Json;
                         using GeneratedModels;
 
@@ -301,14 +301,14 @@ public class CSharpSchemaGeneratorTests
                         Console.WriteLine(JsonSerializer.Serialize(alert));
                         """);
 
-                Assert.Equal("2024-01-02T03:04:05.0000000+00:00", lines[^2]);
-                Assert.Equal("{\"createdAt\":\"2024-01-02T03:04:05+00:00\"}", lines[^1]);
-        }
+        Assert.Equal("2024-01-02T03:04:05.0000000+00:00", lines[^2]);
+        Assert.Equal("{\"createdAt\":\"2024-01-02T03:04:05+00:00\"}", lines[^1]);
+    }
 
-        [Fact]
-        public void Generate_FromText_RecordAndEnum_RoundTripWithSystemTextJsonDefaults()
-        {
-                const string spec = """
+    [Fact]
+    public void Generate_FromText_RecordAndEnum_RoundTripWithSystemTextJsonDefaults()
+    {
+        const string spec = """
                         {
                             "openapi": "3.0.3",
                             "info": { "title": "Record Test", "version": "1.0.0" },
@@ -332,14 +332,14 @@ public class CSharpSchemaGeneratorTests
                         }
                         """;
 
-                var generator = new CSharpSchemaGenerator(new GeneratorOptions
-                {
-                        GenerateFileHeader = false,
-                        Namespace = "GeneratedModels"
-                });
+        var generator = new CSharpSchemaGenerator(new GeneratorOptions
+        {
+            GenerateFileHeader = false,
+            Namespace = "GeneratedModels"
+        });
 
-                string generatedCode = generator.GenerateFromText(spec);
-                string[] lines = GetSerializationLines(generatedCode, """
+        string generatedCode = generator.GenerateFromText(spec);
+        string[] lines = GetSerializationLines(generatedCode, """
                         using System.Text.Json;
                         using GeneratedModels;
 
@@ -348,21 +348,21 @@ public class CSharpSchemaGeneratorTests
                         Console.WriteLine(JsonSerializer.Serialize(user));
                         """);
 
-                Assert.Equal("7|Ada|Active", lines[^2]);
-                Assert.Equal("{\"id\":7,\"name\":\"Ada\",\"status\":\"active\"}", lines[^1]);
-        }
+        Assert.Equal("7|Ada|Active", lines[^2]);
+        Assert.Equal("{\"id\":7,\"name\":\"Ada\",\"status\":\"active\"}", lines[^1]);
+    }
 
-            [Fact]
-            public void Generate_ComprehensiveApi_AllOfDerivedRecord_RoundTripsWithSystemTextJsonDefaults()
-            {
-                var generator = new CSharpSchemaGenerator(new GeneratorOptions
-                {
-                    GenerateFileHeader = false,
-                    Namespace = "GeneratedModels"
-                });
+    [Fact]
+    public void Generate_ComprehensiveApi_AllOfDerivedRecord_RoundTripsWithSystemTextJsonDefaults()
+    {
+        var generator = new CSharpSchemaGenerator(new GeneratorOptions
+        {
+            GenerateFileHeader = false,
+            Namespace = "GeneratedModels"
+        });
 
-                string generatedCode = generator.GenerateFromFile(GetFixturePath("comprehensive-api.json"));
-                string[] lines = GetSerializationLines(generatedCode, """
+        string generatedCode = generator.GenerateFromFile(GetFixturePath("comprehensive-api.json"));
+        string[] lines = GetSerializationLines(generatedCode, """
                     using System.Text.Json;
                     using GeneratedModels;
 
@@ -371,21 +371,21 @@ public class CSharpSchemaGeneratorTests
                     Console.WriteLine(JsonSerializer.Serialize(cat));
                     """);
 
-                Assert.Equal("Milo|cat|True|False", lines[^2]);
-                Assert.Equal("{\"indoor\":true,\"declawed\":false,\"name\":\"Milo\",\"petType\":\"cat\"}", lines[^1]);
-            }
+        Assert.Equal("Milo|cat|True|False", lines[^2]);
+        Assert.Equal("{\"indoor\":true,\"declawed\":false,\"name\":\"Milo\",\"petType\":\"cat\"}", lines[^1]);
+    }
 
-            [Fact]
-            public void Generate_ComprehensiveApi_OneOfDiscriminatedUnion_DefaultSystemTextJsonReportsUnsupportedDerivedType()
-            {
-                var generator = new CSharpSchemaGenerator(new GeneratorOptions
-                {
-                    GenerateFileHeader = false,
-                    Namespace = "GeneratedModels"
-                });
+    [Fact]
+    public void Generate_ComprehensiveApi_OneOfDiscriminatedUnion_DefaultSystemTextJsonReportsUnsupportedDerivedType()
+    {
+        var generator = new CSharpSchemaGenerator(new GeneratorOptions
+        {
+            GenerateFileHeader = false,
+            Namespace = "GeneratedModels"
+        });
 
-                string generatedCode = generator.GenerateFromFile(GetFixturePath("comprehensive-api.json"));
-                string[] lines = GetSerializationLines(generatedCode, """
+        string generatedCode = generator.GenerateFromFile(GetFixturePath("comprehensive-api.json"));
+        string[] lines = GetSerializationLines(generatedCode, """
                     using System;
                     using System.Text.Json;
                     using GeneratedModels;
@@ -403,22 +403,22 @@ public class CSharpSchemaGeneratorTests
                     }
                     """);
 
-                Assert.Equal("InvalidOperationException", lines[^2]);
-                Assert.Contains("not a supported derived type", lines[^1], StringComparison.Ordinal);
-                Assert.Contains("GeneratedModels.Shape", lines[^1], StringComparison.Ordinal);
-            }
+        Assert.Equal("InvalidOperationException", lines[^2]);
+        Assert.Contains("not a supported derived type", lines[^1], StringComparison.Ordinal);
+        Assert.Contains("GeneratedModels.Shape", lines[^1], StringComparison.Ordinal);
+    }
 
-            [Fact]
-            public void Generate_ComprehensiveApi_AnyOfUnion_DefaultSystemTextJsonReportsUnsupportedDerivedType()
-            {
-                var generator = new CSharpSchemaGenerator(new GeneratorOptions
-                {
-                    GenerateFileHeader = false,
-                    Namespace = "GeneratedModels"
-                });
+    [Fact]
+    public void Generate_ComprehensiveApi_AnyOfUnion_DefaultSystemTextJsonReportsUnsupportedDerivedType()
+    {
+        var generator = new CSharpSchemaGenerator(new GeneratorOptions
+        {
+            GenerateFileHeader = false,
+            Namespace = "GeneratedModels"
+        });
 
-                string generatedCode = generator.GenerateFromFile(GetFixturePath("comprehensive-api.json"));
-                string[] lines = GetSerializationLines(generatedCode, """
+        string generatedCode = generator.GenerateFromFile(GetFixturePath("comprehensive-api.json"));
+        string[] lines = GetSerializationLines(generatedCode, """
                     using System;
                     using System.Text.Json;
                     using GeneratedModels;
@@ -436,15 +436,15 @@ public class CSharpSchemaGeneratorTests
                     }
                     """);
 
-                Assert.Equal("InvalidOperationException", lines[^2]);
-                Assert.Contains("not a supported derived type", lines[^1], StringComparison.Ordinal);
-                Assert.Contains("GeneratedModels.NotificationPreference", lines[^1], StringComparison.Ordinal);
-            }
+        Assert.Equal("InvalidOperationException", lines[^2]);
+        Assert.Contains("not a supported derived type", lines[^1], StringComparison.Ordinal);
+        Assert.Contains("GeneratedModels.NotificationPreference", lines[^1], StringComparison.Ordinal);
+    }
 
-        [Fact]
-        public void Generate_FromText_WithInlinePrimitiveTypeAliases_InlinesAliasReferences()
-        {
-                const string spec = """
+    [Fact]
+    public void Generate_FromText_WithInlinePrimitiveTypeAliases_InlinesAliasReferences()
+    {
+        const string spec = """
                         {
                             "openapi": "3.0.3",
                             "info": { "title": "Alias Test", "version": "1.0.0" },
@@ -468,18 +468,18 @@ public class CSharpSchemaGeneratorTests
                         }
                         """;
 
-                var generator = new CSharpSchemaGenerator(new GeneratorOptions
-                {
-                        GenerateFileHeader = false,
-                        Namespace = "Test",
-                        InlinePrimitiveTypeAliases = true,
-                });
+        var generator = new CSharpSchemaGenerator(new GeneratorOptions
+        {
+            GenerateFileHeader = false,
+            Namespace = "Test",
+            InlinePrimitiveTypeAliases = true,
+        });
 
-                string result = generator.GenerateFromText(spec);
+        string result = generator.GenerateFromText(spec);
 
-                Assert.DoesNotContain("public record struct AlertCreatedAt(DateTimeOffset Value)", result, StringComparison.Ordinal);
-                Assert.Contains("public required DateTimeOffset CreatedAt { get; init; }", result, StringComparison.Ordinal);
-        }
+        Assert.DoesNotContain("public record struct AlertCreatedAt(DateTimeOffset Value)", result, StringComparison.Ordinal);
+        Assert.Contains("public required DateTimeOffset CreatedAt { get; init; }", result, StringComparison.Ordinal);
+    }
 
     [Fact]
     public void Generate_ComprehensiveApi_ProducesValidCSharpStructure()
