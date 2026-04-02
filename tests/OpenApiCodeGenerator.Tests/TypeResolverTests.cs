@@ -279,7 +279,7 @@ public class TypeResolverTests
     }
 
     [Fact]
-    public void RequiresBinaryStreamTypeAliasJsonConverter_BinaryStringAlias_ReturnsTrue()
+    public void IsBinaryStreamPropertyType_BinaryStringAlias_ReturnsTrue()
     {
         TypeResolver resolver = CreateResolver();
         var schema = new OpenApiSchema { Type = JsonSchemaType.String, Format = "binary" };
