@@ -57,17 +57,12 @@ internal class CSharpCodeEmitter
         AppendLine("#nullable enable");
         AppendLine();
 
-        if (emitGenericTypeAliasConverters || emitBinaryStreamJsonConverter || emitBinaryStreamTypeAliasConverters)
-        {
-            AppendLine("using System.Text.Json;");
-        }
-
-        if (emitBinaryStreamJsonConverter || emitBinaryStreamTypeAliasConverters)
-        {
-            AppendLine("using System;");
-            AppendLine("using System.IO;");
-        }
-
+        // Generated files must compile without relying on implicit usings in the consuming project.
+        AppendLine("using System;");
+        AppendLine("using System.Collections.Generic;");
+        AppendLine("using System.Globalization;");
+        AppendLine("using System.IO;");
+        AppendLine("using System.Text.Json;");
         AppendLine("using System.Text.Json.Serialization;");
         AppendLine();
 
@@ -574,7 +569,7 @@ internal class CSharpCodeEmitter
 
             if (TypeResolver.HasTypeFlag(schema, JsonSchemaType.String))
             {
-                AppendLine($"[JsonStringEnumMemberName(\"{rawValue.Replace("\"", "\\\"", StringComparison.Ordinal)}\")]");
+                AppendLine($"[JsonStringEnumMemberName(\"{EscapeCSharpStringLiteral(rawValue)}\")]");
             }
 
             if ((TypeResolver.HasTypeFlag(schema, JsonSchemaType.Integer) || TypeResolver.HasTypeFlag(schema, JsonSchemaType.Number))
@@ -695,7 +690,7 @@ internal class CSharpCodeEmitter
         // Add JSON attribute
         if (jsonName != null)
         {
-            AppendLine($"[JsonPropertyName(\"{jsonName.Replace("\"", "\\\"", StringComparison.Ordinal)}\")]");
+            AppendLine($"[JsonPropertyName(\"{EscapeCSharpStringLiteral(jsonName)}\")]");
         }
 
         if (_typeResolver.IsBinaryStreamPropertyType(propertySchema))
@@ -759,7 +754,7 @@ internal class CSharpCodeEmitter
 
                 if (string.IsNullOrEmpty(schema.Format))
                 {
-                    return $"\"{strVal.Replace("\"", "\\\"", StringComparison.Ordinal)}\"";
+                    return $"\"{EscapeCSharpStringLiteral(strVal)}\"";
                 }
 
                 if (schema.Format == "date-time" && DateTimeOffset.TryParse(strVal, CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind, out DateTimeOffset dto))
@@ -784,7 +779,7 @@ internal class CSharpCodeEmitter
 
                 if (schema.Format == "uri" && Uri.TryCreate(strVal, UriKind.Absolute, out Uri? uri))
                 {
-                    return $"new Uri(\"{uri}\")";
+                    return $"new Uri(\"{EscapeCSharpStringLiteral(uri.ToString())}\")";
                 }
 
                 return "null!";
@@ -1220,6 +1215,61 @@ internal class CSharpCodeEmitter
             .Replace("&", "&amp;", StringComparison.Ordinal)
             .Replace("<", "&lt;", StringComparison.Ordinal)
             .Replace(">", "&gt;", StringComparison.Ordinal);
+    }
+
+    private static string EscapeCSharpStringLiteral(string text)
+    {
+        var builder = new StringBuilder(text.Length);
+
+        foreach (char ch in text)
+        {
+            switch (ch)
+            {
+                case '\\':
+                    builder.Append("\\\\");
+                    break;
+                case '"':
+                    builder.Append("\\\"");
+                    break;
+                case '\0':
+                    builder.Append("\\0");
+                    break;
+                case '\a':
+                    builder.Append("\\a");
+                    break;
+                case '\b':
+                    builder.Append("\\b");
+                    break;
+                case '\f':
+                    builder.Append("\\f");
+                    break;
+                case '\n':
+                    builder.Append("\\n");
+                    break;
+                case '\r':
+                    builder.Append("\\r");
+                    break;
+                case '\t':
+                    builder.Append("\\t");
+                    break;
+                case '\v':
+                    builder.Append("\\v");
+                    break;
+                default:
+                    if (char.IsControl(ch) || ch is '\u2028' or '\u2029')
+                    {
+                        builder.Append("\\u");
+                        builder.Append(((int)ch).ToString("x4", CultureInfo.InvariantCulture));
+                    }
+                    else
+                    {
+                        builder.Append(ch);
+                    }
+                    break;
+            }
+        }
+
+        return builder.ToString();
     }
 
     private void AppendLine(string? text = null)

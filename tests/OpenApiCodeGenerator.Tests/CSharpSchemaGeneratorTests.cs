@@ -90,6 +90,76 @@ public class CSharpSchemaGeneratorTests
         }
     }
 
+    private static async Task AssertGeneratedCodeCompilesAsync(string generatedCode, bool implicitUsings)
+    {
+        string tempRoot = Path.Combine(
+            AppContext.BaseDirectory,
+            "..",
+            "..",
+            "..",
+            "..",
+            "TestResults",
+            "GeneratedCodeCompilation",
+            Guid.NewGuid().ToString("N"));
+
+        Directory.CreateDirectory(tempRoot);
+
+        try
+        {
+            string generatedPath = Path.Combine(tempRoot, "Generated.cs");
+            string projectPath = Path.Combine(tempRoot, "CompilationHarness.csproj");
+
+            await File.WriteAllTextAsync(generatedPath, generatedCode).ConfigureAwait(false);
+            await File.WriteAllTextAsync(projectPath, $$"""
+                <Project Sdk="Microsoft.NET.Sdk">
+                  <PropertyGroup>
+                    <TargetFramework>net10.0</TargetFramework>
+                    <ImplicitUsings>{{(implicitUsings ? "enable" : "disable")}}</ImplicitUsings>
+                    <Nullable>enable</Nullable>
+                  </PropertyGroup>
+                </Project>
+                """).ConfigureAwait(false);
+
+            using var process = new Process
+            {
+                StartInfo = new ProcessStartInfo
+                {
+                    FileName = "dotnet",
+                    Arguments = $"build \"{projectPath}\" -v q --nologo",
+                    WorkingDirectory = tempRoot,
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true,
+                    UseShellExecute = false,
+                    CreateNoWindow = true,
+                }
+            };
+
+            process.Start();
+
+            Task<string> standardOutputTask = process.StandardOutput.ReadToEndAsync();
+            Task<string> standardErrorTask = process.StandardError.ReadToEndAsync();
+
+            await Task.WhenAll(
+                standardOutputTask,
+                standardErrorTask,
+                process.WaitForExitAsync()).ConfigureAwait(false);
+
+            string standardOutput = await standardOutputTask.ConfigureAwait(false);
+            string standardError = await standardErrorTask.ConfigureAwait(false);
+
+            Assert.True(
+                process.ExitCode == 0,
+                $"Generated code failed to compile with ImplicitUsings={(implicitUsings ? "enable" : "disable")}.{Environment.NewLine}STDOUT:{Environment.NewLine}{standardOutput}{Environment.NewLine}STDERR:{Environment.NewLine}{standardError}");
+        }
+        finally
+        {
+            if (Directory.Exists(tempRoot))
+            {
+                Directory.Delete(tempRoot, recursive: true);
+            }
+        }
+    }
+
     #region Comprehensive API Fixture
 
     [Fact]
@@ -406,6 +476,128 @@ public class CSharpSchemaGeneratorTests
 
         Assert.Equal("7|Ada|Active", lines[^2]);
         Assert.Equal("{\"id\":7,\"name\":\"Ada\",\"status\":\"active\"}", lines[^1]);
+    }
+
+    [Fact]
+    public async Task Generate_FromText_PropertyNameWithBackslash_RoundTripsWithSystemTextJsonDefaults()
+    {
+        const string spec = """
+                        {
+                            "openapi": "3.0.3",
+                            "info": { "title": "Escaped Property Test", "version": "1.0.0" },
+                            "components": {
+                                "schemas": {
+                                    "Payload": {
+                                        "type": "object",
+                                        "required": ["bad\\q"],
+                                        "properties": {
+                                            "bad\\q": { "type": "string" }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        """;
+
+        var generator = new CSharpSchemaGenerator(new GeneratorOptions
+        {
+            GenerateFileHeader = false,
+            Namespace = "GeneratedModels"
+        });
+
+        string generatedCode = generator.GenerateFromText(spec);
+        string[] lines = await GetSerializationLinesAsync(generatedCode, """
+                using System.Text.Json;
+                using GeneratedModels;
+
+                Payload? payload = JsonSerializer.Deserialize<Payload>("{\"bad\\\\q\":\"hello\"}");
+                Console.WriteLine(payload?.Badq);
+                Console.WriteLine(JsonSerializer.Serialize(payload));
+                """);
+
+        Assert.Equal("hello", lines[^2]);
+        Assert.Equal("{\"bad\\\\q\":\"hello\"}", lines[^1]);
+    }
+
+    [Fact]
+    public async Task Generate_FromText_EnumValueWithBackslash_RoundTripsWithSystemTextJsonDefaults()
+    {
+        const string spec = """
+                        {
+                            "openapi": "3.0.3",
+                            "info": { "title": "Escaped Enum Test", "version": "1.0.0" },
+                            "components": {
+                                "schemas": {
+                                    "Status": {
+                                        "type": "string",
+                                        "enum": ["bad\\q"]
+                                    }
+                                }
+                            }
+                        }
+                        """;
+
+        var generator = new CSharpSchemaGenerator(new GeneratorOptions
+        {
+            GenerateFileHeader = false,
+            Namespace = "GeneratedModels"
+        });
+
+        string generatedCode = generator.GenerateFromText(spec);
+        string[] lines = await GetSerializationLinesAsync(generatedCode, """
+                using System.Text.Json;
+                using GeneratedModels;
+
+                Status value = JsonSerializer.Deserialize<Status>("\"bad\\\\q\"");
+                Console.WriteLine(value);
+                Console.WriteLine(JsonSerializer.Serialize(value));
+                """);
+
+        Assert.Equal("Badq", lines[^2]);
+        Assert.Equal("\"bad\\\\q\"", lines[^1]);
+    }
+
+    [Fact]
+    public async Task Generate_FromText_StringDefaultWithBackslash_PreservesDefaultValue()
+    {
+        const string spec = """
+                        {
+                            "openapi": "3.0.3",
+                            "info": { "title": "Escaped Default Test", "version": "1.0.0" },
+                            "components": {
+                                "schemas": {
+                                    "Payload": {
+                                        "type": "object",
+                                        "properties": {
+                                            "content": {
+                                                "type": "string",
+                                                "default": "bad\\q"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        """;
+
+        var generator = new CSharpSchemaGenerator(new GeneratorOptions
+        {
+            GenerateFileHeader = false,
+            Namespace = "GeneratedModels"
+        });
+
+        string generatedCode = generator.GenerateFromText(spec);
+        string[] lines = await GetSerializationLinesAsync(generatedCode, """
+                using System.Text.Json;
+                using GeneratedModels;
+
+                var payload = new Payload();
+                Console.WriteLine(payload.Content);
+                Console.WriteLine(JsonSerializer.Serialize(payload));
+                """);
+
+        Assert.Equal("bad\\q", lines[^2]);
+        Assert.Equal("{\"content\":\"bad\\\\q\"}", lines[^1]);
     }
 
     [Fact]
@@ -773,6 +965,19 @@ public class CSharpSchemaGeneratorTests
         int openBraces = result.Count(c => c == '{');
         int closeBraces = result.Count(c => c == '}');
         Assert.Equal(openBraces, closeBraces);
+    }
+
+    [Fact]
+    public async Task Generate_ComprehensiveApi_CompilesWithoutImplicitUsings()
+    {
+        var generator = new CSharpSchemaGenerator(new GeneratorOptions
+        {
+            Namespace = "ValidCSharp"
+        });
+
+        string result = generator.GenerateFromFile(GetFixturePath("comprehensive-api.json"));
+
+        await AssertGeneratedCodeCompilesAsync(result, implicitUsings: false);
     }
 
     [Fact]
