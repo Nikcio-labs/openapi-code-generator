@@ -1,5 +1,24 @@
 # Changelog
 
+## [1.1.0] (2026-04-02)
+
+### Added
+
+- Support `--model-prefix` and `GeneratorOptions.ModelPrefix` to prefix every generated model type name
+- Support generator option validation for invalid namespaces and model prefixes before generation starts
+- Support `--inline-type-aliases` and `GeneratorOptions.InlinePrimitiveTypeAliases` to inline primitive aliases at usage sites
+- Support `string`/`binary` component aliases as `Stream`, including generated JSON converters for wrapper aliases
+
+### Changed
+
+- Bumps Microsoft.OpenApi from 3.4.0 to 3.5.1
+- Bumps Microsoft.OpenApi.YamlReader from 3.4.0 to 3.5.1
+
+### Fixed
+
+- Fixes default value handling for date-based properties
+- Fixes stream alias detection during code generation
+
 ## [1.0.1] (2026-03-14)
 
 ### Changes
@@ -26,4 +45,6 @@
 - URL input support for remote OpenAPI specifications
 - Configurable generation options (namespace, enums, nullable, collections, etc.)
 
+[1.1.0]: https://github.com/Nikcio-labs/openapi-code-generator/releases/tag/v1.1.0
+[1.0.1]: https://github.com/Nikcio-labs/openapi-code-generator/releases/tag/v1.0.1
 [1.0.0]: https://github.com/Nikcio-labs/openapi-code-generator/releases/tag/v1.0.0
