@@ -11,6 +11,7 @@
     <!-- CA1707: no underscores – benchmark method names use _ as separator by convention -->
     <!-- CA1822: mark as static – BenchmarkDotNet requires instance methods -->
     <NoWarn>$(NoWarn);CS1591;CA1707;CA1822</NoWarn>
+    <IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
