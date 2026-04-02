@@ -673,6 +673,25 @@ public class CSharpCodeEmitterTests
     }
 
     [Fact]
+    public void Emit_IncludesSuppressionForUnusedUsings()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["Empty"] = new OpenApiSchema { Type = JsonSchemaType.Object }
+        };
+
+        var options = new GeneratorOptions
+        {
+            GenerateFileHeader = false,
+            Namespace = "Test"
+        };
+
+        string result = Generate(schemas, options);
+
+        Assert.Contains("#pragma warning disable CS8019", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
     public void Emit_WithJsonAttributes_IncludesUsingStatement()
     {
         var schemas = new Dictionary<string, IOpenApiSchema>

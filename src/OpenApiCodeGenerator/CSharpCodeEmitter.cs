@@ -55,24 +55,12 @@ internal class CSharpCodeEmitter
         }
 
         AppendLine("#nullable enable");
+        AppendLine("#pragma warning disable CS8019");
         AppendLine();
 
-        // Emit only the using directives that are actually referenced in the generated output,
-        // so that consuming projects with warnings-as-errors do not get CS8019 warnings.
-        if (NeedsSystemNamespace(emitBinaryStreamJsonConverter))
-        {
-            AppendLine("using System;");
-        }
-
-        if (NeedsCollectionsNamespace())
-        {
-            AppendLine("using System.Collections.Generic;");
-        }
-
-        if (NeedsGlobalizationNamespace())
-        {
-            AppendLine("using System.Globalization;");
-        }
+        AppendLine("using System;");
+        AppendLine("using System.Collections.Generic;");
+        AppendLine("using System.Globalization;");
 
         if (emitBinaryStreamJsonConverter || emitBinaryStreamTypeAliasConverters)
         {
@@ -141,103 +129,6 @@ internal class CSharpCodeEmitter
     private bool ShouldEmitBinaryStreamTypeAliasConverters()
     {
         return !_options.InlinePrimitiveTypeAliases && _allSchemas.Values.Any(schema => TypeResolver.IsTypeAlias(schema) && _typeResolver.IsBinaryStreamPropertyType(schema));
-    }
-
-    private bool NeedsSystemNamespace(bool emitBinaryStreamJsonConverter)
-    {
-        // The binary stream JSON converter emits references to System.Convert and System.MemoryStream.
-        if (emitBinaryStreamJsonConverter)
-        {
-            return true;
-        }
-
-        // Check whether any schema or property uses a string format that maps to a System type.
-        return _allSchemas.Values.Any(schema =>
-            SchemaResolvesToSystemType(schema) ||
-            CollectProperties(schema).Values.Any(SchemaResolvesToSystemType));
-    }
-
-    private bool NeedsCollectionsNamespace()
-    {
-        return _allSchemas.Values.Any(schema =>
-            SchemaResolvesToCollectionType(schema) ||
-            CollectProperties(schema).Values.Any(SchemaResolvesToCollectionType));
-    }
-
-    private bool NeedsGlobalizationNamespace()
-    {
-        // CultureInfo and DateTimeStyles are emitted in generated default-value expressions
-        // only when a date-time, date, or time property has a non-null default value.
-        return _allSchemas.Values.Any(schema =>
-            CollectProperties(schema).Values.Any(prop =>
-                (string.Equals(prop.Format, "date-time", StringComparison.OrdinalIgnoreCase)
-                    || string.Equals(prop.Format, "date", StringComparison.OrdinalIgnoreCase)
-                    || string.Equals(prop.Format, "time", StringComparison.OrdinalIgnoreCase))
-                && prop.Default != null));
-    }
-
-    /// <summary>
-    /// Returns true if the schema resolves to a type that lives in the System namespace
-    /// (DateTimeOffset, DateOnly, TimeOnly, TimeSpan, Guid, or Uri). Checks are made
-    /// against the OpenAPI format directly to avoid false positives from schema names.
-    /// </summary>
-    private static bool SchemaResolvesToSystemType(IOpenApiSchema schema)
-    {
-        // Formats that map to System types via ResolveStringType.
-        if (TypeResolver.HasTypeFlag(schema, JsonSchemaType.String)
-            && FormatResolvesToSystemType(schema.Format))
-        {
-            return true;
-        }
-
-        // Recursively check array item type (e.g. List<DateTimeOffset>).
-        if (schema.Items != null && SchemaResolvesToSystemType(schema.Items))
-        {
-            return true;
-        }
-
-        // Recursively check dictionary value type (e.g. Dictionary<string, Guid>).
-        if (schema.AdditionalProperties != null && SchemaResolvesToSystemType(schema.AdditionalProperties))
-        {
-            return true;
-        }
-
-        return false;
-    }
-
-    private static bool FormatResolvesToSystemType(string? format)
-    {
-        return string.Equals(format, "date-time", StringComparison.OrdinalIgnoreCase)
-            || string.Equals(format, "date", StringComparison.OrdinalIgnoreCase)
-            || string.Equals(format, "time", StringComparison.OrdinalIgnoreCase)
-            || string.Equals(format, "duration", StringComparison.OrdinalIgnoreCase)
-            || string.Equals(format, "uuid", StringComparison.OrdinalIgnoreCase)
-            || string.Equals(format, "uri", StringComparison.OrdinalIgnoreCase);
-    }
-
-    /// <summary>
-    /// Returns true if the schema resolves to a generic collection type that lives in
-    /// System.Collections.Generic (List&lt;T&gt;, IReadOnlyList&lt;T&gt;, Dictionary&lt;K,V&gt;,
-    /// or IReadOnlyDictionary&lt;K,V&gt;).
-    /// </summary>
-    private static bool SchemaResolvesToCollectionType(IOpenApiSchema schema)
-    {
-        // Array schemas resolve to List<T> or IReadOnlyList<T>.
-        if (TypeResolver.HasTypeFlag(schema, JsonSchemaType.Array))
-        {
-            return true;
-        }
-
-        // Object schemas with additionalProperties only resolve to Dictionary<string, T>
-        // or IReadOnlyDictionary<string, T>.
-        if (TypeResolver.HasTypeFlag(schema, JsonSchemaType.Object)
-            && schema.AdditionalProperties != null
-            && (schema.Properties == null || schema.Properties.Count == 0))
-        {
-            return true;
-        }
-
-        return false;
     }
 
     private void EmitTypeAliasInterface()
@@ -1377,7 +1268,7 @@ internal class CSharpCodeEmitter
                     if (char.IsControl(ch) || ch is '\u2028' or '\u2029')
                     {
                         builder.Append("\\u");
-                        builder.Append(((int)ch).ToString("x4", CultureInfo.InvariantCulture));
+                        builder.Append(((int) ch).ToString("x4", CultureInfo.InvariantCulture));
                     }
                     else
                     {

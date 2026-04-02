@@ -90,7 +90,7 @@ public class CSharpSchemaGeneratorTests
         }
     }
 
-    private static async Task AssertGeneratedCodeCompilesAsync(string generatedCode, bool implicitUsings)
+    private static async Task AssertGeneratedCodeCompilesAsync(string generatedCode, bool implicitUsings, bool treatWarningsAsErrors = false)
     {
         string tempRoot = Path.Combine(
             AppContext.BaseDirectory,
@@ -116,6 +116,8 @@ public class CSharpSchemaGeneratorTests
                     <TargetFramework>net10.0</TargetFramework>
                     <ImplicitUsings>{{(implicitUsings ? "enable" : "disable")}}</ImplicitUsings>
                     <Nullable>enable</Nullable>
+                    <TreatWarningsAsErrors>{{(treatWarningsAsErrors ? "true" : "false")}}</TreatWarningsAsErrors>
+                    <AnalysisMode>All</AnalysisMode>
                   </PropertyGroup>
                 </Project>
                 """).ConfigureAwait(false);
@@ -149,7 +151,7 @@ public class CSharpSchemaGeneratorTests
 
             Assert.True(
                 process.ExitCode == 0,
-                $"Generated code failed to compile with ImplicitUsings={(implicitUsings ? "enable" : "disable")}.{Environment.NewLine}STDOUT:{Environment.NewLine}{standardOutput}{Environment.NewLine}STDERR:{Environment.NewLine}{standardError}");
+                $"Generated code failed to compile with ImplicitUsings={(implicitUsings ? "enable" : "disable")}, TreatWarningsAsErrors={(treatWarningsAsErrors ? "true" : "false")}.{Environment.NewLine}STDOUT:{Environment.NewLine}{standardOutput}{Environment.NewLine}STDERR:{Environment.NewLine}{standardError}");
         }
         finally
         {
@@ -978,6 +980,32 @@ public class CSharpSchemaGeneratorTests
         string result = generator.GenerateFromFile(GetFixturePath("comprehensive-api.json"));
 
         await AssertGeneratedCodeCompilesAsync(result, implicitUsings: false);
+    }
+
+    [Fact]
+    public async Task Generate_ComprehensiveApi_CompilesWithImplicitUsingsWhenWarningsAreErrors()
+    {
+        var generator = new CSharpSchemaGenerator(new GeneratorOptions
+        {
+            Namespace = "ValidCSharp"
+        });
+
+        string result = generator.GenerateFromFile(GetFixturePath("comprehensive-api.json"));
+
+        await AssertGeneratedCodeCompilesAsync(result, implicitUsings: true, treatWarningsAsErrors: true);
+    }
+
+    [Fact]
+    public async Task Generate_ComprehensiveApi_CompilesWithoutImplicitUsingsWhenWarningsAreErrors()
+    {
+        var generator = new CSharpSchemaGenerator(new GeneratorOptions
+        {
+            Namespace = "ValidCSharp"
+        });
+
+        string result = generator.GenerateFromFile(GetFixturePath("comprehensive-api.json"));
+
+        await AssertGeneratedCodeCompilesAsync(result, implicitUsings: false, treatWarningsAsErrors: true);
     }
 
     [Fact]
