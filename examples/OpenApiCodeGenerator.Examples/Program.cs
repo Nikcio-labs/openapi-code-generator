@@ -1,26 +1,30 @@
 #pragma warning disable CA1031 // Do not catch general exception types
 #pragma warning disable CA1303 // Do not pass literals as localized parameters
 
+using System.Diagnostics.CodeAnalysis;
 using System.Diagnostics;
 using OpenApiCodeGenerator;
 
-const string OutputDir = "output";
+string outputDir = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "output"));
 
-var specifications = new Dictionary<string, Uri>
+string showcaseSpecPath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "specs", "showcase-openapi.yaml"));
+
+var specifications = new Dictionary<string, string>
 {
-    ["github-api"] = new Uri("https://raw.githubusercontent.com/github/rest-api-description/main/descriptions/api.github.com/api.github.com.yaml"),
-    ["github-api-next"] = new Uri("https://raw.githubusercontent.com/github/rest-api-description/main/descriptions-next/api.github.com/api.github.com.yaml"),
-    ["octokit-ghes-3.6-diff-to-api"] = new Uri("https://raw.githubusercontent.com/octokit/octokit-next.js/main/cache/types-openapi/ghes-3.6-diff-to-api.github.com.json"),
-    ["stripe-api"] = new Uri("https://raw.githubusercontent.com/stripe/openapi/master/openapi/spec3.yaml"),
-    ["petstore"] = new Uri("https://petstore3.swagger.io/api/v3/openapi.json"),
+    ["showcase-openapi"] = showcaseSpecPath,
+    ["github-api"] = "https://raw.githubusercontent.com/github/rest-api-description/main/descriptions/api.github.com/api.github.com.yaml",
+    ["github-api-next"] = "https://raw.githubusercontent.com/github/rest-api-description/main/descriptions-next/api.github.com/api.github.com.yaml",
+    ["octokit-ghes-3.6-diff-to-api"] = "https://raw.githubusercontent.com/octokit/octokit-next.js/main/cache/types-openapi/ghes-3.6-diff-to-api.github.com.json",
+    ["stripe-api"] = "https://raw.githubusercontent.com/stripe/openapi/master/openapi/spec3.yaml",
+    ["petstore"] = "https://petstore3.swagger.io/api/v3/openapi.json",
 };
 
-if (Directory.Exists(OutputDir))
+if (Directory.Exists(outputDir))
 {
-    Directory.Delete(OutputDir, recursive: true);
+    Directory.Delete(outputDir, recursive: true);
 }
 
-Directory.CreateDirectory(OutputDir);
+Directory.CreateDirectory(outputDir);
 
 using var httpClient = new HttpClient();
 httpClient.DefaultRequestHeaders.UserAgent.ParseAdd("OpenApiCodeGenerator-Examples/1.0");
@@ -32,7 +36,7 @@ Console.WriteLine();
 int succeeded = 0;
 int failed = 0;
 
-foreach ((string? name, Uri url) in specifications)
+foreach ((string? name, string source) in specifications)
 {
     Console.Write($"  {name,-40} ");
     var sw = Stopwatch.StartNew();
@@ -47,15 +51,12 @@ foreach ((string? name, Uri url) in specifications)
             GenerateFileHeader = true,
         });
 
-        using HttpResponseMessage response = await httpClient.GetAsync(url).ConfigureAwait(false);
-        response.EnsureSuccessStatusCode();
-
-        using Stream stream = (await response.Content.ReadAsStreamAsync().ConfigureAwait(false));
+        using Stream stream = await OpenSpecificationStreamAsync(httpClient, source).ConfigureAwait(false);
 
         string code = generator.GenerateFromStream(stream);
         sw.Stop();
 
-        string outputPath = Path.Combine(OutputDir, $"{name}.cs");
+        string outputPath = Path.Combine(outputDir, $"{name}.cs");
         await File.WriteAllTextAsync(outputPath, code).ConfigureAwait(false);
 
         int lines = code.Split('\n').Length;
@@ -70,8 +71,8 @@ foreach ((string? name, Uri url) in specifications)
         Console.WriteLine($"    Error: {ex.Message}");
 
         // Write error report
-        string errorPath = Path.Combine(OutputDir, $"{name}.error.txt");
-        await File.WriteAllTextAsync(errorPath, $"URL: {url}\n\n{ex}").ConfigureAwait(false);
+        string errorPath = Path.Combine(outputDir, $"{name}.error.txt");
+        await File.WriteAllTextAsync(errorPath, $"Source: {source}\n\n{ex}").ConfigureAwait(false);
         failed++;
     }
 }
@@ -79,13 +80,13 @@ foreach ((string? name, Uri url) in specifications)
 Console.WriteLine();
 Console.WriteLine(new string('-', 50));
 Console.WriteLine($"  Results: {succeeded} succeeded, {failed} failed");
-Console.WriteLine($"  Output:  {Path.GetFullPath(OutputDir)}{Path.DirectorySeparatorChar}");
+Console.WriteLine($"  Output:  {outputDir}{Path.DirectorySeparatorChar}");
 Console.WriteLine();
 
 if (succeeded > 0)
 {
     Console.WriteLine("Generated files:");
-    foreach (string? file in Directory.GetFiles(OutputDir, "*.cs").Order())
+    foreach (string? file in Directory.GetFiles(outputDir, "*.cs").Order())
     {
         var info = new FileInfo(file);
         Console.WriteLine($"  {info.Name,-45} {info.Length / 1024.0:F0} KB");
@@ -124,4 +125,22 @@ static string NameToNamespace(string name)
 
         return char.ToUpperInvariant(p[0]) + p[1..];
     }));
+}
+
+[SuppressMessage("Reliability", "CA2000:Dispose objects before losing scope", Justification = "Stream ownership is transferred to the caller.")]
+static async Task<Stream> OpenSpecificationStreamAsync(HttpClient httpClient, string source)
+{
+    if (File.Exists(source))
+    {
+        return File.OpenRead(source);
+    }
+
+    if (Uri.TryCreate(source, UriKind.Absolute, out Uri? uri) && (uri.Scheme == Uri.UriSchemeHttp || uri.Scheme == Uri.UriSchemeHttps))
+    {
+        HttpResponseMessage response = await httpClient.GetAsync(uri).ConfigureAwait(false);
+        response.EnsureSuccessStatusCode();
+        return await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
+    }
+
+    throw new FileNotFoundException($"Could not resolve specification source '{source}'.", source);
 }

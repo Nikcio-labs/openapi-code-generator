@@ -41,9 +41,9 @@ internal class CSharpCodeEmitter
     {
         _sb.Clear();
         _indent = 0;
-        bool emitTypeAliasInfrastructure = ShouldEmitTypeAliasInfrastructure();
         bool emitGenericTypeAliasConverters = ShouldEmitGenericTypeAliasConverters();
         bool emitBinaryStreamTypeAliasConverters = ShouldEmitBinaryStreamTypeAliasConverters();
+        bool emitBinaryStreamJsonConverter = ShouldEmitBinaryStreamJsonConverter() || emitBinaryStreamTypeAliasConverters;
 
         if (_options.GenerateFileHeader)
         {
@@ -57,12 +57,12 @@ internal class CSharpCodeEmitter
         AppendLine("#nullable enable");
         AppendLine();
 
-        if (emitTypeAliasInfrastructure)
+        if (emitGenericTypeAliasConverters || emitBinaryStreamJsonConverter || emitBinaryStreamTypeAliasConverters)
         {
             AppendLine("using System.Text.Json;");
         }
 
-        if (emitBinaryStreamTypeAliasConverters)
+        if (emitBinaryStreamJsonConverter || emitBinaryStreamTypeAliasConverters)
         {
             AppendLine("using System;");
             AppendLine("using System.IO;");
@@ -74,11 +74,24 @@ internal class CSharpCodeEmitter
         AppendLine($"namespace {_options.Namespace};");
         AppendLine();
 
-        if (emitTypeAliasInfrastructure)
+        if (emitGenericTypeAliasConverters || emitBinaryStreamTypeAliasConverters)
         {
-            EmitTypeAliasJsonConverterInfrastructure(
-                emitGenericTypeAliasConverters,
-                emitBinaryStreamTypeAliasConverters);
+            EmitTypeAliasInterface();
+        }
+
+        if (emitBinaryStreamJsonConverter)
+        {
+            EmitBinaryStreamJsonConverter();
+        }
+
+        if (emitGenericTypeAliasConverters)
+        {
+            EmitGenericTypeAliasJsonConverter();
+        }
+
+        if (emitBinaryStreamTypeAliasConverters)
+        {
+            EmitBinaryStreamTypeAliasJsonConverter();
         }
 
         // Two-pass type name resolution: detect collisions, assign clean names to
@@ -99,24 +112,22 @@ internal class CSharpCodeEmitter
         return _sb.ToString().TrimEnd() + Environment.NewLine;
     }
 
-    private bool ShouldEmitTypeAliasInfrastructure()
-    {
-        return !_options.InlinePrimitiveTypeAliases && _allSchemas.Values.Any(TypeResolver.IsTypeAlias);
-    }
-
     private bool ShouldEmitGenericTypeAliasConverters()
     {
         return !_options.InlinePrimitiveTypeAliases && _allSchemas.Values.Any(_typeResolver.UsesGenericTypeAliasJsonConverter);
     }
 
-    private bool ShouldEmitBinaryStreamTypeAliasConverters()
+    private bool ShouldEmitBinaryStreamJsonConverter()
     {
-        return !_options.InlinePrimitiveTypeAliases && _allSchemas.Values.Any(_typeResolver.RequiresBinaryStreamTypeAliasJsonConverter);
+        return _allSchemas.Values.Any(schema => CollectProperties(schema).Values.Any(propertySchema => _typeResolver.IsBinaryStreamPropertyType(propertySchema)));
     }
 
-    private void EmitTypeAliasJsonConverterInfrastructure(
-        bool emitGenericTypeAliasConverters,
-        bool emitBinaryStreamTypeAliasConverters)
+    private bool ShouldEmitBinaryStreamTypeAliasConverters()
+    {
+        return !_options.InlinePrimitiveTypeAliases && _allSchemas.Values.Any(schema => TypeResolver.IsTypeAlias(schema) && _typeResolver.IsBinaryStreamPropertyType(schema));
+    }
+
+    private void EmitTypeAliasInterface()
     {
         AppendLine("file interface IOpenApiGeneratedTypeAlias<TSelf, TValue>");
         AppendLine("    where TSelf : struct, IOpenApiGeneratedTypeAlias<TSelf, TValue>");
@@ -128,110 +139,150 @@ internal class CSharpCodeEmitter
         _indent--;
         AppendLine("}");
         AppendLine();
+    }
 
-        if (emitGenericTypeAliasConverters)
-        {
-            AppendLine("file sealed class OpenApiGeneratedTypeAliasJsonConverter<TAlias, TValue> : JsonConverter<TAlias>");
-            AppendLine("    where TAlias : struct, IOpenApiGeneratedTypeAlias<TAlias, TValue>");
-            AppendLine("{");
-            _indent++;
-            AppendLine("public override TAlias Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)");
-            AppendLine("{");
-            _indent++;
-            AppendLine("TValue value = JsonSerializer.Deserialize<TValue>(ref reader, options)!;");
-            AppendLine("return TAlias.Create(value);");
-            _indent--;
-            AppendLine("}");
-            AppendLine();
-            AppendLine("public override void Write(Utf8JsonWriter writer, TAlias value, JsonSerializerOptions options)");
-            AppendLine("{");
-            _indent++;
-            AppendLine("JsonSerializer.Serialize(writer, value.Value, options);");
-            _indent--;
-            AppendLine("}");
-            _indent--;
-            AppendLine("}");
-            AppendLine();
-        }
+    private void EmitBinaryStreamJsonConverter()
+    {
+        AppendLine("file sealed class OpenApiGeneratedBinaryStreamJsonConverter : JsonConverter<Stream>");
+        AppendLine("{");
+        _indent++;
+        AppendLine("public override Stream? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)");
+        AppendLine("{");
+        _indent++;
+        AppendLine("if (reader.TokenType == JsonTokenType.Null)");
+        AppendLine("{");
+        _indent++;
+        AppendLine("return null;");
+        _indent--;
+        AppendLine("}");
+        AppendLine();
+        AppendLine("if (reader.TokenType != JsonTokenType.String)");
+        AppendLine("{");
+        _indent++;
+        AppendLine("throw new JsonException(\"Expected a base64-encoded string for binary content.\");");
+        _indent--;
+        AppendLine("}");
+        AppendLine();
+        AppendLine("string? base64 = reader.GetString();");
+        AppendLine("if (string.IsNullOrEmpty(base64))");
+        AppendLine("{");
+        _indent++;
+        AppendLine("return new MemoryStream();");
+        _indent--;
+        AppendLine("}");
+        AppendLine();
+        AppendLine("try");
+        AppendLine("{");
+        _indent++;
+        AppendLine("byte[] bytes = Convert.FromBase64String(base64);");
+        AppendLine("return new MemoryStream(bytes, writable: false);");
+        _indent--;
+        AppendLine("}");
+        AppendLine("catch (FormatException exception)");
+        AppendLine("{");
+        _indent++;
+        AppendLine("throw new JsonException(\"Expected a base64-encoded string for binary content.\", exception);");
+        _indent--;
+        AppendLine("}");
+        _indent--;
+        AppendLine("}");
+        AppendLine();
+        AppendLine("public override void Write(Utf8JsonWriter writer, Stream? value, JsonSerializerOptions options)");
+        AppendLine("{");
+        _indent++;
+        AppendLine("if (value is null)");
+        AppendLine("{");
+        _indent++;
+        AppendLine("writer.WriteNullValue();");
+        AppendLine("return;");
+        _indent--;
+        AppendLine("}");
+        AppendLine();
+        AppendLine("long originalPosition = 0;");
+        AppendLine("if (value.CanSeek)");
+        AppendLine("{");
+        _indent++;
+        AppendLine("originalPosition = value.Position;");
+        AppendLine("value.Position = 0;");
+        _indent--;
+        AppendLine("}");
+        AppendLine();
+        AppendLine("try");
+        AppendLine("{");
+        _indent++;
+        AppendLine("using var buffer = new MemoryStream();");
+        AppendLine("value.CopyTo(buffer);");
+        AppendLine("writer.WriteStringValue(Convert.ToBase64String(buffer.ToArray()));");
+        _indent--;
+        AppendLine("}");
+        AppendLine("finally");
+        AppendLine("{");
+        _indent++;
+        AppendLine("if (value.CanSeek)");
+        AppendLine("{");
+        _indent++;
+        AppendLine("value.Position = originalPosition;");
+        _indent--;
+        AppendLine("}");
+        _indent--;
+        AppendLine("}");
+        _indent--;
+        AppendLine("}");
+        _indent--;
+        AppendLine("}");
+        AppendLine();
+    }
 
-        if (emitBinaryStreamTypeAliasConverters)
-        {
-            AppendLine("file sealed class OpenApiGeneratedBinaryStreamTypeAliasJsonConverter<TAlias> : JsonConverter<TAlias>");
-            AppendLine("    where TAlias : struct, IOpenApiGeneratedTypeAlias<TAlias, Stream>");
-            AppendLine("{");
-            _indent++;
-            AppendLine("public override TAlias Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)");
-            AppendLine("{");
-            _indent++;
-            AppendLine("if (reader.TokenType != JsonTokenType.String)");
-            AppendLine("{");
-            _indent++;
-            AppendLine("throw new JsonException(\"Expected a base64-encoded string for binary content.\");");
-            _indent--;
-            AppendLine("}");
-            AppendLine();
-            AppendLine("string? base64 = reader.GetString();");
-            AppendLine("if (string.IsNullOrEmpty(base64))");
-            AppendLine("{");
-            _indent++;
-            AppendLine("return TAlias.Create(new MemoryStream());");
-            _indent--;
-            AppendLine("}");
-            AppendLine();
-            AppendLine("try");
-            AppendLine("{");
-            _indent++;
-            AppendLine("byte[] bytes = Convert.FromBase64String(base64);");
-            AppendLine("return TAlias.Create(new MemoryStream(bytes, writable: false));");
-            _indent--;
-            AppendLine("}");
-            AppendLine("catch (FormatException exception)");
-            AppendLine("{");
-            _indent++;
-            AppendLine("throw new JsonException(\"Expected a base64-encoded string for binary content.\", exception);");
-            _indent--;
-            AppendLine("}");
-            _indent--;
-            AppendLine("}");
-            AppendLine();
-            AppendLine("public override void Write(Utf8JsonWriter writer, TAlias value, JsonSerializerOptions options)");
-            AppendLine("{");
-            _indent++;
-            AppendLine("Stream stream = value.Value;");
-            AppendLine("long originalPosition = 0;");
-            AppendLine("if (stream.CanSeek)");
-            AppendLine("{");
-            _indent++;
-            AppendLine("originalPosition = stream.Position;");
-            AppendLine("stream.Position = 0;");
-            _indent--;
-            AppendLine("}");
-            AppendLine();
-            AppendLine("try");
-            AppendLine("{");
-            _indent++;
-            AppendLine("using var buffer = new MemoryStream();");
-            AppendLine("stream.CopyTo(buffer);");
-            AppendLine("writer.WriteStringValue(Convert.ToBase64String(buffer.ToArray()));");
-            _indent--;
-            AppendLine("}");
-            AppendLine("finally");
-            AppendLine("{");
-            _indent++;
-            AppendLine("if (stream.CanSeek)");
-            AppendLine("{");
-            _indent++;
-            AppendLine("stream.Position = originalPosition;");
-            _indent--;
-            AppendLine("}");
-            _indent--;
-            AppendLine("}");
-            _indent--;
-            AppendLine("}");
-            _indent--;
-            AppendLine("}");
-            AppendLine();
-        }
+    private void EmitGenericTypeAliasJsonConverter()
+    {
+        AppendLine("file sealed class OpenApiGeneratedTypeAliasJsonConverter<TAlias, TValue> : JsonConverter<TAlias>");
+        AppendLine("    where TAlias : struct, IOpenApiGeneratedTypeAlias<TAlias, TValue>");
+        AppendLine("{");
+        _indent++;
+        AppendLine("public override TAlias Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)");
+        AppendLine("{");
+        _indent++;
+        AppendLine("TValue value = JsonSerializer.Deserialize<TValue>(ref reader, options)!;");
+        AppendLine("return TAlias.Create(value);");
+        _indent--;
+        AppendLine("}");
+        AppendLine();
+        AppendLine("public override void Write(Utf8JsonWriter writer, TAlias value, JsonSerializerOptions options)");
+        AppendLine("{");
+        _indent++;
+        AppendLine("JsonSerializer.Serialize(writer, value.Value, options);");
+        _indent--;
+        AppendLine("}");
+        _indent--;
+        AppendLine("}");
+        AppendLine();
+    }
+
+    private void EmitBinaryStreamTypeAliasJsonConverter()
+    {
+        AppendLine("file sealed class OpenApiGeneratedBinaryStreamTypeAliasJsonConverter<TAlias> : JsonConverter<TAlias>");
+        AppendLine("    where TAlias : struct, IOpenApiGeneratedTypeAlias<TAlias, Stream>");
+        AppendLine("{");
+        _indent++;
+        AppendLine("private static readonly OpenApiGeneratedBinaryStreamJsonConverter StreamConverter = new();");
+        AppendLine();
+        AppendLine("public override TAlias Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)");
+        AppendLine("{");
+        _indent++;
+        AppendLine("Stream stream = StreamConverter.Read(ref reader, typeof(Stream), options) ?? new MemoryStream();");
+        AppendLine("return TAlias.Create(stream);");
+        _indent--;
+        AppendLine("}");
+        AppendLine();
+        AppendLine("public override void Write(Utf8JsonWriter writer, TAlias value, JsonSerializerOptions options)");
+        AppendLine("{");
+        _indent++;
+        AppendLine("StreamConverter.Write(writer, value.Value, options);");
+        _indent--;
+        AppendLine("}");
+        _indent--;
+        AppendLine("}");
+        AppendLine();
     }
 
     #region Inline Enum Resolution
@@ -647,6 +698,11 @@ internal class CSharpCodeEmitter
             AppendLine($"[JsonPropertyName(\"{jsonName.Replace("\"", "\\\"", StringComparison.Ordinal)}\")]");
         }
 
+        if (_typeResolver.IsBinaryStreamPropertyType(propertySchema))
+        {
+            AppendLine("[JsonConverter(typeof(OpenApiGeneratedBinaryStreamJsonConverter))]");
+        }
+
         // Resolve the C# default value literal (if any)
         string? defaultLiteral = ToCSharpDefaultLiteral(propertySchema, typeName);
         string defaultSuffix = defaultLiteral != null ? $" = {defaultLiteral};" : "";
@@ -809,7 +865,7 @@ internal class CSharpCodeEmitter
 
         if (!_options.InlinePrimitiveTypeAliases)
         {
-            string converterType = _typeResolver.RequiresBinaryStreamTypeAliasJsonConverter(schema)
+            string converterType = _typeResolver.IsBinaryStreamPropertyType(schema)
                 ? $"OpenApiGeneratedBinaryStreamTypeAliasJsonConverter<{typeName}>"
                 : $"OpenApiGeneratedTypeAliasJsonConverter<{typeName}, {resolvedType}>";
 

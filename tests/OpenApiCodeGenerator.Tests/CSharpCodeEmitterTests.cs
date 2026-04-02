@@ -540,6 +540,63 @@ public class CSharpCodeEmitterTests
     }
 
     [Fact]
+    public void Emit_DirectBinaryStreamProperty_UsesSharedStreamConverter()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["Attachment"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Required = new HashSet<string> { "content" },
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["content"] = new OpenApiSchema
+                    {
+                        Type = JsonSchemaType.String,
+                        Format = "binary"
+                    }
+                }
+            }
+        };
+
+        string result = Generate(schemas);
+
+        Assert.Contains("using System.Text.Json;", result, StringComparison.Ordinal);
+        Assert.Contains("using System;", result, StringComparison.Ordinal);
+        Assert.Contains("using System.IO;", result, StringComparison.Ordinal);
+        Assert.Contains("file sealed class OpenApiGeneratedBinaryStreamJsonConverter : JsonConverter<Stream>", result, StringComparison.Ordinal);
+        Assert.Contains("[JsonConverter(typeof(OpenApiGeneratedBinaryStreamJsonConverter))]", result, StringComparison.Ordinal);
+        Assert.Contains("public required Stream Content { get; init; }", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Emit_DirectBinaryStreamProperty_GeneratesNullHandlingBranches()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["Attachment"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["content"] = new OpenApiSchema
+                    {
+                        Type = JsonSchemaType.String,
+                        Format = "binary"
+                    }
+                }
+            }
+        };
+
+        string result = Generate(schemas);
+
+        Assert.Contains("if (reader.TokenType == JsonTokenType.Null)", result, StringComparison.Ordinal);
+        Assert.Contains("return null;", result, StringComparison.Ordinal);
+        Assert.Contains("if (value is null)", result, StringComparison.Ordinal);
+        Assert.Contains("writer.WriteNullValue();", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
     public void Emit_WithInlinePrimitiveTypeAliases_InlinesAliasUsagesAndSkipsWrapperType()
     {
         var schemas = new Dictionary<string, IOpenApiSchema>

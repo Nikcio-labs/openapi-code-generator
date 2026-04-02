@@ -1,0 +1,174 @@
+openapi: 3.0.3
+info:
+  title: OpenApiCodeGenerator Showcase
+  version: 1.0.0
+components:
+  schemas:
+    EventId:
+      type: string
+      format: uuid
+      description: Strongly typed UUID alias.
+
+    EventTimestamp:
+      type: string
+      format: date-time
+      description: Strongly typed timestamp alias.
+
+    BinaryPayload:
+      type: string
+      format: binary
+      description: Strongly typed binary payload alias.
+
+    DeliveryState:
+      type: string
+      description: Simple string enum.
+      enum:
+        - pending
+        - sent
+        - failed
+
+    Metadata:
+      type: object
+      description: Demonstrates additionalProperties extension-data support.
+      required:
+        - source
+      properties:
+        source:
+          type: string
+      additionalProperties:
+        type: string
+
+    Attachment:
+      type: object
+      description: Demonstrates direct stream handling and inline enums.
+      required:
+        - fileName
+        - content
+      properties:
+        fileName:
+          type: string
+        content:
+          type: string
+          format: binary
+          description: Direct binary property emitted as Stream.
+        kind:
+          type: string
+          enum:
+            - invoice
+            - receipt
+            - image
+
+    DeliveryBase:
+      type: object
+      description: Base record for allOf inheritance.
+      required:
+        - id
+        - createdAt
+      properties:
+        id:
+          $ref: '#/components/schemas/EventId'
+        createdAt:
+          $ref: '#/components/schemas/EventTimestamp'
+
+    DeliveryRecord:
+      allOf:
+        - $ref: '#/components/schemas/DeliveryBase'
+        - type: object
+          required:
+            - status
+            - payload
+          properties:
+            status:
+              $ref: '#/components/schemas/DeliveryState'
+            payload:
+              $ref: '#/components/schemas/BinaryPayload'
+            attachment:
+              $ref: '#/components/schemas/Attachment'
+            metadata:
+              $ref: '#/components/schemas/Metadata'
+            tags:
+              type: array
+              items:
+                type: string
+            note:
+              type: string
+              nullable: true
+
+    Circle:
+      type: object
+      required:
+        - shapeType
+        - radius
+      properties:
+        shapeType:
+          type: string
+          enum:
+            - circle
+        radius:
+          type: number
+          format: double
+
+    Rectangle:
+      type: object
+      required:
+        - shapeType
+        - width
+        - height
+      properties:
+        shapeType:
+          type: string
+          enum:
+            - rectangle
+        width:
+          type: number
+          format: double
+        height:
+          type: number
+          format: double
+
+    Shape:
+      oneOf:
+        - $ref: '#/components/schemas/Circle'
+        - $ref: '#/components/schemas/Rectangle'
+      discriminator:
+        propertyName: shapeType
+        mapping:
+          circle: '#/components/schemas/Circle'
+          rectangle: '#/components/schemas/Rectangle'
+
+    EmailContact:
+      type: object
+      required:
+        - email
+      properties:
+        email:
+          type: string
+          format: email
+
+    WebhookContact:
+      type: object
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          format: uri
+
+    ContactMethod:
+      anyOf:
+        - $ref: '#/components/schemas/EmailContact'
+        - $ref: '#/components/schemas/WebhookContact'
+
+    Notification:
+      type: object
+      required:
+        - record
+        - preferredShape
+        - contact
+      properties:
+        record:
+          $ref: '#/components/schemas/DeliveryRecord'
+        preferredShape:
+          $ref: '#/components/schemas/Shape'
+        contact:
+          $ref: '#/components/schemas/ContactMethod'

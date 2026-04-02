@@ -325,6 +325,43 @@ public class CSharpSchemaGeneratorTests
     }
 
     [Fact]
+    public async Task Generate_FromText_StringTypeAlias_RootNull_RoundTripsWithSystemTextJsonDefaults()
+    {
+        const string spec = """
+                        {
+                            "openapi": "3.0.3",
+                            "info": { "title": "Nullable Alias Test", "version": "1.0.0" },
+                            "components": {
+                                "schemas": {
+                                    "Tag": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                        """;
+
+        var generator = new CSharpSchemaGenerator(new GeneratorOptions
+        {
+            GenerateFileHeader = false,
+            Namespace = "GeneratedModels"
+        });
+
+        string generatedCode = generator.GenerateFromText(spec);
+        string[] lines = await GetSerializationLinesAsync(generatedCode, """
+                using System.Text.Json;
+                using GeneratedModels;
+
+                Tag tag = JsonSerializer.Deserialize<Tag>("null");
+                Console.WriteLine(tag.Value is null ? "<null>" : tag.Value);
+                Console.WriteLine(JsonSerializer.Serialize(tag));
+                """);
+
+        Assert.Equal("<null>", lines[^2]);
+        Assert.Equal("null", lines[^1]);
+    }
+
+    [Fact]
     public async Task Generate_FromText_RecordAndEnum_RoundTripWithSystemTextJsonDefaults()
     {
         const string spec = """
@@ -422,6 +459,46 @@ public class CSharpSchemaGeneratorTests
     }
 
     [Fact]
+    public async Task Generate_FromText_BinaryTypeAlias_RootNull_DeserializesAsEmptyStream()
+    {
+        const string spec = """
+                        {
+                            "openapi": "3.0.3",
+                            "info": { "title": "Binary Alias Null Test", "version": "1.0.0" },
+                            "components": {
+                                "schemas": {
+                                    "FileContent": {
+                                        "type": "string",
+                                        "format": "binary"
+                                    }
+                                }
+                            }
+                        }
+                        """;
+
+        var generator = new CSharpSchemaGenerator(new GeneratorOptions
+        {
+            GenerateFileHeader = false,
+            Namespace = "GeneratedModels"
+        });
+
+        string generatedCode = generator.GenerateFromText(spec);
+        string[] lines = await GetSerializationLinesAsync(generatedCode, """
+            using System.Text.Json;
+            using GeneratedModels;
+
+            FileContent content = JsonSerializer.Deserialize<FileContent>("null");
+            Console.WriteLine(content.Value.GetType().Name);
+            Console.WriteLine(content.Value.Length);
+            Console.WriteLine(JsonSerializer.Serialize(content));
+            """);
+
+        Assert.Equal("MemoryStream", lines[^3]);
+        Assert.Equal("0", lines[^2]);
+        Assert.Equal("\"\"", lines[^1]);
+    }
+
+    [Fact]
     public async Task Generate_FromSchemas_NullableBinaryTypeAlias_RoundTripsWithSystemTextJsonDefaults()
     {
         var schemas = new Dictionary<string, IOpenApiSchema>
@@ -463,6 +540,90 @@ public class CSharpSchemaGeneratorTests
 
         Assert.Equal("hello", lines[^2]);
         Assert.Equal("{\"content\":\"aGVsbG8=\"}", lines[^1]);
+    }
+
+    [Fact]
+    public async Task Generate_FromSchemas_NullableBinaryTypeAlias_RoundTripsNullWithSystemTextJsonDefaults()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["NullableFileContent"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.String | JsonSchemaType.Null,
+                Format = "binary"
+            },
+            ["Attachment"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["content"] = new OpenApiSchemaReference("NullableFileContent")
+                }
+            }
+        };
+
+        var generator = new CSharpSchemaGenerator(new GeneratorOptions
+        {
+            GenerateFileHeader = false,
+            Namespace = "GeneratedModels"
+        });
+
+        string generatedCode = generator.GenerateFromSchemas(schemas);
+        string[] lines = await GetSerializationLinesAsync(generatedCode, """
+            using System.Text.Json;
+            using GeneratedModels;
+
+            Attachment? attachment = JsonSerializer.Deserialize<Attachment>("{\"content\":null}");
+            Console.WriteLine(attachment?.Content is null ? "<null>" : "<value>");
+            Console.WriteLine(JsonSerializer.Serialize(attachment));
+            """);
+
+        Assert.Equal("<null>", lines[^2]);
+        Assert.Equal("{\"content\":null}", lines[^1]);
+    }
+
+    [Fact]
+    public async Task Generate_FromText_NullableDirectBinaryStreamProperty_RoundTripsNullWithSystemTextJsonDefaults()
+    {
+        const string spec = """
+                        {
+                            "openapi": "3.0.3",
+                            "info": { "title": "Binary Property Null Test", "version": "1.0.0" },
+                            "components": {
+                                "schemas": {
+                                    "Attachment": {
+                                        "type": "object",
+                                        "properties": {
+                                            "content": {
+                                                "type": "string",
+                                                "format": "binary",
+                                                "nullable": true
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        """;
+
+        var generator = new CSharpSchemaGenerator(new GeneratorOptions
+        {
+            GenerateFileHeader = false,
+            Namespace = "GeneratedModels"
+        });
+
+        string generatedCode = generator.GenerateFromText(spec);
+        string[] lines = await GetSerializationLinesAsync(generatedCode, """
+            using System.Text.Json;
+            using GeneratedModels;
+
+            Attachment? attachment = JsonSerializer.Deserialize<Attachment>("{\"content\":null}");
+            Console.WriteLine(attachment?.Content is null ? "<null>" : "<value>");
+            Console.WriteLine(JsonSerializer.Serialize(attachment));
+            """);
+
+        Assert.Equal("<null>", lines[^2]);
+        Assert.Equal("{\"content\":null}", lines[^1]);
     }
 
     [Fact]

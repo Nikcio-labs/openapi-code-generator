@@ -1,5 +1,5 @@
-using Microsoft.OpenApi;
 using System.Text.Json.Nodes;
+using Microsoft.OpenApi;
 
 namespace OpenApiCodeGenerator.Tests;
 
@@ -259,7 +259,7 @@ public class TypeResolverTests
         var schema = new OpenApiSchema
         {
             Type = JsonSchemaType.String,
-            Enum = new List<JsonNode> { (JsonNode)"a", (JsonNode)"b" }
+            Enum = new List<JsonNode> { (JsonNode) "a", (JsonNode) "b" }
         };
         Assert.True(TypeResolver.IsEnum(schema));
     }
@@ -279,12 +279,12 @@ public class TypeResolverTests
     }
 
     [Fact]
-    public void RequiresBinaryStreamTypeAliasJsonConverter_BinaryStringAlias_ReturnsTrue()
+    public void IsBinaryStreamPropertyType_BinaryStringAlias_ReturnsTrue()
     {
         TypeResolver resolver = CreateResolver();
         var schema = new OpenApiSchema { Type = JsonSchemaType.String, Format = "binary" };
 
-        Assert.True(resolver.RequiresBinaryStreamTypeAliasJsonConverter(schema));
+        Assert.True(resolver.IsBinaryStreamPropertyType(schema));
         Assert.False(resolver.UsesGenericTypeAliasJsonConverter(schema));
     }
 
@@ -295,7 +295,7 @@ public class TypeResolverTests
         var schema = new OpenApiSchema { Type = JsonSchemaType.String, Format = "uuid" };
 
         Assert.True(resolver.UsesGenericTypeAliasJsonConverter(schema));
-        Assert.False(resolver.RequiresBinaryStreamTypeAliasJsonConverter(schema));
+        Assert.False(resolver.IsBinaryStreamPropertyType(schema));
     }
 
     [Fact]
