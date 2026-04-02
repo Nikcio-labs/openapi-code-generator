@@ -119,7 +119,7 @@ internal class CSharpCodeEmitter
 
     private bool ShouldEmitBinaryStreamJsonConverter()
     {
-        return _allSchemas.Values.Any(schema => CollectProperties(schema).Values.Any(schema => _typeResolver.IsBinaryStreamPropertyType(schema)));
+        return _allSchemas.Values.Any(schema => CollectProperties(schema).Values.Any(propertySchema => _typeResolver.IsBinaryStreamPropertyType(propertySchema)));
     }
 
     private bool ShouldEmitBinaryStreamTypeAliasConverters()
