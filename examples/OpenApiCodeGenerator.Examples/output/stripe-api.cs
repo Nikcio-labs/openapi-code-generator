@@ -649,16 +649,6 @@ public enum ExchangeRateObject
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
 [JsonConverter(typeof(JsonStringEnumConverter))]
-public enum FabricServiceObject
-{
-    [JsonStringEnumMemberName("fabric_service")]
-    FabricService
-}
-
-/// <summary>
-/// String representing the object's type. Objects of the same type share the same value.
-/// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
 public enum FeeRefundObject
 {
     [JsonStringEnumMemberName("fee_refund")]
@@ -1910,6 +1900,8 @@ public enum ConfirmationTokensResourcePaymentMethodPreviewType
     Swish,
     [JsonStringEnumMemberName("twint")]
     Twint,
+    [JsonStringEnumMemberName("upi")]
+    Upi,
     [JsonStringEnumMemberName("us_bank_account")]
     UsBankAccount,
     [JsonStringEnumMemberName("wechat_pay")]
@@ -2209,7 +2201,7 @@ public enum InvoicesPaymentsInvoicePaymentAssociatedPaymentType
 }
 
 /// <summary>
-/// The type of the tax ID, one of `ad_nrt`, `ar_cuit`, `eu_vat`, `bo_tin`, `br_cnpj`, `br_cpf`, `cn_tin`, `co_nit`, `cr_tin`, `do_rcn`, `ec_ruc`, `eu_oss_vat`, `hr_oib`, `pe_ruc`, `ro_tin`, `rs_pib`, `sv_nit`, `uy_ruc`, `ve_rif`, `vn_tin`, `gb_vat`, `nz_gst`, `au_abn`, `au_arn`, `in_gst`, `no_vat`, `no_voec`, `za_vat`, `ch_vat`, `mx_rfc`, `sg_uen`, `ru_inn`, `ru_kpp`, `ca_bn`, `hk_br`, `es_cif`, `pl_nip`, `tw_vat`, `th_vat`, `jp_cn`, `jp_rn`, `jp_trn`, `li_uid`, `li_vat`, `my_itn`, `us_ein`, `kr_brn`, `ca_qst`, `ca_gst_hst`, `ca_pst_bc`, `ca_pst_mb`, `ca_pst_sk`, `my_sst`, `sg_gst`, `ae_trn`, `cl_tin`, `sa_vat`, `id_npwp`, `my_frp`, `il_vat`, `ge_vat`, `ua_vat`, `is_vat`, `bg_uic`, `hu_tin`, `si_tin`, `ke_pin`, `tr_tin`, `eg_tin`, `ph_tin`, `al_tin`, `bh_vat`, `kz_bin`, `ng_tin`, `om_vat`, `de_stn`, `ch_uid`, `tz_vat`, `uz_vat`, `uz_tin`, `md_vat`, `ma_vat`, `by_tin`, `ao_tin`, `bs_tin`, `bb_tin`, `cd_nif`, `mr_nif`, `me_pib`, `zw_tin`, `ba_tin`, `gn_nif`, `mk_vat`, `sr_fin`, `sn_ninea`, `am_tin`, `np_pan`, `tj_tin`, `ug_tin`, `zm_tin`, `kh_tin`, `aw_tin`, `az_tin`, `bd_bin`, `bj_ifu`, `et_tin`, `kg_tin`, `la_tin`, `cm_niu`, `cv_nif`, `bf_ifu`, or `unknown`
+/// The type of the tax ID, one of `ad_nrt`, `ar_cuit`, `eu_vat`, `bo_tin`, `br_cnpj`, `br_cpf`, `cn_tin`, `co_nit`, `cr_tin`, `do_rcn`, `ec_ruc`, `eu_oss_vat`, `hr_oib`, `pe_ruc`, `ro_tin`, `rs_pib`, `sv_nit`, `uy_ruc`, `ve_rif`, `vn_tin`, `gb_vat`, `nz_gst`, `au_abn`, `au_arn`, `in_gst`, `no_vat`, `no_voec`, `za_vat`, `ch_vat`, `mx_rfc`, `sg_uen`, `ru_inn`, `ru_kpp`, `ca_bn`, `hk_br`, `es_cif`, `pl_nip`, `tw_vat`, `th_vat`, `jp_cn`, `jp_rn`, `jp_trn`, `li_uid`, `li_vat`, `lk_vat`, `my_itn`, `us_ein`, `kr_brn`, `ca_qst`, `ca_gst_hst`, `ca_pst_bc`, `ca_pst_mb`, `ca_pst_sk`, `my_sst`, `sg_gst`, `ae_trn`, `cl_tin`, `sa_vat`, `id_npwp`, `my_frp`, `il_vat`, `ge_vat`, `ua_vat`, `is_vat`, `bg_uic`, `hu_tin`, `si_tin`, `ke_pin`, `tr_tin`, `eg_tin`, `ph_tin`, `al_tin`, `bh_vat`, `kz_bin`, `ng_tin`, `om_vat`, `de_stn`, `ch_uid`, `tz_vat`, `uz_vat`, `uz_tin`, `md_vat`, `ma_vat`, `by_tin`, `ao_tin`, `bs_tin`, `bb_tin`, `cd_nif`, `mr_nif`, `me_pib`, `zw_tin`, `ba_tin`, `gn_nif`, `mk_vat`, `sr_fin`, `sn_ninea`, `am_tin`, `np_pan`, `tj_tin`, `ug_tin`, `zm_tin`, `kh_tin`, `aw_tin`, `az_tin`, `bd_bin`, `bj_ifu`, `et_tin`, `kg_tin`, `la_tin`, `cm_niu`, `cv_nif`, `bf_ifu`, or `unknown`
 /// </summary>
 [JsonConverter(typeof(JsonStringEnumConverter))]
 public enum InvoicesResourceInvoiceTaxIdType
@@ -2346,6 +2338,8 @@ public enum InvoicesResourceInvoiceTaxIdType
     LiUid,
     [JsonStringEnumMemberName("li_vat")]
     LiVat,
+    [JsonStringEnumMemberName("lk_vat")]
+    LkVat,
     [JsonStringEnumMemberName("ma_vat")]
     MaVat,
     [JsonStringEnumMemberName("md_vat")]
@@ -4088,6 +4082,20 @@ public enum Treasury
 /// </summary>
 [JsonConverter(typeof(JsonStringEnumConverter))]
 public enum TwintPayments
+{
+    [JsonStringEnumMemberName("active")]
+    Active,
+    [JsonStringEnumMemberName("inactive")]
+    Inactive,
+    [JsonStringEnumMemberName("pending")]
+    Pending
+}
+
+/// <summary>
+/// The status of the upi payments capability of the account, or whether the account can directly process upi charges.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum UpiPayments
 {
     [JsonStringEnumMemberName("active")]
     Active,
@@ -6058,6 +6066,8 @@ public enum Feedback
 [JsonConverter(typeof(JsonStringEnumConverter))]
 public enum CancellationDetailsReason
 {
+    [JsonStringEnumMemberName("canceled_by_retention_policy")]
+    CanceledByRetentionPolicy,
     [JsonStringEnumMemberName("cancellation_requested")]
     CancellationRequested,
     [JsonStringEnumMemberName("payment_disputed")]
@@ -6498,17 +6508,17 @@ public enum SubmitType
 }
 
 /// <summary>
-/// The UI mode of the Session. Defaults to `hosted`.
+/// The UI mode of the Session. Defaults to `hosted_page`.
 /// </summary>
 [JsonConverter(typeof(JsonStringEnumConverter))]
 public enum UiMode
 {
-    [JsonStringEnumMemberName("custom")]
-    Custom,
-    [JsonStringEnumMemberName("embedded")]
-    Embedded,
-    [JsonStringEnumMemberName("hosted")]
-    Hosted
+    [JsonStringEnumMemberName("elements")]
+    Elements,
+    [JsonStringEnumMemberName("embedded_page")]
+    EmbeddedPage,
+    [JsonStringEnumMemberName("hosted_page")]
+    HostedPage
 }
 
 /// <summary>
@@ -6642,7 +6652,7 @@ public enum ConfirmationTokenSetupFutureUsage
 }
 
 /// <summary>
-/// Bank account verification method.
+/// Bank account verification method. The default value is `automatic`.
 /// </summary>
 [JsonConverter(typeof(JsonStringEnumConverter))]
 public enum CheckoutAcssDebitPaymentMethodOptionsVerificationMethod
@@ -6656,7 +6666,7 @@ public enum CheckoutAcssDebitPaymentMethodOptionsVerificationMethod
 }
 
 /// <summary>
-/// Bank account verification method.
+/// Bank account verification method. The default value is `automatic`.
 /// </summary>
 [JsonConverter(typeof(JsonStringEnumConverter))]
 public enum CheckoutUsBankAccountPaymentMethodOptionsVerificationMethod
@@ -6876,7 +6886,9 @@ public enum RemovalPathway
     [JsonStringEnumMemberName("direct_air_capture")]
     DirectAirCapture,
     [JsonStringEnumMemberName("enhanced_weathering")]
-    EnhancedWeathering
+    EnhancedWeathering,
+    [JsonStringEnumMemberName("marine_carbon_removal")]
+    MarineCarbonRemoval
 }
 
 /// <summary>
@@ -7036,7 +7048,9 @@ public enum PaymentMethodDetailsCryptoNetwork
     [JsonStringEnumMemberName("polygon")]
     Polygon,
     [JsonStringEnumMemberName("solana")]
-    Solana
+    Solana,
+    [JsonStringEnumMemberName("tempo")]
+    Tempo
 }
 
 /// <summary>
@@ -7244,6 +7258,36 @@ public enum Source2
 }
 
 /// <summary>
+/// Device type of the reader.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum DeviceType
+{
+    [JsonStringEnumMemberName("bbpos_chipper2x")]
+    BbposChipper2x,
+    [JsonStringEnumMemberName("bbpos_wisepad3")]
+    BbposWisepad3,
+    [JsonStringEnumMemberName("bbpos_wisepos_e")]
+    BbposWiseposE,
+    [JsonStringEnumMemberName("mobile_phone_reader")]
+    MobilePhoneReader,
+    [JsonStringEnumMemberName("simulated_stripe_s700")]
+    SimulatedStripeS700,
+    [JsonStringEnumMemberName("simulated_stripe_s710")]
+    SimulatedStripeS710,
+    [JsonStringEnumMemberName("simulated_wisepos_e")]
+    SimulatedWiseposE,
+    [JsonStringEnumMemberName("stripe_m2")]
+    StripeM2,
+    [JsonStringEnumMemberName("stripe_s700")]
+    StripeS700,
+    [JsonStringEnumMemberName("stripe_s710")]
+    StripeS710,
+    [JsonStringEnumMemberName("verifone_P400")]
+    VerifoneP400
+}
+
+/// <summary>
 /// The AmazonPay dispute type, chargeback or claim
 /// </summary>
 [JsonConverter(typeof(JsonStringEnumConverter))]
@@ -7328,7 +7372,11 @@ public enum FilePurpose
     [JsonStringEnumMemberName("terminal_android_apk")]
     TerminalAndroidApk,
     [JsonStringEnumMemberName("terminal_reader_splashscreen")]
-    TerminalReaderSplashscreen
+    TerminalReaderSplashscreen,
+    [JsonStringEnumMemberName("terminal_wifi_certificate")]
+    TerminalWifiCertificate,
+    [JsonStringEnumMemberName("terminal_wifi_private_key")]
+    TerminalWifiPrivateKey
 }
 
 /// <summary>
@@ -7513,18 +7561,6 @@ public enum PaymentMethodDetailsInteracPresentReceiptAccountType
 }
 
 /// <summary>
-/// Recommended action based on the model score. Possible values are `block` and `continue`.
-/// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum RecommendedAction
-{
-    [JsonStringEnumMemberName("block")]
-    Block,
-    [JsonStringEnumMemberName("continue")]
-    Continue
-}
-
-/// <summary>
 /// The type of fraud labeled by the issuer.
 /// </summary>
 [JsonConverter(typeof(JsonStringEnumConverter))]
@@ -7669,6 +7705,20 @@ public enum IssuingAuthorizationVerificationDataCvcCheck
 }
 
 /// <summary>
+/// Risk level of this signal, based on the score.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum RiskLevel
+{
+    [JsonStringEnumMemberName("elevated")]
+    Elevated,
+    [JsonStringEnumMemberName("highest")]
+    Highest,
+    [JsonStringEnumMemberName("normal")]
+    Normal
+}
+
+/// <summary>
 /// Result of the intervention if it has been completed.
 /// </summary>
 [JsonConverter(typeof(JsonStringEnumConverter))]
@@ -7781,11 +7831,10 @@ public enum InvoicePaymentMethodOptionsBancontactPreferredLanguage
 }
 
 /// <summary>
-/// Preferred language of the SOFORT authorization page that the customer is redirected to.
-/// Can be one of `de`, `en`, `es`, `fr`, `it`, `nl`, or `pl`
+/// Preferred language of the SOFORT authorization page that the customer is redirected to. Can be one of `de`, `en`, `es`, `fr`, `it`, `nl`, or `pl`
 /// </summary>
 [JsonConverter(typeof(JsonStringEnumConverter))]
-public enum PaymentMethodDetailsSofortPreferredLanguage
+public enum PaymentMethodDetailsPaymentRecordSofortPreferredLanguage
 {
     [JsonStringEnumMemberName("de")]
     De,
@@ -7804,7 +7853,7 @@ public enum PaymentMethodDetailsSofortPreferredLanguage
 }
 
 /// <summary>
-/// The desired country code of the bank account information. Permitted values include: `BE`, `DE`, `ES`, `FR`, `IE`, or `NL`.
+/// The desired country code of the bank account information. Permitted values include: `DE`, `FR`, `IE`, or `NL`.
 /// </summary>
 [JsonConverter(typeof(JsonStringEnumConverter))]
 public enum Country
@@ -8081,6 +8130,9 @@ public enum IssuingCardShippingAddressValidationResult
     LikelyUndeliverable
 }
 
+/// <summary>
+/// Indicates the outcome of 3D Secure authentication.
+/// </summary>
 [JsonConverter(typeof(JsonStringEnumConverter))]
 public enum PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardDetailsResourceThreeDSecureResult
 {
@@ -8400,6 +8452,22 @@ public enum MicrodepositType
     Amounts,
     [JsonStringEnumMemberName("descriptor_code")]
     DescriptorCode
+}
+
+/// <summary>
+/// The purpose of the transaction.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum TransactionPurpose
+{
+    [JsonStringEnumMemberName("goods")]
+    Goods,
+    [JsonStringEnumMemberName("other")]
+    Other,
+    [JsonStringEnumMemberName("services")]
+    Services,
+    [JsonStringEnumMemberName("unspecified")]
+    Unspecified
 }
 
 /// <summary>
@@ -9044,6 +9112,9 @@ public enum StoredCredentialUsage
     Unscheduled
 }
 
+/// <summary>
+/// For authenticated transactions: Indicates how the issuing bank authenticated the customer.
+/// </summary>
 [JsonConverter(typeof(JsonStringEnumConverter))]
 public enum AuthenticationFlow
 {
@@ -9053,6 +9124,62 @@ public enum AuthenticationFlow
     Frictionless
 }
 
+/// <summary>
+/// The Electronic Commerce Indicator (ECI). A protocol-level field indicating what degree of authentication was performed.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardDetailsResourceThreeDSecureElectronicCommerceIndicator
+{
+    [JsonStringEnumMemberName("01")]
+    _01,
+    [JsonStringEnumMemberName("02")]
+    _02,
+    [JsonStringEnumMemberName("03")]
+    _03,
+    [JsonStringEnumMemberName("04")]
+    _04,
+    [JsonStringEnumMemberName("05")]
+    _05,
+    [JsonStringEnumMemberName("06")]
+    _06,
+    [JsonStringEnumMemberName("07")]
+    _07
+}
+
+/// <summary>
+/// The Electronic Commerce Indicator (ECI). A protocol-level field
+/// indicating what degree of authentication was performed.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum ThreeDSecureDetailsElectronicCommerceIndicator
+{
+    [JsonStringEnumMemberName("01")]
+    _01,
+    [JsonStringEnumMemberName("02")]
+    _02,
+    [JsonStringEnumMemberName("05")]
+    _05,
+    [JsonStringEnumMemberName("06")]
+    _06,
+    [JsonStringEnumMemberName("07")]
+    _07
+}
+
+/// <summary>
+/// The exemption requested via 3DS and accepted by the issuer at authentication time.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum ExemptionIndicator
+{
+    [JsonStringEnumMemberName("low_risk")]
+    LowRisk,
+    [JsonStringEnumMemberName("none")]
+    None
+}
+
+/// <summary>
+/// Additional information about why 3D Secure succeeded or failed, based on the `result`.
+/// </summary>
 [JsonConverter(typeof(JsonStringEnumConverter))]
 public enum ResultReason
 {
@@ -9072,6 +9199,9 @@ public enum ResultReason
     Rejected
 }
 
+/// <summary>
+/// The version of 3D Secure that was used.
+/// </summary>
 [JsonConverter(typeof(JsonStringEnumConverter))]
 public enum PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardDetailsResourceThreeDSecureVersion
 {
@@ -9214,7 +9344,19 @@ public enum TrialUpdateBehavior
 }
 
 /// <summary>
-/// The type of items in the value list. One of `card_fingerprint`, `card_bin`, `email`, `ip_address`, `country`, `string`, `case_sensitive_string`, `customer_id`, `sepa_debit_fingerprint`, or `us_bank_account_fingerprint`.
+/// Recommended action based on the score of the fraudulent_payment signal. Possible values are `block` and `continue`.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum RecommendedAction
+{
+    [JsonStringEnumMemberName("block")]
+    Block,
+    [JsonStringEnumMemberName("continue")]
+    Continue
+}
+
+/// <summary>
+/// The type of items in the value list. One of `card_fingerprint`, `card_bin`, `crypto_fingerprint`, `email`, `ip_address`, `country`, `string`, `case_sensitive_string`, `customer_id`, `sepa_debit_fingerprint`, or `us_bank_account_fingerprint`.
 /// </summary>
 [JsonConverter(typeof(JsonStringEnumConverter))]
 public enum ItemType
@@ -9227,6 +9369,8 @@ public enum ItemType
     CaseSensitiveString,
     [JsonStringEnumMemberName("country")]
     Country,
+    [JsonStringEnumMemberName("crypto_fingerprint")]
+    CryptoFingerprint,
     [JsonStringEnumMemberName("customer_id")]
     CustomerId,
     [JsonStringEnumMemberName("email")]
@@ -9320,7 +9464,7 @@ public enum ProrationDiscounts
 }
 
 /// <summary>
-/// The payment collection behavior for this subscription while paused. One of `keep_as_draft`, `mark_uncollectible`, or `void`.
+/// The payment collection behavior for this subscription while paused.
 /// </summary>
 [JsonConverter(typeof(JsonStringEnumConverter))]
 public enum Behavior
@@ -9520,32 +9664,6 @@ public enum LinkType
 }
 
 /// <summary>
-/// Device type of the reader.
-/// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum DeviceType
-{
-    [JsonStringEnumMemberName("bbpos_chipper2x")]
-    BbposChipper2x,
-    [JsonStringEnumMemberName("bbpos_wisepad3")]
-    BbposWisepad3,
-    [JsonStringEnumMemberName("bbpos_wisepos_e")]
-    BbposWiseposE,
-    [JsonStringEnumMemberName("mobile_phone_reader")]
-    MobilePhoneReader,
-    [JsonStringEnumMemberName("simulated_stripe_s700")]
-    SimulatedStripeS700,
-    [JsonStringEnumMemberName("simulated_wisepos_e")]
-    SimulatedWiseposE,
-    [JsonStringEnumMemberName("stripe_m2")]
-    StripeM2,
-    [JsonStringEnumMemberName("stripe_s700")]
-    StripeS700,
-    [JsonStringEnumMemberName("verifone_P400")]
-    VerifoneP400
-}
-
-/// <summary>
 /// The button style for the choice. Can be `primary` or `secondary`.
 /// </summary>
 [JsonConverter(typeof(JsonStringEnumConverter))]
@@ -9567,37 +9685,6 @@ public enum DefaultValue
     Disabled,
     [JsonStringEnumMemberName("enabled")]
     Enabled
-}
-
-/// <summary>
-/// The Electronic Commerce Indicator (ECI). A protocol-level field
-/// indicating what degree of authentication was performed.
-/// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum ElectronicCommerceIndicator
-{
-    [JsonStringEnumMemberName("01")]
-    _01,
-    [JsonStringEnumMemberName("02")]
-    _02,
-    [JsonStringEnumMemberName("05")]
-    _05,
-    [JsonStringEnumMemberName("06")]
-    _06,
-    [JsonStringEnumMemberName("07")]
-    _07
-}
-
-/// <summary>
-/// The exemption requested via 3DS and accepted by the issuer at authentication time.
-/// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum ExemptionIndicator
-{
-    [JsonStringEnumMemberName("low_risk")]
-    LowRisk,
-    [JsonStringEnumMemberName("none")]
-    None
 }
 
 /// <summary>
@@ -9761,6 +9848,8 @@ public enum Balance2
 }
 
 /// <summary>
+/// For new integrations, we recommend using the [Accounts v2 API](/api/v2/core/accounts), in place of /v1/accounts and /v1/customers to represent a user.
+/// 
 /// This is an object representing a Stripe account. You can retrieve it to see
 /// properties on the account like its current requirements or if the account is
 /// enabled to make live charges or receive payouts.
@@ -10392,6 +10481,12 @@ public record AccountCapabilities
     public TwintPayments? TwintPayments { get; init; }
 
     /// <summary>
+    /// The status of the upi payments capability of the account, or whether the account can directly process upi charges.
+    /// </summary>
+    [JsonPropertyName("upi_payments")]
+    public UpiPayments? UpiPayments { get; init; }
+
+    /// <summary>
     /// The status of the US bank account ACH payments capability of the account, or whether the account can directly process US bank account charges.
     /// </summary>
     [JsonPropertyName("us_bank_account_ach_payments")]
@@ -10885,7 +10980,7 @@ public record AccountSession
     public required int ExpiresAt { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -11265,7 +11360,7 @@ public record ApplePayDomain
     public required string Id { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -11363,7 +11458,7 @@ public record ApplicationFee
     public required string Id { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -11432,7 +11527,7 @@ public record AppsSecret
     public required string Id { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -11526,7 +11621,7 @@ public record Balance
     public BalanceDetail? Issuing { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -12230,7 +12325,7 @@ public record BillingAlert
     public required string Id { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -12285,7 +12380,7 @@ public record BillingCreditBalanceSummary
     public string? CustomerAccount { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -12340,7 +12435,7 @@ public record BillingCreditBalanceTransaction
     public required string Id { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -12421,7 +12516,7 @@ public record BillingCreditGrant
     public required string Id { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -12514,7 +12609,7 @@ public record BillingMeter
     public required string Id { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -12569,7 +12664,7 @@ public record BillingMeterEvent
     public required string Identifier { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -12612,7 +12707,7 @@ public record BillingMeterEventAdjustment
     public required string EventName { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -12664,7 +12759,7 @@ public record BillingMeterEventSummary
     public required string Id { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -13261,7 +13356,7 @@ public record BillingPortalConfiguration
     public required bool IsDefault { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -13350,7 +13445,7 @@ public record BillingPortalSession
     public required string Id { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -13722,7 +13817,7 @@ public record CashBalance
     public string? CustomerAccount { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -13863,7 +13958,7 @@ public record Charge
     public required string Id { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -14298,6 +14393,12 @@ public record CheckoutSession
     public required string Id { get; init; }
 
     /// <summary>
+    /// The integration identifier for this Checkout Session. Multiple Checkout Sessions can have the same integration identifier.
+    /// </summary>
+    [JsonPropertyName("integration_identifier")]
+    public string? IntegrationIdentifier { get; init; }
+
+    /// <summary>
     /// ID of the invoice created by the Checkout Session, if it exists.
     /// </summary>
     [JsonPropertyName("invoice")]
@@ -14316,7 +14417,7 @@ public record CheckoutSession
     public object? LineItems { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -14503,7 +14604,7 @@ public record CheckoutSession
     public PaymentPagesCheckoutSessionTotalDetails? TotalDetails { get; init; }
 
     /// <summary>
-    /// The UI mode of the Session. Defaults to `hosted`.
+    /// The UI mode of the Session. Defaults to `hosted_page`.
     /// </summary>
     [JsonPropertyName("ui_mode")]
     public UiMode? UiMode { get; init; }
@@ -14587,7 +14688,7 @@ public record CheckoutAcssDebitPaymentMethodOptions
     public string? TargetDate { get; init; }
 
     /// <summary>
-    /// Bank account verification method.
+    /// Bank account verification method. The default value is `automatic`.
     /// </summary>
     [JsonPropertyName("verification_method")]
     public CheckoutAcssDebitPaymentMethodOptionsVerificationMethod? VerificationMethod { get; init; }
@@ -15546,6 +15647,9 @@ public record CheckoutSessionPaymentMethodOptions
     [JsonPropertyName("twint")]
     public CheckoutTwintPaymentMethodOptions? Twint { get; init; }
 
+    [JsonPropertyName("upi")]
+    public CheckoutUpiPaymentMethodOptions? Upi { get; init; }
+
     [JsonPropertyName("us_bank_account")]
     public CheckoutUsBankAccountPaymentMethodOptions? UsBankAccount { get; init; }
 
@@ -15600,6 +15704,25 @@ public record CheckoutTwintPaymentMethodOptions
 
 }
 
+public record CheckoutUpiPaymentMethodOptions
+{
+    [JsonPropertyName("mandate_options")]
+    public MandateOptionsUpi? MandateOptions { get; init; }
+
+    /// <summary>
+    /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
+    /// 
+    /// If you provide a Customer with the PaymentIntent, you can use this parameter to [attach the payment method](/payments/save-during-payment) to the Customer after the PaymentIntent is confirmed and the customer completes any required actions. If you don't provide a Customer, you can still [attach](/api/payment_methods/attach) the payment method to a Customer after the transaction completes.
+    /// 
+    /// If the payment method is `card_present` and isn't a digital wallet, Stripe creates and attaches a [generated_card](/api/charges/object#charge_object-payment_method_details-card_present-generated_card) payment method representing the card to the Customer instead.
+    /// 
+    /// When processing card payments, Stripe uses `setup_future_usage` to help you comply with regional legislation and network rules, such as [SCA](/strong-customer-authentication).
+    /// </summary>
+    [JsonPropertyName("setup_future_usage")]
+    public CheckoutAcssDebitPaymentMethodOptionsSetupFutureUsage? SetupFutureUsage { get; init; }
+
+}
+
 public record CheckoutUsBankAccountPaymentMethodOptions
 {
     [JsonPropertyName("financial_connections")]
@@ -15624,7 +15747,7 @@ public record CheckoutUsBankAccountPaymentMethodOptions
     public string? TargetDate { get; init; }
 
     /// <summary>
-    /// Bank account verification method.
+    /// Bank account verification method. The default value is `automatic`.
     /// </summary>
     [JsonPropertyName("verification_method")]
     public CheckoutUsBankAccountPaymentMethodOptionsVerificationMethod? VerificationMethod { get; init; }
@@ -16014,7 +16137,7 @@ public record ConfirmationToken
     public required string Id { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -16352,6 +16475,9 @@ public record ConfirmationTokensResourcePaymentMethodPreview
     [JsonPropertyName("type")]
     public required ConfirmationTokensResourcePaymentMethodPreviewType Type { get; init; }
 
+    [JsonPropertyName("upi")]
+    public PaymentMethodUpi? Upi { get; init; }
+
     [JsonPropertyName("us_bank_account")]
     public PaymentMethodUsBankAccount? UsBankAccount { get; init; }
 
@@ -16425,7 +16551,7 @@ public record ConnectCollectionTransfer
     public required string Id { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -16982,7 +17108,7 @@ public record CountrySpecVerificationFields
 /// <summary>
 /// A coupon contains information about a percent-off or amount-off discount you
 /// might want to apply to a customer. Coupons may be applied to [subscriptions](https://api.stripe.com#subscriptions), [invoices](https://api.stripe.com#invoices),
-/// [checkout sessions](https://docs.stripe.com/api/checkout/sessions), [quotes](https://api.stripe.com#quotes), and more. Coupons do not work with conventional one-off [charges](https://api.stripe.com#create_charge) or [payment intents](https://docs.stripe.com/api/payment_intents).
+/// [checkout sessions](https://docs.stripe.com/api/checkout/sessions), [quotes](https://api.stripe.com#quotes), and more. Coupons do not work with conventional one-off [charges](/api/charges/create) or [payment intents](https://docs.stripe.com/api/payment_intents).
 /// </summary>
 public record Coupon
 {
@@ -17032,7 +17158,7 @@ public record Coupon
     public required string Id { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -17203,7 +17329,7 @@ public record CreditNote
     public required object Lines { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -17372,10 +17498,16 @@ public record CreditNoteLineItem
     public string? InvoiceLineItem { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
+
+    /// <summary>
+    /// Set of [key-value pairs](https://docs.stripe.com/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+    /// </summary>
+    [JsonPropertyName("metadata")]
+    public IReadOnlyDictionary<string, string>? Metadata { get; init; }
 
     /// <summary>
     /// String representing the object's type. Objects of the same type share the same value.
@@ -17683,7 +17815,7 @@ public record Customer
     public InvoiceSettingCustomerSetting? InvoiceSettings { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -18053,7 +18185,7 @@ public record CustomerBalanceTransaction
     public object? Invoice { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -18132,7 +18264,7 @@ public record CustomerCashBalanceTransaction
     public required string Id { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -18215,7 +18347,7 @@ public record CustomerSession
     public required int ExpiresAt { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -19077,6 +19209,12 @@ public record DeletedTerminalReader
     public required bool Deleted { get; init; }
 
     /// <summary>
+    /// Device type of the reader.
+    /// </summary>
+    [JsonPropertyName("device_type")]
+    public required DeviceType DeviceType { get; init; }
+
+    /// <summary>
     /// Unique identifier for the object.
     /// </summary>
     [JsonPropertyName("id")]
@@ -19087,6 +19225,12 @@ public record DeletedTerminalReader
     /// </summary>
     [JsonPropertyName("object")]
     public required DeletedTerminalReaderObject Object { get; init; }
+
+    /// <summary>
+    /// Serial number of the reader.
+    /// </summary>
+    [JsonPropertyName("serial_number")]
+    public required string SerialNumber { get; init; }
 
 }
 
@@ -19255,7 +19399,7 @@ public record DiscountsResourceDiscountAmount
 
 }
 
-public record DiscountsResourceStackableDiscount
+public record DiscountsResourceStackableDiscountWithDiscountEnd
 {
     /// <summary>
     /// ID of the coupon to create a new discount for.
@@ -19341,7 +19485,7 @@ public record Dispute
     public required bool IsChargeRefundable { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -19917,7 +20061,7 @@ public record EntitlementsActiveEntitlement
     public required string Id { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -19955,7 +20099,7 @@ public record EntitlementsFeature
     public required string Id { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -20007,7 +20151,7 @@ public record EphemeralKey
     public required string Id { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -20092,7 +20236,7 @@ public record Event
     public required string Id { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -20207,19 +20351,6 @@ public record ExternalAccountRequirements
     /// </summary>
     [JsonPropertyName("pending_verification")]
     public IReadOnlyList<string>? PendingVerification { get; init; }
-
-}
-
-/// <summary>
-/// A resource representing a fabric service integration.
-/// </summary>
-public record FabricService
-{
-    /// <summary>
-    /// String representing the object's type. Objects of the same type share the same value.
-    /// </summary>
-    [JsonPropertyName("object")]
-    public required FabricServiceObject Object { get; init; }
 
 }
 
@@ -20433,7 +20564,7 @@ public record FileLink
     public required string Id { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -20524,7 +20655,7 @@ public record FinancialConnectionsAccount
     public string? Last4 { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -20717,7 +20848,7 @@ public record FinancialConnectionsSession
     public required string Id { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -20784,7 +20915,7 @@ public record FinancialConnectionsTransaction
     public required string Id { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -20997,7 +21128,7 @@ public record ForwardingRequest
     public required string Id { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -21077,7 +21208,7 @@ public record FundingInstructions
     public required FundingType FundingType { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -22147,7 +22278,7 @@ public record IdentityVerificationReport
     public GelatoIdNumberReport? IdNumber { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -22245,7 +22376,7 @@ public record IdentityVerificationSession
     public object? LastVerificationReport { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -22470,25 +22601,6 @@ public record InsightsResourcesPaymentEvaluationBillingDetails
 }
 
 /// <summary>
-/// Provides Stripe Radar's evaluation of the likelihood that a payment will be declined by the card issuer.
-/// </summary>
-public record InsightsResourcesPaymentEvaluationCardIssuerDecline
-{
-    /// <summary>
-    /// Stripe Radar's evaluation of the likelihood that the payment will be declined by the card issuer. Scores range from 0 to 100, with higher values indicating a higher likelihood of decline.
-    /// </summary>
-    [JsonPropertyName("model_score")]
-    public required double ModelScore { get; init; }
-
-    /// <summary>
-    /// Recommended action based on the model score. Possible values are `block` and `continue`.
-    /// </summary>
-    [JsonPropertyName("recommended_action")]
-    public required RecommendedAction RecommendedAction { get; init; }
-
-}
-
-/// <summary>
 /// Client device metadata attached to this payment evaluation.
 /// </summary>
 public record InsightsResourcesPaymentEvaluationClientDeviceMetadata
@@ -22622,31 +22734,6 @@ public record InsightsResourcesPaymentEvaluationEvent
     /// </summary>
     [JsonPropertyName("user_intervention_resolved")]
     public InsightsResourcesPaymentEvaluationUserInterventionResolved? UserInterventionResolved { get; init; }
-
-}
-
-/// <summary>
-/// Collection of scores and insights for this payment evaluation.
-/// </summary>
-public record InsightsResourcesPaymentEvaluationInsights
-{
-    /// <summary>
-    /// Stripe Radar's evaluation of the likelihood of a card issuer decline on this payment.
-    /// </summary>
-    [JsonPropertyName("card_issuer_decline")]
-    public InsightsResourcesPaymentEvaluationCardIssuerDecline? CardIssuerDecline { get; init; }
-
-    /// <summary>
-    /// The timestamp when the evaluation was performed.
-    /// </summary>
-    [JsonPropertyName("evaluated_at")]
-    public required int EvaluatedAt { get; init; }
-
-    /// <summary>
-    /// Scores, insights and recommended action for one scorer for this PaymentEvaluation.
-    /// </summary>
-    [JsonPropertyName("fraudulent_dispute")]
-    public required InsightsResourcesPaymentEvaluationScorer FraudulentDispute { get; init; }
 
 }
 
@@ -22876,25 +22963,6 @@ public record InsightsResourcesPaymentEvaluationRejectedCard
 }
 
 /// <summary>
-/// Scores, insights and recommended action for one scorer for this PaymentEvaluation.
-/// </summary>
-public record InsightsResourcesPaymentEvaluationScorer
-{
-    /// <summary>
-    /// Recommended action based on the risk score. Possible values are `block` and `continue`.
-    /// </summary>
-    [JsonPropertyName("recommended_action")]
-    public required RecommendedAction RecommendedAction { get; init; }
-
-    /// <summary>
-    /// Stripe Radar’s evaluation of the risk level of the payment. Possible values for evaluated payments are between 0 and 100, with higher scores indicating higher risk.
-    /// </summary>
-    [JsonPropertyName("risk_score")]
-    public required int RiskScore { get; init; }
-
-}
-
-/// <summary>
 /// Shipping details attached to this payment.
 /// </summary>
 public record InsightsResourcesPaymentEvaluationShipping
@@ -22916,6 +22984,44 @@ public record InsightsResourcesPaymentEvaluationShipping
     /// </summary>
     [JsonPropertyName("phone")]
     public string? Phone { get; init; }
+
+}
+
+/// <summary>
+/// A payment evaluation signal with evaluated_at, risk_level, and score fields.
+/// </summary>
+public record InsightsResourcesPaymentEvaluationSignalV2
+{
+    /// <summary>
+    /// The time when this signal was evaluated.
+    /// </summary>
+    [JsonPropertyName("evaluated_at")]
+    public required int EvaluatedAt { get; init; }
+
+    /// <summary>
+    /// Risk level of this signal, based on the score.
+    /// </summary>
+    [JsonPropertyName("risk_level")]
+    public required RiskLevel RiskLevel { get; init; }
+
+    /// <summary>
+    /// Score for this insight. Possible values for evaluated payments are -1 and any value between 0 and 100. The value is returned with two decimal places. A score of -1 indicates a test integration and higher scores indicate a higher likelihood of the signal being true.
+    /// </summary>
+    [JsonPropertyName("score")]
+    public required double Score { get; init; }
+
+}
+
+/// <summary>
+/// Collection of signals for this payment evaluation.
+/// </summary>
+public record InsightsResourcesPaymentEvaluationSignals
+{
+    /// <summary>
+    /// A payment evaluation signal with evaluated_at, risk_level, and score fields.
+    /// </summary>
+    [JsonPropertyName("fraudulent_payment")]
+    public required InsightsResourcesPaymentEvaluationSignalV2 FraudulentPayment { get; init; }
 
 }
 
@@ -23363,7 +23469,7 @@ public record Invoice
     public required object Lines { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -23408,7 +23514,7 @@ public record Invoice
     public required InvoicesPaymentSettings PaymentSettings { get; init; }
 
     /// <summary>
-    /// Payments for this invoice
+    /// Payments for this invoice. Use [invoice payment](/api/invoice-payment) to get more details.
     /// </summary>
     [JsonPropertyName("payments")]
     public object? Payments { get; init; }
@@ -23586,7 +23692,7 @@ public record InvoiceLineItemPeriod
 public record InvoiceMandateOptionsCard
 {
     /// <summary>
-    /// Amount to be charged for future payments.
+    /// Amount to be charged for future payments, specified in the presentment currency.
     /// </summary>
     [JsonPropertyName("amount")]
     public int? Amount { get; init; }
@@ -23682,7 +23788,7 @@ public record InvoicePayment
     public required bool IsDefault { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -23713,7 +23819,7 @@ public record InvoicePaymentMethodOptionsAcssDebit
     public InvoicePaymentMethodOptionsAcssDebitMandateOptions? MandateOptions { get; init; }
 
     /// <summary>
-    /// Bank account verification method.
+    /// Bank account verification method. The default value is `automatic`.
     /// </summary>
     [JsonPropertyName("verification_method")]
     public CheckoutAcssDebitPaymentMethodOptionsVerificationMethod? VerificationMethod { get; init; }
@@ -23782,7 +23888,7 @@ public record InvoicePaymentMethodOptionsCustomerBalanceBankTransfer
 public record InvoicePaymentMethodOptionsCustomerBalanceBankTransferEuBankTransfer
 {
     /// <summary>
-    /// The desired country code of the bank account information. Permitted values include: `BE`, `DE`, `ES`, `FR`, `IE`, or `NL`.
+    /// The desired country code of the bank account information. Permitted values include: `DE`, `FR`, `IE`, or `NL`.
     /// </summary>
     [JsonPropertyName("country")]
     public required Country Country { get; init; }
@@ -23810,7 +23916,7 @@ public record InvoicePaymentMethodOptionsUsBankAccount
     public InvoicePaymentMethodOptionsUsBankAccountLinkedAccountOptions? FinancialConnections { get; init; }
 
     /// <summary>
-    /// Bank account verification method.
+    /// Bank account verification method. The default value is `automatic`.
     /// </summary>
     [JsonPropertyName("verification_method")]
     public CheckoutAcssDebitPaymentMethodOptionsVerificationMethod? VerificationMethod { get; init; }
@@ -23875,7 +23981,7 @@ public record InvoiceRenderingTemplate
     public required string Id { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -24131,7 +24237,7 @@ public record Invoiceitem
     public object? Invoice { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -24179,10 +24285,16 @@ public record Invoiceitem
     public ProrationDetails? ProrationDetails { get; init; }
 
     /// <summary>
-    /// Quantity of units for the invoice item. If the invoice item is a proration, the quantity of the subscription that the proration was computed for.
+    /// Quantity of units for the invoice item in integer format, with any decimal precision truncated. For the item's full-precision decimal quantity, use `quantity_decimal`. This field will be deprecated in favor of `quantity_decimal` in a future version. If the invoice item is a proration, the quantity of the subscription that the proration was computed for.
     /// </summary>
     [JsonPropertyName("quantity")]
     public required int Quantity { get; init; }
+
+    /// <summary>
+    /// Non-negative decimal with at most 12 decimal places. The quantity of units for the invoice item.
+    /// </summary>
+    [JsonPropertyName("quantity_decimal")]
+    public required string QuantityDecimal { get; init; }
 
     /// <summary>
     /// The tax rates which apply to the invoice item. When set, the `default_tax_rates` on the invoice do not apply to this invoice item.
@@ -24379,7 +24491,7 @@ public record InvoicesResourceInvoiceRendering
 public record InvoicesResourceInvoiceTaxId
 {
     /// <summary>
-    /// The type of the tax ID, one of `ad_nrt`, `ar_cuit`, `eu_vat`, `bo_tin`, `br_cnpj`, `br_cpf`, `cn_tin`, `co_nit`, `cr_tin`, `do_rcn`, `ec_ruc`, `eu_oss_vat`, `hr_oib`, `pe_ruc`, `ro_tin`, `rs_pib`, `sv_nit`, `uy_ruc`, `ve_rif`, `vn_tin`, `gb_vat`, `nz_gst`, `au_abn`, `au_arn`, `in_gst`, `no_vat`, `no_voec`, `za_vat`, `ch_vat`, `mx_rfc`, `sg_uen`, `ru_inn`, `ru_kpp`, `ca_bn`, `hk_br`, `es_cif`, `pl_nip`, `tw_vat`, `th_vat`, `jp_cn`, `jp_rn`, `jp_trn`, `li_uid`, `li_vat`, `my_itn`, `us_ein`, `kr_brn`, `ca_qst`, `ca_gst_hst`, `ca_pst_bc`, `ca_pst_mb`, `ca_pst_sk`, `my_sst`, `sg_gst`, `ae_trn`, `cl_tin`, `sa_vat`, `id_npwp`, `my_frp`, `il_vat`, `ge_vat`, `ua_vat`, `is_vat`, `bg_uic`, `hu_tin`, `si_tin`, `ke_pin`, `tr_tin`, `eg_tin`, `ph_tin`, `al_tin`, `bh_vat`, `kz_bin`, `ng_tin`, `om_vat`, `de_stn`, `ch_uid`, `tz_vat`, `uz_vat`, `uz_tin`, `md_vat`, `ma_vat`, `by_tin`, `ao_tin`, `bs_tin`, `bb_tin`, `cd_nif`, `mr_nif`, `me_pib`, `zw_tin`, `ba_tin`, `gn_nif`, `mk_vat`, `sr_fin`, `sn_ninea`, `am_tin`, `np_pan`, `tj_tin`, `ug_tin`, `zm_tin`, `kh_tin`, `aw_tin`, `az_tin`, `bd_bin`, `bj_ifu`, `et_tin`, `kg_tin`, `la_tin`, `cm_niu`, `cv_nif`, `bf_ifu`, or `unknown`
+    /// The type of the tax ID, one of `ad_nrt`, `ar_cuit`, `eu_vat`, `bo_tin`, `br_cnpj`, `br_cpf`, `cn_tin`, `co_nit`, `cr_tin`, `do_rcn`, `ec_ruc`, `eu_oss_vat`, `hr_oib`, `pe_ruc`, `ro_tin`, `rs_pib`, `sv_nit`, `uy_ruc`, `ve_rif`, `vn_tin`, `gb_vat`, `nz_gst`, `au_abn`, `au_arn`, `in_gst`, `no_vat`, `no_voec`, `za_vat`, `ch_vat`, `mx_rfc`, `sg_uen`, `ru_inn`, `ru_kpp`, `ca_bn`, `hk_br`, `es_cif`, `pl_nip`, `tw_vat`, `th_vat`, `jp_cn`, `jp_rn`, `jp_trn`, `li_uid`, `li_vat`, `lk_vat`, `my_itn`, `us_ein`, `kr_brn`, `ca_qst`, `ca_gst_hst`, `ca_pst_bc`, `ca_pst_mb`, `ca_pst_sk`, `my_sst`, `sg_gst`, `ae_trn`, `cl_tin`, `sa_vat`, `id_npwp`, `my_frp`, `il_vat`, `ge_vat`, `ua_vat`, `is_vat`, `bg_uic`, `hu_tin`, `si_tin`, `ke_pin`, `tr_tin`, `eg_tin`, `ph_tin`, `al_tin`, `bh_vat`, `kz_bin`, `ng_tin`, `om_vat`, `de_stn`, `ch_uid`, `tz_vat`, `uz_vat`, `uz_tin`, `md_vat`, `ma_vat`, `by_tin`, `ao_tin`, `bs_tin`, `bb_tin`, `cd_nif`, `mr_nif`, `me_pib`, `zw_tin`, `ba_tin`, `gn_nif`, `mk_vat`, `sr_fin`, `sn_ninea`, `am_tin`, `np_pan`, `tj_tin`, `ug_tin`, `zm_tin`, `kh_tin`, `aw_tin`, `az_tin`, `bd_bin`, `bj_ifu`, `et_tin`, `kg_tin`, `la_tin`, `cm_niu`, `cv_nif`, `bf_ifu`, or `unknown`
     /// </summary>
     [JsonPropertyName("type")]
     public required InvoicesResourceInvoiceTaxIdType Type { get; init; }
@@ -24570,7 +24682,7 @@ public record IssuingAuthorization
     public required string Id { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -24741,7 +24853,13 @@ public record IssuingCard
     public IssuingCardFraudWarning? LatestFraudWarning { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// Rules that control the lifecycle of this card, such as automatic cancellation. Refer to our [documentation](/issuing/controls/lifecycle-controls) for more details.
+    /// </summary>
+    [JsonPropertyName("lifecycle_controls")]
+    public IssuingCardLifecycleControls? LifecycleControls { get; init; }
+
+    /// <summary>
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -24864,7 +24982,7 @@ public record IssuingCardholder
     public IssuingCardholderIndividual? Individual { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -24894,7 +25012,7 @@ public record IssuingCardholder
     public string? PhoneNumber { get; init; }
 
     /// <summary>
-    /// The cardholder’s preferred locales (languages), ordered by preference. Locales can be `de`, `en`, `es`, `fr`, or `it`.
+    /// The cardholder’s preferred locales (languages), ordered by preference. Locales can be `da`, `de`, `en`, `es`, `fr`, `it`, `pl`, or `sv`.
     ///  This changes the language of the [3D Secure flow](https://docs.stripe.com/issuing/3d-secure) and one-time password messages sent to the cardholder.
     /// </summary>
     [JsonPropertyName("preferred_locales")]
@@ -24964,7 +25082,7 @@ public record IssuingDispute
     public required string Id { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -25037,7 +25155,7 @@ public record IssuingPersonalizationDesign
     public required string Id { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -25101,7 +25219,7 @@ public record IssuingPhysicalBundle
     public required string Id { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -25174,7 +25292,7 @@ public record IssuingSettlement
     public required int InterchangeFeesAmount { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -25277,7 +25395,7 @@ public record IssuingToken
     public string? Last4 { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -25387,7 +25505,7 @@ public record IssuingTransaction
     public required string Id { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -26048,6 +26166,23 @@ public record IssuingCardGooglePay
     /// </summary>
     [JsonPropertyName("ineligible_reason")]
     public IneligibleReason? IneligibleReason { get; init; }
+
+}
+
+public record IssuingCardLifecycleConditions
+{
+    /// <summary>
+    /// The card is automatically cancelled when it makes this number of non-zero payment authorizations and transactions. The count includes penny authorizations, but doesn't include non-payment actions, such as authorization advice.
+    /// </summary>
+    [JsonPropertyName("payment_count")]
+    public required int PaymentCount { get; init; }
+
+}
+
+public record IssuingCardLifecycleControls
+{
+    [JsonPropertyName("cancel_after")]
+    public required IssuingCardLifecycleConditions CancelAfter { get; init; }
 
 }
 
@@ -26843,7 +26978,7 @@ public record IssuingNetworkTokenVisa
     /// A unique reference ID from Visa to represent the card account number.
     /// </summary>
     [JsonPropertyName("card_reference_id")]
-    public required string CardReferenceId { get; init; }
+    public string? CardReferenceId { get; init; }
 
     /// <summary>
     /// The network-unique identifier for the token.
@@ -27918,7 +28053,7 @@ public record LineItem
     public string? Invoice { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -27957,10 +28092,16 @@ public record LineItem
     public BillingBillResourceInvoicingPricingPricing? Pricing { get; init; }
 
     /// <summary>
-    /// The quantity of the subscription, if the line item is a subscription or a proration.
+    /// Quantity of units for the invoice line item in integer format, with any decimal precision truncated. For the line item's full-precision decimal quantity, use `quantity_decimal`. This field will be deprecated in favor of `quantity_decimal` in a future version. If the line item is a proration or subscription, the quantity of the subscription that the proration was computed for.
     /// </summary>
     [JsonPropertyName("quantity")]
     public int? Quantity { get; init; }
+
+    /// <summary>
+    /// Non-negative decimal with at most 12 decimal places. The quantity of units for the line item.
+    /// </summary>
+    [JsonPropertyName("quantity_decimal")]
+    public string? QuantityDecimal { get; init; }
 
     [JsonPropertyName("subscription")]
     public object? Subscription { get; init; }
@@ -28107,7 +28248,7 @@ public record Mandate
     public required string Id { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -28198,6 +28339,12 @@ public record MandateAuBecsDebit
 public record MandateBacsDebit
 {
     /// <summary>
+    /// The display name for the account on this mandate.
+    /// </summary>
+    [JsonPropertyName("display_name")]
+    public string? DisplayName { get; init; }
+
+    /// <summary>
     /// The status of the mandate on the Bacs network. Can be one of `pending`, `revoked`, `refused`, or `accepted`.
     /// </summary>
     [JsonPropertyName("network_status")]
@@ -28214,6 +28361,12 @@ public record MandateBacsDebit
     /// </summary>
     [JsonPropertyName("revocation_reason")]
     public RevocationReason? RevocationReason { get; init; }
+
+    /// <summary>
+    /// The service user number for the account on this mandate.
+    /// </summary>
+    [JsonPropertyName("service_user_number")]
+    public string? ServiceUserNumber { get; init; }
 
     /// <summary>
     /// The URL that will contain the mandate that the customer has signed.
@@ -28301,6 +28454,34 @@ public record MandateOptionsPayto
 
 }
 
+public record MandateOptionsUpi
+{
+    /// <summary>
+    /// Amount to be charged for future payments.
+    /// </summary>
+    [JsonPropertyName("amount")]
+    public int? Amount { get; init; }
+
+    /// <summary>
+    /// One of `fixed` or `maximum`. If `fixed`, the `amount` param refers to the exact amount to be charged in future payments. If `maximum`, the amount charged can be up to the value passed for the `amount` param.
+    /// </summary>
+    [JsonPropertyName("amount_type")]
+    public AmountType? AmountType { get; init; }
+
+    /// <summary>
+    /// A description of the mandate or subscription that is meant to be displayed to the customer.
+    /// </summary>
+    [JsonPropertyName("description")]
+    public string? Description { get; init; }
+
+    /// <summary>
+    /// End date of the mandate or subscription.
+    /// </summary>
+    [JsonPropertyName("end_date")]
+    public int? EndDate { get; init; }
+
+}
+
 public record MandatePaymentMethodDetails
 {
     [JsonPropertyName("acss_debit")]
@@ -28356,6 +28537,9 @@ public record MandatePaymentMethodDetails
     /// </summary>
     [JsonPropertyName("type")]
     public required string Type { get; init; }
+
+    [JsonPropertyName("upi")]
+    public MandateUpi? Upi { get; init; }
 
     [JsonPropertyName("us_bank_account")]
     public MandateUsBankAccount? UsBankAccount { get; init; }
@@ -28457,6 +28641,34 @@ public record MandateSingleUse
     /// </summary>
     [JsonPropertyName("currency")]
     public required string Currency { get; init; }
+
+}
+
+public record MandateUpi
+{
+    /// <summary>
+    /// Amount to be charged for future payments.
+    /// </summary>
+    [JsonPropertyName("amount")]
+    public int? Amount { get; init; }
+
+    /// <summary>
+    /// One of `fixed` or `maximum`. If `fixed`, the `amount` param refers to the exact amount to be charged in future payments. If `maximum`, the amount charged can be up to the value passed for the `amount` param.
+    /// </summary>
+    [JsonPropertyName("amount_type")]
+    public AmountType? AmountType { get; init; }
+
+    /// <summary>
+    /// A description of the mandate or subscription that is meant to be displayed to the customer.
+    /// </summary>
+    [JsonPropertyName("description")]
+    public string? Description { get; init; }
+
+    /// <summary>
+    /// End date of the mandate or subscription.
+    /// </summary>
+    [JsonPropertyName("end_date")]
+    public int? EndDate { get; init; }
 
 }
 
@@ -28827,7 +29039,7 @@ public record PaymentAttemptRecord
     public required string Id { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -29059,8 +29271,6 @@ public record PaymentFlowsPaymentDetails
 
     /// <summary>
     /// A unique value assigned by the business to identify the transaction. Required for L2 and L3 rates.
-    /// 
-    /// Required when the Payment Method Types array contains `card`, including when [automatic_payment_methods.enabled](/api/payment_intents/create#create_payment_intent-automatic_payment_methods-enabled) is set to `true`.
     /// 
     /// For Cards, this field is truncated to 25 alphanumeric characters, excluding spaces, before being sent to card networks. For Klarna, this field is truncated to 255 characters and is visible to customers when they view the order in the Klarna app.
     /// </summary>
@@ -29493,7 +29703,7 @@ public record PaymentIntent
     public object? LatestCharge { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -29660,7 +29870,7 @@ public record PaymentIntentAmountDetailsLineItem
     /// <summary>
     /// The product name of the line item. Required for L3 rates. At most 1024 characters long.
     /// 
-    /// For Cards, this field is truncated to 26 alphanumeric characters before being sent to the card networks. For Paypal, this field is truncated to 127 characters.
+    /// For Cards, this field is truncated to 26 alphanumeric characters before being sent to the card networks. For PayPal, this field is truncated to 127 characters.
     /// </summary>
     [JsonPropertyName("product_name")]
     public required string ProductName { get; init; }
@@ -29744,6 +29954,9 @@ public record PaymentIntentNextAction
     /// </summary>
     [JsonPropertyName("type")]
     public required string Type { get; init; }
+
+    [JsonPropertyName("upi_handle_redirect_or_display_qr_code")]
+    public PaymentIntentNextActionUpiHandleRedirectOrDisplayQrCode? UpiHandleRedirectOrDisplayQrCode { get; init; }
 
     /// <summary>
     /// When confirming a PaymentIntent with Stripe.js, Stripe.js depends on the contents of this dictionary to invoke authentication flows. The shape of the contents is subject to change and is only intended to be used by Stripe.js.
@@ -30220,6 +30433,41 @@ public record PaymentIntentNextActionSwishQrCode
 
 }
 
+public record PaymentIntentNextActionUpiHandleRedirectOrDisplayQrCode
+{
+    /// <summary>
+    /// The URL to the hosted UPI instructions page, which allows customers to view the QR code.
+    /// </summary>
+    [JsonPropertyName("hosted_instructions_url")]
+    public required string HostedInstructionsUrl { get; init; }
+
+    [JsonPropertyName("qr_code")]
+    public required PaymentIntentNextActionUpiqrCode QrCode { get; init; }
+
+}
+
+public record PaymentIntentNextActionUpiqrCode
+{
+    /// <summary>
+    /// The date (unix timestamp) when the QR code expires.
+    /// </summary>
+    [JsonPropertyName("expires_at")]
+    public required int ExpiresAt { get; init; }
+
+    /// <summary>
+    /// The image_url_png string used to render QR code
+    /// </summary>
+    [JsonPropertyName("image_url_png")]
+    public required string ImageUrlPng { get; init; }
+
+    /// <summary>
+    /// The image_url_svg string used to render QR code
+    /// </summary>
+    [JsonPropertyName("image_url_svg")]
+    public required string ImageUrlSvg { get; init; }
+
+}
+
 public record PaymentIntentNextActionVerifyWithMicrodeposits
 {
     /// <summary>
@@ -30481,6 +30729,9 @@ public record PaymentIntentPaymentMethodOptions
     [JsonPropertyName("twint")]
     public object? Twint { get; init; }
 
+    [JsonPropertyName("upi")]
+    public object? Upi { get; init; }
+
     [JsonPropertyName("us_bank_account")]
     public object? UsBankAccount { get; init; }
 
@@ -30516,7 +30767,7 @@ public record PaymentIntentPaymentMethodOptionsAcssDebit
     public string? TargetDate { get; init; }
 
     /// <summary>
-    /// Bank account verification method.
+    /// Bank account verification method. The default value is `automatic`.
     /// </summary>
     [JsonPropertyName("verification_method")]
     public CheckoutAcssDebitPaymentMethodOptionsVerificationMethod? VerificationMethod { get; init; }
@@ -30939,7 +31190,13 @@ public record PaymentIntentPaymentMethodOptionsUsBankAccount
     public string? TargetDate { get; init; }
 
     /// <summary>
-    /// Bank account verification method.
+    /// The purpose of the transaction.
+    /// </summary>
+    [JsonPropertyName("transaction_purpose")]
+    public TransactionPurpose? TransactionPurpose { get; init; }
+
+    /// <summary>
+    /// Bank account verification method. The default value is `automatic`.
     /// </summary>
     [JsonPropertyName("verification_method")]
     public CheckoutAcssDebitPaymentMethodOptionsVerificationMethod? VerificationMethod { get; init; }
@@ -31017,7 +31274,7 @@ public record PaymentIntentTypeSpecificPaymentMethodOptionsClient
     public CheckoutAcssDebitPaymentMethodOptionsSetupFutureUsage? SetupFutureUsage { get; init; }
 
     /// <summary>
-    /// Bank account verification method.
+    /// Bank account verification method. The default value is `automatic`.
     /// </summary>
     [JsonPropertyName("verification_method")]
     public CheckoutAcssDebitPaymentMethodOptionsVerificationMethod? VerificationMethod { get; init; }
@@ -31127,7 +31384,7 @@ public record PaymentLink
     public object? LineItems { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -31370,7 +31627,7 @@ public record PaymentLinksResourceCustomFields
 public record PaymentLinksResourceCustomFieldsDropdown
 {
     /// <summary>
-    /// The value that will pre-fill on the payment page.
+    /// The value that pre-fills on the payment page.
     /// </summary>
     [JsonPropertyName("default_value")]
     public string? DefaultValue { get; init; }
@@ -31418,7 +31675,7 @@ public record PaymentLinksResourceCustomFieldsLabel
 public record PaymentLinksResourceCustomFieldsNumeric
 {
     /// <summary>
-    /// The value that will pre-fill the field on the payment page.
+    /// The value that pre-fills the field on the payment page.
     /// </summary>
     [JsonPropertyName("default_value")]
     public string? DefaultValue { get; init; }
@@ -31440,7 +31697,7 @@ public record PaymentLinksResourceCustomFieldsNumeric
 public record PaymentLinksResourceCustomFieldsText
 {
     /// <summary>
-    /// The value that will pre-fill the field on the payment page.
+    /// The value that pre-fills the field on the payment page.
     /// </summary>
     [JsonPropertyName("default_value")]
     public string? DefaultValue { get; init; }
@@ -31490,7 +31747,7 @@ public record PaymentLinksResourceCustomText
 public record PaymentLinksResourceCustomTextPosition
 {
     /// <summary>
-    /// Text may be up to 1200 characters in length.
+    /// Text can be up to 1200 characters in length.
     /// </summary>
     [JsonPropertyName("message")]
     public required string Message { get; init; }
@@ -31915,7 +32172,7 @@ public record PaymentMethod
     public PaymentMethodLink? Link { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -32006,6 +32263,9 @@ public record PaymentMethod
     /// </summary>
     [JsonPropertyName("type")]
     public required ConfirmationTokensResourcePaymentMethodPreviewType Type { get; init; }
+
+    [JsonPropertyName("upi")]
+    public PaymentMethodUpi? Upi { get; init; }
 
     [JsonPropertyName("us_bank_account")]
     public PaymentMethodUsBankAccount? UsBankAccount { get; init; }
@@ -32696,7 +32956,7 @@ public record PaymentMethodConfiguration
     public PaymentMethodConfigResourcePaymentMethodProperties? Link { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -32781,6 +33041,9 @@ public record PaymentMethodConfiguration
 
     [JsonPropertyName("twint")]
     public PaymentMethodConfigResourcePaymentMethodProperties? Twint { get; init; }
+
+    [JsonPropertyName("upi")]
+    public PaymentMethodConfigResourcePaymentMethodProperties? Upi { get; init; }
 
     [JsonPropertyName("us_bank_account")]
     public PaymentMethodConfigResourcePaymentMethodProperties? UsBankAccount { get; init; }
@@ -32988,6 +33251,9 @@ public record PaymentMethodDetails
     /// </summary>
     [JsonPropertyName("type")]
     public required string Type { get; init; }
+
+    [JsonPropertyName("upi")]
+    public PaymentMethodDetailsUpi? Upi { get; init; }
 
     [JsonPropertyName("us_bank_account")]
     public PaymentMethodDetailsUsBankAccount? UsBankAccount { get; init; }
@@ -33633,6 +33899,12 @@ public record PaymentMethodDetailsCardPresent
     public string? Last4 { get; init; }
 
     /// <summary>
+    /// ID of the [location](https://docs.stripe.com/api/terminal/locations) that this transaction's reader is assigned to.
+    /// </summary>
+    [JsonPropertyName("location")]
+    public string? Location { get; init; }
+
+    /// <summary>
     /// Identifies which network this charge was processed on. Can be `amex`, `cartes_bancaires`, `diners`, `discover`, `eftpos_au`, `interac`, `jcb`, `link`, `mastercard`, `unionpay`, `visa`, or `unknown`.
     /// </summary>
     [JsonPropertyName("network")]
@@ -33667,6 +33939,12 @@ public record PaymentMethodDetailsCardPresent
     /// </summary>
     [JsonPropertyName("read_method")]
     public ReadMethod? ReadMethod { get; init; }
+
+    /// <summary>
+    /// ID of the [reader](https://docs.stripe.com/api/terminal/readers) this transaction was made on.
+    /// </summary>
+    [JsonPropertyName("reader")]
+    public string? Reader { get; init; }
 
     /// <summary>
     /// A collection of fields required to be displayed on receipts. Only required for EMV transactions.
@@ -34118,6 +34396,12 @@ public record PaymentMethodDetailsInteracPresent
     public string? Last4 { get; init; }
 
     /// <summary>
+    /// ID of the [location](https://docs.stripe.com/api/terminal/locations) that this transaction's reader is assigned to.
+    /// </summary>
+    [JsonPropertyName("location")]
+    public string? Location { get; init; }
+
+    /// <summary>
     /// Identifies which network this charge was processed on. Can be `amex`, `cartes_bancaires`, `diners`, `discover`, `eftpos_au`, `interac`, `jcb`, `link`, `mastercard`, `unionpay`, `visa`, or `unknown`.
     /// </summary>
     [JsonPropertyName("network")]
@@ -34140,6 +34424,12 @@ public record PaymentMethodDetailsInteracPresent
     /// </summary>
     [JsonPropertyName("read_method")]
     public ReadMethod? ReadMethod { get; init; }
+
+    /// <summary>
+    /// ID of the [reader](https://docs.stripe.com/api/terminal/readers) this transaction was made on.
+    /// </summary>
+    [JsonPropertyName("reader")]
+    public string? Reader { get; init; }
 
     /// <summary>
     /// A collection of fields required to be displayed on receipts. Only required for EMV transactions.
@@ -34492,6 +34782,218 @@ public record PaymentMethodDetailsPayco
 
 }
 
+public record PaymentMethodDetailsPaymentRecordAffirm
+{
+    /// <summary>
+    /// ID of the location that this reader is assigned to.
+    /// </summary>
+    [JsonPropertyName("location")]
+    public string? Location { get; init; }
+
+    /// <summary>
+    /// ID of the reader this transaction was made on.
+    /// </summary>
+    [JsonPropertyName("reader")]
+    public string? Reader { get; init; }
+
+    /// <summary>
+    /// The Affirm transaction ID associated with this payment.
+    /// </summary>
+    [JsonPropertyName("transaction_id")]
+    public string? TransactionId { get; init; }
+
+}
+
+public record PaymentMethodDetailsPaymentRecordAfterpayClearpay
+{
+    /// <summary>
+    /// The Afterpay order ID associated with this payment intent.
+    /// </summary>
+    [JsonPropertyName("order_id")]
+    public string? OrderId { get; init; }
+
+    /// <summary>
+    /// Order identifier shown to the merchant in Afterpay's online portal.
+    /// </summary>
+    [JsonPropertyName("reference")]
+    public string? Reference { get; init; }
+
+}
+
+public record PaymentMethodDetailsPaymentRecordBancontact
+{
+    /// <summary>
+    /// Bank code of bank associated with the bank account.
+    /// </summary>
+    [JsonPropertyName("bank_code")]
+    public string? BankCode { get; init; }
+
+    /// <summary>
+    /// Name of the bank associated with the bank account.
+    /// </summary>
+    [JsonPropertyName("bank_name")]
+    public string? BankName { get; init; }
+
+    /// <summary>
+    /// Bank Identifier Code of the bank associated with the bank account.
+    /// </summary>
+    [JsonPropertyName("bic")]
+    public string? Bic { get; init; }
+
+    /// <summary>
+    /// The ID of the SEPA Direct Debit PaymentMethod which was generated by this Charge.
+    /// </summary>
+    [JsonPropertyName("generated_sepa_debit")]
+    public object? GeneratedSepaDebit { get; init; }
+
+    /// <summary>
+    /// The mandate for the SEPA Direct Debit PaymentMethod which was generated by this Charge.
+    /// </summary>
+    [JsonPropertyName("generated_sepa_debit_mandate")]
+    public object? GeneratedSepaDebitMandate { get; init; }
+
+    /// <summary>
+    /// Last four characters of the IBAN.
+    /// </summary>
+    [JsonPropertyName("iban_last4")]
+    public string? IbanLast4 { get; init; }
+
+    /// <summary>
+    /// Preferred language of the Bancontact authorization page that the customer is redirected to. Can be one of `en`, `de`, `fr`, or `nl`
+    /// </summary>
+    [JsonPropertyName("preferred_language")]
+    public InvoicePaymentMethodOptionsBancontactPreferredLanguage? PreferredLanguage { get; init; }
+
+    /// <summary>
+    /// Owner's verified full name. Values are verified or provided by Bancontact directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.
+    /// </summary>
+    [JsonPropertyName("verified_name")]
+    public string? VerifiedName { get; init; }
+
+}
+
+public record PaymentMethodDetailsPaymentRecordBoleto
+{
+    /// <summary>
+    /// The tax ID of the customer (CPF for individuals consumers or CNPJ for businesses consumers)
+    /// </summary>
+    [JsonPropertyName("tax_id")]
+    public string? TaxId { get; init; }
+
+}
+
+public record PaymentMethodDetailsPaymentRecordCashapp
+{
+    /// <summary>
+    /// A unique and immutable identifier assigned by Cash App to every buyer.
+    /// </summary>
+    [JsonPropertyName("buyer_id")]
+    public string? BuyerId { get; init; }
+
+    /// <summary>
+    /// A public identifier for buyers using Cash App.
+    /// </summary>
+    [JsonPropertyName("cashtag")]
+    public string? Cashtag { get; init; }
+
+    /// <summary>
+    /// A unique and immutable identifier of payments assigned by Cash App.
+    /// </summary>
+    [JsonPropertyName("transaction_id")]
+    public string? TransactionId { get; init; }
+
+}
+
+public record PaymentMethodDetailsPaymentRecordGiropay
+{
+    /// <summary>
+    /// Bank code of bank associated with the bank account.
+    /// </summary>
+    [JsonPropertyName("bank_code")]
+    public string? BankCode { get; init; }
+
+    /// <summary>
+    /// Name of the bank associated with the bank account.
+    /// </summary>
+    [JsonPropertyName("bank_name")]
+    public string? BankName { get; init; }
+
+    /// <summary>
+    /// Bank Identifier Code of the bank associated with the bank account.
+    /// </summary>
+    [JsonPropertyName("bic")]
+    public string? Bic { get; init; }
+
+    /// <summary>
+    /// Owner's verified full name. Values are verified or provided by Giropay directly (if supported) at the time of authorization or settlement. They cannot be set or mutated. Giropay rarely provides this information so the attribute is usually empty.
+    /// </summary>
+    [JsonPropertyName("verified_name")]
+    public string? VerifiedName { get; init; }
+
+}
+
+public record PaymentMethodDetailsPaymentRecordIdeal
+{
+    /// <summary>
+    /// The customer's bank. Can be one of `abn_amro`, `adyen`, `asn_bank`, `bunq`, `buut`, `finom`, `handelsbanken`, `ing`, `knab`, `mollie`, `moneyou`, `n26`, `nn`, `rabobank`, `regiobank`, `revolut`, `sns_bank`, `triodos_bank`, `van_lanschot`, or `yoursafe`.
+    /// </summary>
+    [JsonPropertyName("bank")]
+    public PaymentMethodDetailsIdealBank? Bank { get; init; }
+
+    /// <summary>
+    /// The Bank Identifier Code of the customer's bank.
+    /// </summary>
+    [JsonPropertyName("bic")]
+    public Bic? Bic { get; init; }
+
+    /// <summary>
+    /// The ID of the SEPA Direct Debit PaymentMethod which was generated by this Charge.
+    /// </summary>
+    [JsonPropertyName("generated_sepa_debit")]
+    public object? GeneratedSepaDebit { get; init; }
+
+    /// <summary>
+    /// The mandate for the SEPA Direct Debit PaymentMethod which was generated by this Charge.
+    /// </summary>
+    [JsonPropertyName("generated_sepa_debit_mandate")]
+    public object? GeneratedSepaDebitMandate { get; init; }
+
+    /// <summary>
+    /// Last four characters of the IBAN.
+    /// </summary>
+    [JsonPropertyName("iban_last4")]
+    public string? IbanLast4 { get; init; }
+
+    /// <summary>
+    /// Unique transaction ID generated by iDEAL.
+    /// </summary>
+    [JsonPropertyName("transaction_id")]
+    public string? TransactionId { get; init; }
+
+    /// <summary>
+    /// Owner's verified full name. Values are verified or provided by iDEAL directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.
+    /// </summary>
+    [JsonPropertyName("verified_name")]
+    public string? VerifiedName { get; init; }
+
+}
+
+public record PaymentMethodDetailsPaymentRecordKakaoPay
+{
+    /// <summary>
+    /// A unique identifier for the buyer as determined by the local payment processor.
+    /// </summary>
+    [JsonPropertyName("buyer_id")]
+    public string? BuyerId { get; init; }
+
+    /// <summary>
+    /// The Kakao Pay transaction ID associated with this payment.
+    /// </summary>
+    [JsonPropertyName("transaction_id")]
+    public string? TransactionId { get; init; }
+
+}
+
 public record PaymentMethodDetailsPaymentRecordKonbini
 {
     /// <summary>
@@ -34504,6 +35006,74 @@ public record PaymentMethodDetailsPaymentRecordKonbini
 
 public record PaymentMethodDetailsPaymentRecordMbWay
 {
+}
+
+public record PaymentMethodDetailsPaymentRecordMobilepay
+{
+    /// <summary>
+    /// Internal card details
+    /// </summary>
+    [JsonPropertyName("card")]
+    public PaymentsPrimitivesPaymentRecordsResourcePaymentMethodMobilepayDetailsResourceCard? Card { get; init; }
+
+}
+
+public record PaymentMethodDetailsPaymentRecordMultibanco
+{
+    /// <summary>
+    /// Entity number associated with this Multibanco payment.
+    /// </summary>
+    [JsonPropertyName("entity")]
+    public string? Entity { get; init; }
+
+    /// <summary>
+    /// Reference number associated with this Multibanco payment.
+    /// </summary>
+    [JsonPropertyName("reference")]
+    public string? Reference { get; init; }
+
+}
+
+public record PaymentMethodDetailsPaymentRecordNaverPay
+{
+    /// <summary>
+    /// A unique identifier for the buyer as determined by the local payment processor.
+    /// </summary>
+    [JsonPropertyName("buyer_id")]
+    public string? BuyerId { get; init; }
+
+    /// <summary>
+    /// The Naver Pay transaction ID associated with this payment.
+    /// </summary>
+    [JsonPropertyName("transaction_id")]
+    public string? TransactionId { get; init; }
+
+}
+
+public record PaymentMethodDetailsPaymentRecordOxxo
+{
+    /// <summary>
+    /// OXXO reference number
+    /// </summary>
+    [JsonPropertyName("number")]
+    public string? Number { get; init; }
+
+}
+
+public record PaymentMethodDetailsPaymentRecordPayco
+{
+    /// <summary>
+    /// A unique identifier for the buyer as determined by the local payment processor.
+    /// </summary>
+    [JsonPropertyName("buyer_id")]
+    public string? BuyerId { get; init; }
+
+    /// <summary>
+    /// The Payco transaction ID associated with this payment.
+    /// </summary>
+    [JsonPropertyName("transaction_id")]
+    public string? TransactionId { get; init; }
+
 }
 
 public record PaymentMethodDetailsPaymentRecordPaynow
@@ -34528,6 +35098,16 @@ public record PaymentMethodDetailsPaymentRecordPaynow
 
 }
 
+public record PaymentMethodDetailsPaymentRecordPix
+{
+    /// <summary>
+    /// Unique transaction id generated by BCB
+    /// </summary>
+    [JsonPropertyName("bank_transaction_id")]
+    public string? BankTransactionId { get; init; }
+
+}
+
 public record PaymentMethodDetailsPaymentRecordPromptpay
 {
     /// <summary>
@@ -34536,6 +35116,152 @@ public record PaymentMethodDetailsPaymentRecordPromptpay
     [JsonPropertyName("reference")]
     public string? Reference { get; init; }
 
+}
+
+public record PaymentMethodDetailsPaymentRecordSamsungPay
+{
+    /// <summary>
+    /// A unique identifier for the buyer as determined by the local payment processor.
+    /// </summary>
+    [JsonPropertyName("buyer_id")]
+    public string? BuyerId { get; init; }
+
+    /// <summary>
+    /// The Samsung Pay transaction ID associated with this payment.
+    /// </summary>
+    [JsonPropertyName("transaction_id")]
+    public string? TransactionId { get; init; }
+
+}
+
+public record PaymentMethodDetailsPaymentRecordSepaDebit
+{
+    /// <summary>
+    /// Bank code of bank associated with the bank account.
+    /// </summary>
+    [JsonPropertyName("bank_code")]
+    public string? BankCode { get; init; }
+
+    /// <summary>
+    /// Branch code of bank associated with the bank account.
+    /// </summary>
+    [JsonPropertyName("branch_code")]
+    public string? BranchCode { get; init; }
+
+    /// <summary>
+    /// Two-letter ISO code representing the country the bank account is located in.
+    /// </summary>
+    [JsonPropertyName("country")]
+    public string? Country { get; init; }
+
+    /// <summary>
+    /// Estimated date to debit the customer's bank account. A date string in YYYY-MM-DD format.
+    /// </summary>
+    [JsonPropertyName("expected_debit_date")]
+    public string? ExpectedDebitDate { get; init; }
+
+    /// <summary>
+    /// Uniquely identifies this particular bank account. You can use this attribute to check whether two bank accounts are the same.
+    /// </summary>
+    [JsonPropertyName("fingerprint")]
+    public string? Fingerprint { get; init; }
+
+    /// <summary>
+    /// Last four characters of the IBAN.
+    /// </summary>
+    [JsonPropertyName("last4")]
+    public string? Last4 { get; init; }
+
+    /// <summary>
+    /// Find the ID of the mandate used for this payment under the [payment_method_details.sepa_debit.mandate](https://docs.stripe.com/api/charges/object#charge_object-payment_method_details-sepa_debit-mandate) property on the Charge. Use this mandate ID to [retrieve the Mandate](https://docs.stripe.com/api/mandates/retrieve).
+    /// </summary>
+    [JsonPropertyName("mandate")]
+    public string? Mandate { get; init; }
+
+}
+
+public record PaymentMethodDetailsPaymentRecordSofort
+{
+    /// <summary>
+    /// Bank code of bank associated with the bank account.
+    /// </summary>
+    [JsonPropertyName("bank_code")]
+    public string? BankCode { get; init; }
+
+    /// <summary>
+    /// Name of the bank associated with the bank account.
+    /// </summary>
+    [JsonPropertyName("bank_name")]
+    public string? BankName { get; init; }
+
+    /// <summary>
+    /// Bank Identifier Code of the bank associated with the bank account.
+    /// </summary>
+    [JsonPropertyName("bic")]
+    public string? Bic { get; init; }
+
+    /// <summary>
+    /// Two-letter ISO code representing the country the bank account is located in.
+    /// </summary>
+    [JsonPropertyName("country")]
+    public string? Country { get; init; }
+
+    /// <summary>
+    /// The ID of the SEPA Direct Debit PaymentMethod which was generated by this Charge.
+    /// </summary>
+    [JsonPropertyName("generated_sepa_debit")]
+    public object? GeneratedSepaDebit { get; init; }
+
+    /// <summary>
+    /// The mandate for the SEPA Direct Debit PaymentMethod which was generated by this Charge.
+    /// </summary>
+    [JsonPropertyName("generated_sepa_debit_mandate")]
+    public object? GeneratedSepaDebitMandate { get; init; }
+
+    /// <summary>
+    /// Last four characters of the IBAN.
+    /// </summary>
+    [JsonPropertyName("iban_last4")]
+    public string? IbanLast4 { get; init; }
+
+    /// <summary>
+    /// Preferred language of the SOFORT authorization page that the customer is redirected to. Can be one of `de`, `en`, `es`, `fr`, `it`, `nl`, or `pl`
+    /// </summary>
+    [JsonPropertyName("preferred_language")]
+    public PaymentMethodDetailsPaymentRecordSofortPreferredLanguage? PreferredLanguage { get; init; }
+
+    /// <summary>
+    /// Owner's verified full name. Values are verified or provided by SOFORT directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.
+    /// </summary>
+    [JsonPropertyName("verified_name")]
+    public string? VerifiedName { get; init; }
+
+}
+
+public record PaymentMethodDetailsPaymentRecordSwish
+{
+    /// <summary>
+    /// Uniquely identifies the payer's Swish account. You can use this attribute to check whether two Swish transactions were paid for by the same payer
+    /// </summary>
+    [JsonPropertyName("fingerprint")]
+    public string? Fingerprint { get; init; }
+
+    /// <summary>
+    /// Payer bank reference number for the payment
+    /// </summary>
+    [JsonPropertyName("payment_reference")]
+    public string? PaymentReference { get; init; }
+
+    /// <summary>
+    /// The last four digits of the Swish account phone number
+    /// </summary>
+    [JsonPropertyName("verified_phone_last4")]
+    public string? VerifiedPhoneLast4 { get; init; }
+
+}
+
+public record PaymentMethodDetailsPaymentRecordTwint
+{
 }
 
 public record PaymentMethodDetailsPaymentRecordUsBankAccount
@@ -34874,7 +35600,7 @@ public record PaymentMethodDetailsSofort
     /// Can be one of `de`, `en`, `es`, `fr`, `it`, `nl`, or `pl`
     /// </summary>
     [JsonPropertyName("preferred_language")]
-    public PaymentMethodDetailsSofortPreferredLanguage? PreferredLanguage { get; init; }
+    public PaymentMethodDetailsPaymentRecordSofortPreferredLanguage? PreferredLanguage { get; init; }
 
     /// <summary>
     /// Owner's verified full name. Values are verified or provided by SOFORT directly
@@ -34913,6 +35639,16 @@ public record PaymentMethodDetailsSwish
 
 public record PaymentMethodDetailsTwint
 {
+}
+
+public record PaymentMethodDetailsUpi
+{
+    /// <summary>
+    /// Customer's unique Virtual Payment Address.
+    /// </summary>
+    [JsonPropertyName("vpa")]
+    public string? Vpa { get; init; }
+
 }
 
 public record PaymentMethodDetailsUsBankAccount
@@ -35072,7 +35808,7 @@ public record PaymentMethodDomain
     public required PaymentMethodDomainResourcePaymentMethodStatus Link { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -35547,7 +36283,7 @@ public record PaymentMethodOptionsCardInstallments
 public record PaymentMethodOptionsCardMandateOptions
 {
     /// <summary>
-    /// Amount to be charged for future payments.
+    /// Amount to be charged for future payments, specified in the presentment currency.
     /// </summary>
     [JsonPropertyName("amount")]
     public required int Amount { get; init; }
@@ -35724,7 +36460,7 @@ public record PaymentMethodOptionsCustomerBalanceBankTransfer
 public record PaymentMethodOptionsCustomerBalanceEuBankAccount
 {
     /// <summary>
-    /// The desired country code of the bank account information. Permitted values include: `BE`, `DE`, `ES`, `FR`, `IE`, or `NL`.
+    /// The desired country code of the bank account information. Permitted values include: `DE`, `FR`, `IE`, or `NL`.
     /// </summary>
     [JsonPropertyName("country")]
     public required Country Country { get; init; }
@@ -35886,6 +36622,34 @@ public record PaymentMethodOptionsKrCard
     /// </summary>
     [JsonPropertyName("setup_future_usage")]
     public CheckoutAmazonPayPaymentMethodOptionsSetupFutureUsage? SetupFutureUsage { get; init; }
+
+}
+
+public record PaymentMethodOptionsMandateOptionsUpi
+{
+    /// <summary>
+    /// Amount to be charged for future payments.
+    /// </summary>
+    [JsonPropertyName("amount")]
+    public int? Amount { get; init; }
+
+    /// <summary>
+    /// One of `fixed` or `maximum`. If `fixed`, the `amount` param refers to the exact amount to be charged in future payments. If `maximum`, the amount charged can be up to the value passed for the `amount` param.
+    /// </summary>
+    [JsonPropertyName("amount_type")]
+    public AmountType? AmountType { get; init; }
+
+    /// <summary>
+    /// A description of the mandate or subscription that is meant to be displayed to the customer.
+    /// </summary>
+    [JsonPropertyName("description")]
+    public string? Description { get; init; }
+
+    /// <summary>
+    /// End date of the mandate or subscription.
+    /// </summary>
+    [JsonPropertyName("end_date")]
+    public int? EndDate { get; init; }
 
 }
 
@@ -36101,7 +36865,7 @@ public record PaymentMethodOptionsSofort
     /// Preferred language of the SOFORT authorization page that the customer is redirected to.
     /// </summary>
     [JsonPropertyName("preferred_language")]
-    public PaymentMethodDetailsSofortPreferredLanguage? PreferredLanguage { get; init; }
+    public PaymentMethodDetailsPaymentRecordSofortPreferredLanguage? PreferredLanguage { get; init; }
 
     /// <summary>
     /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
@@ -36130,6 +36894,22 @@ public record PaymentMethodOptionsTwint
     /// </summary>
     [JsonPropertyName("setup_future_usage")]
     public CheckoutAffirmPaymentMethodOptionsSetupFutureUsage? SetupFutureUsage { get; init; }
+
+}
+
+public record PaymentMethodOptionsUpi
+{
+    /// <summary>
+    /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
+    /// 
+    /// If you provide a Customer with the PaymentIntent, you can use this parameter to [attach the payment method](/payments/save-during-payment) to the Customer after the PaymentIntent is confirmed and the customer completes any required actions. If you don't provide a Customer, you can still [attach](/api/payment_methods/attach) the payment method to a Customer after the transaction completes.
+    /// 
+    /// If the payment method is `card_present` and isn't a digital wallet, Stripe creates and attaches a [generated_card](/api/charges/object#charge_object-payment_method_details-card_present-generated_card) payment method representing the card to the Customer instead.
+    /// 
+    /// When processing card payments, Stripe uses `setup_future_usage` to help you comply with regional legislation and network rules, such as [SCA](/strong-customer-authentication).
+    /// </summary>
+    [JsonPropertyName("setup_future_usage")]
+    public ConfirmationTokenSetupFutureUsage? SetupFutureUsage { get; init; }
 
 }
 
@@ -36334,6 +37114,16 @@ public record PaymentMethodSwish
 
 public record PaymentMethodTwint
 {
+}
+
+public record PaymentMethodUpi
+{
+    /// <summary>
+    /// Customer's unique Virtual Payment Address
+    /// </summary>
+    [JsonPropertyName("vpa")]
+    public string? Vpa { get; init; }
+
 }
 
 public record PaymentMethodUsBankAccount
@@ -36750,7 +37540,7 @@ public record PaymentPagesCheckoutSessionCustomFields
 public record PaymentPagesCheckoutSessionCustomFieldsDropdown
 {
     /// <summary>
-    /// The value that will pre-fill on the payment page.
+    /// The value that pre-fills on the payment page.
     /// </summary>
     [JsonPropertyName("default_value")]
     public string? DefaultValue { get; init; }
@@ -36788,7 +37578,7 @@ public record PaymentPagesCheckoutSessionCustomFieldsLabel
 public record PaymentPagesCheckoutSessionCustomFieldsNumeric
 {
     /// <summary>
-    /// The value that will pre-fill the field on the payment page.
+    /// The value that pre-fills the field on the payment page.
     /// </summary>
     [JsonPropertyName("default_value")]
     public string? DefaultValue { get; init; }
@@ -36832,7 +37622,7 @@ public record PaymentPagesCheckoutSessionCustomFieldsOption
 public record PaymentPagesCheckoutSessionCustomFieldsText
 {
     /// <summary>
-    /// The value that will pre-fill the field on the payment page.
+    /// The value that pre-fills the field on the payment page.
     /// </summary>
     [JsonPropertyName("default_value")]
     public string? DefaultValue { get; init; }
@@ -36888,7 +37678,7 @@ public record PaymentPagesCheckoutSessionCustomText
 public record PaymentPagesCheckoutSessionCustomTextPosition
 {
     /// <summary>
-    /// Text may be up to 1200 characters in length.
+    /// Text can be up to 1200 characters in length.
     /// </summary>
     [JsonPropertyName("message")]
     public required string Message { get; init; }
@@ -37206,7 +37996,7 @@ public record PaymentPagesCheckoutSessionShippingOption
 public record PaymentPagesCheckoutSessionTaxId
 {
     /// <summary>
-    /// The type of the tax ID, one of `ad_nrt`, `ar_cuit`, `eu_vat`, `bo_tin`, `br_cnpj`, `br_cpf`, `cn_tin`, `co_nit`, `cr_tin`, `do_rcn`, `ec_ruc`, `eu_oss_vat`, `hr_oib`, `pe_ruc`, `ro_tin`, `rs_pib`, `sv_nit`, `uy_ruc`, `ve_rif`, `vn_tin`, `gb_vat`, `nz_gst`, `au_abn`, `au_arn`, `in_gst`, `no_vat`, `no_voec`, `za_vat`, `ch_vat`, `mx_rfc`, `sg_uen`, `ru_inn`, `ru_kpp`, `ca_bn`, `hk_br`, `es_cif`, `pl_nip`, `tw_vat`, `th_vat`, `jp_cn`, `jp_rn`, `jp_trn`, `li_uid`, `li_vat`, `my_itn`, `us_ein`, `kr_brn`, `ca_qst`, `ca_gst_hst`, `ca_pst_bc`, `ca_pst_mb`, `ca_pst_sk`, `my_sst`, `sg_gst`, `ae_trn`, `cl_tin`, `sa_vat`, `id_npwp`, `my_frp`, `il_vat`, `ge_vat`, `ua_vat`, `is_vat`, `bg_uic`, `hu_tin`, `si_tin`, `ke_pin`, `tr_tin`, `eg_tin`, `ph_tin`, `al_tin`, `bh_vat`, `kz_bin`, `ng_tin`, `om_vat`, `de_stn`, `ch_uid`, `tz_vat`, `uz_vat`, `uz_tin`, `md_vat`, `ma_vat`, `by_tin`, `ao_tin`, `bs_tin`, `bb_tin`, `cd_nif`, `mr_nif`, `me_pib`, `zw_tin`, `ba_tin`, `gn_nif`, `mk_vat`, `sr_fin`, `sn_ninea`, `am_tin`, `np_pan`, `tj_tin`, `ug_tin`, `zm_tin`, `kh_tin`, `aw_tin`, `az_tin`, `bd_bin`, `bj_ifu`, `et_tin`, `kg_tin`, `la_tin`, `cm_niu`, `cv_nif`, `bf_ifu`, or `unknown`
+    /// The type of the tax ID, one of `ad_nrt`, `ar_cuit`, `eu_vat`, `bo_tin`, `br_cnpj`, `br_cpf`, `cn_tin`, `co_nit`, `cr_tin`, `do_rcn`, `ec_ruc`, `eu_oss_vat`, `hr_oib`, `pe_ruc`, `ro_tin`, `rs_pib`, `sv_nit`, `uy_ruc`, `ve_rif`, `vn_tin`, `gb_vat`, `nz_gst`, `au_abn`, `au_arn`, `in_gst`, `no_vat`, `no_voec`, `za_vat`, `ch_vat`, `mx_rfc`, `sg_uen`, `ru_inn`, `ru_kpp`, `ca_bn`, `hk_br`, `es_cif`, `pl_nip`, `tw_vat`, `th_vat`, `jp_cn`, `jp_rn`, `jp_trn`, `li_uid`, `li_vat`, `lk_vat`, `my_itn`, `us_ein`, `kr_brn`, `ca_qst`, `ca_gst_hst`, `ca_pst_bc`, `ca_pst_mb`, `ca_pst_sk`, `my_sst`, `sg_gst`, `ae_trn`, `cl_tin`, `sa_vat`, `id_npwp`, `my_frp`, `il_vat`, `ge_vat`, `ua_vat`, `is_vat`, `bg_uic`, `hu_tin`, `si_tin`, `ke_pin`, `tr_tin`, `eg_tin`, `ph_tin`, `al_tin`, `bh_vat`, `kz_bin`, `ng_tin`, `om_vat`, `de_stn`, `ch_uid`, `tz_vat`, `uz_vat`, `uz_tin`, `md_vat`, `ma_vat`, `by_tin`, `ao_tin`, `bs_tin`, `bb_tin`, `cd_nif`, `mr_nif`, `me_pib`, `zw_tin`, `ba_tin`, `gn_nif`, `mk_vat`, `sr_fin`, `sn_ninea`, `am_tin`, `np_pan`, `tj_tin`, `ug_tin`, `zm_tin`, `kh_tin`, `aw_tin`, `az_tin`, `bd_bin`, `bj_ifu`, `et_tin`, `kg_tin`, `la_tin`, `cm_niu`, `cv_nif`, `bf_ifu`, or `unknown`
     /// </summary>
     [JsonPropertyName("type")]
     public required InvoicesResourceInvoiceTaxIdType Type { get; init; }
@@ -37379,7 +38169,7 @@ public record PaymentRecord
     public string? LatestPaymentAttemptRecord { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -37570,7 +38360,7 @@ public record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardDetails
     /// Card brand. Can be `amex`, `cartes_bancaires`, `diners`, `discover`, `eftpos_au`, `jcb`, `link`, `mastercard`, `unionpay`, `visa` or `unknown`.
     /// </summary>
     [JsonPropertyName("brand")]
-    public required PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardDetailsBrand Brand { get; init; }
+    public PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardDetailsBrand? Brand { get; init; }
 
     /// <summary>
     /// When using manual capture, a future timestamp at which the charge will be automatically refunded if uncaptured.
@@ -37600,13 +38390,13 @@ public record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardDetails
     /// Two-digit number representing the card's expiration month.
     /// </summary>
     [JsonPropertyName("exp_month")]
-    public required int ExpMonth { get; init; }
+    public int? ExpMonth { get; init; }
 
     /// <summary>
     /// Four-digit number representing the card's expiration year.
     /// </summary>
     [JsonPropertyName("exp_year")]
-    public required int ExpYear { get; init; }
+    public int? ExpYear { get; init; }
 
     /// <summary>
     /// Uniquely identifies this particular card number. You can use this attribute to check whether two customers who’ve signed up with you are using the same card number, for example. For payment methods that tokenize card information (Apple Pay, Google Pay), the tokenized number might be provided instead of the underlying card number.
@@ -37620,7 +38410,7 @@ public record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardDetails
     /// Card funding type. Can be `credit`, `debit`, `prepaid`, or `unknown`.
     /// </summary>
     [JsonPropertyName("funding")]
-    public required PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardDetailsFunding Funding { get; init; }
+    public PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardDetailsFunding? Funding { get; init; }
 
     /// <summary>
     /// Issuer identification number of the card.
@@ -37644,7 +38434,7 @@ public record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardDetails
     /// The last four digits of the card.
     /// </summary>
     [JsonPropertyName("last4")]
-    public required string Last4 { get; init; }
+    public string? Last4 { get; init; }
 
     /// <summary>
     /// Identifies which network this charge was processed on. Can be `amex`, `cartes_bancaires`, `diners`, `discover`, `eftpos_au`, `interac`, `jcb`, `link`, `mastercard`, `unionpay`, `visa`, or `unknown`.
@@ -37698,12 +38488,21 @@ public record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardDetails
 
 public record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardDetailsResourceChecks
 {
+    /// <summary>
+    /// If you provide a value for `address.line1`, the check result is one of `pass`, `fail`, `unavailable`, or `unchecked`.
+    /// </summary>
     [JsonPropertyName("address_line1_check")]
     public InsightsResourcesPaymentEvaluationRejectedCardAddressLine1Check? AddressLine1Check { get; init; }
 
+    /// <summary>
+    /// If you provide a address postal code, the check result is one of `pass`, `fail`, `unavailable`, or `unchecked`.
+    /// </summary>
     [JsonPropertyName("address_postal_code_check")]
     public InsightsResourcesPaymentEvaluationRejectedCardAddressPostalCodeCheck? AddressPostalCodeCheck { get; init; }
 
+    /// <summary>
+    /// If you provide a CVC, the check results is one of `pass`, `fail`, `unavailable`, or `unchecked`.
+    /// </summary>
     [JsonPropertyName("cvc_check")]
     public InsightsResourcesPaymentEvaluationRejectedCardCvcCheck? CvcCheck { get; init; }
 
@@ -37733,6 +38532,9 @@ public record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardDetailsRe
 
 public record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardDetailsResourceInstallments
 {
+    /// <summary>
+    /// Installment plan selected for the payment.
+    /// </summary>
     [JsonPropertyName("plan")]
     public PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardDetailsResourceInstallmentPlan? Plan { get; init; }
 
@@ -37750,15 +38552,51 @@ public record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardDetailsRe
 
 public record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardDetailsResourceThreeDSecure
 {
+    /// <summary>
+    /// For authenticated transactions: Indicates how the issuing bank authenticated the customer.
+    /// </summary>
     [JsonPropertyName("authentication_flow")]
     public AuthenticationFlow? AuthenticationFlow { get; init; }
 
+    /// <summary>
+    /// The 3D Secure cryptogram, also known as the "authentication value" (AAV, CAVV or AEVV).
+    /// </summary>
+    [JsonPropertyName("cryptogram")]
+    public string? Cryptogram { get; init; }
+
+    /// <summary>
+    /// The Electronic Commerce Indicator (ECI). A protocol-level field indicating what degree of authentication was performed.
+    /// </summary>
+    [JsonPropertyName("electronic_commerce_indicator")]
+    public PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardDetailsResourceThreeDSecureElectronicCommerceIndicator? ElectronicCommerceIndicator { get; init; }
+
+    /// <summary>
+    /// The exemption requested via 3DS and accepted by the issuer at authentication time.
+    /// </summary>
+    [JsonPropertyName("exemption_indicator")]
+    public ExemptionIndicator? ExemptionIndicator { get; init; }
+
+    /// <summary>
+    /// Whether Stripe requested the value of `exemption_indicator` in the transaction. This will depend on the outcome of Stripe's internal risk assessment.
+    /// </summary>
+    [JsonPropertyName("exemption_indicator_applied")]
+    public bool? ExemptionIndicatorApplied { get; init; }
+
+    /// <summary>
+    /// Indicates the outcome of 3D Secure authentication.
+    /// </summary>
     [JsonPropertyName("result")]
     public PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardDetailsResourceThreeDSecureResult? Result { get; init; }
 
+    /// <summary>
+    /// Additional information about why 3D Secure succeeded or failed, based on the `result`.
+    /// </summary>
     [JsonPropertyName("result_reason")]
     public ResultReason? ResultReason { get; init; }
 
+    /// <summary>
+    /// The version of 3D Secure that was used.
+    /// </summary>
     [JsonPropertyName("version")]
     public PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardDetailsResourceThreeDSecureVersion? Version { get; init; }
 
@@ -37836,10 +38674,10 @@ public record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodDetails
     public PaymentMethodDetailsAcssDebit? AcssDebit { get; init; }
 
     [JsonPropertyName("affirm")]
-    public PaymentMethodDetailsAffirm? Affirm { get; init; }
+    public PaymentMethodDetailsPaymentRecordAffirm? Affirm { get; init; }
 
     [JsonPropertyName("afterpay_clearpay")]
-    public PaymentMethodDetailsAfterpayClearpay? AfterpayClearpay { get; init; }
+    public PaymentMethodDetailsPaymentRecordAfterpayClearpay? AfterpayClearpay { get; init; }
 
     [JsonPropertyName("alipay")]
     public PaymentFlowsPrivatePaymentMethodsAlipayDetails? Alipay { get; init; }
@@ -37857,7 +38695,7 @@ public record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodDetails
     public PaymentMethodDetailsBacsDebit? BacsDebit { get; init; }
 
     [JsonPropertyName("bancontact")]
-    public PaymentMethodDetailsBancontact? Bancontact { get; init; }
+    public PaymentMethodDetailsPaymentRecordBancontact? Bancontact { get; init; }
 
     [JsonPropertyName("billie")]
     public PaymentMethodDetailsBillie? Billie { get; init; }
@@ -37872,7 +38710,7 @@ public record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodDetails
     public PaymentMethodDetailsBlik? Blik { get; init; }
 
     [JsonPropertyName("boleto")]
-    public PaymentMethodDetailsBoleto? Boleto { get; init; }
+    public PaymentMethodDetailsPaymentRecordBoleto? Boleto { get; init; }
 
     /// <summary>
     /// Details of the card used for this payment attempt.
@@ -37884,7 +38722,7 @@ public record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodDetails
     public PaymentMethodDetailsCardPresent? CardPresent { get; init; }
 
     [JsonPropertyName("cashapp")]
-    public PaymentMethodDetailsCashapp? Cashapp { get; init; }
+    public PaymentMethodDetailsPaymentRecordCashapp? Cashapp { get; init; }
 
     [JsonPropertyName("crypto")]
     public PaymentMethodDetailsCrypto? Crypto { get; init; }
@@ -37907,19 +38745,19 @@ public record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodDetails
     public PaymentMethodDetailsFpx? Fpx { get; init; }
 
     [JsonPropertyName("giropay")]
-    public PaymentMethodDetailsGiropay? Giropay { get; init; }
+    public PaymentMethodDetailsPaymentRecordGiropay? Giropay { get; init; }
 
     [JsonPropertyName("grabpay")]
     public PaymentMethodDetailsGrabpay? Grabpay { get; init; }
 
     [JsonPropertyName("ideal")]
-    public PaymentMethodDetailsIdeal? Ideal { get; init; }
+    public PaymentMethodDetailsPaymentRecordIdeal? Ideal { get; init; }
 
     [JsonPropertyName("interac_present")]
     public PaymentMethodDetailsInteracPresent? InteracPresent { get; init; }
 
     [JsonPropertyName("kakao_pay")]
-    public PaymentMethodDetailsKakaoPay? KakaoPay { get; init; }
+    public PaymentMethodDetailsPaymentRecordKakaoPay? KakaoPay { get; init; }
 
     [JsonPropertyName("klarna")]
     public PaymentMethodDetailsKlarna? Klarna { get; init; }
@@ -37937,19 +38775,19 @@ public record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodDetails
     public PaymentMethodDetailsPaymentRecordMbWay? MbWay { get; init; }
 
     [JsonPropertyName("mobilepay")]
-    public PaymentMethodDetailsMobilepay? Mobilepay { get; init; }
+    public PaymentMethodDetailsPaymentRecordMobilepay? Mobilepay { get; init; }
 
     [JsonPropertyName("multibanco")]
-    public PaymentMethodDetailsMultibanco? Multibanco { get; init; }
+    public PaymentMethodDetailsPaymentRecordMultibanco? Multibanco { get; init; }
 
     [JsonPropertyName("naver_pay")]
-    public PaymentMethodDetailsNaverPay? NaverPay { get; init; }
+    public PaymentMethodDetailsPaymentRecordNaverPay? NaverPay { get; init; }
 
     [JsonPropertyName("nz_bank_account")]
     public PaymentMethodDetailsNzBankAccount? NzBankAccount { get; init; }
 
     [JsonPropertyName("oxxo")]
-    public PaymentMethodDetailsOxxo? Oxxo { get; init; }
+    public PaymentMethodDetailsPaymentRecordOxxo? Oxxo { get; init; }
 
     [JsonPropertyName("p24")]
     public PaymentMethodDetailsP24? P24 { get; init; }
@@ -37958,7 +38796,7 @@ public record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodDetails
     public PaymentMethodDetailsPayByBank? PayByBank { get; init; }
 
     [JsonPropertyName("payco")]
-    public PaymentMethodDetailsPayco? Payco { get; init; }
+    public PaymentMethodDetailsPaymentRecordPayco? Payco { get; init; }
 
     /// <summary>
     /// ID of the Stripe PaymentMethod used to make this payment.
@@ -37976,7 +38814,7 @@ public record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodDetails
     public PaymentMethodDetailsPayto? Payto { get; init; }
 
     [JsonPropertyName("pix")]
-    public PaymentMethodDetailsPix? Pix { get; init; }
+    public PaymentMethodDetailsPaymentRecordPix? Pix { get; init; }
 
     [JsonPropertyName("promptpay")]
     public PaymentMethodDetailsPaymentRecordPromptpay? Promptpay { get; init; }
@@ -37985,25 +38823,25 @@ public record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodDetails
     public PaymentMethodDetailsRevolutPay? RevolutPay { get; init; }
 
     [JsonPropertyName("samsung_pay")]
-    public PaymentMethodDetailsSamsungPay? SamsungPay { get; init; }
+    public PaymentMethodDetailsPaymentRecordSamsungPay? SamsungPay { get; init; }
 
     [JsonPropertyName("satispay")]
     public PaymentMethodDetailsSatispay? Satispay { get; init; }
 
     [JsonPropertyName("sepa_debit")]
-    public PaymentMethodDetailsSepaDebit? SepaDebit { get; init; }
+    public PaymentMethodDetailsPaymentRecordSepaDebit? SepaDebit { get; init; }
 
     [JsonPropertyName("sofort")]
-    public PaymentMethodDetailsSofort? Sofort { get; init; }
+    public PaymentMethodDetailsPaymentRecordSofort? Sofort { get; init; }
 
     [JsonPropertyName("stripe_account")]
     public PaymentMethodDetailsStripeAccount? StripeAccount { get; init; }
 
     [JsonPropertyName("swish")]
-    public PaymentMethodDetailsSwish? Swish { get; init; }
+    public PaymentMethodDetailsPaymentRecordSwish? Swish { get; init; }
 
     [JsonPropertyName("twint")]
-    public PaymentMethodDetailsTwint? Twint { get; init; }
+    public PaymentMethodDetailsPaymentRecordTwint? Twint { get; init; }
 
     /// <summary>
     /// The type of transaction-specific details of the payment method used in the payment. See [PaymentMethod.type](https://docs.stripe.com/api/payment_methods/object#payment_method_object-type) for the full list of possible types.
@@ -38012,6 +38850,9 @@ public record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodDetails
     /// </summary>
     [JsonPropertyName("type")]
     public required string Type { get; init; }
+
+    [JsonPropertyName("upi")]
+    public PaymentMethodDetailsUpi? Upi { get; init; }
 
     [JsonPropertyName("us_bank_account")]
     public PaymentMethodDetailsPaymentRecordUsBankAccount? UsBankAccount { get; init; }
@@ -38034,6 +38875,40 @@ public record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodKonbiniDetail
     /// </summary>
     [JsonPropertyName("chain")]
     public Chain? Chain { get; init; }
+
+}
+
+public record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodMobilepayDetailsResourceCard
+{
+    /// <summary>
+    /// Brand of the card used in the transaction
+    /// </summary>
+    [JsonPropertyName("brand")]
+    public string? Brand { get; init; }
+
+    /// <summary>
+    /// Two-letter ISO code representing the country of the card
+    /// </summary>
+    [JsonPropertyName("country")]
+    public string? Country { get; init; }
+
+    /// <summary>
+    /// Two digit number representing the card's expiration month
+    /// </summary>
+    [JsonPropertyName("exp_month")]
+    public int? ExpMonth { get; init; }
+
+    /// <summary>
+    /// Two digit number representing the card's expiration year
+    /// </summary>
+    [JsonPropertyName("exp_year")]
+    public int? ExpYear { get; init; }
+
+    /// <summary>
+    /// The last 4 digits of the card
+    /// </summary>
+    [JsonPropertyName("last4")]
+    public string? Last4 { get; init; }
 
 }
 
@@ -38195,7 +39070,7 @@ public record Payout
     public required string Id { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -38764,7 +39639,7 @@ public record Plan
     public required int IntervalCount { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -39371,7 +40246,7 @@ public record Price
     public required string Id { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -39539,7 +40414,7 @@ public record Product
     public required IReadOnlyList<string> Images { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -39632,7 +40507,7 @@ public record ProductFeature
     public required string Id { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -39671,7 +40546,7 @@ public record PromotionCode
     public required bool Active { get; init; }
 
     /// <summary>
-    /// The customer-facing code. Regardless of case, this code must be unique across all active promotion codes for each customer. Valid characters are lower case letters (a-z), upper case letters (A-Z), and digits (0-9).
+    /// The customer-facing code. Regardless of case, this code must be unique across all active promotion codes for each customer. Valid characters are lower case letters (a-z), upper case letters (A-Z), digits (0-9), and dashes (-).
     /// </summary>
     [JsonPropertyName("code")]
     public required string Code { get; init; }
@@ -39707,7 +40582,7 @@ public record PromotionCode
     public required string Id { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -39944,7 +40819,7 @@ public record Quote
     public object? LineItems { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -40301,7 +41176,7 @@ public record RadarEarlyFraudWarning
     public required string Id { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -40356,13 +41231,7 @@ public record RadarPaymentEvaluation
     public required string Id { get; init; }
 
     /// <summary>
-    /// Collection of scores and insights for this payment evaluation.
-    /// </summary>
-    [JsonPropertyName("insights")]
-    public required InsightsResourcesPaymentEvaluationInsights Insights { get; init; }
-
-    /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -40390,6 +41259,18 @@ public record RadarPaymentEvaluation
     /// </summary>
     [JsonPropertyName("payment_details")]
     public InsightsResourcesPaymentEvaluationPaymentDetails? PaymentDetails { get; init; }
+
+    /// <summary>
+    /// Recommended action based on the score of the fraudulent_payment signal. Possible values are `block` and `continue`.
+    /// </summary>
+    [JsonPropertyName("recommended_action")]
+    public required RecommendedAction RecommendedAction { get; init; }
+
+    /// <summary>
+    /// Collection of signals for this payment evaluation.
+    /// </summary>
+    [JsonPropertyName("signals")]
+    public required InsightsResourcesPaymentEvaluationSignals Signals { get; init; }
 
 }
 
@@ -40425,7 +41306,7 @@ public record RadarValueList
     public required string Id { get; init; }
 
     /// <summary>
-    /// The type of items in the value list. One of `card_fingerprint`, `card_bin`, `email`, `ip_address`, `country`, `string`, `case_sensitive_string`, `customer_id`, `sepa_debit_fingerprint`, or `us_bank_account_fingerprint`.
+    /// The type of items in the value list. One of `card_fingerprint`, `card_bin`, `crypto_fingerprint`, `email`, `ip_address`, `country`, `string`, `case_sensitive_string`, `customer_id`, `sepa_debit_fingerprint`, or `us_bank_account_fingerprint`.
     /// </summary>
     [JsonPropertyName("item_type")]
     public required ItemType ItemType { get; init; }
@@ -40437,7 +41318,7 @@ public record RadarValueList
     public required object ListItems { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -40488,7 +41369,7 @@ public record RadarValueListItem
     public required string Id { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -41272,7 +42153,7 @@ public record ReportingReportType
     public required string Id { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -41385,7 +42266,7 @@ public record Review
     public RadarReviewResourceLocation? IpAddressLocation { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -41499,7 +42380,7 @@ public record ScheduledQueryRun
     public required string Id { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -41645,7 +42526,7 @@ public record SetupAttempt
     public required string Id { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -41767,6 +42648,9 @@ public record SetupAttemptPaymentMethodDetails
     /// </summary>
     [JsonPropertyName("type")]
     public required string Type { get; init; }
+
+    [JsonPropertyName("upi")]
+    public SetupAttemptPaymentMethodDetailsUpi? Upi { get; init; }
 
     [JsonPropertyName("us_bank_account")]
     public SetupAttemptPaymentMethodDetailsUsBankAccount? UsBankAccount { get; init; }
@@ -42118,6 +43002,10 @@ public record SetupAttemptPaymentMethodDetailsSofort
 
 }
 
+public record SetupAttemptPaymentMethodDetailsUpi
+{
+}
+
 public record SetupAttemptPaymentMethodDetailsUsBankAccount
 {
 }
@@ -42242,7 +43130,7 @@ public record SetupIntent
     public object? LatestAttempt { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -42337,6 +43225,9 @@ public record SetupIntentNextAction
     [JsonPropertyName("type")]
     public required string Type { get; init; }
 
+    [JsonPropertyName("upi_handle_redirect_or_display_qr_code")]
+    public PaymentIntentNextActionUpiHandleRedirectOrDisplayQrCode? UpiHandleRedirectOrDisplayQrCode { get; init; }
+
     /// <summary>
     /// When confirming a SetupIntent with Stripe.js, Stripe.js depends on the contents of this dictionary to invoke authentication flows. The shape of the contents is subject to change and is only intended to be used by Stripe.js.
     /// </summary>
@@ -42418,6 +43309,9 @@ public record SetupIntentPaymentMethodOptions
     [JsonPropertyName("sepa_debit")]
     public object? SepaDebit { get; init; }
 
+    [JsonPropertyName("upi")]
+    public object? Upi { get; init; }
+
     [JsonPropertyName("us_bank_account")]
     public object? UsBankAccount { get; init; }
 
@@ -42435,7 +43329,7 @@ public record SetupIntentPaymentMethodOptionsAcssDebit
     public SetupIntentPaymentMethodOptionsMandateOptionsAcssDebit? MandateOptions { get; init; }
 
     /// <summary>
-    /// Bank account verification method.
+    /// Bank account verification method. The default value is `automatic`.
     /// </summary>
     [JsonPropertyName("verification_method")]
     public CheckoutAcssDebitPaymentMethodOptionsVerificationMethod? VerificationMethod { get; init; }
@@ -42478,7 +43372,7 @@ public record SetupIntentPaymentMethodOptionsCard
 public record SetupIntentPaymentMethodOptionsCardMandateOptions
 {
     /// <summary>
-    /// Amount to be charged for future payments.
+    /// Amount to be charged for future payments, specified in the presentment currency.
     /// </summary>
     [JsonPropertyName("amount")]
     public required int Amount { get; init; }
@@ -42687,6 +43581,13 @@ public record SetupIntentPaymentMethodOptionsSepaDebit
 
 }
 
+public record SetupIntentPaymentMethodOptionsUpi
+{
+    [JsonPropertyName("mandate_options")]
+    public PaymentMethodOptionsMandateOptionsUpi? MandateOptions { get; init; }
+
+}
+
 public record SetupIntentPaymentMethodOptionsUsBankAccount
 {
     [JsonPropertyName("financial_connections")]
@@ -42696,7 +43597,7 @@ public record SetupIntentPaymentMethodOptionsUsBankAccount
     public PaymentMethodOptionsUsBankAccountMandateOptions? MandateOptions { get; init; }
 
     /// <summary>
-    /// Bank account verification method.
+    /// Bank account verification method. The default value is `automatic`.
     /// </summary>
     [JsonPropertyName("verification_method")]
     public CheckoutAcssDebitPaymentMethodOptionsVerificationMethod? VerificationMethod { get; init; }
@@ -42709,7 +43610,7 @@ public record SetupIntentTypeSpecificPaymentMethodOptionsClient
     public SetupIntentPaymentMethodOptionsMandateOptionsPayto? MandateOptions { get; init; }
 
     /// <summary>
-    /// Bank account verification method.
+    /// Bank account verification method. The default value is `automatic`.
     /// </summary>
     [JsonPropertyName("verification_method")]
     public CheckoutAcssDebitPaymentMethodOptionsVerificationMethod? VerificationMethod { get; init; }
@@ -42787,7 +43688,7 @@ public record ShippingRate
     public required string Id { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -42912,7 +43813,7 @@ public record SigmaSigmaApiQuery
     public required string Id { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -43049,7 +43950,7 @@ public record Source
     public SourceTypeKlarna? Klarna { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -43173,7 +44074,7 @@ public record SourceMandateNotification
     public required string Id { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -43497,7 +44398,7 @@ public record SourceTransaction
     public required string Id { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -44214,6 +45115,50 @@ public record SourceTypeWechat
 
 }
 
+public record StackableDiscountWithDiscountSettings
+{
+    /// <summary>
+    /// ID of the coupon to create a new discount for.
+    /// </summary>
+    [JsonPropertyName("coupon")]
+    public object? Coupon { get; init; }
+
+    /// <summary>
+    /// ID of an existing discount on the object (or one of its ancestors) to reuse.
+    /// </summary>
+    [JsonPropertyName("discount")]
+    public object? Discount { get; init; }
+
+    /// <summary>
+    /// ID of the promotion code to create a new discount for.
+    /// </summary>
+    [JsonPropertyName("promotion_code")]
+    public object? PromotionCode { get; init; }
+
+}
+
+public record StackableDiscountWithDiscountSettingsAndDiscountEnd
+{
+    /// <summary>
+    /// ID of the coupon to create a new discount for.
+    /// </summary>
+    [JsonPropertyName("coupon")]
+    public object? Coupon { get; init; }
+
+    /// <summary>
+    /// ID of an existing discount on the object (or one of its ancestors) to reuse.
+    /// </summary>
+    [JsonPropertyName("discount")]
+    public object? Discount { get; init; }
+
+    /// <summary>
+    /// ID of the promotion code to create a new discount for.
+    /// </summary>
+    [JsonPropertyName("promotion_code")]
+    public object? PromotionCode { get; init; }
+
+}
+
 /// <summary>
 /// Subscriptions allow you to charge a customer on a recurring basis.
 /// 
@@ -44378,7 +45323,7 @@ public record Subscription
     public object? LatestInvoice { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -44420,7 +45365,7 @@ public record Subscription
     public SubscriptionsResourcePaymentSettings? PaymentSettings { get; init; }
 
     /// <summary>
-    /// Specifies an interval for how often to bill for any pending invoice items. It is analogous to calling [Create an invoice](https://docs.stripe.com/api#create_invoice) for the given subscription at the specified interval.
+    /// Specifies an interval for how often to bill for any pending invoice items. It is analogous to calling [Create an invoice](/api/invoices/create) for the given subscription at the specified interval.
     /// </summary>
     [JsonPropertyName("pending_invoice_item_interval")]
     public SubscriptionPendingInvoiceItemInterval? PendingInvoiceItemInterval { get; init; }
@@ -44436,6 +45381,9 @@ public record Subscription
     /// </summary>
     [JsonPropertyName("pending_update")]
     public SubscriptionsResourcePendingUpdate? PendingUpdate { get; init; }
+
+    [JsonPropertyName("presentment_details")]
+    public SubscriptionsResourceSubscriptionPresentmentDetails? PresentmentDetails { get; init; }
 
     /// <summary>
     /// The schedule attached to the subscription
@@ -44487,7 +45435,7 @@ public record Subscription
     /// Settings related to subscription trials.
     /// </summary>
     [JsonPropertyName("trial_settings")]
-    public SubscriptionsTrialsResourceTrialSettings? TrialSettings { get; init; }
+    public SubscriptionsResourceTrialSettingsTrialSettings? TrialSettings { get; init; }
 
     /// <summary>
     /// If the subscription has a trial, the beginning of that trial.
@@ -44736,7 +45684,7 @@ public record SubscriptionSchedule
     public required string Id { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -44800,7 +45748,7 @@ public record SubscriptionScheduleAddInvoiceItem
     /// The stackable discounts that will be applied to the item.
     /// </summary>
     [JsonPropertyName("discounts")]
-    public required IReadOnlyList<DiscountsResourceStackableDiscount> Discounts { get; init; }
+    public required IReadOnlyList<DiscountsResourceStackableDiscountWithDiscountEnd> Discounts { get; init; }
 
     /// <summary>
     /// Set of [key-value pairs](https://docs.stripe.com/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
@@ -44856,7 +45804,7 @@ public record SubscriptionScheduleConfigurationItem
     /// The discounts applied to the subscription item. Subscription item discounts are applied before subscription discounts. Use `expand[]=discounts` to expand each discount.
     /// </summary>
     [JsonPropertyName("discounts")]
-    public required IReadOnlyList<DiscountsResourceStackableDiscount> Discounts { get; init; }
+    public required IReadOnlyList<StackableDiscountWithDiscountSettings> Discounts { get; init; }
 
     /// <summary>
     /// Set of [key-value pairs](https://docs.stripe.com/api/metadata) that you can attach to an item. Metadata on this item will update the underlying subscription item's `metadata` when the phase is entered.
@@ -44966,7 +45914,7 @@ public record SubscriptionSchedulePhaseConfiguration
     /// The stackable discounts that will be applied to the subscription on this phase. Subscription item discounts are applied before subscription discounts.
     /// </summary>
     [JsonPropertyName("discounts")]
-    public required IReadOnlyList<DiscountsResourceStackableDiscount> Discounts { get; init; }
+    public required IReadOnlyList<StackableDiscountWithDiscountSettingsAndDiscountEnd> Discounts { get; init; }
 
     /// <summary>
     /// The end of this phase of the subscription schedule.
@@ -45228,7 +46176,7 @@ public record SubscriptionsResourceBillingModeFlexible
 public record SubscriptionsResourcePauseCollection
 {
     /// <summary>
-    /// The payment collection behavior for this subscription while paused. One of `keep_as_draft`, `mark_uncollectible`, or `void`.
+    /// The payment collection behavior for this subscription while paused.
     /// </summary>
     [JsonPropertyName("behavior")]
     public required Behavior Behavior { get; init; }
@@ -45366,6 +46314,42 @@ public record SubscriptionsResourceSubscriptionInvoiceSettings
 
 }
 
+public record SubscriptionsResourceSubscriptionPresentmentDetails
+{
+    /// <summary>
+    /// Currency used for customer payments.
+    /// </summary>
+    [JsonPropertyName("presentment_currency")]
+    public required string PresentmentCurrency { get; init; }
+
+}
+
+/// <summary>
+/// Defines how a subscription behaves when a trial ends.
+/// </summary>
+public record SubscriptionsResourceTrialSettingsEndBehavior
+{
+    /// <summary>
+    /// Indicates how the subscription should change when the trial ends if the user did not provide a payment method.
+    /// </summary>
+    [JsonPropertyName("missing_payment_method")]
+    public required MissingPaymentMethod MissingPaymentMethod { get; init; }
+
+}
+
+/// <summary>
+/// Configures how this subscription behaves during the trial period.
+/// </summary>
+public record SubscriptionsResourceTrialSettingsTrialSettings
+{
+    /// <summary>
+    /// Defines how a subscription behaves when a trial ends.
+    /// </summary>
+    [JsonPropertyName("end_behavior")]
+    public required SubscriptionsResourceTrialSettingsEndBehavior EndBehavior { get; init; }
+
+}
+
 /// <summary>
 /// Defines how a subscription behaves when a free trial ends.
 /// </summary>
@@ -45437,7 +46421,7 @@ public record TaxAssociation
 public record TaxCalculation
 {
     /// <summary>
-    /// Total amount after taxes in the [smallest currency unit](https://docs.stripe.com/currencies#zero-decimal).
+    /// Total amount after taxes in the [smallest currency unit](https://docs.stripe.com/currencies#minor-units).
     /// </summary>
     [JsonPropertyName("amount_total")]
     public required int AmountTotal { get; init; }
@@ -45476,7 +46460,7 @@ public record TaxCalculation
     public object? LineItems { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -45528,13 +46512,13 @@ public record TaxCalculation
 public record TaxCalculationLineItem
 {
     /// <summary>
-    /// The line item amount in the [smallest currency unit](https://docs.stripe.com/currencies#zero-decimal). If `tax_behavior=inclusive`, then this amount includes taxes. Otherwise, taxes were calculated on top of this amount.
+    /// The line item amount in the [smallest currency unit](https://docs.stripe.com/currencies#minor-units). If `tax_behavior=inclusive`, then this amount includes taxes. Otherwise, taxes were calculated on top of this amount.
     /// </summary>
     [JsonPropertyName("amount")]
     public required int Amount { get; init; }
 
     /// <summary>
-    /// The amount of tax calculated for this line item, in the [smallest currency unit](https://docs.stripe.com/currencies#zero-decimal).
+    /// The amount of tax calculated for this line item, in the [smallest currency unit](https://docs.stripe.com/currencies#minor-units).
     /// </summary>
     [JsonPropertyName("amount_tax")]
     public required int AmountTax { get; init; }
@@ -45546,7 +46530,7 @@ public record TaxCalculationLineItem
     public required string Id { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -45644,7 +46628,7 @@ public record TaxRegistration
     public required string Id { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -45680,7 +46664,7 @@ public record TaxSettings
     public TaxProductResourceTaxSettingsHeadOffice? HeadOffice { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -45743,7 +46727,7 @@ public record TaxTransaction
     public object? LineItems { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -45807,13 +46791,13 @@ public record TaxTransaction
 public record TaxTransactionLineItem
 {
     /// <summary>
-    /// The line item amount in the [smallest currency unit](https://docs.stripe.com/currencies#zero-decimal). If `tax_behavior=inclusive`, then this amount includes taxes. Otherwise, taxes were calculated on top of this amount.
+    /// The line item amount in the [smallest currency unit](https://docs.stripe.com/currencies#minor-units). If `tax_behavior=inclusive`, then this amount includes taxes. Otherwise, taxes were calculated on top of this amount.
     /// </summary>
     [JsonPropertyName("amount")]
     public required int Amount { get; init; }
 
     /// <summary>
-    /// The amount of tax calculated for this line item, in the [smallest currency unit](https://docs.stripe.com/currencies#zero-decimal).
+    /// The amount of tax calculated for this line item, in the [smallest currency unit](https://docs.stripe.com/currencies#minor-units).
     /// </summary>
     [JsonPropertyName("amount_tax")]
     public required int AmountTax { get; init; }
@@ -45825,7 +46809,7 @@ public record TaxTransactionLineItem
     public required string Id { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -46024,7 +47008,7 @@ public record TaxId
     public required string Id { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -46042,7 +47026,7 @@ public record TaxId
     public TaxIDsOwner? Owner { get; init; }
 
     /// <summary>
-    /// Type of the tax ID, one of `ad_nrt`, `ae_trn`, `al_tin`, `am_tin`, `ao_tin`, `ar_cuit`, `au_abn`, `au_arn`, `aw_tin`, `az_tin`, `ba_tin`, `bb_tin`, `bd_bin`, `bf_ifu`, `bg_uic`, `bh_vat`, `bj_ifu`, `bo_tin`, `br_cnpj`, `br_cpf`, `bs_tin`, `by_tin`, `ca_bn`, `ca_gst_hst`, `ca_pst_bc`, `ca_pst_mb`, `ca_pst_sk`, `ca_qst`, `cd_nif`, `ch_uid`, `ch_vat`, `cl_tin`, `cm_niu`, `cn_tin`, `co_nit`, `cr_tin`, `cv_nif`, `de_stn`, `do_rcn`, `ec_ruc`, `eg_tin`, `es_cif`, `et_tin`, `eu_oss_vat`, `eu_vat`, `gb_vat`, `ge_vat`, `gn_nif`, `hk_br`, `hr_oib`, `hu_tin`, `id_npwp`, `il_vat`, `in_gst`, `is_vat`, `jp_cn`, `jp_rn`, `jp_trn`, `ke_pin`, `kg_tin`, `kh_tin`, `kr_brn`, `kz_bin`, `la_tin`, `li_uid`, `li_vat`, `ma_vat`, `md_vat`, `me_pib`, `mk_vat`, `mr_nif`, `mx_rfc`, `my_frp`, `my_itn`, `my_sst`, `ng_tin`, `no_vat`, `no_voec`, `np_pan`, `nz_gst`, `om_vat`, `pe_ruc`, `ph_tin`, `pl_nip`, `ro_tin`, `rs_pib`, `ru_inn`, `ru_kpp`, `sa_vat`, `sg_gst`, `sg_uen`, `si_tin`, `sn_ninea`, `sr_fin`, `sv_nit`, `th_vat`, `tj_tin`, `tr_tin`, `tw_vat`, `tz_vat`, `ua_vat`, `ug_tin`, `us_ein`, `uy_ruc`, `uz_tin`, `uz_vat`, `ve_rif`, `vn_tin`, `za_vat`, `zm_tin`, or `zw_tin`. Note that some legacy tax IDs have type `unknown`
+    /// Type of the tax ID, one of `ad_nrt`, `ae_trn`, `al_tin`, `am_tin`, `ao_tin`, `ar_cuit`, `au_abn`, `au_arn`, `aw_tin`, `az_tin`, `ba_tin`, `bb_tin`, `bd_bin`, `bf_ifu`, `bg_uic`, `bh_vat`, `bj_ifu`, `bo_tin`, `br_cnpj`, `br_cpf`, `bs_tin`, `by_tin`, `ca_bn`, `ca_gst_hst`, `ca_pst_bc`, `ca_pst_mb`, `ca_pst_sk`, `ca_qst`, `cd_nif`, `ch_uid`, `ch_vat`, `cl_tin`, `cm_niu`, `cn_tin`, `co_nit`, `cr_tin`, `cv_nif`, `de_stn`, `do_rcn`, `ec_ruc`, `eg_tin`, `es_cif`, `et_tin`, `eu_oss_vat`, `eu_vat`, `gb_vat`, `ge_vat`, `gn_nif`, `hk_br`, `hr_oib`, `hu_tin`, `id_npwp`, `il_vat`, `in_gst`, `is_vat`, `jp_cn`, `jp_rn`, `jp_trn`, `ke_pin`, `kg_tin`, `kh_tin`, `kr_brn`, `kz_bin`, `la_tin`, `li_uid`, `li_vat`, `lk_vat`, `ma_vat`, `md_vat`, `me_pib`, `mk_vat`, `mr_nif`, `mx_rfc`, `my_frp`, `my_itn`, `my_sst`, `ng_tin`, `no_vat`, `no_voec`, `np_pan`, `nz_gst`, `om_vat`, `pe_ruc`, `ph_tin`, `pl_nip`, `ro_tin`, `rs_pib`, `ru_inn`, `ru_kpp`, `sa_vat`, `sg_gst`, `sg_uen`, `si_tin`, `sn_ninea`, `sr_fin`, `sv_nit`, `th_vat`, `tj_tin`, `tr_tin`, `tw_vat`, `tz_vat`, `ua_vat`, `ug_tin`, `us_ein`, `uy_ruc`, `uz_tin`, `uz_vat`, `ve_rif`, `vn_tin`, `za_vat`, `zm_tin`, or `zw_tin`. Note that some legacy tax IDs have type `unknown`
     /// </summary>
     [JsonPropertyName("type")]
     public required InvoicesResourceInvoiceTaxIdType Type { get; init; }
@@ -46249,6 +47233,9 @@ public record TaxProductRegistrationsResourceCountryOptions
 
     [JsonPropertyName("la")]
     public TaxProductRegistrationsResourceCountryOptionsSimplified? La { get; init; }
+
+    [JsonPropertyName("lk")]
+    public TaxProductRegistrationsResourceCountryOptionsSimplified? Lk { get; init; }
 
     [JsonPropertyName("lt")]
     public TaxProductRegistrationsResourceCountryOptionsEurope? Lt { get; init; }
@@ -46594,7 +47581,7 @@ public record TaxProductResourceCustomerDetails
 public record TaxProductResourceCustomerDetailsResourceTaxId
 {
     /// <summary>
-    /// The type of the tax ID, one of `ad_nrt`, `ar_cuit`, `eu_vat`, `bo_tin`, `br_cnpj`, `br_cpf`, `cn_tin`, `co_nit`, `cr_tin`, `do_rcn`, `ec_ruc`, `eu_oss_vat`, `hr_oib`, `pe_ruc`, `ro_tin`, `rs_pib`, `sv_nit`, `uy_ruc`, `ve_rif`, `vn_tin`, `gb_vat`, `nz_gst`, `au_abn`, `au_arn`, `in_gst`, `no_vat`, `no_voec`, `za_vat`, `ch_vat`, `mx_rfc`, `sg_uen`, `ru_inn`, `ru_kpp`, `ca_bn`, `hk_br`, `es_cif`, `pl_nip`, `tw_vat`, `th_vat`, `jp_cn`, `jp_rn`, `jp_trn`, `li_uid`, `li_vat`, `my_itn`, `us_ein`, `kr_brn`, `ca_qst`, `ca_gst_hst`, `ca_pst_bc`, `ca_pst_mb`, `ca_pst_sk`, `my_sst`, `sg_gst`, `ae_trn`, `cl_tin`, `sa_vat`, `id_npwp`, `my_frp`, `il_vat`, `ge_vat`, `ua_vat`, `is_vat`, `bg_uic`, `hu_tin`, `si_tin`, `ke_pin`, `tr_tin`, `eg_tin`, `ph_tin`, `al_tin`, `bh_vat`, `kz_bin`, `ng_tin`, `om_vat`, `de_stn`, `ch_uid`, `tz_vat`, `uz_vat`, `uz_tin`, `md_vat`, `ma_vat`, `by_tin`, `ao_tin`, `bs_tin`, `bb_tin`, `cd_nif`, `mr_nif`, `me_pib`, `zw_tin`, `ba_tin`, `gn_nif`, `mk_vat`, `sr_fin`, `sn_ninea`, `am_tin`, `np_pan`, `tj_tin`, `ug_tin`, `zm_tin`, `kh_tin`, `aw_tin`, `az_tin`, `bd_bin`, `bj_ifu`, `et_tin`, `kg_tin`, `la_tin`, `cm_niu`, `cv_nif`, `bf_ifu`, or `unknown`
+    /// The type of the tax ID, one of `ad_nrt`, `ar_cuit`, `eu_vat`, `bo_tin`, `br_cnpj`, `br_cpf`, `cn_tin`, `co_nit`, `cr_tin`, `do_rcn`, `ec_ruc`, `eu_oss_vat`, `hr_oib`, `pe_ruc`, `ro_tin`, `rs_pib`, `sv_nit`, `uy_ruc`, `ve_rif`, `vn_tin`, `gb_vat`, `nz_gst`, `au_abn`, `au_arn`, `in_gst`, `no_vat`, `no_voec`, `za_vat`, `ch_vat`, `mx_rfc`, `sg_uen`, `ru_inn`, `ru_kpp`, `ca_bn`, `hk_br`, `es_cif`, `pl_nip`, `tw_vat`, `th_vat`, `jp_cn`, `jp_rn`, `jp_trn`, `li_uid`, `li_vat`, `lk_vat`, `my_itn`, `us_ein`, `kr_brn`, `ca_qst`, `ca_gst_hst`, `ca_pst_bc`, `ca_pst_mb`, `ca_pst_sk`, `my_sst`, `sg_gst`, `ae_trn`, `cl_tin`, `sa_vat`, `id_npwp`, `my_frp`, `il_vat`, `ge_vat`, `ua_vat`, `is_vat`, `bg_uic`, `hu_tin`, `si_tin`, `ke_pin`, `tr_tin`, `eg_tin`, `ph_tin`, `al_tin`, `bh_vat`, `kz_bin`, `ng_tin`, `om_vat`, `de_stn`, `ch_uid`, `tz_vat`, `uz_vat`, `uz_tin`, `md_vat`, `ma_vat`, `by_tin`, `ao_tin`, `bs_tin`, `bb_tin`, `cd_nif`, `mr_nif`, `me_pib`, `zw_tin`, `ba_tin`, `gn_nif`, `mk_vat`, `sr_fin`, `sn_ninea`, `am_tin`, `np_pan`, `tj_tin`, `ug_tin`, `zm_tin`, `kh_tin`, `aw_tin`, `az_tin`, `bd_bin`, `bj_ifu`, `et_tin`, `kg_tin`, `la_tin`, `cm_niu`, `cv_nif`, `bf_ifu`, or `unknown`
     /// </summary>
     [JsonPropertyName("type")]
     public required InvoicesResourceInvoiceTaxIdType Type { get; init; }
@@ -46638,7 +47625,7 @@ public record TaxProductResourceJurisdiction
 public record TaxProductResourceLineItemTaxBreakdown
 {
     /// <summary>
-    /// The amount of tax, in the [smallest currency unit](https://docs.stripe.com/currencies#zero-decimal).
+    /// The amount of tax, in the [smallest currency unit](https://docs.stripe.com/currencies#minor-units).
     /// </summary>
     [JsonPropertyName("amount")]
     public required int Amount { get; init; }
@@ -46665,7 +47652,7 @@ public record TaxProductResourceLineItemTaxBreakdown
     public required LineItemsTaxAmountTaxabilityReason TaxabilityReason { get; init; }
 
     /// <summary>
-    /// The amount on which tax is calculated, in the [smallest currency unit](https://docs.stripe.com/currencies#zero-decimal).
+    /// The amount on which tax is calculated, in the [smallest currency unit](https://docs.stripe.com/currencies#minor-units).
     /// </summary>
     [JsonPropertyName("taxable_amount")]
     public required int TaxableAmount { get; init; }
@@ -46786,7 +47773,7 @@ public record TaxProductResourceTaxAssociationTransactionAttemptsResourceErrored
 public record TaxProductResourceTaxBreakdown
 {
     /// <summary>
-    /// The amount of tax, in the [smallest currency unit](https://docs.stripe.com/currencies#zero-decimal).
+    /// The amount of tax, in the [smallest currency unit](https://docs.stripe.com/currencies#minor-units).
     /// </summary>
     [JsonPropertyName("amount")]
     public required int Amount { get; init; }
@@ -46807,7 +47794,7 @@ public record TaxProductResourceTaxBreakdown
     public required LineItemsTaxAmountTaxabilityReason TaxabilityReason { get; init; }
 
     /// <summary>
-    /// The amount on which tax is calculated, in the [smallest currency unit](https://docs.stripe.com/currencies#zero-decimal).
+    /// The amount on which tax is calculated, in the [smallest currency unit](https://docs.stripe.com/currencies#minor-units).
     /// </summary>
     [JsonPropertyName("taxable_amount")]
     public required int TaxableAmount { get; init; }
@@ -46817,13 +47804,13 @@ public record TaxProductResourceTaxBreakdown
 public record TaxProductResourceTaxCalculationShippingCost
 {
     /// <summary>
-    /// The shipping amount in the [smallest currency unit](https://docs.stripe.com/currencies#zero-decimal). If `tax_behavior=inclusive`, then this amount includes taxes. Otherwise, taxes were calculated on top of this amount.
+    /// The shipping amount in the [smallest currency unit](https://docs.stripe.com/currencies#minor-units). If `tax_behavior=inclusive`, then this amount includes taxes. Otherwise, taxes were calculated on top of this amount.
     /// </summary>
     [JsonPropertyName("amount")]
     public required int Amount { get; init; }
 
     /// <summary>
-    /// The amount of tax calculated for shipping, in the [smallest currency unit](https://docs.stripe.com/currencies#zero-decimal).
+    /// The amount of tax calculated for shipping, in the [smallest currency unit](https://docs.stripe.com/currencies#minor-units).
     /// </summary>
     [JsonPropertyName("amount_tax")]
     public required int AmountTax { get; init; }
@@ -46970,13 +47957,13 @@ public record TaxProductResourceTaxTransactionResourceReversal
 public record TaxProductResourceTaxTransactionShippingCost
 {
     /// <summary>
-    /// The shipping amount in the [smallest currency unit](https://docs.stripe.com/currencies#zero-decimal). If `tax_behavior=inclusive`, then this amount includes taxes. Otherwise, taxes were calculated on top of this amount.
+    /// The shipping amount in the [smallest currency unit](https://docs.stripe.com/currencies#minor-units). If `tax_behavior=inclusive`, then this amount includes taxes. Otherwise, taxes were calculated on top of this amount.
     /// </summary>
     [JsonPropertyName("amount")]
     public required int Amount { get; init; }
 
     /// <summary>
-    /// The amount of tax calculated for shipping, in the [smallest currency unit](https://docs.stripe.com/currencies#zero-decimal).
+    /// The amount of tax calculated for shipping, in the [smallest currency unit](https://docs.stripe.com/currencies#minor-units).
     /// </summary>
     [JsonPropertyName("amount_tax")]
     public required int AmountTax { get; init; }
@@ -47077,7 +48064,7 @@ public record TaxRate
     public JurisdictionLevel? JurisdictionLevel { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -47151,6 +48138,9 @@ public record TerminalConfiguration
     [JsonPropertyName("bbpos_wisepos_e")]
     public TerminalConfigurationConfigurationResourceDeviceTypeSpecificConfig? BbposWiseposE { get; init; }
 
+    [JsonPropertyName("cellular")]
+    public TerminalConfigurationConfigurationResourceCellularConfig? Cellular { get; init; }
+
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
@@ -47164,7 +48154,7 @@ public record TerminalConfiguration
     public bool? IsAccountDefault { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -47189,6 +48179,9 @@ public record TerminalConfiguration
 
     [JsonPropertyName("stripe_s700")]
     public TerminalConfigurationConfigurationResourceDeviceTypeSpecificConfig? StripeS700 { get; init; }
+
+    [JsonPropertyName("stripe_s710")]
+    public TerminalConfigurationConfigurationResourceDeviceTypeSpecificConfig? StripeS710 { get; init; }
 
     [JsonPropertyName("tipping")]
     public TerminalConfigurationConfigurationResourceTipping? Tipping { get; init; }
@@ -47275,7 +48268,7 @@ public record TerminalLocation
     public required string Id { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -47384,7 +48377,7 @@ public record TerminalReader
     public int? LastSeenAt { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -47418,6 +48411,23 @@ public record TerminalReader
     /// </summary>
     [JsonPropertyName("status")]
     public TerminalReaderStatus? Status { get; init; }
+
+}
+
+/// <summary>
+/// A Refund object returned by the Terminal refunds API.
+/// </summary>
+public record TerminalRefund
+{
+}
+
+public record TerminalConfigurationConfigurationResourceCellularConfig
+{
+    /// <summary>
+    /// Whether a cellular-capable reader can connect to the internet over cellular.
+    /// </summary>
+    [JsonPropertyName("enabled")]
+    public required bool Enabled { get; init; }
 
 }
 
@@ -48385,7 +49395,7 @@ public record TestHelpersTestClock
     public required string Id { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -48427,7 +49437,7 @@ public record ThreeDSecureDetails
     /// indicating what degree of authentication was performed.
     /// </summary>
     [JsonPropertyName("electronic_commerce_indicator")]
-    public ElectronicCommerceIndicator? ElectronicCommerceIndicator { get; init; }
+    public ThreeDSecureDetailsElectronicCommerceIndicator? ElectronicCommerceIndicator { get; init; }
 
     /// <summary>
     /// Indicates the outcome of 3D Secure authentication.
@@ -48471,7 +49481,7 @@ public record ThreeDSecureDetailsCharge
     /// indicating what degree of authentication was performed.
     /// </summary>
     [JsonPropertyName("electronic_commerce_indicator")]
-    public ElectronicCommerceIndicator? ElectronicCommerceIndicator { get; init; }
+    public ThreeDSecureDetailsElectronicCommerceIndicator? ElectronicCommerceIndicator { get; init; }
 
     /// <summary>
     /// The exemption requested via 3DS and accepted by the issuer at authentication time.
@@ -48633,7 +49643,7 @@ public record Token
     public required string Id { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -48714,7 +49724,7 @@ public record Topup
     public int? ExpectedAvailabilityDate { get; init; }
 
     /// <summary>
-    /// Error code explaining reason for top-up failure if available (see [the errors section](https://docs.stripe.com/api#errors) for a list of codes).
+    /// Error code explaining reason for top-up failure if available (see [the errors section](/api/errors) for a list of codes).
     /// </summary>
     [JsonPropertyName("failure_code")]
     public string? FailureCode { get; init; }
@@ -48732,7 +49742,7 @@ public record Topup
     public required string Id { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -48844,7 +49854,7 @@ public record Transfer
     public required string Id { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -49104,7 +50114,7 @@ public record TreasuryCreditReversal
     public required string Id { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -49198,7 +50208,7 @@ public record TreasuryDebitReversal
     public TreasuryReceivedDebitsResourceDebitReversalLinkedFlows? LinkedFlows { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -49297,7 +50307,7 @@ public record TreasuryFinancialAccount
     public bool? IsDefault { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -49476,7 +50486,7 @@ public record TreasuryInboundTransfer
     public required TreasuryInboundTransfersResourceInboundTransferResourceLinkedFlows LinkedFlows { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -49622,7 +50632,7 @@ public record TreasuryOutboundPayment
     public required string Id { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -49747,7 +50757,7 @@ public record TreasuryOutboundTransfer
     public required string Id { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -49859,7 +50869,7 @@ public record TreasuryReceivedCredit
     public required TreasuryReceivedCreditsResourceLinkedFlows LinkedFlows { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -49956,7 +50966,7 @@ public record TreasuryReceivedDebit
     public required TreasuryReceivedDebitsResourceLinkedFlows LinkedFlows { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -50065,7 +51075,7 @@ public record TreasuryTransaction
     public required string Id { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -50147,7 +51157,7 @@ public record TreasuryTransactionEntry
     public required string Id { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
@@ -51179,7 +52189,7 @@ public record WebhookEndpoint
     public required string Id { get; init; }
 
     /// <summary>
-    /// Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }

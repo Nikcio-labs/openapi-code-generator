@@ -831,6 +831,18 @@ public enum OrganizationCopilotSeatManagement
 }
 
 /// <summary>
+/// The level of permission to grant the access token to view and manage Copilot coding agent settings for an organization.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum OrganizationCopilotAgentSettings
+{
+    [JsonStringEnumMemberName("read")]
+    Read,
+    [JsonStringEnumMemberName("write")]
+    Write
+}
+
+/// <summary>
 /// The level of permission to grant the access token to view and manage announcement banners for an organization.
 /// </summary>
 [JsonConverter(typeof(JsonStringEnumConverter))]
@@ -1161,6 +1173,18 @@ public enum MergeCommitMessage
 }
 
 /// <summary>
+/// Whether the inclusion was defined at the organization or enterprise level
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum InclusionSource
+{
+    [JsonStringEnumMemberName("organization")]
+    Organization,
+    [JsonStringEnumMemberName("enterprise")]
+    Enterprise
+}
+
+/// <summary>
 /// The type of the code security configuration.
 /// </summary>
 [JsonConverter(typeof(JsonStringEnumConverter))]
@@ -1377,6 +1401,20 @@ public enum SecretScanningGenericSecrets
 /// </summary>
 [JsonConverter(typeof(JsonStringEnumConverter))]
 public enum SecretScanningDelegatedAlertDismissal
+{
+    [JsonStringEnumMemberName("enabled")]
+    Enabled,
+    [JsonStringEnumMemberName("disabled")]
+    Disabled,
+    [JsonStringEnumMemberName("not_set")]
+    NotSet
+}
+
+/// <summary>
+/// The enablement status of secret scanning extended metadata
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum SecretScanningExtendedMetadata
 {
     [JsonStringEnumMemberName("enabled")]
     Enabled,
@@ -2212,6 +2250,22 @@ public enum IssueFieldValueDataType
 }
 
 /// <summary>
+/// The data type of the issue field.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum IssueFieldDataType
+{
+    [JsonStringEnumMemberName("text")]
+    Text,
+    [JsonStringEnumMemberName("date")]
+    Date,
+    [JsonStringEnumMemberName("single_select")]
+    SingleSelect,
+    [JsonStringEnumMemberName("number")]
+    Number
+}
+
+/// <summary>
 /// The field's data type.
 /// </summary>
 [JsonConverter(typeof(JsonStringEnumConverter))]
@@ -2270,30 +2324,6 @@ public enum DefaultLevel
     Public,
     [JsonStringEnumMemberName("internal")]
     Internal
-}
-
-/// <summary>
-/// The type of pricing for the budget
-/// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum BudgetBudgetType
-{
-    [JsonStringEnumMemberName("SkuPricing")]
-    SkuPricing,
-    [JsonStringEnumMemberName("ProductPricing")]
-    ProductPricing
-}
-
-/// <summary>
-/// The type of pricing for the budget
-/// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum GetBudgetBudgetType
-{
-    [JsonStringEnumMemberName("ProductPricing")]
-    ProductPricing,
-    [JsonStringEnumMemberName("SkuPricing")]
-    SkuPricing
 }
 
 /// <summary>
@@ -2459,6 +2489,18 @@ public enum PackageVisibility
     Private,
     [JsonStringEnumMemberName("public")]
     Public
+}
+
+/// <summary>
+/// The visibility of the issue field. Can be `organization_members_only` (visible only within the organization) or `all` (visible to all users who can see issues).
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum IssueFieldVisibility
+{
+    [JsonStringEnumMemberName("organization_members_only")]
+    OrganizationMembersOnly,
+    [JsonStringEnumMemberName("all")]
+    All
 }
 
 /// <summary>
@@ -2751,6 +2793,24 @@ public enum RegistryType
 }
 
 /// <summary>
+/// The authentication type for the private registry.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum AuthType
+{
+    [JsonStringEnumMemberName("token")]
+    Token,
+    [JsonStringEnumMemberName("username_password")]
+    UsernamePassword,
+    [JsonStringEnumMemberName("oidc_azure")]
+    OidcAzure,
+    [JsonStringEnumMemberName("oidc_aws")]
+    OidcAws,
+    [JsonStringEnumMemberName("oidc_jfrog")]
+    OidcJfrog
+}
+
+/// <summary>
 /// The merge method to use.
 /// </summary>
 [JsonConverter(typeof(JsonStringEnumConverter))]
@@ -2912,20 +2972,6 @@ public enum SecurityAlertsThreshold
     MediumOrHigher,
     [JsonStringEnumMemberName("all")]
     All
-}
-
-/// <summary>
-/// The name of a code review analysis tool
-/// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum Name
-{
-    [JsonStringEnumMemberName("CodeQL")]
-    CodeQl,
-    [JsonStringEnumMemberName("ESLint")]
-    ESLint,
-    [JsonStringEnumMemberName("PMD")]
-    Pmd
 }
 
 /// <summary>
@@ -5633,6 +5679,12 @@ public record AppPermissions
     public OrganizationCopilotSeatManagement? OrganizationCopilotSeatManagement { get; init; }
 
     /// <summary>
+    /// The level of permission to grant the access token to view and manage Copilot coding agent settings for an organization.
+    /// </summary>
+    [JsonPropertyName("organization_copilot_agent_settings")]
+    public OrganizationCopilotAgentSettings? OrganizationCopilotAgentSettings { get; init; }
+
+    /// <summary>
     /// The level of permission to grant the access token to view and manage announcement banners for an organization.
     /// </summary>
     [JsonPropertyName("organization_announcement_banners")]
@@ -7036,6 +7088,38 @@ public record ActionsCacheStorageLimitForEnterprise
 }
 
 /// <summary>
+/// An OIDC custom property inclusion for repository properties
+/// </summary>
+public record OidcCustomPropertyInclusion
+{
+    /// <summary>
+    /// The name of the custom property that is included in the OIDC token
+    /// </summary>
+    [JsonPropertyName("custom_property_name")]
+    public required string CustomPropertyName { get; init; }
+
+    /// <summary>
+    /// Whether the inclusion was defined at the organization or enterprise level
+    /// </summary>
+    [JsonPropertyName("inclusion_source")]
+    public required InclusionSource InclusionSource { get; init; }
+
+}
+
+/// <summary>
+/// Input for creating an OIDC custom property inclusion
+/// </summary>
+public record OidcCustomPropertyInclusionInput
+{
+    /// <summary>
+    /// The name of the custom property to include in the OIDC token
+    /// </summary>
+    [JsonPropertyName("custom_property_name")]
+    public required string CustomPropertyName { get; init; }
+
+}
+
+/// <summary>
 /// A code security configuration
 /// </summary>
 public record CodeSecurityConfiguration
@@ -7177,6 +7261,12 @@ public record CodeSecurityConfiguration
     /// </summary>
     [JsonPropertyName("secret_scanning_delegated_alert_dismissal")]
     public SecretScanningDelegatedAlertDismissal? SecretScanningDelegatedAlertDismissal { get; init; }
+
+    /// <summary>
+    /// The enablement status of secret scanning extended metadata
+    /// </summary>
+    [JsonPropertyName("secret_scanning_extended_metadata")]
+    public SecretScanningExtendedMetadata? SecretScanningExtendedMetadata { get; init; }
 
     /// <summary>
     /// The enablement status of private vulnerability reporting
@@ -7546,6 +7636,50 @@ public record CodeSecurityConfigurationRepositories
     /// </summary>
     [JsonPropertyName("repository")]
     public SimpleRepository? Repository { get; init; }
+
+}
+
+/// <summary>
+/// Links to download the Copilot usage metrics report for an enterprise/organization for a specific day.
+/// </summary>
+public record CopilotUsageMetrics1DayReport
+{
+    /// <summary>
+    /// The URLs to download the Copilot usage metrics report for the enterprise/organization for the specified day.
+    /// </summary>
+    [JsonPropertyName("download_links")]
+    public required IReadOnlyList<Uri> DownloadLinks { get; init; }
+
+    /// <summary>
+    /// The day of the report in `YYYY-MM-DD` format.
+    /// </summary>
+    [JsonPropertyName("report_day")]
+    public required DateOnly ReportDay { get; init; }
+
+}
+
+/// <summary>
+/// Links to download the latest Copilot usage metrics report for an enterprise/organization.
+/// </summary>
+public record CopilotUsageMetrics28DayReport
+{
+    /// <summary>
+    /// The URLs to download the latest Copilot usage metrics report for the enterprise/organization.
+    /// </summary>
+    [JsonPropertyName("download_links")]
+    public required IReadOnlyList<Uri> DownloadLinks { get; init; }
+
+    /// <summary>
+    /// The start date of the report period in `YYYY-MM-DD` format.
+    /// </summary>
+    [JsonPropertyName("report_start_day")]
+    public required DateOnly ReportStartDay { get; init; }
+
+    /// <summary>
+    /// The end date of the report period in `YYYY-MM-DD` format.
+    /// </summary>
+    [JsonPropertyName("report_end_day")]
+    public required DateOnly ReportEndDay { get; init; }
 
 }
 
@@ -10416,7 +10550,7 @@ public record Budget
     /// The type of pricing for the budget
     /// </summary>
     [JsonPropertyName("budget_type")]
-    public required BudgetBudgetType BudgetType { get; init; }
+    public required object BudgetType { get; init; }
 
     /// <summary>
     /// The budget amount limit in whole dollars. For license-based products, this represents the number of licenses.
@@ -10517,7 +10651,7 @@ public record GetBudget
     /// The type of pricing for the budget
     /// </summary>
     [JsonPropertyName("budget_type")]
-    public required GetBudgetBudgetType BudgetType { get; init; }
+    public required object BudgetType { get; init; }
 
     [JsonPropertyName("budget_alerting")]
     public required object BudgetAlerting { get; init; }
@@ -13041,6 +13175,11 @@ public record CopilotSeatDetails
 }
 
 /// <summary>
+/// List all Copilot Content Exclusion rules for an organization.
+/// </summary>
+public record CopilotOrganizationContentExclusionDetails;
+
+/// <summary>
 /// Usage metrics for Copilot editor code completions in the IDE.
 /// </summary>
 public record CopilotIdeCodeCompletions
@@ -13754,6 +13893,129 @@ public record InteractionLimit
 
 }
 
+/// <summary>
+/// A custom attribute defined at the organization level for attaching structured data to issues.
+/// </summary>
+public record IssueField
+{
+    /// <summary>
+    /// The unique identifier of the issue field.
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    /// <summary>
+    /// The node identifier of the issue field.
+    /// </summary>
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    /// <summary>
+    /// The name of the issue field.
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    /// <summary>
+    /// The description of the issue field.
+    /// </summary>
+    [JsonPropertyName("description")]
+    public string? Description { get; init; }
+
+    /// <summary>
+    /// The data type of the issue field.
+    /// </summary>
+    [JsonPropertyName("data_type")]
+    public required IssueFieldDataType DataType { get; init; }
+
+    /// <summary>
+    /// The visibility of the issue field. Can be `organization_members_only` (visible only within the organization) or `all` (visible to all users who can see issues).
+    /// </summary>
+    [JsonPropertyName("visibility")]
+    public IssueFieldVisibility? Visibility { get; init; }
+
+    /// <summary>
+    /// Available options for single select fields.
+    /// </summary>
+    [JsonPropertyName("options")]
+    public IReadOnlyList<object>? Options { get; init; }
+
+    /// <summary>
+    /// The time the issue field was created.
+    /// </summary>
+    [JsonPropertyName("created_at")]
+    public DateTimeOffset? CreatedAt { get; init; }
+
+    /// <summary>
+    /// The time the issue field was last updated.
+    /// </summary>
+    [JsonPropertyName("updated_at")]
+    public DateTimeOffset? UpdatedAt { get; init; }
+
+}
+
+public record OrganizationCreateIssueField
+{
+    /// <summary>
+    /// Name of the issue field.
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    /// <summary>
+    /// Description of the issue field.
+    /// </summary>
+    [JsonPropertyName("description")]
+    public string? Description { get; init; }
+
+    /// <summary>
+    /// The data type of the issue field.
+    /// </summary>
+    [JsonPropertyName("data_type")]
+    public required IssueFieldDataType DataType { get; init; }
+
+    /// <summary>
+    /// The visibility of the issue field. Can be `organization_members_only` (visible only within the organization) or `all` (visible to all users who can see issues). Only used when the visibility settings feature is enabled. Defaults to `organization_members_only`.
+    /// </summary>
+    [JsonPropertyName("visibility")]
+    public IssueFieldVisibility? Visibility { get; init; }
+
+    /// <summary>
+    /// Options for single select fields. Required when data_type is 'single_select'.
+    /// </summary>
+    [JsonPropertyName("options")]
+    public IReadOnlyList<object>? Options { get; init; }
+
+}
+
+public record OrganizationUpdateIssueField
+{
+    /// <summary>
+    /// Name of the issue field.
+    /// </summary>
+    [JsonPropertyName("name")]
+    public string? Name { get; init; }
+
+    /// <summary>
+    /// Description of the issue field.
+    /// </summary>
+    [JsonPropertyName("description")]
+    public string? Description { get; init; }
+
+    /// <summary>
+    /// The visibility of the issue field. Can be `organization_members_only` (visible only within the organization) or `all` (visible to all users who can see issues). Only used when the visibility settings feature is enabled.
+    /// </summary>
+    [JsonPropertyName("visibility")]
+    public IssueFieldVisibility? Visibility { get; init; }
+
+    /// <summary>
+    /// Options for single select fields. Only applicable when updating single_select fields.
+    /// </summary>
+    [JsonPropertyName("options")]
+    public IReadOnlyList<object>? Options { get; init; }
+
+}
+
 public record OrganizationCreateIssueType
 {
     /// <summary>
@@ -14459,6 +14721,12 @@ public record OrgPrivateRegistryConfiguration
     public required RegistryType RegistryType { get; init; }
 
     /// <summary>
+    /// The authentication type for the private registry.
+    /// </summary>
+    [JsonPropertyName("auth_type")]
+    public AuthType? AuthType { get; init; }
+
+    /// <summary>
     /// The URL of the private registry.
     /// </summary>
     [JsonPropertyName("url")]
@@ -14481,6 +14749,66 @@ public record OrgPrivateRegistryConfiguration
     /// </summary>
     [JsonPropertyName("visibility")]
     public required OrganizationActionsSecretVisibility Visibility { get; init; }
+
+    /// <summary>
+    /// The tenant ID of the Azure AD application.
+    /// </summary>
+    [JsonPropertyName("tenant_id")]
+    public string? TenantId { get; init; }
+
+    /// <summary>
+    /// The client ID of the Azure AD application.
+    /// </summary>
+    [JsonPropertyName("client_id")]
+    public string? ClientId { get; init; }
+
+    /// <summary>
+    /// The AWS region.
+    /// </summary>
+    [JsonPropertyName("aws_region")]
+    public string? AwsRegion { get; init; }
+
+    /// <summary>
+    /// The AWS account ID.
+    /// </summary>
+    [JsonPropertyName("account_id")]
+    public string? AccountId { get; init; }
+
+    /// <summary>
+    /// The AWS IAM role name.
+    /// </summary>
+    [JsonPropertyName("role_name")]
+    public string? RoleName { get; init; }
+
+    /// <summary>
+    /// The CodeArtifact domain.
+    /// </summary>
+    [JsonPropertyName("domain")]
+    public string? Domain { get; init; }
+
+    /// <summary>
+    /// The CodeArtifact domain owner.
+    /// </summary>
+    [JsonPropertyName("domain_owner")]
+    public string? DomainOwner { get; init; }
+
+    /// <summary>
+    /// The JFrog OIDC provider name.
+    /// </summary>
+    [JsonPropertyName("jfrog_oidc_provider_name")]
+    public string? JfrogOidcProviderName { get; init; }
+
+    /// <summary>
+    /// The OIDC audience.
+    /// </summary>
+    [JsonPropertyName("audience")]
+    public string? Audience { get; init; }
+
+    /// <summary>
+    /// The JFrog identity mapping name.
+    /// </summary>
+    [JsonPropertyName("identity_mapping_name")]
+    public string? IdentityMappingName { get; init; }
 
     [JsonPropertyName("created_at")]
     public required DateTimeOffset CreatedAt { get; init; }
@@ -14506,6 +14834,12 @@ public record OrgPrivateRegistryConfigurationWithSelectedRepositories
     /// </summary>
     [JsonPropertyName("registry_type")]
     public required RegistryType RegistryType { get; init; }
+
+    /// <summary>
+    /// The authentication type for the private registry.
+    /// </summary>
+    [JsonPropertyName("auth_type")]
+    public AuthType? AuthType { get; init; }
 
     /// <summary>
     /// The URL of the private registry.
@@ -14536,6 +14870,66 @@ public record OrgPrivateRegistryConfigurationWithSelectedRepositories
     /// </summary>
     [JsonPropertyName("selected_repository_ids")]
     public IReadOnlyList<int>? SelectedRepositoryIds { get; init; }
+
+    /// <summary>
+    /// The tenant ID of the Azure AD application.
+    /// </summary>
+    [JsonPropertyName("tenant_id")]
+    public string? TenantId { get; init; }
+
+    /// <summary>
+    /// The client ID of the Azure AD application.
+    /// </summary>
+    [JsonPropertyName("client_id")]
+    public string? ClientId { get; init; }
+
+    /// <summary>
+    /// The AWS region.
+    /// </summary>
+    [JsonPropertyName("aws_region")]
+    public string? AwsRegion { get; init; }
+
+    /// <summary>
+    /// The AWS account ID.
+    /// </summary>
+    [JsonPropertyName("account_id")]
+    public string? AccountId { get; init; }
+
+    /// <summary>
+    /// The AWS IAM role name.
+    /// </summary>
+    [JsonPropertyName("role_name")]
+    public string? RoleName { get; init; }
+
+    /// <summary>
+    /// The CodeArtifact domain.
+    /// </summary>
+    [JsonPropertyName("domain")]
+    public string? Domain { get; init; }
+
+    /// <summary>
+    /// The CodeArtifact domain owner.
+    /// </summary>
+    [JsonPropertyName("domain_owner")]
+    public string? DomainOwner { get; init; }
+
+    /// <summary>
+    /// The JFrog OIDC provider name.
+    /// </summary>
+    [JsonPropertyName("jfrog_oidc_provider_name")]
+    public string? JfrogOidcProviderName { get; init; }
+
+    /// <summary>
+    /// The OIDC audience.
+    /// </summary>
+    [JsonPropertyName("audience")]
+    public string? Audience { get; init; }
+
+    /// <summary>
+    /// The JFrog identity mapping name.
+    /// </summary>
+    [JsonPropertyName("identity_mapping_name")]
+    public string? IdentityMappingName { get; init; }
 
     [JsonPropertyName("created_at")]
     public required DateTimeOffset CreatedAt { get; init; }
@@ -15103,6 +15497,12 @@ public record ProjectsV2Field
     /// </summary>
     [JsonPropertyName("id")]
     public required int Id { get; init; }
+
+    /// <summary>
+    /// The ID of the issue field.
+    /// </summary>
+    [JsonPropertyName("issue_field_id")]
+    public int? IssueFieldId { get; init; }
 
     /// <summary>
     /// The node ID of the field.
@@ -16871,19 +17271,6 @@ public record RepositoryRuleCopilotCodeReview
 }
 
 /// <summary>
-/// A tool that must provide code review results for this rule to pass.
-/// </summary>
-public record RepositoryRuleParamsCopilotCodeReviewAnalysisTool
-{
-    /// <summary>
-    /// The name of a code review analysis tool
-    /// </summary>
-    [JsonPropertyName("name")]
-    public required Name Name { get; init; }
-
-}
-
-/// <summary>
 /// A repository rule.
 /// </summary>
 public record RepositoryRule
@@ -16975,6 +17362,32 @@ public record OrgRules
 /// Response
 /// </summary>
 public record RuleSuites;
+
+/// <summary>
+/// Metadata for a pull request rule evaluation result.
+/// </summary>
+public record RuleSuitePullRequest
+{
+    /// <summary>
+    /// The pull request associated with the rule evaluation.
+    /// </summary>
+    [JsonPropertyName("pull_request")]
+    public object? PullRequest { get; init; }
+
+}
+
+/// <summary>
+/// Metadata for a required status checks rule evaluation result.
+/// </summary>
+public record RuleSuiteRequiredStatusChecks
+{
+    /// <summary>
+    /// The status checks associated with the rule evaluation.
+    /// </summary>
+    [JsonPropertyName("checks")]
+    public IReadOnlyList<object>? Checks { get; init; }
+
+}
 
 /// <summary>
 /// Response
@@ -26377,28 +26790,6 @@ public record Tag
 
     [JsonPropertyName("node_id")]
     public required string NodeId { get; init; }
-
-}
-
-/// <summary>
-/// Tag protection
-/// </summary>
-public record TagProtection
-{
-    [JsonPropertyName("id")]
-    public int? Id { get; init; }
-
-    [JsonPropertyName("created_at")]
-    public string? CreatedAt { get; init; }
-
-    [JsonPropertyName("updated_at")]
-    public string? UpdatedAt { get; init; }
-
-    [JsonPropertyName("enabled")]
-    public bool? Enabled { get; init; }
-
-    [JsonPropertyName("pattern")]
-    public required string Pattern { get; init; }
 
 }
 
