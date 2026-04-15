@@ -908,7 +908,7 @@ public class CSharpSchemaGeneratorTests
 
         InvalidOperationException exception = Assert.Throws<InvalidOperationException>(() => generator.GenerateFromSchemas(schemas));
 
-        Assert.Contains("IncludeSchemas references schema(s) not found in the document", exception.Message, StringComparison.Ordinal);
+        Assert.Contains("IncludeSchemas references schema(s) not found in the provided schemas", exception.Message, StringComparison.Ordinal);
         Assert.Contains("MissingSchema", exception.Message, StringComparison.Ordinal);
     }
 
