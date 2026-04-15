@@ -87,9 +87,117 @@ public sealed class CSharpSchemaGenerator
     /// </summary>
     public string GenerateFromSchemas(IDictionary<string, IOpenApiSchema> schemas)
     {
-        var typeResolver = new TypeResolver(_options, schemas);
-        var emitter = new CSharpCodeEmitter(_options, typeResolver, schemas);
+        ArgumentNullException.ThrowIfNull(schemas);
+
+        IDictionary<string, IOpenApiSchema> selectedSchemas = SelectSchemas(schemas);
+        var typeResolver = new TypeResolver(_options, selectedSchemas);
+        var emitter = new CSharpCodeEmitter(_options, typeResolver, selectedSchemas);
         return emitter.Emit();
+    }
+
+    private IDictionary<string, IOpenApiSchema> SelectSchemas(IDictionary<string, IOpenApiSchema> schemas)
+    {
+        if (_options.IncludeSchemas is not { Count: > 0 } includedSchemas)
+        {
+            return schemas;
+        }
+
+        var reachableSchemas = new HashSet<string>(StringComparer.Ordinal);
+        var pendingSchemaNames = new Queue<string>(includedSchemas.Distinct(StringComparer.Ordinal));
+        var missingSchemaNames = new HashSet<string>(StringComparer.Ordinal);
+
+        while (pendingSchemaNames.Count > 0)
+        {
+            string schemaName = pendingSchemaNames.Dequeue();
+            if (!reachableSchemas.Add(schemaName))
+            {
+                continue;
+            }
+
+            if (!schemas.TryGetValue(schemaName, out IOpenApiSchema? schema))
+            {
+                missingSchemaNames.Add(schemaName);
+                continue;
+            }
+
+            CollectReferencedSchemaNames(schema, pendingSchemaNames);
+        }
+
+        if (missingSchemaNames.Count > 0)
+        {
+            string missingNames = string.Join(", ", missingSchemaNames.OrderBy(name => name, StringComparer.Ordinal));
+            throw new InvalidOperationException($"IncludeSchemas references schema(s) not found in the provided schemas: {missingNames}");
+        }
+
+        return schemas
+            .Where(kvp => reachableSchemas.Contains(kvp.Key))
+            .ToDictionary(kvp => kvp.Key, kvp => kvp.Value, StringComparer.Ordinal);
+    }
+
+    private static void CollectReferencedSchemaNames(IOpenApiSchema schema, Queue<string> pendingSchemaNames)
+    {
+        if (schema is OpenApiSchemaReference schemaReference)
+        {
+            if (!string.IsNullOrWhiteSpace(schemaReference.Reference?.Id))
+            {
+                pendingSchemaNames.Enqueue(schemaReference.Reference.Id);
+            }
+
+            return;
+        }
+
+        if (schema.Properties is { Count: > 0 })
+        {
+            foreach (IOpenApiSchema propertySchema in schema.Properties.Values)
+            {
+                CollectReferencedSchemaNames(propertySchema, pendingSchemaNames);
+            }
+        }
+
+        if (schema.Items is not null)
+        {
+            CollectReferencedSchemaNames(schema.Items, pendingSchemaNames);
+        }
+
+        if (schema.AdditionalProperties is not null)
+        {
+            CollectReferencedSchemaNames(schema.AdditionalProperties, pendingSchemaNames);
+        }
+
+        if (schema.AllOf is { Count: > 0 })
+        {
+            foreach (IOpenApiSchema subSchema in schema.AllOf)
+            {
+                CollectReferencedSchemaNames(subSchema, pendingSchemaNames);
+            }
+        }
+
+        if (schema.OneOf is { Count: > 0 })
+        {
+            foreach (IOpenApiSchema subSchema in schema.OneOf)
+            {
+                CollectReferencedSchemaNames(subSchema, pendingSchemaNames);
+            }
+        }
+
+        if (schema.AnyOf is { Count: > 0 })
+        {
+            foreach (IOpenApiSchema subSchema in schema.AnyOf)
+            {
+                CollectReferencedSchemaNames(subSchema, pendingSchemaNames);
+            }
+        }
+
+        if (schema.Discriminator?.Mapping is { Count: > 0 } discriminatorMapping)
+        {
+            foreach (OpenApiSchemaReference mappedSchema in discriminatorMapping.Values)
+            {
+                if (!string.IsNullOrWhiteSpace(mappedSchema.Reference?.Id))
+                {
+                    pendingSchemaNames.Enqueue(mappedSchema.Reference.Id);
+                }
+            }
+        }
     }
 
     private static void HandleDiagnostics(ReadResult result)

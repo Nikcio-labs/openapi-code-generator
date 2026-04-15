@@ -30,6 +30,7 @@ static async Task<int> RunAsync(string[] args)
     bool addDefaultValuesToProperties = true;
     bool immutableArrays = true;
     bool immutableDictionaries = true;
+    var includeSchemas = new List<string>();
     bool inlinePrimitiveTypeAliases = false;
 
     for (int i = 0; i < args.Length; i++)
@@ -47,6 +48,9 @@ static async Task<int> RunAsync(string[] args)
                 break;
             case "--model-prefix":
                 modelPrefix = GetNextArg(args, ref i, "--model-prefix");
+                break;
+            case "--include-schema":
+                includeSchemas.Add(GetNextArg(args, ref i, "--include-schema"));
                 break;
             case "--no-doc-comments":
                 docComments = false;
@@ -105,6 +109,7 @@ static async Task<int> RunAsync(string[] args)
         UseImmutableArrays = immutableArrays,
         UseImmutableDictionaries = immutableDictionaries,
         AddDefaultValuesToProperties = addDefaultValuesToProperties,
+        IncludeSchemas = includeSchemas,
         InlinePrimitiveTypeAliases = inlinePrimitiveTypeAliases,
     };
 
@@ -220,6 +225,7 @@ static void PrintUsage()
             -o, --output <path>         Output C# file path
             -n, --namespace <name>      C# namespace (default: GeneratedModels)
                 --model-prefix <prefix> Prefix every generated model type name
+                --include-schema <name> Include only the named schema and its dependencies (repeatable)
                 --no-doc-comments       Disable XML doc comment generation
                 --no-header             Disable auto-generated file header
                 --no-default-non-nullable  Don't treat defaults as non-nullable
@@ -233,6 +239,7 @@ static void PrintUsage()
         EXAMPLES:
             openapi-codegen petstore.yaml -o Models.cs
             openapi-codegen https://petstore3.swagger.io/api/v3/openapi.json -o PetStore.cs -n MyApp.Models --model-prefix PetStore
+            openapi-codegen spec.yaml -o Models.cs --include-schema User --include-schema Address
             openapi-codegen spec.yaml --mutable-arrays --mutable-dictionaries
             openapi-codegen spec.yaml --inline-type-aliases
         """);

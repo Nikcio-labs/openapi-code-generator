@@ -10,6 +10,7 @@ OpenAPI Code Generator provides a rich set of options to customize the generated
 | Option | CLI Flag | Default | Description |
 |--------|----------|---------|-------------|
 | `Namespace` | `-n, --namespace` | `GeneratedModels` | C# namespace for generated types |
+| `IncludeSchemas` | `--include-schema` | `null` | Generate only selected schemas and their dependencies |
 | `GenerateDocComments` | `--no-doc-comments` | `true` | Include XML doc comments |
 | `GenerateFileHeader` | `--no-header` | `true` | Auto-generated file header |
 | `DefaultNonNullable` | `--no-default-non-nullable` | `true` | Defaults as non-nullable |
@@ -36,6 +37,26 @@ new GeneratorOptions { Namespace = "MyApp.Api.Models" }
 ```csharp
 namespace MyApp.Api.Models;
 ```
+
+## Included Schemas
+
+Restricts generation to a named subset of component schemas while automatically bringing along referenced dependencies.
+
+**CLI:** Repeat `--include-schema` for each root schema you want to generate.
+
+```bash
+openapi-codegen spec.yaml -o Models.cs --include-schema User --include-schema Address
+```
+
+**Library:**
+```csharp
+new GeneratorOptions
+{
+    IncludeSchemas = ["User", "Address"]
+}
+```
+
+If `User` references `Address`, including only `User` is enough to generate both.
 
 ## XML Doc Comments
 

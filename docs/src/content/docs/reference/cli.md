@@ -72,6 +72,17 @@ Prefix every generated model type name. The prefix must start with a letter or u
 openapi-codegen spec.yaml -o Models.cs --model-prefix Api
 ```
 
+### `--include-schema <name>`
+
+Generate only the named component schema and its referenced dependencies.
+
+- Repeat the flag to include multiple root schemas
+- Referenced schemas are included automatically so the output remains compilable
+
+```bash
+openapi-codegen spec.yaml -o Models.cs --include-schema User --include-schema Address
+```
+
 ### `--no-doc-comments`
 
 Disable generation of XML documentation comments from OpenAPI descriptions.
@@ -165,6 +176,9 @@ openapi-codegen petstore.yaml -o Models.cs -n PetStore.Models
 
 # Prefix generated model types
 openapi-codegen petstore.yaml -o Models.cs --model-prefix Api
+
+# Generate only selected schemas
+openapi-codegen petstore.yaml -o Models.cs --include-schema Pet --include-schema Category
 
 # From URL with all options disabled
 openapi-codegen https://example.com/api.json \
