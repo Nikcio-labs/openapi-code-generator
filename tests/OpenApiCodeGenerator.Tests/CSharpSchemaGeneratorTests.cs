@@ -254,6 +254,66 @@ public class CSharpSchemaGeneratorTests
     }
 
     [Fact]
+    public async Task Generate_WithoutJsonPropertyNameAttributes_UsesSerializerNamingPolicy()
+    {
+        const string openApi = """
+            {
+              "openapi": "3.0.1",
+              "info": {
+                "title": "Test",
+                "version": "1.0.0"
+              },
+              "paths": {},
+              "components": {
+                "schemas": {
+                  "User": {
+                    "type": "object",
+                    "properties": {
+                      "firstName": { "type": "string" },
+                      "email": { "type": "string" }
+                    }
+                  }
+                }
+              }
+            }
+            """;
+
+        var generator = new CSharpSchemaGenerator(new GeneratorOptions
+        {
+            GenerateFileHeader = false,
+            Namespace = "Test",
+            GenerateJsonPropertyNameAttributes = false
+        });
+
+        string result = generator.GenerateFromStream(new MemoryStream(System.Text.Encoding.UTF8.GetBytes(openApi)));
+
+        Assert.DoesNotContain("[JsonPropertyName(", result, StringComparison.Ordinal);
+
+        string[] lines = await GetSerializationLinesAsync(
+            result,
+            """
+            using System.Text.Json;
+            using Test;
+
+            var user = new User
+            {
+                FirstName = "Ada",
+                Email = "ada@example.com"
+            };
+
+            var options = new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            };
+
+            Console.WriteLine(JsonSerializer.Serialize(user, options));
+            """
+        );
+
+        Assert.Contains("""{"firstName":"Ada","email":"ada@example.com"}""", lines);
+    }
+
+    [Fact]
     public void Generate_ComprehensiveApi_StringFormats_MappedCorrectly()
     {
         var generator = new CSharpSchemaGenerator(new GeneratorOptions
