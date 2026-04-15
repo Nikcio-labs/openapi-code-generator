@@ -8,6 +8,7 @@ public class GeneratorOptionsTests
         var options = new GeneratorOptions();
 
         options.Validate();
+        Assert.Null(options.IncludeSchemas);
     }
 
     [Theory]
@@ -52,5 +53,16 @@ public class GeneratorOptionsTests
         };
 
         Assert.Throws<ArgumentException>(() => new CSharpSchemaGenerator(options));
+    }
+
+    [Fact]
+    public void Validate_BlankIncludedSchema_ThrowsArgumentException()
+    {
+        var options = new GeneratorOptions
+        {
+            IncludeSchemas = ["User", " "]
+        };
+
+        Assert.Throws<ArgumentException>(() => options.Validate());
     }
 }

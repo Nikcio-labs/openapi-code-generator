@@ -49,6 +49,12 @@ public sealed class GeneratorOptions
     public bool AddDefaultValuesToProperties { get; init; } = true;
 
     /// <summary>
+    /// Restricts generation to the named component schemas and their referenced dependencies.
+    /// When null or empty, all discovered component schemas are generated.
+    /// </summary>
+    public IReadOnlyCollection<string>? IncludeSchemas { get; init; }
+
+    /// <summary>
     /// When true, component schemas that would otherwise be emitted as primitive wrapper aliases
     /// are inlined to their underlying primitive types at usage sites instead.
     /// </summary>
@@ -65,6 +71,19 @@ public sealed class GeneratorOptions
         if (!string.IsNullOrEmpty(ModelPrefix))
         {
             NameHelper.ValidateTypeNamePrefix(ModelPrefix);
+        }
+
+        if (IncludeSchemas is { Count: > 0 } includedSchemas)
+        {
+            foreach (string schemaName in includedSchemas)
+            {
+                if (string.IsNullOrWhiteSpace(schemaName))
+                {
+                    throw new ArgumentException(
+                        "IncludeSchemas must not contain null or blank schema names.",
+                        nameof(IncludeSchemas));
+                }
+            }
         }
     }
 

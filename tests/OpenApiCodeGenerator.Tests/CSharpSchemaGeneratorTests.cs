@@ -777,6 +777,86 @@ public class CSharpSchemaGeneratorTests
     }
 
     [Fact]
+    public async Task Generate_FromSchemas_WithIncludedSchemas_EmitsRequestedSchemasAndDependencies()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["Pet"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["name"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                }
+            },
+            ["Cat"] = new OpenApiSchema
+            {
+                AllOf =
+                [
+                    new OpenApiSchemaReference("Pet"),
+                    new OpenApiSchema
+                    {
+                        Type = JsonSchemaType.Object,
+                        Properties = new Dictionary<string, IOpenApiSchema>
+                        {
+                            ["lives"] = new OpenApiSchema { Type = JsonSchemaType.Integer, Format = "int32" }
+                        }
+                    }
+                ]
+            },
+            ["Address"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["city"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                }
+            }
+        };
+
+        var generator = new CSharpSchemaGenerator(new GeneratorOptions
+        {
+            GenerateFileHeader = false,
+            Namespace = "GeneratedModels",
+            IncludeSchemas = ["Cat"]
+        });
+
+        string generatedCode = generator.GenerateFromSchemas(schemas);
+
+        Assert.Contains("public record Pet", generatedCode, StringComparison.Ordinal);
+        Assert.Contains("public record Cat : Pet", generatedCode, StringComparison.Ordinal);
+        Assert.DoesNotContain("public record Address", generatedCode, StringComparison.Ordinal);
+
+        await AssertGeneratedCodeCompilesAsync(generatedCode, implicitUsings: true);
+    }
+
+    [Fact]
+    public void Generate_FromSchemas_WithUnknownIncludedSchema_ThrowsClearError()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["User"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["name"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                }
+            }
+        };
+
+        var generator = new CSharpSchemaGenerator(new GeneratorOptions
+        {
+            IncludeSchemas = ["MissingSchema"]
+        });
+
+        InvalidOperationException exception = Assert.Throws<InvalidOperationException>(() => generator.GenerateFromSchemas(schemas));
+
+        Assert.Contains("IncludeSchemas references schema(s) not found in the document", exception.Message, StringComparison.Ordinal);
+        Assert.Contains("MissingSchema", exception.Message, StringComparison.Ordinal);
+    }
+
+    [Fact]
     public async Task Generate_FromText_NullableDirectBinaryStreamProperty_RoundTripsNullWithSystemTextJsonDefaults()
     {
         const string spec = """

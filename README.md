@@ -84,6 +84,7 @@ OPTIONS:
     -o, --output <path>         Output C# file path
     -n, --namespace <name>      C# namespace (default: GeneratedModels)
         --model-prefix <prefix> Prefix every generated model type name
+        --include-schema <name> Include only the named schema and its dependencies (repeatable)
         --no-doc-comments       Disable XML doc comment generation
         --no-header             Disable auto-generated file header
         --no-default-non-nullable  Don't treat defaults as non-nullable
@@ -106,6 +107,7 @@ var generator = new CSharpSchemaGenerator(new GeneratorOptions
 {
     Namespace = "MyApp.Models",
     ModelPrefix = "Api",
+    IncludeSchemas = ["User", "Address"],
     GenerateDocComments = true
 });
 
