@@ -131,6 +131,17 @@ Use `Dictionary<string, T>` instead of `IReadOnlyDictionary<string, T>` for map/
 openapi-codegen spec.yaml -o Models.cs --mutable-dictionaries
 ```
 
+### `--no-json-property-name-attributes`
+
+Skip `[JsonPropertyName]` on generated properties.
+
+- **Default behavior:** emit `[JsonPropertyName]` to preserve exact OpenAPI wire names
+- **With this flag:** rely on the consuming serializer configuration to map property names
+
+```bash
+openapi-codegen spec.yaml -o Models.cs --no-json-property-name-attributes
+```
+
 ### `--inline-type-aliases`
 
 Inline primitive component aliases to their underlying primitive types instead of emitting wrapper alias structs.
@@ -188,7 +199,8 @@ openapi-codegen https://example.com/api.json \
   --no-default-non-nullable \
   --no-add-default-values \
   --mutable-arrays \
-  --mutable-dictionaries
+  --mutable-dictionaries \
+  --no-json-property-name-attributes
 
 # Inline primitive aliases
 openapi-codegen spec.yaml -o Models.cs --inline-type-aliases

@@ -91,6 +91,7 @@ OPTIONS:
         --no-add-default-values     Don't add default values from OpenAPI to properties
         --mutable-arrays        Use List<T> instead of IReadOnlyList<T>
         --mutable-dictionaries  Use Dictionary<K,V> instead of IReadOnlyDictionary<K,V>
+        --no-json-property-name-attributes  Skip [JsonPropertyName] on generated properties
         --inline-type-aliases   Inline primitive aliases instead of emitting wrapper types
     -v, --version               Show version information
     -h, --help                  Show this help message

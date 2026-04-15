@@ -17,6 +17,7 @@ OpenAPI Code Generator provides a rich set of options to customize the generated
 | `AddDefaultValuesToProperties` | `--no-add-default-values` | `true` | Add default values from OpenAPI to properties |
 | `UseImmutableArrays` | `--mutable-arrays` | `true` | Use `IReadOnlyList<T>` |
 | `UseImmutableDictionaries` | `--mutable-dictionaries` | `true` | Use `IReadOnlyDictionary` |
+| `GenerateJsonPropertyNameAttributes` | `--no-json-property-name-attributes` | `true` | Emit `[JsonPropertyName]` on generated properties |
 | `InlinePrimitiveTypeAliases` | `--inline-type-aliases` | `false` | Inline primitive aliases instead of emitting wrapper types |
 
 ## Namespace
@@ -112,6 +113,32 @@ When enabled, properties with `default` values in the OpenAPI spec are treated a
 When enabled, properties with `default` values in the OpenAPI spec will have those default values added to the generated C# properties.
 
 **CLI:** Enabled by default. Disable with `--no-add-default-values`.
+
+## JsonPropertyName Attributes
+
+When enabled, generated properties emit `[JsonPropertyName]` so their wire names always match the OpenAPI schema exactly.
+
+**CLI:** Enabled by default. Disable with `--no-json-property-name-attributes`.
+
+**Library:**
+```csharp
+new GeneratorOptions { GenerateJsonPropertyNameAttributes = false }
+```
+
+This is most useful when the consuming app already applies the correct serializer naming policy, for example `camelCase` in ASP.NET Core.
+
+**Default output:**
+```csharp
+[JsonPropertyName("firstName")]
+public string? FirstName { get; init; }
+```
+
+**Without attributes:**
+```csharp
+public string? FirstName { get; init; }
+```
+
+Be careful with schemas that use names that do not match your serializer policy, such as `snake_case`, `_prefixed`, or unusual casing like `IsWashedFREG`.
 
 ## Immutable Collections
 

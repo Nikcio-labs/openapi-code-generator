@@ -697,7 +697,7 @@ internal class CSharpCodeEmitter
         }
 
         // Add JSON attribute
-        if (jsonName != null)
+        if (_options.GenerateJsonPropertyNameAttributes && jsonName != null)
         {
             AppendLine($"[JsonPropertyName(\"{EscapeCSharpStringLiteral(jsonName)}\")]");
         }

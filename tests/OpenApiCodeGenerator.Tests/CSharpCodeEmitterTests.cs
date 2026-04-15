@@ -98,6 +98,35 @@ public class CSharpCodeEmitterTests
     }
 
     [Fact]
+    public void Emit_WithoutJsonPropertyNameAttributes_SkipsPropertyAttributes()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["User"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["firstName"] = new OpenApiSchema { Type = JsonSchemaType.String },
+                    ["email"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                }
+            }
+        };
+
+        string result = Generate(schemas, new GeneratorOptions
+        {
+            GenerateFileHeader = false,
+            Namespace = "TestModels",
+            GenerateJsonPropertyNameAttributes = false
+        });
+
+        Assert.Contains("public string? FirstName { get; init; }", result, StringComparison.Ordinal);
+        Assert.Contains("public string? Email { get; init; }", result, StringComparison.Ordinal);
+        Assert.DoesNotContain("[JsonPropertyName(\"firstName\")]", result, StringComparison.Ordinal);
+        Assert.DoesNotContain("[JsonPropertyName(\"email\")]", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
     public void Emit_RecordWithDateTimeFormats_MapsCorrectly()
     {
         var schemas = new Dictionary<string, IOpenApiSchema>
