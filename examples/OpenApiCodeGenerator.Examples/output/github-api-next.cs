@@ -4,7 +4,11 @@
 // </auto-generated>
 
 #nullable enable
+#pragma warning disable CS8019
 
+using System;
+using System.Collections.Generic;
+using System.Globalization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -1841,6 +1845,18 @@ public enum WebhookRepositoryImportStatus
 }
 
 /// <summary>
+/// The classification of the advisory.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum Classification
+{
+    [JsonStringEnumMemberName("general")]
+    General,
+    [JsonStringEnumMemberName("malware")]
+    Malware
+}
+
+/// <summary>
 /// The state of the Dependabot alert.
 /// </summary>
 [JsonConverter(typeof(JsonStringEnumConverter))]
@@ -2399,20 +2415,6 @@ public enum PriceModel
 }
 
 /// <summary>
-/// The default repository access level for Dependabot updates.
-/// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum DefaultLevel
-{
-    [JsonStringEnumMemberName("public")]
-    Public,
-    [JsonStringEnumMemberName("internal")]
-    Internal,
-    [JsonStringEnumMemberName("")]
-    Unknown
-}
-
-/// <summary>
 /// The type of scope for the budget
 /// </summary>
 [JsonConverter(typeof(JsonStringEnumConverter))]
@@ -2739,6 +2741,20 @@ public enum CopilotSeatDetailsPlanType
     Unknown
 }
 
+/// <summary>
+/// The default repository access level for Dependabot updates.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum DefaultLevel
+{
+    [JsonStringEnumMemberName("public")]
+    Public,
+    [JsonStringEnumMemberName("internal")]
+    Internal,
+    [JsonStringEnumMemberName("")]
+    Unknown
+}
+
 [JsonConverter(typeof(JsonStringEnumConverter))]
 public enum PackageType
 {
@@ -2901,7 +2917,9 @@ public enum AuthType
     [JsonStringEnumMemberName("oidc_aws")]
     OidcAws,
     [JsonStringEnumMemberName("oidc_jfrog")]
-    OidcJfrog
+    OidcJfrog,
+    [JsonStringEnumMemberName("oidc_cloudsmith")]
+    OidcCloudsmith
 }
 
 /// <summary>
@@ -7823,6 +7841,12 @@ public record DependabotAlertSecurityAdvisory
     public required DependabotAlertSecurityVulnerabilitySeverity Severity { get; init; }
 
     /// <summary>
+    /// The classification of the advisory.
+    /// </summary>
+    [JsonPropertyName("classification")]
+    public Classification? Classification { get; init; }
+
+    /// <summary>
     /// Details for the advisory pertaining to the Common Vulnerability Scoring System.
     /// </summary>
     [JsonPropertyName("cvss")]
@@ -10088,22 +10112,6 @@ public record ActionsCacheStorageLimitForOrganization
     /// </summary>
     [JsonPropertyName("max_cache_size_gb")]
     public int? MaxCacheSizeGb { get; init; }
-
-}
-
-/// <summary>
-/// Information about repositories that Dependabot is able to access in an organization
-/// </summary>
-public record DependabotRepositoryAccessDetails
-{
-    /// <summary>
-    /// The default repository access level for Dependabot updates.
-    /// </summary>
-    [JsonPropertyName("default_level")]
-    public DefaultLevel? DefaultLevel { get; init; }
-
-    [JsonPropertyName("accessible_repositories")]
-    public IReadOnlyList<SimpleRepository?>? AccessibleRepositories { get; init; }
 
 }
 
@@ -12864,6 +12872,22 @@ public record CopilotUsageMetricsDay
 }
 
 /// <summary>
+/// Information about repositories that Dependabot is able to access in an organization
+/// </summary>
+public record DependabotRepositoryAccessDetails
+{
+    /// <summary>
+    /// The default repository access level for Dependabot updates.
+    /// </summary>
+    [JsonPropertyName("default_level")]
+    public DefaultLevel? DefaultLevel { get; init; }
+
+    [JsonPropertyName("accessible_repositories")]
+    public IReadOnlyList<SimpleRepository?>? AccessibleRepositories { get; init; }
+
+}
+
+/// <summary>
 /// Secrets for GitHub Dependabot for an organization.
 /// </summary>
 public record OrganizationDependabotSecret
@@ -13270,7 +13294,7 @@ public record OrganizationUpdateIssueField
     public IssueFieldVisibility? Visibility { get; init; }
 
     /// <summary>
-    /// Options for single select fields. Only applicable when updating single_select fields.
+    /// Options for single select fields. Only applicable when updating single_select fields. When provided, this array **replaces** the entire existing set of options rather than adding to or updating individual options. To retain or update an existing option, include it in the array with its `id`. Options sent without an `id` are treated as new options and may cause existing options to be deleted and recreated.
     /// </summary>
     [JsonPropertyName("options")]
     public IReadOnlyList<object>? Options { get; init; }
@@ -13971,6 +13995,24 @@ public record OrgPrivateRegistryConfiguration
     [JsonPropertyName("identity_mapping_name")]
     public string? IdentityMappingName { get; init; }
 
+    /// <summary>
+    /// The Cloudsmith organization namespace.
+    /// </summary>
+    [JsonPropertyName("namespace")]
+    public string? Namespace { get; init; }
+
+    /// <summary>
+    /// The Cloudsmith service account slug.
+    /// </summary>
+    [JsonPropertyName("service_slug")]
+    public string? ServiceSlug { get; init; }
+
+    /// <summary>
+    /// The Cloudsmith API host.
+    /// </summary>
+    [JsonPropertyName("api_host")]
+    public string? ApiHost { get; init; }
+
     [JsonPropertyName("created_at")]
     public required DateTimeOffset CreatedAt { get; init; }
 
@@ -14091,6 +14133,24 @@ public record OrgPrivateRegistryConfigurationWithSelectedRepositories
     /// </summary>
     [JsonPropertyName("identity_mapping_name")]
     public string? IdentityMappingName { get; init; }
+
+    /// <summary>
+    /// The Cloudsmith organization namespace.
+    /// </summary>
+    [JsonPropertyName("namespace")]
+    public string? Namespace { get; init; }
+
+    /// <summary>
+    /// The Cloudsmith service account slug.
+    /// </summary>
+    [JsonPropertyName("service_slug")]
+    public string? ServiceSlug { get; init; }
+
+    /// <summary>
+    /// The Cloudsmith API host.
+    /// </summary>
+    [JsonPropertyName("api_host")]
+    public string? ApiHost { get; init; }
 
     [JsonPropertyName("created_at")]
     public required DateTimeOffset CreatedAt { get; init; }
@@ -16306,6 +16366,12 @@ public record SecretScanningLocationCommit
     [JsonPropertyName("commit_url")]
     public required string CommitUrl { get; init; }
 
+    /// <summary>
+    /// The GitHub URL to get the associated commit resource.
+    /// </summary>
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
 }
 
 /// <summary>
@@ -16380,6 +16446,12 @@ public record SecretScanningLocationIssueTitle
     [JsonPropertyName("issue_title_url")]
     public required Uri IssueTitleUrl { get; init; }
 
+    /// <summary>
+    /// The GitHub URL for the issue where the secret was detected.
+    /// </summary>
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
 }
 
 /// <summary>
@@ -16393,6 +16465,12 @@ public record SecretScanningLocationIssueBody
     [JsonPropertyName("issue_body_url")]
     public required Uri IssueBodyUrl { get; init; }
 
+    /// <summary>
+    /// The GitHub URL for the issue where the secret was detected.
+    /// </summary>
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
 }
 
 /// <summary>
@@ -16405,6 +16483,12 @@ public record SecretScanningLocationIssueComment
     /// </summary>
     [JsonPropertyName("issue_comment_url")]
     public required Uri IssueCommentUrl { get; init; }
+
+    /// <summary>
+    /// The GitHub URL for the issue comment where the secret was detected.
+    /// </summary>
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
 
 }
 
@@ -16458,6 +16542,12 @@ public record SecretScanningLocationPullRequestTitle
     [JsonPropertyName("pull_request_title_url")]
     public required Uri PullRequestTitleUrl { get; init; }
 
+    /// <summary>
+    /// The GitHub URL for the pull request where the secret was detected.
+    /// </summary>
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
 }
 
 /// <summary>
@@ -16470,6 +16560,12 @@ public record SecretScanningLocationPullRequestBody
     /// </summary>
     [JsonPropertyName("pull_request_body_url")]
     public required Uri PullRequestBodyUrl { get; init; }
+
+    /// <summary>
+    /// The GitHub URL for the pull request where the secret was detected.
+    /// </summary>
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
 
 }
 
@@ -16484,6 +16580,12 @@ public record SecretScanningLocationPullRequestComment
     [JsonPropertyName("pull_request_comment_url")]
     public required Uri PullRequestCommentUrl { get; init; }
 
+    /// <summary>
+    /// The GitHub URL for the pull request comment where the secret was detected.
+    /// </summary>
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
 }
 
 /// <summary>
@@ -16497,6 +16599,12 @@ public record SecretScanningLocationPullRequestReview
     [JsonPropertyName("pull_request_review_url")]
     public required Uri PullRequestReviewUrl { get; init; }
 
+    /// <summary>
+    /// The GitHub URL for the pull request review where the secret was detected.
+    /// </summary>
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
 }
 
 /// <summary>
@@ -16509,6 +16617,12 @@ public record SecretScanningLocationPullRequestReviewComment
     /// </summary>
     [JsonPropertyName("pull_request_review_comment_url")]
     public required Uri PullRequestReviewCommentUrl { get; init; }
+
+    /// <summary>
+    /// The GitHub URL for the pull request review comment where the secret was detected.
+    /// </summary>
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
 
 }
 
@@ -16604,6 +16718,18 @@ public record OrganizationSecretScanningAlert
     public string? SecretTypeDisplayName { get; init; }
 
     /// <summary>
+    /// The provider of the secret that was detected.
+    /// </summary>
+    [JsonPropertyName("provider")]
+    public string? Provider { get; init; }
+
+    /// <summary>
+    /// The slug identifier for the provider of the secret that was detected. Use this value for filtering by provider with the `providers` or `exclude_providers` parameters.
+    /// </summary>
+    [JsonPropertyName("provider_slug")]
+    public string? ProviderSlug { get; init; }
+
+    /// <summary>
     /// The secret that was detected.
     /// </summary>
     [JsonPropertyName("secret")]
@@ -16692,6 +16818,21 @@ public record OrganizationSecretScanningAlert
 
     [JsonPropertyName("assigned_to")]
     public SimpleUser? AssignedTo { get; init; }
+
+    /// <summary>
+    /// An optional comment from the closure request author.
+    /// </summary>
+    [JsonPropertyName("closure_request_comment")]
+    public string? ClosureRequestComment { get; init; }
+
+    /// <summary>
+    /// An optional comment from the closure request reviewer.
+    /// </summary>
+    [JsonPropertyName("closure_request_reviewer_comment")]
+    public string? ClosureRequestReviewerComment { get; init; }
+
+    [JsonPropertyName("closure_request_reviewer")]
+    public SimpleUser? ClosureRequestReviewer { get; init; }
 
 }
 
@@ -24455,6 +24596,18 @@ public record SecretScanningAlert
     public string? SecretTypeDisplayName { get; init; }
 
     /// <summary>
+    /// The provider of the secret that was detected.
+    /// </summary>
+    [JsonPropertyName("provider")]
+    public string? Provider { get; init; }
+
+    /// <summary>
+    /// The slug identifier for the provider of the secret that was detected. Use this value for filtering by provider with the `providers` or `exclude_providers` parameters.
+    /// </summary>
+    [JsonPropertyName("provider_slug")]
+    public string? ProviderSlug { get; init; }
+
+    /// <summary>
     /// The secret that was detected.
     /// </summary>
     [JsonPropertyName("secret")]
@@ -24531,6 +24684,21 @@ public record SecretScanningAlert
 
     [JsonPropertyName("assigned_to")]
     public SimpleUser? AssignedTo { get; init; }
+
+    /// <summary>
+    /// An optional comment from the closure request author.
+    /// </summary>
+    [JsonPropertyName("closure_request_comment")]
+    public string? ClosureRequestComment { get; init; }
+
+    /// <summary>
+    /// An optional comment from the closure request reviewer.
+    /// </summary>
+    [JsonPropertyName("closure_request_reviewer_comment")]
+    public string? ClosureRequestReviewerComment { get; init; }
+
+    [JsonPropertyName("closure_request_reviewer")]
+    public SimpleUser? ClosureRequestReviewer { get; init; }
 
 }
 
@@ -24651,6 +24819,9 @@ public record SecretScanningScanHistory
 
     [JsonPropertyName("custom_pattern_backfill_scans")]
     public IReadOnlyList<SecretScanningScan>? CustomPatternBackfillScans { get; init; }
+
+    [JsonPropertyName("generic_secrets_backfill_scans")]
+    public IReadOnlyList<SecretScanningScan>? GenericSecretsBackfillScans { get; init; }
 
 }
 
@@ -29591,6 +29762,18 @@ public record SecretScanningAlertWebhook
     public string? SecretTypeDisplayName { get; init; }
 
     /// <summary>
+    /// The provider of the secret that was detected.
+    /// </summary>
+    [JsonPropertyName("provider")]
+    public string? Provider { get; init; }
+
+    /// <summary>
+    /// The slug identifier for the provider of the secret that was detected.
+    /// </summary>
+    [JsonPropertyName("provider_slug")]
+    public string? ProviderSlug { get; init; }
+
+    /// <summary>
     /// The token status as of the latest validity check.
     /// </summary>
     [JsonPropertyName("validity")]
@@ -29646,6 +29829,21 @@ public record SecretScanningAlertWebhook
 
     [JsonPropertyName("assigned_to")]
     public SimpleUser? AssignedTo { get; init; }
+
+    /// <summary>
+    /// An optional comment from the closure request author.
+    /// </summary>
+    [JsonPropertyName("closure_request_comment")]
+    public string? ClosureRequestComment { get; init; }
+
+    /// <summary>
+    /// An optional comment from the closure request reviewer.
+    /// </summary>
+    [JsonPropertyName("closure_request_reviewer_comment")]
+    public string? ClosureRequestReviewerComment { get; init; }
+
+    [JsonPropertyName("closure_request_reviewer")]
+    public SimpleUser? ClosureRequestReviewer { get; init; }
 
 }
 

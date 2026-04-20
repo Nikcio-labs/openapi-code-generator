@@ -4,7 +4,11 @@
 // </auto-generated>
 
 #nullable enable
+#pragma warning disable CS8019
 
+using System;
+using System.Collections.Generic;
+using System.Globalization;
 using System.Text.Json.Serialization;
 
 namespace Generated.StripeApi;

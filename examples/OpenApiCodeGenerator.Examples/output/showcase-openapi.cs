@@ -4,10 +4,13 @@
 // </auto-generated>
 
 #nullable enable
+#pragma warning disable CS8019
 
-using System.Text.Json;
 using System;
+using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Generated.ShowcaseOpenapi;
