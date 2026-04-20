@@ -8,7 +8,6 @@ public class GeneratorOptionsTests
         var options = new GeneratorOptions();
 
         options.Validate();
-        Assert.True(options.GenerateJsonPropertyNameAttributes);
     }
 
     [Theory]

@@ -31,7 +31,7 @@ static async Task<int> RunAsync(string[] args)
     bool immutableArrays = true;
     bool immutableDictionaries = true;
     var includeSchemas = new List<string>();
-    bool jsonPropertyNameAttributes = true;
+    bool omitJsonAttributes = true;
     bool inlinePrimitiveTypeAliases = false;
 
     for (int i = 0; i < args.Length; i++)
@@ -71,8 +71,8 @@ static async Task<int> RunAsync(string[] args)
             case "--mutable-dictionaries":
                 immutableDictionaries = false;
                 break;
-            case "--no-json-property-name-attributes":
-                jsonPropertyNameAttributes = false;
+            case "--omit-json-attributes":
+                omitJsonAttributes = true;
                 break;
             case "--inline-type-aliases":
                 inlinePrimitiveTypeAliases = true;
@@ -114,7 +114,7 @@ static async Task<int> RunAsync(string[] args)
         UseImmutableDictionaries = immutableDictionaries,
         AddDefaultValuesToProperties = addDefaultValuesToProperties,
         IncludeSchemas = includeSchemas,
-        GenerateJsonPropertyNameAttributes = jsonPropertyNameAttributes,
+        OmitJsonAttributes = omitJsonAttributes,
         InlinePrimitiveTypeAliases = inlinePrimitiveTypeAliases,
     };
 
@@ -237,7 +237,7 @@ static void PrintUsage()
                 --no-add-default-values     Don't add default values from OpenAPI to properties
                 --mutable-arrays        Use List<T> instead of IReadOnlyList<T>
                 --mutable-dictionaries  Use Dictionary<K,V> instead of IReadOnlyDictionary<K,V>
-                --no-json-property-name-attributes  Skip [JsonPropertyName] on generated properties
+                --omit-json-attributes  Skip [JsonPropertyName] on generated properties
                 --inline-type-aliases   Inline primitive aliases instead of emitting wrapper types
             -v, --version               Show version information
             -h, --help                  Show this help message

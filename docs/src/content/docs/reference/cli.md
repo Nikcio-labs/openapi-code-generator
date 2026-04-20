@@ -131,15 +131,15 @@ Use `Dictionary<string, T>` instead of `IReadOnlyDictionary<string, T>` for map/
 openapi-codegen spec.yaml -o Models.cs --mutable-dictionaries
 ```
 
-### `--no-json-property-name-attributes`
+### `--omit-json-attributes`
 
 Skip `[JsonPropertyName]` on generated properties.
 
-- **Default behavior:** emit `[JsonPropertyName]` to preserve exact OpenAPI wire names
+- **Default behavior:** emit `[JsonPropertyName]` to preserve OpenAPI names
 - **With this flag:** rely on the consuming serializer configuration to map property names
 
 ```bash
-openapi-codegen spec.yaml -o Models.cs --no-json-property-name-attributes
+openapi-codegen spec.yaml -o Models.cs --omit-json-attributes
 ```
 
 ### `--inline-type-aliases`
@@ -200,7 +200,7 @@ openapi-codegen https://example.com/api.json \
   --no-add-default-values \
   --mutable-arrays \
   --mutable-dictionaries \
-  --no-json-property-name-attributes
+  --omit-json-attributes
 
 # Inline primitive aliases
 openapi-codegen spec.yaml -o Models.cs --inline-type-aliases
