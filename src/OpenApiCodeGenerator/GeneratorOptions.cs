@@ -57,7 +57,7 @@ public sealed class GeneratorOptions
     /// <summary>
     /// When true, omit <c>[JsonPropertyName]</c> for generated properties.
     /// </summary>
-    public bool OmitJsonAttributes { get; init; } 
+    public bool OmitJsonPropertyNameAttributes { get; init; } 
 
     /// <summary>
     /// When true, component schemas that would otherwise be emitted as primitive wrapper aliases

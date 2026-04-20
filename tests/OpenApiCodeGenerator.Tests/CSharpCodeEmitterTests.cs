@@ -98,7 +98,7 @@ public class CSharpCodeEmitterTests
     }
 
     [Fact]
-    public void Emit_WithOmitJsonAttributes_SkipsPropertyAttributes()
+    public void Emit_WithOmitJsonPropertyNameAttributes_SkipsPropertyAttributes()
     {
         var schemas = new Dictionary<string, IOpenApiSchema>
         {
@@ -117,7 +117,7 @@ public class CSharpCodeEmitterTests
         {
             GenerateFileHeader = false,
             Namespace = "TestModels",
-            OmitJsonAttributes = true
+            OmitJsonPropertyNameAttributes = true
         });
 
         Assert.Contains("public string? FirstName { get; init; }", result, StringComparison.Ordinal);

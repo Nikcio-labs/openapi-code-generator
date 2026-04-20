@@ -31,7 +31,7 @@ static async Task<int> RunAsync(string[] args)
     bool immutableArrays = true;
     bool immutableDictionaries = true;
     var includeSchemas = new List<string>();
-    bool omitJsonAttributes = true;
+    bool omitJsonPropertyNameAttributes = false;
     bool inlinePrimitiveTypeAliases = false;
 
     for (int i = 0; i < args.Length; i++)
@@ -72,7 +72,7 @@ static async Task<int> RunAsync(string[] args)
                 immutableDictionaries = false;
                 break;
             case "--omit-json-attributes":
-                omitJsonAttributes = true;
+                omitJsonPropertyNameAttributes = true;
                 break;
             case "--inline-type-aliases":
                 inlinePrimitiveTypeAliases = true;
@@ -114,7 +114,7 @@ static async Task<int> RunAsync(string[] args)
         UseImmutableDictionaries = immutableDictionaries,
         AddDefaultValuesToProperties = addDefaultValuesToProperties,
         IncludeSchemas = includeSchemas,
-        OmitJsonAttributes = omitJsonAttributes,
+        OmitJsonPropertyNameAttributes = omitJsonPropertyNameAttributes,
         InlinePrimitiveTypeAliases = inlinePrimitiveTypeAliases,
     };
 

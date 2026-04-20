@@ -254,7 +254,7 @@ public class CSharpSchemaGeneratorTests
     }
 
     [Fact]
-    public async Task Generate_WithOmitJsonAttributes_UsesSerializerNamingPolicy()
+    public async Task Generate_WithOmitJsonPropertyNameAttributes_UsesSerializerNamingPolicy()
     {
         const string openApi = """
             {
@@ -282,7 +282,7 @@ public class CSharpSchemaGeneratorTests
         {
             GenerateFileHeader = false,
             Namespace = "Test",
-            OmitJsonAttributes = true
+            OmitJsonPropertyNameAttributes = true
         });
 
         string result = generator.GenerateFromStream(new MemoryStream(System.Text.Encoding.UTF8.GetBytes(openApi)));

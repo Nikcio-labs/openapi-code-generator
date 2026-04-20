@@ -17,7 +17,7 @@ OpenAPI Code Generator provides a rich set of options to customize the generated
 | `AddDefaultValuesToProperties` | `--no-add-default-values` | `true` | Add default values from OpenAPI to properties |
 | `UseImmutableArrays` | `--mutable-arrays` | `true` | Use `IReadOnlyList<T>` |
 | `UseImmutableDictionaries` | `--mutable-dictionaries` | `true` | Use `IReadOnlyDictionary` |
-| `OmitJsonAttributes` | `--omit-json-attributes` | `false` | Emit `[JsonPropertyName]` on generated properties |
+| `OmitJsonPropertyNameAttributes` | `--omit-json-attributes` | `false` | Skip `[JsonPropertyName]` on generated properties |
 | `InlinePrimitiveTypeAliases` | `--inline-type-aliases` | `false` | Inline primitive aliases instead of emitting wrapper types |
 
 ## Namespace
