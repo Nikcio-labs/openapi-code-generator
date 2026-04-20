@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.2.0] (2026-04-20)
+
+### Added
+
+- Support `--include-schema` and `GeneratorOptions.IncludeSchemas` to generate only selected component schemas and their referenced dependencies
+- Support `--omit-json-attributes` and `GeneratorOptions.OmitJsonPropertyNameAttributes` to omit generated `[JsonPropertyName]` attributes when serializer naming policies are preferred
+- Support `string`/`binary` schema properties as `Stream`, including generated JSON converters for direct property serialization
+
+### Changed
+
+- Bumps Microsoft.OpenApi from 3.5.1 to 3.5.2
+- Bumps Microsoft.OpenApi.YamlReader from 3.5.1 to 3.5.2
+
 ## [1.1.0] (2026-04-02)
 
 ### Added
@@ -45,6 +58,7 @@
 - URL input support for remote OpenAPI specifications
 - Configurable generation options (namespace, enums, nullable, collections, etc.)
 
+[1.2.0]: https://github.com/Nikcio-labs/openapi-code-generator/releases/tag/v1.2.0
 [1.1.0]: https://github.com/Nikcio-labs/openapi-code-generator/releases/tag/v1.1.0
 [1.0.1]: https://github.com/Nikcio-labs/openapi-code-generator/releases/tag/v1.0.1
 [1.0.0]: https://github.com/Nikcio-labs/openapi-code-generator/releases/tag/v1.0.0
