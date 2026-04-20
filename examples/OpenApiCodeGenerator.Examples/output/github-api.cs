@@ -4,7 +4,11 @@
 // </auto-generated>
 
 #nullable enable
+#pragma warning disable CS8019
 
+using System;
+using System.Collections.Generic;
+using System.Globalization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -1795,6 +1799,18 @@ public enum WebhookRepositoryImportStatus
 }
 
 /// <summary>
+/// The classification of the advisory.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum Classification
+{
+    [JsonStringEnumMemberName("general")]
+    General,
+    [JsonStringEnumMemberName("malware")]
+    Malware
+}
+
+/// <summary>
 /// The state of the Dependabot alert.
 /// </summary>
 [JsonConverter(typeof(JsonStringEnumConverter))]
@@ -2339,18 +2355,6 @@ public enum PriceModel
 }
 
 /// <summary>
-/// The default repository access level for Dependabot updates.
-/// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum DefaultLevel
-{
-    [JsonStringEnumMemberName("public")]
-    Public,
-    [JsonStringEnumMemberName("internal")]
-    Internal
-}
-
-/// <summary>
 /// The type of scope for the budget
 /// </summary>
 [JsonConverter(typeof(JsonStringEnumConverter))]
@@ -2671,6 +2675,18 @@ public enum CopilotSeatDetailsPlanType
     Unknown
 }
 
+/// <summary>
+/// The default repository access level for Dependabot updates.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum DefaultLevel
+{
+    [JsonStringEnumMemberName("public")]
+    Public,
+    [JsonStringEnumMemberName("internal")]
+    Internal
+}
+
 [JsonConverter(typeof(JsonStringEnumConverter))]
 public enum PackageType
 {
@@ -2831,7 +2847,9 @@ public enum AuthType
     [JsonStringEnumMemberName("oidc_aws")]
     OidcAws,
     [JsonStringEnumMemberName("oidc_jfrog")]
-    OidcJfrog
+    OidcJfrog,
+    [JsonStringEnumMemberName("oidc_cloudsmith")]
+    OidcCloudsmith
 }
 
 /// <summary>
@@ -7823,6 +7841,12 @@ public record DependabotAlertSecurityAdvisory
     public required DependabotAlertSecurityVulnerabilitySeverity Severity { get; init; }
 
     /// <summary>
+    /// The classification of the advisory.
+    /// </summary>
+    [JsonPropertyName("classification")]
+    public Classification? Classification { get; init; }
+
+    /// <summary>
     /// Details for the advisory pertaining to the Common Vulnerability Scoring System.
     /// </summary>
     [JsonPropertyName("cvss")]
@@ -10304,305 +10328,6 @@ public record ActionsCacheStorageLimitForOrganization
     /// </summary>
     [JsonPropertyName("max_cache_size_gb")]
     public int? MaxCacheSizeGb { get; init; }
-
-}
-
-/// <summary>
-/// A GitHub repository.
-/// </summary>
-public record NullableSimpleRepository
-{
-    /// <summary>
-    /// A unique identifier of the repository.
-    /// </summary>
-    [JsonPropertyName("id")]
-    public required long Id { get; init; }
-
-    /// <summary>
-    /// The GraphQL identifier of the repository.
-    /// </summary>
-    [JsonPropertyName("node_id")]
-    public required string NodeId { get; init; }
-
-    /// <summary>
-    /// The name of the repository.
-    /// </summary>
-    [JsonPropertyName("name")]
-    public required string Name { get; init; }
-
-    /// <summary>
-    /// The full, globally unique, name of the repository.
-    /// </summary>
-    [JsonPropertyName("full_name")]
-    public required string FullName { get; init; }
-
-    /// <summary>
-    /// A GitHub user.
-    /// </summary>
-    [JsonPropertyName("owner")]
-    public required SimpleUser Owner { get; init; }
-
-    /// <summary>
-    /// Whether the repository is private.
-    /// </summary>
-    [JsonPropertyName("private")]
-    public required bool Private { get; init; }
-
-    /// <summary>
-    /// The URL to view the repository on GitHub.com.
-    /// </summary>
-    [JsonPropertyName("html_url")]
-    public required Uri HtmlUrl { get; init; }
-
-    /// <summary>
-    /// The repository description.
-    /// </summary>
-    [JsonPropertyName("description")]
-    public required string? Description { get; init; }
-
-    /// <summary>
-    /// Whether the repository is a fork.
-    /// </summary>
-    [JsonPropertyName("fork")]
-    public required bool Fork { get; init; }
-
-    /// <summary>
-    /// The URL to get more information about the repository from the GitHub API.
-    /// </summary>
-    [JsonPropertyName("url")]
-    public required Uri Url { get; init; }
-
-    /// <summary>
-    /// A template for the API URL to download the repository as an archive.
-    /// </summary>
-    [JsonPropertyName("archive_url")]
-    public required string ArchiveUrl { get; init; }
-
-    /// <summary>
-    /// A template for the API URL to list the available assignees for issues in the repository.
-    /// </summary>
-    [JsonPropertyName("assignees_url")]
-    public required string AssigneesUrl { get; init; }
-
-    /// <summary>
-    /// A template for the API URL to create or retrieve a raw Git blob in the repository.
-    /// </summary>
-    [JsonPropertyName("blobs_url")]
-    public required string BlobsUrl { get; init; }
-
-    /// <summary>
-    /// A template for the API URL to get information about branches in the repository.
-    /// </summary>
-    [JsonPropertyName("branches_url")]
-    public required string BranchesUrl { get; init; }
-
-    /// <summary>
-    /// A template for the API URL to get information about collaborators of the repository.
-    /// </summary>
-    [JsonPropertyName("collaborators_url")]
-    public required string CollaboratorsUrl { get; init; }
-
-    /// <summary>
-    /// A template for the API URL to get information about comments on the repository.
-    /// </summary>
-    [JsonPropertyName("comments_url")]
-    public required string CommentsUrl { get; init; }
-
-    /// <summary>
-    /// A template for the API URL to get information about commits on the repository.
-    /// </summary>
-    [JsonPropertyName("commits_url")]
-    public required string CommitsUrl { get; init; }
-
-    /// <summary>
-    /// A template for the API URL to compare two commits or refs.
-    /// </summary>
-    [JsonPropertyName("compare_url")]
-    public required string CompareUrl { get; init; }
-
-    /// <summary>
-    /// A template for the API URL to get the contents of the repository.
-    /// </summary>
-    [JsonPropertyName("contents_url")]
-    public required string ContentsUrl { get; init; }
-
-    /// <summary>
-    /// A template for the API URL to list the contributors to the repository.
-    /// </summary>
-    [JsonPropertyName("contributors_url")]
-    public required Uri ContributorsUrl { get; init; }
-
-    /// <summary>
-    /// The API URL to list the deployments of the repository.
-    /// </summary>
-    [JsonPropertyName("deployments_url")]
-    public required Uri DeploymentsUrl { get; init; }
-
-    /// <summary>
-    /// The API URL to list the downloads on the repository.
-    /// </summary>
-    [JsonPropertyName("downloads_url")]
-    public required Uri DownloadsUrl { get; init; }
-
-    /// <summary>
-    /// The API URL to list the events of the repository.
-    /// </summary>
-    [JsonPropertyName("events_url")]
-    public required Uri EventsUrl { get; init; }
-
-    /// <summary>
-    /// The API URL to list the forks of the repository.
-    /// </summary>
-    [JsonPropertyName("forks_url")]
-    public required Uri ForksUrl { get; init; }
-
-    /// <summary>
-    /// A template for the API URL to get information about Git commits of the repository.
-    /// </summary>
-    [JsonPropertyName("git_commits_url")]
-    public required string GitCommitsUrl { get; init; }
-
-    /// <summary>
-    /// A template for the API URL to get information about Git refs of the repository.
-    /// </summary>
-    [JsonPropertyName("git_refs_url")]
-    public required string GitRefsUrl { get; init; }
-
-    /// <summary>
-    /// A template for the API URL to get information about Git tags of the repository.
-    /// </summary>
-    [JsonPropertyName("git_tags_url")]
-    public required string GitTagsUrl { get; init; }
-
-    /// <summary>
-    /// A template for the API URL to get information about issue comments on the repository.
-    /// </summary>
-    [JsonPropertyName("issue_comment_url")]
-    public required string IssueCommentUrl { get; init; }
-
-    /// <summary>
-    /// A template for the API URL to get information about issue events on the repository.
-    /// </summary>
-    [JsonPropertyName("issue_events_url")]
-    public required string IssueEventsUrl { get; init; }
-
-    /// <summary>
-    /// A template for the API URL to get information about issues on the repository.
-    /// </summary>
-    [JsonPropertyName("issues_url")]
-    public required string IssuesUrl { get; init; }
-
-    /// <summary>
-    /// A template for the API URL to get information about deploy keys on the repository.
-    /// </summary>
-    [JsonPropertyName("keys_url")]
-    public required string KeysUrl { get; init; }
-
-    /// <summary>
-    /// A template for the API URL to get information about labels of the repository.
-    /// </summary>
-    [JsonPropertyName("labels_url")]
-    public required string LabelsUrl { get; init; }
-
-    /// <summary>
-    /// The API URL to get information about the languages of the repository.
-    /// </summary>
-    [JsonPropertyName("languages_url")]
-    public required Uri LanguagesUrl { get; init; }
-
-    /// <summary>
-    /// The API URL to merge branches in the repository.
-    /// </summary>
-    [JsonPropertyName("merges_url")]
-    public required Uri MergesUrl { get; init; }
-
-    /// <summary>
-    /// A template for the API URL to get information about milestones of the repository.
-    /// </summary>
-    [JsonPropertyName("milestones_url")]
-    public required string MilestonesUrl { get; init; }
-
-    /// <summary>
-    /// A template for the API URL to get information about notifications on the repository.
-    /// </summary>
-    [JsonPropertyName("notifications_url")]
-    public required string NotificationsUrl { get; init; }
-
-    /// <summary>
-    /// A template for the API URL to get information about pull requests on the repository.
-    /// </summary>
-    [JsonPropertyName("pulls_url")]
-    public required string PullsUrl { get; init; }
-
-    /// <summary>
-    /// A template for the API URL to get information about releases on the repository.
-    /// </summary>
-    [JsonPropertyName("releases_url")]
-    public required string ReleasesUrl { get; init; }
-
-    /// <summary>
-    /// The API URL to list the stargazers on the repository.
-    /// </summary>
-    [JsonPropertyName("stargazers_url")]
-    public required Uri StargazersUrl { get; init; }
-
-    /// <summary>
-    /// A template for the API URL to get information about statuses of a commit.
-    /// </summary>
-    [JsonPropertyName("statuses_url")]
-    public required string StatusesUrl { get; init; }
-
-    /// <summary>
-    /// The API URL to list the subscribers on the repository.
-    /// </summary>
-    [JsonPropertyName("subscribers_url")]
-    public required Uri SubscribersUrl { get; init; }
-
-    /// <summary>
-    /// The API URL to subscribe to notifications for this repository.
-    /// </summary>
-    [JsonPropertyName("subscription_url")]
-    public required Uri SubscriptionUrl { get; init; }
-
-    /// <summary>
-    /// The API URL to get information about tags on the repository.
-    /// </summary>
-    [JsonPropertyName("tags_url")]
-    public required Uri TagsUrl { get; init; }
-
-    /// <summary>
-    /// The API URL to list the teams on the repository.
-    /// </summary>
-    [JsonPropertyName("teams_url")]
-    public required Uri TeamsUrl { get; init; }
-
-    /// <summary>
-    /// A template for the API URL to create or retrieve a raw Git tree of the repository.
-    /// </summary>
-    [JsonPropertyName("trees_url")]
-    public required string TreesUrl { get; init; }
-
-    /// <summary>
-    /// The API URL to list the hooks on the repository.
-    /// </summary>
-    [JsonPropertyName("hooks_url")]
-    public required Uri HooksUrl { get; init; }
-
-}
-
-/// <summary>
-/// Information about repositories that Dependabot is able to access in an organization
-/// </summary>
-public record DependabotRepositoryAccessDetails
-{
-    /// <summary>
-    /// The default repository access level for Dependabot updates.
-    /// </summary>
-    [JsonPropertyName("default_level")]
-    public DefaultLevel? DefaultLevel { get; init; }
-
-    [JsonPropertyName("accessible_repositories")]
-    public IReadOnlyList<NullableSimpleRepository>? AccessibleRepositories { get; init; }
 
 }
 
@@ -13421,6 +13146,305 @@ public record CopilotUsageMetricsDay
 }
 
 /// <summary>
+/// A GitHub repository.
+/// </summary>
+public record NullableSimpleRepository
+{
+    /// <summary>
+    /// A unique identifier of the repository.
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required long Id { get; init; }
+
+    /// <summary>
+    /// The GraphQL identifier of the repository.
+    /// </summary>
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    /// <summary>
+    /// The name of the repository.
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    /// <summary>
+    /// The full, globally unique, name of the repository.
+    /// </summary>
+    [JsonPropertyName("full_name")]
+    public required string FullName { get; init; }
+
+    /// <summary>
+    /// A GitHub user.
+    /// </summary>
+    [JsonPropertyName("owner")]
+    public required SimpleUser Owner { get; init; }
+
+    /// <summary>
+    /// Whether the repository is private.
+    /// </summary>
+    [JsonPropertyName("private")]
+    public required bool Private { get; init; }
+
+    /// <summary>
+    /// The URL to view the repository on GitHub.com.
+    /// </summary>
+    [JsonPropertyName("html_url")]
+    public required Uri HtmlUrl { get; init; }
+
+    /// <summary>
+    /// The repository description.
+    /// </summary>
+    [JsonPropertyName("description")]
+    public required string? Description { get; init; }
+
+    /// <summary>
+    /// Whether the repository is a fork.
+    /// </summary>
+    [JsonPropertyName("fork")]
+    public required bool Fork { get; init; }
+
+    /// <summary>
+    /// The URL to get more information about the repository from the GitHub API.
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+    /// <summary>
+    /// A template for the API URL to download the repository as an archive.
+    /// </summary>
+    [JsonPropertyName("archive_url")]
+    public required string ArchiveUrl { get; init; }
+
+    /// <summary>
+    /// A template for the API URL to list the available assignees for issues in the repository.
+    /// </summary>
+    [JsonPropertyName("assignees_url")]
+    public required string AssigneesUrl { get; init; }
+
+    /// <summary>
+    /// A template for the API URL to create or retrieve a raw Git blob in the repository.
+    /// </summary>
+    [JsonPropertyName("blobs_url")]
+    public required string BlobsUrl { get; init; }
+
+    /// <summary>
+    /// A template for the API URL to get information about branches in the repository.
+    /// </summary>
+    [JsonPropertyName("branches_url")]
+    public required string BranchesUrl { get; init; }
+
+    /// <summary>
+    /// A template for the API URL to get information about collaborators of the repository.
+    /// </summary>
+    [JsonPropertyName("collaborators_url")]
+    public required string CollaboratorsUrl { get; init; }
+
+    /// <summary>
+    /// A template for the API URL to get information about comments on the repository.
+    /// </summary>
+    [JsonPropertyName("comments_url")]
+    public required string CommentsUrl { get; init; }
+
+    /// <summary>
+    /// A template for the API URL to get information about commits on the repository.
+    /// </summary>
+    [JsonPropertyName("commits_url")]
+    public required string CommitsUrl { get; init; }
+
+    /// <summary>
+    /// A template for the API URL to compare two commits or refs.
+    /// </summary>
+    [JsonPropertyName("compare_url")]
+    public required string CompareUrl { get; init; }
+
+    /// <summary>
+    /// A template for the API URL to get the contents of the repository.
+    /// </summary>
+    [JsonPropertyName("contents_url")]
+    public required string ContentsUrl { get; init; }
+
+    /// <summary>
+    /// A template for the API URL to list the contributors to the repository.
+    /// </summary>
+    [JsonPropertyName("contributors_url")]
+    public required Uri ContributorsUrl { get; init; }
+
+    /// <summary>
+    /// The API URL to list the deployments of the repository.
+    /// </summary>
+    [JsonPropertyName("deployments_url")]
+    public required Uri DeploymentsUrl { get; init; }
+
+    /// <summary>
+    /// The API URL to list the downloads on the repository.
+    /// </summary>
+    [JsonPropertyName("downloads_url")]
+    public required Uri DownloadsUrl { get; init; }
+
+    /// <summary>
+    /// The API URL to list the events of the repository.
+    /// </summary>
+    [JsonPropertyName("events_url")]
+    public required Uri EventsUrl { get; init; }
+
+    /// <summary>
+    /// The API URL to list the forks of the repository.
+    /// </summary>
+    [JsonPropertyName("forks_url")]
+    public required Uri ForksUrl { get; init; }
+
+    /// <summary>
+    /// A template for the API URL to get information about Git commits of the repository.
+    /// </summary>
+    [JsonPropertyName("git_commits_url")]
+    public required string GitCommitsUrl { get; init; }
+
+    /// <summary>
+    /// A template for the API URL to get information about Git refs of the repository.
+    /// </summary>
+    [JsonPropertyName("git_refs_url")]
+    public required string GitRefsUrl { get; init; }
+
+    /// <summary>
+    /// A template for the API URL to get information about Git tags of the repository.
+    /// </summary>
+    [JsonPropertyName("git_tags_url")]
+    public required string GitTagsUrl { get; init; }
+
+    /// <summary>
+    /// A template for the API URL to get information about issue comments on the repository.
+    /// </summary>
+    [JsonPropertyName("issue_comment_url")]
+    public required string IssueCommentUrl { get; init; }
+
+    /// <summary>
+    /// A template for the API URL to get information about issue events on the repository.
+    /// </summary>
+    [JsonPropertyName("issue_events_url")]
+    public required string IssueEventsUrl { get; init; }
+
+    /// <summary>
+    /// A template for the API URL to get information about issues on the repository.
+    /// </summary>
+    [JsonPropertyName("issues_url")]
+    public required string IssuesUrl { get; init; }
+
+    /// <summary>
+    /// A template for the API URL to get information about deploy keys on the repository.
+    /// </summary>
+    [JsonPropertyName("keys_url")]
+    public required string KeysUrl { get; init; }
+
+    /// <summary>
+    /// A template for the API URL to get information about labels of the repository.
+    /// </summary>
+    [JsonPropertyName("labels_url")]
+    public required string LabelsUrl { get; init; }
+
+    /// <summary>
+    /// The API URL to get information about the languages of the repository.
+    /// </summary>
+    [JsonPropertyName("languages_url")]
+    public required Uri LanguagesUrl { get; init; }
+
+    /// <summary>
+    /// The API URL to merge branches in the repository.
+    /// </summary>
+    [JsonPropertyName("merges_url")]
+    public required Uri MergesUrl { get; init; }
+
+    /// <summary>
+    /// A template for the API URL to get information about milestones of the repository.
+    /// </summary>
+    [JsonPropertyName("milestones_url")]
+    public required string MilestonesUrl { get; init; }
+
+    /// <summary>
+    /// A template for the API URL to get information about notifications on the repository.
+    /// </summary>
+    [JsonPropertyName("notifications_url")]
+    public required string NotificationsUrl { get; init; }
+
+    /// <summary>
+    /// A template for the API URL to get information about pull requests on the repository.
+    /// </summary>
+    [JsonPropertyName("pulls_url")]
+    public required string PullsUrl { get; init; }
+
+    /// <summary>
+    /// A template for the API URL to get information about releases on the repository.
+    /// </summary>
+    [JsonPropertyName("releases_url")]
+    public required string ReleasesUrl { get; init; }
+
+    /// <summary>
+    /// The API URL to list the stargazers on the repository.
+    /// </summary>
+    [JsonPropertyName("stargazers_url")]
+    public required Uri StargazersUrl { get; init; }
+
+    /// <summary>
+    /// A template for the API URL to get information about statuses of a commit.
+    /// </summary>
+    [JsonPropertyName("statuses_url")]
+    public required string StatusesUrl { get; init; }
+
+    /// <summary>
+    /// The API URL to list the subscribers on the repository.
+    /// </summary>
+    [JsonPropertyName("subscribers_url")]
+    public required Uri SubscribersUrl { get; init; }
+
+    /// <summary>
+    /// The API URL to subscribe to notifications for this repository.
+    /// </summary>
+    [JsonPropertyName("subscription_url")]
+    public required Uri SubscriptionUrl { get; init; }
+
+    /// <summary>
+    /// The API URL to get information about tags on the repository.
+    /// </summary>
+    [JsonPropertyName("tags_url")]
+    public required Uri TagsUrl { get; init; }
+
+    /// <summary>
+    /// The API URL to list the teams on the repository.
+    /// </summary>
+    [JsonPropertyName("teams_url")]
+    public required Uri TeamsUrl { get; init; }
+
+    /// <summary>
+    /// A template for the API URL to create or retrieve a raw Git tree of the repository.
+    /// </summary>
+    [JsonPropertyName("trees_url")]
+    public required string TreesUrl { get; init; }
+
+    /// <summary>
+    /// The API URL to list the hooks on the repository.
+    /// </summary>
+    [JsonPropertyName("hooks_url")]
+    public required Uri HooksUrl { get; init; }
+
+}
+
+/// <summary>
+/// Information about repositories that Dependabot is able to access in an organization
+/// </summary>
+public record DependabotRepositoryAccessDetails
+{
+    /// <summary>
+    /// The default repository access level for Dependabot updates.
+    /// </summary>
+    [JsonPropertyName("default_level")]
+    public DefaultLevel? DefaultLevel { get; init; }
+
+    [JsonPropertyName("accessible_repositories")]
+    public IReadOnlyList<NullableSimpleRepository>? AccessibleRepositories { get; init; }
+
+}
+
+/// <summary>
 /// Secrets for GitHub Dependabot for an organization.
 /// </summary>
 public record OrganizationDependabotSecret
@@ -14125,7 +14149,7 @@ public record OrganizationUpdateIssueField
     public IssueFieldVisibility? Visibility { get; init; }
 
     /// <summary>
-    /// Options for single select fields. Only applicable when updating single_select fields.
+    /// Options for single select fields. Only applicable when updating single_select fields. When provided, this array **replaces** the entire existing set of options rather than adding to or updating individual options. To retain or update an existing option, include it in the array with its `id`. Options sent without an `id` are treated as new options and may cause existing options to be deleted and recreated.
     /// </summary>
     [JsonPropertyName("options")]
     public IReadOnlyList<object>? Options { get; init; }
@@ -14926,6 +14950,24 @@ public record OrgPrivateRegistryConfiguration
     [JsonPropertyName("identity_mapping_name")]
     public string? IdentityMappingName { get; init; }
 
+    /// <summary>
+    /// The Cloudsmith organization namespace.
+    /// </summary>
+    [JsonPropertyName("namespace")]
+    public string? Namespace { get; init; }
+
+    /// <summary>
+    /// The Cloudsmith service account slug.
+    /// </summary>
+    [JsonPropertyName("service_slug")]
+    public string? ServiceSlug { get; init; }
+
+    /// <summary>
+    /// The Cloudsmith API host.
+    /// </summary>
+    [JsonPropertyName("api_host")]
+    public string? ApiHost { get; init; }
+
     [JsonPropertyName("created_at")]
     public required DateTimeOffset CreatedAt { get; init; }
 
@@ -15046,6 +15088,24 @@ public record OrgPrivateRegistryConfigurationWithSelectedRepositories
     /// </summary>
     [JsonPropertyName("identity_mapping_name")]
     public string? IdentityMappingName { get; init; }
+
+    /// <summary>
+    /// The Cloudsmith organization namespace.
+    /// </summary>
+    [JsonPropertyName("namespace")]
+    public string? Namespace { get; init; }
+
+    /// <summary>
+    /// The Cloudsmith service account slug.
+    /// </summary>
+    [JsonPropertyName("service_slug")]
+    public string? ServiceSlug { get; init; }
+
+    /// <summary>
+    /// The Cloudsmith API host.
+    /// </summary>
+    [JsonPropertyName("api_host")]
+    public string? ApiHost { get; init; }
 
     [JsonPropertyName("created_at")]
     public required DateTimeOffset CreatedAt { get; init; }
@@ -17712,6 +17772,12 @@ public record SecretScanningLocationCommit
     [JsonPropertyName("commit_url")]
     public required string CommitUrl { get; init; }
 
+    /// <summary>
+    /// The GitHub URL to get the associated commit resource.
+    /// </summary>
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
 }
 
 /// <summary>
@@ -17786,6 +17852,12 @@ public record SecretScanningLocationIssueTitle
     [JsonPropertyName("issue_title_url")]
     public required Uri IssueTitleUrl { get; init; }
 
+    /// <summary>
+    /// The GitHub URL for the issue where the secret was detected.
+    /// </summary>
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
 }
 
 /// <summary>
@@ -17799,6 +17871,12 @@ public record SecretScanningLocationIssueBody
     [JsonPropertyName("issue_body_url")]
     public required Uri IssueBodyUrl { get; init; }
 
+    /// <summary>
+    /// The GitHub URL for the issue where the secret was detected.
+    /// </summary>
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
 }
 
 /// <summary>
@@ -17811,6 +17889,12 @@ public record SecretScanningLocationIssueComment
     /// </summary>
     [JsonPropertyName("issue_comment_url")]
     public required Uri IssueCommentUrl { get; init; }
+
+    /// <summary>
+    /// The GitHub URL for the issue comment where the secret was detected.
+    /// </summary>
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
 
 }
 
@@ -17864,6 +17948,12 @@ public record SecretScanningLocationPullRequestTitle
     [JsonPropertyName("pull_request_title_url")]
     public required Uri PullRequestTitleUrl { get; init; }
 
+    /// <summary>
+    /// The GitHub URL for the pull request where the secret was detected.
+    /// </summary>
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
 }
 
 /// <summary>
@@ -17876,6 +17966,12 @@ public record SecretScanningLocationPullRequestBody
     /// </summary>
     [JsonPropertyName("pull_request_body_url")]
     public required Uri PullRequestBodyUrl { get; init; }
+
+    /// <summary>
+    /// The GitHub URL for the pull request where the secret was detected.
+    /// </summary>
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
 
 }
 
@@ -17890,6 +17986,12 @@ public record SecretScanningLocationPullRequestComment
     [JsonPropertyName("pull_request_comment_url")]
     public required Uri PullRequestCommentUrl { get; init; }
 
+    /// <summary>
+    /// The GitHub URL for the pull request comment where the secret was detected.
+    /// </summary>
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
 }
 
 /// <summary>
@@ -17903,6 +18005,12 @@ public record SecretScanningLocationPullRequestReview
     [JsonPropertyName("pull_request_review_url")]
     public required Uri PullRequestReviewUrl { get; init; }
 
+    /// <summary>
+    /// The GitHub URL for the pull request review where the secret was detected.
+    /// </summary>
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
 }
 
 /// <summary>
@@ -17915,6 +18023,12 @@ public record SecretScanningLocationPullRequestReviewComment
     /// </summary>
     [JsonPropertyName("pull_request_review_comment_url")]
     public required Uri PullRequestReviewCommentUrl { get; init; }
+
+    /// <summary>
+    /// The GitHub URL for the pull request review comment where the secret was detected.
+    /// </summary>
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
 
 }
 
@@ -18014,6 +18128,18 @@ public record OrganizationSecretScanningAlert
     /// </summary>
     [JsonPropertyName("secret_type_display_name")]
     public string? SecretTypeDisplayName { get; init; }
+
+    /// <summary>
+    /// The provider of the secret that was detected.
+    /// </summary>
+    [JsonPropertyName("provider")]
+    public string? Provider { get; init; }
+
+    /// <summary>
+    /// The slug identifier for the provider of the secret that was detected. Use this value for filtering by provider with the `providers` or `exclude_providers` parameters.
+    /// </summary>
+    [JsonPropertyName("provider_slug")]
+    public string? ProviderSlug { get; init; }
 
     /// <summary>
     /// The secret that was detected.
@@ -18117,6 +18243,24 @@ public record OrganizationSecretScanningAlert
     /// </summary>
     [JsonPropertyName("assigned_to")]
     public NullableSimpleUser? AssignedTo { get; init; }
+
+    /// <summary>
+    /// An optional comment from the closure request author.
+    /// </summary>
+    [JsonPropertyName("closure_request_comment")]
+    public string? ClosureRequestComment { get; init; }
+
+    /// <summary>
+    /// An optional comment from the closure request reviewer.
+    /// </summary>
+    [JsonPropertyName("closure_request_reviewer_comment")]
+    public string? ClosureRequestReviewerComment { get; init; }
+
+    /// <summary>
+    /// A GitHub user.
+    /// </summary>
+    [JsonPropertyName("closure_request_reviewer")]
+    public NullableSimpleUser? ClosureRequestReviewer { get; init; }
 
 }
 
@@ -26484,6 +26628,18 @@ public record SecretScanningAlert
     public string? SecretTypeDisplayName { get; init; }
 
     /// <summary>
+    /// The provider of the secret that was detected.
+    /// </summary>
+    [JsonPropertyName("provider")]
+    public string? Provider { get; init; }
+
+    /// <summary>
+    /// The slug identifier for the provider of the secret that was detected. Use this value for filtering by provider with the `providers` or `exclude_providers` parameters.
+    /// </summary>
+    [JsonPropertyName("provider_slug")]
+    public string? ProviderSlug { get; init; }
+
+    /// <summary>
     /// The secret that was detected.
     /// </summary>
     [JsonPropertyName("secret")]
@@ -26573,6 +26729,24 @@ public record SecretScanningAlert
     /// </summary>
     [JsonPropertyName("assigned_to")]
     public NullableSimpleUser? AssignedTo { get; init; }
+
+    /// <summary>
+    /// An optional comment from the closure request author.
+    /// </summary>
+    [JsonPropertyName("closure_request_comment")]
+    public string? ClosureRequestComment { get; init; }
+
+    /// <summary>
+    /// An optional comment from the closure request reviewer.
+    /// </summary>
+    [JsonPropertyName("closure_request_reviewer_comment")]
+    public string? ClosureRequestReviewerComment { get; init; }
+
+    /// <summary>
+    /// A GitHub user.
+    /// </summary>
+    [JsonPropertyName("closure_request_reviewer")]
+    public NullableSimpleUser? ClosureRequestReviewer { get; init; }
 
 }
 
@@ -26693,6 +26867,9 @@ public record SecretScanningScanHistory
 
     [JsonPropertyName("custom_pattern_backfill_scans")]
     public IReadOnlyList<SecretScanningScan>? CustomPatternBackfillScans { get; init; }
+
+    [JsonPropertyName("generic_secrets_backfill_scans")]
+    public IReadOnlyList<SecretScanningScan>? GenericSecretsBackfillScans { get; init; }
 
 }
 
@@ -32270,6 +32447,18 @@ public record SecretScanningAlertWebhook
     public string? SecretTypeDisplayName { get; init; }
 
     /// <summary>
+    /// The provider of the secret that was detected.
+    /// </summary>
+    [JsonPropertyName("provider")]
+    public string? Provider { get; init; }
+
+    /// <summary>
+    /// The slug identifier for the provider of the secret that was detected.
+    /// </summary>
+    [JsonPropertyName("provider_slug")]
+    public string? ProviderSlug { get; init; }
+
+    /// <summary>
     /// The token status as of the latest validity check.
     /// </summary>
     [JsonPropertyName("validity")]
@@ -32334,6 +32523,24 @@ public record SecretScanningAlertWebhook
     /// </summary>
     [JsonPropertyName("assigned_to")]
     public NullableSimpleUser? AssignedTo { get; init; }
+
+    /// <summary>
+    /// An optional comment from the closure request author.
+    /// </summary>
+    [JsonPropertyName("closure_request_comment")]
+    public string? ClosureRequestComment { get; init; }
+
+    /// <summary>
+    /// An optional comment from the closure request reviewer.
+    /// </summary>
+    [JsonPropertyName("closure_request_reviewer_comment")]
+    public string? ClosureRequestReviewerComment { get; init; }
+
+    /// <summary>
+    /// A GitHub user.
+    /// </summary>
+    [JsonPropertyName("closure_request_reviewer")]
+    public NullableSimpleUser? ClosureRequestReviewer { get; init; }
 
 }
 
