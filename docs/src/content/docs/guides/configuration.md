@@ -17,6 +17,7 @@ OpenAPI Code Generator provides a rich set of options to customize the generated
 | `AddDefaultValuesToProperties` | `--no-add-default-values` | `true` | Add default values from OpenAPI to properties |
 | `UseImmutableArrays` | `--mutable-arrays` | `true` | Use `IReadOnlyList<T>` |
 | `UseImmutableDictionaries` | `--mutable-dictionaries` | `true` | Use `IReadOnlyDictionary` |
+| `OmitJsonPropertyNameAttributes` | `--omit-json-attributes` | `false` | Skip `[JsonPropertyName]` on generated properties |
 | `InlinePrimitiveTypeAliases` | `--inline-type-aliases` | `false` | Inline primitive aliases instead of emitting wrapper types |
 
 ## Namespace
@@ -112,6 +113,23 @@ When enabled, properties with `default` values in the OpenAPI spec are treated a
 When enabled, properties with `default` values in the OpenAPI spec will have those default values added to the generated C# properties.
 
 **CLI:** Enabled by default. Disable with `--no-add-default-values`.
+
+## JsonPropertyName Attributes
+
+When enabled, generated properties emit `[JsonPropertyName]` to match the OpenAPI schema.
+
+**CLI:** Enabled by default. Disable with `--omit-json-attributes`.
+
+**Default output:**
+```csharp
+[JsonPropertyName("firstName")]
+public string? FirstName { get; init; }
+```
+
+**Without attributes:**
+```csharp
+public string? FirstName { get; init; }
+```
 
 ## Immutable Collections
 

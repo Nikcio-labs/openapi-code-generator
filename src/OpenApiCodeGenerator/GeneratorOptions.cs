@@ -55,6 +55,11 @@ public sealed class GeneratorOptions
     public IReadOnlyCollection<string>? IncludeSchemas { get; init; }
 
     /// <summary>
+    /// When true, omit <c>[JsonPropertyName]</c> for generated properties.
+    /// </summary>
+    public bool OmitJsonPropertyNameAttributes { get; init; } 
+
+    /// <summary>
     /// When true, component schemas that would otherwise be emitted as primitive wrapper aliases
     /// are inlined to their underlying primitive types at usage sites instead.
     /// </summary>
