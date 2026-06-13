@@ -137,6 +137,22 @@ public enum RepositoryRuleRequiredSignaturesType
 }
 
 /// <summary>
+/// The type of the actor
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum RepositoryRuleParamsActorType
+{
+    [JsonStringEnumMemberName("User")]
+    User,
+    [JsonStringEnumMemberName("Team")]
+    Team,
+    [JsonStringEnumMemberName("IntegrationInstallation")]
+    IntegrationInstallation,
+    [JsonStringEnumMemberName("RepositoryRole")]
+    RepositoryRole
+}
+
+/// <summary>
 /// The type of the reviewer
 /// </summary>
 [JsonConverter(typeof(JsonStringEnumConverter))]
@@ -203,6 +219,27 @@ public enum RepositoryRuleTagNamePatternType
 }
 
 [JsonConverter(typeof(JsonStringEnumConverter))]
+public enum RepositoryRuleWorkflowsType
+{
+    [JsonStringEnumMemberName("workflows")]
+    Workflows
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum RepositoryRuleCodeScanningType
+{
+    [JsonStringEnumMemberName("code_scanning")]
+    CodeScanning
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum RepositoryRuleCopilotCodeReviewType
+{
+    [JsonStringEnumMemberName("copilot_code_review")]
+    CopilotCodeReview
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter))]
 public enum RepositoryRuleFilePathRestrictionType
 {
     [JsonStringEnumMemberName("file_path_restriction")]
@@ -228,27 +265,6 @@ public enum RepositoryRuleMaxFileSizeType
 {
     [JsonStringEnumMemberName("max_file_size")]
     MaxFileSize
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum RepositoryRuleWorkflowsType
-{
-    [JsonStringEnumMemberName("workflows")]
-    Workflows
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum RepositoryRuleCodeScanningType
-{
-    [JsonStringEnumMemberName("code_scanning")]
-    CodeScanning
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum RepositoryRuleCopilotCodeReviewType
-{
-    [JsonStringEnumMemberName("copilot_code_review")]
-    CopilotCodeReview
 }
 
 /// <summary>
@@ -503,6 +519,18 @@ public enum Attestations
 /// </summary>
 [JsonConverter(typeof(JsonStringEnumConverter))]
 public enum Checks
+{
+    [JsonStringEnumMemberName("read")]
+    Read,
+    [JsonStringEnumMemberName("write")]
+    Write
+}
+
+/// <summary>
+/// The level of permission to grant the access token to view and manage code quality data.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum CodeQuality
 {
     [JsonStringEnumMemberName("read")]
     Read,
@@ -854,12 +882,14 @@ public enum OrganizationCustomProperties
 [JsonConverter(typeof(JsonStringEnumConverter))]
 public enum OrganizationCopilotSeatManagement
 {
+    [JsonStringEnumMemberName("read")]
+    Read,
     [JsonStringEnumMemberName("write")]
     Write
 }
 
 /// <summary>
-/// The level of permission to grant the access token to view and manage Copilot coding agent settings for an organization.
+/// The level of permission to grant the access token to view and manage Copilot cloud agent settings for an organization.
 /// </summary>
 [JsonConverter(typeof(JsonStringEnumConverter))]
 public enum OrganizationCopilotAgentSettings
@@ -1510,7 +1540,7 @@ public enum CodeScanningDefaultSetupOptionsRunnerType
 /// Runner type to be used.
 /// </summary>
 [JsonConverter(typeof(JsonStringEnumConverter))]
-public enum CodeScanningDefaultSetupRunnerType
+public enum CodeQualitySetupRunnerType
 {
     [JsonStringEnumMemberName("standard")]
     Standard,
@@ -2024,6 +2054,18 @@ public enum WorkflowState
 }
 
 /// <summary>
+/// Code quality setup has been configured or not.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum CodeQualitySetupState
+{
+    [JsonStringEnumMemberName("configured")]
+    Configured,
+    [JsonStringEnumMemberName("not-configured")]
+    NotConfigured
+}
+
+/// <summary>
 /// State of a code scanning alert instance.
 /// </summary>
 [JsonConverter(typeof(JsonStringEnumConverter))]
@@ -2033,18 +2075,6 @@ public enum CodeScanningAlertInstanceListState
     Open,
     [JsonStringEnumMemberName("fixed")]
     Fixed
-}
-
-/// <summary>
-/// Code scanning default setup has been configured or not.
-/// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum CodeScanningDefaultSetupState
-{
-    [JsonStringEnumMemberName("configured")]
-    Configured,
-    [JsonStringEnumMemberName("not-configured")]
-    NotConfigured
 }
 
 /// <summary>
@@ -2170,6 +2200,30 @@ public enum CodeScanningOrganizationAlertItemsDismissedReason
 }
 
 /// <summary>
+/// The default repository access level for Dependabot updates.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum DefaultLevel
+{
+    [JsonStringEnumMemberName("public")]
+    Public,
+    [JsonStringEnumMemberName("internal")]
+    Internal
+}
+
+/// <summary>
+/// Whether team members will receive notifications when the team is mentioned.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum NotificationSetting
+{
+    [JsonStringEnumMemberName("notifications_enabled")]
+    NotificationsEnabled,
+    [JsonStringEnumMemberName("notifications_disabled")]
+    NotificationsDisabled
+}
+
+/// <summary>
 /// How the author is associated with the repository.
 /// </summary>
 [JsonConverter(typeof(JsonStringEnumConverter))]
@@ -2283,6 +2337,8 @@ public enum IssueFieldValueDataType
     Text,
     [JsonStringEnumMemberName("single_select")]
     SingleSelect,
+    [JsonStringEnumMemberName("multi_select")]
+    MultiSelect,
     [JsonStringEnumMemberName("number")]
     Number,
     [JsonStringEnumMemberName("date")]
@@ -2301,6 +2357,8 @@ public enum IssueFieldDataType
     Date,
     [JsonStringEnumMemberName("single_select")]
     SingleSelect,
+    [JsonStringEnumMemberName("multi_select")]
+    MultiSelect,
     [JsonStringEnumMemberName("number")]
     Number
 }
@@ -2355,7 +2413,7 @@ public enum PriceModel
 }
 
 /// <summary>
-/// The type of scope for the budget
+/// The scope of the budget
 /// </summary>
 [JsonConverter(typeof(JsonStringEnumConverter))]
 public enum BudgetScope
@@ -2367,7 +2425,11 @@ public enum BudgetScope
     [JsonStringEnumMemberName("repository")]
     Repository,
     [JsonStringEnumMemberName("cost_center")]
-    CostCenter
+    CostCenter,
+    [JsonStringEnumMemberName("multi_user_customer")]
+    MultiUserCustomer,
+    [JsonStringEnumMemberName("user")]
+    User
 }
 
 /// <summary>
@@ -2578,6 +2640,66 @@ public enum Location
 }
 
 /// <summary>
+/// The base role that determines default permissions.
+/// - `no_access`: No default access
+/// - `reader`: Default read permissions
+/// - `writer`: Default write permissions (organization spaces only)
+/// - `admin`: Default admin permissions (organization spaces only)
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum CopilotSpaceBaseRole
+{
+    [JsonStringEnumMemberName("reader")]
+    Reader,
+    [JsonStringEnumMemberName("writer")]
+    Writer,
+    [JsonStringEnumMemberName("admin")]
+    Admin,
+    [JsonStringEnumMemberName("no_access")]
+    NoAccess
+}
+
+/// <summary>
+/// The system role from which this role inherits permissions.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum OrganizationRoleBaseRole
+{
+    [JsonStringEnumMemberName("read")]
+    Read,
+    [JsonStringEnumMemberName("triage")]
+    Triage,
+    [JsonStringEnumMemberName("write")]
+    Write,
+    [JsonStringEnumMemberName("maintain")]
+    Maintain,
+    [JsonStringEnumMemberName("admin")]
+    Admin
+}
+
+/// <summary>
+/// The type of the resource.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum ResourceType
+{
+    [JsonStringEnumMemberName("repository")]
+    Repository,
+    [JsonStringEnumMemberName("github_file")]
+    GithubFile,
+    [JsonStringEnumMemberName("free_text")]
+    FreeText,
+    [JsonStringEnumMemberName("github_issue")]
+    GithubIssue,
+    [JsonStringEnumMemberName("github_pull_request")]
+    GithubPullRequest,
+    [JsonStringEnumMemberName("media_content")]
+    MediaContent,
+    [JsonStringEnumMemberName("uploaded_text_file")]
+    UploadedTextFile
+}
+
+/// <summary>
 /// The organization policy for allowing or blocking suggestions matching public code (duplication detection filter).
 /// </summary>
 [JsonConverter(typeof(JsonStringEnumConverter))]
@@ -2675,18 +2797,6 @@ public enum CopilotSeatDetailsPlanType
     Unknown
 }
 
-/// <summary>
-/// The default repository access level for Dependabot updates.
-/// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum DefaultLevel
-{
-    [JsonStringEnumMemberName("public")]
-    Public,
-    [JsonStringEnumMemberName("internal")]
-    Internal
-}
-
 [JsonConverter(typeof(JsonStringEnumConverter))]
 public enum PackageType
 {
@@ -2763,24 +2873,6 @@ public enum TeamMembershipRole
 }
 
 /// <summary>
-/// The system role from which this role inherits permissions.
-/// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum BaseRole
-{
-    [JsonStringEnumMemberName("read")]
-    Read,
-    [JsonStringEnumMemberName("triage")]
-    Triage,
-    [JsonStringEnumMemberName("write")]
-    Write,
-    [JsonStringEnumMemberName("maintain")]
-    Maintain,
-    [JsonStringEnumMemberName("admin")]
-    Admin
-}
-
-/// <summary>
 /// Determines if the team has a direct, indirect, or mixed relationship to a role
 /// </summary>
 [JsonConverter(typeof(JsonStringEnumConverter))]
@@ -2849,7 +2941,9 @@ public enum AuthType
     [JsonStringEnumMemberName("oidc_jfrog")]
     OidcJfrog,
     [JsonStringEnumMemberName("oidc_cloudsmith")]
-    OidcCloudsmith
+    OidcCloudsmith,
+    [JsonStringEnumMemberName("oidc_gcp")]
+    OidcGcp
 }
 
 /// <summary>
@@ -2965,7 +3059,9 @@ public enum ActorType
     [JsonStringEnumMemberName("Team")]
     Team,
     [JsonStringEnumMemberName("DeployKey")]
-    DeployKey
+    DeployKey,
+    [JsonStringEnumMemberName("User")]
+    User
 }
 
 /// <summary>
@@ -3219,18 +3315,6 @@ public enum WebhooksTeamPrivacy
 }
 
 /// <summary>
-/// The notification setting the team has set
-/// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum NotificationSetting
-{
-    [JsonStringEnumMemberName("notifications_enabled")]
-    NotificationsEnabled,
-    [JsonStringEnumMemberName("notifications_disabled")]
-    NotificationsDisabled
-}
-
-/// <summary>
 /// The outcome of the job.
 /// </summary>
 [JsonConverter(typeof(JsonStringEnumConverter))]
@@ -3365,6 +3449,16 @@ public enum ActivityType
 }
 
 /// <summary>
+/// The frequency of the periodic analysis.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum Schedule
+{
+    [JsonStringEnumMemberName("weekly")]
+    Weekly
+}
+
+/// <summary>
 /// The language targeted by the CodeQL query
 /// </summary>
 [JsonConverter(typeof(JsonStringEnumConverter))]
@@ -3448,16 +3542,6 @@ public enum ThreatModel
     Remote,
     [JsonStringEnumMemberName("remote_and_local")]
     RemoteAndLocal
-}
-
-/// <summary>
-/// The frequency of the periodic analysis.
-/// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum Schedule
-{
-    [JsonStringEnumMemberName("weekly")]
-    Weekly
 }
 
 /// <summary>
@@ -3560,6 +3644,18 @@ public enum WebhookMembershipRemovedScope
     Team,
     [JsonStringEnumMemberName("organization")]
     Organization
+}
+
+/// <summary>
+/// The Git hash algorithm used by this repository.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum HashAlgorithm
+{
+    [JsonStringEnumMemberName("sha1")]
+    Sha1,
+    [JsonStringEnumMemberName("sha256")]
+    Sha256
 }
 
 /// <summary>
@@ -4183,6 +4279,20 @@ public enum WebhookIssuesDemilestonedAction
 {
     [JsonStringEnumMemberName("demilestoned")]
     Demilestoned
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum WebhookIssuesFieldAddedAction
+{
+    [JsonStringEnumMemberName("field_added")]
+    FieldAdded
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum WebhookIssuesFieldRemovedAction
+{
+    [JsonStringEnumMemberName("field_removed")]
+    FieldRemoved
 }
 
 [JsonConverter(typeof(JsonStringEnumConverter))]
@@ -5559,6 +5669,12 @@ public record AppPermissions
     public Checks? Checks { get; init; }
 
     /// <summary>
+    /// The level of permission to grant the access token to view and manage code quality data.
+    /// </summary>
+    [JsonPropertyName("code_quality")]
+    public CodeQuality? CodeQuality { get; init; }
+
+    /// <summary>
     /// The level of permission to grant the access token to create, edit, delete, and list Codespaces.
     /// </summary>
     [JsonPropertyName("codespaces")]
@@ -5733,7 +5849,7 @@ public record AppPermissions
     public OrganizationCopilotSeatManagement? OrganizationCopilotSeatManagement { get; init; }
 
     /// <summary>
-    /// The level of permission to grant the access token to view and manage Copilot coding agent settings for an organization.
+    /// The level of permission to grant the access token to view and manage Copilot cloud agent settings for an organization.
     /// </summary>
     [JsonPropertyName("organization_copilot_agent_settings")]
     public OrganizationCopilotAgentSettings? OrganizationCopilotAgentSettings { get; init; }
@@ -8136,6 +8252,305 @@ public record DependabotAlertWithRepository
 }
 
 /// <summary>
+/// A GitHub repository.
+/// </summary>
+public record NullableSimpleRepository
+{
+    /// <summary>
+    /// A unique identifier of the repository.
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required long Id { get; init; }
+
+    /// <summary>
+    /// The GraphQL identifier of the repository.
+    /// </summary>
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    /// <summary>
+    /// The name of the repository.
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    /// <summary>
+    /// The full, globally unique, name of the repository.
+    /// </summary>
+    [JsonPropertyName("full_name")]
+    public required string FullName { get; init; }
+
+    /// <summary>
+    /// A GitHub user.
+    /// </summary>
+    [JsonPropertyName("owner")]
+    public required SimpleUser Owner { get; init; }
+
+    /// <summary>
+    /// Whether the repository is private.
+    /// </summary>
+    [JsonPropertyName("private")]
+    public required bool Private { get; init; }
+
+    /// <summary>
+    /// The URL to view the repository on GitHub.com.
+    /// </summary>
+    [JsonPropertyName("html_url")]
+    public required Uri HtmlUrl { get; init; }
+
+    /// <summary>
+    /// The repository description.
+    /// </summary>
+    [JsonPropertyName("description")]
+    public required string? Description { get; init; }
+
+    /// <summary>
+    /// Whether the repository is a fork.
+    /// </summary>
+    [JsonPropertyName("fork")]
+    public required bool Fork { get; init; }
+
+    /// <summary>
+    /// The URL to get more information about the repository from the GitHub API.
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+    /// <summary>
+    /// A template for the API URL to download the repository as an archive.
+    /// </summary>
+    [JsonPropertyName("archive_url")]
+    public required string ArchiveUrl { get; init; }
+
+    /// <summary>
+    /// A template for the API URL to list the available assignees for issues in the repository.
+    /// </summary>
+    [JsonPropertyName("assignees_url")]
+    public required string AssigneesUrl { get; init; }
+
+    /// <summary>
+    /// A template for the API URL to create or retrieve a raw Git blob in the repository.
+    /// </summary>
+    [JsonPropertyName("blobs_url")]
+    public required string BlobsUrl { get; init; }
+
+    /// <summary>
+    /// A template for the API URL to get information about branches in the repository.
+    /// </summary>
+    [JsonPropertyName("branches_url")]
+    public required string BranchesUrl { get; init; }
+
+    /// <summary>
+    /// A template for the API URL to get information about collaborators of the repository.
+    /// </summary>
+    [JsonPropertyName("collaborators_url")]
+    public required string CollaboratorsUrl { get; init; }
+
+    /// <summary>
+    /// A template for the API URL to get information about comments on the repository.
+    /// </summary>
+    [JsonPropertyName("comments_url")]
+    public required string CommentsUrl { get; init; }
+
+    /// <summary>
+    /// A template for the API URL to get information about commits on the repository.
+    /// </summary>
+    [JsonPropertyName("commits_url")]
+    public required string CommitsUrl { get; init; }
+
+    /// <summary>
+    /// A template for the API URL to compare two commits or refs.
+    /// </summary>
+    [JsonPropertyName("compare_url")]
+    public required string CompareUrl { get; init; }
+
+    /// <summary>
+    /// A template for the API URL to get the contents of the repository.
+    /// </summary>
+    [JsonPropertyName("contents_url")]
+    public required string ContentsUrl { get; init; }
+
+    /// <summary>
+    /// A template for the API URL to list the contributors to the repository.
+    /// </summary>
+    [JsonPropertyName("contributors_url")]
+    public required Uri ContributorsUrl { get; init; }
+
+    /// <summary>
+    /// The API URL to list the deployments of the repository.
+    /// </summary>
+    [JsonPropertyName("deployments_url")]
+    public required Uri DeploymentsUrl { get; init; }
+
+    /// <summary>
+    /// The API URL to list the downloads on the repository.
+    /// </summary>
+    [JsonPropertyName("downloads_url")]
+    public required Uri DownloadsUrl { get; init; }
+
+    /// <summary>
+    /// The API URL to list the events of the repository.
+    /// </summary>
+    [JsonPropertyName("events_url")]
+    public required Uri EventsUrl { get; init; }
+
+    /// <summary>
+    /// The API URL to list the forks of the repository.
+    /// </summary>
+    [JsonPropertyName("forks_url")]
+    public required Uri ForksUrl { get; init; }
+
+    /// <summary>
+    /// A template for the API URL to get information about Git commits of the repository.
+    /// </summary>
+    [JsonPropertyName("git_commits_url")]
+    public required string GitCommitsUrl { get; init; }
+
+    /// <summary>
+    /// A template for the API URL to get information about Git refs of the repository.
+    /// </summary>
+    [JsonPropertyName("git_refs_url")]
+    public required string GitRefsUrl { get; init; }
+
+    /// <summary>
+    /// A template for the API URL to get information about Git tags of the repository.
+    /// </summary>
+    [JsonPropertyName("git_tags_url")]
+    public required string GitTagsUrl { get; init; }
+
+    /// <summary>
+    /// A template for the API URL to get information about issue comments on the repository.
+    /// </summary>
+    [JsonPropertyName("issue_comment_url")]
+    public required string IssueCommentUrl { get; init; }
+
+    /// <summary>
+    /// A template for the API URL to get information about issue events on the repository.
+    /// </summary>
+    [JsonPropertyName("issue_events_url")]
+    public required string IssueEventsUrl { get; init; }
+
+    /// <summary>
+    /// A template for the API URL to get information about issues on the repository.
+    /// </summary>
+    [JsonPropertyName("issues_url")]
+    public required string IssuesUrl { get; init; }
+
+    /// <summary>
+    /// A template for the API URL to get information about deploy keys on the repository.
+    /// </summary>
+    [JsonPropertyName("keys_url")]
+    public required string KeysUrl { get; init; }
+
+    /// <summary>
+    /// A template for the API URL to get information about labels of the repository.
+    /// </summary>
+    [JsonPropertyName("labels_url")]
+    public required string LabelsUrl { get; init; }
+
+    /// <summary>
+    /// The API URL to get information about the languages of the repository.
+    /// </summary>
+    [JsonPropertyName("languages_url")]
+    public required Uri LanguagesUrl { get; init; }
+
+    /// <summary>
+    /// The API URL to merge branches in the repository.
+    /// </summary>
+    [JsonPropertyName("merges_url")]
+    public required Uri MergesUrl { get; init; }
+
+    /// <summary>
+    /// A template for the API URL to get information about milestones of the repository.
+    /// </summary>
+    [JsonPropertyName("milestones_url")]
+    public required string MilestonesUrl { get; init; }
+
+    /// <summary>
+    /// A template for the API URL to get information about notifications on the repository.
+    /// </summary>
+    [JsonPropertyName("notifications_url")]
+    public required string NotificationsUrl { get; init; }
+
+    /// <summary>
+    /// A template for the API URL to get information about pull requests on the repository.
+    /// </summary>
+    [JsonPropertyName("pulls_url")]
+    public required string PullsUrl { get; init; }
+
+    /// <summary>
+    /// A template for the API URL to get information about releases on the repository.
+    /// </summary>
+    [JsonPropertyName("releases_url")]
+    public required string ReleasesUrl { get; init; }
+
+    /// <summary>
+    /// The API URL to list the stargazers on the repository.
+    /// </summary>
+    [JsonPropertyName("stargazers_url")]
+    public required Uri StargazersUrl { get; init; }
+
+    /// <summary>
+    /// A template for the API URL to get information about statuses of a commit.
+    /// </summary>
+    [JsonPropertyName("statuses_url")]
+    public required string StatusesUrl { get; init; }
+
+    /// <summary>
+    /// The API URL to list the subscribers on the repository.
+    /// </summary>
+    [JsonPropertyName("subscribers_url")]
+    public required Uri SubscribersUrl { get; init; }
+
+    /// <summary>
+    /// The API URL to subscribe to notifications for this repository.
+    /// </summary>
+    [JsonPropertyName("subscription_url")]
+    public required Uri SubscriptionUrl { get; init; }
+
+    /// <summary>
+    /// The API URL to get information about tags on the repository.
+    /// </summary>
+    [JsonPropertyName("tags_url")]
+    public required Uri TagsUrl { get; init; }
+
+    /// <summary>
+    /// The API URL to list the teams on the repository.
+    /// </summary>
+    [JsonPropertyName("teams_url")]
+    public required Uri TeamsUrl { get; init; }
+
+    /// <summary>
+    /// A template for the API URL to create or retrieve a raw Git tree of the repository.
+    /// </summary>
+    [JsonPropertyName("trees_url")]
+    public required string TreesUrl { get; init; }
+
+    /// <summary>
+    /// The API URL to list the hooks on the repository.
+    /// </summary>
+    [JsonPropertyName("hooks_url")]
+    public required Uri HooksUrl { get; init; }
+
+}
+
+/// <summary>
+/// Information about repositories that Dependabot is able to access in an organization
+/// </summary>
+public record DependabotRepositoryAccessDetails
+{
+    /// <summary>
+    /// The default repository access level for Dependabot updates.
+    /// </summary>
+    [JsonPropertyName("default_level")]
+    public DefaultLevel? DefaultLevel { get; init; }
+
+    [JsonPropertyName("accessible_repositories")]
+    public IReadOnlyList<NullableSimpleRepository>? AccessibleRepositories { get; init; }
+
+}
+
+/// <summary>
 /// Group of enterprise owners and/or members
 /// </summary>
 public record EnterpriseTeam
@@ -8184,6 +8599,12 @@ public record EnterpriseTeam
 
     [JsonPropertyName("updated_at")]
     public required DateTimeOffset UpdatedAt { get; init; }
+
+    /// <summary>
+    /// Whether team members will receive notifications when the team is mentioned.
+    /// </summary>
+    [JsonPropertyName("notification_setting")]
+    public NotificationSetting? NotificationSetting { get; init; }
 
 }
 
@@ -8456,7 +8877,7 @@ public record NullableMilestone
 }
 
 /// <summary>
-/// The type of issue.
+/// The type assigned to the issue. This is only present for issues in repositories where issue types are supported.
 /// </summary>
 public record IssueType
 {
@@ -8785,6 +9206,12 @@ public record IssueFieldValue
     [JsonPropertyName("single_select_option")]
     public object? SingleSelectOption { get; init; }
 
+    /// <summary>
+    /// Details about the selected options
+    /// </summary>
+    [JsonPropertyName("multi_select_options")]
+    public IReadOnlyList<object>? MultiSelectOptions { get; init; }
+
 }
 
 /// <summary>
@@ -8916,7 +9343,7 @@ public record Issue
     public Uri? TimelineUrl { get; init; }
 
     /// <summary>
-    /// The type of issue.
+    /// The type assigned to the issue. This is only present for issues in repositories where issue types are supported.
     /// </summary>
     [JsonPropertyName("type")]
     public IssueType? Type { get; init; }
@@ -10331,6 +10758,40 @@ public record ActionsCacheStorageLimitForOrganization
 
 }
 
+public record BillingAiCreditUsageReportOrg
+{
+    [JsonPropertyName("timePeriod")]
+    public required object TimePeriod { get; init; }
+
+    /// <summary>
+    /// The unique identifier of the organization.
+    /// </summary>
+    [JsonPropertyName("organization")]
+    public required string Organization { get; init; }
+
+    /// <summary>
+    /// The name of the user for the usage report.
+    /// </summary>
+    [JsonPropertyName("user")]
+    public string? User { get; init; }
+
+    /// <summary>
+    /// The product for the usage report.
+    /// </summary>
+    [JsonPropertyName("product")]
+    public string? Product { get; init; }
+
+    /// <summary>
+    /// The model for the usage report.
+    /// </summary>
+    [JsonPropertyName("model")]
+    public string? Model { get; init; }
+
+    [JsonPropertyName("usageItems")]
+    public required IReadOnlyList<object> UsageItems { get; init; }
+
+}
+
 public record Budget
 {
     /// <summary>
@@ -10358,16 +10819,22 @@ public record Budget
     public required bool PreventFurtherUsage { get; init; }
 
     /// <summary>
-    /// The scope of the budget (enterprise, organization, repository, cost center)
+    /// The scope of the budget
     /// </summary>
     [JsonPropertyName("budget_scope")]
-    public required string BudgetScope { get; init; }
+    public required BudgetScope BudgetScope { get; init; }
 
     /// <summary>
     /// The name of the entity for the budget (enterprise does not require a name).
     /// </summary>
     [JsonPropertyName("budget_entity_name")]
     public string? BudgetEntityName { get; init; }
+
+    /// <summary>
+    /// The user login when the budget is scoped to a single user (`user` scope).
+    /// </summary>
+    [JsonPropertyName("user")]
+    public string? User { get; init; }
 
     /// <summary>
     /// A single product or sku to apply the budget to.
@@ -10389,6 +10856,18 @@ public record GetAllBudgets
     public required IReadOnlyList<Budget> Budgets { get; init; }
 
     /// <summary>
+    /// User login included when the response is scoped with the `user` query parameter.
+    /// </summary>
+    [JsonPropertyName("user")]
+    public string? User { get; init; }
+
+    /// <summary>
+    /// Effective user-level budget details returned when the response is scoped with the `user` query parameter.
+    /// </summary>
+    [JsonPropertyName("effective_budget")]
+    public object? EffectiveBudget { get; init; }
+
+    /// <summary>
     /// Indicates if there are more pages of results available (maps to hasNextPage from billing platform)
     /// </summary>
     [JsonPropertyName("has_next_page")]
@@ -10399,6 +10878,19 @@ public record GetAllBudgets
     /// </summary>
     [JsonPropertyName("total_count")]
     public int? TotalCount { get; init; }
+
+}
+
+public record CreateBudget
+{
+    /// <summary>
+    /// A message indicating the result of the create operation
+    /// </summary>
+    [JsonPropertyName("message")]
+    public required string Message { get; init; }
+
+    [JsonPropertyName("budget")]
+    public required object Budget { get; init; }
 
 }
 
@@ -10421,6 +10913,12 @@ public record GetBudget
     /// </summary>
     [JsonPropertyName("budget_entity_name")]
     public required string BudgetEntityName { get; init; }
+
+    /// <summary>
+    /// The user login when the budget is scoped to a single user (`user` scope).
+    /// </summary>
+    [JsonPropertyName("user")]
+    public string? User { get; init; }
 
     /// <summary>
     /// The budget amount in whole dollars. For license-based products, this represents the number of licenses.
@@ -10448,6 +10946,19 @@ public record GetBudget
 
     [JsonPropertyName("budget_alerting")]
     public required object BudgetAlerting { get; init; }
+
+}
+
+public record UpdateBudget
+{
+    /// <summary>
+    /// A message indicating the result of the update operation
+    /// </summary>
+    [JsonPropertyName("message")]
+    public required string Message { get; init; }
+
+    [JsonPropertyName("budget")]
+    public required object Budget { get; init; }
 
 }
 
@@ -11172,6 +11683,12 @@ public record OidcCustomSub
     [JsonPropertyName("include_claim_keys")]
     public required IReadOnlyList<string> IncludeClaimKeys { get; init; }
 
+    /// <summary>
+    /// Whether to opt in to the immutable OIDC subject claim format for the organization. When `true`, new OIDC tokens will use a stable, repository-ID-based `sub` claim instead of the name-based format.
+    /// </summary>
+    [JsonPropertyName("use_immutable_subject")]
+    public bool? UseImmutableSubject { get; init; }
+
 }
 
 /// <summary>
@@ -11585,6 +12102,12 @@ public record Runner
 
     [JsonPropertyName("ephemeral")]
     public bool? Ephemeral { get; init; }
+
+    /// <summary>
+    /// The version of the GitHub Actions Runner software. This is only set if the runner has connected to the service at least once.
+    /// </summary>
+    [JsonPropertyName("version")]
+    public string? Version { get; init; }
 
 }
 
@@ -12814,6 +13337,145 @@ public record CodespacesPublicKey
 }
 
 /// <summary>
+/// A GitHub Copilot Space represents an interactive AI workspace where users can ask questions and get assistance.
+/// </summary>
+public record CopilotSpace
+{
+    /// <summary>
+    /// The unique identifier of the space.
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required long Id { get; init; }
+
+    /// <summary>
+    /// The number that identifies the space within its owner.
+    /// </summary>
+    [JsonPropertyName("number")]
+    public required int Number { get; init; }
+
+    /// <summary>
+    /// The display name of the space.
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    /// <summary>
+    /// A description of the space.
+    /// </summary>
+    [JsonPropertyName("description")]
+    public string? Description { get; init; }
+
+    /// <summary>
+    /// General instructions for the Copilot Space.
+    /// </summary>
+    [JsonPropertyName("general_instructions")]
+    public string? GeneralInstructions { get; init; }
+
+    /// <summary>
+    /// The base role that determines default permissions.
+    /// - `no_access`: No default access
+    /// - `reader`: Default read permissions
+    /// - `writer`: Default write permissions (organization spaces only)
+    /// - `admin`: Default admin permissions (organization spaces only)
+    /// </summary>
+    [JsonPropertyName("base_role")]
+    public required CopilotSpaceBaseRole BaseRole { get; init; }
+
+    /// <summary>
+    /// The user or organization that owns this space.
+    /// </summary>
+    [JsonPropertyName("owner")]
+    public required object Owner { get; init; }
+
+    /// <summary>
+    /// A GitHub user.
+    /// </summary>
+    [JsonPropertyName("creator")]
+    public required SimpleUser Creator { get; init; }
+
+    /// <summary>
+    /// The date and time the space was created.
+    /// </summary>
+    [JsonPropertyName("created_at")]
+    public required DateTimeOffset CreatedAt { get; init; }
+
+    /// <summary>
+    /// The date and time the space was last updated.
+    /// </summary>
+    [JsonPropertyName("updated_at")]
+    public required DateTimeOffset UpdatedAt { get; init; }
+
+    /// <summary>
+    /// The HTML URL of the space.
+    /// </summary>
+    [JsonPropertyName("html_url")]
+    public required Uri HtmlUrl { get; init; }
+
+    /// <summary>
+    /// The API URL of the space.
+    /// </summary>
+    [JsonPropertyName("api_url")]
+    public required Uri ApiUrl { get; init; }
+
+    /// <summary>
+    /// Resources attached to the space.
+    /// </summary>
+    [JsonPropertyName("resources_attributes")]
+    public IReadOnlyList<object>? ResourcesAttributes { get; init; }
+
+}
+
+/// <summary>
+/// A collaborator (user or team) of a Copilot Space
+/// </summary>
+public record CopilotSpaceCollaborator
+{
+}
+
+/// <summary>
+/// A resource attached to a Copilot Space.
+/// </summary>
+public record CopilotSpaceResource
+{
+    /// <summary>
+    /// The unique identifier of the resource.
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    /// <summary>
+    /// The type of the resource.
+    /// </summary>
+    [JsonPropertyName("resource_type")]
+    public required ResourceType ResourceType { get; init; }
+
+    /// <summary>
+    /// The ID of the associated chat attachment, if any.
+    /// </summary>
+    [JsonPropertyName("copilot_chat_attachment_id")]
+    public int? CopilotChatAttachmentId { get; init; }
+
+    /// <summary>
+    /// Resource-specific metadata. The keys and values depend on the resource type.
+    /// </summary>
+    [JsonPropertyName("metadata")]
+    public required object Metadata { get; init; }
+
+    /// <summary>
+    /// The date and time the resource was created.
+    /// </summary>
+    [JsonPropertyName("created_at")]
+    public required DateTimeOffset CreatedAt { get; init; }
+
+    /// <summary>
+    /// The date and time the resource was last updated.
+    /// </summary>
+    [JsonPropertyName("updated_at")]
+    public required DateTimeOffset UpdatedAt { get; init; }
+
+}
+
+/// <summary>
 /// The breakdown of Copilot Business seats for the organization.
 /// </summary>
 public record CopilotOrganizationSeatBreakdown
@@ -13142,305 +13804,6 @@ public record CopilotUsageMetricsDay
     /// </summary>
     [JsonPropertyName("copilot_dotcom_pull_requests")]
     public CopilotDotcomPullRequests? CopilotDotcomPullRequests { get; init; }
-
-}
-
-/// <summary>
-/// A GitHub repository.
-/// </summary>
-public record NullableSimpleRepository
-{
-    /// <summary>
-    /// A unique identifier of the repository.
-    /// </summary>
-    [JsonPropertyName("id")]
-    public required long Id { get; init; }
-
-    /// <summary>
-    /// The GraphQL identifier of the repository.
-    /// </summary>
-    [JsonPropertyName("node_id")]
-    public required string NodeId { get; init; }
-
-    /// <summary>
-    /// The name of the repository.
-    /// </summary>
-    [JsonPropertyName("name")]
-    public required string Name { get; init; }
-
-    /// <summary>
-    /// The full, globally unique, name of the repository.
-    /// </summary>
-    [JsonPropertyName("full_name")]
-    public required string FullName { get; init; }
-
-    /// <summary>
-    /// A GitHub user.
-    /// </summary>
-    [JsonPropertyName("owner")]
-    public required SimpleUser Owner { get; init; }
-
-    /// <summary>
-    /// Whether the repository is private.
-    /// </summary>
-    [JsonPropertyName("private")]
-    public required bool Private { get; init; }
-
-    /// <summary>
-    /// The URL to view the repository on GitHub.com.
-    /// </summary>
-    [JsonPropertyName("html_url")]
-    public required Uri HtmlUrl { get; init; }
-
-    /// <summary>
-    /// The repository description.
-    /// </summary>
-    [JsonPropertyName("description")]
-    public required string? Description { get; init; }
-
-    /// <summary>
-    /// Whether the repository is a fork.
-    /// </summary>
-    [JsonPropertyName("fork")]
-    public required bool Fork { get; init; }
-
-    /// <summary>
-    /// The URL to get more information about the repository from the GitHub API.
-    /// </summary>
-    [JsonPropertyName("url")]
-    public required Uri Url { get; init; }
-
-    /// <summary>
-    /// A template for the API URL to download the repository as an archive.
-    /// </summary>
-    [JsonPropertyName("archive_url")]
-    public required string ArchiveUrl { get; init; }
-
-    /// <summary>
-    /// A template for the API URL to list the available assignees for issues in the repository.
-    /// </summary>
-    [JsonPropertyName("assignees_url")]
-    public required string AssigneesUrl { get; init; }
-
-    /// <summary>
-    /// A template for the API URL to create or retrieve a raw Git blob in the repository.
-    /// </summary>
-    [JsonPropertyName("blobs_url")]
-    public required string BlobsUrl { get; init; }
-
-    /// <summary>
-    /// A template for the API URL to get information about branches in the repository.
-    /// </summary>
-    [JsonPropertyName("branches_url")]
-    public required string BranchesUrl { get; init; }
-
-    /// <summary>
-    /// A template for the API URL to get information about collaborators of the repository.
-    /// </summary>
-    [JsonPropertyName("collaborators_url")]
-    public required string CollaboratorsUrl { get; init; }
-
-    /// <summary>
-    /// A template for the API URL to get information about comments on the repository.
-    /// </summary>
-    [JsonPropertyName("comments_url")]
-    public required string CommentsUrl { get; init; }
-
-    /// <summary>
-    /// A template for the API URL to get information about commits on the repository.
-    /// </summary>
-    [JsonPropertyName("commits_url")]
-    public required string CommitsUrl { get; init; }
-
-    /// <summary>
-    /// A template for the API URL to compare two commits or refs.
-    /// </summary>
-    [JsonPropertyName("compare_url")]
-    public required string CompareUrl { get; init; }
-
-    /// <summary>
-    /// A template for the API URL to get the contents of the repository.
-    /// </summary>
-    [JsonPropertyName("contents_url")]
-    public required string ContentsUrl { get; init; }
-
-    /// <summary>
-    /// A template for the API URL to list the contributors to the repository.
-    /// </summary>
-    [JsonPropertyName("contributors_url")]
-    public required Uri ContributorsUrl { get; init; }
-
-    /// <summary>
-    /// The API URL to list the deployments of the repository.
-    /// </summary>
-    [JsonPropertyName("deployments_url")]
-    public required Uri DeploymentsUrl { get; init; }
-
-    /// <summary>
-    /// The API URL to list the downloads on the repository.
-    /// </summary>
-    [JsonPropertyName("downloads_url")]
-    public required Uri DownloadsUrl { get; init; }
-
-    /// <summary>
-    /// The API URL to list the events of the repository.
-    /// </summary>
-    [JsonPropertyName("events_url")]
-    public required Uri EventsUrl { get; init; }
-
-    /// <summary>
-    /// The API URL to list the forks of the repository.
-    /// </summary>
-    [JsonPropertyName("forks_url")]
-    public required Uri ForksUrl { get; init; }
-
-    /// <summary>
-    /// A template for the API URL to get information about Git commits of the repository.
-    /// </summary>
-    [JsonPropertyName("git_commits_url")]
-    public required string GitCommitsUrl { get; init; }
-
-    /// <summary>
-    /// A template for the API URL to get information about Git refs of the repository.
-    /// </summary>
-    [JsonPropertyName("git_refs_url")]
-    public required string GitRefsUrl { get; init; }
-
-    /// <summary>
-    /// A template for the API URL to get information about Git tags of the repository.
-    /// </summary>
-    [JsonPropertyName("git_tags_url")]
-    public required string GitTagsUrl { get; init; }
-
-    /// <summary>
-    /// A template for the API URL to get information about issue comments on the repository.
-    /// </summary>
-    [JsonPropertyName("issue_comment_url")]
-    public required string IssueCommentUrl { get; init; }
-
-    /// <summary>
-    /// A template for the API URL to get information about issue events on the repository.
-    /// </summary>
-    [JsonPropertyName("issue_events_url")]
-    public required string IssueEventsUrl { get; init; }
-
-    /// <summary>
-    /// A template for the API URL to get information about issues on the repository.
-    /// </summary>
-    [JsonPropertyName("issues_url")]
-    public required string IssuesUrl { get; init; }
-
-    /// <summary>
-    /// A template for the API URL to get information about deploy keys on the repository.
-    /// </summary>
-    [JsonPropertyName("keys_url")]
-    public required string KeysUrl { get; init; }
-
-    /// <summary>
-    /// A template for the API URL to get information about labels of the repository.
-    /// </summary>
-    [JsonPropertyName("labels_url")]
-    public required string LabelsUrl { get; init; }
-
-    /// <summary>
-    /// The API URL to get information about the languages of the repository.
-    /// </summary>
-    [JsonPropertyName("languages_url")]
-    public required Uri LanguagesUrl { get; init; }
-
-    /// <summary>
-    /// The API URL to merge branches in the repository.
-    /// </summary>
-    [JsonPropertyName("merges_url")]
-    public required Uri MergesUrl { get; init; }
-
-    /// <summary>
-    /// A template for the API URL to get information about milestones of the repository.
-    /// </summary>
-    [JsonPropertyName("milestones_url")]
-    public required string MilestonesUrl { get; init; }
-
-    /// <summary>
-    /// A template for the API URL to get information about notifications on the repository.
-    /// </summary>
-    [JsonPropertyName("notifications_url")]
-    public required string NotificationsUrl { get; init; }
-
-    /// <summary>
-    /// A template for the API URL to get information about pull requests on the repository.
-    /// </summary>
-    [JsonPropertyName("pulls_url")]
-    public required string PullsUrl { get; init; }
-
-    /// <summary>
-    /// A template for the API URL to get information about releases on the repository.
-    /// </summary>
-    [JsonPropertyName("releases_url")]
-    public required string ReleasesUrl { get; init; }
-
-    /// <summary>
-    /// The API URL to list the stargazers on the repository.
-    /// </summary>
-    [JsonPropertyName("stargazers_url")]
-    public required Uri StargazersUrl { get; init; }
-
-    /// <summary>
-    /// A template for the API URL to get information about statuses of a commit.
-    /// </summary>
-    [JsonPropertyName("statuses_url")]
-    public required string StatusesUrl { get; init; }
-
-    /// <summary>
-    /// The API URL to list the subscribers on the repository.
-    /// </summary>
-    [JsonPropertyName("subscribers_url")]
-    public required Uri SubscribersUrl { get; init; }
-
-    /// <summary>
-    /// The API URL to subscribe to notifications for this repository.
-    /// </summary>
-    [JsonPropertyName("subscription_url")]
-    public required Uri SubscriptionUrl { get; init; }
-
-    /// <summary>
-    /// The API URL to get information about tags on the repository.
-    /// </summary>
-    [JsonPropertyName("tags_url")]
-    public required Uri TagsUrl { get; init; }
-
-    /// <summary>
-    /// The API URL to list the teams on the repository.
-    /// </summary>
-    [JsonPropertyName("teams_url")]
-    public required Uri TeamsUrl { get; init; }
-
-    /// <summary>
-    /// A template for the API URL to create or retrieve a raw Git tree of the repository.
-    /// </summary>
-    [JsonPropertyName("trees_url")]
-    public required string TreesUrl { get; init; }
-
-    /// <summary>
-    /// The API URL to list the hooks on the repository.
-    /// </summary>
-    [JsonPropertyName("hooks_url")]
-    public required Uri HooksUrl { get; init; }
-
-}
-
-/// <summary>
-/// Information about repositories that Dependabot is able to access in an organization
-/// </summary>
-public record DependabotRepositoryAccessDetails
-{
-    /// <summary>
-    /// The default repository access level for Dependabot updates.
-    /// </summary>
-    [JsonPropertyName("default_level")]
-    public DefaultLevel? DefaultLevel { get; init; }
-
-    [JsonPropertyName("accessible_repositories")]
-    public IReadOnlyList<NullableSimpleRepository>? AccessibleRepositories { get; init; }
 
 }
 
@@ -14075,7 +14438,7 @@ public record IssueField
     public IssueFieldVisibility? Visibility { get; init; }
 
     /// <summary>
-    /// Available options for single select fields.
+    /// Available options for single select and multi select fields.
     /// </summary>
     [JsonPropertyName("options")]
     public IReadOnlyList<object>? Options { get; init; }
@@ -14121,7 +14484,7 @@ public record OrganizationCreateIssueField
     public IssueFieldVisibility? Visibility { get; init; }
 
     /// <summary>
-    /// Options for single select fields. Required when data_type is 'single_select'.
+    /// Options for select fields. Required when data_type is 'single_select' or 'multi_select'.
     /// </summary>
     [JsonPropertyName("options")]
     public IReadOnlyList<object>? Options { get; init; }
@@ -14149,7 +14512,7 @@ public record OrganizationUpdateIssueField
     public IssueFieldVisibility? Visibility { get; init; }
 
     /// <summary>
-    /// Options for single select fields. Only applicable when updating single_select fields. When provided, this array **replaces** the entire existing set of options rather than adding to or updating individual options. To retain or update an existing option, include it in the array with its `id`. Options sent without an `id` are treated as new options and may cause existing options to be deleted and recreated.
+    /// Options for select fields. Only applicable when updating single_select or multi_select fields. When provided, this array **replaces** the entire existing set of options rather than adding to or updating individual options. To retain or update an existing option, include it in the array with its `id`. Options sent without an `id` are treated as new options and may cause existing options to be deleted and recreated.
     /// </summary>
     [JsonPropertyName("options")]
     public IReadOnlyList<object>? Options { get; init; }
@@ -14362,7 +14725,7 @@ public record OrganizationRole
     /// The system role from which this role inherits permissions.
     /// </summary>
     [JsonPropertyName("base_role")]
-    public BaseRole? BaseRole { get; init; }
+    public OrganizationRoleBaseRole? BaseRole { get; init; }
 
     /// <summary>
     /// Source answers the question, "where did this role come from?"
@@ -14968,6 +15331,18 @@ public record OrgPrivateRegistryConfiguration
     [JsonPropertyName("api_host")]
     public string? ApiHost { get; init; }
 
+    /// <summary>
+    /// The full resource name of the GCP Workload Identity Provider (e.g. `projects/&lt;NUM&gt;/locations/global/workloadIdentityPools/&lt;POOL&gt;/providers/&lt;PROVIDER&gt;`).
+    /// </summary>
+    [JsonPropertyName("workload_identity_provider")]
+    public string? WorkloadIdentityProvider { get; init; }
+
+    /// <summary>
+    /// The GCP service account email to impersonate. If omitted, the federated token is used directly (direct WIF).
+    /// </summary>
+    [JsonPropertyName("service_account")]
+    public string? ServiceAccount { get; init; }
+
     [JsonPropertyName("created_at")]
     public required DateTimeOffset CreatedAt { get; init; }
 
@@ -15106,6 +15481,18 @@ public record OrgPrivateRegistryConfigurationWithSelectedRepositories
     /// </summary>
     [JsonPropertyName("api_host")]
     public string? ApiHost { get; init; }
+
+    /// <summary>
+    /// The full resource name of the GCP Workload Identity Provider (e.g. `projects/&lt;NUM&gt;/locations/global/workloadIdentityPools/&lt;POOL&gt;/providers/&lt;PROVIDER&gt;`).
+    /// </summary>
+    [JsonPropertyName("workload_identity_provider")]
+    public string? WorkloadIdentityProvider { get; init; }
+
+    /// <summary>
+    /// The GCP service account email to impersonate. If omitted, the federated token is used directly (direct WIF).
+    /// </summary>
+    [JsonPropertyName("service_account")]
+    public string? ServiceAccount { get; init; }
 
     [JsonPropertyName("created_at")]
     public required DateTimeOffset CreatedAt { get; init; }
@@ -16943,7 +17330,7 @@ public enum RepositoryRuleEnforcement
 public record RepositoryRulesetBypassActor
 {
     /// <summary>
-    /// The ID of the actor that can bypass a ruleset. Required for `Integration`, `RepositoryRole`, and `Team` actor types. If `actor_type` is `OrganizationAdmin`, `actor_id` is ignored. If `actor_type` is `DeployKey`, this should be null. `OrganizationAdmin` is not applicable for personal repositories.
+    /// The ID of the actor that can bypass a ruleset. Required for `Integration`, `RepositoryRole`, `Team`, and `User` actor types. If `actor_type` is `OrganizationAdmin`, `actor_id` is ignored. If `actor_type` is `DeployKey`, this should be null. `OrganizationAdmin` is not applicable for personal repositories.
     /// </summary>
     [JsonPropertyName("actor_id")]
     public int? ActorId { get; init; }
@@ -17117,6 +17504,44 @@ public record RepositoryRuleRequiredSignatures
 }
 
 /// <summary>
+/// An actor allowed to dismiss pull request reviews
+/// </summary>
+public record RepositoryRuleParamsActor
+{
+    /// <summary>
+    /// ID of the actor that can dismiss reviews.
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    /// <summary>
+    /// The type of the actor
+    /// </summary>
+    [JsonPropertyName("type")]
+    public required RepositoryRuleParamsActorType Type { get; init; }
+
+}
+
+/// <summary>
+/// Specify people, teams, or apps allowed to dismiss pull request reviews.
+/// </summary>
+public record RepositoryRuleParamsDismissalRestriction
+{
+    /// <summary>
+    /// Specify people, teams, or apps allowed to dismiss pull request reviews.
+    /// </summary>
+    [JsonPropertyName("allowed_actors")]
+    public IReadOnlyList<RepositoryRuleParamsActor>? AllowedActors { get; init; }
+
+    /// <summary>
+    /// Whether to restrict review dismissal to specific actors.
+    /// </summary>
+    [JsonPropertyName("enabled")]
+    public required bool Enabled { get; init; }
+
+}
+
+/// <summary>
 /// A required reviewing team
 /// </summary>
 public record RepositoryRuleParamsReviewer
@@ -17281,58 +17706,6 @@ public record RepositoryRuleTagNamePattern
 }
 
 /// <summary>
-/// Prevent commits that include changes in specified file and folder paths from being pushed to the commit graph. This includes absolute paths that contain file names.
-/// </summary>
-public record RepositoryRuleFilePathRestriction
-{
-    [JsonPropertyName("type")]
-    public required RepositoryRuleFilePathRestrictionType Type { get; init; }
-
-    [JsonPropertyName("parameters")]
-    public object? Parameters { get; init; }
-
-}
-
-/// <summary>
-/// Prevent commits that include file paths that exceed the specified character limit from being pushed to the commit graph.
-/// </summary>
-public record RepositoryRuleMaxFilePathLength
-{
-    [JsonPropertyName("type")]
-    public required RepositoryRuleMaxFilePathLengthType Type { get; init; }
-
-    [JsonPropertyName("parameters")]
-    public object? Parameters { get; init; }
-
-}
-
-/// <summary>
-/// Prevent commits that include files with specified file extensions from being pushed to the commit graph.
-/// </summary>
-public record RepositoryRuleFileExtensionRestriction
-{
-    [JsonPropertyName("type")]
-    public required RepositoryRuleFileExtensionRestrictionType Type { get; init; }
-
-    [JsonPropertyName("parameters")]
-    public object? Parameters { get; init; }
-
-}
-
-/// <summary>
-/// Prevent commits with individual files that exceed the specified limit from being pushed to the commit graph.
-/// </summary>
-public record RepositoryRuleMaxFileSize
-{
-    [JsonPropertyName("type")]
-    public required RepositoryRuleMaxFileSizeType Type { get; init; }
-
-    [JsonPropertyName("parameters")]
-    public object? Parameters { get; init; }
-
-}
-
-/// <summary>
 /// Restricted commit
 /// </summary>
 public record RepositoryRuleParamsRestrictedCommits
@@ -17440,6 +17813,58 @@ public record RepositoryRuleCopilotCodeReview
 {
     [JsonPropertyName("type")]
     public required RepositoryRuleCopilotCodeReviewType Type { get; init; }
+
+    [JsonPropertyName("parameters")]
+    public object? Parameters { get; init; }
+
+}
+
+/// <summary>
+/// Prevent commits that include changes in specified file and folder paths from being pushed to the commit graph. This includes absolute paths that contain file names.
+/// </summary>
+public record RepositoryRuleFilePathRestriction
+{
+    [JsonPropertyName("type")]
+    public required RepositoryRuleFilePathRestrictionType Type { get; init; }
+
+    [JsonPropertyName("parameters")]
+    public object? Parameters { get; init; }
+
+}
+
+/// <summary>
+/// Prevent commits that include file paths that exceed the specified character limit from being pushed to the commit graph.
+/// </summary>
+public record RepositoryRuleMaxFilePathLength
+{
+    [JsonPropertyName("type")]
+    public required RepositoryRuleMaxFilePathLengthType Type { get; init; }
+
+    [JsonPropertyName("parameters")]
+    public object? Parameters { get; init; }
+
+}
+
+/// <summary>
+/// Prevent commits that include files with specified file extensions from being pushed to the commit graph.
+/// </summary>
+public record RepositoryRuleFileExtensionRestriction
+{
+    [JsonPropertyName("type")]
+    public required RepositoryRuleFileExtensionRestrictionType Type { get; init; }
+
+    [JsonPropertyName("parameters")]
+    public object? Parameters { get; init; }
+
+}
+
+/// <summary>
+/// Prevent commits with individual files that exceed the specified limit from being pushed to the commit graph.
+/// </summary>
+public record RepositoryRuleMaxFileSize
+{
+    [JsonPropertyName("type")]
+    public required RepositoryRuleMaxFileSizeType Type { get; init; }
 
     [JsonPropertyName("parameters")]
     public object? Parameters { get; init; }
@@ -19447,6 +19872,45 @@ public record ActionsCacheList
 }
 
 /// <summary>
+/// A list of active concurrency groups for a repository.
+/// </summary>
+public record ConcurrencyGroupList
+{
+    [JsonPropertyName("total_count")]
+    public required int TotalCount { get; init; }
+
+    [JsonPropertyName("concurrency_groups")]
+    public required IReadOnlyList<object> ConcurrencyGroups { get; init; }
+
+}
+
+/// <summary>
+/// A concurrency group with the workflow runs and jobs that are either currently holding
+/// or waiting for the concurrency group lease.
+/// </summary>
+public record ConcurrencyGroup
+{
+    /// <summary>
+    /// The name of the concurrency group.
+    /// </summary>
+    [JsonPropertyName("group_name")]
+    public required string GroupName { get; init; }
+
+    /// <summary>
+    /// API URL for this concurrency group.
+    /// </summary>
+    [JsonPropertyName("group_url")]
+    public required Uri GroupUrl { get; init; }
+
+    [JsonPropertyName("total_count")]
+    public required int TotalCount { get; init; }
+
+    [JsonPropertyName("group_members")]
+    public required IReadOnlyList<object> GroupMembers { get; init; }
+
+}
+
+/// <summary>
 /// Information of a job execution in a workflow run
 /// </summary>
 public record Job
@@ -19592,6 +20056,18 @@ public record OidcCustomSubRepo
     /// </summary>
     [JsonPropertyName("include_claim_keys")]
     public IReadOnlyList<string>? IncludeClaimKeys { get; init; }
+
+    /// <summary>
+    /// Whether the repository has opted in to the immutable OIDC subject claim format. When `true`, OIDC tokens will use a stable, repository-ID-based `sub` claim. If not set at the repository level, falls back to the organization-level setting.
+    /// </summary>
+    [JsonPropertyName("use_immutable_subject")]
+    public bool? UseImmutableSubject { get; init; }
+
+    /// <summary>
+    /// The current `sub` claim prefix for this repository.
+    /// </summary>
+    [JsonPropertyName("sub_claim_prefix")]
+    public string? SubClaimPrefix { get; init; }
 
 }
 
@@ -19975,6 +20451,26 @@ public record EnvironmentApprovals
     /// </summary>
     [JsonPropertyName("comment")]
     public required string Comment { get; init; }
+
+}
+
+/// <summary>
+/// A list of concurrency groups associated with a workflow run.
+/// </summary>
+public record ConcurrencyGroupRunList
+{
+    /// <summary>
+    /// The total number of concurrency groups this workflow run participates in,
+    /// derived from the run's configuration. This count is not filtered by
+    /// whether the run currently holds or is waiting in each group, so it can
+    /// include groups whose `group_members` array is empty (for example, when
+    /// the run has already released its lease in that group).
+    /// </summary>
+    [JsonPropertyName("total_count")]
+    public required int TotalCount { get; init; }
+
+    [JsonPropertyName("concurrency_groups")]
+    public required IReadOnlyList<object> ConcurrencyGroups { get; init; }
 
 }
 
@@ -21094,6 +21590,100 @@ public record CheckSuitePreference
 
 }
 
+/// <summary>
+/// Configuration for code quality setup.
+/// </summary>
+public record CodeQualitySetup
+{
+    /// <summary>
+    /// Code quality setup has been configured or not.
+    /// </summary>
+    [JsonPropertyName("state")]
+    public CodeQualitySetupState? State { get; init; }
+
+    /// <summary>
+    /// Languages to be analyzed.
+    /// </summary>
+    [JsonPropertyName("languages")]
+    public IReadOnlyList<string>? Languages { get; init; }
+
+    /// <summary>
+    /// Runner type to be used.
+    /// </summary>
+    [JsonPropertyName("runner_type")]
+    public CodeQualitySetupRunnerType? RunnerType { get; init; }
+
+    /// <summary>
+    /// Runner label to be used if the runner type is labeled.
+    /// </summary>
+    [JsonPropertyName("runner_label")]
+    public string? RunnerLabel { get; init; }
+
+    /// <summary>
+    /// Timestamp of latest configuration update.
+    /// </summary>
+    [JsonPropertyName("updated_at")]
+    public DateTimeOffset? UpdatedAt { get; init; }
+
+    /// <summary>
+    /// The frequency of the periodic analysis.
+    /// </summary>
+    [JsonPropertyName("schedule")]
+    public Schedule? Schedule { get; init; }
+
+}
+
+/// <summary>
+/// Configuration for code quality setup.
+/// </summary>
+public record CodeQualitySetupUpdate
+{
+    /// <summary>
+    /// The desired state of code quality setup.
+    /// </summary>
+    [JsonPropertyName("state")]
+    public CodeQualitySetupState? State { get; init; }
+
+    /// <summary>
+    /// Runner type to be used.
+    /// </summary>
+    [JsonPropertyName("runner_type")]
+    public CodeQualitySetupRunnerType? RunnerType { get; init; }
+
+    /// <summary>
+    /// Runner label to be used if the runner type is labeled.
+    /// </summary>
+    [JsonPropertyName("runner_label")]
+    public string? RunnerLabel { get; init; }
+
+    /// <summary>
+    /// Languages to be analyzed.
+    /// </summary>
+    [JsonPropertyName("languages")]
+    public IReadOnlyList<string>? Languages { get; init; }
+
+}
+
+/// <summary>
+/// You can use `run_url` to track the status of the run. This includes a property status and conclusion.
+/// You should not rely on this always being an actions workflow run object.
+/// </summary>
+public record CodeQualitySetupUpdateResponse
+{
+    /// <summary>
+    /// ID of the corresponding run.
+    /// </summary>
+    [JsonPropertyName("run_id")]
+    public int? RunId { get; init; }
+
+    /// <summary>
+    /// URL of the corresponding run.
+    /// </summary>
+    [JsonPropertyName("run_url")]
+    public string? RunUrl { get; init; }
+
+}
+
 public record CodeScanningAlertItems
 {
     /// <summary>
@@ -22008,7 +22598,7 @@ public record CodeScanningDefaultSetup
     /// Code scanning default setup has been configured or not.
     /// </summary>
     [JsonPropertyName("state")]
-    public CodeScanningDefaultSetupState? State { get; init; }
+    public CodeQualitySetupState? State { get; init; }
 
     /// <summary>
     /// Languages to be analyzed.
@@ -22020,7 +22610,7 @@ public record CodeScanningDefaultSetup
     /// Runner type to be used.
     /// </summary>
     [JsonPropertyName("runner_type")]
-    public CodeScanningDefaultSetupRunnerType? RunnerType { get; init; }
+    public CodeQualitySetupRunnerType? RunnerType { get; init; }
 
     /// <summary>
     /// Runner label to be used if the runner type is labeled.
@@ -22063,13 +22653,13 @@ public record CodeScanningDefaultSetupUpdate
     /// The desired state of code scanning default setup.
     /// </summary>
     [JsonPropertyName("state")]
-    public CodeScanningDefaultSetupState? State { get; init; }
+    public CodeQualitySetupState? State { get; init; }
 
     /// <summary>
     /// Runner type to be used.
     /// </summary>
     [JsonPropertyName("runner_type")]
-    public CodeScanningDefaultSetupRunnerType? RunnerType { get; init; }
+    public CodeQualitySetupRunnerType? RunnerType { get; init; }
 
     /// <summary>
     /// Runner label to be used if the runner type is labeled.
@@ -23855,6 +24445,19 @@ public record GitTree
 
 }
 
+/// <summary>
+/// Repository hash algorithm
+/// </summary>
+public record RepositoryHashAlgorithm
+{
+    /// <summary>
+    /// The Git hash algorithm used by this repository.
+    /// </summary>
+    [JsonPropertyName("hash_algorithm")]
+    public required HashAlgorithm HashAlgorithm { get; init; }
+
+}
+
 public record HookResponse
 {
     [JsonPropertyName("code")]
@@ -24203,7 +24806,7 @@ public record NullableIssue
     public Uri? TimelineUrl { get; init; }
 
     /// <summary>
-    /// The type of issue.
+    /// The type assigned to the issue. This is only present for issues in repositories where issue types are supported.
     /// </summary>
     [JsonPropertyName("type")]
     public IssueType? Type { get; init; }
@@ -26835,7 +27438,12 @@ public record SecretScanningScan
     public string? Type { get; init; }
 
     /// <summary>
-    /// The state of the scan. Either "completed", "running", or "pending"
+    /// The state of the scan. Either "completed", "running", "pending", "failed", or "unknown".
+    /// 
+    /// "failed": this scan type has hit its retry limit and has been marked permanently failed.
+    /// This usually resolves on its own at the next scheduled scan attempt. If "failed" persists, contact Support.
+    /// 
+    /// "unknown": the scan is in an unrecognized or currently unhandled state.
     /// </summary>
     [JsonPropertyName("status")]
     public string? Status { get; init; }
@@ -27488,7 +28096,7 @@ public record IssueSearchResultItem
     public Uri? TimelineUrl { get; init; }
 
     /// <summary>
-    /// The type of issue.
+    /// The type assigned to the issue. This is only present for issues in repositories where issue types are supported.
     /// </summary>
     [JsonPropertyName("type")]
     public IssueType? Type { get; init; }
@@ -28660,6 +29268,34 @@ public record KeySimple
 
     [JsonPropertyName("last_used")]
     public DateTimeOffset? LastUsed { get; init; }
+
+}
+
+public record BillingAiCreditUsageReportUser
+{
+    [JsonPropertyName("timePeriod")]
+    public required object TimePeriod { get; init; }
+
+    /// <summary>
+    /// The unique identifier of the user.
+    /// </summary>
+    [JsonPropertyName("user")]
+    public required string User { get; init; }
+
+    /// <summary>
+    /// The product for the usage report.
+    /// </summary>
+    [JsonPropertyName("product")]
+    public string? Product { get; init; }
+
+    /// <summary>
+    /// The model for the usage report.
+    /// </summary>
+    [JsonPropertyName("model")]
+    public string? Model { get; init; }
+
+    [JsonPropertyName("usageItems")]
+    public required IReadOnlyList<object> UsageItems { get; init; }
 
 }
 
@@ -30225,7 +30861,7 @@ public record WebhooksIssue
     public required string Title { get; init; }
 
     /// <summary>
-    /// The type of issue.
+    /// The type assigned to the issue. This is only present for issues in repositories where issue types are supported.
     /// </summary>
     [JsonPropertyName("type")]
     public IssueType? Type { get; init; }
@@ -30428,7 +31064,7 @@ public record WebhooksIssue2
     public required string Title { get; init; }
 
     /// <summary>
-    /// The type of issue.
+    /// The type assigned to the issue. This is only present for issues in repositories where issue types are supported.
     /// </summary>
     [JsonPropertyName("type")]
     public IssueType? Type { get; init; }
@@ -37292,6 +37928,134 @@ public record WebhookIssuesEdited
 
 }
 
+public record WebhookIssuesFieldAdded
+{
+    [JsonPropertyName("action")]
+    public required WebhookIssuesFieldAddedAction Action { get; init; }
+
+    /// <summary>
+    /// An enterprise on GitHub. Webhook payloads contain the `enterprise` property when the webhook is configured
+    /// on an enterprise account or an organization that's part of an enterprise account. For more information,
+    /// see "[About enterprise accounts](https://docs.github.com/admin/overview/about-enterprise-accounts)."
+    /// </summary>
+    [JsonPropertyName("enterprise")]
+    public EnterpriseWebhooks? Enterprise { get; init; }
+
+    /// <summary>
+    /// The GitHub App installation. Webhook payloads contain the `installation` property when the event is configured
+    /// for and sent to a GitHub App. For more information,
+    /// see "[Using webhooks with GitHub Apps](https://docs.github.com/apps/creating-github-apps/registering-a-github-app/using-webhooks-with-github-apps)."
+    /// </summary>
+    [JsonPropertyName("installation")]
+    public SimpleInstallation? Installation { get; init; }
+
+    /// <summary>
+    /// The [issue](https://docs.github.com/rest/issues/issues#get-an-issue) itself.
+    /// </summary>
+    [JsonPropertyName("issue")]
+    public required WebhooksIssue Issue { get; init; }
+
+    /// <summary>
+    /// The issue field whose value was set or updated on the issue.
+    /// </summary>
+    [JsonPropertyName("issue_field")]
+    public required object IssueField { get; init; }
+
+    /// <summary>
+    /// The value that was set or updated for the issue field. When updating an existing value, the previous value is available in `changes`.
+    /// </summary>
+    [JsonPropertyName("issue_field_value")]
+    public object? IssueFieldValue { get; init; }
+
+    /// <summary>
+    /// The previous field value, present when an existing value was updated.
+    /// </summary>
+    [JsonPropertyName("changes")]
+    public object? Changes { get; init; }
+
+    /// <summary>
+    /// A GitHub organization. Webhook payloads contain the `organization` property when the webhook is configured for an
+    /// organization, or when the event occurs from activity in a repository owned by an organization.
+    /// </summary>
+    [JsonPropertyName("organization")]
+    public OrganizationSimpleWebhooks? Organization { get; init; }
+
+    /// <summary>
+    /// The repository on GitHub where the event occurred. Webhook payloads contain the `repository` property
+    /// when the event occurs from activity in a repository.
+    /// </summary>
+    [JsonPropertyName("repository")]
+    public required RepositoryWebhooks Repository { get; init; }
+
+    /// <summary>
+    /// A GitHub user.
+    /// </summary>
+    [JsonPropertyName("sender")]
+    public required SimpleUser Sender { get; init; }
+
+}
+
+public record WebhookIssuesFieldRemoved
+{
+    [JsonPropertyName("action")]
+    public required WebhookIssuesFieldRemovedAction Action { get; init; }
+
+    /// <summary>
+    /// An enterprise on GitHub. Webhook payloads contain the `enterprise` property when the webhook is configured
+    /// on an enterprise account or an organization that's part of an enterprise account. For more information,
+    /// see "[About enterprise accounts](https://docs.github.com/admin/overview/about-enterprise-accounts)."
+    /// </summary>
+    [JsonPropertyName("enterprise")]
+    public EnterpriseWebhooks? Enterprise { get; init; }
+
+    /// <summary>
+    /// The GitHub App installation. Webhook payloads contain the `installation` property when the event is configured
+    /// for and sent to a GitHub App. For more information,
+    /// see "[Using webhooks with GitHub Apps](https://docs.github.com/apps/creating-github-apps/registering-a-github-app/using-webhooks-with-github-apps)."
+    /// </summary>
+    [JsonPropertyName("installation")]
+    public SimpleInstallation? Installation { get; init; }
+
+    /// <summary>
+    /// The [issue](https://docs.github.com/rest/issues/issues#get-an-issue) itself.
+    /// </summary>
+    [JsonPropertyName("issue")]
+    public required WebhooksIssue Issue { get; init; }
+
+    /// <summary>
+    /// The issue field whose value was cleared from the issue.
+    /// </summary>
+    [JsonPropertyName("issue_field")]
+    public required object IssueField { get; init; }
+
+    /// <summary>
+    /// The value that was cleared from the issue field.
+    /// </summary>
+    [JsonPropertyName("issue_field_value")]
+    public object? IssueFieldValue { get; init; }
+
+    /// <summary>
+    /// A GitHub organization. Webhook payloads contain the `organization` property when the webhook is configured for an
+    /// organization, or when the event occurs from activity in a repository owned by an organization.
+    /// </summary>
+    [JsonPropertyName("organization")]
+    public OrganizationSimpleWebhooks? Organization { get; init; }
+
+    /// <summary>
+    /// The repository on GitHub where the event occurred. Webhook payloads contain the `repository` property
+    /// when the event occurs from activity in a repository.
+    /// </summary>
+    [JsonPropertyName("repository")]
+    public required RepositoryWebhooks Repository { get; init; }
+
+    /// <summary>
+    /// A GitHub user.
+    /// </summary>
+    [JsonPropertyName("sender")]
+    public required SimpleUser Sender { get; init; }
+
+}
+
 public record WebhookIssuesLabeled
 {
     [JsonPropertyName("action")]
@@ -37678,7 +38442,7 @@ public record WebhookIssuesTyped
     public required WebhooksIssue Issue { get; init; }
 
     /// <summary>
-    /// The type of issue.
+    /// The type assigned to the issue. This is only present for issues in repositories where issue types are supported.
     /// </summary>
     [JsonPropertyName("type")]
     public required IssueType? Type { get; init; }
@@ -37938,7 +38702,7 @@ public record WebhookIssuesUntyped
     public required WebhooksIssue Issue { get; init; }
 
     /// <summary>
-    /// The type of issue.
+    /// The type assigned to the issue. This is only present for issues in repositories where issue types are supported.
     /// </summary>
     [JsonPropertyName("type")]
     public required IssueType? Type { get; init; }
@@ -45073,19 +45837,19 @@ public record WebhookSubIssuesParentIssueAdded
     /// The ID of the parent issue.
     /// </summary>
     [JsonPropertyName("parent_issue_id")]
-    public required double ParentIssueId { get; init; }
+    public double? ParentIssueId { get; init; }
 
     /// <summary>
     /// Issues are a great way to keep track of tasks, enhancements, and bugs for your projects.
     /// </summary>
     [JsonPropertyName("parent_issue")]
-    public required Issue ParentIssue { get; init; }
+    public Issue? ParentIssue { get; init; }
 
     /// <summary>
     /// A repository on GitHub.
     /// </summary>
     [JsonPropertyName("parent_issue_repo")]
-    public required Repository ParentIssueRepo { get; init; }
+    public Repository? ParentIssueRepo { get; init; }
 
     /// <summary>
     /// The ID of the sub-issue.
@@ -45119,13 +45883,13 @@ public record WebhookSubIssuesParentIssueAdded
     /// when the event occurs from activity in a repository.
     /// </summary>
     [JsonPropertyName("repository")]
-    public RepositoryWebhooks? Repository { get; init; }
+    public required RepositoryWebhooks Repository { get; init; }
 
     /// <summary>
     /// A GitHub user.
     /// </summary>
     [JsonPropertyName("sender")]
-    public SimpleUser? Sender { get; init; }
+    public required SimpleUser Sender { get; init; }
 
 }
 
@@ -45138,19 +45902,19 @@ public record WebhookSubIssuesParentIssueRemoved
     /// The ID of the parent issue.
     /// </summary>
     [JsonPropertyName("parent_issue_id")]
-    public required double ParentIssueId { get; init; }
+    public double? ParentIssueId { get; init; }
 
     /// <summary>
     /// Issues are a great way to keep track of tasks, enhancements, and bugs for your projects.
     /// </summary>
     [JsonPropertyName("parent_issue")]
-    public required Issue ParentIssue { get; init; }
+    public Issue? ParentIssue { get; init; }
 
     /// <summary>
     /// A repository on GitHub.
     /// </summary>
     [JsonPropertyName("parent_issue_repo")]
-    public required Repository ParentIssueRepo { get; init; }
+    public Repository? ParentIssueRepo { get; init; }
 
     /// <summary>
     /// The ID of the sub-issue.
@@ -45184,13 +45948,13 @@ public record WebhookSubIssuesParentIssueRemoved
     /// when the event occurs from activity in a repository.
     /// </summary>
     [JsonPropertyName("repository")]
-    public RepositoryWebhooks? Repository { get; init; }
+    public required RepositoryWebhooks Repository { get; init; }
 
     /// <summary>
     /// A GitHub user.
     /// </summary>
     [JsonPropertyName("sender")]
-    public SimpleUser? Sender { get; init; }
+    public required SimpleUser Sender { get; init; }
 
 }
 
@@ -45203,19 +45967,19 @@ public record WebhookSubIssuesSubIssueAdded
     /// The ID of the sub-issue.
     /// </summary>
     [JsonPropertyName("sub_issue_id")]
-    public required double SubIssueId { get; init; }
+    public double? SubIssueId { get; init; }
 
     /// <summary>
     /// Issues are a great way to keep track of tasks, enhancements, and bugs for your projects.
     /// </summary>
     [JsonPropertyName("sub_issue")]
-    public required Issue SubIssue { get; init; }
+    public Issue? SubIssue { get; init; }
 
     /// <summary>
     /// A repository on GitHub.
     /// </summary>
     [JsonPropertyName("sub_issue_repo")]
-    public required Repository SubIssueRepo { get; init; }
+    public Repository? SubIssueRepo { get; init; }
 
     /// <summary>
     /// The ID of the parent issue.
@@ -45249,13 +46013,13 @@ public record WebhookSubIssuesSubIssueAdded
     /// when the event occurs from activity in a repository.
     /// </summary>
     [JsonPropertyName("repository")]
-    public RepositoryWebhooks? Repository { get; init; }
+    public required RepositoryWebhooks Repository { get; init; }
 
     /// <summary>
     /// A GitHub user.
     /// </summary>
     [JsonPropertyName("sender")]
-    public SimpleUser? Sender { get; init; }
+    public required SimpleUser Sender { get; init; }
 
 }
 
@@ -45268,19 +46032,19 @@ public record WebhookSubIssuesSubIssueRemoved
     /// The ID of the sub-issue.
     /// </summary>
     [JsonPropertyName("sub_issue_id")]
-    public required double SubIssueId { get; init; }
+    public double? SubIssueId { get; init; }
 
     /// <summary>
     /// Issues are a great way to keep track of tasks, enhancements, and bugs for your projects.
     /// </summary>
     [JsonPropertyName("sub_issue")]
-    public required Issue SubIssue { get; init; }
+    public Issue? SubIssue { get; init; }
 
     /// <summary>
     /// A repository on GitHub.
     /// </summary>
     [JsonPropertyName("sub_issue_repo")]
-    public required Repository SubIssueRepo { get; init; }
+    public Repository? SubIssueRepo { get; init; }
 
     /// <summary>
     /// The ID of the parent issue.
@@ -45314,13 +46078,13 @@ public record WebhookSubIssuesSubIssueRemoved
     /// when the event occurs from activity in a repository.
     /// </summary>
     [JsonPropertyName("repository")]
-    public RepositoryWebhooks? Repository { get; init; }
+    public required RepositoryWebhooks Repository { get; init; }
 
     /// <summary>
     /// A GitHub user.
     /// </summary>
     [JsonPropertyName("sender")]
-    public SimpleUser? Sender { get; init; }
+    public required SimpleUser Sender { get; init; }
 
 }
 
