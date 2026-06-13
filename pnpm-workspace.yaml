@@ -5,7 +5,8 @@ allowBuilds:
   esbuild: false
   sharp: false
 
-minimumReleaseAge: 1440
+minimumReleaseAge: 10080
+ignoreScripts: true
 
 overrides:
   defu@<=6.1.4: '>=6.1.5'
