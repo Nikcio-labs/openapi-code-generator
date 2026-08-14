@@ -370,7 +370,7 @@ public class CSharpSchemaGeneratorTests
         });
         string result = generator.GenerateFromFile(GetFixturePath("comprehensive-api.json"));
 
-        Assert.Contains("[JsonConverter(typeof(JsonStringEnumConverter))]", result, StringComparison.Ordinal);
+        Assert.Contains("[JsonConverter(typeof(JsonStringEnumConverter<UserStatus>))]", result, StringComparison.Ordinal);
         Assert.Contains("public enum UserStatus", result, StringComparison.Ordinal);
         Assert.Contains("Active", result, StringComparison.Ordinal);
         Assert.Contains("Inactive", result, StringComparison.Ordinal);
