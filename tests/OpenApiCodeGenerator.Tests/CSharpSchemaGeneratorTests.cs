@@ -184,22 +184,22 @@ public class CSharpSchemaGeneratorTests
         string result = generator.GenerateFromFile(GetFixturePath("comprehensive-api.json"));
 
         // Records
-        Assert.Contains("public record User", result, StringComparison.Ordinal);
-        Assert.Contains("public record Address", result, StringComparison.Ordinal);
-        Assert.Contains("public record PaginatedResponse", result, StringComparison.Ordinal);
-        Assert.Contains("public record ErrorResponse", result, StringComparison.Ordinal);
-        Assert.Contains("public record ValidationError", result, StringComparison.Ordinal);
-        Assert.Contains("public record Circle", result, StringComparison.Ordinal);
-        Assert.Contains("public record Rectangle", result, StringComparison.Ordinal);
-        Assert.Contains("public record Triangle", result, StringComparison.Ordinal);
-        Assert.Contains("public record EmailNotification", result, StringComparison.Ordinal);
-        Assert.Contains("public record SmsNotification", result, StringComparison.Ordinal);
-        Assert.Contains("public record FileUpload", result, StringComparison.Ordinal);
-        Assert.Contains("public record NullableFields", result, StringComparison.Ordinal);
-        Assert.Contains("public record StringFormats", result, StringComparison.Ordinal);
-        Assert.Contains("public record NumericTypes", result, StringComparison.Ordinal);
-        Assert.Contains("public record ArrayTypes", result, StringComparison.Ordinal);
-        Assert.Contains("public record DictionaryTypes", result, StringComparison.Ordinal);
+        Assert.Contains("public partial record User", result, StringComparison.Ordinal);
+        Assert.Contains("public partial record Address", result, StringComparison.Ordinal);
+        Assert.Contains("public partial record PaginatedResponse", result, StringComparison.Ordinal);
+        Assert.Contains("public partial record ErrorResponse", result, StringComparison.Ordinal);
+        Assert.Contains("public partial record ValidationError", result, StringComparison.Ordinal);
+        Assert.Contains("public partial record Circle", result, StringComparison.Ordinal);
+        Assert.Contains("public partial record Rectangle", result, StringComparison.Ordinal);
+        Assert.Contains("public partial record Triangle", result, StringComparison.Ordinal);
+        Assert.Contains("public partial record EmailNotification", result, StringComparison.Ordinal);
+        Assert.Contains("public partial record SmsNotification", result, StringComparison.Ordinal);
+        Assert.Contains("public partial record FileUpload", result, StringComparison.Ordinal);
+        Assert.Contains("public partial record NullableFields", result, StringComparison.Ordinal);
+        Assert.Contains("public partial record StringFormats", result, StringComparison.Ordinal);
+        Assert.Contains("public partial record NumericTypes", result, StringComparison.Ordinal);
+        Assert.Contains("public partial record ArrayTypes", result, StringComparison.Ordinal);
+        Assert.Contains("public partial record DictionaryTypes", result, StringComparison.Ordinal);
 
         // Enums
         Assert.Contains("public enum UserStatus", result, StringComparison.Ordinal);
@@ -207,8 +207,8 @@ public class CSharpSchemaGeneratorTests
         Assert.Contains("public enum HttpStatusCode", result, StringComparison.Ordinal);
 
         // allOf inheritance
-        Assert.Contains("public record Cat : Pet", result, StringComparison.Ordinal);
-        Assert.Contains("public record Dog : Pet", result, StringComparison.Ordinal);
+        Assert.Contains("public partial record Cat : Pet", result, StringComparison.Ordinal);
+        Assert.Contains("public partial record Dog : Pet", result, StringComparison.Ordinal);
 
         // oneOf with discriminator
         Assert.Contains("public abstract record Shape", result, StringComparison.Ordinal);
@@ -406,7 +406,7 @@ public class CSharpSchemaGeneratorTests
         string result = generator.GenerateFromFile(GetFixturePath("comprehensive-api.json"));
 
         Assert.Contains("[JsonConverter(typeof(OpenApiGeneratedTypeAliasJsonConverter<ObjectId, Guid>))]", result, StringComparison.Ordinal);
-        Assert.Contains("public readonly record struct ObjectId(Guid Value) : IOpenApiGeneratedTypeAlias<ObjectId, Guid>", result, StringComparison.Ordinal);
+        Assert.Contains("public readonly partial record struct ObjectId(Guid Value) : IOpenApiGeneratedTypeAlias<ObjectId, Guid>", result, StringComparison.Ordinal);
     }
 
     [Fact]
@@ -883,9 +883,9 @@ public class CSharpSchemaGeneratorTests
 
         string generatedCode = generator.GenerateFromSchemas(schemas);
 
-        Assert.Contains("public record Pet", generatedCode, StringComparison.Ordinal);
-        Assert.Contains("public record Cat : Pet", generatedCode, StringComparison.Ordinal);
-        Assert.DoesNotContain("public record Address", generatedCode, StringComparison.Ordinal);
+        Assert.Contains("public partial record Pet", generatedCode, StringComparison.Ordinal);
+        Assert.Contains("public partial record Cat : Pet", generatedCode, StringComparison.Ordinal);
+        Assert.DoesNotContain("public partial record Address", generatedCode, StringComparison.Ordinal);
 
         await AssertGeneratedCodeCompilesAsync(generatedCode, implicitUsings: true);
     }
@@ -938,10 +938,10 @@ public class CSharpSchemaGeneratorTests
 
         string generatedCode = generator.GenerateFromSchemas(schemas);
 
-        Assert.Contains("public record User", generatedCode, StringComparison.Ordinal);
-        Assert.Contains("public record Address", generatedCode, StringComparison.Ordinal);
-        Assert.Contains("public record Scope", generatedCode, StringComparison.Ordinal);
-        Assert.DoesNotContain("public record Product", generatedCode, StringComparison.Ordinal);
+        Assert.Contains("public partial record User", generatedCode, StringComparison.Ordinal);
+        Assert.Contains("public partial record Address", generatedCode, StringComparison.Ordinal);
+        Assert.Contains("public partial record Scope", generatedCode, StringComparison.Ordinal);
+        Assert.DoesNotContain("public partial record Product", generatedCode, StringComparison.Ordinal);
 
         await AssertGeneratedCodeCompilesAsync(generatedCode, implicitUsings: true);
     }
@@ -1215,10 +1215,10 @@ public class CSharpSchemaGeneratorTests
         });
         string result = generator.GenerateFromFile(GetFixturePath("comprehensive-api.json"));
 
-        Assert.Contains("public record ApiUser", result, StringComparison.Ordinal);
+        Assert.Contains("public partial record ApiUser", result, StringComparison.Ordinal);
         Assert.Contains("public enum ApiUserStatus", result, StringComparison.Ordinal);
-        Assert.Contains("public record ApiCat : ApiPet", result, StringComparison.Ordinal);
-        Assert.Contains("public record ApiAddress", result, StringComparison.Ordinal);
+        Assert.Contains("public partial record ApiCat : ApiPet", result, StringComparison.Ordinal);
+        Assert.Contains("public partial record ApiAddress", result, StringComparison.Ordinal);
     }
 
     #endregion
@@ -1245,23 +1245,23 @@ public class CSharpSchemaGeneratorTests
         string result = generator.GenerateFromFile(GetFixturePath("umbraco-management-api.json"));
 
         // Content models
-        Assert.Contains("public record ContentItemResponseModel", result, StringComparison.Ordinal);
-        Assert.Contains("public record ContentTypeReferenceModel", result, StringComparison.Ordinal);
-        Assert.Contains("public record ContentValueModel", result, StringComparison.Ordinal);
-        Assert.Contains("public record ContentVariantModel", result, StringComparison.Ordinal);
-        Assert.Contains("public record ContentUrlModel", result, StringComparison.Ordinal);
-        Assert.Contains("public record CreateContentRequestModel", result, StringComparison.Ordinal);
-        Assert.Contains("public record UpdateContentRequestModel", result, StringComparison.Ordinal);
+        Assert.Contains("public partial record ContentItemResponseModel", result, StringComparison.Ordinal);
+        Assert.Contains("public partial record ContentTypeReferenceModel", result, StringComparison.Ordinal);
+        Assert.Contains("public partial record ContentValueModel", result, StringComparison.Ordinal);
+        Assert.Contains("public partial record ContentVariantModel", result, StringComparison.Ordinal);
+        Assert.Contains("public partial record ContentUrlModel", result, StringComparison.Ordinal);
+        Assert.Contains("public partial record CreateContentRequestModel", result, StringComparison.Ordinal);
+        Assert.Contains("public partial record UpdateContentRequestModel", result, StringComparison.Ordinal);
 
         // Media
-        Assert.Contains("public record MediaItemResponseModel", result, StringComparison.Ordinal);
+        Assert.Contains("public partial record MediaItemResponseModel", result, StringComparison.Ordinal);
 
         // Content types
-        Assert.Contains("public record ContentTypeResponseModel", result, StringComparison.Ordinal);
-        Assert.Contains("public record PropertyTypeModel", result, StringComparison.Ordinal);
+        Assert.Contains("public partial record ContentTypeResponseModel", result, StringComparison.Ordinal);
+        Assert.Contains("public partial record PropertyTypeModel", result, StringComparison.Ordinal);
 
         // Users
-        Assert.Contains("public record UserResponseModel", result, StringComparison.Ordinal);
+        Assert.Contains("public partial record UserResponseModel", result, StringComparison.Ordinal);
 
         // Enums
         Assert.Contains("public enum ContentVariantState", result, StringComparison.Ordinal);
@@ -1273,12 +1273,12 @@ public class CSharpSchemaGeneratorTests
         Assert.Contains("public enum HealthCheckResultType", result, StringComparison.Ordinal);
 
         // Health checks
-        Assert.Contains("public record HealthCheckGroupResponseModel", result, StringComparison.Ordinal);
-        Assert.Contains("public record HealthCheckModel", result, StringComparison.Ordinal);
-        Assert.Contains("public record HealthCheckResultResponseModel", result, StringComparison.Ordinal);
+        Assert.Contains("public partial record HealthCheckGroupResponseModel", result, StringComparison.Ordinal);
+        Assert.Contains("public partial record HealthCheckModel", result, StringComparison.Ordinal);
+        Assert.Contains("public partial record HealthCheckResultResponseModel", result, StringComparison.Ordinal);
 
         // Problem details
-        Assert.Contains("public record ProblemDetails", result, StringComparison.Ordinal);
+        Assert.Contains("public partial record ProblemDetails", result, StringComparison.Ordinal);
 
         // Namespace
         Assert.Contains("namespace Umbraco.Api.Models;", result, StringComparison.Ordinal);
@@ -1392,7 +1392,7 @@ public class CSharpSchemaGeneratorTests
 
         string result = generator.GenerateFromText(spec);
 
-        Assert.Contains("public record Item", result, StringComparison.Ordinal);
+        Assert.Contains("public partial record Item", result, StringComparison.Ordinal);
         Assert.Contains("public required int Id { get; init; }", result, StringComparison.Ordinal);
         Assert.Contains("public required string Name { get; init; }", result, StringComparison.Ordinal);
     }
