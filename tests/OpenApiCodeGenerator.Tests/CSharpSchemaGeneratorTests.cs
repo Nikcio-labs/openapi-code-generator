@@ -211,7 +211,7 @@ public class CSharpSchemaGeneratorTests
         Assert.Contains("public partial record Dog : Pet", result, StringComparison.Ordinal);
 
         // oneOf with discriminator
-        Assert.Contains("public abstract record Shape", result, StringComparison.Ordinal);
+        Assert.Contains("public abstract partial record Shape", result, StringComparison.Ordinal);
 
         // Namespace
         Assert.Contains("namespace ComprehensiveApi;", result, StringComparison.Ordinal);
@@ -388,7 +388,7 @@ public class CSharpSchemaGeneratorTests
         });
         string result = generator.GenerateFromFile(GetFixturePath("comprehensive-api.json"));
 
-        Assert.Contains("public abstract record Shape", result, StringComparison.Ordinal);
+        Assert.Contains("public abstract partial record Shape", result, StringComparison.Ordinal);
         Assert.Contains("[JsonDerivedType(typeof(Circle), \"circle\")]", result, StringComparison.Ordinal);
         Assert.Contains("[JsonDerivedType(typeof(Rectangle), \"rectangle\")]", result, StringComparison.Ordinal);
         Assert.Contains("[JsonDerivedType(typeof(Triangle), \"triangle\")]", result, StringComparison.Ordinal);

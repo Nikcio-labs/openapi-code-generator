@@ -948,7 +948,7 @@ internal class CSharpCodeEmitter
 
         AppendLine($"[JsonPolymorphic(TypeDiscriminatorPropertyName = \"{discriminator.PropertyName}\")]");
 
-        AppendLine($"public abstract record {typeName};");
+        AppendLine($"public abstract partial record {typeName};");
         AppendLine();
     }
 
@@ -977,7 +977,7 @@ internal class CSharpCodeEmitter
             }
         }
 
-        AppendLine($"public abstract record {typeName};");
+        AppendLine($"public abstract partial record {typeName};");
         AppendLine();
     }
 

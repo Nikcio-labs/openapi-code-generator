@@ -460,7 +460,7 @@ public class CSharpCodeEmitterTests
 
         string result = Generate(schemas);
 
-        Assert.Contains("public abstract record Shape", result, StringComparison.Ordinal);
+        Assert.Contains("public abstract partial record Shape", result, StringComparison.Ordinal);
         Assert.Contains("[JsonDerivedType(typeof(Circle), \"circle\")]", result, StringComparison.Ordinal);
         Assert.Contains("[JsonDerivedType(typeof(Rectangle), \"rectangle\")]", result, StringComparison.Ordinal);
         Assert.Contains("[JsonPolymorphic(TypeDiscriminatorPropertyName = \"shapeType\")]", result, StringComparison.Ordinal);
@@ -499,7 +499,7 @@ public class CSharpCodeEmitterTests
 
         string result = Generate(schemas);
 
-        Assert.Contains("public abstract record Result", result, StringComparison.Ordinal);
+        Assert.Contains("public abstract partial record Result", result, StringComparison.Ordinal);
         Assert.Contains("Union of: SuccessResult | ErrorResult", result, StringComparison.Ordinal);
     }
 

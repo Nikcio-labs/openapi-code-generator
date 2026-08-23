@@ -117,7 +117,7 @@ file sealed class OpenApiGeneratedBinaryStreamTypeAliasJsonConverter<TAlias> : J
     }
 }
 
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Kind>))]
 public enum Kind
 {
     [JsonStringEnumMemberName("invoice")]
@@ -131,7 +131,7 @@ public enum Kind
 /// <summary>
 /// Simple string enum.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Status>))]
 public enum Status
 {
     [JsonStringEnumMemberName("pending")]
@@ -142,14 +142,14 @@ public enum Status
     Failed
 }
 
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CircleShapeType>))]
 public enum CircleShapeType
 {
     [JsonStringEnumMemberName("circle")]
     Circle
 }
 
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<RectangleShapeType>))]
 public enum RectangleShapeType
 {
     [JsonStringEnumMemberName("rectangle")]
@@ -163,7 +163,7 @@ public enum RectangleShapeType
 /// Type alias for Guid.
 /// </summary>
 [JsonConverter(typeof(OpenApiGeneratedTypeAliasJsonConverter<EventId, Guid>))]
-public readonly record struct EventId(Guid Value) : IOpenApiGeneratedTypeAlias<EventId, Guid>
+public readonly partial record struct EventId(Guid Value) : IOpenApiGeneratedTypeAlias<EventId, Guid>
 {
     public static EventId Create(Guid value) => new(value);
 }
@@ -175,7 +175,7 @@ public readonly record struct EventId(Guid Value) : IOpenApiGeneratedTypeAlias<E
 /// Type alias for DateTimeOffset.
 /// </summary>
 [JsonConverter(typeof(OpenApiGeneratedTypeAliasJsonConverter<EventTimestamp, DateTimeOffset>))]
-public readonly record struct EventTimestamp(DateTimeOffset Value) : IOpenApiGeneratedTypeAlias<EventTimestamp, DateTimeOffset>
+public readonly partial record struct EventTimestamp(DateTimeOffset Value) : IOpenApiGeneratedTypeAlias<EventTimestamp, DateTimeOffset>
 {
     public static EventTimestamp Create(DateTimeOffset value) => new(value);
 }
@@ -187,7 +187,7 @@ public readonly record struct EventTimestamp(DateTimeOffset Value) : IOpenApiGen
 /// Type alias for Stream.
 /// </summary>
 [JsonConverter(typeof(OpenApiGeneratedBinaryStreamTypeAliasJsonConverter<BinaryPayload>))]
-public readonly record struct BinaryPayload(Stream Value) : IOpenApiGeneratedTypeAlias<BinaryPayload, Stream>
+public readonly partial record struct BinaryPayload(Stream Value) : IOpenApiGeneratedTypeAlias<BinaryPayload, Stream>
 {
     public static BinaryPayload Create(Stream value) => new(value);
 }
@@ -195,7 +195,7 @@ public readonly record struct BinaryPayload(Stream Value) : IOpenApiGeneratedTyp
 /// <summary>
 /// Simple string enum.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<DeliveryState>))]
 public enum DeliveryState
 {
     [JsonStringEnumMemberName("pending")]
@@ -209,7 +209,7 @@ public enum DeliveryState
 /// <summary>
 /// Demonstrates additionalProperties extension-data support.
 /// </summary>
-public record Metadata
+public partial record Metadata
 {
     [JsonPropertyName("source")]
     public required string Source { get; init; }
@@ -222,7 +222,7 @@ public record Metadata
 /// <summary>
 /// Demonstrates direct stream handling and inline enums.
 /// </summary>
-public record Attachment
+public partial record Attachment
 {
     [JsonPropertyName("fileName")]
     public required string FileName { get; init; }
@@ -242,7 +242,7 @@ public record Attachment
 /// <summary>
 /// Base record for allOf inheritance.
 /// </summary>
-public record DeliveryBase
+public partial record DeliveryBase
 {
     /// <summary>
     /// Strongly typed UUID alias.
@@ -258,7 +258,7 @@ public record DeliveryBase
 
 }
 
-public record DeliveryRecord : DeliveryBase
+public partial record DeliveryRecord : DeliveryBase
 {
     /// <summary>
     /// Simple string enum.
@@ -292,7 +292,7 @@ public record DeliveryRecord : DeliveryBase
 
 }
 
-public record Circle
+public partial record Circle
 {
     [JsonPropertyName("shapeType")]
     public required CircleShapeType ShapeType { get; init; }
@@ -302,7 +302,7 @@ public record Circle
 
 }
 
-public record Rectangle
+public partial record Rectangle
 {
     [JsonPropertyName("shapeType")]
     public required RectangleShapeType ShapeType { get; init; }
@@ -318,16 +318,16 @@ public record Rectangle
 [JsonDerivedType(typeof(Circle), "circle")]
 [JsonDerivedType(typeof(Rectangle), "rectangle")]
 [JsonPolymorphic(TypeDiscriminatorPropertyName = "shapeType")]
-public abstract record Shape;
+public abstract partial record Shape;
 
-public record EmailContact
+public partial record EmailContact
 {
     [JsonPropertyName("email")]
     public required string Email { get; init; }
 
 }
 
-public record WebhookContact
+public partial record WebhookContact
 {
     [JsonPropertyName("url")]
     public required Uri Url { get; init; }
@@ -339,9 +339,9 @@ public record WebhookContact
 /// </remarks>
 [JsonDerivedType(typeof(EmailContact), "EmailContact")]
 [JsonDerivedType(typeof(WebhookContact), "WebhookContact")]
-public abstract record ContactMethod;
+public abstract partial record ContactMethod;
 
-public record Notification
+public partial record Notification
 {
     [JsonPropertyName("record")]
     public required DeliveryRecord Record { get; init; }
