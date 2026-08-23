@@ -412,6 +412,7 @@ internal class CSharpCodeEmitter
     private static List<string> ExtractEnumValues(IOpenApiSchema schema)
     {
         return schema.Enum!
+            .Where(e => e is null || !JsonNullSentinel.IsJsonNullSentinel(e))
             .Select(e =>
             {
                 if (e is JsonValue jv)
@@ -542,6 +543,7 @@ internal class CSharpCodeEmitter
         _indent++;
 
         var enumValues = schema.Enum!
+            .Where(e => e is null || !JsonNullSentinel.IsJsonNullSentinel(e))
             .Select(e =>
             {
                 if (e is JsonValue jv)

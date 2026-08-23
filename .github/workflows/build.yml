@@ -5,8 +5,12 @@ on:
     branches: [ "main" ]
     paths:
       - 'src/**'
+      - 'tests/**'
       - 'examples/**'
+      - 'benchmarks/**'
       - 'Directory.Build.props'
+      - 'Directory.Packages.props'
+      - 'global.json'
       - '.editorconfig'
       - 'OpenApiCodeGenerator.slnx'
       - 'nuget.config'

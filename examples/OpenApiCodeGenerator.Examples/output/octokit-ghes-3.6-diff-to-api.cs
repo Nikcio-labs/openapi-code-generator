@@ -1057,7 +1057,7 @@ public partial record Installation
     public required int Id { get; init; }
 
     [JsonPropertyName("account")]
-    public required object? Account { get; init; }
+    public required object Account { get; init; }
 
     /// <summary>
     /// Describe whether all repositories have been selected or there's a selection involved

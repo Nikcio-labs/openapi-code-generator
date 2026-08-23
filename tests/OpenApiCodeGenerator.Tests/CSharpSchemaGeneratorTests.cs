@@ -1491,6 +1491,105 @@ public class CSharpSchemaGeneratorTests
 
     #endregion
 
+    #region Nullable Enum (JsonNullSentinel filtering)
+
+    [Fact]
+    public void Generate_FromText_NullableEnum_DoesNotEmitNullSentinelMember()
+    {
+        const string spec = """
+                        {
+                            "openapi": "3.0.3",
+                            "info": { "title": "Nullable Enum Test", "version": "1.0.0" },
+                            "components": {
+                                "schemas": {
+                                    "secret-scanning-alert-resolution": {
+                                        "type": "string",
+                                        "description": "**Required when the `state` is `resolved`.** The reason for resolving the alert.",
+                                        "nullable": true,
+                                        "enum": [null, "false_positive", "wont_fix", "revoked", "used_in_tests"]
+                                    }
+                                }
+                            }
+                        }
+                        """;
+
+        var generator = new CSharpSchemaGenerator(new GeneratorOptions
+        {
+            GenerateFileHeader = false,
+            Namespace = "GeneratedModels"
+        });
+
+        string generatedCode = generator.GenerateFromText(spec);
+
+        Assert.DoesNotContain("openapi-json-null-sentinel", generatedCode, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("OpenapiJsonNullSentinel", generatedCode, StringComparison.Ordinal);
+        Assert.Contains("FalsePositive", generatedCode, StringComparison.Ordinal);
+        Assert.Contains("WontFix", generatedCode, StringComparison.Ordinal);
+        Assert.Contains("Revoked", generatedCode, StringComparison.Ordinal);
+        Assert.Contains("UsedInTests", generatedCode, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public async Task Generate_FromText_NullableEnum_RoundTripsWithSystemTextJsonDefaults()
+    {
+        const string spec = """
+                        {
+                            "openapi": "3.0.3",
+                            "info": { "title": "Nullable Enum Test", "version": "1.0.0" },
+                            "components": {
+                                "schemas": {
+                                    "secret-scanning-alert-resolution": {
+                                        "type": "string",
+                                        "description": "**Required when the `state` is `resolved`.** The reason for resolving the alert.",
+                                        "nullable": true,
+                                        "enum": [null, "false_positive", "wont_fix", "revoked", "used_in_tests"]
+                                    },
+                                    "Alert": {
+                                        "type": "object",
+                                        "required": ["id"],
+                                        "properties": {
+                                            "id": { "type": "integer", "format": "int32" },
+                                            "resolution": { "$ref": "#/components/schemas/secret-scanning-alert-resolution" }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        """;
+
+        var generator = new CSharpSchemaGenerator(new GeneratorOptions
+        {
+            GenerateFileHeader = false,
+            Namespace = "GeneratedModels"
+        });
+
+        string generatedCode = generator.GenerateFromText(spec);
+
+        Assert.DoesNotContain("openapi-json-null-sentinel", generatedCode, StringComparison.OrdinalIgnoreCase);
+
+        string[] lines = await GetSerializationLinesAsync(generatedCode, """
+                using System.Text.Json;
+                using GeneratedModels;
+
+                // Non-null enum value round-trips
+                Alert? alert = JsonSerializer.Deserialize<Alert>("{\"id\":1,\"resolution\":\"wont_fix\"}");
+                Console.WriteLine($"{alert?.Id}|{alert?.Resolution}");
+                Console.WriteLine(JsonSerializer.Serialize(alert));
+
+                // Null enum value round-trips
+                Alert? nullAlert = JsonSerializer.Deserialize<Alert>("{\"id\":2,\"resolution\":null}");
+                Console.WriteLine($"{nullAlert?.Id}|{nullAlert?.Resolution}");
+                Console.WriteLine(JsonSerializer.Serialize(nullAlert));
+                """);
+
+        Assert.Equal("1|WontFix", lines[^4]);
+        Assert.Equal("{\"id\":1,\"resolution\":\"wont_fix\"}", lines[^3]);
+        Assert.Equal("2|", lines[^2]);
+        Assert.Equal("{\"id\":2,\"resolution\":null}", lines[^1]);
+    }
+
+    #endregion
+
     #region HandleDiagnostics
 
     [Fact]
