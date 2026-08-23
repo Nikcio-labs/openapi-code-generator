@@ -3480,9 +3480,7 @@ public enum CheckSuiteConclusion
     [JsonStringEnumMemberName("startup_failure")]
     StartupFailure,
     [JsonStringEnumMemberName("stale")]
-    Stale,
-    [JsonStringEnumMemberName("openapi-json-null-sentinel-value-2BF93600-0FE4-4250-987A-E5DDB203E464")]
-    OpenapiJsonNullSentinelValue2BF936000FE44250987AE5DDB203E464
+    Stale
 }
 
 [JsonConverter(typeof(JsonStringEnumConverter<SimpleCheckSuiteConclusion>))]
@@ -4647,27 +4645,13 @@ public enum WebhookWorkflowJobWaitingAction
 /// <summary>
 /// The side of the first line of the range for a multi-line comment.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter<PullRequestReviewCommentStartSide>))]
-public enum PullRequestReviewCommentStartSide
+[JsonConverter(typeof(JsonStringEnumConverter<StartSide>))]
+public enum StartSide
 {
     [JsonStringEnumMemberName("LEFT")]
     Left,
     [JsonStringEnumMemberName("RIGHT")]
     Right
-}
-
-/// <summary>
-/// The side of the first line of the range for a multi-line comment.
-/// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter<WebhooksReviewCommentStartSide>))]
-public enum WebhooksReviewCommentStartSide
-{
-    [JsonStringEnumMemberName("LEFT")]
-    Left,
-    [JsonStringEnumMemberName("RIGHT")]
-    Right,
-    [JsonStringEnumMemberName("openapi-json-null-sentinel-value-2BF93600-0FE4-4250-987A-E5DDB203E464")]
-    OpenapiJsonNullSentinelValue2BF936000FE44250987AE5DDB203E464
 }
 
 /// <summary>
@@ -4923,9 +4907,7 @@ public enum ActiveLockReason
     [JsonStringEnumMemberName("too heated")]
     TooHeated,
     [JsonStringEnumMemberName("spam")]
-    Spam,
-    [JsonStringEnumMemberName("openapi-json-null-sentinel-value-2BF93600-0FE4-4250-987A-E5DDB203E464")]
-    OpenapiJsonNullSentinelValue2BF936000FE44250987AE5DDB203E464
+    Spam
 }
 
 /// <summary>
@@ -6270,7 +6252,7 @@ public partial record Installation
     public required int Id { get; init; }
 
     [JsonPropertyName("account")]
-    public required object? Account { get; init; }
+    public required object Account { get; init; }
 
     /// <summary>
     /// Describe whether all repositories have been selected or there's a selection involved
@@ -9438,7 +9420,7 @@ public partial record IssueFieldValue
     /// The value of the issue field
     /// </summary>
     [JsonPropertyName("value")]
-    public required object? Value { get; init; }
+    public required object Value { get; init; }
 
     /// <summary>
     /// Details about the selected option (only present for single_select fields)
@@ -16644,7 +16626,7 @@ public partial record CustomPropertyValue
     /// The value assigned to the property
     /// </summary>
     [JsonPropertyName("value")]
-    public required object? Value { get; init; }
+    public required object Value { get; init; }
 
 }
 
@@ -19310,13 +19292,13 @@ public partial record RepositoryAdvisory
     /// The author of the advisory.
     /// </summary>
     [JsonPropertyName("author")]
-    public required SimpleUser? Author { get; init; }
+    public required SimpleUser Author { get; init; }
 
     /// <summary>
     /// The publisher of the advisory.
     /// </summary>
     [JsonPropertyName("publisher")]
-    public required SimpleUser? Publisher { get; init; }
+    public required SimpleUser Publisher { get; init; }
 
     [JsonPropertyName("identifiers")]
     public required IReadOnlyList<object> Identifiers { get; init; }
@@ -19400,7 +19382,7 @@ public partial record RepositoryAdvisory
     /// A temporary private fork of the advisory's repository for collaborating on a fix.
     /// </summary>
     [JsonPropertyName("private_fork")]
-    public required SimpleRepository? PrivateFork { get; init; }
+    public required SimpleRepository PrivateFork { get; init; }
 
 }
 
@@ -21638,10 +21620,10 @@ public partial record Commit
     public required object CommitValue { get; init; }
 
     [JsonPropertyName("author")]
-    public required object? Author { get; init; }
+    public required object Author { get; init; }
 
     [JsonPropertyName("committer")]
-    public required object? Committer { get; init; }
+    public required object Committer { get; init; }
 
     [JsonPropertyName("parents")]
     public required IReadOnlyList<object> Parents { get; init; }
@@ -27168,7 +27150,7 @@ public partial record IssueSuggestion
     /// The proposed value, when applicable. An array for multi-select field suggestions.
     /// </summary>
     [JsonPropertyName("target_value")]
-    public required object? TargetValue { get; init; }
+    public required object TargetValue { get; init; }
 
     /// <summary>
     /// The rationale the actor provided for the suggestion.
@@ -27572,7 +27554,7 @@ public partial record PullRequestReviewComment
     /// The side of the first line of the range for a multi-line comment.
     /// </summary>
     [JsonPropertyName("start_side")]
-    public PullRequestReviewCommentStartSide? StartSide { get; init; } = Generated.GithubApi.PullRequestReviewCommentStartSide.Right;
+    public StartSide? StartSide { get; init; } = Generated.GithubApi.StartSide.Right;
 
     /// <summary>
     /// The line of the blob to which the comment applies. The last line of the range for a multi-line comment
@@ -28555,7 +28537,7 @@ public partial record ReviewComment
     /// The side of the first line of the range for a multi-line comment.
     /// </summary>
     [JsonPropertyName("start_side")]
-    public PullRequestReviewCommentStartSide? StartSide { get; init; } = Generated.GithubApi.PullRequestReviewCommentStartSide.Right;
+    public StartSide? StartSide { get; init; } = Generated.GithubApi.StartSide.Right;
 
     /// <summary>
     /// The line of the blob to which the comment applies. The last line of the range for a multi-line comment
@@ -32189,7 +32171,7 @@ public record WebhooksReviewers;
 public partial record WebhooksWorkflowJobRun
 {
     [JsonPropertyName("conclusion")]
-    public required object? Conclusion { get; init; }
+    public required object Conclusion { get; init; }
 
     [JsonPropertyName("created_at")]
     public required string CreatedAt { get; init; }
@@ -32204,7 +32186,7 @@ public partial record WebhooksWorkflowJobRun
     public required int Id { get; init; }
 
     [JsonPropertyName("name")]
-    public required object? Name { get; init; }
+    public required object Name { get; init; }
 
     [JsonPropertyName("status")]
     public required string Status { get; init; }
@@ -32314,7 +32296,7 @@ public partial record WebhooksAnswer
     public required string NodeId { get; init; }
 
     [JsonPropertyName("parent_id")]
-    public required object? ParentId { get; init; }
+    public required object ParentId { get; init; }
 
     [JsonPropertyName("reactions")]
     public object? Reactions { get; init; }
@@ -32958,7 +32940,7 @@ public partial record WebhooksPreviousMarketplacePurchase
     public required string BillingCycle { get; init; }
 
     [JsonPropertyName("free_trial_ends_on")]
-    public required object? FreeTrialEndsOn { get; init; }
+    public required object FreeTrialEndsOn { get; init; }
 
     [JsonPropertyName("next_billing_date")]
     public string? NextBillingDate { get; init; }
@@ -34444,7 +34426,7 @@ public partial record WebhooksReviewComment
     /// The side of the first line of the range for a multi-line comment.
     /// </summary>
     [JsonPropertyName("start_side")]
-    public required WebhooksReviewCommentStartSide StartSide { get; init; } = Generated.GithubApi.WebhooksReviewCommentStartSide.Right;
+    public required StartSide StartSide { get; init; } = Generated.GithubApi.StartSide.Right;
 
     /// <summary>
     /// The level at which the comment is targeted, can be a diff line or a file.
@@ -47669,7 +47651,7 @@ public partial record WebhookStarDeleted
     /// The time the star was created. This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`. Will be `null` for the `deleted` action.
     /// </summary>
     [JsonPropertyName("starred_at")]
-    public required object? StarredAt { get; init; }
+    public required object StarredAt { get; init; }
 
 }
 
