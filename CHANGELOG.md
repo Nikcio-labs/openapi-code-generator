@@ -1,5 +1,23 @@
 # Changelog
 
+## [1.3.0] (2026-08-23)
+
+### Added
+
+- Emit records and aliases as `partial` to support extending generated types
+
+### Changed
+
+- Use `JsonStringEnumConverter<>` instead of `JsonStringEnumConverter` in generated code
+- Bumps Microsoft.OpenApi from 3.5.2 to 3.10.2
+- Bumps Microsoft.OpenApi.YamlReader from 3.5.2 to 3.10.2
+- Migrate test projects to Microsoft Testing Platform (MTP) mode
+- Bumps xunit.v3 from 3.2.2 to 4.0.0
+
+### Fixed
+
+- Filter `JsonNullSentinel` values from nullable enum emission (introduced by Microsoft.OpenApi 3.8.0)
+
 ## [1.2.0] (2026-04-20)
 
 ### Added
@@ -58,6 +76,7 @@
 - URL input support for remote OpenAPI specifications
 - Configurable generation options (namespace, enums, nullable, collections, etc.)
 
+[1.3.0]: https://github.com/Nikcio-labs/openapi-code-generator/releases/tag/v1.3.0
 [1.2.0]: https://github.com/Nikcio-labs/openapi-code-generator/releases/tag/v1.2.0
 [1.1.0]: https://github.com/Nikcio-labs/openapi-code-generator/releases/tag/v1.1.0
 [1.0.1]: https://github.com/Nikcio-labs/openapi-code-generator/releases/tag/v1.0.1
