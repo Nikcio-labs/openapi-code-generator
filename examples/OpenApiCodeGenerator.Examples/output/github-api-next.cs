@@ -40,7 +40,7 @@ file sealed class OpenApiGeneratedTypeAliasJsonConverter<TAlias, TValue> : JsonC
 /// <summary>
 /// The type of advisory.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<GlobalAdvisoryType>))]
 public enum GlobalAdvisoryType
 {
     [JsonStringEnumMemberName("reviewed")]
@@ -54,7 +54,7 @@ public enum GlobalAdvisoryType
 /// <summary>
 /// Whether it's a group assignment or individual assignment.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ClassroomAssignmentType>))]
 public enum ClassroomAssignmentType
 {
     [JsonStringEnumMemberName("individual")]
@@ -66,7 +66,7 @@ public enum ClassroomAssignmentType
 /// <summary>
 /// The type of label. Read-only labels are applied automatically when the runner is configured.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<RunnerLabelType>))]
 public enum RunnerLabelType
 {
     [JsonStringEnumMemberName("read-only")]
@@ -78,7 +78,7 @@ public enum RunnerLabelType
 /// <summary>
 /// The ownership type of the team
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TeamSimpleType>))]
 public enum TeamSimpleType
 {
     [JsonStringEnumMemberName("enterprise")]
@@ -87,49 +87,49 @@ public enum TeamSimpleType
     Organization
 }
 
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<RepositoryRuleCreationType>))]
 public enum RepositoryRuleCreationType
 {
     [JsonStringEnumMemberName("creation")]
     Creation
 }
 
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<RepositoryRuleUpdateType>))]
 public enum RepositoryRuleUpdateType
 {
     [JsonStringEnumMemberName("update")]
     Update
 }
 
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<RepositoryRuleDeletionType>))]
 public enum RepositoryRuleDeletionType
 {
     [JsonStringEnumMemberName("deletion")]
     Deletion
 }
 
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<RepositoryRuleRequiredLinearHistoryType>))]
 public enum RepositoryRuleRequiredLinearHistoryType
 {
     [JsonStringEnumMemberName("required_linear_history")]
     RequiredLinearHistory
 }
 
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<RepositoryRuleMergeQueueType>))]
 public enum RepositoryRuleMergeQueueType
 {
     [JsonStringEnumMemberName("merge_queue")]
     MergeQueue
 }
 
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<RepositoryRuleRequiredDeploymentsType>))]
 public enum RepositoryRuleRequiredDeploymentsType
 {
     [JsonStringEnumMemberName("required_deployments")]
     RequiredDeployments
 }
 
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<RepositoryRuleRequiredSignaturesType>))]
 public enum RepositoryRuleRequiredSignaturesType
 {
     [JsonStringEnumMemberName("required_signatures")]
@@ -139,7 +139,7 @@ public enum RepositoryRuleRequiredSignaturesType
 /// <summary>
 /// The type of the actor
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<RepositoryRuleParamsActorType>))]
 public enum RepositoryRuleParamsActorType
 {
     [JsonStringEnumMemberName("User")]
@@ -155,112 +155,119 @@ public enum RepositoryRuleParamsActorType
 /// <summary>
 /// The type of the reviewer
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<RepositoryRuleParamsReviewerType>))]
 public enum RepositoryRuleParamsReviewerType
 {
     [JsonStringEnumMemberName("Team")]
     Team
 }
 
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<RepositoryRulePullRequestType>))]
 public enum RepositoryRulePullRequestType
 {
     [JsonStringEnumMemberName("pull_request")]
     PullRequest
 }
 
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<RepositoryRuleRequiredStatusChecksType>))]
 public enum RepositoryRuleRequiredStatusChecksType
 {
     [JsonStringEnumMemberName("required_status_checks")]
     RequiredStatusChecks
 }
 
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<RepositoryRuleNonFastForwardType>))]
 public enum RepositoryRuleNonFastForwardType
 {
     [JsonStringEnumMemberName("non_fast_forward")]
     NonFastForward
 }
 
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<RepositoryRuleCommitMessagePatternType>))]
 public enum RepositoryRuleCommitMessagePatternType
 {
     [JsonStringEnumMemberName("commit_message_pattern")]
     CommitMessagePattern
 }
 
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<RepositoryRuleCommitAuthorEmailPatternType>))]
 public enum RepositoryRuleCommitAuthorEmailPatternType
 {
     [JsonStringEnumMemberName("commit_author_email_pattern")]
     CommitAuthorEmailPattern
 }
 
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<RepositoryRuleCommitterEmailPatternType>))]
 public enum RepositoryRuleCommitterEmailPatternType
 {
     [JsonStringEnumMemberName("committer_email_pattern")]
     CommitterEmailPattern
 }
 
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<RepositoryRuleBranchNamePatternType>))]
 public enum RepositoryRuleBranchNamePatternType
 {
     [JsonStringEnumMemberName("branch_name_pattern")]
     BranchNamePattern
 }
 
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<RepositoryRuleTagNamePatternType>))]
 public enum RepositoryRuleTagNamePatternType
 {
     [JsonStringEnumMemberName("tag_name_pattern")]
     TagNamePattern
 }
 
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<RepositoryRuleWorkflowsType>))]
 public enum RepositoryRuleWorkflowsType
 {
     [JsonStringEnumMemberName("workflows")]
     Workflows
 }
 
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<RepositoryRuleCodeScanningType>))]
 public enum RepositoryRuleCodeScanningType
 {
     [JsonStringEnumMemberName("code_scanning")]
     CodeScanning
 }
 
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<RepositoryRuleCopilotCodeReviewType>))]
 public enum RepositoryRuleCopilotCodeReviewType
 {
     [JsonStringEnumMemberName("copilot_code_review")]
     CopilotCodeReview
 }
 
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<RepositoryRuleLicenseComplianceScanningType>))]
+public enum RepositoryRuleLicenseComplianceScanningType
+{
+    [JsonStringEnumMemberName("license_compliance_scanning")]
+    LicenseComplianceScanning
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<RepositoryRuleFilePathRestrictionType>))]
 public enum RepositoryRuleFilePathRestrictionType
 {
     [JsonStringEnumMemberName("file_path_restriction")]
     FilePathRestriction
 }
 
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<RepositoryRuleMaxFilePathLengthType>))]
 public enum RepositoryRuleMaxFilePathLengthType
 {
     [JsonStringEnumMemberName("max_file_path_length")]
     MaxFilePathLength
 }
 
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<RepositoryRuleFileExtensionRestrictionType>))]
 public enum RepositoryRuleFileExtensionRestrictionType
 {
     [JsonStringEnumMemberName("file_extension_restriction")]
     FileExtensionRestriction
 }
 
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<RepositoryRuleMaxFileSizeType>))]
 public enum RepositoryRuleMaxFileSizeType
 {
     [JsonStringEnumMemberName("max_file_size")]
@@ -270,7 +277,7 @@ public enum RepositoryRuleMaxFileSizeType
 /// <summary>
 /// The type of credit the user is receiving.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<RepositoryAdvisoryCreditType>))]
 public enum RepositoryAdvisoryCreditType
 {
     [JsonStringEnumMemberName("analyst")]
@@ -295,21 +302,21 @@ public enum RepositoryAdvisoryCreditType
     Other
 }
 
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ContentFileType>))]
 public enum ContentFileType
 {
     [JsonStringEnumMemberName("file")]
     File
 }
 
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ContentSymlinkType>))]
 public enum ContentSymlinkType
 {
     [JsonStringEnumMemberName("symlink")]
     Symlink
 }
 
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ContentSubmoduleType>))]
 public enum ContentSubmoduleType
 {
     [JsonStringEnumMemberName("submodule")]
@@ -319,7 +326,7 @@ public enum ContentSubmoduleType
 /// <summary>
 /// Whether this rule targets a branch or tag.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<DeploymentBranchPolicyType>))]
 public enum DeploymentBranchPolicyType
 {
     [JsonStringEnumMemberName("branch")]
@@ -331,7 +338,7 @@ public enum DeploymentBranchPolicyType
 /// <summary>
 /// The location type. Because secrets may be found in different types of resources (ie. code, comments, issues, pull requests, discussions), this field identifies the type of resource where the secret was found.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<SecretScanningLocationType>))]
 public enum SecretScanningLocationType
 {
     [JsonStringEnumMemberName("commit")]
@@ -362,7 +369,7 @@ public enum SecretScanningLocationType
     PullRequestReviewComment
 }
 
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<WebhooksUserType>))]
 public enum WebhooksUserType
 {
     [JsonStringEnumMemberName("Bot")]
@@ -373,7 +380,7 @@ public enum WebhooksUserType
     Organization
 }
 
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<WebhooksUserMannequinType>))]
 public enum WebhooksUserMannequinType
 {
     [JsonStringEnumMemberName("Bot")]
@@ -389,7 +396,7 @@ public enum WebhooksUserMannequinType
 /// <summary>
 /// What type of scan was completed
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookSecretScanningScanCompletedType>))]
 public enum WebhookSecretScanningScanCompletedType
 {
     [JsonStringEnumMemberName("backfill")]
@@ -403,7 +410,7 @@ public enum WebhookSecretScanningScanCompletedType
 /// <summary>
 /// The severity of the advisory.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<GlobalAdvisorySeverity>))]
 public enum GlobalAdvisorySeverity
 {
     [JsonStringEnumMemberName("critical")]
@@ -421,7 +428,7 @@ public enum GlobalAdvisorySeverity
 /// <summary>
 /// The severity of the vulnerability.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<DependabotAlertSecurityVulnerabilitySeverity>))]
 public enum DependabotAlertSecurityVulnerabilitySeverity
 {
     [JsonStringEnumMemberName("low")]
@@ -437,7 +444,7 @@ public enum DependabotAlertSecurityVulnerabilitySeverity
 /// <summary>
 /// The severity of the alert.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CodeScanningAlertRuleSummarySeverity>))]
 public enum CodeScanningAlertRuleSummarySeverity
 {
     [JsonStringEnumMemberName("none")]
@@ -455,7 +462,7 @@ public enum CodeScanningAlertRuleSummarySeverity
 /// <summary>
 /// The severity of the advisory.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<RepositoryAdvisorySeverity>))]
 public enum RepositoryAdvisorySeverity
 {
     [JsonStringEnumMemberName("critical")]
@@ -471,9 +478,25 @@ public enum RepositoryAdvisorySeverity
 }
 
 /// <summary>
+/// The severity of the rule used to detect the finding.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter<CodeQualityFindingRuleSeverity>))]
+public enum CodeQualityFindingRuleSeverity
+{
+    [JsonStringEnumMemberName("error")]
+    Error,
+    [JsonStringEnumMemberName("warning")]
+    Warning,
+    [JsonStringEnumMemberName("note")]
+    Note,
+    [JsonStringEnumMemberName("none")]
+    None
+}
+
+/// <summary>
 /// The level of permission to grant the access token for GitHub Actions workflows, workflow runs, and artifacts.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Actions>))]
 public enum Actions
 {
     [JsonStringEnumMemberName("read")]
@@ -485,7 +508,7 @@ public enum Actions
 /// <summary>
 /// The level of permission to grant the access token for repository creation, deletion, settings, teams, and collaborators creation.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Administration>))]
 public enum Administration
 {
     [JsonStringEnumMemberName("read")]
@@ -497,7 +520,7 @@ public enum Administration
 /// <summary>
 /// The level of permission to grant the access token to create and retrieve build artifact metadata records.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ArtifactMetadata>))]
 public enum ArtifactMetadata
 {
     [JsonStringEnumMemberName("read")]
@@ -509,7 +532,7 @@ public enum ArtifactMetadata
 /// <summary>
 /// The level of permission to create and retrieve the access token for repository attestations.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Attestations>))]
 public enum Attestations
 {
     [JsonStringEnumMemberName("read")]
@@ -521,7 +544,7 @@ public enum Attestations
 /// <summary>
 /// The level of permission to grant the access token for checks on code.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Checks>))]
 public enum Checks
 {
     [JsonStringEnumMemberName("read")]
@@ -533,7 +556,7 @@ public enum Checks
 /// <summary>
 /// The level of permission to grant the access token to view and manage code quality data.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CodeQuality>))]
 public enum CodeQuality
 {
     [JsonStringEnumMemberName("read")]
@@ -545,7 +568,7 @@ public enum CodeQuality
 /// <summary>
 /// The level of permission to grant the access token to create, edit, delete, and list Codespaces.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Codespaces>))]
 public enum Codespaces
 {
     [JsonStringEnumMemberName("read")]
@@ -557,7 +580,7 @@ public enum Codespaces
 /// <summary>
 /// The level of permission to grant the access token for repository contents, commits, branches, downloads, releases, and merges.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Contents>))]
 public enum Contents
 {
     [JsonStringEnumMemberName("read")]
@@ -569,7 +592,7 @@ public enum Contents
 /// <summary>
 /// The level of permission to grant the access token to manage Dependabot secrets.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<DependabotSecrets>))]
 public enum DependabotSecrets
 {
     [JsonStringEnumMemberName("read")]
@@ -581,7 +604,7 @@ public enum DependabotSecrets
 /// <summary>
 /// The level of permission to grant the access token for deployments and deployment statuses.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Deployments>))]
 public enum Deployments
 {
     [JsonStringEnumMemberName("read")]
@@ -593,7 +616,7 @@ public enum Deployments
 /// <summary>
 /// The level of permission to grant the access token for discussions and related comments and labels.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Discussions>))]
 public enum Discussions
 {
     [JsonStringEnumMemberName("read")]
@@ -605,7 +628,7 @@ public enum Discussions
 /// <summary>
 /// The level of permission to grant the access token for managing repository environments.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Environments>))]
 public enum Environments
 {
     [JsonStringEnumMemberName("read")]
@@ -617,7 +640,7 @@ public enum Environments
 /// <summary>
 /// The level of permission to grant the access token for issues and related comments, assignees, labels, and milestones.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Issues>))]
 public enum Issues
 {
     [JsonStringEnumMemberName("read")]
@@ -629,7 +652,7 @@ public enum Issues
 /// <summary>
 /// The level of permission to grant the access token to manage the merge queues for a repository.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<MergeQueues>))]
 public enum MergeQueues
 {
     [JsonStringEnumMemberName("read")]
@@ -641,7 +664,7 @@ public enum MergeQueues
 /// <summary>
 /// The level of permission to grant the access token to search repositories, list collaborators, and access repository metadata.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Metadata2>))]
 public enum Metadata2
 {
     [JsonStringEnumMemberName("read")]
@@ -653,7 +676,7 @@ public enum Metadata2
 /// <summary>
 /// The level of permission to grant the access token for packages published to GitHub Packages.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Packages>))]
 public enum Packages
 {
     [JsonStringEnumMemberName("read")]
@@ -665,7 +688,7 @@ public enum Packages
 /// <summary>
 /// The level of permission to grant the access token to retrieve Pages statuses, configuration, and builds, as well as create new builds.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Pages>))]
 public enum Pages
 {
     [JsonStringEnumMemberName("read")]
@@ -677,7 +700,7 @@ public enum Pages
 /// <summary>
 /// The level of permission to grant the access token for pull requests and related comments, assignees, labels, milestones, and merges.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PullRequests>))]
 public enum PullRequests
 {
     [JsonStringEnumMemberName("read")]
@@ -689,7 +712,7 @@ public enum PullRequests
 /// <summary>
 /// The level of permission to grant the access token to view and edit custom properties for a repository, when allowed by the property.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<RepositoryCustomProperties>))]
 public enum RepositoryCustomProperties
 {
     [JsonStringEnumMemberName("read")]
@@ -701,7 +724,7 @@ public enum RepositoryCustomProperties
 /// <summary>
 /// The level of permission to grant the access token to manage the post-receive hooks for a repository.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<RepositoryHooks>))]
 public enum RepositoryHooks
 {
     [JsonStringEnumMemberName("read")]
@@ -713,7 +736,7 @@ public enum RepositoryHooks
 /// <summary>
 /// The level of permission to grant the access token to manage repository projects, columns, and cards.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<RepositoryProjects>))]
 public enum RepositoryProjects
 {
     [JsonStringEnumMemberName("read")]
@@ -727,7 +750,7 @@ public enum RepositoryProjects
 /// <summary>
 /// The level of permission to grant the access token to view and manage secret scanning alerts.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<SecretScanningAlerts>))]
 public enum SecretScanningAlerts
 {
     [JsonStringEnumMemberName("read")]
@@ -739,7 +762,7 @@ public enum SecretScanningAlerts
 /// <summary>
 /// The level of permission to grant the access token to manage repository secrets.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Secrets>))]
 public enum Secrets
 {
     [JsonStringEnumMemberName("read")]
@@ -751,7 +774,7 @@ public enum Secrets
 /// <summary>
 /// The level of permission to grant the access token to view and manage security events like code scanning alerts.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<SecurityEvents>))]
 public enum SecurityEvents
 {
     [JsonStringEnumMemberName("read")]
@@ -763,7 +786,7 @@ public enum SecurityEvents
 /// <summary>
 /// The level of permission to grant the access token to manage just a single file.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<SingleFile>))]
 public enum SingleFile
 {
     [JsonStringEnumMemberName("read")]
@@ -775,7 +798,7 @@ public enum SingleFile
 /// <summary>
 /// The level of permission to grant the access token for commit statuses.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Statuses>))]
 public enum Statuses
 {
     [JsonStringEnumMemberName("read")]
@@ -787,7 +810,7 @@ public enum Statuses
 /// <summary>
 /// The level of permission to grant the access token to manage Dependabot alerts.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<VulnerabilityAlerts>))]
 public enum VulnerabilityAlerts
 {
     [JsonStringEnumMemberName("read")]
@@ -799,7 +822,7 @@ public enum VulnerabilityAlerts
 /// <summary>
 /// The level of permission to grant the access token to update GitHub Actions workflow files.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Workflows>))]
 public enum Workflows
 {
     [JsonStringEnumMemberName("write")]
@@ -809,7 +832,7 @@ public enum Workflows
 /// <summary>
 /// The level of permission to grant the access token to view and edit custom properties for an organization, when allowed by the property.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CustomPropertiesForOrganizations>))]
 public enum CustomPropertiesForOrganizations
 {
     [JsonStringEnumMemberName("read")]
@@ -821,7 +844,7 @@ public enum CustomPropertiesForOrganizations
 /// <summary>
 /// The level of permission to grant the access token for organization teams and members.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Members>))]
 public enum Members
 {
     [JsonStringEnumMemberName("read")]
@@ -833,7 +856,7 @@ public enum Members
 /// <summary>
 /// The level of permission to grant the access token to manage access to an organization.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<OrganizationAdministration>))]
 public enum OrganizationAdministration
 {
     [JsonStringEnumMemberName("read")]
@@ -845,7 +868,7 @@ public enum OrganizationAdministration
 /// <summary>
 /// The level of permission to grant the access token for custom repository roles management.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<OrganizationCustomRoles>))]
 public enum OrganizationCustomRoles
 {
     [JsonStringEnumMemberName("read")]
@@ -857,7 +880,7 @@ public enum OrganizationCustomRoles
 /// <summary>
 /// The level of permission to grant the access token for custom organization roles management.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<OrganizationCustomOrgRoles>))]
 public enum OrganizationCustomOrgRoles
 {
     [JsonStringEnumMemberName("read")]
@@ -869,7 +892,7 @@ public enum OrganizationCustomOrgRoles
 /// <summary>
 /// The level of permission to grant the access token for repository custom properties management at the organization level.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<OrganizationCustomProperties>))]
 public enum OrganizationCustomProperties
 {
     [JsonStringEnumMemberName("read")]
@@ -883,7 +906,7 @@ public enum OrganizationCustomProperties
 /// <summary>
 /// The level of permission to grant the access token for managing access to GitHub Copilot for members of an organization with a Copilot Business subscription. This property is in public preview and is subject to change.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<OrganizationCopilotSeatManagement>))]
 public enum OrganizationCopilotSeatManagement
 {
     [JsonStringEnumMemberName("read")]
@@ -895,7 +918,7 @@ public enum OrganizationCopilotSeatManagement
 /// <summary>
 /// The level of permission to grant the access token to view and manage Copilot cloud agent settings for an organization.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<OrganizationCopilotAgentSettings>))]
 public enum OrganizationCopilotAgentSettings
 {
     [JsonStringEnumMemberName("read")]
@@ -907,7 +930,7 @@ public enum OrganizationCopilotAgentSettings
 /// <summary>
 /// The level of permission to grant the access token to view and manage announcement banners for an organization.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<OrganizationAnnouncementBanners>))]
 public enum OrganizationAnnouncementBanners
 {
     [JsonStringEnumMemberName("read")]
@@ -919,7 +942,7 @@ public enum OrganizationAnnouncementBanners
 /// <summary>
 /// The level of permission to grant the access token to view events triggered by an activity in an organization.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<OrganizationEvents>))]
 public enum OrganizationEvents
 {
     [JsonStringEnumMemberName("read")]
@@ -929,7 +952,7 @@ public enum OrganizationEvents
 /// <summary>
 /// The level of permission to grant the access token to manage the post-receive hooks for an organization.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<OrganizationHooks>))]
 public enum OrganizationHooks
 {
     [JsonStringEnumMemberName("read")]
@@ -941,7 +964,7 @@ public enum OrganizationHooks
 /// <summary>
 /// The level of permission to grant the access token for viewing and managing fine-grained personal access token requests to an organization.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<OrganizationPersonalAccessTokens>))]
 public enum OrganizationPersonalAccessTokens
 {
     [JsonStringEnumMemberName("read")]
@@ -953,7 +976,7 @@ public enum OrganizationPersonalAccessTokens
 /// <summary>
 /// The level of permission to grant the access token for viewing and managing fine-grained personal access tokens that have been approved by an organization.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<OrganizationPersonalAccessTokenRequests>))]
 public enum OrganizationPersonalAccessTokenRequests
 {
     [JsonStringEnumMemberName("read")]
@@ -965,7 +988,7 @@ public enum OrganizationPersonalAccessTokenRequests
 /// <summary>
 /// The level of permission to grant the access token for viewing an organization's plan.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<OrganizationPlan>))]
 public enum OrganizationPlan
 {
     [JsonStringEnumMemberName("read")]
@@ -975,7 +998,7 @@ public enum OrganizationPlan
 /// <summary>
 /// The level of permission to grant the access token to manage organization projects and projects public preview (where available).
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<OrganizationProjects>))]
 public enum OrganizationProjects
 {
     [JsonStringEnumMemberName("read")]
@@ -989,7 +1012,7 @@ public enum OrganizationProjects
 /// <summary>
 /// The level of permission to grant the access token for organization packages published to GitHub Packages.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<OrganizationPackages>))]
 public enum OrganizationPackages
 {
     [JsonStringEnumMemberName("read")]
@@ -1001,7 +1024,7 @@ public enum OrganizationPackages
 /// <summary>
 /// The level of permission to grant the access token to manage organization secrets.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<OrganizationSecrets>))]
 public enum OrganizationSecrets
 {
     [JsonStringEnumMemberName("read")]
@@ -1013,7 +1036,7 @@ public enum OrganizationSecrets
 /// <summary>
 /// The level of permission to grant the access token to view and manage GitHub Actions self-hosted runners available to an organization.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<OrganizationSelfHostedRunners>))]
 public enum OrganizationSelfHostedRunners
 {
     [JsonStringEnumMemberName("read")]
@@ -1025,7 +1048,7 @@ public enum OrganizationSelfHostedRunners
 /// <summary>
 /// The level of permission to grant the access token to view and manage users blocked by the organization.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<OrganizationUserBlocking>))]
 public enum OrganizationUserBlocking
 {
     [JsonStringEnumMemberName("read")]
@@ -1037,7 +1060,7 @@ public enum OrganizationUserBlocking
 /// <summary>
 /// The level of permission to grant the access token to manage the email addresses belonging to a user.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<EmailAddresses>))]
 public enum EmailAddresses
 {
     [JsonStringEnumMemberName("read")]
@@ -1049,7 +1072,7 @@ public enum EmailAddresses
 /// <summary>
 /// The level of permission to grant the access token to manage the followers belonging to a user.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Followers>))]
 public enum Followers
 {
     [JsonStringEnumMemberName("read")]
@@ -1061,7 +1084,7 @@ public enum Followers
 /// <summary>
 /// The level of permission to grant the access token to manage git SSH keys.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<GitSshKeys>))]
 public enum GitSshKeys
 {
     [JsonStringEnumMemberName("read")]
@@ -1073,7 +1096,7 @@ public enum GitSshKeys
 /// <summary>
 /// The level of permission to grant the access token to view and manage GPG keys belonging to a user.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<GpgKeys>))]
 public enum GpgKeys
 {
     [JsonStringEnumMemberName("read")]
@@ -1085,7 +1108,7 @@ public enum GpgKeys
 /// <summary>
 /// The level of permission to grant the access token to view and manage interaction limits on a repository.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<InteractionLimits>))]
 public enum InteractionLimits
 {
     [JsonStringEnumMemberName("read")]
@@ -1097,7 +1120,7 @@ public enum InteractionLimits
 /// <summary>
 /// The level of permission to grant the access token to manage the profile settings belonging to a user.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Profile>))]
 public enum Profile
 {
     [JsonStringEnumMemberName("write")]
@@ -1107,7 +1130,7 @@ public enum Profile
 /// <summary>
 /// The level of permission to grant the access token to list and manage repositories a user is starring.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Starring>))]
 public enum Starring
 {
     [JsonStringEnumMemberName("read")]
@@ -1119,7 +1142,7 @@ public enum Starring
 /// <summary>
 /// The level of permission to grant the access token for organization custom properties management at the enterprise level.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<EnterpriseCustomPropertiesForOrganizations>))]
 public enum EnterpriseCustomPropertiesForOrganizations
 {
     [JsonStringEnumMemberName("read")]
@@ -1133,7 +1156,7 @@ public enum EnterpriseCustomPropertiesForOrganizations
 /// <summary>
 /// Describe whether all repositories have been selected or there's a selection involved
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<InstallationRepositorySelection>))]
 public enum InstallationRepositorySelection
 {
     [JsonStringEnumMemberName("all")]
@@ -1145,7 +1168,7 @@ public enum InstallationRepositorySelection
 /// <summary>
 /// Type of repository selection requested.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<OrganizationProgrammaticAccessGrantRequestRepositorySelection>))]
 public enum OrganizationProgrammaticAccessGrantRequestRepositorySelection
 {
     [JsonStringEnumMemberName("none")]
@@ -1159,7 +1182,7 @@ public enum OrganizationProgrammaticAccessGrantRequestRepositorySelection
 /// <summary>
 /// The policy controlling who can create pull requests: all or collaborators_only.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PullRequestCreationPolicy>))]
 public enum PullRequestCreationPolicy
 {
     [JsonStringEnumMemberName("all")]
@@ -1174,7 +1197,7 @@ public enum PullRequestCreationPolicy
 /// - `PR_TITLE` - default to the pull request's title.
 /// - `COMMIT_OR_PR_TITLE` - default to the commit's title (if only one commit) or the pull request's title (when more than one commit).
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<SquashMergeCommitTitle>))]
 public enum SquashMergeCommitTitle
 {
     [JsonStringEnumMemberName("PR_TITLE")]
@@ -1190,7 +1213,7 @@ public enum SquashMergeCommitTitle
 /// - `COMMIT_MESSAGES` - default to the branch's commit messages.
 /// - `BLANK` - default to a blank commit message.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<SquashMergeCommitMessage>))]
 public enum SquashMergeCommitMessage
 {
     [JsonStringEnumMemberName("PR_BODY")]
@@ -1207,7 +1230,7 @@ public enum SquashMergeCommitMessage
 /// - `PR_TITLE` - default to the pull request's title.
 /// - `MERGE_MESSAGE` - default to the classic title for a merge message (e.g., Merge pull request #123 from branch-name).
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<MergeCommitTitle>))]
 public enum MergeCommitTitle
 {
     [JsonStringEnumMemberName("PR_TITLE")]
@@ -1223,7 +1246,7 @@ public enum MergeCommitTitle
 /// - `PR_BODY` - default to the pull request's body.
 /// - `BLANK` - default to a blank commit message.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<MergeCommitMessage>))]
 public enum MergeCommitMessage
 {
     [JsonStringEnumMemberName("PR_BODY")]
@@ -1237,7 +1260,7 @@ public enum MergeCommitMessage
 /// <summary>
 /// Whether the inclusion was defined at the organization or enterprise level
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<InclusionSource>))]
 public enum InclusionSource
 {
     [JsonStringEnumMemberName("organization")]
@@ -1249,7 +1272,7 @@ public enum InclusionSource
 /// <summary>
 /// The type of the code security configuration.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TargetType>))]
 public enum TargetType
 {
     [JsonStringEnumMemberName("global")]
@@ -1263,7 +1286,7 @@ public enum TargetType
 /// <summary>
 /// The enablement status of GitHub Advanced Security
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<AdvancedSecurity>))]
 public enum AdvancedSecurity
 {
     [JsonStringEnumMemberName("enabled")]
@@ -1279,7 +1302,7 @@ public enum AdvancedSecurity
 /// <summary>
 /// The enablement status of Dependency Graph
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<DependencyGraph>))]
 public enum DependencyGraph
 {
     [JsonStringEnumMemberName("enabled")]
@@ -1293,7 +1316,7 @@ public enum DependencyGraph
 /// <summary>
 /// The enablement status of Automatic dependency submission
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<DependencyGraphAutosubmitAction>))]
 public enum DependencyGraphAutosubmitAction
 {
     [JsonStringEnumMemberName("enabled")]
@@ -1307,7 +1330,7 @@ public enum DependencyGraphAutosubmitAction
 /// <summary>
 /// The enablement status of Dependabot alerts
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<DependabotAlerts>))]
 public enum DependabotAlerts
 {
     [JsonStringEnumMemberName("enabled")]
@@ -1321,7 +1344,7 @@ public enum DependabotAlerts
 /// <summary>
 /// The enablement status of Dependabot security updates
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<DependabotSecurityUpdates>))]
 public enum DependabotSecurityUpdates
 {
     [JsonStringEnumMemberName("enabled")]
@@ -1335,7 +1358,7 @@ public enum DependabotSecurityUpdates
 /// <summary>
 /// The enablement status of Dependabot delegated alert dismissal
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<DependabotDelegatedAlertDismissal>))]
 public enum DependabotDelegatedAlertDismissal
 {
     [JsonStringEnumMemberName("enabled")]
@@ -1351,7 +1374,7 @@ public enum DependabotDelegatedAlertDismissal
 /// <summary>
 /// The enablement status of code scanning default setup
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CodeScanningDefaultSetup2>))]
 public enum CodeScanningDefaultSetup2
 {
     [JsonStringEnumMemberName("enabled")]
@@ -1365,7 +1388,7 @@ public enum CodeScanningDefaultSetup2
 /// <summary>
 /// The enablement status of code scanning delegated alert dismissal
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CodeScanningDelegatedAlertDismissal>))]
 public enum CodeScanningDelegatedAlertDismissal
 {
     [JsonStringEnumMemberName("enabled")]
@@ -1379,7 +1402,7 @@ public enum CodeScanningDelegatedAlertDismissal
 /// <summary>
 /// The enablement status of secret scanning
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<SecretScanning>))]
 public enum SecretScanning
 {
     [JsonStringEnumMemberName("enabled")]
@@ -1393,7 +1416,7 @@ public enum SecretScanning
 /// <summary>
 /// The enablement status of secret scanning push protection
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<SecretScanningPushProtection>))]
 public enum SecretScanningPushProtection
 {
     [JsonStringEnumMemberName("enabled")]
@@ -1407,7 +1430,7 @@ public enum SecretScanningPushProtection
 /// <summary>
 /// The enablement status of secret scanning delegated bypass
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<SecretScanningDelegatedBypass>))]
 public enum SecretScanningDelegatedBypass
 {
     [JsonStringEnumMemberName("enabled")]
@@ -1421,7 +1444,7 @@ public enum SecretScanningDelegatedBypass
 /// <summary>
 /// The enablement status of secret scanning validity checks
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<SecretScanningValidityChecks>))]
 public enum SecretScanningValidityChecks
 {
     [JsonStringEnumMemberName("enabled")]
@@ -1435,7 +1458,7 @@ public enum SecretScanningValidityChecks
 /// <summary>
 /// The enablement status of secret scanning non-provider patterns
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<SecretScanningNonProviderPatterns>))]
 public enum SecretScanningNonProviderPatterns
 {
     [JsonStringEnumMemberName("enabled")]
@@ -1449,7 +1472,7 @@ public enum SecretScanningNonProviderPatterns
 /// <summary>
 /// The enablement status of Copilot secret scanning
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<SecretScanningGenericSecrets>))]
 public enum SecretScanningGenericSecrets
 {
     [JsonStringEnumMemberName("enabled")]
@@ -1463,7 +1486,7 @@ public enum SecretScanningGenericSecrets
 /// <summary>
 /// The enablement status of secret scanning delegated alert dismissal
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<SecretScanningDelegatedAlertDismissal>))]
 public enum SecretScanningDelegatedAlertDismissal
 {
     [JsonStringEnumMemberName("enabled")]
@@ -1477,7 +1500,7 @@ public enum SecretScanningDelegatedAlertDismissal
 /// <summary>
 /// The enablement status of secret scanning extended metadata
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<SecretScanningExtendedMetadata>))]
 public enum SecretScanningExtendedMetadata
 {
     [JsonStringEnumMemberName("enabled")]
@@ -1491,7 +1514,7 @@ public enum SecretScanningExtendedMetadata
 /// <summary>
 /// The enablement status of private vulnerability reporting
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PrivateVulnerabilityReporting>))]
 public enum PrivateVulnerabilityReporting
 {
     [JsonStringEnumMemberName("enabled")]
@@ -1505,7 +1528,7 @@ public enum PrivateVulnerabilityReporting
 /// <summary>
 /// The enforcement status for a security configuration
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CodeSecurityConfigurationEnforcement>))]
 public enum CodeSecurityConfigurationEnforcement
 {
     [JsonStringEnumMemberName("enforced")]
@@ -1517,7 +1540,7 @@ public enum CodeSecurityConfigurationEnforcement
 /// <summary>
 /// The enforcement level of the ruleset. `evaluate` allows admins to test rules before enforcing them. Admins can view insights on the Rule Insights page (`evaluate` is only available with GitHub Enterprise).
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<RepositoryRulesetEnforcement>))]
 public enum RepositoryRulesetEnforcement
 {
     [JsonStringEnumMemberName("disabled")]
@@ -1531,7 +1554,7 @@ public enum RepositoryRulesetEnforcement
 /// <summary>
 /// Whether to use labeled runners or standard GitHub runners.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CodeScanningDefaultSetupOptionsRunnerType>))]
 public enum CodeScanningDefaultSetupOptionsRunnerType
 {
     [JsonStringEnumMemberName("standard")]
@@ -1545,7 +1568,7 @@ public enum CodeScanningDefaultSetupOptionsRunnerType
 /// <summary>
 /// Runner type to be used.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CodeQualitySetupRunnerType>))]
 public enum CodeQualitySetupRunnerType
 {
     [JsonStringEnumMemberName("standard")]
@@ -1559,7 +1582,7 @@ public enum CodeQualitySetupRunnerType
 /// <summary>
 /// Runner type to be used.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CodeQualitySetupUpdateRunnerType>))]
 public enum CodeQualitySetupUpdateRunnerType
 {
     [JsonStringEnumMemberName("standard")]
@@ -1571,7 +1594,7 @@ public enum CodeQualitySetupUpdateRunnerType
 /// <summary>
 /// The attachment status of the code security configuration on the repository.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CodeSecurityConfigurationRepositoriesStatus>))]
 public enum CodeSecurityConfigurationRepositoriesStatus
 {
     [JsonStringEnumMemberName("attached")]
@@ -1595,7 +1618,7 @@ public enum CodeSecurityConfigurationRepositoriesStatus
 /// <summary>
 /// The current status of the dismissal request.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<DependabotAlertDismissalRequestSimpleStatus>))]
 public enum DependabotAlertDismissalRequestSimpleStatus
 {
     [JsonStringEnumMemberName("pending")]
@@ -1611,7 +1634,7 @@ public enum DependabotAlertDismissalRequestSimpleStatus
 /// <summary>
 /// The status of the runner.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ActionsHostedRunnerStatus>))]
 public enum ActionsHostedRunnerStatus
 {
     [JsonStringEnumMemberName("Ready")]
@@ -1629,7 +1652,7 @@ public enum ActionsHostedRunnerStatus
 /// <summary>
 /// The current status.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ProjectsV2StatusUpdateStatus>))]
 public enum ProjectsV2StatusUpdateStatus
 {
     [JsonStringEnumMemberName("INACTIVE")]
@@ -1649,7 +1672,7 @@ public enum ProjectsV2StatusUpdateStatus
 /// <summary>
 /// The phase of the lifecycle that the job is currently in.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<JobStatus>))]
 public enum JobStatus
 {
     [JsonStringEnumMemberName("queued")]
@@ -1666,7 +1689,7 @@ public enum JobStatus
     Pending
 }
 
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<DiffEntryStatus>))]
 public enum DiffEntryStatus
 {
     [JsonStringEnumMemberName("added")]
@@ -1688,7 +1711,7 @@ public enum DiffEntryStatus
 /// <summary>
 /// The phase of the lifecycle that the check suite is currently in. Statuses of waiting, requested, and pending are reserved for GitHub Actions check suites.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CheckSuiteStatus>))]
 public enum CheckSuiteStatus
 {
     [JsonStringEnumMemberName("queued")]
@@ -1710,7 +1733,7 @@ public enum CheckSuiteStatus
 /// <summary>
 /// The status of an autofix.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CodeScanningAutofixStatus2>))]
 public enum CodeScanningAutofixStatus2
 {
     [JsonStringEnumMemberName("pending")]
@@ -1723,7 +1746,7 @@ public enum CodeScanningAutofixStatus2
     Outdated
 }
 
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CodeScanningVariantAnalysisStatus2>))]
 public enum CodeScanningVariantAnalysisStatus2
 {
     [JsonStringEnumMemberName("in_progress")]
@@ -1736,7 +1759,7 @@ public enum CodeScanningVariantAnalysisStatus2
     Cancelled
 }
 
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CommitComparisonStatus>))]
 public enum CommitComparisonStatus
 {
     [JsonStringEnumMemberName("diverged")]
@@ -1749,7 +1772,7 @@ public enum CommitComparisonStatus
     Identical
 }
 
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ImportStatus>))]
 public enum ImportStatus
 {
     [JsonStringEnumMemberName("auth")]
@@ -1789,7 +1812,7 @@ public enum ImportStatus
 /// <summary>
 /// The status of the most recent build of the Page.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PageStatus>))]
 public enum PageStatus
 {
     [JsonStringEnumMemberName("built")]
@@ -1805,7 +1828,7 @@ public enum PageStatus
 /// <summary>
 /// The current status of the deployment.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PagesDeploymentStatusStatus>))]
 public enum PagesDeploymentStatusStatus
 {
     [JsonStringEnumMemberName("deployment_in_progress")]
@@ -1832,7 +1855,20 @@ public enum PagesDeploymentStatusStatus
     Succeed
 }
 
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PullRequestMergeAsyncResultStatus>))]
+public enum PullRequestMergeAsyncResultStatus
+{
+    [JsonStringEnumMemberName("pending")]
+    Pending,
+    [JsonStringEnumMemberName("merged")]
+    Merged,
+    [JsonStringEnumMemberName("enqueued")]
+    Enqueued,
+    [JsonStringEnumMemberName("failed")]
+    Failed
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<SimpleCheckSuiteStatus>))]
 public enum SimpleCheckSuiteStatus
 {
     [JsonStringEnumMemberName("queued")]
@@ -1850,7 +1886,7 @@ public enum SimpleCheckSuiteStatus
 /// <summary>
 /// The phase of the lifecycle that the check is currently in.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CheckRunWithSimpleCheckSuiteStatus>))]
 public enum CheckRunWithSimpleCheckSuiteStatus
 {
     [JsonStringEnumMemberName("queued")]
@@ -1863,7 +1899,7 @@ public enum CheckRunWithSimpleCheckSuiteStatus
     Pending
 }
 
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookRepositoryImportStatus>))]
 public enum WebhookRepositoryImportStatus
 {
     [JsonStringEnumMemberName("success")]
@@ -1877,7 +1913,7 @@ public enum WebhookRepositoryImportStatus
 /// <summary>
 /// The classification of the advisory.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Classification>))]
 public enum Classification
 {
     [JsonStringEnumMemberName("general")]
@@ -1889,7 +1925,7 @@ public enum Classification
 /// <summary>
 /// The state of the Dependabot alert.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<DependabotAlertWithRepositoryState>))]
 public enum DependabotAlertWithRepositoryState
 {
     [JsonStringEnumMemberName("auto_dismissed")]
@@ -1907,7 +1943,7 @@ public enum DependabotAlertWithRepositoryState
 /// `converting` means that the discussion is being converted from an issue.
 /// `transferring` means that the discussion is being transferred from another repository.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<DiscussionState>))]
 public enum DiscussionState
 {
     [JsonStringEnumMemberName("open")]
@@ -1925,7 +1961,7 @@ public enum DiscussionState
 /// <summary>
 /// The state of the milestone.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<MilestoneState>))]
 public enum MilestoneState
 {
     [JsonStringEnumMemberName("open")]
@@ -1937,7 +1973,7 @@ public enum MilestoneState
 /// <summary>
 /// State of the release asset.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ReleaseAssetState>))]
 public enum ReleaseAssetState
 {
     [JsonStringEnumMemberName("uploaded")]
@@ -1949,7 +1985,7 @@ public enum ReleaseAssetState
 /// <summary>
 /// State of a code scanning alert.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CodeScanningAlertInstanceState2>))]
 public enum CodeScanningAlertInstanceState2
 {
     [JsonStringEnumMemberName("open")]
@@ -1965,7 +2001,7 @@ public enum CodeScanningAlertInstanceState2
 /// <summary>
 /// State of this codespace.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CodespaceState>))]
 public enum CodespaceState
 {
     [JsonStringEnumMemberName("Unknown")]
@@ -2007,7 +2043,7 @@ public enum CodespaceState
 /// <summary>
 /// The state of the member in the organization. The `pending` state indicates the user has not yet accepted an invitation.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<OrgMembershipState>))]
 public enum OrgMembershipState
 {
     [JsonStringEnumMemberName("active")]
@@ -2019,7 +2055,7 @@ public enum OrgMembershipState
 /// <summary>
 /// Sets the state of the secret scanning alert. You must provide `resolution` when you set the state to `resolved`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<OrganizationSecretScanningAlertState>))]
 public enum OrganizationSecretScanningAlertState
 {
     [JsonStringEnumMemberName("open")]
@@ -2029,9 +2065,21 @@ public enum OrganizationSecretScanningAlertState
 }
 
 /// <summary>
+/// The state of the custom pattern.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter<SecretScanningCustomPatternState>))]
+public enum SecretScanningCustomPatternState
+{
+    [JsonStringEnumMemberName("published")]
+    Published,
+    [JsonStringEnumMemberName("unpublished")]
+    Unpublished
+}
+
+/// <summary>
 /// The state of the user's acceptance of the credit.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<RepositoryAdvisoryCreditState>))]
 public enum RepositoryAdvisoryCreditState
 {
     [JsonStringEnumMemberName("accepted")]
@@ -2045,7 +2093,7 @@ public enum RepositoryAdvisoryCreditState
 /// <summary>
 /// The state of the advisory.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<RepositoryAdvisoryState>))]
 public enum RepositoryAdvisoryState
 {
     [JsonStringEnumMemberName("published")]
@@ -2063,7 +2111,7 @@ public enum RepositoryAdvisoryState
 /// <summary>
 /// Whether deployment to the environment(s) was approved or rejected or pending (with comments)
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<EnvironmentApprovalsState>))]
 public enum EnvironmentApprovalsState
 {
     [JsonStringEnumMemberName("approved")]
@@ -2077,7 +2125,7 @@ public enum EnvironmentApprovalsState
 /// <summary>
 /// Whether to approve or reject deployment to the specified environments.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ReviewCustomGatesStateRequiredState>))]
 public enum ReviewCustomGatesStateRequiredState
 {
     [JsonStringEnumMemberName("approved")]
@@ -2086,7 +2134,7 @@ public enum ReviewCustomGatesStateRequiredState
     Rejected
 }
 
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<WorkflowState>))]
 public enum WorkflowState
 {
     [JsonStringEnumMemberName("active")]
@@ -2102,9 +2150,21 @@ public enum WorkflowState
 }
 
 /// <summary>
+/// State of the code quality finding.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter<CodeQualityFindingState>))]
+public enum CodeQualityFindingState
+{
+    [JsonStringEnumMemberName("open")]
+    Open,
+    [JsonStringEnumMemberName("dismissed")]
+    Dismissed
+}
+
+/// <summary>
 /// Code quality setup has been configured or not.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CodeQualitySetupState>))]
 public enum CodeQualitySetupState
 {
     [JsonStringEnumMemberName("configured")]
@@ -2116,7 +2176,7 @@ public enum CodeQualitySetupState
 /// <summary>
 /// State of a code scanning alert instance.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CodeScanningAlertInstanceListState>))]
 public enum CodeScanningAlertInstanceListState
 {
     [JsonStringEnumMemberName("open")]
@@ -2130,7 +2190,7 @@ public enum CodeScanningAlertInstanceListState
 /// <summary>
 /// The state of the status.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<DeploymentStatusState>))]
 public enum DeploymentStatusState
 {
     [JsonStringEnumMemberName("error")]
@@ -2149,7 +2209,27 @@ public enum DeploymentStatusState
     InProgress
 }
 
-[JsonConverter(typeof(JsonStringEnumConverter))]
+/// <summary>
+/// The suggestion's lifecycle state.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter<IssueSuggestionState>))]
+public enum IssueSuggestionState
+{
+    [JsonStringEnumMemberName("pending")]
+    Pending,
+    [JsonStringEnumMemberName("applied")]
+    Applied,
+    [JsonStringEnumMemberName("approved")]
+    Approved,
+    [JsonStringEnumMemberName("dismissed")]
+    Dismissed,
+    [JsonStringEnumMemberName("replaced")]
+    Replaced,
+    [JsonStringEnumMemberName("invalidated")]
+    Invalidated
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<PagesHttpsCertificateState>))]
 public enum PagesHttpsCertificateState
 {
     [JsonStringEnumMemberName("new")]
@@ -2181,7 +2261,7 @@ public enum PagesHttpsCertificateState
 /// <summary>
 /// The state of the advisory.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<RepositoryAdvisoryUpdateState>))]
 public enum RepositoryAdvisoryUpdateState
 {
     [JsonStringEnumMemberName("published")]
@@ -2192,7 +2272,7 @@ public enum RepositoryAdvisoryUpdateState
     Draft
 }
 
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<WebhooksAlertState>))]
 public enum WebhooksAlertState
 {
     [JsonStringEnumMemberName("auto_dismissed")]
@@ -2204,7 +2284,7 @@ public enum WebhooksAlertState
 /// <summary>
 /// The new state. Can be `pending`, `success`, `failure`, or `error`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookStatusState>))]
 public enum WebhookStatusState
 {
     [JsonStringEnumMemberName("pending")]
@@ -2220,7 +2300,7 @@ public enum WebhookStatusState
 /// <summary>
 /// The reason that the alert was dismissed.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<DependabotAlertWithRepositoryDismissedReason>))]
 public enum DependabotAlertWithRepositoryDismissedReason
 {
     [JsonStringEnumMemberName("fix_started")]
@@ -2240,7 +2320,7 @@ public enum DependabotAlertWithRepositoryDismissedReason
 /// <summary>
 /// **Required when the state is dismissed.** The reason for dismissing or closing the alert.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CodeScanningOrganizationAlertItemsDismissedReason>))]
 public enum CodeScanningOrganizationAlertItemsDismissedReason
 {
     [JsonStringEnumMemberName("false positive")]
@@ -2249,6 +2329,8 @@ public enum CodeScanningOrganizationAlertItemsDismissedReason
     WontFix,
     [JsonStringEnumMemberName("used in tests")]
     UsedInTests,
+    [JsonStringEnumMemberName("mitigated")]
+    Mitigated,
     [JsonStringEnumMemberName("")]
     Unknown
 }
@@ -2256,7 +2338,7 @@ public enum CodeScanningOrganizationAlertItemsDismissedReason
 /// <summary>
 /// The default repository access level for Dependabot updates.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<DefaultLevel>))]
 public enum DefaultLevel
 {
     [JsonStringEnumMemberName("public")]
@@ -2270,7 +2352,7 @@ public enum DefaultLevel
 /// <summary>
 /// Whether team members will receive notifications when the team is mentioned.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<NotificationSetting>))]
 public enum NotificationSetting
 {
     [JsonStringEnumMemberName("notifications_enabled")]
@@ -2282,7 +2364,7 @@ public enum NotificationSetting
 /// <summary>
 /// How the author is associated with the repository.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<AuthorAssociation2>))]
 public enum AuthorAssociation2
 {
     [JsonStringEnumMemberName("COLLABORATOR")]
@@ -2306,7 +2388,7 @@ public enum AuthorAssociation2
 /// <summary>
 /// The reason for the current state
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<DiscussionStateReason>))]
 public enum DiscussionStateReason
 {
     [JsonStringEnumMemberName("resolved")]
@@ -2324,7 +2406,7 @@ public enum DiscussionStateReason
 /// <summary>
 /// The reason for the current state
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<IssueStateReason>))]
 public enum IssueStateReason
 {
     [JsonStringEnumMemberName("completed")]
@@ -2342,7 +2424,7 @@ public enum IssueStateReason
 /// <summary>
 /// The color of the issue type.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<IssueTypeColor>))]
 public enum IssueTypeColor
 {
     [JsonStringEnumMemberName("gray")]
@@ -2368,7 +2450,7 @@ public enum IssueTypeColor
 /// <summary>
 /// The color associated with the option.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ProjectsV2FieldSingleSelectOptionColor>))]
 public enum ProjectsV2FieldSingleSelectOptionColor
 {
     [JsonStringEnumMemberName("BLUE")]
@@ -2392,7 +2474,7 @@ public enum ProjectsV2FieldSingleSelectOptionColor
 /// <summary>
 /// The data type of the issue field
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<IssueFieldValueDataType>))]
 public enum IssueFieldValueDataType
 {
     [JsonStringEnumMemberName("text")]
@@ -2410,7 +2492,7 @@ public enum IssueFieldValueDataType
 /// <summary>
 /// The data type of the issue field.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<IssueFieldDataType>))]
 public enum IssueFieldDataType
 {
     [JsonStringEnumMemberName("text")]
@@ -2428,7 +2510,7 @@ public enum IssueFieldDataType
 /// <summary>
 /// The field's data type.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ProjectsV2FieldDataType>))]
 public enum ProjectsV2FieldDataType
 {
     [JsonStringEnumMemberName("assignees")]
@@ -2463,7 +2545,7 @@ public enum ProjectsV2FieldDataType
     SubIssuesProgress
 }
 
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PriceModel>))]
 public enum PriceModel
 {
     [JsonStringEnumMemberName("FREE")]
@@ -2477,7 +2559,7 @@ public enum PriceModel
 /// <summary>
 /// The scope of the budget
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<BudgetScope>))]
 public enum BudgetScope
 {
     [JsonStringEnumMemberName("enterprise")]
@@ -2490,6 +2572,8 @@ public enum BudgetScope
     CostCenter,
     [JsonStringEnumMemberName("multi_user_customer")]
     MultiUserCustomer,
+    [JsonStringEnumMemberName("multi_user_cost_center")]
+    MultiUserCostCenter,
     [JsonStringEnumMemberName("user")]
     User
 }
@@ -2497,7 +2581,7 @@ public enum BudgetScope
 /// <summary>
 /// The image provider.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ActionsHostedRunnerPoolImageSource>))]
 public enum ActionsHostedRunnerPoolImageSource
 {
     [JsonStringEnumMemberName("github")]
@@ -2511,7 +2595,7 @@ public enum ActionsHostedRunnerPoolImageSource
 /// <summary>
 /// Source answers the question, "where did this role come from?"
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<OrganizationRoleSource>))]
 public enum OrganizationRoleSource
 {
     [JsonStringEnumMemberName("Organization")]
@@ -2527,7 +2611,7 @@ public enum OrganizationRoleSource
 /// <summary>
 /// The source of the repository property. Defaults to 'custom' if not specified.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<RepositoryRulesetConditionsRepositoryPropertySpecSource>))]
 public enum RepositoryRulesetConditionsRepositoryPropertySpecSource
 {
     [JsonStringEnumMemberName("custom")]
@@ -2539,7 +2623,7 @@ public enum RepositoryRulesetConditionsRepositoryPropertySpecSource
 /// <summary>
 /// What type of content was scanned
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookSecretScanningScanCompletedSource>))]
 public enum WebhookSecretScanningScanCompletedSource
 {
     [JsonStringEnumMemberName("git")]
@@ -2557,7 +2641,7 @@ public enum WebhookSecretScanningScanCompletedSource
 /// <summary>
 /// The policy that controls the repositories in the organization that are allowed to run GitHub Actions.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ActionsOrganizationPermissionsEnabledRepositories>))]
 public enum ActionsOrganizationPermissionsEnabledRepositories
 {
     [JsonStringEnumMemberName("all")]
@@ -2571,7 +2655,7 @@ public enum ActionsOrganizationPermissionsEnabledRepositories
 /// <summary>
 /// The policy that controls whether self-hosted runners can be used by repositories in the organization
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<SelfHostedRunnersSettingsEnabledRepositories>))]
 public enum SelfHostedRunnersSettingsEnabledRepositories
 {
     [JsonStringEnumMemberName("all")]
@@ -2585,7 +2669,7 @@ public enum SelfHostedRunnersSettingsEnabledRepositories
 /// <summary>
 /// The permissions policy that controls the actions and reusable workflows that are allowed to run.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<AllowedActions2>))]
 public enum AllowedActions2
 {
     [JsonStringEnumMemberName("all")]
@@ -2599,7 +2683,7 @@ public enum AllowedActions2
 /// <summary>
 /// The policy that controls when fork PR workflows require approval from a maintainer.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ApprovalPolicy>))]
 public enum ApprovalPolicy
 {
     [JsonStringEnumMemberName("first_time_contributors_new_to_github")]
@@ -2613,7 +2697,7 @@ public enum ApprovalPolicy
 /// <summary>
 /// The default workflow permissions granted to the GITHUB_TOKEN when running workflows.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<DefaultWorkflowPermissions>))]
 public enum DefaultWorkflowPermissions
 {
     [JsonStringEnumMemberName("read")]
@@ -2625,7 +2709,7 @@ public enum DefaultWorkflowPermissions
 /// <summary>
 /// Visibility of a secret
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<OrganizationActionsSecretVisibility>))]
 public enum OrganizationActionsSecretVisibility
 {
     [JsonStringEnumMemberName("all")]
@@ -2636,7 +2720,7 @@ public enum OrganizationActionsSecretVisibility
     Selected
 }
 
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PackageVisibility>))]
 public enum PackageVisibility
 {
     [JsonStringEnumMemberName("private")]
@@ -2648,7 +2732,7 @@ public enum PackageVisibility
 /// <summary>
 /// The visibility of the issue field. Can be `organization_members_only` (visible only within the organization) or `all` (visible to all users who can see issues).
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<IssueFieldVisibility>))]
 public enum IssueFieldVisibility
 {
     [JsonStringEnumMemberName("organization_members_only")]
@@ -2658,9 +2742,25 @@ public enum IssueFieldVisibility
 }
 
 /// <summary>
+/// How the team's access to the repository was granted. This property is only
+/// present when the team is returned in a repository context, such as
+/// `GET /repos/{owner}/{repo}/teams`.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter<AccessSource>))]
+public enum AccessSource
+{
+    [JsonStringEnumMemberName("direct")]
+    Direct,
+    [JsonStringEnumMemberName("organization")]
+    Organization,
+    [JsonStringEnumMemberName("enterprise")]
+    Enterprise
+}
+
+/// <summary>
 /// The security severity of the alert.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<SecuritySeverityLevel>))]
 public enum SecuritySeverityLevel
 {
     [JsonStringEnumMemberName("low")]
@@ -2678,7 +2778,7 @@ public enum SecuritySeverityLevel
 /// <summary>
 /// Whether a prebuild is currently available when creating a codespace for this machine and repository. If a branch was not specified as a ref, the default branch will be assumed. Value will be "null" if prebuilds are not supported or prebuild availability could not be determined. Value will be "none" if no prebuild is available. Latest values "ready" and "in_progress" indicate the prebuild availability status.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PrebuildAvailability>))]
 public enum PrebuildAvailability
 {
     [JsonStringEnumMemberName("none")]
@@ -2694,7 +2794,7 @@ public enum PrebuildAvailability
 /// <summary>
 /// The initally assigned location of a new codespace.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Location>))]
 public enum Location
 {
     [JsonStringEnumMemberName("EastUs")]
@@ -2714,7 +2814,7 @@ public enum Location
 /// - `writer`: Default write permissions (organization spaces only)
 /// - `admin`: Default admin permissions (organization spaces only)
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CopilotSpaceBaseRole>))]
 public enum CopilotSpaceBaseRole
 {
     [JsonStringEnumMemberName("reader")]
@@ -2730,7 +2830,7 @@ public enum CopilotSpaceBaseRole
 /// <summary>
 /// The system role from which this role inherits permissions.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<OrganizationRoleBaseRole>))]
 public enum OrganizationRoleBaseRole
 {
     [JsonStringEnumMemberName("read")]
@@ -2750,7 +2850,7 @@ public enum OrganizationRoleBaseRole
 /// <summary>
 /// The type of the resource.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ResourceType>))]
 public enum ResourceType
 {
     [JsonStringEnumMemberName("repository")]
@@ -2772,7 +2872,7 @@ public enum ResourceType
 /// <summary>
 /// The organization policy for allowing or blocking suggestions matching public code (duplication detection filter).
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PublicCodeSuggestions>))]
 public enum PublicCodeSuggestions
 {
     [JsonStringEnumMemberName("allow")]
@@ -2786,7 +2886,7 @@ public enum PublicCodeSuggestions
 /// <summary>
 /// The organization policy for allowing or disallowing Copilot Chat in the IDE.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<IdeChat>))]
 public enum IdeChat
 {
     [JsonStringEnumMemberName("enabled")]
@@ -2800,7 +2900,7 @@ public enum IdeChat
 /// <summary>
 /// The organization policy for allowing or disallowing Copilot features on GitHub.com.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PlatformChat>))]
 public enum PlatformChat
 {
     [JsonStringEnumMemberName("enabled")]
@@ -2814,7 +2914,7 @@ public enum PlatformChat
 /// <summary>
 /// The organization policy for allowing or disallowing Copilot CLI.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Cli>))]
 public enum Cli
 {
     [JsonStringEnumMemberName("enabled")]
@@ -2828,7 +2928,7 @@ public enum Cli
 /// <summary>
 /// The mode of assigning new seats.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<SeatManagementSetting>))]
 public enum SeatManagementSetting
 {
     [JsonStringEnumMemberName("assign_all")]
@@ -2844,7 +2944,7 @@ public enum SeatManagementSetting
 /// <summary>
 /// The Copilot plan of the organization, or the parent enterprise, when applicable.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CopilotOrganizationDetailsPlanType>))]
 public enum CopilotOrganizationDetailsPlanType
 {
     [JsonStringEnumMemberName("business")]
@@ -2856,7 +2956,7 @@ public enum CopilotOrganizationDetailsPlanType
 /// <summary>
 /// The Copilot plan of the organization, or the parent enterprise, when applicable.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CopilotSeatDetailsPlanType>))]
 public enum CopilotSeatDetailsPlanType
 {
     [JsonStringEnumMemberName("business")]
@@ -2867,7 +2967,7 @@ public enum CopilotSeatDetailsPlanType
     Unknown
 }
 
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PackageType>))]
 public enum PackageType
 {
     [JsonStringEnumMemberName("npm")]
@@ -2887,7 +2987,7 @@ public enum PackageType
 /// <summary>
 /// The type of GitHub user that can comment, open issues, or create pull requests while the interaction limit is in effect.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Limit>))]
 public enum Limit
 {
     [JsonStringEnumMemberName("existing_users")]
@@ -2901,7 +3001,7 @@ public enum Limit
 /// <summary>
 /// The duration of the interaction restriction. Default: `one_day`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Expiry>))]
 public enum Expiry
 {
     [JsonStringEnumMemberName("one_day")]
@@ -2919,7 +3019,7 @@ public enum Expiry
 /// <summary>
 /// The user's membership type in the organization.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<OrgMembershipRole>))]
 public enum OrgMembershipRole
 {
     [JsonStringEnumMemberName("admin")]
@@ -2931,10 +3031,10 @@ public enum OrgMembershipRole
 }
 
 /// <summary>
-/// The role of the user in the team.
+/// The member's role on the team. Only present on the `List team members` endpoint, and only when the feature is enabled for the organization.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum TeamMembershipRole
+[JsonConverter(typeof(JsonStringEnumConverter<TeamMemberRole>))]
+public enum TeamMemberRole
 {
     [JsonStringEnumMemberName("member")]
     Member,
@@ -2945,7 +3045,7 @@ public enum TeamMembershipRole
 /// <summary>
 /// Determines if the team has a direct, indirect, or mixed relationship to a role
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Assignment>))]
 public enum Assignment
 {
     [JsonStringEnumMemberName("direct")]
@@ -2959,7 +3059,7 @@ public enum Assignment
 /// <summary>
 /// The registry type.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<RegistryType>))]
 public enum RegistryType
 {
     [JsonStringEnumMemberName("maven_repository")]
@@ -2997,7 +3097,7 @@ public enum RegistryType
 /// <summary>
 /// The authentication type for the private registry.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<AuthType>))]
 public enum AuthType
 {
     [JsonStringEnumMemberName("token")]
@@ -3019,7 +3119,7 @@ public enum AuthType
 /// <summary>
 /// The merge method to use.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<MergeMethod>))]
 public enum MergeMethod
 {
     [JsonStringEnumMemberName("merge")]
@@ -3033,7 +3133,7 @@ public enum MergeMethod
 /// <summary>
 /// The type of content tracked in a project item
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ContentType>))]
 public enum ContentType
 {
     [JsonStringEnumMemberName("Issue")]
@@ -3047,7 +3147,7 @@ public enum ContentType
 /// <summary>
 /// The layout of the view.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Layout>))]
 public enum Layout
 {
     [JsonStringEnumMemberName("table")]
@@ -3061,7 +3161,7 @@ public enum Layout
 /// <summary>
 /// The source type of the property
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CustomPropertySourceType>))]
 public enum CustomPropertySourceType
 {
     [JsonStringEnumMemberName("organization")]
@@ -3073,7 +3173,7 @@ public enum CustomPropertySourceType
 /// <summary>
 /// The type of the source of the ruleset
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<RepositoryRulesetSourceType>))]
 public enum RepositoryRulesetSourceType
 {
     [JsonStringEnumMemberName("Repository")]
@@ -3087,7 +3187,7 @@ public enum RepositoryRulesetSourceType
 /// <summary>
 /// The type of the value for the property
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ValueType>))]
 public enum ValueType
 {
     [JsonStringEnumMemberName("string")]
@@ -3105,7 +3205,7 @@ public enum ValueType
 /// <summary>
 /// Who can edit the values of the property
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ValuesEditableBy>))]
 public enum ValuesEditableBy
 {
     [JsonStringEnumMemberName("org_actors")]
@@ -3119,7 +3219,7 @@ public enum ValuesEditableBy
 /// <summary>
 /// The type of actor that can bypass a ruleset.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ActorType>))]
 public enum ActorType
 {
     [JsonStringEnumMemberName("Integration")]
@@ -3139,7 +3239,7 @@ public enum ActorType
 /// <summary>
 /// When the specified actor can bypass the ruleset. `pull_request` means that an actor can only bypass rules on pull requests. `pull_request` is not applicable for the `DeployKey` actor type. Also, `pull_request` is only applicable to branch rulesets. When `bypass_mode` is `exempt`, rules will not be run for that actor and a bypass audit entry will not be created.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<BypassMode>))]
 public enum BypassMode
 {
     [JsonStringEnumMemberName("always")]
@@ -3153,7 +3253,7 @@ public enum BypassMode
 /// <summary>
 /// The severity level at which code scanning results that raise alerts block a reference update. For more information on alert severity levels, see "[About code scanning alerts](https://docs.github.com/code-security/code-scanning/managing-code-scanning-alerts/about-code-scanning-alerts#about-alert-severity-and-security-severity-levels)."
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<AlertsThreshold>))]
 public enum AlertsThreshold
 {
     [JsonStringEnumMemberName("none")]
@@ -3169,7 +3269,7 @@ public enum AlertsThreshold
 /// <summary>
 /// The severity level at which code scanning results that raise security alerts block a reference update. For more information on security severity levels, see "[About code scanning alerts](https://docs.github.com/code-security/code-scanning/managing-code-scanning-alerts/about-code-scanning-alerts#about-alert-severity-and-security-severity-levels)."
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<SecurityAlertsThreshold>))]
 public enum SecurityAlertsThreshold
 {
     [JsonStringEnumMemberName("none")]
@@ -3187,7 +3287,7 @@ public enum SecurityAlertsThreshold
 /// <summary>
 /// The target of the ruleset
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Target>))]
 public enum Target
 {
     [JsonStringEnumMemberName("branch")]
@@ -3204,7 +3304,7 @@ public enum Target
 /// The bypass type of the user making the API request for this ruleset. This field is only returned when
 /// querying the repository-level endpoint.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CurrentUserCanBypass>))]
 public enum CurrentUserCanBypass
 {
     [JsonStringEnumMemberName("always")]
@@ -3220,7 +3320,7 @@ public enum CurrentUserCanBypass
 /// <summary>
 /// The result of the rule evaluations for rules with the `active` enforcement status.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Result>))]
 public enum Result
 {
     [JsonStringEnumMemberName("pass")]
@@ -3234,7 +3334,7 @@ public enum Result
 /// <summary>
 /// The result of the rule evaluations for rules with the `active` and `evaluate` enforcement statuses, demonstrating whether rules would pass or fail if all rules in the rule suite were `active`. Null if no rules with `evaluate` enforcement status were run.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<EvaluationResult>))]
 public enum EvaluationResult
 {
     [JsonStringEnumMemberName("pass")]
@@ -3250,7 +3350,7 @@ public enum EvaluationResult
 /// <summary>
 /// **Required when the `state` is `resolved`.** The reason for resolving the alert.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<OrganizationSecretScanningAlertResolution>))]
 public enum OrganizationSecretScanningAlertResolution
 {
     [JsonStringEnumMemberName("false_positive")]
@@ -3268,7 +3368,7 @@ public enum OrganizationSecretScanningAlertResolution
 /// <summary>
 /// The reason for resolving the alert.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<SecretScanningAlertWebhookResolution>))]
 public enum SecretScanningAlertWebhookResolution
 {
     [JsonStringEnumMemberName("false_positive")]
@@ -3290,7 +3390,7 @@ public enum SecretScanningAlertWebhookResolution
 /// <summary>
 /// The token status as of the latest validity check.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Validity>))]
 public enum Validity
 {
     [JsonStringEnumMemberName("active")]
@@ -3302,9 +3402,33 @@ public enum Validity
 }
 
 /// <summary>
+/// A machine-readable code describing the error.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter<Code>))]
+public enum Code
+{
+    [JsonStringEnumMemberName("invalid")]
+    Invalid,
+    [JsonStringEnumMemberName("unprocessable")]
+    Unprocessable,
+    [JsonStringEnumMemberName("start_delimiter")]
+    StartDelimiter,
+    [JsonStringEnumMemberName("end_delimiter")]
+    EndDelimiter,
+    [JsonStringEnumMemberName("name")]
+    Name,
+    [JsonStringEnumMemberName("must_match")]
+    MustMatch,
+    [JsonStringEnumMemberName("must_not_match")]
+    MustNotMatch,
+    [JsonStringEnumMemberName("custom_pattern_version_mismatch")]
+    CustomPatternVersionMismatch
+}
+
+/// <summary>
 /// The default push protection setting for this pattern.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<DefaultSetting>))]
 public enum DefaultSetting
 {
     [JsonStringEnumMemberName("disabled")]
@@ -3316,7 +3440,7 @@ public enum DefaultSetting
 /// <summary>
 /// The push protection setting for this pattern set at the enterprise level. Only present for partner patterns when the organization has a parent enterprise.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<EnterpriseSetting>))]
 public enum EnterpriseSetting
 {
     [JsonStringEnumMemberName("not-set")]
@@ -3332,7 +3456,7 @@ public enum EnterpriseSetting
 /// <summary>
 /// The current push protection setting for this pattern. If this is `not-set`, then it inherits either the enterprise setting if it exists or the default setting.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Setting>))]
 public enum Setting
 {
     [JsonStringEnumMemberName("not-set")]
@@ -3346,7 +3470,7 @@ public enum Setting
 /// <summary>
 /// The policy that controls how immutable releases are enforced in the organization.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<EnforcedRepositories>))]
 public enum EnforcedRepositories
 {
     [JsonStringEnumMemberName("all")]
@@ -3360,7 +3484,7 @@ public enum EnforcedRepositories
 /// <summary>
 /// The hosted compute service the network configuration supports.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ComputeService>))]
 public enum ComputeService
 {
     [JsonStringEnumMemberName("none")]
@@ -3374,7 +3498,7 @@ public enum ComputeService
 /// <summary>
 /// The level of privacy this team should have
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TeamFullPrivacy>))]
 public enum TeamFullPrivacy
 {
     [JsonStringEnumMemberName("closed")]
@@ -3383,7 +3507,7 @@ public enum TeamFullPrivacy
     Secret
 }
 
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<WebhooksTeamPrivacy>))]
 public enum WebhooksTeamPrivacy
 {
     [JsonStringEnumMemberName("open")]
@@ -3397,7 +3521,7 @@ public enum WebhooksTeamPrivacy
 /// <summary>
 /// The outcome of the job.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<JobConclusion>))]
 public enum JobConclusion
 {
     [JsonStringEnumMemberName("success")]
@@ -3418,7 +3542,7 @@ public enum JobConclusion
     Unknown
 }
 
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CheckSuiteConclusion>))]
 public enum CheckSuiteConclusion
 {
     [JsonStringEnumMemberName("success")]
@@ -3443,7 +3567,7 @@ public enum CheckSuiteConclusion
     Unknown
 }
 
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<SimpleCheckSuiteConclusion>))]
 public enum SimpleCheckSuiteConclusion
 {
     [JsonStringEnumMemberName("success")]
@@ -3468,7 +3592,7 @@ public enum SimpleCheckSuiteConclusion
     Unknown
 }
 
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CheckRunWithSimpleCheckSuiteConclusion>))]
 public enum CheckRunWithSimpleCheckSuiteConclusion
 {
     [JsonStringEnumMemberName("waiting")]
@@ -3503,7 +3627,7 @@ public enum CheckRunWithSimpleCheckSuiteConclusion
 /// 
 /// `none` means the access is only possible from workflows in this repository. `user` level access allows sharing across user owned private repositories only. `organization` level access allows sharing across the organization.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<AccessLevel>))]
 public enum AccessLevel
 {
     [JsonStringEnumMemberName("none")]
@@ -3517,7 +3641,7 @@ public enum AccessLevel
 /// <summary>
 /// The type of the activity that was performed.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ActivityType>))]
 public enum ActivityType
 {
     [JsonStringEnumMemberName("push")]
@@ -3535,9 +3659,23 @@ public enum ActivityType
 }
 
 /// <summary>
+/// The category of the rule used to detect the finding.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter<Category>))]
+public enum Category
+{
+    [JsonStringEnumMemberName("none")]
+    None,
+    [JsonStringEnumMemberName("maintainability")]
+    Maintainability,
+    [JsonStringEnumMemberName("reliability")]
+    Reliability
+}
+
+/// <summary>
 /// The frequency of the periodic analysis.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Schedule>))]
 public enum Schedule
 {
     [JsonStringEnumMemberName("weekly")]
@@ -3547,9 +3685,35 @@ public enum Schedule
 }
 
 /// <summary>
+/// The AI findings configuration for the repository.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter<CodeQualitySetupAiFindingsOption>))]
+public enum CodeQualitySetupAiFindingsOption
+{
+    [JsonStringEnumMemberName("disabled")]
+    Disabled,
+    [JsonStringEnumMemberName("on_push")]
+    OnPush,
+    [JsonStringEnumMemberName("")]
+    Unknown
+}
+
+/// <summary>
+/// Whether AI findings run for Code Quality on this repository.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter<CodeQualitySetupUpdateAiFindingsOption>))]
+public enum CodeQualitySetupUpdateAiFindingsOption
+{
+    [JsonStringEnumMemberName("disabled")]
+    Disabled,
+    [JsonStringEnumMemberName("on_push")]
+    OnPush
+}
+
+/// <summary>
 /// The language targeted by the CodeQL query
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<QueryLanguage>))]
 public enum QueryLanguage
 {
     [JsonStringEnumMemberName("actions")]
@@ -3577,7 +3741,7 @@ public enum QueryLanguage
 /// <summary>
 /// The reason for a failure of the variant analysis. This is only available if the variant analysis has failed.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<FailureReason>))]
 public enum FailureReason
 {
     [JsonStringEnumMemberName("no_repos_queried")]
@@ -3591,7 +3755,7 @@ public enum FailureReason
 /// <summary>
 /// The new status of the CodeQL variant analysis repository task.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<AnalysisStatus>))]
 public enum AnalysisStatus
 {
     [JsonStringEnumMemberName("pending")]
@@ -3611,7 +3775,7 @@ public enum AnalysisStatus
 /// <summary>
 /// CodeQL query suite to be used.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<QuerySuite>))]
 public enum QuerySuite
 {
     [JsonStringEnumMemberName("default")]
@@ -3623,7 +3787,7 @@ public enum QuerySuite
 /// <summary>
 /// Threat model to be used for code scanning analysis. Use `remote` to analyze only network sources and `remote_and_local` to include local sources like filesystem access, command-line arguments, database reads, environment variable and standard input.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ThreatModel>))]
 public enum ThreatModel
 {
     [JsonStringEnumMemberName("remote")]
@@ -3635,7 +3799,7 @@ public enum ThreatModel
 /// <summary>
 /// `pending` files have not yet been processed, while `complete` means results from the SARIF have been stored. `failed` files have either not been processed at all, or could only be partially processed.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ProcessingStatus>))]
 public enum ProcessingStatus
 {
     [JsonStringEnumMemberName("pending")]
@@ -3649,7 +3813,7 @@ public enum ProcessingStatus
 /// <summary>
 /// The permission associated with the invitation.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Permissions>))]
 public enum Permissions
 {
     [JsonStringEnumMemberName("read")]
@@ -3667,7 +3831,7 @@ public enum Permissions
 /// <summary>
 /// The reaction to use
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Content>))]
 public enum Content
 {
     [JsonStringEnumMemberName("+1")]
@@ -3691,7 +3855,7 @@ public enum Content
 /// <summary>
 /// A notation of whether a dependency is requested directly by this manifest or is a dependency of another dependency.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Relationship>))]
 public enum Relationship
 {
     [JsonStringEnumMemberName("direct")]
@@ -3703,7 +3867,7 @@ public enum Relationship
 /// <summary>
 /// A notation of whether the dependency is required for the primary build artifact (runtime) or is only used for development. Future versions of this specification may allow for more granular scopes.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<DependencyScope>))]
 public enum DependencyScope
 {
     [JsonStringEnumMemberName("runtime")]
@@ -3715,7 +3879,7 @@ public enum DependencyScope
 /// <summary>
 /// The scope of the membership. Currently, can only be `team`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookMembershipAddedScope>))]
 public enum WebhookMembershipAddedScope
 {
     [JsonStringEnumMemberName("team")]
@@ -3725,7 +3889,7 @@ public enum WebhookMembershipAddedScope
 /// <summary>
 /// The scope of the membership. Currently, can only be `team`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookMembershipRemovedScope>))]
 public enum WebhookMembershipRemovedScope
 {
     [JsonStringEnumMemberName("team")]
@@ -3737,7 +3901,7 @@ public enum WebhookMembershipRemovedScope
 /// <summary>
 /// The Git hash algorithm used by this repository.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<HashAlgorithm>))]
 public enum HashAlgorithm
 {
     [JsonStringEnumMemberName("sha1")]
@@ -3747,9 +3911,847 @@ public enum HashAlgorithm
 }
 
 /// <summary>
+/// The confidence level the agent had when performing this action.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter<Confidence>))]
+public enum Confidence
+{
+    [JsonStringEnumMemberName("LOW")]
+    Low,
+    [JsonStringEnumMemberName("MEDIUM")]
+    Medium,
+    [JsonStringEnumMemberName("HIGH")]
+    High,
+    [JsonStringEnumMemberName("")]
+    Unknown
+}
+
+/// <summary>
+/// The kind of change proposed.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter<IssueSuggestionAction>))]
+public enum IssueSuggestionAction
+{
+    [JsonStringEnumMemberName("set_type")]
+    SetType,
+    [JsonStringEnumMemberName("add_label")]
+    AddLabel,
+    [JsonStringEnumMemberName("add_field")]
+    AddField,
+    [JsonStringEnumMemberName("add_assignee")]
+    AddAssignee,
+    [JsonStringEnumMemberName("close_issue")]
+    CloseIssue
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookBranchProtectionConfigurationDisabledAction>))]
+public enum WebhookBranchProtectionConfigurationDisabledAction
+{
+    [JsonStringEnumMemberName("disabled")]
+    Disabled
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookBranchProtectionConfigurationEnabledAction>))]
+public enum WebhookBranchProtectionConfigurationEnabledAction
+{
+    [JsonStringEnumMemberName("enabled")]
+    Enabled
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookBranchProtectionRuleCreatedAction>))]
+public enum WebhookBranchProtectionRuleCreatedAction
+{
+    [JsonStringEnumMemberName("created")]
+    Created
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookBranchProtectionRuleDeletedAction>))]
+public enum WebhookBranchProtectionRuleDeletedAction
+{
+    [JsonStringEnumMemberName("deleted")]
+    Deleted
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookBranchProtectionRuleEditedAction>))]
+public enum WebhookBranchProtectionRuleEditedAction
+{
+    [JsonStringEnumMemberName("edited")]
+    Edited
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookCheckRunCompletedAction>))]
+public enum WebhookCheckRunCompletedAction
+{
+    [JsonStringEnumMemberName("completed")]
+    Completed
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookCheckRunRequestedActionAction>))]
+public enum WebhookCheckRunRequestedActionAction
+{
+    [JsonStringEnumMemberName("requested_action")]
+    RequestedAction
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookCheckRunRerequestedAction>))]
+public enum WebhookCheckRunRerequestedAction
+{
+    [JsonStringEnumMemberName("rerequested")]
+    Rerequested
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookCheckSuiteRequestedAction>))]
+public enum WebhookCheckSuiteRequestedAction
+{
+    [JsonStringEnumMemberName("requested")]
+    Requested
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookCodeScanningAlertAppearedInBranchAction>))]
+public enum WebhookCodeScanningAlertAppearedInBranchAction
+{
+    [JsonStringEnumMemberName("appeared_in_branch")]
+    AppearedInBranch
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookCodeScanningAlertClosedByUserAction>))]
+public enum WebhookCodeScanningAlertClosedByUserAction
+{
+    [JsonStringEnumMemberName("closed_by_user")]
+    ClosedByUser
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookCodeScanningAlertFixedAction>))]
+public enum WebhookCodeScanningAlertFixedAction
+{
+    [JsonStringEnumMemberName("fixed")]
+    Fixed
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookCodeScanningAlertReopenedAction>))]
+public enum WebhookCodeScanningAlertReopenedAction
+{
+    [JsonStringEnumMemberName("reopened")]
+    Reopened
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookCodeScanningAlertReopenedByUserAction>))]
+public enum WebhookCodeScanningAlertReopenedByUserAction
+{
+    [JsonStringEnumMemberName("reopened_by_user")]
+    ReopenedByUser
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookCodeScanningAlertUpdatedAssignmentAction>))]
+public enum WebhookCodeScanningAlertUpdatedAssignmentAction
+{
+    [JsonStringEnumMemberName("updated_assignment")]
+    UpdatedAssignment
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookCustomPropertyPromotedToEnterpriseAction>))]
+public enum WebhookCustomPropertyPromotedToEnterpriseAction
+{
+    [JsonStringEnumMemberName("promote_to_enterprise")]
+    PromoteToEnterprise
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookCustomPropertyUpdatedAction>))]
+public enum WebhookCustomPropertyUpdatedAction
+{
+    [JsonStringEnumMemberName("updated")]
+    Updated
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookDependabotAlertAssigneesChangedAction>))]
+public enum WebhookDependabotAlertAssigneesChangedAction
+{
+    [JsonStringEnumMemberName("assignees_changed")]
+    AssigneesChanged
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookDependabotAlertAutoDismissedAction>))]
+public enum WebhookDependabotAlertAutoDismissedAction
+{
+    [JsonStringEnumMemberName("auto_dismissed")]
+    AutoDismissed
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookDependabotAlertAutoReopenedAction>))]
+public enum WebhookDependabotAlertAutoReopenedAction
+{
+    [JsonStringEnumMemberName("auto_reopened")]
+    AutoReopened
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookDependabotAlertDismissedAction>))]
+public enum WebhookDependabotAlertDismissedAction
+{
+    [JsonStringEnumMemberName("dismissed")]
+    Dismissed
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookDependabotAlertReintroducedAction>))]
+public enum WebhookDependabotAlertReintroducedAction
+{
+    [JsonStringEnumMemberName("reintroduced")]
+    Reintroduced
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookDeploymentReviewApprovedAction>))]
+public enum WebhookDeploymentReviewApprovedAction
+{
+    [JsonStringEnumMemberName("approved")]
+    Approved
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookDeploymentReviewRejectedAction>))]
+public enum WebhookDeploymentReviewRejectedAction
+{
+    [JsonStringEnumMemberName("rejected")]
+    Rejected
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookDiscussionAnsweredAction>))]
+public enum WebhookDiscussionAnsweredAction
+{
+    [JsonStringEnumMemberName("answered")]
+    Answered
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookDiscussionCategoryChangedAction>))]
+public enum WebhookDiscussionCategoryChangedAction
+{
+    [JsonStringEnumMemberName("category_changed")]
+    CategoryChanged
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookDiscussionClosedAction>))]
+public enum WebhookDiscussionClosedAction
+{
+    [JsonStringEnumMemberName("closed")]
+    Closed
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookDiscussionLabeledAction>))]
+public enum WebhookDiscussionLabeledAction
+{
+    [JsonStringEnumMemberName("labeled")]
+    Labeled
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookDiscussionLockedAction>))]
+public enum WebhookDiscussionLockedAction
+{
+    [JsonStringEnumMemberName("locked")]
+    Locked
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookDiscussionPinnedAction>))]
+public enum WebhookDiscussionPinnedAction
+{
+    [JsonStringEnumMemberName("pinned")]
+    Pinned
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookDiscussionTransferredAction>))]
+public enum WebhookDiscussionTransferredAction
+{
+    [JsonStringEnumMemberName("transferred")]
+    Transferred
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookDiscussionUnansweredAction>))]
+public enum WebhookDiscussionUnansweredAction
+{
+    [JsonStringEnumMemberName("unanswered")]
+    Unanswered
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookDiscussionUnlabeledAction>))]
+public enum WebhookDiscussionUnlabeledAction
+{
+    [JsonStringEnumMemberName("unlabeled")]
+    Unlabeled
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookDiscussionUnlockedAction>))]
+public enum WebhookDiscussionUnlockedAction
+{
+    [JsonStringEnumMemberName("unlocked")]
+    Unlocked
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookDiscussionUnpinnedAction>))]
+public enum WebhookDiscussionUnpinnedAction
+{
+    [JsonStringEnumMemberName("unpinned")]
+    Unpinned
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookGithubAppAuthorizationRevokedAction>))]
+public enum WebhookGithubAppAuthorizationRevokedAction
+{
+    [JsonStringEnumMemberName("revoked")]
+    Revoked
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookInstallationNewPermissionsAcceptedAction>))]
+public enum WebhookInstallationNewPermissionsAcceptedAction
+{
+    [JsonStringEnumMemberName("new_permissions_accepted")]
+    NewPermissionsAccepted
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookInstallationRepositoriesAddedAction>))]
+public enum WebhookInstallationRepositoriesAddedAction
+{
+    [JsonStringEnumMemberName("added")]
+    Added
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookInstallationRepositoriesRemovedAction>))]
+public enum WebhookInstallationRepositoriesRemovedAction
+{
+    [JsonStringEnumMemberName("removed")]
+    Removed
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookInstallationSuspendAction>))]
+public enum WebhookInstallationSuspendAction
+{
+    [JsonStringEnumMemberName("suspend")]
+    Suspend
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookInstallationTargetRenamedAction>))]
+public enum WebhookInstallationTargetRenamedAction
+{
+    [JsonStringEnumMemberName("renamed")]
+    Renamed
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookInstallationUnsuspendAction>))]
+public enum WebhookInstallationUnsuspendAction
+{
+    [JsonStringEnumMemberName("unsuspend")]
+    Unsuspend
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookIssueDependenciesBlockedByAddedAction>))]
+public enum WebhookIssueDependenciesBlockedByAddedAction
+{
+    [JsonStringEnumMemberName("blocked_by_added")]
+    BlockedByAdded
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookIssueDependenciesBlockedByRemovedAction>))]
+public enum WebhookIssueDependenciesBlockedByRemovedAction
+{
+    [JsonStringEnumMemberName("blocked_by_removed")]
+    BlockedByRemoved
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookIssueDependenciesBlockingAddedAction>))]
+public enum WebhookIssueDependenciesBlockingAddedAction
+{
+    [JsonStringEnumMemberName("blocking_added")]
+    BlockingAdded
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookIssueDependenciesBlockingRemovedAction>))]
+public enum WebhookIssueDependenciesBlockingRemovedAction
+{
+    [JsonStringEnumMemberName("blocking_removed")]
+    BlockingRemoved
+}
+
+/// <summary>
+/// The action that was performed.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookIssuesAssignedAction>))]
+public enum WebhookIssuesAssignedAction
+{
+    [JsonStringEnumMemberName("assigned")]
+    Assigned
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookIssuesDemilestonedAction>))]
+public enum WebhookIssuesDemilestonedAction
+{
+    [JsonStringEnumMemberName("demilestoned")]
+    Demilestoned
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookIssuesFieldAddedAction>))]
+public enum WebhookIssuesFieldAddedAction
+{
+    [JsonStringEnumMemberName("field_added")]
+    FieldAdded
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookIssuesFieldRemovedAction>))]
+public enum WebhookIssuesFieldRemovedAction
+{
+    [JsonStringEnumMemberName("field_removed")]
+    FieldRemoved
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookIssuesMilestonedAction>))]
+public enum WebhookIssuesMilestonedAction
+{
+    [JsonStringEnumMemberName("milestoned")]
+    Milestoned
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookIssuesOpenedAction>))]
+public enum WebhookIssuesOpenedAction
+{
+    [JsonStringEnumMemberName("opened")]
+    Opened
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookIssuesTypedAction>))]
+public enum WebhookIssuesTypedAction
+{
+    [JsonStringEnumMemberName("typed")]
+    Typed
+}
+
+/// <summary>
+/// The action that was performed.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookIssuesUnassignedAction>))]
+public enum WebhookIssuesUnassignedAction
+{
+    [JsonStringEnumMemberName("unassigned")]
+    Unassigned
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookIssuesUntypedAction>))]
+public enum WebhookIssuesUntypedAction
+{
+    [JsonStringEnumMemberName("untyped")]
+    Untyped
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookMarketplacePurchaseCancelledAction>))]
+public enum WebhookMarketplacePurchaseCancelledAction
+{
+    [JsonStringEnumMemberName("cancelled")]
+    Cancelled
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookMarketplacePurchaseChangedAction>))]
+public enum WebhookMarketplacePurchaseChangedAction
+{
+    [JsonStringEnumMemberName("changed")]
+    Changed
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookMarketplacePurchasePendingChangeAction>))]
+public enum WebhookMarketplacePurchasePendingChangeAction
+{
+    [JsonStringEnumMemberName("pending_change")]
+    PendingChange
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookMarketplacePurchasePendingChangeCancelledAction>))]
+public enum WebhookMarketplacePurchasePendingChangeCancelledAction
+{
+    [JsonStringEnumMemberName("pending_change_cancelled")]
+    PendingChangeCancelled
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookMarketplacePurchasePurchasedAction>))]
+public enum WebhookMarketplacePurchasePurchasedAction
+{
+    [JsonStringEnumMemberName("purchased")]
+    Purchased
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookMergeGroupChecksRequestedAction>))]
+public enum WebhookMergeGroupChecksRequestedAction
+{
+    [JsonStringEnumMemberName("checks_requested")]
+    ChecksRequested
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookMergeGroupDestroyedAction>))]
+public enum WebhookMergeGroupDestroyedAction
+{
+    [JsonStringEnumMemberName("destroyed")]
+    Destroyed
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookOrgBlockBlockedAction>))]
+public enum WebhookOrgBlockBlockedAction
+{
+    [JsonStringEnumMemberName("blocked")]
+    Blocked
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookOrgBlockUnblockedAction>))]
+public enum WebhookOrgBlockUnblockedAction
+{
+    [JsonStringEnumMemberName("unblocked")]
+    Unblocked
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookOrganizationMemberAddedAction>))]
+public enum WebhookOrganizationMemberAddedAction
+{
+    [JsonStringEnumMemberName("member_added")]
+    MemberAdded
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookOrganizationMemberInvitedAction>))]
+public enum WebhookOrganizationMemberInvitedAction
+{
+    [JsonStringEnumMemberName("member_invited")]
+    MemberInvited
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookOrganizationMemberRemovedAction>))]
+public enum WebhookOrganizationMemberRemovedAction
+{
+    [JsonStringEnumMemberName("member_removed")]
+    MemberRemoved
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookPackagePublishedAction>))]
+public enum WebhookPackagePublishedAction
+{
+    [JsonStringEnumMemberName("published")]
+    Published
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookPersonalAccessTokenRequestDeniedAction>))]
+public enum WebhookPersonalAccessTokenRequestDeniedAction
+{
+    [JsonStringEnumMemberName("denied")]
+    Denied
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookProjectCardConvertedAction>))]
+public enum WebhookProjectCardConvertedAction
+{
+    [JsonStringEnumMemberName("converted")]
+    Converted
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookProjectCardMovedAction>))]
+public enum WebhookProjectCardMovedAction
+{
+    [JsonStringEnumMemberName("moved")]
+    Moved
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookProjectsV2ItemArchivedAction>))]
+public enum WebhookProjectsV2ItemArchivedAction
+{
+    [JsonStringEnumMemberName("archived")]
+    Archived
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookProjectsV2ItemReorderedAction>))]
+public enum WebhookProjectsV2ItemReorderedAction
+{
+    [JsonStringEnumMemberName("reordered")]
+    Reordered
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookProjectsV2ItemRestoredAction>))]
+public enum WebhookProjectsV2ItemRestoredAction
+{
+    [JsonStringEnumMemberName("restored")]
+    Restored
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookPullRequestAutoMergeDisabledAction>))]
+public enum WebhookPullRequestAutoMergeDisabledAction
+{
+    [JsonStringEnumMemberName("auto_merge_disabled")]
+    AutoMergeDisabled
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookPullRequestAutoMergeEnabledAction>))]
+public enum WebhookPullRequestAutoMergeEnabledAction
+{
+    [JsonStringEnumMemberName("auto_merge_enabled")]
+    AutoMergeEnabled
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookPullRequestConvertedToDraftAction>))]
+public enum WebhookPullRequestConvertedToDraftAction
+{
+    [JsonStringEnumMemberName("converted_to_draft")]
+    ConvertedToDraft
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookPullRequestDequeuedAction>))]
+public enum WebhookPullRequestDequeuedAction
+{
+    [JsonStringEnumMemberName("dequeued")]
+    Dequeued
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookPullRequestEnqueuedAction>))]
+public enum WebhookPullRequestEnqueuedAction
+{
+    [JsonStringEnumMemberName("enqueued")]
+    Enqueued
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookPullRequestReadyForReviewAction>))]
+public enum WebhookPullRequestReadyForReviewAction
+{
+    [JsonStringEnumMemberName("ready_for_review")]
+    ReadyForReview
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookPullRequestReviewSubmittedAction>))]
+public enum WebhookPullRequestReviewSubmittedAction
+{
+    [JsonStringEnumMemberName("submitted")]
+    Submitted
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookPullRequestReviewThreadResolvedAction>))]
+public enum WebhookPullRequestReviewThreadResolvedAction
+{
+    [JsonStringEnumMemberName("resolved")]
+    Resolved
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookPullRequestReviewThreadUnresolvedAction>))]
+public enum WebhookPullRequestReviewThreadUnresolvedAction
+{
+    [JsonStringEnumMemberName("unresolved")]
+    Unresolved
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookPullRequestStackedAction>))]
+public enum WebhookPullRequestStackedAction
+{
+    [JsonStringEnumMemberName("stacked")]
+    Stacked
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookPullRequestSynchronizeAction>))]
+public enum WebhookPullRequestSynchronizeAction
+{
+    [JsonStringEnumMemberName("synchronize")]
+    Synchronize
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookReleasePrereleasedAction>))]
+public enum WebhookReleasePrereleasedAction
+{
+    [JsonStringEnumMemberName("prereleased")]
+    Prereleased
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookReleaseReleasedAction>))]
+public enum WebhookReleaseReleasedAction
+{
+    [JsonStringEnumMemberName("released")]
+    Released
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookReleaseUnpublishedAction>))]
+public enum WebhookReleaseUnpublishedAction
+{
+    [JsonStringEnumMemberName("unpublished")]
+    Unpublished
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookRepositoryAdvisoryReportedAction>))]
+public enum WebhookRepositoryAdvisoryReportedAction
+{
+    [JsonStringEnumMemberName("reported")]
+    Reported
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookRepositoryPrivatizedAction>))]
+public enum WebhookRepositoryPrivatizedAction
+{
+    [JsonStringEnumMemberName("privatized")]
+    Privatized
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookRepositoryPublicizedAction>))]
+public enum WebhookRepositoryPublicizedAction
+{
+    [JsonStringEnumMemberName("publicized")]
+    Publicized
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookRepositoryUnarchivedAction>))]
+public enum WebhookRepositoryUnarchivedAction
+{
+    [JsonStringEnumMemberName("unarchived")]
+    Unarchived
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookRepositoryVulnerabilityAlertCreateAction>))]
+public enum WebhookRepositoryVulnerabilityAlertCreateAction
+{
+    [JsonStringEnumMemberName("create")]
+    Create
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookRepositoryVulnerabilityAlertDismissAction>))]
+public enum WebhookRepositoryVulnerabilityAlertDismissAction
+{
+    [JsonStringEnumMemberName("dismiss")]
+    Dismiss
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookRepositoryVulnerabilityAlertReopenAction>))]
+public enum WebhookRepositoryVulnerabilityAlertReopenAction
+{
+    [JsonStringEnumMemberName("reopen")]
+    Reopen
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookRepositoryVulnerabilityAlertResolveAction>))]
+public enum WebhookRepositoryVulnerabilityAlertResolveAction
+{
+    [JsonStringEnumMemberName("resolve")]
+    Resolve
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookSecretScanningAlertMetadataCreatedAction>))]
+public enum WebhookSecretScanningAlertMetadataCreatedAction
+{
+    [JsonStringEnumMemberName("metadata_created")]
+    MetadataCreated
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookSecretScanningAlertMetadataRemovedAction>))]
+public enum WebhookSecretScanningAlertMetadataRemovedAction
+{
+    [JsonStringEnumMemberName("metadata_removed")]
+    MetadataRemoved
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookSecretScanningAlertPubliclyLeakedAction>))]
+public enum WebhookSecretScanningAlertPubliclyLeakedAction
+{
+    [JsonStringEnumMemberName("publicly_leaked")]
+    PubliclyLeaked
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookSecretScanningAlertValidatedAction>))]
+public enum WebhookSecretScanningAlertValidatedAction
+{
+    [JsonStringEnumMemberName("validated")]
+    Validated
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookSecurityAdvisoryWithdrawnAction>))]
+public enum WebhookSecurityAdvisoryWithdrawnAction
+{
+    [JsonStringEnumMemberName("withdrawn")]
+    Withdrawn
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookSponsorshipPendingCancellationAction>))]
+public enum WebhookSponsorshipPendingCancellationAction
+{
+    [JsonStringEnumMemberName("pending_cancellation")]
+    PendingCancellation
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookSponsorshipPendingTierChangeAction>))]
+public enum WebhookSponsorshipPendingTierChangeAction
+{
+    [JsonStringEnumMemberName("pending_tier_change")]
+    PendingTierChange
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookSponsorshipTierChangedAction>))]
+public enum WebhookSponsorshipTierChangedAction
+{
+    [JsonStringEnumMemberName("tier_changed")]
+    TierChanged
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookSubIssuesParentIssueAddedAction>))]
+public enum WebhookSubIssuesParentIssueAddedAction
+{
+    [JsonStringEnumMemberName("parent_issue_added")]
+    ParentIssueAdded
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookSubIssuesParentIssueRemovedAction>))]
+public enum WebhookSubIssuesParentIssueRemovedAction
+{
+    [JsonStringEnumMemberName("parent_issue_removed")]
+    ParentIssueRemoved
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookSubIssuesSubIssueAddedAction>))]
+public enum WebhookSubIssuesSubIssueAddedAction
+{
+    [JsonStringEnumMemberName("sub_issue_added")]
+    SubIssueAdded
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookSubIssuesSubIssueRemovedAction>))]
+public enum WebhookSubIssuesSubIssueRemovedAction
+{
+    [JsonStringEnumMemberName("sub_issue_removed")]
+    SubIssueRemoved
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookTeamAddedToRepositoryAction>))]
+public enum WebhookTeamAddedToRepositoryAction
+{
+    [JsonStringEnumMemberName("added_to_repository")]
+    AddedToRepository
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookTeamRemovedFromRepositoryAction>))]
+public enum WebhookTeamRemovedFromRepositoryAction
+{
+    [JsonStringEnumMemberName("removed_from_repository")]
+    RemovedFromRepository
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookWatchStartedAction>))]
+public enum WebhookWatchStartedAction
+{
+    [JsonStringEnumMemberName("started")]
+    Started
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookWorkflowJobInProgressAction>))]
+public enum WebhookWorkflowJobInProgressAction
+{
+    [JsonStringEnumMemberName("in_progress")]
+    InProgress
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookWorkflowJobQueuedAction>))]
+public enum WebhookWorkflowJobQueuedAction
+{
+    [JsonStringEnumMemberName("queued")]
+    Queued
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookWorkflowJobWaitingAction>))]
+public enum WebhookWorkflowJobWaitingAction
+{
+    [JsonStringEnumMemberName("waiting")]
+    Waiting
+}
+
+/// <summary>
 /// The side of the first line of the range for a multi-line comment.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<StartSide>))]
 public enum StartSide
 {
     [JsonStringEnumMemberName("LEFT")]
@@ -3763,7 +4765,7 @@ public enum StartSide
 /// <summary>
 /// The side of the diff to which the comment applies. The side of the last line of the range for a multi-line comment
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Side>))]
 public enum Side
 {
     [JsonStringEnumMemberName("LEFT")]
@@ -3775,7 +4777,7 @@ public enum Side
 /// <summary>
 /// The level at which the comment is targeted, can be a diff line or a file.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<SubjectType>))]
 public enum SubjectType
 {
     [JsonStringEnumMemberName("line")]
@@ -3784,7 +4786,7 @@ public enum SubjectType
     File
 }
 
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<MergeType>))]
 public enum MergeType
 {
     [JsonStringEnumMemberName("merge")]
@@ -3798,7 +4800,7 @@ public enum MergeType
 /// <summary>
 /// The state if the domain is verified
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ProtectedDomainState>))]
 public enum ProtectedDomainState
 {
     [JsonStringEnumMemberName("pending")]
@@ -3814,7 +4816,7 @@ public enum ProtectedDomainState
 /// <summary>
 /// The process in which the Page will be built.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<BuildType>))]
 public enum BuildType
 {
     [JsonStringEnumMemberName("legacy")]
@@ -3828,7 +4830,7 @@ public enum BuildType
 /// <summary>
 /// The type of source for the ruleset that includes this rule.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<RulesetSourceType>))]
 public enum RulesetSourceType
 {
     [JsonStringEnumMemberName("Repository")]
@@ -3840,7 +4842,7 @@ public enum RulesetSourceType
 /// <summary>
 /// The reason for bypassing push protection.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<SecretScanningPushProtectionBypassReason2>))]
 public enum SecretScanningPushProtectionBypassReason2
 {
     [JsonStringEnumMemberName("false_positive")]
@@ -3854,7 +4856,7 @@ public enum SecretScanningPushProtectionBypassReason2
 /// <summary>
 /// Explains why the merge group is being destroyed. The group could have been merged, removed from the queue (dequeued), or invalidated by an earlier queue entry being dequeued (invalidated).
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookMergeGroupDestroyedReason>))]
 public enum WebhookMergeGroupDestroyedReason
 {
     [JsonStringEnumMemberName("merged")]
@@ -3865,7 +4867,7 @@ public enum WebhookMergeGroupDestroyedReason
     Dequeued
 }
 
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookPullRequestDequeuedReason>))]
 public enum WebhookPullRequestDequeuedReason
 {
     [JsonStringEnumMemberName("UNKNOWN_REMOVAL_REASON")]
@@ -3894,7 +4896,7 @@ public enum WebhookPullRequestDequeuedReason
     InvalidMergeCommit
 }
 
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<AllowDeletionsEnforcementLevel>))]
 public enum AllowDeletionsEnforcementLevel
 {
     [JsonStringEnumMemberName("off")]
@@ -3905,7 +4907,7 @@ public enum AllowDeletionsEnforcementLevel
     Everyone
 }
 
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<AllowForcePushesEnforcementLevel>))]
 public enum AllowForcePushesEnforcementLevel
 {
     [JsonStringEnumMemberName("off")]
@@ -3916,7 +4918,7 @@ public enum AllowForcePushesEnforcementLevel
     Everyone
 }
 
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<LinearHistoryRequirementEnforcementLevel>))]
 public enum LinearHistoryRequirementEnforcementLevel
 {
     [JsonStringEnumMemberName("off")]
@@ -3930,7 +4932,7 @@ public enum LinearHistoryRequirementEnforcementLevel
 /// <summary>
 /// The enforcement level of the branch lock setting. `off` means the branch is not locked, `non_admins` means the branch is read-only for non_admins, and `everyone` means the branch is read-only for everyone.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<LockBranchEnforcementLevel>))]
 public enum LockBranchEnforcementLevel
 {
     [JsonStringEnumMemberName("off")]
@@ -3941,7 +4943,7 @@ public enum LockBranchEnforcementLevel
     Everyone
 }
 
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<MergeQueueEnforcementLevel>))]
 public enum MergeQueueEnforcementLevel
 {
     [JsonStringEnumMemberName("off")]
@@ -3952,7 +4954,7 @@ public enum MergeQueueEnforcementLevel
     Everyone
 }
 
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PullRequestReviewsEnforcementLevel>))]
 public enum PullRequestReviewsEnforcementLevel
 {
     [JsonStringEnumMemberName("off")]
@@ -3963,7 +4965,7 @@ public enum PullRequestReviewsEnforcementLevel
     Everyone
 }
 
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<RequiredConversationResolutionLevel>))]
 public enum RequiredConversationResolutionLevel
 {
     [JsonStringEnumMemberName("off")]
@@ -3974,7 +4976,7 @@ public enum RequiredConversationResolutionLevel
     Everyone
 }
 
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<RequiredDeploymentsEnforcementLevel>))]
 public enum RequiredDeploymentsEnforcementLevel
 {
     [JsonStringEnumMemberName("off")]
@@ -3985,7 +4987,7 @@ public enum RequiredDeploymentsEnforcementLevel
     Everyone
 }
 
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<RequiredStatusChecksEnforcementLevel>))]
 public enum RequiredStatusChecksEnforcementLevel
 {
     [JsonStringEnumMemberName("off")]
@@ -3996,7 +4998,7 @@ public enum RequiredStatusChecksEnforcementLevel
     Everyone
 }
 
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<SignatureRequirementEnforcementLevel>))]
 public enum SignatureRequirementEnforcementLevel
 {
     [JsonStringEnumMemberName("off")]
@@ -4007,7 +5009,7 @@ public enum SignatureRequirementEnforcementLevel
     Everyone
 }
 
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ActiveLockReason>))]
 public enum ActiveLockReason
 {
     [JsonStringEnumMemberName("resolved")]
@@ -4022,793 +5024,22 @@ public enum ActiveLockReason
     Unknown
 }
 
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookBranchProtectionConfigurationDisabledAction
-{
-    [JsonStringEnumMemberName("disabled")]
-    Disabled
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookBranchProtectionConfigurationEnabledAction
-{
-    [JsonStringEnumMemberName("enabled")]
-    Enabled
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookBranchProtectionRuleCreatedAction
-{
-    [JsonStringEnumMemberName("created")]
-    Created
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookBranchProtectionRuleDeletedAction
-{
-    [JsonStringEnumMemberName("deleted")]
-    Deleted
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookBranchProtectionRuleEditedAction
-{
-    [JsonStringEnumMemberName("edited")]
-    Edited
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookCheckRunCompletedAction
-{
-    [JsonStringEnumMemberName("completed")]
-    Completed
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookCheckRunRequestedActionAction
-{
-    [JsonStringEnumMemberName("requested_action")]
-    RequestedAction
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookCheckRunRerequestedAction
-{
-    [JsonStringEnumMemberName("rerequested")]
-    Rerequested
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookCheckSuiteRequestedAction
-{
-    [JsonStringEnumMemberName("requested")]
-    Requested
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookCodeScanningAlertAppearedInBranchAction
-{
-    [JsonStringEnumMemberName("appeared_in_branch")]
-    AppearedInBranch
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookCodeScanningAlertClosedByUserAction
-{
-    [JsonStringEnumMemberName("closed_by_user")]
-    ClosedByUser
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookCodeScanningAlertFixedAction
-{
-    [JsonStringEnumMemberName("fixed")]
-    Fixed
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookCodeScanningAlertReopenedAction
-{
-    [JsonStringEnumMemberName("reopened")]
-    Reopened
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookCodeScanningAlertReopenedByUserAction
-{
-    [JsonStringEnumMemberName("reopened_by_user")]
-    ReopenedByUser
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookCodeScanningAlertUpdatedAssignmentAction
-{
-    [JsonStringEnumMemberName("updated_assignment")]
-    UpdatedAssignment
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookCustomPropertyPromotedToEnterpriseAction
-{
-    [JsonStringEnumMemberName("promote_to_enterprise")]
-    PromoteToEnterprise
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookCustomPropertyUpdatedAction
-{
-    [JsonStringEnumMemberName("updated")]
-    Updated
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookDependabotAlertAssigneesChangedAction
-{
-    [JsonStringEnumMemberName("assignees_changed")]
-    AssigneesChanged
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookDependabotAlertAutoDismissedAction
-{
-    [JsonStringEnumMemberName("auto_dismissed")]
-    AutoDismissed
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookDependabotAlertAutoReopenedAction
-{
-    [JsonStringEnumMemberName("auto_reopened")]
-    AutoReopened
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookDependabotAlertDismissedAction
-{
-    [JsonStringEnumMemberName("dismissed")]
-    Dismissed
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookDependabotAlertReintroducedAction
-{
-    [JsonStringEnumMemberName("reintroduced")]
-    Reintroduced
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookDeploymentReviewApprovedAction
-{
-    [JsonStringEnumMemberName("approved")]
-    Approved
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookDeploymentReviewRejectedAction
-{
-    [JsonStringEnumMemberName("rejected")]
-    Rejected
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookDiscussionAnsweredAction
-{
-    [JsonStringEnumMemberName("answered")]
-    Answered
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookDiscussionCategoryChangedAction
-{
-    [JsonStringEnumMemberName("category_changed")]
-    CategoryChanged
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookDiscussionClosedAction
-{
-    [JsonStringEnumMemberName("closed")]
-    Closed
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookDiscussionLabeledAction
-{
-    [JsonStringEnumMemberName("labeled")]
-    Labeled
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookDiscussionLockedAction
-{
-    [JsonStringEnumMemberName("locked")]
-    Locked
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookDiscussionPinnedAction
-{
-    [JsonStringEnumMemberName("pinned")]
-    Pinned
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookDiscussionTransferredAction
-{
-    [JsonStringEnumMemberName("transferred")]
-    Transferred
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookDiscussionUnansweredAction
-{
-    [JsonStringEnumMemberName("unanswered")]
-    Unanswered
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookDiscussionUnlabeledAction
-{
-    [JsonStringEnumMemberName("unlabeled")]
-    Unlabeled
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookDiscussionUnlockedAction
-{
-    [JsonStringEnumMemberName("unlocked")]
-    Unlocked
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookDiscussionUnpinnedAction
-{
-    [JsonStringEnumMemberName("unpinned")]
-    Unpinned
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookGithubAppAuthorizationRevokedAction
-{
-    [JsonStringEnumMemberName("revoked")]
-    Revoked
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookInstallationNewPermissionsAcceptedAction
-{
-    [JsonStringEnumMemberName("new_permissions_accepted")]
-    NewPermissionsAccepted
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookInstallationRepositoriesAddedAction
-{
-    [JsonStringEnumMemberName("added")]
-    Added
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookInstallationRepositoriesRemovedAction
-{
-    [JsonStringEnumMemberName("removed")]
-    Removed
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookInstallationSuspendAction
-{
-    [JsonStringEnumMemberName("suspend")]
-    Suspend
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookInstallationTargetRenamedAction
-{
-    [JsonStringEnumMemberName("renamed")]
-    Renamed
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookInstallationUnsuspendAction
-{
-    [JsonStringEnumMemberName("unsuspend")]
-    Unsuspend
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookIssueDependenciesBlockedByAddedAction
-{
-    [JsonStringEnumMemberName("blocked_by_added")]
-    BlockedByAdded
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookIssueDependenciesBlockedByRemovedAction
-{
-    [JsonStringEnumMemberName("blocked_by_removed")]
-    BlockedByRemoved
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookIssueDependenciesBlockingAddedAction
-{
-    [JsonStringEnumMemberName("blocking_added")]
-    BlockingAdded
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookIssueDependenciesBlockingRemovedAction
-{
-    [JsonStringEnumMemberName("blocking_removed")]
-    BlockingRemoved
-}
-
 /// <summary>
-/// The action that was performed.
+/// The category of the detected secret. `default` covers specific provider patterns and custom patterns; `generic` covers non-specific patterns and AI-detected secrets.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookIssuesAssignedAction
-{
-    [JsonStringEnumMemberName("assigned")]
-    Assigned
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookIssuesDemilestonedAction
-{
-    [JsonStringEnumMemberName("demilestoned")]
-    Demilestoned
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookIssuesFieldAddedAction
-{
-    [JsonStringEnumMemberName("field_added")]
-    FieldAdded
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookIssuesFieldRemovedAction
-{
-    [JsonStringEnumMemberName("field_removed")]
-    FieldRemoved
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookIssuesMilestonedAction
-{
-    [JsonStringEnumMemberName("milestoned")]
-    Milestoned
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookIssuesOpenedAction
-{
-    [JsonStringEnumMemberName("opened")]
-    Opened
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookIssuesTypedAction
-{
-    [JsonStringEnumMemberName("typed")]
-    Typed
-}
-
-/// <summary>
-/// The action that was performed.
-/// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookIssuesUnassignedAction
-{
-    [JsonStringEnumMemberName("unassigned")]
-    Unassigned
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookIssuesUntypedAction
-{
-    [JsonStringEnumMemberName("untyped")]
-    Untyped
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookMarketplacePurchaseCancelledAction
-{
-    [JsonStringEnumMemberName("cancelled")]
-    Cancelled
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookMarketplacePurchaseChangedAction
-{
-    [JsonStringEnumMemberName("changed")]
-    Changed
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookMarketplacePurchasePendingChangeAction
-{
-    [JsonStringEnumMemberName("pending_change")]
-    PendingChange
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookMarketplacePurchasePendingChangeCancelledAction
-{
-    [JsonStringEnumMemberName("pending_change_cancelled")]
-    PendingChangeCancelled
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookMarketplacePurchasePurchasedAction
-{
-    [JsonStringEnumMemberName("purchased")]
-    Purchased
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookMergeGroupChecksRequestedAction
-{
-    [JsonStringEnumMemberName("checks_requested")]
-    ChecksRequested
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookMergeGroupDestroyedAction
-{
-    [JsonStringEnumMemberName("destroyed")]
-    Destroyed
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookOrgBlockBlockedAction
-{
-    [JsonStringEnumMemberName("blocked")]
-    Blocked
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookOrgBlockUnblockedAction
-{
-    [JsonStringEnumMemberName("unblocked")]
-    Unblocked
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookOrganizationMemberAddedAction
-{
-    [JsonStringEnumMemberName("member_added")]
-    MemberAdded
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookOrganizationMemberInvitedAction
-{
-    [JsonStringEnumMemberName("member_invited")]
-    MemberInvited
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookOrganizationMemberRemovedAction
-{
-    [JsonStringEnumMemberName("member_removed")]
-    MemberRemoved
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookPackagePublishedAction
-{
-    [JsonStringEnumMemberName("published")]
-    Published
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookPersonalAccessTokenRequestDeniedAction
-{
-    [JsonStringEnumMemberName("denied")]
-    Denied
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookProjectCardConvertedAction
-{
-    [JsonStringEnumMemberName("converted")]
-    Converted
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookProjectCardMovedAction
-{
-    [JsonStringEnumMemberName("moved")]
-    Moved
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookProjectsV2ItemArchivedAction
-{
-    [JsonStringEnumMemberName("archived")]
-    Archived
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookProjectsV2ItemReorderedAction
-{
-    [JsonStringEnumMemberName("reordered")]
-    Reordered
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookProjectsV2ItemRestoredAction
-{
-    [JsonStringEnumMemberName("restored")]
-    Restored
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookPullRequestAutoMergeDisabledAction
-{
-    [JsonStringEnumMemberName("auto_merge_disabled")]
-    AutoMergeDisabled
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookPullRequestAutoMergeEnabledAction
-{
-    [JsonStringEnumMemberName("auto_merge_enabled")]
-    AutoMergeEnabled
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookPullRequestConvertedToDraftAction
-{
-    [JsonStringEnumMemberName("converted_to_draft")]
-    ConvertedToDraft
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookPullRequestDequeuedAction
-{
-    [JsonStringEnumMemberName("dequeued")]
-    Dequeued
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookPullRequestEnqueuedAction
-{
-    [JsonStringEnumMemberName("enqueued")]
-    Enqueued
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookPullRequestReadyForReviewAction
-{
-    [JsonStringEnumMemberName("ready_for_review")]
-    ReadyForReview
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookPullRequestReviewSubmittedAction
-{
-    [JsonStringEnumMemberName("submitted")]
-    Submitted
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookPullRequestReviewThreadResolvedAction
-{
-    [JsonStringEnumMemberName("resolved")]
-    Resolved
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookPullRequestReviewThreadUnresolvedAction
-{
-    [JsonStringEnumMemberName("unresolved")]
-    Unresolved
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookPullRequestSynchronizeAction
-{
-    [JsonStringEnumMemberName("synchronize")]
-    Synchronize
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookReleasePrereleasedAction
-{
-    [JsonStringEnumMemberName("prereleased")]
-    Prereleased
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookReleaseReleasedAction
-{
-    [JsonStringEnumMemberName("released")]
-    Released
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookReleaseUnpublishedAction
-{
-    [JsonStringEnumMemberName("unpublished")]
-    Unpublished
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookRepositoryAdvisoryReportedAction
-{
-    [JsonStringEnumMemberName("reported")]
-    Reported
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookRepositoryPrivatizedAction
-{
-    [JsonStringEnumMemberName("privatized")]
-    Privatized
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookRepositoryPublicizedAction
-{
-    [JsonStringEnumMemberName("publicized")]
-    Publicized
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookRepositoryUnarchivedAction
-{
-    [JsonStringEnumMemberName("unarchived")]
-    Unarchived
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookRepositoryVulnerabilityAlertCreateAction
-{
-    [JsonStringEnumMemberName("create")]
-    Create
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookRepositoryVulnerabilityAlertDismissAction
-{
-    [JsonStringEnumMemberName("dismiss")]
-    Dismiss
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookRepositoryVulnerabilityAlertReopenAction
-{
-    [JsonStringEnumMemberName("reopen")]
-    Reopen
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookRepositoryVulnerabilityAlertResolveAction
-{
-    [JsonStringEnumMemberName("resolve")]
-    Resolve
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookSecretScanningAlertPubliclyLeakedAction
-{
-    [JsonStringEnumMemberName("publicly_leaked")]
-    PubliclyLeaked
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookSecretScanningAlertValidatedAction
-{
-    [JsonStringEnumMemberName("validated")]
-    Validated
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookSecurityAdvisoryWithdrawnAction
-{
-    [JsonStringEnumMemberName("withdrawn")]
-    Withdrawn
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookSponsorshipPendingCancellationAction
-{
-    [JsonStringEnumMemberName("pending_cancellation")]
-    PendingCancellation
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookSponsorshipPendingTierChangeAction
-{
-    [JsonStringEnumMemberName("pending_tier_change")]
-    PendingTierChange
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookSponsorshipTierChangedAction
-{
-    [JsonStringEnumMemberName("tier_changed")]
-    TierChanged
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookSubIssuesParentIssueAddedAction
-{
-    [JsonStringEnumMemberName("parent_issue_added")]
-    ParentIssueAdded
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookSubIssuesParentIssueRemovedAction
-{
-    [JsonStringEnumMemberName("parent_issue_removed")]
-    ParentIssueRemoved
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookSubIssuesSubIssueAddedAction
-{
-    [JsonStringEnumMemberName("sub_issue_added")]
-    SubIssueAdded
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookSubIssuesSubIssueRemovedAction
-{
-    [JsonStringEnumMemberName("sub_issue_removed")]
-    SubIssueRemoved
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookTeamAddedToRepositoryAction
-{
-    [JsonStringEnumMemberName("added_to_repository")]
-    AddedToRepository
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookTeamRemovedFromRepositoryAction
-{
-    [JsonStringEnumMemberName("removed_from_repository")]
-    RemovedFromRepository
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookWatchStartedAction
-{
-    [JsonStringEnumMemberName("started")]
-    Started
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookWorkflowJobInProgressAction
-{
-    [JsonStringEnumMemberName("in_progress")]
-    InProgress
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookWorkflowJobQueuedAction
-{
-    [JsonStringEnumMemberName("queued")]
-    Queued
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum WebhookWorkflowJobWaitingAction
-{
-    [JsonStringEnumMemberName("waiting")]
-    Waiting
+[JsonConverter(typeof(JsonStringEnumConverter<SecretCategory>))]
+public enum SecretCategory
+{
+    [JsonStringEnumMemberName("default")]
+    Default,
+    [JsonStringEnumMemberName("generic")]
+    Generic
 }
 
 /// <summary>
 /// The type of Git ref object created in the repository.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<RefType>))]
 public enum RefType
 {
     [JsonStringEnumMemberName("tag")]
@@ -4820,7 +5051,7 @@ public enum RefType
 /// <summary>
 /// If the scan was triggered by a custom pattern update, this will be the scope of the pattern that was updated
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CustomPatternScope>))]
 public enum CustomPatternScope
 {
     [JsonStringEnumMemberName("repository")]
@@ -4833,7 +5064,7 @@ public enum CustomPatternScope
     Unknown
 }
 
-public record Root
+public partial record Root
 {
     [JsonPropertyName("current_user_url")]
     public required string CurrentUserUrl { get; init; }
@@ -4939,7 +5170,7 @@ public record Root
 /// <summary>
 /// The package's language or package management ecosystem.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<SecurityAdvisoryEcosystems>))]
 public enum SecurityAdvisoryEcosystems
 {
     [JsonStringEnumMemberName("rubygems")]
@@ -4973,7 +5204,7 @@ public enum SecurityAdvisoryEcosystems
 /// <summary>
 /// A vulnerability describing the product and its affected versions within a GitHub Security Advisory.
 /// </summary>
-public record Vulnerability
+public partial record Vulnerability
 {
     /// <summary>
     /// The name of the package affected by the vulnerability.
@@ -5001,7 +5232,7 @@ public record Vulnerability
 
 }
 
-public record CvssSeverities
+public partial record CvssSeverities
 {
     [JsonPropertyName("cvss_v3")]
     public object? CvssV3 { get; init; }
@@ -5014,7 +5245,7 @@ public record CvssSeverities
 /// <summary>
 /// The EPSS scores as calculated by the [Exploit Prediction Scoring System](https://www.first.org/epss).
 /// </summary>
-public record SecurityAdvisoryEpss
+public partial record SecurityAdvisoryEpss
 {
     [JsonPropertyName("percentage")]
     public double? Percentage { get; init; }
@@ -5027,7 +5258,7 @@ public record SecurityAdvisoryEpss
 /// <summary>
 /// A GitHub user.
 /// </summary>
-public record SimpleUser
+public partial record SimpleUser
 {
     [JsonPropertyName("name")]
     public string? Name { get; init; }
@@ -5100,7 +5331,7 @@ public record SimpleUser
 /// <summary>
 /// The type of credit the user is receiving.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<SecurityAdvisoryCreditTypes>))]
 public enum SecurityAdvisoryCreditTypes
 {
     [JsonStringEnumMemberName("analyst")]
@@ -5128,7 +5359,7 @@ public enum SecurityAdvisoryCreditTypes
 /// <summary>
 /// A GitHub Security Advisory.
 /// </summary>
-public record GlobalAdvisory
+public partial record GlobalAdvisory
 {
     /// <summary>
     /// The GitHub Security Advisory ID.
@@ -5259,7 +5490,7 @@ public record GlobalAdvisory
 /// <summary>
 /// Basic Error
 /// </summary>
-public record BasicError
+public partial record BasicError
 {
     [JsonPropertyName("message")]
     public string? Message { get; init; }
@@ -5278,7 +5509,7 @@ public record BasicError
 /// <summary>
 /// Validation Error Simple
 /// </summary>
-public record ValidationErrorSimple
+public partial record ValidationErrorSimple
 {
     [JsonPropertyName("message")]
     public required string Message { get; init; }
@@ -5294,7 +5525,7 @@ public record ValidationErrorSimple
 /// <summary>
 /// An enterprise on GitHub.
 /// </summary>
-public record Enterprise
+public partial record Enterprise
 {
     /// <summary>
     /// A short description of the enterprise.
@@ -5346,7 +5577,7 @@ public record Enterprise
 /// <summary>
 /// GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
 /// </summary>
-public record Integration
+public partial record Integration
 {
     /// <summary>
     /// Unique identifier of the GitHub app
@@ -5417,7 +5648,7 @@ public record Integration
 /// Type alias for Uri.
 /// </summary>
 [JsonConverter(typeof(OpenApiGeneratedTypeAliasJsonConverter<WebhookConfigUrl, Uri>))]
-public readonly record struct WebhookConfigUrl(Uri Value) : IOpenApiGeneratedTypeAlias<WebhookConfigUrl, Uri>
+public readonly partial record struct WebhookConfigUrl(Uri Value) : IOpenApiGeneratedTypeAlias<WebhookConfigUrl, Uri>
 {
     public static WebhookConfigUrl Create(Uri value) => new(value);
 }
@@ -5429,7 +5660,7 @@ public readonly record struct WebhookConfigUrl(Uri Value) : IOpenApiGeneratedTyp
 /// Type alias for string.
 /// </summary>
 [JsonConverter(typeof(OpenApiGeneratedTypeAliasJsonConverter<WebhookConfigContentType, string>))]
-public readonly record struct WebhookConfigContentType(string Value) : IOpenApiGeneratedTypeAlias<WebhookConfigContentType, string>
+public readonly partial record struct WebhookConfigContentType(string Value) : IOpenApiGeneratedTypeAlias<WebhookConfigContentType, string>
 {
     public static WebhookConfigContentType Create(string value) => new(value);
 }
@@ -5441,17 +5672,17 @@ public readonly record struct WebhookConfigContentType(string Value) : IOpenApiG
 /// Type alias for string.
 /// </summary>
 [JsonConverter(typeof(OpenApiGeneratedTypeAliasJsonConverter<WebhookConfigSecret, string>))]
-public readonly record struct WebhookConfigSecret(string Value) : IOpenApiGeneratedTypeAlias<WebhookConfigSecret, string>
+public readonly partial record struct WebhookConfigSecret(string Value) : IOpenApiGeneratedTypeAlias<WebhookConfigSecret, string>
 {
     public static WebhookConfigSecret Create(string value) => new(value);
 }
 
-public abstract record WebhookConfigInsecureSsl;
+public abstract partial record WebhookConfigInsecureSsl;
 
 /// <summary>
 /// Configuration object of the webhook
 /// </summary>
-public record WebhookConfig
+public partial record WebhookConfig
 {
     /// <summary>
     /// The URL to which the payloads will be delivered.
@@ -5479,7 +5710,7 @@ public record WebhookConfig
 /// <summary>
 /// Delivery made by a webhook, without request and response information.
 /// </summary>
-public record HookDeliveryItem
+public partial record HookDeliveryItem
 {
     /// <summary>
     /// Unique identifier of the webhook delivery.
@@ -5558,7 +5789,7 @@ public record HookDeliveryItem
 /// <summary>
 /// Scim Error
 /// </summary>
-public record ScimError
+public partial record ScimError
 {
     [JsonPropertyName("message")]
     public string? Message { get; init; }
@@ -5583,7 +5814,7 @@ public record ScimError
 /// <summary>
 /// Validation Error
 /// </summary>
-public record ValidationError
+public partial record ValidationError
 {
     [JsonPropertyName("message")]
     public required string Message { get; init; }
@@ -5599,7 +5830,7 @@ public record ValidationError
 /// <summary>
 /// Delivery made by a webhook.
 /// </summary>
-public record HookDelivery
+public partial record HookDelivery
 {
     /// <summary>
     /// Unique identifier of the delivery.
@@ -5690,7 +5921,7 @@ public record HookDelivery
 /// <summary>
 /// Request to install an integration on a target
 /// </summary>
-public record IntegrationInstallationRequest
+public partial record IntegrationInstallationRequest
 {
     /// <summary>
     /// Unique identifier of the request installation.
@@ -5716,9 +5947,9 @@ public record IntegrationInstallationRequest
 }
 
 /// <summary>
-/// The permissions granted to the user access token.
+/// The permissions granted to the fine-grained access token.
 /// </summary>
-public record AppPermissions
+public partial record AppPermissions
 {
     /// <summary>
     /// The level of permission to grant the access token for GitHub Actions workflows, workflow runs, and artifacts.
@@ -6055,7 +6286,7 @@ public record AppPermissions
 /// <summary>
 /// Installation
 /// </summary>
-public record Installation
+public partial record Installation
 {
     /// <summary>
     /// The ID of the installation.
@@ -6097,7 +6328,7 @@ public record Installation
     public required string TargetType { get; init; }
 
     /// <summary>
-    /// The permissions granted to the user access token.
+    /// The permissions granted to the fine-grained access token.
     /// </summary>
     [JsonPropertyName("permissions")]
     public required AppPermissions Permissions { get; init; }
@@ -6137,7 +6368,7 @@ public record Installation
 /// <summary>
 /// License Simple
 /// </summary>
-public record LicenseSimple
+public partial record LicenseSimple
 {
     [JsonPropertyName("key")]
     public required string Key { get; init; }
@@ -6162,7 +6393,7 @@ public record LicenseSimple
 /// <summary>
 /// A repository on GitHub.
 /// </summary>
-public record Repository
+public partial record Repository
 {
     /// <summary>
     /// Unique identifier of the repository
@@ -6573,7 +6804,7 @@ public record Repository
 /// <summary>
 /// Authentication token for a GitHub App installed on a user or org.
 /// </summary>
-public record InstallationToken
+public partial record InstallationToken
 {
     [JsonPropertyName("token")]
     public required string Token { get; init; }
@@ -6582,7 +6813,7 @@ public record InstallationToken
     public required string ExpiresAt { get; init; }
 
     /// <summary>
-    /// The permissions granted to the user access token.
+    /// The permissions granted to the fine-grained access token.
     /// </summary>
     [JsonPropertyName("permissions")]
     public AppPermissions? Permissions { get; init; }
@@ -6604,10 +6835,10 @@ public record InstallationToken
 
 }
 
-public record ScopedInstallation
+public partial record ScopedInstallation
 {
     /// <summary>
-    /// The permissions granted to the user access token.
+    /// The permissions granted to the fine-grained access token.
     /// </summary>
     [JsonPropertyName("permissions")]
     public required AppPermissions Permissions { get; init; }
@@ -6641,7 +6872,7 @@ public record ScopedInstallation
 /// <summary>
 /// The authorization for an OAuth app, GitHub App, or a Personal Access Token.
 /// </summary>
-public record Authorization
+public partial record Authorization
 {
     [JsonPropertyName("id")]
     public required long Id { get; init; }
@@ -6696,7 +6927,7 @@ public record Authorization
 /// <summary>
 /// A GitHub repository view for Classroom
 /// </summary>
-public record SimpleClassroomRepository
+public partial record SimpleClassroomRepository
 {
     /// <summary>
     /// A unique identifier of the repository.
@@ -6739,7 +6970,7 @@ public record SimpleClassroomRepository
 /// <summary>
 /// A GitHub organization.
 /// </summary>
-public record SimpleClassroomOrganization
+public partial record SimpleClassroomOrganization
 {
     [JsonPropertyName("id")]
     public required int Id { get; init; }
@@ -6764,7 +6995,7 @@ public record SimpleClassroomOrganization
 /// <summary>
 /// A GitHub Classroom classroom
 /// </summary>
-public record Classroom
+public partial record Classroom
 {
     /// <summary>
     /// Unique identifier of the classroom.
@@ -6801,7 +7032,7 @@ public record Classroom
 /// <summary>
 /// A GitHub Classroom assignment
 /// </summary>
-public record ClassroomAssignment
+public partial record ClassroomAssignment
 {
     /// <summary>
     /// Unique identifier of the repository.
@@ -6922,7 +7153,7 @@ public record ClassroomAssignment
 /// <summary>
 /// A GitHub user simplified for Classroom.
 /// </summary>
-public record SimpleClassroomUser
+public partial record SimpleClassroomUser
 {
     [JsonPropertyName("id")]
     public required int Id { get; init; }
@@ -6941,7 +7172,7 @@ public record SimpleClassroomUser
 /// <summary>
 /// A GitHub Classroom classroom
 /// </summary>
-public record SimpleClassroom
+public partial record SimpleClassroom
 {
     /// <summary>
     /// Unique identifier of the classroom.
@@ -6972,7 +7203,7 @@ public record SimpleClassroom
 /// <summary>
 /// A GitHub Classroom assignment
 /// </summary>
-public record SimpleClassroomAssignment
+public partial record SimpleClassroomAssignment
 {
     /// <summary>
     /// Unique identifier of the repository.
@@ -7087,7 +7318,7 @@ public record SimpleClassroomAssignment
 /// <summary>
 /// A GitHub Classroom accepted assignment
 /// </summary>
-public record ClassroomAcceptedAssignment
+public partial record ClassroomAcceptedAssignment
 {
     /// <summary>
     /// Unique identifier of the repository.
@@ -7139,7 +7370,7 @@ public record ClassroomAcceptedAssignment
 /// <summary>
 /// Grade for a student or groups GitHub Classroom assignment
 /// </summary>
-public record ClassroomAssignmentGrade
+public partial record ClassroomAssignmentGrade
 {
     /// <summary>
     /// Name of the assignment
@@ -7212,7 +7443,7 @@ public record ClassroomAssignmentGrade
 /// <summary>
 /// Code Of Conduct
 /// </summary>
-public record CodeOfConduct
+public partial record CodeOfConduct
 {
     [JsonPropertyName("key")]
     public required string Key { get; init; }
@@ -7234,7 +7465,7 @@ public record CodeOfConduct
 /// <summary>
 /// GitHub Actions cache retention policy for an enterprise.
 /// </summary>
-public record ActionsCacheRetentionLimitForEnterprise
+public partial record ActionsCacheRetentionLimitForEnterprise
 {
     /// <summary>
     /// For repositories &amp; organizations in an enterprise, the maximum duration, in days, for which caches in a repository may be retained.
@@ -7247,7 +7478,7 @@ public record ActionsCacheRetentionLimitForEnterprise
 /// <summary>
 /// GitHub Actions cache storage policy for an enterprise.
 /// </summary>
-public record ActionsCacheStorageLimitForEnterprise
+public partial record ActionsCacheStorageLimitForEnterprise
 {
     /// <summary>
     /// For repositories &amp; organizations in an enterprise, the maximum size limit for the sum of all caches in a repository, in gigabytes.
@@ -7260,7 +7491,7 @@ public record ActionsCacheStorageLimitForEnterprise
 /// <summary>
 /// An OIDC custom property inclusion for repository properties
 /// </summary>
-public record OidcCustomPropertyInclusion
+public partial record OidcCustomPropertyInclusion
 {
     /// <summary>
     /// The name of the custom property that is included in the OIDC token
@@ -7279,7 +7510,7 @@ public record OidcCustomPropertyInclusion
 /// <summary>
 /// Input for creating an OIDC custom property inclusion
 /// </summary>
-public record OidcCustomPropertyInclusionInput
+public partial record OidcCustomPropertyInclusionInput
 {
     /// <summary>
     /// The name of the custom property to include in the OIDC token
@@ -7292,7 +7523,7 @@ public record OidcCustomPropertyInclusionInput
 /// <summary>
 /// A code security configuration
 /// </summary>
-public record CodeSecurityConfiguration
+public partial record CodeSecurityConfiguration
 {
     /// <summary>
     /// The ID of the code security configuration
@@ -7473,7 +7704,7 @@ public record CodeSecurityConfiguration
 /// <summary>
 /// Security Configuration feature options for code scanning
 /// </summary>
-public record CodeScanningOptions
+public partial record CodeScanningOptions
 {
     /// <summary>
     /// Whether to allow repos which use advanced setup
@@ -7486,7 +7717,7 @@ public record CodeScanningOptions
 /// <summary>
 /// Feature options for code scanning default setup
 /// </summary>
-public record CodeScanningDefaultSetupOptions
+public partial record CodeScanningDefaultSetupOptions
 {
     /// <summary>
     /// Whether to use labeled runners or standard GitHub runners.
@@ -7510,7 +7741,7 @@ public record CodeSecurityDefaultConfigurations;
 /// <summary>
 /// A GitHub repository.
 /// </summary>
-public record SimpleRepository
+public partial record SimpleRepository
 {
     /// <summary>
     /// A unique identifier of the repository.
@@ -7793,7 +8024,7 @@ public record SimpleRepository
 /// <summary>
 /// Repositories associated with a code security configuration and attachment status
 /// </summary>
-public record CodeSecurityConfigurationRepositories
+public partial record CodeSecurityConfigurationRepositories
 {
     /// <summary>
     /// The attachment status of the code security configuration on the repository.
@@ -7812,7 +8043,7 @@ public record CodeSecurityConfigurationRepositories
 /// <summary>
 /// Links to download the Copilot usage metrics report for an enterprise/organization for a specific day.
 /// </summary>
-public record CopilotUsageMetrics1DayReport
+public partial record CopilotUsageMetrics1DayReport
 {
     /// <summary>
     /// The URLs to download the Copilot usage metrics report for the enterprise/organization for the specified day.
@@ -7831,7 +8062,7 @@ public record CopilotUsageMetrics1DayReport
 /// <summary>
 /// Links to download the latest Copilot usage metrics report for an enterprise/organization.
 /// </summary>
-public record CopilotUsageMetrics28DayReport
+public partial record CopilotUsageMetrics28DayReport
 {
     /// <summary>
     /// The URLs to download the latest Copilot usage metrics report for the enterprise/organization.
@@ -7860,7 +8091,7 @@ public record CopilotUsageMetrics28DayReport
 /// Type alias for int.
 /// </summary>
 [JsonConverter(typeof(OpenApiGeneratedTypeAliasJsonConverter<AlertNumber, int>))]
-public readonly record struct AlertNumber(int Value) : IOpenApiGeneratedTypeAlias<AlertNumber, int>
+public readonly partial record struct AlertNumber(int Value) : IOpenApiGeneratedTypeAlias<AlertNumber, int>
 {
     public static AlertNumber Create(int value) => new(value);
 }
@@ -7868,7 +8099,7 @@ public readonly record struct AlertNumber(int Value) : IOpenApiGeneratedTypeAlia
 /// <summary>
 /// Details for the vulnerable package.
 /// </summary>
-public record DependabotAlertPackage
+public partial record DependabotAlertPackage
 {
     /// <summary>
     /// The package's language or package management ecosystem.
@@ -7887,7 +8118,7 @@ public record DependabotAlertPackage
 /// <summary>
 /// Details pertaining to one vulnerable version range for the advisory.
 /// </summary>
-public record DependabotAlertSecurityVulnerability
+public partial record DependabotAlertSecurityVulnerability
 {
     /// <summary>
     /// Details for the vulnerable package.
@@ -7918,7 +8149,7 @@ public record DependabotAlertSecurityVulnerability
 /// <summary>
 /// Details for the GitHub Security Advisory.
 /// </summary>
-public record DependabotAlertSecurityAdvisory
+public partial record DependabotAlertSecurityAdvisory
 {
     /// <summary>
     /// The unique GitHub Security Advisory ID assigned to the advisory.
@@ -8022,7 +8253,7 @@ public record DependabotAlertSecurityAdvisory
 /// Type alias for Uri.
 /// </summary>
 [JsonConverter(typeof(OpenApiGeneratedTypeAliasJsonConverter<AlertUrl, Uri>))]
-public readonly record struct AlertUrl(Uri Value) : IOpenApiGeneratedTypeAlias<AlertUrl, Uri>
+public readonly partial record struct AlertUrl(Uri Value) : IOpenApiGeneratedTypeAlias<AlertUrl, Uri>
 {
     public static AlertUrl Create(Uri value) => new(value);
 }
@@ -8034,7 +8265,7 @@ public readonly record struct AlertUrl(Uri Value) : IOpenApiGeneratedTypeAlias<A
 /// Type alias for Uri.
 /// </summary>
 [JsonConverter(typeof(OpenApiGeneratedTypeAliasJsonConverter<AlertHtmlUrl, Uri>))]
-public readonly record struct AlertHtmlUrl(Uri Value) : IOpenApiGeneratedTypeAlias<AlertHtmlUrl, Uri>
+public readonly partial record struct AlertHtmlUrl(Uri Value) : IOpenApiGeneratedTypeAlias<AlertHtmlUrl, Uri>
 {
     public static AlertHtmlUrl Create(Uri value) => new(value);
 }
@@ -8046,7 +8277,7 @@ public readonly record struct AlertHtmlUrl(Uri Value) : IOpenApiGeneratedTypeAli
 /// Type alias for DateTimeOffset.
 /// </summary>
 [JsonConverter(typeof(OpenApiGeneratedTypeAliasJsonConverter<AlertCreatedAt, DateTimeOffset>))]
-public readonly record struct AlertCreatedAt(DateTimeOffset Value) : IOpenApiGeneratedTypeAlias<AlertCreatedAt, DateTimeOffset>
+public readonly partial record struct AlertCreatedAt(DateTimeOffset Value) : IOpenApiGeneratedTypeAlias<AlertCreatedAt, DateTimeOffset>
 {
     public static AlertCreatedAt Create(DateTimeOffset value) => new(value);
 }
@@ -8058,7 +8289,7 @@ public readonly record struct AlertCreatedAt(DateTimeOffset Value) : IOpenApiGen
 /// Type alias for DateTimeOffset.
 /// </summary>
 [JsonConverter(typeof(OpenApiGeneratedTypeAliasJsonConverter<AlertUpdatedAt, DateTimeOffset>))]
-public readonly record struct AlertUpdatedAt(DateTimeOffset Value) : IOpenApiGeneratedTypeAlias<AlertUpdatedAt, DateTimeOffset>
+public readonly partial record struct AlertUpdatedAt(DateTimeOffset Value) : IOpenApiGeneratedTypeAlias<AlertUpdatedAt, DateTimeOffset>
 {
     public static AlertUpdatedAt Create(DateTimeOffset value) => new(value);
 }
@@ -8070,7 +8301,7 @@ public readonly record struct AlertUpdatedAt(DateTimeOffset Value) : IOpenApiGen
 /// Type alias for DateTimeOffset?.
 /// </summary>
 [JsonConverter(typeof(OpenApiGeneratedTypeAliasJsonConverter<AlertDismissedAt, DateTimeOffset?>))]
-public readonly record struct AlertDismissedAt(DateTimeOffset? Value) : IOpenApiGeneratedTypeAlias<AlertDismissedAt, DateTimeOffset?>
+public readonly partial record struct AlertDismissedAt(DateTimeOffset? Value) : IOpenApiGeneratedTypeAlias<AlertDismissedAt, DateTimeOffset?>
 {
     public static AlertDismissedAt Create(DateTimeOffset? value) => new(value);
 }
@@ -8082,7 +8313,7 @@ public readonly record struct AlertDismissedAt(DateTimeOffset? Value) : IOpenApi
 /// Type alias for DateTimeOffset?.
 /// </summary>
 [JsonConverter(typeof(OpenApiGeneratedTypeAliasJsonConverter<AlertFixedAt, DateTimeOffset?>))]
-public readonly record struct AlertFixedAt(DateTimeOffset? Value) : IOpenApiGeneratedTypeAlias<AlertFixedAt, DateTimeOffset?>
+public readonly partial record struct AlertFixedAt(DateTimeOffset? Value) : IOpenApiGeneratedTypeAlias<AlertFixedAt, DateTimeOffset?>
 {
     public static AlertFixedAt Create(DateTimeOffset? value) => new(value);
 }
@@ -8094,7 +8325,7 @@ public readonly record struct AlertFixedAt(DateTimeOffset? Value) : IOpenApiGene
 /// Type alias for DateTimeOffset?.
 /// </summary>
 [JsonConverter(typeof(OpenApiGeneratedTypeAliasJsonConverter<AlertAutoDismissedAt, DateTimeOffset?>))]
-public readonly record struct AlertAutoDismissedAt(DateTimeOffset? Value) : IOpenApiGeneratedTypeAlias<AlertAutoDismissedAt, DateTimeOffset?>
+public readonly partial record struct AlertAutoDismissedAt(DateTimeOffset? Value) : IOpenApiGeneratedTypeAlias<AlertAutoDismissedAt, DateTimeOffset?>
 {
     public static AlertAutoDismissedAt Create(DateTimeOffset? value) => new(value);
 }
@@ -8102,7 +8333,7 @@ public readonly record struct AlertAutoDismissedAt(DateTimeOffset? Value) : IOpe
 /// <summary>
 /// Information about an active dismissal request for this Dependabot alert.
 /// </summary>
-public record DependabotAlertDismissalRequestSimple
+public partial record DependabotAlertDismissalRequestSimple
 {
     /// <summary>
     /// The unique identifier of the dismissal request.
@@ -8139,7 +8370,7 @@ public record DependabotAlertDismissalRequestSimple
 /// <summary>
 /// A Dependabot alert.
 /// </summary>
-public record DependabotAlertWithRepository
+public partial record DependabotAlertWithRepository
 {
     /// <summary>
     /// The security alert number.
@@ -8251,7 +8482,7 @@ public record DependabotAlertWithRepository
 /// <summary>
 /// Information about repositories that Dependabot is able to access in an organization
 /// </summary>
-public record DependabotRepositoryAccessDetails
+public partial record DependabotRepositoryAccessDetails
 {
     /// <summary>
     /// The default repository access level for Dependabot updates.
@@ -8267,7 +8498,7 @@ public record DependabotRepositoryAccessDetails
 /// <summary>
 /// Group of enterprise owners and/or members
 /// </summary>
-public record EnterpriseTeam
+public partial record EnterpriseTeam
 {
     [JsonPropertyName("id")]
     public required long Id { get; init; }
@@ -8325,7 +8556,7 @@ public record EnterpriseTeam
 /// <summary>
 /// A GitHub organization.
 /// </summary>
-public record OrganizationSimple
+public partial record OrganizationSimple
 {
     [JsonPropertyName("login")]
     public required string Login { get; init; }
@@ -8368,7 +8599,7 @@ public record OrganizationSimple
 /// <summary>
 /// Actor
 /// </summary>
-public record Actor
+public partial record Actor
 {
     [JsonPropertyName("id")]
     public required int Id { get; init; }
@@ -8393,7 +8624,7 @@ public record Actor
 /// <summary>
 /// Color-coded labels help you categorize and filter your issues (just like labels in Gmail).
 /// </summary>
-public record Label
+public partial record Label
 {
     /// <summary>
     /// Unique identifier for the label.
@@ -8439,7 +8670,7 @@ public record Label
 /// <summary>
 /// A Discussion in a repository.
 /// </summary>
-public record Discussion
+public partial record Discussion
 {
     [JsonPropertyName("active_lock_reason")]
     public required string? ActiveLockReason { get; init; }
@@ -8526,7 +8757,7 @@ public record Discussion
 /// <summary>
 /// A collection of related issues and pull requests.
 /// </summary>
-public record Milestone
+public partial record Milestone
 {
     [JsonPropertyName("url")]
     public required Uri Url { get; init; }
@@ -8590,7 +8821,7 @@ public record Milestone
 /// <summary>
 /// The type assigned to the issue. This is only present for issues in repositories where issue types are supported.
 /// </summary>
-public record IssueType
+public partial record IssueType
 {
     /// <summary>
     /// The unique identifier of the issue type.
@@ -8645,7 +8876,7 @@ public record IssueType
 /// <summary>
 /// How the author is associated with the repository.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<AuthorAssociation>))]
 public enum AuthorAssociation
 {
     [JsonStringEnumMemberName("COLLABORATOR")]
@@ -8666,7 +8897,7 @@ public enum AuthorAssociation
     Owner
 }
 
-public record ReactionRollup
+public partial record ReactionRollup
 {
     [JsonPropertyName("url")]
     public required Uri Url { get; init; }
@@ -8700,7 +8931,7 @@ public record ReactionRollup
 
 }
 
-public record SubIssuesSummary
+public partial record SubIssuesSummary
 {
     [JsonPropertyName("total")]
     public required int Total { get; init; }
@@ -8716,7 +8947,7 @@ public record SubIssuesSummary
 /// <summary>
 /// Context around who pinned an issue comment and when it was pinned.
 /// </summary>
-public record PinnedIssueComment
+public partial record PinnedIssueComment
 {
     [JsonPropertyName("pinned_at")]
     public required DateTimeOffset PinnedAt { get; init; }
@@ -8727,9 +8958,22 @@ public record PinnedIssueComment
 }
 
 /// <summary>
+/// Details about why an issue comment was minimized.
+/// </summary>
+public partial record IssueCommentMinimized
+{
+    /// <summary>
+    /// The reason the comment was minimized.
+    /// </summary>
+    [JsonPropertyName("reason")]
+    public required string? Reason { get; init; }
+
+}
+
+/// <summary>
 /// Comments provide a way for people to collaborate on an issue.
 /// </summary>
-public record IssueComment
+public partial record IssueComment
 {
     /// <summary>
     /// Unique identifier of the issue comment
@@ -8788,9 +9032,12 @@ public record IssueComment
     [JsonPropertyName("pin")]
     public PinnedIssueComment? Pin { get; init; }
 
+    [JsonPropertyName("minimized")]
+    public IssueCommentMinimized? Minimized { get; init; }
+
 }
 
-public record IssueDependenciesSummary
+public partial record IssueDependenciesSummary
 {
     [JsonPropertyName("blocked_by")]
     public required int BlockedBy { get; init; }
@@ -8809,13 +9056,19 @@ public record IssueDependenciesSummary
 /// <summary>
 /// A value assigned to an issue field
 /// </summary>
-public record IssueFieldValue
+public partial record IssueFieldValue
 {
     /// <summary>
     /// Unique identifier for the issue field.
     /// </summary>
     [JsonPropertyName("issue_field_id")]
     public required long IssueFieldId { get; init; }
+
+    /// <summary>
+    /// The human-readable name of the issue field.
+    /// </summary>
+    [JsonPropertyName("issue_field_name")]
+    public string? IssueFieldName { get; init; }
 
     [JsonPropertyName("node_id")]
     public required string NodeId { get; init; }
@@ -8849,7 +9102,7 @@ public record IssueFieldValue
 /// <summary>
 /// Issues are a great way to keep track of tasks, enhancements, and bugs for your projects.
 /// </summary>
-public record Issue
+public partial record Issue
 {
     [JsonPropertyName("id")]
     public required long Id { get; init; }
@@ -9006,7 +9259,7 @@ public record Issue
 
 }
 
-public record PullRequestMinimal
+public partial record PullRequestMinimal
 {
     [JsonPropertyName("id")]
     public required long Id { get; init; }
@@ -9028,7 +9281,7 @@ public record PullRequestMinimal
 /// <summary>
 /// Data related to a release.
 /// </summary>
-public record ReleaseAsset
+public partial record ReleaseAsset
 {
     [JsonPropertyName("url")]
     public required Uri Url { get; init; }
@@ -9083,7 +9336,7 @@ public record ReleaseAsset
 /// <summary>
 /// A release.
 /// </summary>
-public record Release
+public partial record Release
 {
     [JsonPropertyName("url")]
     public required Uri Url { get; init; }
@@ -9186,7 +9439,7 @@ public record Release
 /// <summary>
 /// Event
 /// </summary>
-public record Event
+public partial record Event
 {
     [JsonPropertyName("id")]
     public required string Id { get; init; }
@@ -9223,7 +9476,7 @@ public record Event
 /// <summary>
 /// Hypermedia Link with Type
 /// </summary>
-public record LinkWithType
+public partial record LinkWithType
 {
     [JsonPropertyName("href")]
     public required string Href { get; init; }
@@ -9236,7 +9489,7 @@ public record LinkWithType
 /// <summary>
 /// Feed
 /// </summary>
-public record Feed
+public partial record Feed
 {
     [JsonPropertyName("timeline_url")]
     public required string TimelineUrl { get; init; }
@@ -9282,7 +9535,7 @@ public record Feed
 /// <summary>
 /// Base Gist
 /// </summary>
-public record BaseGist
+public partial record BaseGist
 {
     [JsonPropertyName("url")]
     public required Uri Url { get; init; }
@@ -9355,7 +9608,7 @@ public record BaseGist
 /// <summary>
 /// Public User
 /// </summary>
-public record PublicUser
+public partial record PublicUser
 {
     [JsonPropertyName("login")]
     public required string Login { get; init; }
@@ -9482,7 +9735,7 @@ public record PublicUser
 /// <summary>
 /// Gist History
 /// </summary>
-public record GistHistory
+public partial record GistHistory
 {
     [JsonPropertyName("user")]
     public SimpleUser? User { get; init; }
@@ -9504,7 +9757,7 @@ public record GistHistory
 /// <summary>
 /// Gist Simple
 /// </summary>
-public record GistSimple
+public partial record GistSimple
 {
     [JsonPropertyName("forks")]
     public IReadOnlyList<object>? Forks { get; init; }
@@ -9583,7 +9836,7 @@ public record GistSimple
 /// <summary>
 /// A comment made to a gist.
 /// </summary>
-public record GistComment
+public partial record GistComment
 {
     [JsonPropertyName("id")]
     public required int Id { get; init; }
@@ -9620,7 +9873,7 @@ public record GistComment
 /// <summary>
 /// Gist Commit
 /// </summary>
-public record GistCommit
+public partial record GistCommit
 {
     [JsonPropertyName("url")]
     public required Uri Url { get; init; }
@@ -9642,7 +9895,7 @@ public record GistCommit
 /// <summary>
 /// Gitignore Template
 /// </summary>
-public record GitignoreTemplate
+public partial record GitignoreTemplate
 {
     [JsonPropertyName("name")]
     public required string Name { get; init; }
@@ -9655,7 +9908,7 @@ public record GitignoreTemplate
 /// <summary>
 /// License
 /// </summary>
-public record License
+public partial record License
 {
     [JsonPropertyName("key")]
     public required string Key { get; init; }
@@ -9701,7 +9954,7 @@ public record License
 /// <summary>
 /// Marketplace Listing Plan
 /// </summary>
-public record MarketplaceListingPlan
+public partial record MarketplaceListingPlan
 {
     [JsonPropertyName("url")]
     public required Uri Url { get; init; }
@@ -9747,7 +10000,7 @@ public record MarketplaceListingPlan
 /// <summary>
 /// Marketplace Purchase
 /// </summary>
-public record MarketplacePurchase
+public partial record MarketplacePurchase
 {
     [JsonPropertyName("url")]
     public required string Url { get; init; }
@@ -9778,7 +10031,7 @@ public record MarketplacePurchase
 /// <summary>
 /// Api Overview
 /// </summary>
-public record ApiOverview
+public partial record ApiOverview
 {
     [JsonPropertyName("verifiable_password_authentication")]
     public required bool VerifiablePasswordAuthentication { get; init; }
@@ -9828,12 +10081,15 @@ public record ApiOverview
     [JsonPropertyName("copilot")]
     public IReadOnlyList<string>? Copilot { get; init; }
 
+    [JsonPropertyName("commit_signing_keys")]
+    public IReadOnlyList<string>? CommitSigningKeys { get; init; }
+
     [JsonPropertyName("domains")]
     public object? Domains { get; init; }
 
 }
 
-public record SecurityAndAnalysis
+public partial record SecurityAndAnalysis
 {
     /// <summary>
     /// Enable or disable GitHub Advanced Security for the repository.
@@ -9879,7 +10135,7 @@ public record SecurityAndAnalysis
 /// <summary>
 /// Minimal Repository
 /// </summary>
-public record MinimalRepository
+public partial record MinimalRepository
 {
     [JsonPropertyName("id")]
     public required long Id { get; init; }
@@ -10171,7 +10427,7 @@ public record MinimalRepository
 /// <summary>
 /// Thread
 /// </summary>
-public record Thread
+public partial record Thread
 {
     [JsonPropertyName("id")]
     public required string Id { get; init; }
@@ -10208,7 +10464,7 @@ public record Thread
 /// <summary>
 /// Thread Subscription
 /// </summary>
-public record ThreadSubscription
+public partial record ThreadSubscription
 {
     [JsonPropertyName("subscribed")]
     public required bool Subscribed { get; init; }
@@ -10236,7 +10492,7 @@ public record ThreadSubscription
 /// <summary>
 /// GitHub Actions cache retention policy for an organization.
 /// </summary>
-public record ActionsCacheRetentionLimitForOrganization
+public partial record ActionsCacheRetentionLimitForOrganization
 {
     /// <summary>
     /// For repositories in this organization, the maximum duration, in days, for which caches in a repository may be retained.
@@ -10249,7 +10505,7 @@ public record ActionsCacheRetentionLimitForOrganization
 /// <summary>
 /// GitHub Actions cache storage policy for an organization.
 /// </summary>
-public record ActionsCacheStorageLimitForOrganization
+public partial record ActionsCacheStorageLimitForOrganization
 {
     /// <summary>
     /// For repositories in the organization, the maximum size limit for the sum of all caches in a repository, in gigabytes.
@@ -10259,7 +10515,7 @@ public record ActionsCacheStorageLimitForOrganization
 
 }
 
-public record BillingAiCreditUsageReportOrg
+public partial record BillingAiCreditUsageReportOrg
 {
     [JsonPropertyName("timePeriod")]
     public required object TimePeriod { get; init; }
@@ -10293,7 +10549,7 @@ public record BillingAiCreditUsageReportOrg
 
 }
 
-public record Budget
+public partial record Budget
 {
     /// <summary>
     /// The unique identifier for the budget
@@ -10338,6 +10594,12 @@ public record Budget
     public string? User { get; init; }
 
     /// <summary>
+    /// The amount consumed for a user-scoped budget, or for a multi-user budget when filtering by user.
+    /// </summary>
+    [JsonPropertyName("consumed_amount")]
+    public double? ConsumedAmount { get; init; }
+
+    /// <summary>
     /// A single product or sku to apply the budget to.
     /// </summary>
     [JsonPropertyName("budget_product_sku")]
@@ -10348,7 +10610,7 @@ public record Budget
 
 }
 
-public record GetAllBudgets
+public partial record GetAllBudgets
 {
     /// <summary>
     /// Array of budget objects for the enterprise
@@ -10382,7 +10644,7 @@ public record GetAllBudgets
 
 }
 
-public record CreateBudget
+public partial record CreateBudget
 {
     /// <summary>
     /// A message indicating the result of the create operation
@@ -10395,7 +10657,7 @@ public record CreateBudget
 
 }
 
-public record GetBudget
+public partial record GetBudget
 {
     /// <summary>
     /// ID of the budget.
@@ -10450,7 +10712,7 @@ public record GetBudget
 
 }
 
-public record UpdateBudget
+public partial record UpdateBudget
 {
     /// <summary>
     /// A message indicating the result of the update operation
@@ -10463,7 +10725,7 @@ public record UpdateBudget
 
 }
 
-public record DeleteBudget
+public partial record DeleteBudget
 {
     /// <summary>
     /// A message indicating the result of the deletion operation
@@ -10479,7 +10741,7 @@ public record DeleteBudget
 
 }
 
-public record BillingPremiumRequestUsageReportOrg
+public partial record BillingPremiumRequestUsageReportOrg
 {
     [JsonPropertyName("timePeriod")]
     public required object TimePeriod { get; init; }
@@ -10513,14 +10775,14 @@ public record BillingPremiumRequestUsageReportOrg
 
 }
 
-public record BillingUsageReport
+public partial record BillingUsageReport
 {
     [JsonPropertyName("usageItems")]
     public IReadOnlyList<object>? UsageItems { get; init; }
 
 }
 
-public record BillingUsageSummaryReportOrg
+public partial record BillingUsageSummaryReportOrg
 {
     [JsonPropertyName("timePeriod")]
     public required object TimePeriod { get; init; }
@@ -10557,7 +10819,7 @@ public record BillingUsageSummaryReportOrg
 /// <summary>
 /// Organization Full
 /// </summary>
-public record OrganizationFull
+public partial record OrganizationFull
 {
     [JsonPropertyName("login")]
     public required string Login { get; init; }
@@ -10821,7 +11083,7 @@ public record OrganizationFull
 
 }
 
-public record ActionsCacheUsageOrgEnterprise
+public partial record ActionsCacheUsageOrgEnterprise
 {
     /// <summary>
     /// The count of active caches across all repositories of an enterprise or an organization.
@@ -10840,7 +11102,7 @@ public record ActionsCacheUsageOrgEnterprise
 /// <summary>
 /// GitHub Actions Cache Usage by repository.
 /// </summary>
-public record ActionsCacheUsageByRepository
+public partial record ActionsCacheUsageByRepository
 {
     /// <summary>
     /// The repository owner and name for the cache usage being shown.
@@ -10865,7 +11127,7 @@ public record ActionsCacheUsageByRepository
 /// <summary>
 /// Provides details of a hosted runner image
 /// </summary>
-public record ActionsHostedRunnerPoolImage
+public partial record ActionsHostedRunnerPoolImage
 {
     /// <summary>
     /// The ID of the image. Use this ID for the `image` parameter when creating a new larger runner.
@@ -10902,7 +11164,7 @@ public record ActionsHostedRunnerPoolImage
 /// <summary>
 /// Provides details of a particular machine spec.
 /// </summary>
-public record ActionsHostedRunnerMachineSpec
+public partial record ActionsHostedRunnerMachineSpec
 {
     /// <summary>
     /// The ID used for the `size` parameter when creating a new runner.
@@ -10933,7 +11195,7 @@ public record ActionsHostedRunnerMachineSpec
 /// <summary>
 /// Provides details of Public IP for a GitHub-hosted larger runners
 /// </summary>
-public record PublicIp
+public partial record PublicIp
 {
     /// <summary>
     /// Whether public IP is enabled.
@@ -10958,7 +11220,7 @@ public record PublicIp
 /// <summary>
 /// A Github-hosted hosted runner.
 /// </summary>
-public record ActionsHostedRunner
+public partial record ActionsHostedRunner
 {
     /// <summary>
     /// The unique identifier of the hosted runner.
@@ -11034,7 +11296,7 @@ public record ActionsHostedRunner
 /// <summary>
 /// Provides details of a custom runner image
 /// </summary>
-public record ActionsHostedRunnerCustomImage
+public partial record ActionsHostedRunnerCustomImage
 {
     /// <summary>
     /// The ID of the image. Use this ID for the `image` parameter when creating a new larger runner.
@@ -11089,7 +11351,7 @@ public record ActionsHostedRunnerCustomImage
 /// <summary>
 /// Provides details of a hosted runner custom image version
 /// </summary>
-public record ActionsHostedRunnerCustomImageVersion
+public partial record ActionsHostedRunnerCustomImageVersion
 {
     /// <summary>
     /// The version of image.
@@ -11126,7 +11388,7 @@ public record ActionsHostedRunnerCustomImageVersion
 /// <summary>
 /// Provides details of a hosted runner image
 /// </summary>
-public record ActionsHostedRunnerCuratedImage
+public partial record ActionsHostedRunnerCuratedImage
 {
     /// <summary>
     /// The ID of the image. Use this ID for the `image` parameter when creating a new larger runner.
@@ -11160,7 +11422,7 @@ public record ActionsHostedRunnerCuratedImage
 
 }
 
-public record ActionsHostedRunnerLimits
+public partial record ActionsHostedRunnerLimits
 {
     /// <summary>
     /// Provides details of static public IP limits for GitHub-hosted Hosted Runners
@@ -11173,7 +11435,7 @@ public record ActionsHostedRunnerLimits
 /// <summary>
 /// Actions OIDC Subject customization
 /// </summary>
-public record OidcCustomSub
+public partial record OidcCustomSub
 {
     /// <summary>
     /// Array of unique strings. Each claim key can only contain alphanumeric characters and underscores.
@@ -11192,14 +11454,14 @@ public record OidcCustomSub
 /// <summary>
 /// An object without any properties.
 /// </summary>
-public record EmptyObject
+public partial record EmptyObject
 {
 }
 
 /// <summary>
 /// The policy that controls the repositories in the organization that are allowed to run GitHub Actions.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<EnabledRepositories>))]
 public enum EnabledRepositories
 {
     [JsonStringEnumMemberName("all")]
@@ -11213,7 +11475,7 @@ public enum EnabledRepositories
 /// <summary>
 /// The permissions policy that controls the actions and reusable workflows that are allowed to run.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<AllowedActions>))]
 public enum AllowedActions
 {
     [JsonStringEnumMemberName("all")]
@@ -11231,7 +11493,7 @@ public enum AllowedActions
 /// Type alias for string.
 /// </summary>
 [JsonConverter(typeof(OpenApiGeneratedTypeAliasJsonConverter<SelectedActionsUrl, string>))]
-public readonly record struct SelectedActionsUrl(string Value) : IOpenApiGeneratedTypeAlias<SelectedActionsUrl, string>
+public readonly partial record struct SelectedActionsUrl(string Value) : IOpenApiGeneratedTypeAlias<SelectedActionsUrl, string>
 {
     public static SelectedActionsUrl Create(string value) => new(value);
 }
@@ -11243,12 +11505,12 @@ public readonly record struct SelectedActionsUrl(string Value) : IOpenApiGenerat
 /// Type alias for bool.
 /// </summary>
 [JsonConverter(typeof(OpenApiGeneratedTypeAliasJsonConverter<ShaPinningRequired, bool>))]
-public readonly record struct ShaPinningRequired(bool Value) : IOpenApiGeneratedTypeAlias<ShaPinningRequired, bool>
+public readonly partial record struct ShaPinningRequired(bool Value) : IOpenApiGeneratedTypeAlias<ShaPinningRequired, bool>
 {
     public static ShaPinningRequired Create(bool value) => new(value);
 }
 
-public record ActionsOrganizationPermissions
+public partial record ActionsOrganizationPermissions
 {
     /// <summary>
     /// The policy that controls the repositories in the organization that are allowed to run GitHub Actions.
@@ -11282,7 +11544,7 @@ public record ActionsOrganizationPermissions
 
 }
 
-public record ActionsArtifactAndLogRetentionResponse
+public partial record ActionsArtifactAndLogRetentionResponse
 {
     /// <summary>
     /// The number of days artifacts and logs are retained
@@ -11298,7 +11560,7 @@ public record ActionsArtifactAndLogRetentionResponse
 
 }
 
-public record ActionsArtifactAndLogRetention
+public partial record ActionsArtifactAndLogRetention
 {
     /// <summary>
     /// The number of days to retain artifacts and logs
@@ -11308,7 +11570,7 @@ public record ActionsArtifactAndLogRetention
 
 }
 
-public record ActionsForkPrContributorApproval
+public partial record ActionsForkPrContributorApproval
 {
     /// <summary>
     /// The policy that controls when fork PR workflows require approval from a maintainer.
@@ -11318,7 +11580,7 @@ public record ActionsForkPrContributorApproval
 
 }
 
-public record ActionsForkPrWorkflowsPrivateRepos
+public partial record ActionsForkPrWorkflowsPrivateRepos
 {
     /// <summary>
     /// Whether workflows triggered by pull requests from forks are allowed to run on private repositories.
@@ -11346,7 +11608,7 @@ public record ActionsForkPrWorkflowsPrivateRepos
 
 }
 
-public record ActionsForkPrWorkflowsPrivateReposRequest
+public partial record ActionsForkPrWorkflowsPrivateReposRequest
 {
     /// <summary>
     /// Whether workflows triggered by pull requests from forks are allowed to run on private repositories.
@@ -11374,7 +11636,7 @@ public record ActionsForkPrWorkflowsPrivateReposRequest
 
 }
 
-public record SelectedActions
+public partial record SelectedActions
 {
     /// <summary>
     /// Whether GitHub-owned actions are allowed. For example, this includes the actions in the `actions` organization.
@@ -11399,7 +11661,7 @@ public record SelectedActions
 
 }
 
-public record SelfHostedRunnersSettings
+public partial record SelfHostedRunnersSettings
 {
     /// <summary>
     /// The policy that controls whether self-hosted runners can be used by repositories in the organization
@@ -11418,7 +11680,7 @@ public record SelfHostedRunnersSettings
 /// <summary>
 /// The default workflow permissions granted to the GITHUB_TOKEN when running workflows.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ActionsDefaultWorkflowPermissions>))]
 public enum ActionsDefaultWorkflowPermissions
 {
     [JsonStringEnumMemberName("read")]
@@ -11434,12 +11696,12 @@ public enum ActionsDefaultWorkflowPermissions
 /// Type alias for bool.
 /// </summary>
 [JsonConverter(typeof(OpenApiGeneratedTypeAliasJsonConverter<ActionsCanApprovePullRequestReviews, bool>))]
-public readonly record struct ActionsCanApprovePullRequestReviews(bool Value) : IOpenApiGeneratedTypeAlias<ActionsCanApprovePullRequestReviews, bool>
+public readonly partial record struct ActionsCanApprovePullRequestReviews(bool Value) : IOpenApiGeneratedTypeAlias<ActionsCanApprovePullRequestReviews, bool>
 {
     public static ActionsCanApprovePullRequestReviews Create(bool value) => new(value);
 }
 
-public record ActionsGetDefaultWorkflowPermissions
+public partial record ActionsGetDefaultWorkflowPermissions
 {
     /// <summary>
     /// The default workflow permissions granted to the GITHUB_TOKEN when running workflows.
@@ -11455,7 +11717,7 @@ public record ActionsGetDefaultWorkflowPermissions
 
 }
 
-public record ActionsSetDefaultWorkflowPermissions
+public partial record ActionsSetDefaultWorkflowPermissions
 {
     /// <summary>
     /// The default workflow permissions granted to the GITHUB_TOKEN when running workflows.
@@ -11471,7 +11733,7 @@ public record ActionsSetDefaultWorkflowPermissions
 
 }
 
-public record RunnerGroupsOrg
+public partial record RunnerGroupsOrg
 {
     [JsonPropertyName("id")]
     public required double Id { get; init; }
@@ -11535,7 +11797,7 @@ public record RunnerGroupsOrg
 /// <summary>
 /// A label for a self hosted runner
 /// </summary>
-public record RunnerLabel
+public partial record RunnerLabel
 {
     /// <summary>
     /// Unique identifier of the label.
@@ -11560,7 +11822,7 @@ public record RunnerLabel
 /// <summary>
 /// A self hosted runner
 /// </summary>
-public record Runner
+public partial record Runner
 {
     /// <summary>
     /// The ID of the runner.
@@ -11612,7 +11874,7 @@ public record Runner
 /// <summary>
 /// Runner Application
 /// </summary>
-public record RunnerApplication
+public partial record RunnerApplication
 {
     [JsonPropertyName("os")]
     public required string Os { get; init; }
@@ -11640,7 +11902,7 @@ public record RunnerApplication
 /// <summary>
 /// Authentication Token
 /// </summary>
-public record AuthenticationToken
+public partial record AuthenticationToken
 {
     /// <summary>
     /// The token used for authentication
@@ -11677,7 +11939,7 @@ public record AuthenticationToken
 /// <summary>
 /// Secrets for GitHub Actions for an organization.
 /// </summary>
-public record OrganizationActionsSecret
+public partial record OrganizationActionsSecret
 {
     /// <summary>
     /// The name of the secret.
@@ -11705,7 +11967,7 @@ public record OrganizationActionsSecret
 /// <summary>
 /// The public key used for setting Actions Secrets.
 /// </summary>
-public record ActionsPublicKey
+public partial record ActionsPublicKey
 {
     /// <summary>
     /// The identifier for the key.
@@ -11736,7 +11998,7 @@ public record ActionsPublicKey
 /// <summary>
 /// Organization variable for GitHub Actions.
 /// </summary>
-public record OrganizationActionsVariable
+public partial record OrganizationActionsVariable
 {
     /// <summary>
     /// The name of the variable.
@@ -11776,7 +12038,7 @@ public record OrganizationActionsVariable
 /// <summary>
 /// Artifact Metadata Deployment Record
 /// </summary>
-public record ArtifactDeploymentRecord
+public partial record ArtifactDeploymentRecord
 {
     [JsonPropertyName("id")]
     public int? Id { get; init; }
@@ -11822,7 +12084,7 @@ public record ArtifactDeploymentRecord
 /// <summary>
 /// Indicates whether a campaign is open or closed
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CampaignState>))]
 public enum CampaignState
 {
     [JsonStringEnumMemberName("open")]
@@ -11834,7 +12096,7 @@ public enum CampaignState
 /// <summary>
 /// Indicates the alert type of a campaign
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CampaignAlertType>))]
 public enum CampaignAlertType
 {
     [JsonStringEnumMemberName("code_scanning")]
@@ -11846,7 +12108,7 @@ public enum CampaignAlertType
 /// <summary>
 /// Groups of organization members that gives permissions on specified repositories.
 /// </summary>
-public record TeamSimple
+public partial record TeamSimple
 {
     /// <summary>
     /// Unique identifier of the team
@@ -11934,7 +12196,7 @@ public record TeamSimple
 /// <summary>
 /// Groups of organization members that gives permissions on specified repositories.
 /// </summary>
-public record Team
+public partial record Team
 {
     [JsonPropertyName("id")]
     public required int Id { get; init; }
@@ -11982,6 +12244,14 @@ public record Team
     public required TeamSimpleType Type { get; init; }
 
     /// <summary>
+    /// How the team's access to the repository was granted. This property is only
+    /// present when the team is returned in a repository context, such as
+    /// `GET /repos/{owner}/{repo}/teams`.
+    /// </summary>
+    [JsonPropertyName("access_source")]
+    public AccessSource? AccessSource { get; init; }
+
+    /// <summary>
     /// Unique identifier of the organization to which this team belongs
     /// </summary>
     [JsonPropertyName("organization_id")]
@@ -12001,7 +12271,7 @@ public record Team
 /// <summary>
 /// The campaign metadata and alert stats.
 /// </summary>
-public record CampaignSummary
+public partial record CampaignSummary
 {
     /// <summary>
     /// The number of the newly created campaign
@@ -12087,7 +12357,7 @@ public record CampaignSummary
 /// Type alias for string.
 /// </summary>
 [JsonConverter(typeof(OpenApiGeneratedTypeAliasJsonConverter<CodeScanningAnalysisToolName, string>))]
-public readonly record struct CodeScanningAnalysisToolName(string Value) : IOpenApiGeneratedTypeAlias<CodeScanningAnalysisToolName, string>
+public readonly partial record struct CodeScanningAnalysisToolName(string Value) : IOpenApiGeneratedTypeAlias<CodeScanningAnalysisToolName, string>
 {
     public static CodeScanningAnalysisToolName Create(string value) => new(value);
 }
@@ -12099,7 +12369,7 @@ public readonly record struct CodeScanningAnalysisToolName(string Value) : IOpen
 /// Type alias for string?.
 /// </summary>
 [JsonConverter(typeof(OpenApiGeneratedTypeAliasJsonConverter<CodeScanningAnalysisToolGuid, string?>))]
-public readonly record struct CodeScanningAnalysisToolGuid(string? Value) : IOpenApiGeneratedTypeAlias<CodeScanningAnalysisToolGuid, string?>
+public readonly partial record struct CodeScanningAnalysisToolGuid(string? Value) : IOpenApiGeneratedTypeAlias<CodeScanningAnalysisToolGuid, string?>
 {
     public static CodeScanningAnalysisToolGuid Create(string? value) => new(value);
 }
@@ -12107,7 +12377,7 @@ public readonly record struct CodeScanningAnalysisToolGuid(string? Value) : IOpe
 /// <summary>
 /// State of a code scanning alert.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CodeScanningAlertStateQuery>))]
 public enum CodeScanningAlertStateQuery
 {
     [JsonStringEnumMemberName("open")]
@@ -12123,7 +12393,7 @@ public enum CodeScanningAlertStateQuery
 /// <summary>
 /// Severity of a code scanning alert.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CodeScanningAlertSeverity>))]
 public enum CodeScanningAlertSeverity
 {
     [JsonStringEnumMemberName("critical")]
@@ -12149,7 +12419,7 @@ public enum CodeScanningAlertSeverity
 /// Type alias for Uri.
 /// </summary>
 [JsonConverter(typeof(OpenApiGeneratedTypeAliasJsonConverter<AlertInstancesUrl, Uri>))]
-public readonly record struct AlertInstancesUrl(Uri Value) : IOpenApiGeneratedTypeAlias<AlertInstancesUrl, Uri>
+public readonly partial record struct AlertInstancesUrl(Uri Value) : IOpenApiGeneratedTypeAlias<AlertInstancesUrl, Uri>
 {
     public static AlertInstancesUrl Create(Uri value) => new(value);
 }
@@ -12157,7 +12427,7 @@ public readonly record struct AlertInstancesUrl(Uri Value) : IOpenApiGeneratedTy
 /// <summary>
 /// State of a code scanning alert.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CodeScanningAlertState>))]
 public enum CodeScanningAlertState
 {
     [JsonStringEnumMemberName("open")]
@@ -12173,7 +12443,7 @@ public enum CodeScanningAlertState
 /// <summary>
 /// **Required when the state is dismissed.** The reason for dismissing or closing the alert.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CodeScanningAlertDismissedReason>))]
 public enum CodeScanningAlertDismissedReason
 {
     [JsonStringEnumMemberName("false positive")]
@@ -12182,6 +12452,8 @@ public enum CodeScanningAlertDismissedReason
     WontFix,
     [JsonStringEnumMemberName("used in tests")]
     UsedInTests,
+    [JsonStringEnumMemberName("mitigated")]
+    Mitigated,
     [JsonStringEnumMemberName("")]
     Unknown
 }
@@ -12193,12 +12465,12 @@ public enum CodeScanningAlertDismissedReason
 /// Type alias for string?.
 /// </summary>
 [JsonConverter(typeof(OpenApiGeneratedTypeAliasJsonConverter<CodeScanningAlertDismissedComment, string?>))]
-public readonly record struct CodeScanningAlertDismissedComment(string? Value) : IOpenApiGeneratedTypeAlias<CodeScanningAlertDismissedComment, string?>
+public readonly partial record struct CodeScanningAlertDismissedComment(string? Value) : IOpenApiGeneratedTypeAlias<CodeScanningAlertDismissedComment, string?>
 {
     public static CodeScanningAlertDismissedComment Create(string? value) => new(value);
 }
 
-public record CodeScanningAlertRuleSummary
+public partial record CodeScanningAlertRuleSummary
 {
     /// <summary>
     /// A unique identifier for the rule used to detect the alert.
@@ -12263,12 +12535,12 @@ public record CodeScanningAlertRuleSummary
 /// Type alias for string?.
 /// </summary>
 [JsonConverter(typeof(OpenApiGeneratedTypeAliasJsonConverter<CodeScanningAnalysisToolVersion, string?>))]
-public readonly record struct CodeScanningAnalysisToolVersion(string? Value) : IOpenApiGeneratedTypeAlias<CodeScanningAnalysisToolVersion, string?>
+public readonly partial record struct CodeScanningAnalysisToolVersion(string? Value) : IOpenApiGeneratedTypeAlias<CodeScanningAnalysisToolVersion, string?>
 {
     public static CodeScanningAnalysisToolVersion Create(string? value) => new(value);
 }
 
-public record CodeScanningAnalysisTool
+public partial record CodeScanningAnalysisTool
 {
     /// <summary>
     /// The name of the tool used to generate the code scanning analysis.
@@ -12298,7 +12570,7 @@ public record CodeScanningAnalysisTool
 /// Type alias for string.
 /// </summary>
 [JsonConverter(typeof(OpenApiGeneratedTypeAliasJsonConverter<CodeScanningRef, string>))]
-public readonly record struct CodeScanningRef(string Value) : IOpenApiGeneratedTypeAlias<CodeScanningRef, string>
+public readonly partial record struct CodeScanningRef(string Value) : IOpenApiGeneratedTypeAlias<CodeScanningRef, string>
 {
     public static CodeScanningRef Create(string value) => new(value);
 }
@@ -12310,7 +12582,7 @@ public readonly record struct CodeScanningRef(string Value) : IOpenApiGeneratedT
 /// Type alias for string.
 /// </summary>
 [JsonConverter(typeof(OpenApiGeneratedTypeAliasJsonConverter<CodeScanningAnalysisAnalysisKey, string>))]
-public readonly record struct CodeScanningAnalysisAnalysisKey(string Value) : IOpenApiGeneratedTypeAlias<CodeScanningAnalysisAnalysisKey, string>
+public readonly partial record struct CodeScanningAnalysisAnalysisKey(string Value) : IOpenApiGeneratedTypeAlias<CodeScanningAnalysisAnalysisKey, string>
 {
     public static CodeScanningAnalysisAnalysisKey Create(string value) => new(value);
 }
@@ -12322,7 +12594,7 @@ public readonly record struct CodeScanningAnalysisAnalysisKey(string Value) : IO
 /// Type alias for string.
 /// </summary>
 [JsonConverter(typeof(OpenApiGeneratedTypeAliasJsonConverter<CodeScanningAlertEnvironment, string>))]
-public readonly record struct CodeScanningAlertEnvironment(string Value) : IOpenApiGeneratedTypeAlias<CodeScanningAlertEnvironment, string>
+public readonly partial record struct CodeScanningAlertEnvironment(string Value) : IOpenApiGeneratedTypeAlias<CodeScanningAlertEnvironment, string>
 {
     public static CodeScanningAlertEnvironment Create(string value) => new(value);
 }
@@ -12334,7 +12606,7 @@ public readonly record struct CodeScanningAlertEnvironment(string Value) : IOpen
 /// Type alias for string.
 /// </summary>
 [JsonConverter(typeof(OpenApiGeneratedTypeAliasJsonConverter<CodeScanningAnalysisCategory, string>))]
-public readonly record struct CodeScanningAnalysisCategory(string Value) : IOpenApiGeneratedTypeAlias<CodeScanningAnalysisCategory, string>
+public readonly partial record struct CodeScanningAnalysisCategory(string Value) : IOpenApiGeneratedTypeAlias<CodeScanningAnalysisCategory, string>
 {
     public static CodeScanningAnalysisCategory Create(string value) => new(value);
 }
@@ -12342,7 +12614,7 @@ public readonly record struct CodeScanningAnalysisCategory(string Value) : IOpen
 /// <summary>
 /// Describe a region within a file for the alert.
 /// </summary>
-public record CodeScanningAlertLocation
+public partial record CodeScanningAlertLocation
 {
     [JsonPropertyName("path")]
     public string? Path { get; init; }
@@ -12364,7 +12636,7 @@ public record CodeScanningAlertLocation
 /// <summary>
 /// A classification of the file. For example to identify it as generated.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CodeScanningAlertClassification>))]
 public enum CodeScanningAlertClassification
 {
     [JsonStringEnumMemberName("source")]
@@ -12379,7 +12651,7 @@ public enum CodeScanningAlertClassification
     Unknown
 }
 
-public record CodeScanningAlertInstance
+public partial record CodeScanningAlertInstance
 {
     /// <summary>
     /// The Git reference, formatted as `refs/pull/&lt;number&gt;/merge`, `refs/pull/&lt;number&gt;/head`,
@@ -12436,7 +12708,7 @@ public record CodeScanningAlertInstance
 
 }
 
-public record CodeScanningOrganizationAlertItems
+public partial record CodeScanningOrganizationAlertItems
 {
     /// <summary>
     /// The security alert number.
@@ -12533,7 +12805,7 @@ public record CodeScanningOrganizationAlertItems
 /// <summary>
 /// A description of the machine powering a codespace.
 /// </summary>
-public record CodespaceMachine
+public partial record CodespaceMachine
 {
     /// <summary>
     /// The name of the machine.
@@ -12582,7 +12854,7 @@ public record CodespaceMachine
 /// <summary>
 /// A codespace.
 /// </summary>
-public record Codespace
+public partial record Codespace
 {
     [JsonPropertyName("id")]
     public required long Id { get; init; }
@@ -12763,7 +13035,7 @@ public record Codespace
 /// <summary>
 /// Secrets for a GitHub Codespace.
 /// </summary>
-public record CodespacesOrgSecret
+public partial record CodespacesOrgSecret
 {
     /// <summary>
     /// The name of the secret
@@ -12800,7 +13072,7 @@ public record CodespacesOrgSecret
 /// <summary>
 /// The public key used for setting Codespaces secrets.
 /// </summary>
-public record CodespacesPublicKey
+public partial record CodespacesPublicKey
 {
     /// <summary>
     /// The identifier for the key.
@@ -12831,7 +13103,7 @@ public record CodespacesPublicKey
 /// <summary>
 /// A GitHub Copilot Space represents an interactive AI workspace where users can ask questions and get assistance.
 /// </summary>
-public record CopilotSpace
+public partial record CopilotSpace
 {
     /// <summary>
     /// The unique identifier of the space.
@@ -12920,14 +13192,14 @@ public record CopilotSpace
 /// <summary>
 /// A collaborator (user or team) of a Copilot Space
 /// </summary>
-public record CopilotSpaceCollaborator
+public partial record CopilotSpaceCollaborator
 {
 }
 
 /// <summary>
 /// A resource attached to a Copilot Space.
 /// </summary>
-public record CopilotSpaceResource
+public partial record CopilotSpaceResource
 {
     /// <summary>
     /// The unique identifier of the resource.
@@ -12970,7 +13242,7 @@ public record CopilotSpaceResource
 /// <summary>
 /// The breakdown of Copilot Business seats for the organization.
 /// </summary>
-public record CopilotOrganizationSeatBreakdown
+public partial record CopilotOrganizationSeatBreakdown
 {
     /// <summary>
     /// The total number of seats being billed for the organization as of the current billing cycle.
@@ -13013,7 +13285,7 @@ public record CopilotOrganizationSeatBreakdown
 /// <summary>
 /// Information about the seat breakdown and policies set for an organization with a Copilot Business or Copilot Enterprise subscription.
 /// </summary>
-public record CopilotOrganizationDetails
+public partial record CopilotOrganizationDetails
 {
     /// <summary>
     /// The breakdown of Copilot Business seats for the organization.
@@ -13062,7 +13334,7 @@ public record CopilotOrganizationDetails
 /// <summary>
 /// Information about a Copilot Business seat assignment for a user, team, or organization.
 /// </summary>
-public record CopilotSeatDetails
+public partial record CopilotSeatDetails
 {
     [JsonPropertyName("assignee")]
     public SimpleUser? Assignee { get; init; }
@@ -13126,134 +13398,9 @@ public record CopilotSeatDetails
 public record CopilotOrganizationContentExclusionDetails;
 
 /// <summary>
-/// Usage metrics for Copilot editor code completions in the IDE.
-/// </summary>
-public record CopilotIdeCodeCompletions
-{
-    /// <summary>
-    /// Number of users who accepted at least one Copilot code suggestion, across all active editors. Includes both full and partial acceptances.
-    /// </summary>
-    [JsonPropertyName("total_engaged_users")]
-    public int? TotalEngagedUsers { get; init; }
-
-    /// <summary>
-    /// Code completion metrics for active languages.
-    /// </summary>
-    [JsonPropertyName("languages")]
-    public IReadOnlyList<object>? Languages { get; init; }
-
-    [JsonPropertyName("editors")]
-    public IReadOnlyList<object>? Editors { get; init; }
-
-}
-
-/// <summary>
-/// Usage metrics for Copilot Chat in the IDE.
-/// </summary>
-public record CopilotIdeChat
-{
-    /// <summary>
-    /// Total number of users who prompted Copilot Chat in the IDE.
-    /// </summary>
-    [JsonPropertyName("total_engaged_users")]
-    public int? TotalEngagedUsers { get; init; }
-
-    [JsonPropertyName("editors")]
-    public IReadOnlyList<object>? Editors { get; init; }
-
-}
-
-/// <summary>
-/// Usage metrics for Copilot Chat in GitHub.com
-/// </summary>
-public record CopilotDotcomChat
-{
-    /// <summary>
-    /// Total number of users who prompted Copilot Chat on github.com at least once.
-    /// </summary>
-    [JsonPropertyName("total_engaged_users")]
-    public int? TotalEngagedUsers { get; init; }
-
-    /// <summary>
-    /// List of model metrics for a custom models and the default model.
-    /// </summary>
-    [JsonPropertyName("models")]
-    public IReadOnlyList<object>? Models { get; init; }
-
-}
-
-/// <summary>
-/// Usage metrics for Copilot for pull requests.
-/// </summary>
-public record CopilotDotcomPullRequests
-{
-    /// <summary>
-    /// The number of users who used Copilot for Pull Requests on github.com to generate a pull request summary at least once.
-    /// </summary>
-    [JsonPropertyName("total_engaged_users")]
-    public int? TotalEngagedUsers { get; init; }
-
-    /// <summary>
-    /// Repositories in which users used Copilot for Pull Requests to generate pull request summaries
-    /// </summary>
-    [JsonPropertyName("repositories")]
-    public IReadOnlyList<object>? Repositories { get; init; }
-
-}
-
-/// <summary>
-/// Copilot usage metrics for a given day.
-/// </summary>
-public record CopilotUsageMetricsDay
-{
-    /// <summary>
-    /// The date for which the usage metrics are aggregated, in `YYYY-MM-DD` format.
-    /// </summary>
-    [JsonPropertyName("date")]
-    public required DateOnly Date { get; init; }
-
-    /// <summary>
-    /// The total number of Copilot users with activity belonging to any Copilot feature, globally, for the given day. Includes passive activity such as receiving a code suggestion, as well as engagement activity such as accepting a code suggestion or prompting chat. Does not include authentication events. Is not limited to the individual features detailed on the endpoint.
-    /// </summary>
-    [JsonPropertyName("total_active_users")]
-    public int? TotalActiveUsers { get; init; }
-
-    /// <summary>
-    /// The total number of Copilot users who engaged with any Copilot feature, for the given day. Examples include but are not limited to accepting a code suggestion, prompting Copilot chat, or triggering a PR Summary. Does not include authentication events. Is not limited to the individual features detailed on the endpoint.
-    /// </summary>
-    [JsonPropertyName("total_engaged_users")]
-    public int? TotalEngagedUsers { get; init; }
-
-    /// <summary>
-    /// Usage metrics for Copilot editor code completions in the IDE.
-    /// </summary>
-    [JsonPropertyName("copilot_ide_code_completions")]
-    public CopilotIdeCodeCompletions? CopilotIdeCodeCompletions { get; init; }
-
-    /// <summary>
-    /// Usage metrics for Copilot Chat in the IDE.
-    /// </summary>
-    [JsonPropertyName("copilot_ide_chat")]
-    public CopilotIdeChat? CopilotIdeChat { get; init; }
-
-    /// <summary>
-    /// Usage metrics for Copilot Chat in GitHub.com
-    /// </summary>
-    [JsonPropertyName("copilot_dotcom_chat")]
-    public CopilotDotcomChat? CopilotDotcomChat { get; init; }
-
-    /// <summary>
-    /// Usage metrics for Copilot for pull requests.
-    /// </summary>
-    [JsonPropertyName("copilot_dotcom_pull_requests")]
-    public CopilotDotcomPullRequests? CopilotDotcomPullRequests { get; init; }
-
-}
-
-/// <summary>
 /// Secrets for GitHub Dependabot for an organization.
 /// </summary>
-public record OrganizationDependabotSecret
+public partial record OrganizationDependabotSecret
 {
     /// <summary>
     /// The name of the secret.
@@ -13281,7 +13428,7 @@ public record OrganizationDependabotSecret
 /// <summary>
 /// The public key used for setting Dependabot Secrets.
 /// </summary>
-public record DependabotPublicKey
+public partial record DependabotPublicKey
 {
     /// <summary>
     /// The identifier for the key.
@@ -13300,7 +13447,7 @@ public record DependabotPublicKey
 /// <summary>
 /// A software package
 /// </summary>
-public record Package
+public partial record Package
 {
     /// <summary>
     /// Unique identifier of the package.
@@ -13349,7 +13496,7 @@ public record Package
 /// <summary>
 /// Organization Invitation
 /// </summary>
-public record OrganizationInvitation
+public partial record OrganizationInvitation
 {
     [JsonPropertyName("id")]
     public required long Id { get; init; }
@@ -13395,7 +13542,7 @@ public record OrganizationInvitation
 /// <summary>
 /// Org Hook
 /// </summary>
-public record OrgHook
+public partial record OrgHook
 {
     [JsonPropertyName("id")]
     public required int Id { get; init; }
@@ -13445,7 +13592,7 @@ public record ApiInsightsSubjectStats;
 /// <summary>
 /// API Insights usage summary stats for an organization
 /// </summary>
-public record ApiInsightsSummaryStats
+public partial record ApiInsightsSummaryStats
 {
     /// <summary>
     /// The total number of requests within the queried time period
@@ -13474,7 +13621,7 @@ public record ApiInsightsUserStats;
 /// <summary>
 /// The type of GitHub user that can comment, open issues, or create pull requests while the interaction limit is in effect.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<InteractionGroup>))]
 public enum InteractionGroup
 {
     [JsonStringEnumMemberName("existing_users")]
@@ -13488,7 +13635,7 @@ public enum InteractionGroup
 /// <summary>
 /// Interaction limit settings.
 /// </summary>
-public record InteractionLimitResponse
+public partial record InteractionLimitResponse
 {
     /// <summary>
     /// The type of GitHub user that can comment, open issues, or create pull requests while the interaction limit is in effect.
@@ -13507,7 +13654,7 @@ public record InteractionLimitResponse
 /// <summary>
 /// The duration of the interaction restriction. Default: `one_day`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<InteractionExpiry>))]
 public enum InteractionExpiry
 {
     [JsonStringEnumMemberName("one_day")]
@@ -13525,7 +13672,7 @@ public enum InteractionExpiry
 /// <summary>
 /// Limit interactions to a specific type of user for a specified duration
 /// </summary>
-public record InteractionLimit
+public partial record InteractionLimit
 {
     /// <summary>
     /// The type of GitHub user that can comment, open issues, or create pull requests while the interaction limit is in effect.
@@ -13544,7 +13691,7 @@ public record InteractionLimit
 /// <summary>
 /// A custom attribute defined at the organization level for attaching structured data to issues.
 /// </summary>
-public record IssueField
+public partial record IssueField
 {
     /// <summary>
     /// The unique identifier of the issue field.
@@ -13602,7 +13749,7 @@ public record IssueField
 
 }
 
-public record OrganizationCreateIssueField
+public partial record OrganizationCreateIssueField
 {
     /// <summary>
     /// Name of the issue field.
@@ -13636,7 +13783,7 @@ public record OrganizationCreateIssueField
 
 }
 
-public record OrganizationUpdateIssueField
+public partial record OrganizationUpdateIssueField
 {
     /// <summary>
     /// Name of the issue field.
@@ -13664,7 +13811,7 @@ public record OrganizationUpdateIssueField
 
 }
 
-public record OrganizationCreateIssueType
+public partial record OrganizationCreateIssueType
 {
     /// <summary>
     /// Name of the issue type.
@@ -13692,7 +13839,7 @@ public record OrganizationCreateIssueType
 
 }
 
-public record OrganizationUpdateIssueType
+public partial record OrganizationUpdateIssueType
 {
     /// <summary>
     /// Name of the issue type.
@@ -13723,7 +13870,7 @@ public record OrganizationUpdateIssueType
 /// <summary>
 /// Org Membership
 /// </summary>
-public record OrgMembership
+public partial record OrgMembership
 {
     [JsonPropertyName("url")]
     public required Uri Url { get; init; }
@@ -13773,7 +13920,7 @@ public record OrgMembership
 /// <summary>
 /// A migration.
 /// </summary>
-public record Migration
+public partial record Migration
 {
     [JsonPropertyName("id")]
     public required long Id { get; init; }
@@ -13840,7 +13987,7 @@ public record Migration
 /// <summary>
 /// Organization roles
 /// </summary>
-public record OrganizationRole
+public partial record OrganizationRole
 {
     /// <summary>
     /// The unique identifier of the role.
@@ -13898,7 +14045,7 @@ public record OrganizationRole
 /// <summary>
 /// The Relationship a Team has with a role.
 /// </summary>
-public record TeamRoleAssignment
+public partial record TeamRoleAssignment
 {
     /// <summary>
     /// Determines if the team has a direct, indirect, or mixed relationship to a role
@@ -13971,7 +14118,7 @@ public record TeamRoleAssignment
 /// <summary>
 /// The Relationship a User has with a role.
 /// </summary>
-public record UserRoleAssignment
+public partial record UserRoleAssignment
 {
     /// <summary>
     /// Determines if the user has a direct, indirect, or mixed relationship to a role
@@ -14056,7 +14203,7 @@ public record UserRoleAssignment
 /// <summary>
 /// A version of a software package
 /// </summary>
-public record PackageVersion
+public partial record PackageVersion
 {
     /// <summary>
     /// Unique identifier of the package version.
@@ -14102,7 +14249,7 @@ public record PackageVersion
 /// <summary>
 /// Minimal representation of an organization programmatic access grant request for enumerations
 /// </summary>
-public record OrganizationProgrammaticAccessGrantRequest
+public partial record OrganizationProgrammaticAccessGrantRequest
 {
     /// <summary>
     /// Unique identifier of the request for access via fine-grained personal access token. The `pat_request_id` used to review PAT requests.
@@ -14181,7 +14328,7 @@ public record OrganizationProgrammaticAccessGrantRequest
 /// <summary>
 /// Minimal representation of an organization programmatic access grant for enumerations
 /// </summary>
-public record OrganizationProgrammaticAccessGrant
+public partial record OrganizationProgrammaticAccessGrant
 {
     /// <summary>
     /// Unique identifier of the fine-grained personal access token grant. The `pat_id` used to get details about an approved fine-grained personal access token.
@@ -14254,7 +14401,7 @@ public record OrganizationProgrammaticAccessGrant
 /// <summary>
 /// Private registry configuration for an organization
 /// </summary>
-public record OrgPrivateRegistryConfiguration
+public partial record OrgPrivateRegistryConfiguration
 {
     /// <summary>
     /// The name of the private registry configuration.
@@ -14399,7 +14546,7 @@ public record OrgPrivateRegistryConfiguration
 /// <summary>
 /// Private registry configuration for an organization
 /// </summary>
-public record OrgPrivateRegistryConfigurationWithSelectedRepositories
+public partial record OrgPrivateRegistryConfigurationWithSelectedRepositories
 {
     /// <summary>
     /// The name of the private registry configuration.
@@ -14550,7 +14697,7 @@ public record OrgPrivateRegistryConfigurationWithSelectedRepositories
 /// <summary>
 /// An status update belonging to a project
 /// </summary>
-public record ProjectsV2StatusUpdate
+public partial record ProjectsV2StatusUpdate
 {
     /// <summary>
     /// The unique identifier of the status update.
@@ -14617,7 +14764,7 @@ public record ProjectsV2StatusUpdate
 /// <summary>
 /// A projects v2 project
 /// </summary>
-public record ProjectsV2
+public partial record ProjectsV2
 {
     /// <summary>
     /// The unique identifier of the project.
@@ -14720,7 +14867,7 @@ public record ProjectsV2
 /// <summary>
 /// Hypermedia Link
 /// </summary>
-public record Link
+public partial record Link
 {
     [JsonPropertyName("href")]
     public required string Href { get; init; }
@@ -14730,7 +14877,7 @@ public record Link
 /// <summary>
 /// The status of auto merging a pull request.
 /// </summary>
-public record AutoMerge
+public partial record AutoMerge
 {
     /// <summary>
     /// A GitHub user.
@@ -14759,9 +14906,43 @@ public record AutoMerge
 }
 
 /// <summary>
+/// The stack information associated with a pull request.
+/// </summary>
+public partial record PullRequestStack
+{
+    [JsonPropertyName("base")]
+    public required object Base { get; init; }
+
+    /// <summary>
+    /// The total number of pull requests in the stack.
+    /// </summary>
+    [JsonPropertyName("size")]
+    public int? Size { get; init; }
+
+    /// <summary>
+    /// The one-based position of this pull request within the stack, where 1 is the bottom of the stack.
+    /// </summary>
+    [JsonPropertyName("position")]
+    public int? Position { get; init; }
+
+    /// <summary>
+    /// The ID of the stack that this pull request belongs to.
+    /// </summary>
+    [JsonPropertyName("id")]
+    public int? Id { get; init; }
+
+    /// <summary>
+    /// The number of the stack that this pull request belongs to.
+    /// </summary>
+    [JsonPropertyName("number")]
+    public int? Number { get; init; }
+
+}
+
+/// <summary>
 /// Pull Request Simple
 /// </summary>
-public record PullRequestSimple
+public partial record PullRequestSimple
 {
     [JsonPropertyName("url")]
     public required Uri Url { get; init; }
@@ -14875,6 +15056,12 @@ public record PullRequestSimple
     public required AutoMerge? AutoMerge { get; init; }
 
     /// <summary>
+    /// The stack information associated with a pull request.
+    /// </summary>
+    [JsonPropertyName("stack")]
+    public PullRequestStack? Stack { get; init; }
+
+    /// <summary>
     /// Indicates whether or not the pull request is a draft.
     /// </summary>
     [JsonPropertyName("draft")]
@@ -14885,7 +15072,7 @@ public record PullRequestSimple
 /// <summary>
 /// A draft issue in a project
 /// </summary>
-public record ProjectsV2DraftIssue
+public partial record ProjectsV2DraftIssue
 {
     /// <summary>
     /// The ID of the draft issue
@@ -14931,7 +15118,7 @@ public record ProjectsV2DraftIssue
 /// <summary>
 /// The type of content tracked in a project item
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ProjectsV2ItemContentType>))]
 public enum ProjectsV2ItemContentType
 {
     [JsonStringEnumMemberName("Issue")]
@@ -14945,7 +15132,7 @@ public enum ProjectsV2ItemContentType
 /// <summary>
 /// An item belonging to a project
 /// </summary>
-public record ProjectsV2ItemSimple
+public partial record ProjectsV2ItemSimple
 {
     /// <summary>
     /// The unique identifier of the project item.
@@ -15012,7 +15199,7 @@ public record ProjectsV2ItemSimple
 /// <summary>
 /// An option for a single select field
 /// </summary>
-public record ProjectsV2SingleSelectOptions
+public partial record ProjectsV2SingleSelectOptions
 {
     /// <summary>
     /// The unique identifier of the option.
@@ -15043,7 +15230,7 @@ public record ProjectsV2SingleSelectOptions
 /// <summary>
 /// An iteration setting for an iteration field
 /// </summary>
-public record ProjectsV2IterationSettings
+public partial record ProjectsV2IterationSettings
 {
     /// <summary>
     /// The unique identifier of the iteration setting.
@@ -15080,7 +15267,7 @@ public record ProjectsV2IterationSettings
 /// <summary>
 /// A field inside a projects v2 project
 /// </summary>
-public record ProjectsV2Field
+public partial record ProjectsV2Field
 {
     /// <summary>
     /// The unique identifier of the field.
@@ -15144,7 +15331,7 @@ public record ProjectsV2Field
 
 }
 
-public record ProjectsV2FieldSingleSelectOption
+public partial record ProjectsV2FieldSingleSelectOption
 {
     /// <summary>
     /// The display name of the option.
@@ -15169,19 +15356,19 @@ public record ProjectsV2FieldSingleSelectOption
 /// <summary>
 /// The configuration for iteration fields.
 /// </summary>
-public record ProjectsV2FieldIterationConfiguration
+public partial record ProjectsV2FieldIterationConfiguration
 {
     /// <summary>
     /// The start date of the first iteration.
     /// </summary>
     [JsonPropertyName("start_date")]
-    public DateOnly? StartDate { get; init; }
+    public required DateOnly StartDate { get; init; }
 
     /// <summary>
     /// The default duration for iterations in days. Individual iterations can override this value.
     /// </summary>
     [JsonPropertyName("duration")]
-    public int? Duration { get; init; }
+    public required int Duration { get; init; }
 
     /// <summary>
     /// Zero or more iterations for the field.
@@ -15194,7 +15381,7 @@ public record ProjectsV2FieldIterationConfiguration
 /// <summary>
 /// An item belonging to a project
 /// </summary>
-public record ProjectsV2ItemWithContent
+public partial record ProjectsV2ItemWithContent
 {
     /// <summary>
     /// The unique identifier of the project item.
@@ -15267,7 +15454,7 @@ public record ProjectsV2ItemWithContent
 /// <summary>
 /// A view inside a projects v2 project
 /// </summary>
-public record ProjectsV2View
+public partial record ProjectsV2View
 {
     /// <summary>
     /// The unique identifier of the view.
@@ -15361,7 +15548,7 @@ public record ProjectsV2View
 /// <summary>
 /// Custom property defined on an organization
 /// </summary>
-public record CustomProperty
+public partial record CustomProperty
 {
     /// <summary>
     /// The name of the property
@@ -15429,7 +15616,7 @@ public record CustomProperty
 /// <summary>
 /// Custom property set payload
 /// </summary>
-public record CustomPropertySetPayload
+public partial record CustomPropertySetPayload
 {
     /// <summary>
     /// The type of the value for the property
@@ -15479,7 +15666,7 @@ public record CustomPropertySetPayload
 /// <summary>
 /// Custom property name and associated value
 /// </summary>
-public record CustomPropertyValue
+public partial record CustomPropertyValue
 {
     /// <summary>
     /// The name of the property
@@ -15498,7 +15685,7 @@ public record CustomPropertyValue
 /// <summary>
 /// List of custom property values for a repository
 /// </summary>
-public record OrgRepoCustomPropertyValues
+public partial record OrgRepoCustomPropertyValues
 {
     [JsonPropertyName("repository_id")]
     public required int RepositoryId { get; init; }
@@ -15520,7 +15707,7 @@ public record OrgRepoCustomPropertyValues
 /// <summary>
 /// Code of Conduct Simple
 /// </summary>
-public record CodeOfConductSimple
+public partial record CodeOfConductSimple
 {
     [JsonPropertyName("url")]
     public required Uri Url { get; init; }
@@ -15539,7 +15726,7 @@ public record CodeOfConductSimple
 /// <summary>
 /// Full Repository
 /// </summary>
-public record FullRepository
+public partial record FullRepository
 {
     [JsonPropertyName("id")]
     public required long Id { get; init; }
@@ -15917,7 +16104,7 @@ public record FullRepository
 /// <summary>
 /// The enforcement level of the ruleset. `evaluate` allows admins to test rules before enforcing them. Admins can view insights on the Rule Insights page (`evaluate` is only available with GitHub Enterprise).
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<RepositoryRuleEnforcement>))]
 public enum RepositoryRuleEnforcement
 {
     [JsonStringEnumMemberName("disabled")]
@@ -15931,7 +16118,7 @@ public enum RepositoryRuleEnforcement
 /// <summary>
 /// An actor that can bypass rules in a ruleset
 /// </summary>
-public record RepositoryRulesetBypassActor
+public partial record RepositoryRulesetBypassActor
 {
     /// <summary>
     /// The ID of the actor that can bypass a ruleset. Required for `Integration`, `RepositoryRole`, `Team`, and `User` actor types. If `actor_type` is `OrganizationAdmin`, `actor_id` is ignored. If `actor_type` is `DeployKey`, this should be null. `OrganizationAdmin` is not applicable for personal repositories.
@@ -15956,7 +16143,7 @@ public record RepositoryRulesetBypassActor
 /// <summary>
 /// Parameters for a repository ruleset ref name condition
 /// </summary>
-public record RepositoryRulesetConditions
+public partial record RepositoryRulesetConditions
 {
     [JsonPropertyName("ref_name")]
     public object? RefName { get; init; }
@@ -15966,7 +16153,7 @@ public record RepositoryRulesetConditions
 /// <summary>
 /// Parameters for a repository name condition
 /// </summary>
-public record RepositoryRulesetConditionsRepositoryNameTarget
+public partial record RepositoryRulesetConditionsRepositoryNameTarget
 {
     [JsonPropertyName("repository_name")]
     public required object RepositoryName { get; init; }
@@ -15976,7 +16163,7 @@ public record RepositoryRulesetConditionsRepositoryNameTarget
 /// <summary>
 /// Parameters for a repository ID condition
 /// </summary>
-public record RepositoryRulesetConditionsRepositoryIdTarget
+public partial record RepositoryRulesetConditionsRepositoryIdTarget
 {
     [JsonPropertyName("repository_id")]
     public required object RepositoryId { get; init; }
@@ -15986,7 +16173,7 @@ public record RepositoryRulesetConditionsRepositoryIdTarget
 /// <summary>
 /// Parameters for a targeting a repository property
 /// </summary>
-public record RepositoryRulesetConditionsRepositoryPropertySpec
+public partial record RepositoryRulesetConditionsRepositoryPropertySpec
 {
     /// <summary>
     /// The name of the repository property to target
@@ -16011,7 +16198,7 @@ public record RepositoryRulesetConditionsRepositoryPropertySpec
 /// <summary>
 /// Parameters for a repository property condition
 /// </summary>
-public record RepositoryRulesetConditionsRepositoryPropertyTarget
+public partial record RepositoryRulesetConditionsRepositoryPropertyTarget
 {
     [JsonPropertyName("repository_property")]
     public required object RepositoryProperty { get; init; }
@@ -16024,14 +16211,14 @@ public record RepositoryRulesetConditionsRepositoryPropertyTarget
 /// The push rulesets conditions object does not require the `ref_name` property.
 /// For repository policy rulesets, the conditions object should only contain the `repository_name`, the `repository_id`, or the `repository_property`.
 /// </summary>
-public record OrgRulesetConditions
+public partial record OrgRulesetConditions
 {
 }
 
 /// <summary>
 /// Only allow users with bypass permission to create matching refs.
 /// </summary>
-public record RepositoryRuleCreation
+public partial record RepositoryRuleCreation
 {
     [JsonPropertyName("type")]
     public required RepositoryRuleCreationType Type { get; init; }
@@ -16041,7 +16228,7 @@ public record RepositoryRuleCreation
 /// <summary>
 /// Only allow users with bypass permission to update matching refs.
 /// </summary>
-public record RepositoryRuleUpdate
+public partial record RepositoryRuleUpdate
 {
     [JsonPropertyName("type")]
     public required RepositoryRuleUpdateType Type { get; init; }
@@ -16054,7 +16241,7 @@ public record RepositoryRuleUpdate
 /// <summary>
 /// Only allow users with bypass permissions to delete matching refs.
 /// </summary>
-public record RepositoryRuleDeletion
+public partial record RepositoryRuleDeletion
 {
     [JsonPropertyName("type")]
     public required RepositoryRuleDeletionType Type { get; init; }
@@ -16064,7 +16251,7 @@ public record RepositoryRuleDeletion
 /// <summary>
 /// Prevent merge commits from being pushed to matching refs.
 /// </summary>
-public record RepositoryRuleRequiredLinearHistory
+public partial record RepositoryRuleRequiredLinearHistory
 {
     [JsonPropertyName("type")]
     public required RepositoryRuleRequiredLinearHistoryType Type { get; init; }
@@ -16074,7 +16261,7 @@ public record RepositoryRuleRequiredLinearHistory
 /// <summary>
 /// Merges must be performed via a merge queue.
 /// </summary>
-public record RepositoryRuleMergeQueue
+public partial record RepositoryRuleMergeQueue
 {
     [JsonPropertyName("type")]
     public required RepositoryRuleMergeQueueType Type { get; init; }
@@ -16087,7 +16274,7 @@ public record RepositoryRuleMergeQueue
 /// <summary>
 /// Choose which environments must be successfully deployed to before refs can be pushed into a ref that matches this rule.
 /// </summary>
-public record RepositoryRuleRequiredDeployments
+public partial record RepositoryRuleRequiredDeployments
 {
     [JsonPropertyName("type")]
     public required RepositoryRuleRequiredDeploymentsType Type { get; init; }
@@ -16100,7 +16287,7 @@ public record RepositoryRuleRequiredDeployments
 /// <summary>
 /// Commits pushed to matching refs must have verified signatures.
 /// </summary>
-public record RepositoryRuleRequiredSignatures
+public partial record RepositoryRuleRequiredSignatures
 {
     [JsonPropertyName("type")]
     public required RepositoryRuleRequiredSignaturesType Type { get; init; }
@@ -16110,7 +16297,7 @@ public record RepositoryRuleRequiredSignatures
 /// <summary>
 /// An actor allowed to dismiss pull request reviews
 /// </summary>
-public record RepositoryRuleParamsActor
+public partial record RepositoryRuleParamsActor
 {
     /// <summary>
     /// ID of the actor that can dismiss reviews.
@@ -16129,7 +16316,7 @@ public record RepositoryRuleParamsActor
 /// <summary>
 /// Specify people, teams, or apps allowed to dismiss pull request reviews.
 /// </summary>
-public record RepositoryRuleParamsDismissalRestriction
+public partial record RepositoryRuleParamsDismissalRestriction
 {
     /// <summary>
     /// Specify people, teams, or apps allowed to dismiss pull request reviews.
@@ -16148,7 +16335,7 @@ public record RepositoryRuleParamsDismissalRestriction
 /// <summary>
 /// A required reviewing team
 /// </summary>
-public record RepositoryRuleParamsReviewer
+public partial record RepositoryRuleParamsReviewer
 {
     /// <summary>
     /// ID of the reviewer which must review changes to matching files.
@@ -16167,7 +16354,7 @@ public record RepositoryRuleParamsReviewer
 /// <summary>
 /// A reviewing team, and file patterns describing which files they must approve changes to.
 /// </summary>
-public record RepositoryRuleParamsRequiredReviewerConfiguration
+public partial record RepositoryRuleParamsRequiredReviewerConfiguration
 {
     /// <summary>
     /// Array of file patterns. Pull requests which change matching files must be approved by the specified team. File patterns use fnmatch syntax.
@@ -16192,7 +16379,7 @@ public record RepositoryRuleParamsRequiredReviewerConfiguration
 /// <summary>
 /// Require all commits be made to a non-target branch and submitted via a pull request before they can be merged.
 /// </summary>
-public record RepositoryRulePullRequest
+public partial record RepositoryRulePullRequest
 {
     [JsonPropertyName("type")]
     public required RepositoryRulePullRequestType Type { get; init; }
@@ -16205,7 +16392,7 @@ public record RepositoryRulePullRequest
 /// <summary>
 /// Required status check
 /// </summary>
-public record RepositoryRuleParamsStatusCheckConfiguration
+public partial record RepositoryRuleParamsStatusCheckConfiguration
 {
     /// <summary>
     /// The status check context name that must be present on the commit.
@@ -16224,7 +16411,7 @@ public record RepositoryRuleParamsStatusCheckConfiguration
 /// <summary>
 /// Choose which status checks must pass before the ref is updated. When enabled, commits must first be pushed to another ref where the checks pass.
 /// </summary>
-public record RepositoryRuleRequiredStatusChecks
+public partial record RepositoryRuleRequiredStatusChecks
 {
     [JsonPropertyName("type")]
     public required RepositoryRuleRequiredStatusChecksType Type { get; init; }
@@ -16237,7 +16424,7 @@ public record RepositoryRuleRequiredStatusChecks
 /// <summary>
 /// Prevent users with push access from force pushing to refs.
 /// </summary>
-public record RepositoryRuleNonFastForward
+public partial record RepositoryRuleNonFastForward
 {
     [JsonPropertyName("type")]
     public required RepositoryRuleNonFastForwardType Type { get; init; }
@@ -16247,7 +16434,7 @@ public record RepositoryRuleNonFastForward
 /// <summary>
 /// Parameters to be used for the commit_message_pattern rule
 /// </summary>
-public record RepositoryRuleCommitMessagePattern
+public partial record RepositoryRuleCommitMessagePattern
 {
     [JsonPropertyName("type")]
     public required RepositoryRuleCommitMessagePatternType Type { get; init; }
@@ -16260,7 +16447,7 @@ public record RepositoryRuleCommitMessagePattern
 /// <summary>
 /// Parameters to be used for the commit_author_email_pattern rule
 /// </summary>
-public record RepositoryRuleCommitAuthorEmailPattern
+public partial record RepositoryRuleCommitAuthorEmailPattern
 {
     [JsonPropertyName("type")]
     public required RepositoryRuleCommitAuthorEmailPatternType Type { get; init; }
@@ -16273,7 +16460,7 @@ public record RepositoryRuleCommitAuthorEmailPattern
 /// <summary>
 /// Parameters to be used for the committer_email_pattern rule
 /// </summary>
-public record RepositoryRuleCommitterEmailPattern
+public partial record RepositoryRuleCommitterEmailPattern
 {
     [JsonPropertyName("type")]
     public required RepositoryRuleCommitterEmailPatternType Type { get; init; }
@@ -16286,7 +16473,7 @@ public record RepositoryRuleCommitterEmailPattern
 /// <summary>
 /// Parameters to be used for the branch_name_pattern rule
 /// </summary>
-public record RepositoryRuleBranchNamePattern
+public partial record RepositoryRuleBranchNamePattern
 {
     [JsonPropertyName("type")]
     public required RepositoryRuleBranchNamePatternType Type { get; init; }
@@ -16299,7 +16486,7 @@ public record RepositoryRuleBranchNamePattern
 /// <summary>
 /// Parameters to be used for the tag_name_pattern rule
 /// </summary>
-public record RepositoryRuleTagNamePattern
+public partial record RepositoryRuleTagNamePattern
 {
     [JsonPropertyName("type")]
     public required RepositoryRuleTagNamePatternType Type { get; init; }
@@ -16312,7 +16499,7 @@ public record RepositoryRuleTagNamePattern
 /// <summary>
 /// Restricted commit
 /// </summary>
-public record RepositoryRuleParamsRestrictedCommits
+public partial record RepositoryRuleParamsRestrictedCommits
 {
     /// <summary>
     /// Full or abbreviated commit hash to reject
@@ -16331,7 +16518,7 @@ public record RepositoryRuleParamsRestrictedCommits
 /// <summary>
 /// A workflow that must run for this rule to pass
 /// </summary>
-public record RepositoryRuleParamsWorkflowFileReference
+public partial record RepositoryRuleParamsWorkflowFileReference
 {
     /// <summary>
     /// The path to the workflow file
@@ -16362,7 +16549,7 @@ public record RepositoryRuleParamsWorkflowFileReference
 /// <summary>
 /// Require all changes made to a targeted branch to pass the specified workflows before they can be merged.
 /// </summary>
-public record RepositoryRuleWorkflows
+public partial record RepositoryRuleWorkflows
 {
     [JsonPropertyName("type")]
     public required RepositoryRuleWorkflowsType Type { get; init; }
@@ -16375,7 +16562,7 @@ public record RepositoryRuleWorkflows
 /// <summary>
 /// A tool that must provide code scanning results for this rule to pass.
 /// </summary>
-public record RepositoryRuleParamsCodeScanningTool
+public partial record RepositoryRuleParamsCodeScanningTool
 {
     /// <summary>
     /// The severity level at which code scanning results that raise alerts block a reference update. For more information on alert severity levels, see "[About code scanning alerts](https://docs.github.com/code-security/code-scanning/managing-code-scanning-alerts/about-code-scanning-alerts#about-alert-severity-and-security-severity-levels)."
@@ -16400,7 +16587,7 @@ public record RepositoryRuleParamsCodeScanningTool
 /// <summary>
 /// Choose which tools must provide code scanning results before the reference is updated. When configured, code scanning must be enabled and have results for both the commit and the reference being updated.
 /// </summary>
-public record RepositoryRuleCodeScanning
+public partial record RepositoryRuleCodeScanning
 {
     [JsonPropertyName("type")]
     public required RepositoryRuleCodeScanningType Type { get; init; }
@@ -16413,7 +16600,7 @@ public record RepositoryRuleCodeScanning
 /// <summary>
 /// Request Copilot code review for new pull requests automatically if the author has access to Copilot code review and their premium requests quota has not reached the limit.
 /// </summary>
-public record RepositoryRuleCopilotCodeReview
+public partial record RepositoryRuleCopilotCodeReview
 {
     [JsonPropertyName("type")]
     public required RepositoryRuleCopilotCodeReviewType Type { get; init; }
@@ -16424,9 +16611,19 @@ public record RepositoryRuleCopilotCodeReview
 }
 
 /// <summary>
+/// Enforce any added or changed dependencies to comply with the organization's license policy.
+/// </summary>
+public partial record RepositoryRuleLicenseComplianceScanning
+{
+    [JsonPropertyName("type")]
+    public required RepositoryRuleLicenseComplianceScanningType Type { get; init; }
+
+}
+
+/// <summary>
 /// Prevent commits that include changes in specified file and folder paths from being pushed to the commit graph. This includes absolute paths that contain file names.
 /// </summary>
-public record RepositoryRuleFilePathRestriction
+public partial record RepositoryRuleFilePathRestriction
 {
     [JsonPropertyName("type")]
     public required RepositoryRuleFilePathRestrictionType Type { get; init; }
@@ -16439,7 +16636,7 @@ public record RepositoryRuleFilePathRestriction
 /// <summary>
 /// Prevent commits that include file paths that exceed the specified character limit from being pushed to the commit graph.
 /// </summary>
-public record RepositoryRuleMaxFilePathLength
+public partial record RepositoryRuleMaxFilePathLength
 {
     [JsonPropertyName("type")]
     public required RepositoryRuleMaxFilePathLengthType Type { get; init; }
@@ -16452,7 +16649,7 @@ public record RepositoryRuleMaxFilePathLength
 /// <summary>
 /// Prevent commits that include files with specified file extensions from being pushed to the commit graph.
 /// </summary>
-public record RepositoryRuleFileExtensionRestriction
+public partial record RepositoryRuleFileExtensionRestriction
 {
     [JsonPropertyName("type")]
     public required RepositoryRuleFileExtensionRestrictionType Type { get; init; }
@@ -16465,7 +16662,7 @@ public record RepositoryRuleFileExtensionRestriction
 /// <summary>
 /// Prevent commits with individual files that exceed the specified limit from being pushed to the commit graph.
 /// </summary>
-public record RepositoryRuleMaxFileSize
+public partial record RepositoryRuleMaxFileSize
 {
     [JsonPropertyName("type")]
     public required RepositoryRuleMaxFileSizeType Type { get; init; }
@@ -16478,14 +16675,14 @@ public record RepositoryRuleMaxFileSize
 /// <summary>
 /// A repository rule.
 /// </summary>
-public record RepositoryRule
+public partial record RepositoryRule
 {
 }
 
 /// <summary>
 /// A set of rules to apply when specified conditions are met.
 /// </summary>
-public record RepositoryRuleset
+public partial record RepositoryRuleset
 {
     /// <summary>
     /// The ID of the ruleset
@@ -16559,7 +16756,7 @@ public record RepositoryRuleset
 /// <summary>
 /// A repository rule.
 /// </summary>
-public record OrgRules
+public partial record OrgRules
 {
 }
 
@@ -16571,7 +16768,7 @@ public record RuleSuites;
 /// <summary>
 /// Metadata for a pull request rule evaluation result.
 /// </summary>
-public record RuleSuitePullRequest
+public partial record RuleSuitePullRequest
 {
     /// <summary>
     /// The pull request associated with the rule evaluation.
@@ -16584,7 +16781,7 @@ public record RuleSuitePullRequest
 /// <summary>
 /// Metadata for a required status checks rule evaluation result.
 /// </summary>
-public record RuleSuiteRequiredStatusChecks
+public partial record RuleSuiteRequiredStatusChecks
 {
     /// <summary>
     /// The status checks associated with the rule evaluation.
@@ -16597,7 +16794,7 @@ public record RuleSuiteRequiredStatusChecks
 /// <summary>
 /// Response
 /// </summary>
-public record RuleSuite
+public partial record RuleSuite
 {
     /// <summary>
     /// The unique identifier of the rule insight.
@@ -16673,7 +16870,7 @@ public record RuleSuite
 /// <summary>
 /// The historical version of a ruleset
 /// </summary>
-public record RulesetVersion
+public partial record RulesetVersion
 {
     /// <summary>
     /// The ID of the previous version of the ruleset
@@ -16692,7 +16889,7 @@ public record RulesetVersion
 
 }
 
-public record RulesetVersionWithState : RulesetVersion
+public partial record RulesetVersionWithState : RulesetVersion
 {
     /// <summary>
     /// The state of the ruleset version
@@ -16705,7 +16902,7 @@ public record RulesetVersionWithState : RulesetVersion
 /// <summary>
 /// Sets the state of the secret scanning alert. You must provide `resolution` when you set the state to `resolved`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<SecretScanningAlertState>))]
 public enum SecretScanningAlertState
 {
     [JsonStringEnumMemberName("open")]
@@ -16717,7 +16914,7 @@ public enum SecretScanningAlertState
 /// <summary>
 /// **Required when the `state` is `resolved`.** The reason for resolving the alert.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<SecretScanningAlertResolution>))]
 public enum SecretScanningAlertResolution
 {
     [JsonStringEnumMemberName("false_positive")]
@@ -16735,7 +16932,7 @@ public enum SecretScanningAlertResolution
 /// <summary>
 /// Represents a 'commit' secret scanning location type. This location type shows that a secret was detected inside a commit to a repository.
 /// </summary>
-public record SecretScanningLocationCommit
+public partial record SecretScanningLocationCommit
 {
     /// <summary>
     /// The file path in the repository
@@ -16802,7 +16999,7 @@ public record SecretScanningLocationCommit
 /// <summary>
 /// Represents a 'wiki_commit' secret scanning location type. This location type shows that a secret was detected inside a commit to a repository wiki.
 /// </summary>
-public record SecretScanningLocationWikiCommit
+public partial record SecretScanningLocationWikiCommit
 {
     /// <summary>
     /// The file path of the wiki page
@@ -16863,7 +17060,7 @@ public record SecretScanningLocationWikiCommit
 /// <summary>
 /// Represents an 'issue_title' secret scanning location type. This location type shows that a secret was detected in the title of an issue.
 /// </summary>
-public record SecretScanningLocationIssueTitle
+public partial record SecretScanningLocationIssueTitle
 {
     /// <summary>
     /// The API URL to get the issue where the secret was detected.
@@ -16882,7 +17079,7 @@ public record SecretScanningLocationIssueTitle
 /// <summary>
 /// Represents an 'issue_body' secret scanning location type. This location type shows that a secret was detected in the body of an issue.
 /// </summary>
-public record SecretScanningLocationIssueBody
+public partial record SecretScanningLocationIssueBody
 {
     /// <summary>
     /// The API URL to get the issue where the secret was detected.
@@ -16901,7 +17098,7 @@ public record SecretScanningLocationIssueBody
 /// <summary>
 /// Represents an 'issue_comment' secret scanning location type. This location type shows that a secret was detected in a comment on an issue.
 /// </summary>
-public record SecretScanningLocationIssueComment
+public partial record SecretScanningLocationIssueComment
 {
     /// <summary>
     /// The API URL to get the issue comment where the secret was detected.
@@ -16920,7 +17117,7 @@ public record SecretScanningLocationIssueComment
 /// <summary>
 /// Represents a 'discussion_title' secret scanning location type. This location type shows that a secret was detected in the title of a discussion.
 /// </summary>
-public record SecretScanningLocationDiscussionTitle
+public partial record SecretScanningLocationDiscussionTitle
 {
     /// <summary>
     /// The URL to the discussion where the secret was detected.
@@ -16933,7 +17130,7 @@ public record SecretScanningLocationDiscussionTitle
 /// <summary>
 /// Represents a 'discussion_body' secret scanning location type. This location type shows that a secret was detected in the body of a discussion.
 /// </summary>
-public record SecretScanningLocationDiscussionBody
+public partial record SecretScanningLocationDiscussionBody
 {
     /// <summary>
     /// The URL to the discussion where the secret was detected.
@@ -16946,7 +17143,7 @@ public record SecretScanningLocationDiscussionBody
 /// <summary>
 /// Represents a 'discussion_comment' secret scanning location type. This location type shows that a secret was detected in a comment on a discussion.
 /// </summary>
-public record SecretScanningLocationDiscussionComment
+public partial record SecretScanningLocationDiscussionComment
 {
     /// <summary>
     /// The API URL to get the discussion comment where the secret was detected.
@@ -16959,7 +17156,7 @@ public record SecretScanningLocationDiscussionComment
 /// <summary>
 /// Represents a 'pull_request_title' secret scanning location type. This location type shows that a secret was detected in the title of a pull request.
 /// </summary>
-public record SecretScanningLocationPullRequestTitle
+public partial record SecretScanningLocationPullRequestTitle
 {
     /// <summary>
     /// The API URL to get the pull request where the secret was detected.
@@ -16978,7 +17175,7 @@ public record SecretScanningLocationPullRequestTitle
 /// <summary>
 /// Represents a 'pull_request_body' secret scanning location type. This location type shows that a secret was detected in the body of a pull request.
 /// </summary>
-public record SecretScanningLocationPullRequestBody
+public partial record SecretScanningLocationPullRequestBody
 {
     /// <summary>
     /// The API URL to get the pull request where the secret was detected.
@@ -16997,7 +17194,7 @@ public record SecretScanningLocationPullRequestBody
 /// <summary>
 /// Represents a 'pull_request_comment' secret scanning location type. This location type shows that a secret was detected in a comment on a pull request.
 /// </summary>
-public record SecretScanningLocationPullRequestComment
+public partial record SecretScanningLocationPullRequestComment
 {
     /// <summary>
     /// The API URL to get the pull request comment where the secret was detected.
@@ -17016,7 +17213,7 @@ public record SecretScanningLocationPullRequestComment
 /// <summary>
 /// Represents a 'pull_request_review' secret scanning location type. This location type shows that a secret was detected in a review on a pull request.
 /// </summary>
-public record SecretScanningLocationPullRequestReview
+public partial record SecretScanningLocationPullRequestReview
 {
     /// <summary>
     /// The API URL to get the pull request review where the secret was detected.
@@ -17035,7 +17232,7 @@ public record SecretScanningLocationPullRequestReview
 /// <summary>
 /// Represents a 'pull_request_review_comment' secret scanning location type. This location type shows that a secret was detected in a review comment on a pull request.
 /// </summary>
-public record SecretScanningLocationPullRequestReviewComment
+public partial record SecretScanningLocationPullRequestReviewComment
 {
     /// <summary>
     /// The API URL to get the pull request review comment where the secret was detected.
@@ -17071,9 +17268,9 @@ public record SecretScanningLocationPullRequestReviewComment
 [JsonDerivedType(typeof(SecretScanningLocationPullRequestComment), "secret-scanning-location-pull-request-comment")]
 [JsonDerivedType(typeof(SecretScanningLocationPullRequestReview), "secret-scanning-location-pull-request-review")]
 [JsonDerivedType(typeof(SecretScanningLocationPullRequestReviewComment), "secret-scanning-location-pull-request-review-comment")]
-public abstract record SecretScanningFirstDetectedLocation;
+public abstract partial record SecretScanningFirstDetectedLocation;
 
-public record OrganizationSecretScanningAlert
+public partial record OrganizationSecretScanningAlert
 {
     /// <summary>
     /// The security alert number.
@@ -17268,12 +17465,223 @@ public record OrganizationSecretScanningAlert
 /// Type alias for string?.
 /// </summary>
 [JsonConverter(typeof(OpenApiGeneratedTypeAliasJsonConverter<SecretScanningRowVersion, string?>))]
-public readonly record struct SecretScanningRowVersion(string? Value) : IOpenApiGeneratedTypeAlias<SecretScanningRowVersion, string?>
+public readonly partial record struct SecretScanningRowVersion(string? Value) : IOpenApiGeneratedTypeAlias<SecretScanningRowVersion, string?>
 {
     public static SecretScanningRowVersion Create(string? value) => new(value);
 }
 
-public record SecretScanningPatternOverride
+/// <summary>
+/// A custom pattern for secret scanning.
+/// </summary>
+public partial record SecretScanningCustomPattern
+{
+    /// <summary>
+    /// The ID of the custom pattern.
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    /// <summary>
+    /// The name of the custom pattern.
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    /// <summary>
+    /// The regular expression of the custom pattern.
+    /// </summary>
+    [JsonPropertyName("pattern")]
+    public required string Pattern { get; init; }
+
+    /// <summary>
+    /// A URL-friendly identifier for the custom pattern, derived from its name.
+    /// </summary>
+    [JsonPropertyName("slug")]
+    public required string Slug { get; init; }
+
+    /// <summary>
+    /// The state of the custom pattern.
+    /// </summary>
+    [JsonPropertyName("state")]
+    public required SecretScanningCustomPatternState State { get; init; }
+
+    /// <summary>
+    /// Whether push protection is enabled for this custom pattern.
+    /// </summary>
+    [JsonPropertyName("push_protection_enabled")]
+    public required bool PushProtectionEnabled { get; init; }
+
+    /// <summary>
+    /// The start delimiter regex for the custom pattern.
+    /// </summary>
+    [JsonPropertyName("start_delimiter")]
+    public string? StartDelimiter { get; init; }
+
+    /// <summary>
+    /// The end delimiter regex for the custom pattern.
+    /// </summary>
+    [JsonPropertyName("end_delimiter")]
+    public string? EndDelimiter { get; init; }
+
+    /// <summary>
+    /// List of regexes that the secret must match.
+    /// </summary>
+    [JsonPropertyName("must_match")]
+    public IReadOnlyList<string>? MustMatch { get; init; }
+
+    /// <summary>
+    /// List of regexes that the secret must not match.
+    /// </summary>
+    [JsonPropertyName("must_not_match")]
+    public IReadOnlyList<string>? MustNotMatch { get; init; }
+
+    /// <summary>
+    /// The version of the entity. This is used to confirm you're updating the current version of the entity and mitigate unintentionally overriding someone else's update.
+    /// </summary>
+    [JsonPropertyName("custom_pattern_version")]
+    public SecretScanningRowVersion? CustomPatternVersion { get; init; }
+
+    /// <summary>
+    /// The date and time the custom pattern was created in ISO 8601 format.
+    /// </summary>
+    [JsonPropertyName("created_at")]
+    public DateTimeOffset? CreatedAt { get; init; }
+
+    /// <summary>
+    /// The date and time the custom pattern was last updated in ISO 8601 format.
+    /// </summary>
+    [JsonPropertyName("updated_at")]
+    public DateTimeOffset? UpdatedAt { get; init; }
+
+}
+
+/// <summary>
+/// A custom pattern to create in a bulk operation.
+/// </summary>
+public partial record SecretScanningCustomPatternToCreate
+{
+    /// <summary>
+    /// The name of the custom pattern.
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    /// <summary>
+    /// The regular expression of the custom pattern.
+    /// </summary>
+    [JsonPropertyName("pattern")]
+    public required string Pattern { get; init; }
+
+    /// <summary>
+    /// The start delimiter regex for the custom pattern.
+    /// Defaults to `\A|[^0-9A-Za-z]` when not specified.
+    /// </summary>
+    [JsonPropertyName("start_delimiter")]
+    public string StartDelimiter { get; init; } = "\\A|[^0-9A-Za-z]";
+
+    /// <summary>
+    /// The end delimiter regex for the custom pattern.
+    /// Defaults to `\z|[^0-9A-Za-z]` when not specified.
+    /// </summary>
+    [JsonPropertyName("end_delimiter")]
+    public string EndDelimiter { get; init; } = "\\z|[^0-9A-Za-z]";
+
+    /// <summary>
+    /// List of regexes that the secret must match.
+    /// </summary>
+    [JsonPropertyName("must_match")]
+    public IReadOnlyList<string>? MustMatch { get; init; }
+
+    /// <summary>
+    /// List of regexes that the secret must not match.
+    /// </summary>
+    [JsonPropertyName("must_not_match")]
+    public IReadOnlyList<string>? MustNotMatch { get; init; }
+
+}
+
+/// <summary>
+/// A validation error for a custom pattern in a batch operation.
+/// </summary>
+public partial record SecretScanningCustomPatternValidationError
+{
+    /// <summary>
+    /// A machine-readable code describing the error.
+    /// </summary>
+    [JsonPropertyName("code")]
+    public Code? Code { get; init; }
+
+    /// <summary>
+    /// A human-readable description of the error.
+    /// </summary>
+    [JsonPropertyName("message")]
+    public string? Message { get; init; }
+
+}
+
+/// <summary>
+/// A custom pattern to delete in a bulk operation.
+/// </summary>
+public partial record SecretScanningCustomPatternToDelete
+{
+    /// <summary>
+    /// The ID of the custom pattern to delete.
+    /// </summary>
+    [JsonPropertyName("pattern_id")]
+    public required int PatternId { get; init; }
+
+    /// <summary>
+    /// The version of the entity. This is used to confirm you're updating the current version of the entity and mitigate unintentionally overriding someone else's update.
+    /// </summary>
+    [JsonPropertyName("custom_pattern_version")]
+    public SecretScanningRowVersion? CustomPatternVersion { get; init; }
+
+}
+
+/// <summary>
+/// Fields to update on a custom pattern. At least one updatable field (`pattern`, `start_delimiter`, `end_delimiter`, `must_match`, or `must_not_match`) must also be provided. Only provided fields will be updated.
+/// </summary>
+public partial record SecretScanningCustomPatternToUpdate
+{
+    /// <summary>
+    /// The updated regular expression of the custom pattern.
+    /// </summary>
+    [JsonPropertyName("pattern")]
+    public string? Pattern { get; init; }
+
+    /// <summary>
+    /// The updated start delimiter regex for the custom pattern.
+    /// </summary>
+    [JsonPropertyName("start_delimiter")]
+    public string? StartDelimiter { get; init; }
+
+    /// <summary>
+    /// The updated end delimiter regex for the custom pattern.
+    /// </summary>
+    [JsonPropertyName("end_delimiter")]
+    public string? EndDelimiter { get; init; }
+
+    /// <summary>
+    /// Updated list of regexes that the secret must match.
+    /// </summary>
+    [JsonPropertyName("must_match")]
+    public IReadOnlyList<string>? MustMatch { get; init; }
+
+    /// <summary>
+    /// Updated list of regexes that the secret must not match.
+    /// </summary>
+    [JsonPropertyName("must_not_match")]
+    public IReadOnlyList<string>? MustNotMatch { get; init; }
+
+    /// <summary>
+    /// The version of the entity. This is used to confirm you're updating the current version of the entity and mitigate unintentionally overriding someone else's update.
+    /// </summary>
+    [JsonPropertyName("custom_pattern_version")]
+    public required SecretScanningRowVersion? CustomPatternVersion { get; init; }
+
+}
+
+public partial record SecretScanningPatternOverride
 {
     /// <summary>
     /// The ID of the pattern.
@@ -17352,7 +17760,7 @@ public record SecretScanningPatternOverride
 /// <summary>
 /// A collection of secret scanning patterns and their settings related to push protection.
 /// </summary>
-public record SecretScanningPatternConfiguration
+public partial record SecretScanningPatternConfiguration
 {
     /// <summary>
     /// The version of the entity. This is used to confirm you're updating the current version of the entity and mitigate unintentionally overriding someone else's update.
@@ -17377,7 +17785,7 @@ public record SecretScanningPatternConfiguration
 /// <summary>
 /// A product affected by the vulnerability detailed in a repository security advisory.
 /// </summary>
-public record RepositoryAdvisoryVulnerability
+public partial record RepositoryAdvisoryVulnerability
 {
     /// <summary>
     /// The name of the package affected by the vulnerability.
@@ -17408,7 +17816,7 @@ public record RepositoryAdvisoryVulnerability
 /// <summary>
 /// A credit given to a user for a repository security advisory.
 /// </summary>
-public record RepositoryAdvisoryCredit
+public partial record RepositoryAdvisoryCredit
 {
     /// <summary>
     /// A GitHub user.
@@ -17433,7 +17841,7 @@ public record RepositoryAdvisoryCredit
 /// <summary>
 /// A repository security advisory.
 /// </summary>
-public record RepositoryAdvisory
+public partial record RepositoryAdvisory
 {
     /// <summary>
     /// The GitHub Security Advisory ID.
@@ -17578,7 +17986,7 @@ public record RepositoryAdvisory
 /// <summary>
 /// Check immutable releases settings for an organization.
 /// </summary>
-public record ImmutableReleasesOrganizationSettings
+public partial record ImmutableReleasesOrganizationSettings
 {
     /// <summary>
     /// The policy that controls how immutable releases are enforced in the organization.
@@ -17597,7 +18005,7 @@ public record ImmutableReleasesOrganizationSettings
 /// <summary>
 /// A hosted compute network configuration.
 /// </summary>
-public record NetworkConfiguration
+public partial record NetworkConfiguration
 {
     /// <summary>
     /// The unique identifier of the network configuration.
@@ -17646,7 +18054,7 @@ public record NetworkConfiguration
 /// <summary>
 /// A hosted compute network settings resource.
 /// </summary>
-public record NetworkSettings
+public partial record NetworkSettings
 {
     /// <summary>
     /// The unique identifier of the network settings resource.
@@ -17683,7 +18091,7 @@ public record NetworkSettings
 /// <summary>
 /// Team Organization
 /// </summary>
-public record TeamOrganization
+public partial record TeamOrganization
 {
     [JsonPropertyName("login")]
     public required string Login { get; init; }
@@ -17841,7 +18249,7 @@ public record TeamOrganization
 /// Type alias for string.
 /// </summary>
 [JsonConverter(typeof(OpenApiGeneratedTypeAliasJsonConverter<LdapDn, string>))]
-public readonly record struct LdapDn(string Value) : IOpenApiGeneratedTypeAlias<LdapDn, string>
+public readonly partial record struct LdapDn(string Value) : IOpenApiGeneratedTypeAlias<LdapDn, string>
 {
     public static LdapDn Create(string value) => new(value);
 }
@@ -17849,7 +18257,7 @@ public readonly record struct LdapDn(string Value) : IOpenApiGeneratedTypeAlias<
 /// <summary>
 /// Groups of organization members that gives permissions on specified repositories.
 /// </summary>
-public record TeamFull
+public partial record TeamFull
 {
     /// <summary>
     /// Unique identifier of the team
@@ -17953,9 +18361,94 @@ public record TeamFull
 }
 
 /// <summary>
+/// A user that is a member of a team, including their role on the team and whether the membership is inherited from a child team.
+/// </summary>
+public partial record TeamMember
+{
+    [JsonPropertyName("name")]
+    public string? Name { get; init; }
+
+    [JsonPropertyName("email")]
+    public string? Email { get; init; }
+
+    [JsonPropertyName("login")]
+    public required string Login { get; init; }
+
+    [JsonPropertyName("id")]
+    public required long Id { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    [JsonPropertyName("avatar_url")]
+    public required Uri AvatarUrl { get; init; }
+
+    [JsonPropertyName("gravatar_id")]
+    public required string? GravatarId { get; init; }
+
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public required Uri HtmlUrl { get; init; }
+
+    [JsonPropertyName("followers_url")]
+    public required Uri FollowersUrl { get; init; }
+
+    [JsonPropertyName("following_url")]
+    public required string FollowingUrl { get; init; }
+
+    [JsonPropertyName("gists_url")]
+    public required string GistsUrl { get; init; }
+
+    [JsonPropertyName("starred_url")]
+    public required string StarredUrl { get; init; }
+
+    [JsonPropertyName("subscriptions_url")]
+    public required Uri SubscriptionsUrl { get; init; }
+
+    [JsonPropertyName("organizations_url")]
+    public required Uri OrganizationsUrl { get; init; }
+
+    [JsonPropertyName("repos_url")]
+    public required Uri ReposUrl { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public required string EventsUrl { get; init; }
+
+    [JsonPropertyName("received_events_url")]
+    public required Uri ReceivedEventsUrl { get; init; }
+
+    [JsonPropertyName("type")]
+    public required string Type { get; init; }
+
+    [JsonPropertyName("site_admin")]
+    public required bool SiteAdmin { get; init; }
+
+    [JsonPropertyName("starred_at")]
+    public string? StarredAt { get; init; }
+
+    [JsonPropertyName("user_view_type")]
+    public string? UserViewType { get; init; }
+
+    /// <summary>
+    /// The member's role on the team. Only present on the `List team members` endpoint, and only when the feature is enabled for the organization.
+    /// </summary>
+    [JsonPropertyName("role")]
+    public TeamMemberRole? Role { get; init; }
+
+    /// <summary>
+    /// Whether the user is a member of the team only through a child team. `true` means the membership is inherited from a child team; `false` means the user is a direct (immediate) member of the team. Only present on the `List team members` endpoint, and only when the feature is enabled for the organization.
+    /// </summary>
+    [JsonPropertyName("inherited")]
+    public bool? Inherited { get; init; }
+
+}
+
+/// <summary>
 /// Team Membership
 /// </summary>
-public record TeamMembership
+public partial record TeamMembership
 {
     [JsonPropertyName("url")]
     public required Uri Url { get; init; }
@@ -17964,7 +18457,7 @@ public record TeamMembership
     /// The role of the user in the team.
     /// </summary>
     [JsonPropertyName("role")]
-    public required TeamMembershipRole Role { get; init; } = Generated.GithubApiNext.TeamMembershipRole.Member;
+    public required TeamMemberRole Role { get; init; } = Generated.GithubApiNext.TeamMemberRole.Member;
 
     /// <summary>
     /// The state of the user's membership in the team.
@@ -17977,7 +18470,7 @@ public record TeamMembership
 /// <summary>
 /// A team's access to a repository.
 /// </summary>
-public record TeamRepository
+public partial record TeamRepository
 {
     /// <summary>
     /// Unique identifier of the repository
@@ -18305,7 +18798,7 @@ public record TeamRepository
 
 }
 
-public record RateLimit
+public partial record RateLimit
 {
     [JsonPropertyName("limit")]
     public required int Limit { get; init; }
@@ -18324,7 +18817,7 @@ public record RateLimit
 /// <summary>
 /// Rate Limit Overview
 /// </summary>
-public record RateLimitOverview
+public partial record RateLimitOverview
 {
     [JsonPropertyName("resources")]
     public required object Resources { get; init; }
@@ -18337,7 +18830,7 @@ public record RateLimitOverview
 /// <summary>
 /// An artifact
 /// </summary>
-public record Artifact
+public partial record Artifact
 {
     [JsonPropertyName("id")]
     public required int Id { get; init; }
@@ -18392,7 +18885,7 @@ public record Artifact
 /// <summary>
 /// GitHub Actions cache retention policy for a repository.
 /// </summary>
-public record ActionsCacheRetentionLimitForRepository
+public partial record ActionsCacheRetentionLimitForRepository
 {
     /// <summary>
     /// The maximum number of days to keep caches in this repository.
@@ -18405,7 +18898,7 @@ public record ActionsCacheRetentionLimitForRepository
 /// <summary>
 /// GitHub Actions cache storage policy for a repository.
 /// </summary>
-public record ActionsCacheStorageLimitForRepository
+public partial record ActionsCacheStorageLimitForRepository
 {
     /// <summary>
     /// The maximum total cache size for this repository, in gigabytes.
@@ -18418,7 +18911,7 @@ public record ActionsCacheStorageLimitForRepository
 /// <summary>
 /// Repository actions caches
 /// </summary>
-public record ActionsCacheList
+public partial record ActionsCacheList
 {
     /// <summary>
     /// Total number of caches
@@ -18437,7 +18930,7 @@ public record ActionsCacheList
 /// <summary>
 /// A list of active concurrency groups for a repository.
 /// </summary>
-public record ConcurrencyGroupList
+public partial record ConcurrencyGroupList
 {
     [JsonPropertyName("total_count")]
     public required int TotalCount { get; init; }
@@ -18451,7 +18944,7 @@ public record ConcurrencyGroupList
 /// A concurrency group with the workflow runs and jobs that are either currently holding
 /// or waiting for the concurrency group lease.
 /// </summary>
-public record ConcurrencyGroup
+public partial record ConcurrencyGroup
 {
     /// <summary>
     /// The name of the concurrency group.
@@ -18476,19 +18969,19 @@ public record ConcurrencyGroup
 /// <summary>
 /// Information of a job execution in a workflow run
 /// </summary>
-public record Job
+public partial record Job
 {
     /// <summary>
     /// The id of the job.
     /// </summary>
     [JsonPropertyName("id")]
-    public required int Id { get; init; }
+    public required long Id { get; init; }
 
     /// <summary>
     /// The id of the associated workflow run.
     /// </summary>
     [JsonPropertyName("run_id")]
-    public required int RunId { get; init; }
+    public required long RunId { get; init; }
 
     [JsonPropertyName("run_url")]
     public required string RunUrl { get; init; }
@@ -18606,7 +19099,7 @@ public record Job
 /// <summary>
 /// Actions OIDC subject customization for a repository
 /// </summary>
-public record OidcCustomSubRepo
+public partial record OidcCustomSubRepo
 {
     /// <summary>
     /// Whether to use the default template or not. If `true`, the `include_claim_keys` field is ignored.
@@ -18637,7 +19130,7 @@ public record OidcCustomSubRepo
 /// <summary>
 /// Set secrets for GitHub Actions.
 /// </summary>
-public record ActionsSecret
+public partial record ActionsSecret
 {
     /// <summary>
     /// The name of the secret.
@@ -18653,7 +19146,7 @@ public record ActionsSecret
 
 }
 
-public record ActionsVariable
+public partial record ActionsVariable
 {
     /// <summary>
     /// The name of the variable.
@@ -18688,12 +19181,12 @@ public record ActionsVariable
 /// Type alias for bool.
 /// </summary>
 [JsonConverter(typeof(OpenApiGeneratedTypeAliasJsonConverter<ActionsEnabled, bool>))]
-public readonly record struct ActionsEnabled(bool Value) : IOpenApiGeneratedTypeAlias<ActionsEnabled, bool>
+public readonly partial record struct ActionsEnabled(bool Value) : IOpenApiGeneratedTypeAlias<ActionsEnabled, bool>
 {
     public static ActionsEnabled Create(bool value) => new(value);
 }
 
-public record ActionsRepositoryPermissions
+public partial record ActionsRepositoryPermissions
 {
     /// <summary>
     /// Whether GitHub Actions is enabled on the repository.
@@ -18721,7 +19214,7 @@ public record ActionsRepositoryPermissions
 
 }
 
-public record ActionsWorkflowAccessToRepository
+public partial record ActionsWorkflowAccessToRepository
 {
     /// <summary>
     /// Defines the level of access that workflows outside of the repository have to actions and reusable workflows within the
@@ -18737,7 +19230,7 @@ public record ActionsWorkflowAccessToRepository
 /// <summary>
 /// A workflow referenced/reused by the initial caller workflow
 /// </summary>
-public record ReferencedWorkflow
+public partial record ReferencedWorkflow
 {
     [JsonPropertyName("path")]
     public required string Path { get; init; }
@@ -18753,7 +19246,7 @@ public record ReferencedWorkflow
 /// <summary>
 /// A commit.
 /// </summary>
-public record SimpleCommit
+public partial record SimpleCommit
 {
     /// <summary>
     /// SHA for the commit
@@ -18796,13 +19289,13 @@ public record SimpleCommit
 /// <summary>
 /// An invocation of a workflow
 /// </summary>
-public record WorkflowRun
+public partial record WorkflowRun
 {
     /// <summary>
     /// The ID of the workflow run.
     /// </summary>
     [JsonPropertyName("id")]
-    public required int Id { get; init; }
+    public required long Id { get; init; }
 
     /// <summary>
     /// The name of the workflow run.
@@ -18817,7 +19310,7 @@ public record WorkflowRun
     /// The ID of the associated check suite.
     /// </summary>
     [JsonPropertyName("check_suite_id")]
-    public int? CheckSuiteId { get; init; }
+    public long? CheckSuiteId { get; init; }
 
     /// <summary>
     /// The node ID of the associated check suite.
@@ -18986,7 +19479,7 @@ public record WorkflowRun
 /// <summary>
 /// An entry in the reviews log for environment deployments
 /// </summary>
-public record EnvironmentApprovals
+public partial record EnvironmentApprovals
 {
     /// <summary>
     /// The list of environments that were approved or rejected
@@ -19017,7 +19510,7 @@ public record EnvironmentApprovals
 /// <summary>
 /// A list of concurrency groups associated with a workflow run.
 /// </summary>
-public record ConcurrencyGroupRunList
+public partial record ConcurrencyGroupRunList
 {
     /// <summary>
     /// The total number of concurrency groups this workflow run participates in,
@@ -19034,7 +19527,7 @@ public record ConcurrencyGroupRunList
 
 }
 
-public record ReviewCustomGatesCommentRequired
+public partial record ReviewCustomGatesCommentRequired
 {
     /// <summary>
     /// The name of the environment to approve or reject.
@@ -19050,7 +19543,7 @@ public record ReviewCustomGatesCommentRequired
 
 }
 
-public record ReviewCustomGatesStateRequired
+public partial record ReviewCustomGatesStateRequired
 {
     /// <summary>
     /// The name of the environment to approve or reject.
@@ -19075,7 +19568,7 @@ public record ReviewCustomGatesStateRequired
 /// <summary>
 /// The type of reviewer.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<DeploymentReviewerType>))]
 public enum DeploymentReviewerType
 {
     [JsonStringEnumMemberName("User")]
@@ -19087,7 +19580,7 @@ public enum DeploymentReviewerType
 /// <summary>
 /// Details of a deployment that is waiting for protection rules to pass
 /// </summary>
-public record PendingDeployment
+public partial record PendingDeployment
 {
     [JsonPropertyName("environment")]
     public required object Environment { get; init; }
@@ -19121,7 +19614,7 @@ public record PendingDeployment
 /// <summary>
 /// A request for a specific ref(branch,sha,tag) to be deployed
 /// </summary>
-public record Deployment
+public partial record Deployment
 {
     [JsonPropertyName("url")]
     public required Uri Url { get; init; }
@@ -19200,7 +19693,7 @@ public record Deployment
 /// <summary>
 /// Workflow Run Usage
 /// </summary>
-public record WorkflowRunUsage
+public partial record WorkflowRunUsage
 {
     [JsonPropertyName("billable")]
     public required object Billable { get; init; }
@@ -19213,7 +19706,7 @@ public record WorkflowRunUsage
 /// <summary>
 /// A GitHub Actions workflow
 /// </summary>
-public record Workflow
+public partial record Workflow
 {
     [JsonPropertyName("id")]
     public required int Id { get; init; }
@@ -19257,7 +19750,7 @@ public record Workflow
 /// Type alias for long.
 /// </summary>
 [JsonConverter(typeof(OpenApiGeneratedTypeAliasJsonConverter<WorkflowRunId, long>))]
-public readonly record struct WorkflowRunId(long Value) : IOpenApiGeneratedTypeAlias<WorkflowRunId, long>
+public readonly partial record struct WorkflowRunId(long Value) : IOpenApiGeneratedTypeAlias<WorkflowRunId, long>
 {
     public static WorkflowRunId Create(long value) => new(value);
 }
@@ -19265,7 +19758,7 @@ public readonly record struct WorkflowRunId(long Value) : IOpenApiGeneratedTypeA
 /// <summary>
 /// Response containing the workflow run ID and URLs.
 /// </summary>
-public record WorkflowDispatchResponse
+public partial record WorkflowDispatchResponse
 {
     /// <summary>
     /// The ID of the workflow run.
@@ -19287,7 +19780,7 @@ public record WorkflowDispatchResponse
 /// <summary>
 /// Workflow Usage
 /// </summary>
-public record WorkflowUsage
+public partial record WorkflowUsage
 {
     [JsonPropertyName("billable")]
     public required object Billable { get; init; }
@@ -19297,7 +19790,7 @@ public record WorkflowUsage
 /// <summary>
 /// Activity
 /// </summary>
-public record Activity
+public partial record Activity
 {
     [JsonPropertyName("id")]
     public required int Id { get; init; }
@@ -19343,7 +19836,7 @@ public record Activity
 /// <summary>
 /// An autolink reference.
 /// </summary>
-public record Autolink
+public partial record Autolink
 {
     [JsonPropertyName("id")]
     public required int Id { get; init; }
@@ -19374,7 +19867,7 @@ public record Autolink
 /// <summary>
 /// Check Dependabot security updates
 /// </summary>
-public record CheckAutomatedSecurityFixes
+public partial record CheckAutomatedSecurityFixes
 {
     /// <summary>
     /// Whether Dependabot security updates are enabled for the repository.
@@ -19393,7 +19886,7 @@ public record CheckAutomatedSecurityFixes
 /// <summary>
 /// Protected Branch Required Status Check
 /// </summary>
-public record ProtectedBranchRequiredStatusCheck
+public partial record ProtectedBranchRequiredStatusCheck
 {
     [JsonPropertyName("url")]
     public string? Url { get; init; }
@@ -19418,7 +19911,7 @@ public record ProtectedBranchRequiredStatusCheck
 /// <summary>
 /// Protected Branch Admin Enforced
 /// </summary>
-public record ProtectedBranchAdminEnforced
+public partial record ProtectedBranchAdminEnforced
 {
     [JsonPropertyName("url")]
     public required Uri Url { get; init; }
@@ -19431,7 +19924,7 @@ public record ProtectedBranchAdminEnforced
 /// <summary>
 /// Protected Branch Pull Request Review
 /// </summary>
-public record ProtectedBranchPullRequestReview
+public partial record ProtectedBranchPullRequestReview
 {
     [JsonPropertyName("url")]
     public Uri? Url { get; init; }
@@ -19465,7 +19958,7 @@ public record ProtectedBranchPullRequestReview
 /// <summary>
 /// Branch Restriction Policy
 /// </summary>
-public record BranchRestrictionPolicy
+public partial record BranchRestrictionPolicy
 {
     [JsonPropertyName("url")]
     public required Uri Url { get; init; }
@@ -19493,7 +19986,7 @@ public record BranchRestrictionPolicy
 /// <summary>
 /// Branch Protection
 /// </summary>
-public record BranchProtection
+public partial record BranchProtection
 {
     [JsonPropertyName("url")]
     public string? Url { get; init; }
@@ -19566,7 +20059,7 @@ public record BranchProtection
 /// <summary>
 /// Short Branch
 /// </summary>
-public record ShortBranch
+public partial record ShortBranch
 {
     [JsonPropertyName("name")]
     public required string Name { get; init; }
@@ -19591,7 +20084,7 @@ public record ShortBranch
 /// <summary>
 /// Metaproperties for Git author/committer information.
 /// </summary>
-public record GitUser
+public partial record GitUser
 {
     [JsonPropertyName("name")]
     public string? Name { get; init; }
@@ -19604,7 +20097,7 @@ public record GitUser
 
 }
 
-public record Verification
+public partial record Verification
 {
     [JsonPropertyName("verified")]
     public required bool Verified { get; init; }
@@ -19626,7 +20119,7 @@ public record Verification
 /// <summary>
 /// Diff Entry
 /// </summary>
-public record DiffEntry
+public partial record DiffEntry
 {
     [JsonPropertyName("sha")]
     public required string? Sha { get; init; }
@@ -19666,7 +20159,7 @@ public record DiffEntry
 /// <summary>
 /// Commit
 /// </summary>
-public record Commit
+public partial record Commit
 {
     [JsonPropertyName("url")]
     public required Uri Url { get; init; }
@@ -19706,7 +20199,7 @@ public record Commit
 /// <summary>
 /// Branch With Protection
 /// </summary>
-public record BranchWithProtection
+public partial record BranchWithProtection
 {
     [JsonPropertyName("name")]
     public required string Name { get; init; }
@@ -19743,7 +20236,7 @@ public record BranchWithProtection
 /// <summary>
 /// Status Check Policy
 /// </summary>
-public record StatusCheckPolicy
+public partial record StatusCheckPolicy
 {
     [JsonPropertyName("url")]
     public required Uri Url { get; init; }
@@ -19765,7 +20258,7 @@ public record StatusCheckPolicy
 /// <summary>
 /// Branch protections protect branches
 /// </summary>
-public record ProtectedBranch
+public partial record ProtectedBranch
 {
     [JsonPropertyName("url")]
     public required Uri Url { get; init; }
@@ -19823,7 +20316,7 @@ public record ProtectedBranch
 /// <summary>
 /// A deployment created as the result of an Actions check run from a workflow that references an environment
 /// </summary>
-public record DeploymentSimple
+public partial record DeploymentSimple
 {
     [JsonPropertyName("url")]
     public required Uri Url { get; init; }
@@ -19887,7 +20380,7 @@ public record DeploymentSimple
 /// <summary>
 /// A check performed on the code of a given code change
 /// </summary>
-public record CheckRun
+public partial record CheckRun
 {
     /// <summary>
     /// The id of the check.
@@ -19963,7 +20456,7 @@ public record CheckRun
 /// <summary>
 /// Check Annotation
 /// </summary>
-public record CheckAnnotation
+public partial record CheckAnnotation
 {
     [JsonPropertyName("path")]
     public required string Path { get; init; }
@@ -20000,7 +20493,7 @@ public record CheckAnnotation
 /// <summary>
 /// A suite of checks performed on the code of a given code change
 /// </summary>
-public record CheckSuite
+public partial record CheckSuite
 {
     [JsonPropertyName("id")]
     public required long Id { get; init; }
@@ -20076,7 +20569,7 @@ public record CheckSuite
 /// <summary>
 /// Check suite configuration preferences for a repository.
 /// </summary>
-public record CheckSuitePreference
+public partial record CheckSuitePreference
 {
     [JsonPropertyName("preferences")]
     public required object Preferences { get; init; }
@@ -20090,9 +20583,157 @@ public record CheckSuitePreference
 }
 
 /// <summary>
+/// Code quality rule
+/// </summary>
+public partial record CodeQualityFindingRule
+{
+    /// <summary>
+    /// A unique identifier for the rule used to detect the finding.
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required string Id { get; init; }
+
+    /// <summary>
+    /// The name of the rule used to detect the finding.
+    /// </summary>
+    [JsonPropertyName("title")]
+    public required string Title { get; init; }
+
+    /// <summary>
+    /// A short description of the rule used to detect the finding.
+    /// </summary>
+    [JsonPropertyName("description")]
+    public required string Description { get; init; }
+
+    /// <summary>
+    /// A detailed description of the rule used to detect the finding.
+    /// </summary>
+    [JsonPropertyName("help")]
+    public string? Help { get; init; }
+
+    /// <summary>
+    /// The severity of the rule used to detect the finding.
+    /// </summary>
+    [JsonPropertyName("severity")]
+    public required CodeQualityFindingRuleSeverity Severity { get; init; }
+
+    /// <summary>
+    /// The category of the rule used to detect the finding.
+    /// </summary>
+    [JsonPropertyName("category")]
+    public required Category Category { get; init; }
+
+}
+
+/// <summary>
+/// Code quality file location
+/// </summary>
+public partial record CodeQualityFindingLocation
+{
+    /// <summary>
+    /// The file path where the finding was detected.
+    /// </summary>
+    [JsonPropertyName("path")]
+    public required string Path { get; init; }
+
+    /// <summary>
+    /// The line number where the finding starts.
+    /// </summary>
+    [JsonPropertyName("start_line")]
+    public int? StartLine { get; init; }
+
+    /// <summary>
+    /// The column number where the finding starts.
+    /// </summary>
+    [JsonPropertyName("start_column")]
+    public int? StartColumn { get; init; }
+
+    /// <summary>
+    /// The line number where the finding ends.
+    /// </summary>
+    [JsonPropertyName("end_line")]
+    public int? EndLine { get; init; }
+
+    /// <summary>
+    /// The column number where the finding ends.
+    /// </summary>
+    [JsonPropertyName("end_column")]
+    public int? EndColumn { get; init; }
+
+}
+
+/// <summary>
+/// Code quality finding message
+/// </summary>
+public partial record CodeQualityFindingMessage
+{
+    /// <summary>
+    /// The message text of the code quality finding.
+    /// </summary>
+    [JsonPropertyName("text")]
+    public required string Text { get; init; }
+
+    /// <summary>
+    /// The message text of the code quality finding in markdown format.
+    /// </summary>
+    [JsonPropertyName("markdown")]
+    public required string Markdown { get; init; }
+
+}
+
+/// <summary>
+/// Code quality finding
+/// </summary>
+public partial record CodeQualityFinding
+{
+    /// <summary>
+    /// The finding number.
+    /// </summary>
+    [JsonPropertyName("number")]
+    public required int Number { get; init; }
+
+    /// <summary>
+    /// State of the code quality finding.
+    /// </summary>
+    [JsonPropertyName("state")]
+    public required CodeQualityFindingState State { get; init; }
+
+    /// <summary>
+    /// The REST API URL of the code quality finding resource.
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+    /// <summary>
+    /// Code quality rule
+    /// </summary>
+    [JsonPropertyName("rule")]
+    public required CodeQualityFindingRule Rule { get; init; }
+
+    /// <summary>
+    /// Code quality file location
+    /// </summary>
+    [JsonPropertyName("location")]
+    public required CodeQualityFindingLocation Location { get; init; }
+
+    /// <summary>
+    /// Code quality finding message
+    /// </summary>
+    [JsonPropertyName("message")]
+    public required CodeQualityFindingMessage Message { get; init; }
+
+    /// <summary>
+    /// The time the code quality finding was created.
+    /// </summary>
+    [JsonPropertyName("created_at")]
+    public DateTimeOffset? CreatedAt { get; init; }
+
+}
+
+/// <summary>
 /// Configuration for code quality setup.
 /// </summary>
-public record CodeQualitySetup
+public partial record CodeQualitySetup
 {
     /// <summary>
     /// Code quality setup has been configured or not.
@@ -20130,12 +20771,18 @@ public record CodeQualitySetup
     [JsonPropertyName("schedule")]
     public Schedule? Schedule { get; init; }
 
+    /// <summary>
+    /// The AI findings configuration for the repository.
+    /// </summary>
+    [JsonPropertyName("ai_findings_option")]
+    public CodeQualitySetupAiFindingsOption? AiFindingsOption { get; init; }
+
 }
 
 /// <summary>
 /// Configuration for code quality setup.
 /// </summary>
-public record CodeQualitySetupUpdate
+public partial record CodeQualitySetupUpdate
 {
     /// <summary>
     /// The desired state of code quality setup.
@@ -20161,13 +20808,19 @@ public record CodeQualitySetupUpdate
     [JsonPropertyName("languages")]
     public IReadOnlyList<string>? Languages { get; init; }
 
+    /// <summary>
+    /// Whether AI findings run for Code Quality on this repository.
+    /// </summary>
+    [JsonPropertyName("ai_findings_option")]
+    public CodeQualitySetupUpdateAiFindingsOption? AiFindingsOption { get; init; }
+
 }
 
 /// <summary>
 /// You can use `run_url` to track the status of the run. This includes a property status and conclusion.
 /// You should not rely on this always being an actions workflow run object.
 /// </summary>
-public record CodeQualitySetupUpdateResponse
+public partial record CodeQualitySetupUpdateResponse
 {
     /// <summary>
     /// ID of the corresponding run.
@@ -20183,7 +20836,7 @@ public record CodeQualitySetupUpdateResponse
 
 }
 
-public record CodeScanningAlertItems
+public partial record CodeScanningAlertItems
 {
     /// <summary>
     /// The security alert number.
@@ -20271,7 +20924,7 @@ public record CodeScanningAlertItems
 
 }
 
-public record CodeScanningAlertRule
+public partial record CodeScanningAlertRule
 {
     /// <summary>
     /// A unique identifier for the rule used to detect the alert.
@@ -20329,7 +20982,7 @@ public record CodeScanningAlertRule
 
 }
 
-public record CodeScanningAlert
+public partial record CodeScanningAlert
 {
     /// <summary>
     /// The security alert number.
@@ -20415,12 +21068,18 @@ public record CodeScanningAlert
     [JsonPropertyName("assignees")]
     public IReadOnlyList<SimpleUser>? Assignees { get; init; }
 
+    /// <summary>
+    /// Pull requests linked to this alert.
+    /// </summary>
+    [JsonPropertyName("linked_pull_requests")]
+    public IReadOnlyList<PullRequestSimple>? LinkedPullRequests { get; init; }
+
 }
 
 /// <summary>
 /// Sets the state of the code scanning alert. You must provide `dismissed_reason` when you set the state to `dismissed`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CodeScanningAlertSetState>))]
 public enum CodeScanningAlertSetState
 {
     [JsonStringEnumMemberName("open")]
@@ -20436,7 +21095,7 @@ public enum CodeScanningAlertSetState
 /// Type alias for bool.
 /// </summary>
 [JsonConverter(typeof(OpenApiGeneratedTypeAliasJsonConverter<CodeScanningAlertCreateRequest, bool>))]
-public readonly record struct CodeScanningAlertCreateRequest(bool Value) : IOpenApiGeneratedTypeAlias<CodeScanningAlertCreateRequest, bool>
+public readonly partial record struct CodeScanningAlertCreateRequest(bool Value) : IOpenApiGeneratedTypeAlias<CodeScanningAlertCreateRequest, bool>
 {
     public static CodeScanningAlertCreateRequest Create(bool value) => new(value);
 }
@@ -20449,7 +21108,7 @@ public record CodeScanningAlertAssignees;
 /// <summary>
 /// The status of an autofix.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CodeScanningAutofixStatus>))]
 public enum CodeScanningAutofixStatus
 {
     [JsonStringEnumMemberName("pending")]
@@ -20469,7 +21128,7 @@ public enum CodeScanningAutofixStatus
 /// Type alias for string?.
 /// </summary>
 [JsonConverter(typeof(OpenApiGeneratedTypeAliasJsonConverter<CodeScanningAutofixDescription, string?>))]
-public readonly record struct CodeScanningAutofixDescription(string? Value) : IOpenApiGeneratedTypeAlias<CodeScanningAutofixDescription, string?>
+public readonly partial record struct CodeScanningAutofixDescription(string? Value) : IOpenApiGeneratedTypeAlias<CodeScanningAutofixDescription, string?>
 {
     public static CodeScanningAutofixDescription Create(string? value) => new(value);
 }
@@ -20481,12 +21140,12 @@ public readonly record struct CodeScanningAutofixDescription(string? Value) : IO
 /// Type alias for DateTimeOffset.
 /// </summary>
 [JsonConverter(typeof(OpenApiGeneratedTypeAliasJsonConverter<CodeScanningAutofixStartedAt, DateTimeOffset>))]
-public readonly record struct CodeScanningAutofixStartedAt(DateTimeOffset Value) : IOpenApiGeneratedTypeAlias<CodeScanningAutofixStartedAt, DateTimeOffset>
+public readonly partial record struct CodeScanningAutofixStartedAt(DateTimeOffset Value) : IOpenApiGeneratedTypeAlias<CodeScanningAutofixStartedAt, DateTimeOffset>
 {
     public static CodeScanningAutofixStartedAt Create(DateTimeOffset value) => new(value);
 }
 
-public record CodeScanningAutofix
+public partial record CodeScanningAutofix
 {
     /// <summary>
     /// The status of an autofix.
@@ -20511,7 +21170,7 @@ public record CodeScanningAutofix
 /// <summary>
 /// Commit an autofix for a code scanning alert
 /// </summary>
-public record CodeScanningAutofixCommits
+public partial record CodeScanningAutofixCommits
 {
     /// <summary>
     /// The Git reference of target branch for the commit. Branch needs to already exist.  For more information, see "[Git References](https://git-scm.com/book/en/v2/Git-Internals-Git-References)" in the Git documentation.
@@ -20527,7 +21186,7 @@ public record CodeScanningAutofixCommits
 
 }
 
-public record CodeScanningAutofixCommitsResponse
+public partial record CodeScanningAutofixCommitsResponse
 {
     /// <summary>
     /// The Git reference of target branch for the commit. For more information, see "[Git References](https://git-scm.com/book/en/v2/Git-Internals-Git-References)" in the Git documentation.
@@ -20546,7 +21205,7 @@ public record CodeScanningAutofixCommitsResponse
 /// <summary>
 /// State of a code scanning alert instance.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CodeScanningAlertInstanceState>))]
 public enum CodeScanningAlertInstanceState
 {
     [JsonStringEnumMemberName("open")]
@@ -20557,7 +21216,7 @@ public enum CodeScanningAlertInstanceState
     Unknown
 }
 
-public record CodeScanningAlertInstanceList
+public partial record CodeScanningAlertInstanceList
 {
     /// <summary>
     /// The Git reference, formatted as `refs/pull/&lt;number&gt;/merge`, `refs/pull/&lt;number&gt;/head`,
@@ -20621,7 +21280,7 @@ public record CodeScanningAlertInstanceList
 /// Type alias for string.
 /// </summary>
 [JsonConverter(typeof(OpenApiGeneratedTypeAliasJsonConverter<CodeScanningAnalysisSarifId, string>))]
-public readonly record struct CodeScanningAnalysisSarifId(string Value) : IOpenApiGeneratedTypeAlias<CodeScanningAnalysisSarifId, string>
+public readonly partial record struct CodeScanningAnalysisSarifId(string Value) : IOpenApiGeneratedTypeAlias<CodeScanningAnalysisSarifId, string>
 {
     public static CodeScanningAnalysisSarifId Create(string value) => new(value);
 }
@@ -20633,7 +21292,7 @@ public readonly record struct CodeScanningAnalysisSarifId(string Value) : IOpenA
 /// Type alias for string.
 /// </summary>
 [JsonConverter(typeof(OpenApiGeneratedTypeAliasJsonConverter<CodeScanningAnalysisCommitSha, string>))]
-public readonly record struct CodeScanningAnalysisCommitSha(string Value) : IOpenApiGeneratedTypeAlias<CodeScanningAnalysisCommitSha, string>
+public readonly partial record struct CodeScanningAnalysisCommitSha(string Value) : IOpenApiGeneratedTypeAlias<CodeScanningAnalysisCommitSha, string>
 {
     public static CodeScanningAnalysisCommitSha Create(string value) => new(value);
 }
@@ -20645,7 +21304,7 @@ public readonly record struct CodeScanningAnalysisCommitSha(string Value) : IOpe
 /// Type alias for string.
 /// </summary>
 [JsonConverter(typeof(OpenApiGeneratedTypeAliasJsonConverter<CodeScanningAnalysisEnvironment, string>))]
-public readonly record struct CodeScanningAnalysisEnvironment(string Value) : IOpenApiGeneratedTypeAlias<CodeScanningAnalysisEnvironment, string>
+public readonly partial record struct CodeScanningAnalysisEnvironment(string Value) : IOpenApiGeneratedTypeAlias<CodeScanningAnalysisEnvironment, string>
 {
     public static CodeScanningAnalysisEnvironment Create(string value) => new(value);
 }
@@ -20657,7 +21316,7 @@ public readonly record struct CodeScanningAnalysisEnvironment(string Value) : IO
 /// Type alias for DateTimeOffset.
 /// </summary>
 [JsonConverter(typeof(OpenApiGeneratedTypeAliasJsonConverter<CodeScanningAnalysisCreatedAt, DateTimeOffset>))]
-public readonly record struct CodeScanningAnalysisCreatedAt(DateTimeOffset Value) : IOpenApiGeneratedTypeAlias<CodeScanningAnalysisCreatedAt, DateTimeOffset>
+public readonly partial record struct CodeScanningAnalysisCreatedAt(DateTimeOffset Value) : IOpenApiGeneratedTypeAlias<CodeScanningAnalysisCreatedAt, DateTimeOffset>
 {
     public static CodeScanningAnalysisCreatedAt Create(DateTimeOffset value) => new(value);
 }
@@ -20669,12 +21328,12 @@ public readonly record struct CodeScanningAnalysisCreatedAt(DateTimeOffset Value
 /// Type alias for Uri.
 /// </summary>
 [JsonConverter(typeof(OpenApiGeneratedTypeAliasJsonConverter<CodeScanningAnalysisUrl, Uri>))]
-public readonly record struct CodeScanningAnalysisUrl(Uri Value) : IOpenApiGeneratedTypeAlias<CodeScanningAnalysisUrl, Uri>
+public readonly partial record struct CodeScanningAnalysisUrl(Uri Value) : IOpenApiGeneratedTypeAlias<CodeScanningAnalysisUrl, Uri>
 {
     public static CodeScanningAnalysisUrl Create(Uri value) => new(value);
 }
 
-public record CodeScanningAnalysis
+public partial record CodeScanningAnalysis
 {
     /// <summary>
     /// The Git reference, formatted as `refs/pull/&lt;number&gt;/merge`, `refs/pull/&lt;number&gt;/head`,
@@ -20763,7 +21422,7 @@ public record CodeScanningAnalysis
 /// <summary>
 /// Successful deletion of a code scanning analysis
 /// </summary>
-public record CodeScanningAnalysisDeletion
+public partial record CodeScanningAnalysisDeletion
 {
     /// <summary>
     /// Next deletable analysis in chain, without last analysis deletion confirmation
@@ -20782,7 +21441,7 @@ public record CodeScanningAnalysisDeletion
 /// <summary>
 /// A CodeQL database.
 /// </summary>
-public record CodeScanningCodeqlDatabase
+public partial record CodeScanningCodeqlDatabase
 {
     /// <summary>
     /// The ID of the CodeQL database.
@@ -20849,7 +21508,7 @@ public record CodeScanningCodeqlDatabase
 /// <summary>
 /// The language targeted by the CodeQL query
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CodeScanningVariantAnalysisLanguage>))]
 public enum CodeScanningVariantAnalysisLanguage
 {
     [JsonStringEnumMemberName("actions")]
@@ -20877,7 +21536,7 @@ public enum CodeScanningVariantAnalysisLanguage
 /// <summary>
 /// Repository Identifier
 /// </summary>
-public record CodeScanningVariantAnalysisRepository
+public partial record CodeScanningVariantAnalysisRepository
 {
     /// <summary>
     /// A unique identifier of the repository.
@@ -20914,7 +21573,7 @@ public record CodeScanningVariantAnalysisRepository
 /// <summary>
 /// The new status of the CodeQL variant analysis repository task.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CodeScanningVariantAnalysisStatus>))]
 public enum CodeScanningVariantAnalysisStatus
 {
     [JsonStringEnumMemberName("pending")]
@@ -20931,7 +21590,7 @@ public enum CodeScanningVariantAnalysisStatus
     TimedOut
 }
 
-public record CodeScanningVariantAnalysisSkippedRepoGroup
+public partial record CodeScanningVariantAnalysisSkippedRepoGroup
 {
     /// <summary>
     /// The total number of repositories that were skipped for this reason.
@@ -20950,7 +21609,7 @@ public record CodeScanningVariantAnalysisSkippedRepoGroup
 /// <summary>
 /// A run of a CodeQL query against one or more repositories.
 /// </summary>
-public record CodeScanningVariantAnalysis
+public partial record CodeScanningVariantAnalysis
 {
     /// <summary>
     /// The ID of the variant analysis.
@@ -21026,7 +21685,7 @@ public record CodeScanningVariantAnalysis
 
 }
 
-public record CodeScanningVariantAnalysisRepoTask
+public partial record CodeScanningVariantAnalysisRepoTask
 {
     /// <summary>
     /// A GitHub repository.
@@ -21081,7 +21740,7 @@ public record CodeScanningVariantAnalysisRepoTask
 /// <summary>
 /// Configuration for code scanning default setup.
 /// </summary>
-public record CodeScanningDefaultSetup
+public partial record CodeScanningDefaultSetup
 {
     /// <summary>
     /// Code scanning default setup has been configured or not.
@@ -21136,7 +21795,7 @@ public record CodeScanningDefaultSetup
 /// <summary>
 /// Configuration for code scanning default setup.
 /// </summary>
-public record CodeScanningDefaultSetupUpdate
+public partial record CodeScanningDefaultSetupUpdate
 {
     /// <summary>
     /// The desired state of code scanning default setup.
@@ -21180,7 +21839,7 @@ public record CodeScanningDefaultSetupUpdate
 /// You can use `run_url` to track the status of the run. This includes a property status and conclusion.
 /// You should not rely on this always being an actions workflow run object.
 /// </summary>
-public record CodeScanningDefaultSetupUpdateResponse
+public partial record CodeScanningDefaultSetupUpdateResponse
 {
     /// <summary>
     /// ID of the corresponding run.
@@ -21204,7 +21863,7 @@ public record CodeScanningDefaultSetupUpdateResponse
 /// Type alias for string.
 /// </summary>
 [JsonConverter(typeof(OpenApiGeneratedTypeAliasJsonConverter<CodeScanningRefFull, string>))]
-public readonly record struct CodeScanningRefFull(string Value) : IOpenApiGeneratedTypeAlias<CodeScanningRefFull, string>
+public readonly partial record struct CodeScanningRefFull(string Value) : IOpenApiGeneratedTypeAlias<CodeScanningRefFull, string>
 {
     public static CodeScanningRefFull Create(string value) => new(value);
 }
@@ -21216,12 +21875,12 @@ public readonly record struct CodeScanningRefFull(string Value) : IOpenApiGenera
 /// Type alias for string.
 /// </summary>
 [JsonConverter(typeof(OpenApiGeneratedTypeAliasJsonConverter<CodeScanningAnalysisSarifFile, string>))]
-public readonly record struct CodeScanningAnalysisSarifFile(string Value) : IOpenApiGeneratedTypeAlias<CodeScanningAnalysisSarifFile, string>
+public readonly partial record struct CodeScanningAnalysisSarifFile(string Value) : IOpenApiGeneratedTypeAlias<CodeScanningAnalysisSarifFile, string>
 {
     public static CodeScanningAnalysisSarifFile Create(string value) => new(value);
 }
 
-public record CodeScanningSarifsReceipt
+public partial record CodeScanningSarifsReceipt
 {
     /// <summary>
     /// An identifier for the upload.
@@ -21237,7 +21896,7 @@ public record CodeScanningSarifsReceipt
 
 }
 
-public record CodeScanningSarifsStatus
+public partial record CodeScanningSarifsStatus
 {
     /// <summary>
     /// `pending` files have not yet been processed, while `complete` means results from the SARIF have been stored. `failed` files have either not been processed at all, or could only be partially processed.
@@ -21262,7 +21921,7 @@ public record CodeScanningSarifsStatus
 /// <summary>
 /// Code security configuration associated with a repository and attachment status
 /// </summary>
-public record CodeSecurityConfigurationForRepository
+public partial record CodeSecurityConfigurationForRepository
 {
     /// <summary>
     /// The attachment status of the code security configuration on the repository.
@@ -21281,7 +21940,7 @@ public record CodeSecurityConfigurationForRepository
 /// <summary>
 /// A list of errors found in a repo's CODEOWNERS file
 /// </summary>
-public record CodeownersErrors
+public partial record CodeownersErrors
 {
     [JsonPropertyName("errors")]
     public required IReadOnlyList<object> Errors { get; init; }
@@ -21291,7 +21950,7 @@ public record CodeownersErrors
 /// <summary>
 /// Permission check result for a given devcontainer config.
 /// </summary>
-public record CodespacesPermissionsCheckForDevcontainer
+public partial record CodespacesPermissionsCheckForDevcontainer
 {
     /// <summary>
     /// Whether the user has accepted the permissions defined by the devcontainer config
@@ -21304,7 +21963,7 @@ public record CodespacesPermissionsCheckForDevcontainer
 /// <summary>
 /// Set repository secrets for GitHub Codespaces.
 /// </summary>
-public record RepoCodespacesSecret
+public partial record RepoCodespacesSecret
 {
     /// <summary>
     /// The name of the secret.
@@ -21323,7 +21982,7 @@ public record RepoCodespacesSecret
 /// <summary>
 /// Collaborator
 /// </summary>
-public record Collaborator
+public partial record Collaborator
 {
     [JsonPropertyName("login")]
     public required string Login { get; init; }
@@ -21399,7 +22058,7 @@ public record Collaborator
 /// <summary>
 /// Repository invitations let you manage who you collaborate with.
 /// </summary>
-public record RepositoryInvitation
+public partial record RepositoryInvitation
 {
     /// <summary>
     /// Unique identifier of the repository invitation.
@@ -21451,7 +22110,7 @@ public record RepositoryInvitation
 /// <summary>
 /// Repository Collaborator Permission
 /// </summary>
-public record RepositoryCollaboratorPermission
+public partial record RepositoryCollaboratorPermission
 {
     [JsonPropertyName("permission")]
     public required string Permission { get; init; }
@@ -21467,7 +22126,7 @@ public record RepositoryCollaboratorPermission
 /// <summary>
 /// Commit Comment
 /// </summary>
-public record CommitComment
+public partial record CommitComment
 {
     [JsonPropertyName("html_url")]
     public required Uri HtmlUrl { get; init; }
@@ -21519,7 +22178,7 @@ public record CommitComment
 /// <summary>
 /// Reactions to conversations provide a way to help people express their feelings more simply and effectively.
 /// </summary>
-public record Reaction
+public partial record Reaction
 {
     [JsonPropertyName("id")]
     public required int Id { get; init; }
@@ -21544,7 +22203,7 @@ public record Reaction
 /// <summary>
 /// Branch Short
 /// </summary>
-public record BranchShort
+public partial record BranchShort
 {
     [JsonPropertyName("name")]
     public required string Name { get; init; }
@@ -21557,7 +22216,7 @@ public record BranchShort
 
 }
 
-public record SimpleCommitStatus
+public partial record SimpleCommitStatus
 {
     [JsonPropertyName("description")]
     public required string? Description { get; init; }
@@ -21597,7 +22256,7 @@ public record SimpleCommitStatus
 /// <summary>
 /// Combined Commit Status
 /// </summary>
-public record CombinedCommitStatus
+public partial record CombinedCommitStatus
 {
     [JsonPropertyName("state")]
     public required string State { get; init; }
@@ -21628,7 +22287,7 @@ public record CombinedCommitStatus
 /// <summary>
 /// The status of a commit.
 /// </summary>
-public record Status
+public partial record Status
 {
     [JsonPropertyName("url")]
     public required string Url { get; init; }
@@ -21665,7 +22324,7 @@ public record Status
 
 }
 
-public record CommunityHealthFile
+public partial record CommunityHealthFile
 {
     [JsonPropertyName("url")]
     public required Uri Url { get; init; }
@@ -21678,7 +22337,7 @@ public record CommunityHealthFile
 /// <summary>
 /// Community Profile
 /// </summary>
-public record CommunityProfile
+public partial record CommunityProfile
 {
     [JsonPropertyName("health_percentage")]
     public required int HealthPercentage { get; init; }
@@ -21703,7 +22362,7 @@ public record CommunityProfile
 /// <summary>
 /// Commit Comparison
 /// </summary>
-public record CommitComparison
+public partial record CommitComparison
 {
     [JsonPropertyName("url")]
     public required Uri Url { get; init; }
@@ -21755,7 +22414,7 @@ public record CommitComparison
 /// <summary>
 /// Content Tree
 /// </summary>
-public record ContentTree
+public partial record ContentTree
 {
     [JsonPropertyName("type")]
     public required string Type { get; init; }
@@ -21806,7 +22465,7 @@ public record ContentDirectory;
 /// <summary>
 /// Content File
 /// </summary>
-public record ContentFile
+public partial record ContentFile
 {
     [JsonPropertyName("type")]
     public required ContentFileType Type { get; init; }
@@ -21855,7 +22514,7 @@ public record ContentFile
 /// <summary>
 /// An object describing a symlink
 /// </summary>
-public record ContentSymlink
+public partial record ContentSymlink
 {
     [JsonPropertyName("type")]
     public required ContentSymlinkType Type { get; init; }
@@ -21895,7 +22554,7 @@ public record ContentSymlink
 /// <summary>
 /// An object describing a submodule
 /// </summary>
-public record ContentSubmodule
+public partial record ContentSubmodule
 {
     [JsonPropertyName("type")]
     public required ContentSubmoduleType Type { get; init; }
@@ -21935,7 +22594,7 @@ public record ContentSubmodule
 /// <summary>
 /// File Commit
 /// </summary>
-public record FileCommit
+public partial record FileCommit
 {
     [JsonPropertyName("content")]
     public required object? Content { get; init; }
@@ -21952,7 +22611,7 @@ public record FileCommit
 /// Type alias for string.
 /// </summary>
 [JsonConverter(typeof(OpenApiGeneratedTypeAliasJsonConverter<SecretScanningPushProtectionBypassPlaceholderId, string>))]
-public readonly record struct SecretScanningPushProtectionBypassPlaceholderId(string Value) : IOpenApiGeneratedTypeAlias<SecretScanningPushProtectionBypassPlaceholderId, string>
+public readonly partial record struct SecretScanningPushProtectionBypassPlaceholderId(string Value) : IOpenApiGeneratedTypeAlias<SecretScanningPushProtectionBypassPlaceholderId, string>
 {
     public static SecretScanningPushProtectionBypassPlaceholderId Create(string value) => new(value);
 }
@@ -21960,7 +22619,7 @@ public readonly record struct SecretScanningPushProtectionBypassPlaceholderId(st
 /// <summary>
 /// Repository rule violation was detected
 /// </summary>
-public record RepositoryRuleViolationError
+public partial record RepositoryRuleViolationError
 {
     [JsonPropertyName("message")]
     public string? Message { get; init; }
@@ -21979,7 +22638,7 @@ public record RepositoryRuleViolationError
 /// <summary>
 /// Contributor
 /// </summary>
-public record Contributor
+public partial record Contributor
 {
     [JsonPropertyName("login")]
     public string? Login { get; init; }
@@ -22052,7 +22711,7 @@ public record Contributor
 /// <summary>
 /// A Dependabot alert.
 /// </summary>
-public record DependabotAlert
+public partial record DependabotAlert
 {
     /// <summary>
     /// The security alert number.
@@ -22158,7 +22817,7 @@ public record DependabotAlert
 /// <summary>
 /// Set secrets for Dependabot.
 /// </summary>
-public record DependabotSecret
+public partial record DependabotSecret
 {
     /// <summary>
     /// The name of the secret.
@@ -22182,7 +22841,7 @@ public record DependencyGraphDiff;
 /// <summary>
 /// A schema for the SPDX JSON format returned by the Dependency Graph.
 /// </summary>
-public record DependencyGraphSpdxSbom
+public partial record DependencyGraphSpdxSbom
 {
     [JsonPropertyName("sbom")]
     public required object Sbom { get; init; }
@@ -22194,7 +22853,7 @@ public record DependencyGraphSpdxSbom
 /// </summary>
 public record Metadata;
 
-public record Dependency
+public partial record Dependency
 {
     /// <summary>
     /// Package-url (PURL) of dependency. See https://github.com/package-url/purl-spec for more details.
@@ -22228,7 +22887,7 @@ public record Dependency
 
 }
 
-public record Manifest
+public partial record Manifest
 {
     /// <summary>
     /// The name of the manifest.
@@ -22256,7 +22915,7 @@ public record Manifest
 /// <summary>
 /// Create a new snapshot of a repository's dependencies.
 /// </summary>
-public record Snapshot
+public partial record Snapshot
 {
     /// <summary>
     /// The version of the repository snapshot submission.
@@ -22268,7 +22927,7 @@ public record Snapshot
     public required object Job { get; init; }
 
     /// <summary>
-    /// The commit SHA associated with this dependency snapshot. Maximum length: 40 characters.
+    /// The commit SHA associated with this dependency snapshot. Maximum length: 64 characters.
     /// </summary>
     [JsonPropertyName("sha")]
     public required string Sha { get; init; }
@@ -22308,7 +22967,7 @@ public record Snapshot
 /// <summary>
 /// The status of a deployment.
 /// </summary>
-public record DeploymentStatus
+public partial record DeploymentStatus
 {
     [JsonPropertyName("url")]
     public required Uri Url { get; init; }
@@ -22382,7 +23041,7 @@ public record DeploymentStatus
 /// Type alias for int.
 /// </summary>
 [JsonConverter(typeof(OpenApiGeneratedTypeAliasJsonConverter<WaitTimer, int>))]
-public readonly record struct WaitTimer(int Value) : IOpenApiGeneratedTypeAlias<WaitTimer, int>
+public readonly partial record struct WaitTimer(int Value) : IOpenApiGeneratedTypeAlias<WaitTimer, int>
 {
     public static WaitTimer Create(int value) => new(value);
 }
@@ -22390,7 +23049,7 @@ public readonly record struct WaitTimer(int Value) : IOpenApiGeneratedTypeAlias<
 /// <summary>
 /// The type of deployment branch policy for this environment. To allow all branches to deploy, set to `null`.
 /// </summary>
-public record DeploymentBranchPolicySettings
+public partial record DeploymentBranchPolicySettings
 {
     /// <summary>
     /// Whether only branches with branch protection rules can deploy to this environment. If `protected_branches` is `true`, `custom_branch_policies` must be `false`; if `protected_branches` is `false`, `custom_branch_policies` must be `true`.
@@ -22409,7 +23068,7 @@ public record DeploymentBranchPolicySettings
 /// <summary>
 /// Details of a deployment environment
 /// </summary>
-public record Environment
+public partial record Environment
 {
     /// <summary>
     /// The id of the environment.
@@ -22465,7 +23124,7 @@ public record Environment
 /// Type alias for bool.
 /// </summary>
 [JsonConverter(typeof(OpenApiGeneratedTypeAliasJsonConverter<PreventSelfReview, bool>))]
-public readonly record struct PreventSelfReview(bool Value) : IOpenApiGeneratedTypeAlias<PreventSelfReview, bool>
+public readonly partial record struct PreventSelfReview(bool Value) : IOpenApiGeneratedTypeAlias<PreventSelfReview, bool>
 {
     public static PreventSelfReview Create(bool value) => new(value);
 }
@@ -22473,7 +23132,7 @@ public readonly record struct PreventSelfReview(bool Value) : IOpenApiGeneratedT
 /// <summary>
 /// Details of a deployment branch or tag policy.
 /// </summary>
-public record DeploymentBranchPolicy
+public partial record DeploymentBranchPolicy
 {
     /// <summary>
     /// The unique identifier of the branch or tag policy.
@@ -22498,7 +23157,7 @@ public record DeploymentBranchPolicy
 
 }
 
-public record DeploymentBranchPolicyNamePatternWithType
+public partial record DeploymentBranchPolicyNamePatternWithType
 {
     /// <summary>
     /// The name pattern that branches or tags must match in order to deploy to the environment.
@@ -22517,7 +23176,7 @@ public record DeploymentBranchPolicyNamePatternWithType
 
 }
 
-public record DeploymentBranchPolicyNamePattern
+public partial record DeploymentBranchPolicyNamePattern
 {
     /// <summary>
     /// The name pattern that branches must match in order to deploy to the environment.
@@ -22533,7 +23192,7 @@ public record DeploymentBranchPolicyNamePattern
 /// <summary>
 /// A GitHub App that is providing a custom deployment protection rule.
 /// </summary>
-public record CustomDeploymentRuleApp
+public partial record CustomDeploymentRuleApp
 {
     /// <summary>
     /// The unique identifier of the deployment protection rule integration.
@@ -22564,7 +23223,7 @@ public record CustomDeploymentRuleApp
 /// <summary>
 /// Deployment protection rule
 /// </summary>
-public record DeploymentProtectionRule
+public partial record DeploymentProtectionRule
 {
     /// <summary>
     /// The unique identifier for the deployment protection rule.
@@ -22595,7 +23254,7 @@ public record DeploymentProtectionRule
 /// <summary>
 /// Short Blob
 /// </summary>
-public record ShortBlob
+public partial record ShortBlob
 {
     [JsonPropertyName("url")]
     public required string Url { get; init; }
@@ -22608,7 +23267,7 @@ public record ShortBlob
 /// <summary>
 /// Blob
 /// </summary>
-public record Blob
+public partial record Blob
 {
     [JsonPropertyName("content")]
     public required string Content { get; init; }
@@ -22636,7 +23295,7 @@ public record Blob
 /// <summary>
 /// Low-level Git commit operations within a repository
 /// </summary>
-public record GitCommit
+public partial record GitCommit
 {
     /// <summary>
     /// SHA for the commit
@@ -22685,7 +23344,7 @@ public record GitCommit
 /// <summary>
 /// Git references within a repository
 /// </summary>
-public record GitRef
+public partial record GitRef
 {
     [JsonPropertyName("ref")]
     public required string Ref { get; init; }
@@ -22704,7 +23363,7 @@ public record GitRef
 /// <summary>
 /// Metadata for a Git tag
 /// </summary>
-public record GitTag
+public partial record GitTag
 {
     [JsonPropertyName("node_id")]
     public required string NodeId { get; init; }
@@ -22744,7 +23403,7 @@ public record GitTag
 /// <summary>
 /// The hierarchy between files in a Git repository.
 /// </summary>
-public record GitTree
+public partial record GitTree
 {
     [JsonPropertyName("sha")]
     public required string Sha { get; init; }
@@ -22766,7 +23425,7 @@ public record GitTree
 /// <summary>
 /// Repository hash algorithm
 /// </summary>
-public record RepositoryHashAlgorithm
+public partial record RepositoryHashAlgorithm
 {
     /// <summary>
     /// The Git hash algorithm used by this repository.
@@ -22776,7 +23435,7 @@ public record RepositoryHashAlgorithm
 
 }
 
-public record HookResponse
+public partial record HookResponse
 {
     [JsonPropertyName("code")]
     public required int? Code { get; init; }
@@ -22792,7 +23451,7 @@ public record HookResponse
 /// <summary>
 /// Webhooks for repositories.
 /// </summary>
-public record Hook
+public partial record Hook
 {
     [JsonPropertyName("type")]
     public required string Type { get; init; }
@@ -22853,7 +23512,7 @@ public record Hook
 /// <summary>
 /// Check immutable releases
 /// </summary>
-public record CheckImmutableReleases
+public partial record CheckImmutableReleases
 {
     /// <summary>
     /// Whether immutable releases are enabled for the repository.
@@ -22872,7 +23531,7 @@ public record CheckImmutableReleases
 /// <summary>
 /// A repository import from an external source.
 /// </summary>
-public record Import
+public partial record Import
 {
     [JsonPropertyName("vcs")]
     public required string? Vcs { get; init; }
@@ -22951,7 +23610,7 @@ public record Import
 /// <summary>
 /// Porter Author
 /// </summary>
-public record PorterAuthor
+public partial record PorterAuthor
 {
     [JsonPropertyName("id")]
     public required int Id { get; init; }
@@ -22979,7 +23638,7 @@ public record PorterAuthor
 /// <summary>
 /// Porter Large File
 /// </summary>
-public record PorterLargeFile
+public partial record PorterLargeFile
 {
     [JsonPropertyName("ref_name")]
     public required string RefName { get; init; }
@@ -22996,9 +23655,22 @@ public record PorterLargeFile
 }
 
 /// <summary>
+/// A list of user logins to add or remove from the pull request creation cap bypass list.
+/// </summary>
+public partial record InteractionLimitPullRequestBypassList
+{
+    /// <summary>
+    /// A list of user logins to add or remove from the bypass list.
+    /// </summary>
+    [JsonPropertyName("users")]
+    public required IReadOnlyList<string> Users { get; init; }
+
+}
+
+/// <summary>
 /// Issue Event Label
 /// </summary>
-public record IssueEventLabel
+public partial record IssueEventLabel
 {
     [JsonPropertyName("name")]
     public required string? Name { get; init; }
@@ -23008,7 +23680,7 @@ public record IssueEventLabel
 
 }
 
-public record IssueEventDismissedReview
+public partial record IssueEventDismissedReview
 {
     [JsonPropertyName("state")]
     public required string State { get; init; }
@@ -23027,7 +23699,7 @@ public record IssueEventDismissedReview
 /// <summary>
 /// Issue Event Milestone
 /// </summary>
-public record IssueEventMilestone
+public partial record IssueEventMilestone
 {
     [JsonPropertyName("title")]
     public required string Title { get; init; }
@@ -23037,7 +23709,7 @@ public record IssueEventMilestone
 /// <summary>
 /// Issue Event Project Card
 /// </summary>
-public record IssueEventProjectCard
+public partial record IssueEventProjectCard
 {
     [JsonPropertyName("url")]
     public required Uri Url { get; init; }
@@ -23062,7 +23734,7 @@ public record IssueEventProjectCard
 /// <summary>
 /// Issue Event Rename
 /// </summary>
-public record IssueEventRename
+public partial record IssueEventRename
 {
     [JsonPropertyName("from")]
     public required string From { get; init; }
@@ -23073,9 +23745,96 @@ public record IssueEventRename
 }
 
 /// <summary>
+/// The type of issue.
+/// </summary>
+public partial record IssueTypeWebhook
+{
+    /// <summary>
+    /// The unique identifier of the issue type.
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    /// <summary>
+    /// The name of the issue type.
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    /// <summary>
+    /// The color of the issue type.
+    /// </summary>
+    [JsonPropertyName("color")]
+    public IssueTypeColor? Color { get; init; }
+
+}
+
+/// <summary>
+/// A minimal reference to an issue linked from a timeline event (e.g. sub-issue, parent-issue, or dependency events).
+/// </summary>
+public partial record IssueReference
+{
+    /// <summary>
+    /// The number of the referenced issue.
+    /// </summary>
+    [JsonPropertyName("number")]
+    public required int Number { get; init; }
+
+    /// <summary>
+    /// The title of the referenced issue.
+    /// </summary>
+    [JsonPropertyName("title")]
+    public required string Title { get; init; }
+
+    /// <summary>
+    /// The state of the referenced issue.
+    /// </summary>
+    [JsonPropertyName("state")]
+    public required string State { get; init; }
+
+    /// <summary>
+    /// The reason for the referenced issue's state.
+    /// </summary>
+    [JsonPropertyName("state_reason")]
+    public string? StateReason { get; init; }
+
+    /// <summary>
+    /// A GitHub repository.
+    /// </summary>
+    [JsonPropertyName("repository")]
+    public required SimpleRepository Repository { get; init; }
+
+    /// <summary>
+    /// The type of the referenced issue.
+    /// </summary>
+    [JsonPropertyName("issue_type")]
+    public required object? IssueType { get; init; }
+
+}
+
+/// <summary>
+/// The intent behind an agent's action on an issue, including the rationale and confidence. Present (and `null` when the event carried no agent intent) on supported event types while the issue suggestions feature is enabled for the repository; the property is omitted entirely when the feature is disabled or the event type does not support intent.
+/// </summary>
+public partial record IssueEventIntent
+{
+    /// <summary>
+    /// The reasoning the agent provided for the change.
+    /// </summary>
+    [JsonPropertyName("rationale")]
+    public string? Rationale { get; init; }
+
+    /// <summary>
+    /// The confidence level the agent had when performing this action.
+    /// </summary>
+    [JsonPropertyName("confidence")]
+    public Confidence? Confidence { get; init; }
+
+}
+
+/// <summary>
 /// Issue Event
 /// </summary>
-public record IssueEvent
+public partial record IssueEvent
 {
     [JsonPropertyName("id")]
     public required long Id { get; init; }
@@ -23150,6 +23909,33 @@ public record IssueEvent
     public IssueEventRename? Rename { get; init; }
 
     /// <summary>
+    /// The type of issue.
+    /// </summary>
+    [JsonPropertyName("issue_type")]
+    public IssueTypeWebhook? IssueType { get; init; }
+
+    /// <summary>
+    /// The type of issue.
+    /// </summary>
+    [JsonPropertyName("prev_issue_type")]
+    public IssueTypeWebhook? PrevIssueType { get; init; }
+
+    [JsonPropertyName("sub_issue")]
+    public IssueReference? SubIssue { get; init; }
+
+    [JsonPropertyName("parent_issue")]
+    public IssueReference? ParentIssue { get; init; }
+
+    [JsonPropertyName("blocked_by")]
+    public IssueReference? BlockedBy { get; init; }
+
+    [JsonPropertyName("blocking")]
+    public IssueReference? Blocking { get; init; }
+
+    [JsonPropertyName("intent")]
+    public IssueEventIntent? Intent { get; init; }
+
+    /// <summary>
     /// How the author is associated with the repository.
     /// </summary>
     [JsonPropertyName("author_association")]
@@ -23166,7 +23952,7 @@ public record IssueEvent
 /// <summary>
 /// Labeled Issue Event
 /// </summary>
-public record LabeledIssueEvent
+public partial record LabeledIssueEvent
 {
     [JsonPropertyName("id")]
     public required int Id { get; init; }
@@ -23200,13 +23986,16 @@ public record LabeledIssueEvent
 
     [JsonPropertyName("label")]
     public required object Label { get; init; }
+
+    [JsonPropertyName("intent")]
+    public IssueEventIntent? Intent { get; init; }
 
 }
 
 /// <summary>
 /// Unlabeled Issue Event
 /// </summary>
-public record UnlabeledIssueEvent
+public partial record UnlabeledIssueEvent
 {
     [JsonPropertyName("id")]
     public required int Id { get; init; }
@@ -23241,12 +24030,15 @@ public record UnlabeledIssueEvent
     [JsonPropertyName("label")]
     public required object Label { get; init; }
 
+    [JsonPropertyName("intent")]
+    public IssueEventIntent? Intent { get; init; }
+
 }
 
 /// <summary>
 /// Assigned Issue Event
 /// </summary>
-public record AssignedIssueEvent
+public partial record AssignedIssueEvent
 {
     [JsonPropertyName("id")]
     public required int Id { get; init; }
@@ -23293,12 +24085,15 @@ public record AssignedIssueEvent
     [JsonPropertyName("assigner")]
     public required SimpleUser Assigner { get; init; }
 
+    [JsonPropertyName("intent")]
+    public IssueEventIntent? Intent { get; init; }
+
 }
 
 /// <summary>
 /// Unassigned Issue Event
 /// </summary>
-public record UnassignedIssueEvent
+public partial record UnassignedIssueEvent
 {
     [JsonPropertyName("id")]
     public required int Id { get; init; }
@@ -23347,7 +24142,7 @@ public record UnassignedIssueEvent
 /// <summary>
 /// Milestoned Issue Event
 /// </summary>
-public record MilestonedIssueEvent
+public partial record MilestonedIssueEvent
 {
     [JsonPropertyName("id")]
     public required int Id { get; init; }
@@ -23387,7 +24182,7 @@ public record MilestonedIssueEvent
 /// <summary>
 /// Demilestoned Issue Event
 /// </summary>
-public record DemilestonedIssueEvent
+public partial record DemilestonedIssueEvent
 {
     [JsonPropertyName("id")]
     public required int Id { get; init; }
@@ -23427,7 +24222,7 @@ public record DemilestonedIssueEvent
 /// <summary>
 /// Renamed Issue Event
 /// </summary>
-public record RenamedIssueEvent
+public partial record RenamedIssueEvent
 {
     [JsonPropertyName("id")]
     public required int Id { get; init; }
@@ -23467,7 +24262,7 @@ public record RenamedIssueEvent
 /// <summary>
 /// Review Requested Issue Event
 /// </summary>
-public record ReviewRequestedIssueEvent
+public partial record ReviewRequestedIssueEvent
 {
     [JsonPropertyName("id")]
     public required int Id { get; init; }
@@ -23522,7 +24317,7 @@ public record ReviewRequestedIssueEvent
 /// <summary>
 /// Review Request Removed Issue Event
 /// </summary>
-public record ReviewRequestRemovedIssueEvent
+public partial record ReviewRequestRemovedIssueEvent
 {
     [JsonPropertyName("id")]
     public required int Id { get; init; }
@@ -23577,7 +24372,7 @@ public record ReviewRequestRemovedIssueEvent
 /// <summary>
 /// Review Dismissed Issue Event
 /// </summary>
-public record ReviewDismissedIssueEvent
+public partial record ReviewDismissedIssueEvent
 {
     [JsonPropertyName("id")]
     public required int Id { get; init; }
@@ -23617,7 +24412,7 @@ public record ReviewDismissedIssueEvent
 /// <summary>
 /// Locked Issue Event
 /// </summary>
-public record LockedIssueEvent
+public partial record LockedIssueEvent
 {
     [JsonPropertyName("id")]
     public required int Id { get; init; }
@@ -23657,7 +24452,7 @@ public record LockedIssueEvent
 /// <summary>
 /// Added to Project Issue Event
 /// </summary>
-public record AddedToProjectIssueEvent
+public partial record AddedToProjectIssueEvent
 {
     [JsonPropertyName("id")]
     public required int Id { get; init; }
@@ -23697,7 +24492,7 @@ public record AddedToProjectIssueEvent
 /// <summary>
 /// Moved Column in Project Issue Event
 /// </summary>
-public record MovedColumnInProjectIssueEvent
+public partial record MovedColumnInProjectIssueEvent
 {
     [JsonPropertyName("id")]
     public required int Id { get; init; }
@@ -23737,7 +24532,7 @@ public record MovedColumnInProjectIssueEvent
 /// <summary>
 /// Removed from Project Issue Event
 /// </summary>
-public record RemovedFromProjectIssueEvent
+public partial record RemovedFromProjectIssueEvent
 {
     [JsonPropertyName("id")]
     public required int Id { get; init; }
@@ -23777,7 +24572,7 @@ public record RemovedFromProjectIssueEvent
 /// <summary>
 /// Converted Note to Issue Issue Event
 /// </summary>
-public record ConvertedNoteToIssueIssueEvent
+public partial record ConvertedNoteToIssueIssueEvent
 {
     [JsonPropertyName("id")]
     public required int Id { get; init; }
@@ -23818,10 +24613,474 @@ public record ConvertedNoteToIssueIssueEvent
 }
 
 /// <summary>
+/// Issue Type Added Issue Event
+/// </summary>
+public partial record IssueTypeAddedIssueEvent
+{
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    [JsonPropertyName("url")]
+    public required string Url { get; init; }
+
+    /// <summary>
+    /// A GitHub user.
+    /// </summary>
+    [JsonPropertyName("actor")]
+    public required SimpleUser Actor { get; init; }
+
+    [JsonPropertyName("event")]
+    public required string Event { get; init; }
+
+    [JsonPropertyName("commit_id")]
+    public required string? CommitId { get; init; }
+
+    [JsonPropertyName("commit_url")]
+    public required string? CommitUrl { get; init; }
+
+    [JsonPropertyName("created_at")]
+    public required string CreatedAt { get; init; }
+
+    [JsonPropertyName("performed_via_github_app")]
+    public required Integration? PerformedViaGithubApp { get; init; }
+
+    /// <summary>
+    /// The type of issue.
+    /// </summary>
+    [JsonPropertyName("issue_type")]
+    public required IssueTypeWebhook? IssueType { get; init; }
+
+    [JsonPropertyName("intent")]
+    public IssueEventIntent? Intent { get; init; }
+
+}
+
+/// <summary>
+/// Issue Type Removed Issue Event
+/// </summary>
+public partial record IssueTypeRemovedIssueEvent
+{
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    [JsonPropertyName("url")]
+    public required string Url { get; init; }
+
+    /// <summary>
+    /// A GitHub user.
+    /// </summary>
+    [JsonPropertyName("actor")]
+    public required SimpleUser Actor { get; init; }
+
+    [JsonPropertyName("event")]
+    public required string Event { get; init; }
+
+    [JsonPropertyName("commit_id")]
+    public required string? CommitId { get; init; }
+
+    [JsonPropertyName("commit_url")]
+    public required string? CommitUrl { get; init; }
+
+    [JsonPropertyName("created_at")]
+    public required string CreatedAt { get; init; }
+
+    [JsonPropertyName("performed_via_github_app")]
+    public required Integration? PerformedViaGithubApp { get; init; }
+
+    /// <summary>
+    /// The type of issue.
+    /// </summary>
+    [JsonPropertyName("prev_issue_type")]
+    public required IssueTypeWebhook? PrevIssueType { get; init; }
+
+    [JsonPropertyName("intent")]
+    public IssueEventIntent? Intent { get; init; }
+
+}
+
+/// <summary>
+/// Issue Type Changed Issue Event
+/// </summary>
+public partial record IssueTypeChangedIssueEvent
+{
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    [JsonPropertyName("url")]
+    public required string Url { get; init; }
+
+    /// <summary>
+    /// A GitHub user.
+    /// </summary>
+    [JsonPropertyName("actor")]
+    public required SimpleUser Actor { get; init; }
+
+    [JsonPropertyName("event")]
+    public required string Event { get; init; }
+
+    [JsonPropertyName("commit_id")]
+    public required string? CommitId { get; init; }
+
+    [JsonPropertyName("commit_url")]
+    public required string? CommitUrl { get; init; }
+
+    [JsonPropertyName("created_at")]
+    public required string CreatedAt { get; init; }
+
+    [JsonPropertyName("performed_via_github_app")]
+    public required Integration? PerformedViaGithubApp { get; init; }
+
+    /// <summary>
+    /// The type of issue.
+    /// </summary>
+    [JsonPropertyName("issue_type")]
+    public required IssueTypeWebhook? IssueType { get; init; }
+
+    /// <summary>
+    /// The type of issue.
+    /// </summary>
+    [JsonPropertyName("prev_issue_type")]
+    public required IssueTypeWebhook? PrevIssueType { get; init; }
+
+    [JsonPropertyName("intent")]
+    public IssueEventIntent? Intent { get; init; }
+
+}
+
+/// <summary>
+/// Sub-issue Added Issue Event
+/// </summary>
+public partial record SubIssueAddedIssueEvent
+{
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    [JsonPropertyName("url")]
+    public required string Url { get; init; }
+
+    /// <summary>
+    /// A GitHub user.
+    /// </summary>
+    [JsonPropertyName("actor")]
+    public required SimpleUser Actor { get; init; }
+
+    [JsonPropertyName("event")]
+    public required string Event { get; init; }
+
+    [JsonPropertyName("commit_id")]
+    public required string? CommitId { get; init; }
+
+    [JsonPropertyName("commit_url")]
+    public required string? CommitUrl { get; init; }
+
+    [JsonPropertyName("created_at")]
+    public required string CreatedAt { get; init; }
+
+    [JsonPropertyName("performed_via_github_app")]
+    public required Integration? PerformedViaGithubApp { get; init; }
+
+    [JsonPropertyName("sub_issue")]
+    public required IssueReference? SubIssue { get; init; }
+
+}
+
+/// <summary>
+/// Sub-issue Removed Issue Event
+/// </summary>
+public partial record SubIssueRemovedIssueEvent
+{
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    [JsonPropertyName("url")]
+    public required string Url { get; init; }
+
+    /// <summary>
+    /// A GitHub user.
+    /// </summary>
+    [JsonPropertyName("actor")]
+    public required SimpleUser Actor { get; init; }
+
+    [JsonPropertyName("event")]
+    public required string Event { get; init; }
+
+    [JsonPropertyName("commit_id")]
+    public required string? CommitId { get; init; }
+
+    [JsonPropertyName("commit_url")]
+    public required string? CommitUrl { get; init; }
+
+    [JsonPropertyName("created_at")]
+    public required string CreatedAt { get; init; }
+
+    [JsonPropertyName("performed_via_github_app")]
+    public required Integration? PerformedViaGithubApp { get; init; }
+
+    [JsonPropertyName("sub_issue")]
+    public required IssueReference? SubIssue { get; init; }
+
+}
+
+/// <summary>
+/// Parent-issue Added Issue Event
+/// </summary>
+public partial record ParentIssueAddedIssueEvent
+{
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    [JsonPropertyName("url")]
+    public required string Url { get; init; }
+
+    /// <summary>
+    /// A GitHub user.
+    /// </summary>
+    [JsonPropertyName("actor")]
+    public required SimpleUser Actor { get; init; }
+
+    [JsonPropertyName("event")]
+    public required string Event { get; init; }
+
+    [JsonPropertyName("commit_id")]
+    public required string? CommitId { get; init; }
+
+    [JsonPropertyName("commit_url")]
+    public required string? CommitUrl { get; init; }
+
+    [JsonPropertyName("created_at")]
+    public required string CreatedAt { get; init; }
+
+    [JsonPropertyName("performed_via_github_app")]
+    public required Integration? PerformedViaGithubApp { get; init; }
+
+    [JsonPropertyName("parent_issue")]
+    public required IssueReference? ParentIssue { get; init; }
+
+}
+
+/// <summary>
+/// Parent-issue Removed Issue Event
+/// </summary>
+public partial record ParentIssueRemovedIssueEvent
+{
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    [JsonPropertyName("url")]
+    public required string Url { get; init; }
+
+    /// <summary>
+    /// A GitHub user.
+    /// </summary>
+    [JsonPropertyName("actor")]
+    public required SimpleUser Actor { get; init; }
+
+    [JsonPropertyName("event")]
+    public required string Event { get; init; }
+
+    [JsonPropertyName("commit_id")]
+    public required string? CommitId { get; init; }
+
+    [JsonPropertyName("commit_url")]
+    public required string? CommitUrl { get; init; }
+
+    [JsonPropertyName("created_at")]
+    public required string CreatedAt { get; init; }
+
+    [JsonPropertyName("performed_via_github_app")]
+    public required Integration? PerformedViaGithubApp { get; init; }
+
+    [JsonPropertyName("parent_issue")]
+    public required IssueReference? ParentIssue { get; init; }
+
+}
+
+/// <summary>
+/// Blocked-by Added Issue Event
+/// </summary>
+public partial record BlockedByAddedIssueEvent
+{
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    [JsonPropertyName("url")]
+    public required string Url { get; init; }
+
+    /// <summary>
+    /// A GitHub user.
+    /// </summary>
+    [JsonPropertyName("actor")]
+    public required SimpleUser Actor { get; init; }
+
+    [JsonPropertyName("event")]
+    public required string Event { get; init; }
+
+    [JsonPropertyName("commit_id")]
+    public required string? CommitId { get; init; }
+
+    [JsonPropertyName("commit_url")]
+    public required string? CommitUrl { get; init; }
+
+    [JsonPropertyName("created_at")]
+    public required string CreatedAt { get; init; }
+
+    [JsonPropertyName("performed_via_github_app")]
+    public required Integration? PerformedViaGithubApp { get; init; }
+
+    [JsonPropertyName("blocked_by")]
+    public required IssueReference? BlockedBy { get; init; }
+
+}
+
+/// <summary>
+/// Blocked-by Removed Issue Event
+/// </summary>
+public partial record BlockedByRemovedIssueEvent
+{
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    [JsonPropertyName("url")]
+    public required string Url { get; init; }
+
+    /// <summary>
+    /// A GitHub user.
+    /// </summary>
+    [JsonPropertyName("actor")]
+    public required SimpleUser Actor { get; init; }
+
+    [JsonPropertyName("event")]
+    public required string Event { get; init; }
+
+    [JsonPropertyName("commit_id")]
+    public required string? CommitId { get; init; }
+
+    [JsonPropertyName("commit_url")]
+    public required string? CommitUrl { get; init; }
+
+    [JsonPropertyName("created_at")]
+    public required string CreatedAt { get; init; }
+
+    [JsonPropertyName("performed_via_github_app")]
+    public required Integration? PerformedViaGithubApp { get; init; }
+
+    [JsonPropertyName("blocked_by")]
+    public required IssueReference? BlockedBy { get; init; }
+
+}
+
+/// <summary>
+/// Blocking Added Issue Event
+/// </summary>
+public partial record BlockingAddedIssueEvent
+{
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    [JsonPropertyName("url")]
+    public required string Url { get; init; }
+
+    /// <summary>
+    /// A GitHub user.
+    /// </summary>
+    [JsonPropertyName("actor")]
+    public required SimpleUser Actor { get; init; }
+
+    [JsonPropertyName("event")]
+    public required string Event { get; init; }
+
+    [JsonPropertyName("commit_id")]
+    public required string? CommitId { get; init; }
+
+    [JsonPropertyName("commit_url")]
+    public required string? CommitUrl { get; init; }
+
+    [JsonPropertyName("created_at")]
+    public required string CreatedAt { get; init; }
+
+    [JsonPropertyName("performed_via_github_app")]
+    public required Integration? PerformedViaGithubApp { get; init; }
+
+    [JsonPropertyName("blocking")]
+    public required IssueReference? Blocking { get; init; }
+
+}
+
+/// <summary>
+/// Blocking Removed Issue Event
+/// </summary>
+public partial record BlockingRemovedIssueEvent
+{
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    [JsonPropertyName("url")]
+    public required string Url { get; init; }
+
+    /// <summary>
+    /// A GitHub user.
+    /// </summary>
+    [JsonPropertyName("actor")]
+    public required SimpleUser Actor { get; init; }
+
+    [JsonPropertyName("event")]
+    public required string Event { get; init; }
+
+    [JsonPropertyName("commit_id")]
+    public required string? CommitId { get; init; }
+
+    [JsonPropertyName("commit_url")]
+    public required string? CommitUrl { get; init; }
+
+    [JsonPropertyName("created_at")]
+    public required string CreatedAt { get; init; }
+
+    [JsonPropertyName("performed_via_github_app")]
+    public required Integration? PerformedViaGithubApp { get; init; }
+
+    [JsonPropertyName("blocking")]
+    public required IssueReference? Blocking { get; init; }
+
+}
+
+/// <summary>
 /// Issue Event for Issue
 /// </summary>
 /// <remarks>
-/// Union of: LabeledIssueEvent | UnlabeledIssueEvent | AssignedIssueEvent | UnassignedIssueEvent | MilestonedIssueEvent | DemilestonedIssueEvent | RenamedIssueEvent | ReviewRequestedIssueEvent | ReviewRequestRemovedIssueEvent | ReviewDismissedIssueEvent | LockedIssueEvent | AddedToProjectIssueEvent | MovedColumnInProjectIssueEvent | RemovedFromProjectIssueEvent | ConvertedNoteToIssueIssueEvent
+/// Union of: LabeledIssueEvent | UnlabeledIssueEvent | AssignedIssueEvent | UnassignedIssueEvent | MilestonedIssueEvent | DemilestonedIssueEvent | RenamedIssueEvent | ReviewRequestedIssueEvent | ReviewRequestRemovedIssueEvent | ReviewDismissedIssueEvent | LockedIssueEvent | AddedToProjectIssueEvent | MovedColumnInProjectIssueEvent | RemovedFromProjectIssueEvent | ConvertedNoteToIssueIssueEvent | IssueTypeAddedIssueEvent | IssueTypeRemovedIssueEvent | IssueTypeChangedIssueEvent | SubIssueAddedIssueEvent | SubIssueRemovedIssueEvent | ParentIssueAddedIssueEvent | ParentIssueRemovedIssueEvent | BlockedByAddedIssueEvent | BlockedByRemovedIssueEvent | BlockingAddedIssueEvent | BlockingRemovedIssueEvent
 /// </remarks>
 [JsonDerivedType(typeof(LabeledIssueEvent), "labeled-issue-event")]
 [JsonDerivedType(typeof(UnlabeledIssueEvent), "unlabeled-issue-event")]
@@ -23838,12 +25097,108 @@ public record ConvertedNoteToIssueIssueEvent
 [JsonDerivedType(typeof(MovedColumnInProjectIssueEvent), "moved-column-in-project-issue-event")]
 [JsonDerivedType(typeof(RemovedFromProjectIssueEvent), "removed-from-project-issue-event")]
 [JsonDerivedType(typeof(ConvertedNoteToIssueIssueEvent), "converted-note-to-issue-issue-event")]
-public abstract record IssueEventForIssue;
+[JsonDerivedType(typeof(IssueTypeAddedIssueEvent), "issue-type-added-issue-event")]
+[JsonDerivedType(typeof(IssueTypeRemovedIssueEvent), "issue-type-removed-issue-event")]
+[JsonDerivedType(typeof(IssueTypeChangedIssueEvent), "issue-type-changed-issue-event")]
+[JsonDerivedType(typeof(SubIssueAddedIssueEvent), "sub-issue-added-issue-event")]
+[JsonDerivedType(typeof(SubIssueRemovedIssueEvent), "sub-issue-removed-issue-event")]
+[JsonDerivedType(typeof(ParentIssueAddedIssueEvent), "parent-issue-added-issue-event")]
+[JsonDerivedType(typeof(ParentIssueRemovedIssueEvent), "parent-issue-removed-issue-event")]
+[JsonDerivedType(typeof(BlockedByAddedIssueEvent), "blocked-by-added-issue-event")]
+[JsonDerivedType(typeof(BlockedByRemovedIssueEvent), "blocked-by-removed-issue-event")]
+[JsonDerivedType(typeof(BlockingAddedIssueEvent), "blocking-added-issue-event")]
+[JsonDerivedType(typeof(BlockingRemovedIssueEvent), "blocking-removed-issue-event")]
+public abstract partial record IssueEventForIssue;
+
+/// <summary>
+/// An agent-proposed change to an issue that a maintainer can approve or dismiss.
+/// </summary>
+public partial record IssueSuggestion
+{
+    /// <summary>
+    /// The unique identifier of the suggestion.
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    /// <summary>
+    /// The unique identifier of the issue the suggestion applies to.
+    /// </summary>
+    [JsonPropertyName("issue_id")]
+    public required int IssueId { get; init; }
+
+    /// <summary>
+    /// The kind of change proposed.
+    /// </summary>
+    [JsonPropertyName("action")]
+    public required IssueSuggestionAction Action { get; init; }
+
+    /// <summary>
+    /// The suggestion's lifecycle state.
+    /// </summary>
+    [JsonPropertyName("state")]
+    public required IssueSuggestionState State { get; init; }
+
+    /// <summary>
+    /// The identifier of the target the change applies to (issue type, label, field, assignee, or duplicate issue), when applicable.
+    /// </summary>
+    [JsonPropertyName("target_id")]
+    public required int? TargetId { get; init; }
+
+    /// <summary>
+    /// The proposed value, when applicable. An array for multi-select field suggestions.
+    /// </summary>
+    [JsonPropertyName("target_value")]
+    public required object? TargetValue { get; init; }
+
+    /// <summary>
+    /// The rationale the actor provided for the suggestion.
+    /// </summary>
+    [JsonPropertyName("rationale")]
+    public required string? Rationale { get; init; }
+
+    /// <summary>
+    /// The actor's confidence level in the suggestion.
+    /// </summary>
+    [JsonPropertyName("confidence")]
+    public required Confidence Confidence { get; init; }
+
+    /// <summary>
+    /// The unique identifier of the actor that proposed the suggestion.
+    /// </summary>
+    [JsonPropertyName("actor_id")]
+    public required int? ActorId { get; init; }
+
+    /// <summary>
+    /// The identifier of the timeline event created when the suggestion was approved, when applicable.
+    /// </summary>
+    [JsonPropertyName("issue_event_id")]
+    public required int? IssueEventId { get; init; }
+
+    /// <summary>
+    /// The unique identifier of the user who approved or dismissed the suggestion.
+    /// </summary>
+    [JsonPropertyName("resolved_by")]
+    public required int? ResolvedBy { get; init; }
+
+    /// <summary>
+    /// The time the suggestion was created.
+    /// </summary>
+    [JsonPropertyName("created_at")]
+    public required DateTimeOffset CreatedAt { get; init; }
+
+    /// <summary>
+    /// The time the suggestion was last updated.
+    /// </summary>
+    [JsonPropertyName("updated_at")]
+    public required DateTimeOffset UpdatedAt { get; init; }
+
+}
 
 /// <summary>
 /// Timeline Comment Event
 /// </summary>
-public record TimelineCommentEvent
+public partial record TimelineCommentEvent
 {
     [JsonPropertyName("event")]
     public required string Event { get; init; }
@@ -23914,12 +25269,15 @@ public record TimelineCommentEvent
     [JsonPropertyName("pin")]
     public PinnedIssueComment? Pin { get; init; }
 
+    [JsonPropertyName("minimized")]
+    public IssueCommentMinimized? Minimized { get; init; }
+
 }
 
 /// <summary>
 /// Timeline Cross Referenced Event
 /// </summary>
-public record TimelineCrossReferencedEvent
+public partial record TimelineCrossReferencedEvent
 {
     [JsonPropertyName("event")]
     public required string Event { get; init; }
@@ -23944,7 +25302,7 @@ public record TimelineCrossReferencedEvent
 /// <summary>
 /// Timeline Committed Event
 /// </summary>
-public record TimelineCommittedEvent
+public partial record TimelineCommittedEvent
 {
     [JsonPropertyName("event")]
     public string? Event { get; init; }
@@ -23996,7 +25354,7 @@ public record TimelineCommittedEvent
 /// <summary>
 /// Timeline Reviewed Event
 /// </summary>
-public record TimelineReviewedEvent
+public partial record TimelineReviewedEvent
 {
     [JsonPropertyName("event")]
     public required string Event { get; init; }
@@ -24063,7 +25421,7 @@ public record TimelineReviewedEvent
 /// <summary>
 /// Pull Request Review Comments are comments on a portion of the Pull Request's diff.
 /// </summary>
-public record PullRequestReviewComment
+public partial record PullRequestReviewComment
 {
     /// <summary>
     /// URL for the pull request review comment
@@ -24223,7 +25581,7 @@ public record PullRequestReviewComment
 /// <summary>
 /// Timeline Line Commented Event
 /// </summary>
-public record TimelineLineCommentedEvent
+public partial record TimelineLineCommentedEvent
 {
     [JsonPropertyName("event")]
     public string? Event { get; init; }
@@ -24239,7 +25597,7 @@ public record TimelineLineCommentedEvent
 /// <summary>
 /// Timeline Commit Commented Event
 /// </summary>
-public record TimelineCommitCommentedEvent
+public partial record TimelineCommitCommentedEvent
 {
     [JsonPropertyName("event")]
     public string? Event { get; init; }
@@ -24258,7 +25616,7 @@ public record TimelineCommitCommentedEvent
 /// <summary>
 /// Timeline Assigned Issue Event
 /// </summary>
-public record TimelineAssignedIssueEvent
+public partial record TimelineAssignedIssueEvent
 {
     [JsonPropertyName("id")]
     public required int Id { get; init; }
@@ -24296,12 +25654,15 @@ public record TimelineAssignedIssueEvent
     [JsonPropertyName("assignee")]
     public required SimpleUser Assignee { get; init; }
 
+    [JsonPropertyName("intent")]
+    public IssueEventIntent? Intent { get; init; }
+
 }
 
 /// <summary>
 /// Timeline Unassigned Issue Event
 /// </summary>
-public record TimelineUnassignedIssueEvent
+public partial record TimelineUnassignedIssueEvent
 {
     [JsonPropertyName("id")]
     public required int Id { get; init; }
@@ -24344,7 +25705,7 @@ public record TimelineUnassignedIssueEvent
 /// <summary>
 /// State Change Issue Event
 /// </summary>
-public record StateChangeIssueEvent
+public partial record StateChangeIssueEvent
 {
     [JsonPropertyName("id")]
     public required int Id { get; init; }
@@ -24379,19 +25740,22 @@ public record StateChangeIssueEvent
     [JsonPropertyName("state_reason")]
     public string? StateReason { get; init; }
 
+    [JsonPropertyName("intent")]
+    public IssueEventIntent? Intent { get; init; }
+
 }
 
 /// <summary>
 /// Timeline Event
 /// </summary>
-public record TimelineIssueEvents
+public partial record TimelineIssueEvents
 {
 }
 
 /// <summary>
 /// An SSH key granting access to a single repository.
 /// </summary>
-public record DeployKey
+public partial record DeployKey
 {
     [JsonPropertyName("id")]
     public required int Id { get; init; }
@@ -24433,7 +25797,7 @@ public record Language;
 /// <summary>
 /// License Content
 /// </summary>
-public record LicenseContent
+public partial record LicenseContent
 {
     [JsonPropertyName("name")]
     public required string Name { get; init; }
@@ -24479,7 +25843,7 @@ public record LicenseContent
 /// <summary>
 /// Results of a successful merge upstream request
 /// </summary>
-public record MergedUpstream
+public partial record MergedUpstream
 {
     [JsonPropertyName("message")]
     public string? Message { get; init; }
@@ -24492,7 +25856,7 @@ public record MergedUpstream
 
 }
 
-public record PagesSourceHash
+public partial record PagesSourceHash
 {
     [JsonPropertyName("branch")]
     public required string Branch { get; init; }
@@ -24502,7 +25866,7 @@ public record PagesSourceHash
 
 }
 
-public record PagesHttpsCertificate
+public partial record PagesHttpsCertificate
 {
     [JsonPropertyName("state")]
     public required PagesHttpsCertificateState State { get; init; }
@@ -24524,7 +25888,7 @@ public record PagesHttpsCertificate
 /// <summary>
 /// The configuration for GitHub Pages for a repository.
 /// </summary>
-public record Page
+public partial record Page
 {
     /// <summary>
     /// The API address for accessing this Page resource.
@@ -24597,7 +25961,7 @@ public record Page
 /// <summary>
 /// Page Build
 /// </summary>
-public record PageBuild
+public partial record PageBuild
 {
     [JsonPropertyName("url")]
     public required Uri Url { get; init; }
@@ -24628,7 +25992,7 @@ public record PageBuild
 /// <summary>
 /// Page Build Status
 /// </summary>
-public record PageBuildStatus
+public partial record PageBuildStatus
 {
     [JsonPropertyName("url")]
     public required Uri Url { get; init; }
@@ -24641,7 +26005,7 @@ public record PageBuildStatus
 /// <summary>
 /// The GitHub Pages deployment status.
 /// </summary>
-public record PageDeployment
+public partial record PageDeployment
 {
     /// <summary>
     /// The ID of the GitHub Pages deployment. This is the Git SHA of the deployed commit.
@@ -24669,7 +26033,7 @@ public record PageDeployment
 
 }
 
-public record PagesDeploymentStatus
+public partial record PagesDeploymentStatus
 {
     /// <summary>
     /// The current status of the deployment.
@@ -24682,7 +26046,7 @@ public record PagesDeploymentStatus
 /// <summary>
 /// Pages Health Check Status
 /// </summary>
-public record PagesHealthCheck
+public partial record PagesHealthCheck
 {
     [JsonPropertyName("domain")]
     public object? Domain { get; init; }
@@ -24695,7 +26059,7 @@ public record PagesHealthCheck
 /// <summary>
 /// Pull requests let you tell others about changes you've pushed to a repository on GitHub. Once a pull request is sent, interested parties can review the set of changes, discuss potential modifications, and even push follow-up commits if necessary.
 /// </summary>
-public record PullRequest
+public partial record PullRequest
 {
     [JsonPropertyName("url")]
     public required Uri Url { get; init; }
@@ -24821,6 +26185,12 @@ public record PullRequest
     public required AutoMerge? AutoMerge { get; init; }
 
     /// <summary>
+    /// The stack information associated with a pull request.
+    /// </summary>
+    [JsonPropertyName("stack")]
+    public PullRequestStack? Stack { get; init; }
+
+    /// <summary>
     /// Indicates whether or not the pull request is a draft.
     /// </summary>
     [JsonPropertyName("draft")]
@@ -24870,7 +26240,7 @@ public record PullRequest
 /// <summary>
 /// Pull Request Merge Result
 /// </summary>
-public record PullRequestMergeResult
+public partial record PullRequestMergeResult
 {
     [JsonPropertyName("sha")]
     public required string Sha { get; init; }
@@ -24884,9 +26254,22 @@ public record PullRequestMergeResult
 }
 
 /// <summary>
+/// Pull Request Merge Async Result
+/// </summary>
+public partial record PullRequestMergeAsyncResult
+{
+    [JsonPropertyName("status")]
+    public required PullRequestMergeAsyncResultStatus Status { get; init; }
+
+    [JsonPropertyName("details")]
+    public required object Details { get; init; }
+
+}
+
+/// <summary>
 /// Pull Request Review Request
 /// </summary>
-public record PullRequestReviewRequest
+public partial record PullRequestReviewRequest
 {
     [JsonPropertyName("users")]
     public required IReadOnlyList<SimpleUser> Users { get; init; }
@@ -24899,7 +26282,7 @@ public record PullRequestReviewRequest
 /// <summary>
 /// Pull Request Reviews are reviews on pull requests.
 /// </summary>
-public record PullRequestReview
+public partial record PullRequestReview
 {
     /// <summary>
     /// Unique identifier of the review
@@ -24957,7 +26340,7 @@ public record PullRequestReview
 /// <summary>
 /// Legacy Review Comment
 /// </summary>
-public record ReviewComment
+public partial record ReviewComment
 {
     [JsonPropertyName("url")]
     public required Uri Url { get; init; }
@@ -25075,7 +26458,7 @@ public record ReviewComment
 /// <summary>
 /// Generated name and body describing a release
 /// </summary>
-public record ReleaseNotesContent
+public partial record ReleaseNotesContent
 {
     /// <summary>
     /// The generated name of the release
@@ -25094,7 +26477,7 @@ public record ReleaseNotesContent
 /// <summary>
 /// User-defined metadata to store domain-specific information limited to 8 keys with scalar values.
 /// </summary>
-public record RepositoryRuleRulesetInfo
+public partial record RepositoryRuleRulesetInfo
 {
     /// <summary>
     /// The type of source for the ruleset that includes this rule.
@@ -25119,11 +26502,11 @@ public record RepositoryRuleRulesetInfo
 /// <summary>
 /// A repository rule with ruleset details.
 /// </summary>
-public record RepositoryRuleDetailed
+public partial record RepositoryRuleDetailed
 {
 }
 
-public record SecretScanningAlert
+public partial record SecretScanningAlert
 {
     /// <summary>
     /// The security alert number.
@@ -25306,13 +26689,206 @@ public record SecretScanningAlert
 }
 
 /// <summary>
+/// A list of metadata key/value pairs associated with the secret scanning alert.
+/// </summary>
+public record SecretScanningAlertMetadata;
+
+public partial record SecretScanningAlertWithMetadata
+{
+    /// <summary>
+    /// The security alert number.
+    /// </summary>
+    [JsonPropertyName("number")]
+    public AlertNumber? Number { get; init; }
+
+    /// <summary>
+    /// The time that the alert was created in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
+    /// </summary>
+    [JsonPropertyName("created_at")]
+    public AlertCreatedAt? CreatedAt { get; init; }
+
+    [JsonPropertyName("updated_at")]
+    public AlertUpdatedAt? UpdatedAt { get; init; }
+
+    /// <summary>
+    /// The REST API URL of the alert resource.
+    /// </summary>
+    [JsonPropertyName("url")]
+    public AlertUrl? Url { get; init; }
+
+    /// <summary>
+    /// The GitHub URL of the alert resource.
+    /// </summary>
+    [JsonPropertyName("html_url")]
+    public AlertHtmlUrl? HtmlUrl { get; init; }
+
+    /// <summary>
+    /// The REST API URL of the code locations for this alert.
+    /// </summary>
+    [JsonPropertyName("locations_url")]
+    public Uri? LocationsUrl { get; init; }
+
+    /// <summary>
+    /// Sets the state of the secret scanning alert. You must provide `resolution` when you set the state to `resolved`.
+    /// </summary>
+    [JsonPropertyName("state")]
+    public OrganizationSecretScanningAlertState? State { get; init; }
+
+    /// <summary>
+    /// **Required when the `state` is `resolved`.** The reason for resolving the alert.
+    /// </summary>
+    [JsonPropertyName("resolution")]
+    public OrganizationSecretScanningAlertResolution? Resolution { get; init; }
+
+    /// <summary>
+    /// The time that the alert was resolved in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
+    /// </summary>
+    [JsonPropertyName("resolved_at")]
+    public DateTimeOffset? ResolvedAt { get; init; }
+
+    [JsonPropertyName("resolved_by")]
+    public SimpleUser? ResolvedBy { get; init; }
+
+    /// <summary>
+    /// An optional comment to resolve an alert.
+    /// </summary>
+    [JsonPropertyName("resolution_comment")]
+    public string? ResolutionComment { get; init; }
+
+    /// <summary>
+    /// The type of secret that secret scanning detected.
+    /// </summary>
+    [JsonPropertyName("secret_type")]
+    public string? SecretType { get; init; }
+
+    /// <summary>
+    /// User-friendly name for the detected secret, matching the `secret_type`.
+    /// For a list of built-in patterns, see "[Supported secret scanning patterns](https://docs.github.com/code-security/secret-scanning/introduction/supported-secret-scanning-patterns#supported-secrets)."
+    /// </summary>
+    [JsonPropertyName("secret_type_display_name")]
+    public string? SecretTypeDisplayName { get; init; }
+
+    /// <summary>
+    /// The provider of the secret that was detected.
+    /// </summary>
+    [JsonPropertyName("provider")]
+    public string? Provider { get; init; }
+
+    /// <summary>
+    /// The slug identifier for the provider of the secret that was detected. Use this value for filtering by provider with the `providers` or `exclude_providers` parameters.
+    /// </summary>
+    [JsonPropertyName("provider_slug")]
+    public string? ProviderSlug { get; init; }
+
+    /// <summary>
+    /// The secret that was detected.
+    /// </summary>
+    [JsonPropertyName("secret")]
+    public string? Secret { get; init; }
+
+    /// <summary>
+    /// Whether push protection was bypassed for the detected secret.
+    /// </summary>
+    [JsonPropertyName("push_protection_bypassed")]
+    public bool? PushProtectionBypassed { get; init; }
+
+    [JsonPropertyName("push_protection_bypassed_by")]
+    public SimpleUser? PushProtectionBypassedBy { get; init; }
+
+    /// <summary>
+    /// The time that push protection was bypassed in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
+    /// </summary>
+    [JsonPropertyName("push_protection_bypassed_at")]
+    public DateTimeOffset? PushProtectionBypassedAt { get; init; }
+
+    [JsonPropertyName("push_protection_bypass_request_reviewer")]
+    public SimpleUser? PushProtectionBypassRequestReviewer { get; init; }
+
+    /// <summary>
+    /// An optional comment when reviewing a push protection bypass.
+    /// </summary>
+    [JsonPropertyName("push_protection_bypass_request_reviewer_comment")]
+    public string? PushProtectionBypassRequestReviewerComment { get; init; }
+
+    /// <summary>
+    /// An optional comment when requesting a push protection bypass.
+    /// </summary>
+    [JsonPropertyName("push_protection_bypass_request_comment")]
+    public string? PushProtectionBypassRequestComment { get; init; }
+
+    /// <summary>
+    /// The URL to a push protection bypass request.
+    /// </summary>
+    [JsonPropertyName("push_protection_bypass_request_html_url")]
+    public Uri? PushProtectionBypassRequestHtmlUrl { get; init; }
+
+    /// <summary>
+    /// The token status as of the latest validity check.
+    /// </summary>
+    [JsonPropertyName("validity")]
+    public Validity? Validity { get; init; }
+
+    /// <summary>
+    /// Whether the detected secret was publicly leaked.
+    /// </summary>
+    [JsonPropertyName("publicly_leaked")]
+    public bool? PubliclyLeaked { get; init; }
+
+    /// <summary>
+    /// Whether the detected secret was found in multiple repositories under the same organization or enterprise.
+    /// </summary>
+    [JsonPropertyName("multi_repo")]
+    public bool? MultiRepo { get; init; }
+
+    /// <summary>
+    /// A boolean value representing whether or not alert is base64 encoded
+    /// </summary>
+    [JsonPropertyName("is_base64_encoded")]
+    public bool? IsBase64Encoded { get; init; }
+
+    [JsonPropertyName("first_location_detected")]
+    public SecretScanningFirstDetectedLocation? FirstLocationDetected { get; init; }
+
+    /// <summary>
+    /// A boolean value representing whether or not the token in the alert was detected in more than one location.
+    /// </summary>
+    [JsonPropertyName("has_more_locations")]
+    public bool? HasMoreLocations { get; init; }
+
+    [JsonPropertyName("assigned_to")]
+    public SimpleUser? AssignedTo { get; init; }
+
+    /// <summary>
+    /// An optional comment from the closure request author.
+    /// </summary>
+    [JsonPropertyName("closure_request_comment")]
+    public string? ClosureRequestComment { get; init; }
+
+    /// <summary>
+    /// An optional comment from the closure request reviewer.
+    /// </summary>
+    [JsonPropertyName("closure_request_reviewer_comment")]
+    public string? ClosureRequestReviewerComment { get; init; }
+
+    [JsonPropertyName("closure_request_reviewer")]
+    public SimpleUser? ClosureRequestReviewer { get; init; }
+
+    /// <summary>
+    /// A list of metadata key/value pairs associated with the secret scanning alert.
+    /// </summary>
+    [JsonPropertyName("metadata")]
+    public SecretScanningAlertMetadata? Metadata { get; init; }
+
+}
+
+/// <summary>
 /// An optional comment when closing or reopening an alert. Cannot be updated or deleted.
 /// </summary>
 /// <summary>
 /// Type alias for string?.
 /// </summary>
 [JsonConverter(typeof(OpenApiGeneratedTypeAliasJsonConverter<SecretScanningAlertResolutionComment, string?>))]
-public readonly record struct SecretScanningAlertResolutionComment(string? Value) : IOpenApiGeneratedTypeAlias<SecretScanningAlertResolutionComment, string?>
+public readonly partial record struct SecretScanningAlertResolutionComment(string? Value) : IOpenApiGeneratedTypeAlias<SecretScanningAlertResolutionComment, string?>
 {
     public static SecretScanningAlertResolutionComment Create(string? value) => new(value);
 }
@@ -25324,12 +26900,12 @@ public readonly record struct SecretScanningAlertResolutionComment(string? Value
 /// Type alias for string?.
 /// </summary>
 [JsonConverter(typeof(OpenApiGeneratedTypeAliasJsonConverter<SecretScanningAlertAssignee, string?>))]
-public readonly record struct SecretScanningAlertAssignee(string? Value) : IOpenApiGeneratedTypeAlias<SecretScanningAlertAssignee, string?>
+public readonly partial record struct SecretScanningAlertAssignee(string? Value) : IOpenApiGeneratedTypeAlias<SecretScanningAlertAssignee, string?>
 {
     public static SecretScanningAlertAssignee Create(string? value) => new(value);
 }
 
-public record SecretScanningLocation
+public partial record SecretScanningLocation
 {
     /// <summary>
     /// The location type. Because secrets may be found in different types of resources (ie. code, comments, issues, pull requests, discussions), this field identifies the type of resource where the secret was found.
@@ -25345,7 +26921,7 @@ public record SecretScanningLocation
 /// <summary>
 /// The reason for bypassing push protection.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<SecretScanningPushProtectionBypassReason>))]
 public enum SecretScanningPushProtectionBypassReason
 {
     [JsonStringEnumMemberName("false_positive")]
@@ -25356,7 +26932,7 @@ public enum SecretScanningPushProtectionBypassReason
     WillFixLater
 }
 
-public record SecretScanningPushProtectionBypass
+public partial record SecretScanningPushProtectionBypass
 {
     /// <summary>
     /// The reason for bypassing push protection.
@@ -25381,7 +26957,7 @@ public record SecretScanningPushProtectionBypass
 /// <summary>
 /// Information on a single scan performed by secret scanning on the repository
 /// </summary>
-public record SecretScanningScan
+public partial record SecretScanningScan
 {
     /// <summary>
     /// The type of scan
@@ -25414,7 +26990,7 @@ public record SecretScanningScan
 
 }
 
-public record SecretScanningScanHistory
+public partial record SecretScanningScanHistory
 {
     [JsonPropertyName("incremental_scans")]
     public IReadOnlyList<SecretScanningScan>? IncrementalScans { get; init; }
@@ -25433,7 +27009,7 @@ public record SecretScanningScanHistory
 
 }
 
-public record RepositoryAdvisoryCreate
+public partial record RepositoryAdvisoryCreate
 {
     /// <summary>
     /// A short summary of the advisory.
@@ -25491,7 +27067,7 @@ public record RepositoryAdvisoryCreate
 
 }
 
-public record PrivateVulnerabilityReportCreate
+public partial record PrivateVulnerabilityReportCreate
 {
     /// <summary>
     /// A short summary of the advisory.
@@ -25537,7 +27113,7 @@ public record PrivateVulnerabilityReportCreate
 
 }
 
-public record RepositoryAdvisoryUpdate
+public partial record RepositoryAdvisoryUpdate
 {
     /// <summary>
     /// A short summary of the advisory.
@@ -25607,10 +27183,66 @@ public record RepositoryAdvisoryUpdate
 
 }
 
+public partial record PullRequestStackMinimal
+{
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("number")]
+    public required int Number { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+    [JsonPropertyName("base")]
+    public required object Base { get; init; }
+
+    /// <summary>
+    /// Whether the stack has any open pull request. False when all pull requests are merged or closed.
+    /// </summary>
+    [JsonPropertyName("open")]
+    public required bool Open { get; init; }
+
+    [JsonPropertyName("created_at")]
+    public required DateTimeOffset CreatedAt { get; init; }
+
+    [JsonPropertyName("pull_requests")]
+    public required IReadOnlyList<object> PullRequests { get; init; }
+
+}
+
+public partial record PullRequestStackPullRequest : PullRequestMinimal
+{
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    [JsonPropertyName("title")]
+    public required string Title { get; init; }
+
+    [JsonPropertyName("state")]
+    public required MilestoneState State { get; init; }
+
+    [JsonPropertyName("merged_at")]
+    public required DateTimeOffset? MergedAt { get; init; }
+
+    [JsonPropertyName("draft")]
+    public required bool Draft { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public required Uri HtmlUrl { get; init; }
+
+    [JsonPropertyName("user")]
+    public required SimpleUser? User { get; init; }
+
+}
+
 /// <summary>
 /// Stargazer
 /// </summary>
-public record Stargazer
+public partial record Stargazer
 {
     [JsonPropertyName("starred_at")]
     public required DateTimeOffset StarredAt { get; init; }
@@ -25628,7 +27260,7 @@ public record CodeFrequencyStat;
 /// <summary>
 /// Commit Activity
 /// </summary>
-public record CommitActivity
+public partial record CommitActivity
 {
     [JsonPropertyName("days")]
     public required IReadOnlyList<int> Days { get; init; }
@@ -25644,7 +27276,7 @@ public record CommitActivity
 /// <summary>
 /// Contributor Activity
 /// </summary>
-public record ContributorActivity
+public partial record ContributorActivity
 {
     [JsonPropertyName("author")]
     public required SimpleUser? Author { get; init; }
@@ -25657,7 +27289,7 @@ public record ContributorActivity
 
 }
 
-public record ParticipationStats
+public partial record ParticipationStats
 {
     [JsonPropertyName("all")]
     public required IReadOnlyList<int> All { get; init; }
@@ -25670,7 +27302,7 @@ public record ParticipationStats
 /// <summary>
 /// Repository invitations let you manage who you collaborate with.
 /// </summary>
-public record RepositorySubscription
+public partial record RepositorySubscription
 {
     /// <summary>
     /// Determines if notifications should be received from this repository.
@@ -25701,7 +27333,7 @@ public record RepositorySubscription
 /// <summary>
 /// Tag
 /// </summary>
-public record Tag
+public partial record Tag
 {
     [JsonPropertyName("name")]
     public required string Name { get; init; }
@@ -25723,14 +27355,14 @@ public record Tag
 /// <summary>
 /// A topic aggregates entities that are related to a subject.
 /// </summary>
-public record Topic
+public partial record Topic
 {
     [JsonPropertyName("names")]
     public required IReadOnlyList<string> Names { get; init; }
 
 }
 
-public record Traffic
+public partial record Traffic
 {
     [JsonPropertyName("timestamp")]
     public required DateTimeOffset Timestamp { get; init; }
@@ -25746,7 +27378,7 @@ public record Traffic
 /// <summary>
 /// Clone Traffic
 /// </summary>
-public record CloneTraffic
+public partial record CloneTraffic
 {
     [JsonPropertyName("count")]
     public required int Count { get; init; }
@@ -25762,7 +27394,7 @@ public record CloneTraffic
 /// <summary>
 /// Content Traffic
 /// </summary>
-public record ContentTraffic
+public partial record ContentTraffic
 {
     [JsonPropertyName("path")]
     public required string Path { get; init; }
@@ -25781,7 +27413,7 @@ public record ContentTraffic
 /// <summary>
 /// Referrer Traffic
 /// </summary>
-public record ReferrerTraffic
+public partial record ReferrerTraffic
 {
     [JsonPropertyName("referrer")]
     public required string Referrer { get; init; }
@@ -25797,7 +27429,7 @@ public record ReferrerTraffic
 /// <summary>
 /// View Traffic
 /// </summary>
-public record ViewTraffic
+public partial record ViewTraffic
 {
     [JsonPropertyName("count")]
     public required int Count { get; init; }
@@ -25815,7 +27447,7 @@ public record SearchResultTextMatches;
 /// <summary>
 /// Code Search Result Item
 /// </summary>
-public record CodeSearchResultItem
+public partial record CodeSearchResultItem
 {
     [JsonPropertyName("name")]
     public required string Name { get; init; }
@@ -25864,7 +27496,7 @@ public record CodeSearchResultItem
 /// <summary>
 /// Commit Search Result Item
 /// </summary>
-public record CommitSearchResultItem
+public partial record CommitSearchResultItem
 {
     [JsonPropertyName("url")]
     public required Uri Url { get; init; }
@@ -25910,7 +27542,7 @@ public record CommitSearchResultItem
 /// <summary>
 /// Issue Search Result Item
 /// </summary>
-public record IssueSearchResultItem
+public partial record IssueSearchResultItem
 {
     [JsonPropertyName("url")]
     public required Uri Url { get; init; }
@@ -26046,7 +27678,7 @@ public record IssueSearchResultItem
 /// <summary>
 /// Label Search Result Item
 /// </summary>
-public record LabelSearchResultItem
+public partial record LabelSearchResultItem
 {
     [JsonPropertyName("id")]
     public required int Id { get; init; }
@@ -26080,7 +27712,7 @@ public record LabelSearchResultItem
 /// <summary>
 /// Repo Search Result Item
 /// </summary>
-public record RepoSearchResultItem
+public partial record RepoSearchResultItem
 {
     [JsonPropertyName("id")]
     public required int Id { get; init; }
@@ -26369,7 +28001,7 @@ public record RepoSearchResultItem
 /// <summary>
 /// Topic Search Result Item
 /// </summary>
-public record TopicSearchResultItem
+public partial record TopicSearchResultItem
 {
     [JsonPropertyName("name")]
     public required string Name { get; init; }
@@ -26424,7 +28056,7 @@ public record TopicSearchResultItem
 /// <summary>
 /// User Search Result Item
 /// </summary>
-public record UserSearchResultItem
+public partial record UserSearchResultItem
 {
     [JsonPropertyName("login")]
     public required string Login { get; init; }
@@ -26536,7 +28168,7 @@ public record UserSearchResultItem
 /// <summary>
 /// Private User
 /// </summary>
-public record PrivateUser
+public partial record PrivateUser
 {
     [JsonPropertyName("login")]
     public required string Login { get; init; }
@@ -26672,7 +28304,7 @@ public record PrivateUser
 /// <summary>
 /// Secrets for a GitHub Codespace.
 /// </summary>
-public record CodespacesSecret
+public partial record CodespacesSecret
 {
     /// <summary>
     /// The name of the secret
@@ -26709,7 +28341,7 @@ public record CodespacesSecret
 /// <summary>
 /// The public key used for setting user Codespaces' Secrets.
 /// </summary>
-public record CodespacesUserPublicKey
+public partial record CodespacesUserPublicKey
 {
     /// <summary>
     /// The identifier for the key.
@@ -26728,7 +28360,7 @@ public record CodespacesUserPublicKey
 /// <summary>
 /// An export of a codespace. Also, latest export details for a codespace can be fetched with id = latest
 /// </summary>
-public record CodespaceExportDetails
+public partial record CodespaceExportDetails
 {
     /// <summary>
     /// State of the latest export
@@ -26777,7 +28409,7 @@ public record CodespaceExportDetails
 /// <summary>
 /// A codespace.
 /// </summary>
-public record CodespaceWithFullRepository
+public partial record CodespaceWithFullRepository
 {
     [JsonPropertyName("id")]
     public required long Id { get; init; }
@@ -26952,7 +28584,7 @@ public record CodespaceWithFullRepository
 /// <summary>
 /// Email
 /// </summary>
-public record Email
+public partial record Email
 {
     [JsonPropertyName("email")]
     public required string EmailValue { get; init; }
@@ -26971,7 +28603,7 @@ public record Email
 /// <summary>
 /// A unique encryption key
 /// </summary>
-public record GpgKey
+public partial record GpgKey
 {
     [JsonPropertyName("id")]
     public required long Id { get; init; }
@@ -27023,7 +28655,7 @@ public record GpgKey
 /// <summary>
 /// Key
 /// </summary>
-public record Key
+public partial record Key
 {
     [JsonPropertyName("key")]
     public required string KeyValue { get; init; }
@@ -27051,7 +28683,7 @@ public record Key
 
 }
 
-public record MarketplaceAccount
+public partial record MarketplaceAccount
 {
     [JsonPropertyName("url")]
     public required Uri Url { get; init; }
@@ -27079,7 +28711,7 @@ public record MarketplaceAccount
 /// <summary>
 /// User Marketplace Purchase
 /// </summary>
-public record UserMarketplacePurchase
+public partial record UserMarketplacePurchase
 {
     [JsonPropertyName("billing_cycle")]
     public required string BillingCycle { get; init; }
@@ -27113,7 +28745,7 @@ public record UserMarketplacePurchase
 /// <summary>
 /// Social media account
 /// </summary>
-public record SocialAccount
+public partial record SocialAccount
 {
     [JsonPropertyName("provider")]
     public required string Provider { get; init; }
@@ -27126,7 +28758,7 @@ public record SocialAccount
 /// <summary>
 /// A public SSH key used to sign Git commits
 /// </summary>
-public record SshSigningKey
+public partial record SshSigningKey
 {
     [JsonPropertyName("key")]
     public required string Key { get; init; }
@@ -27145,7 +28777,7 @@ public record SshSigningKey
 /// <summary>
 /// Starred Repository
 /// </summary>
-public record StarredRepository
+public partial record StarredRepository
 {
     [JsonPropertyName("starred_at")]
     public required DateTimeOffset StarredAt { get; init; }
@@ -27161,7 +28793,7 @@ public record StarredRepository
 /// <summary>
 /// Hovercard
 /// </summary>
-public record Hovercard
+public partial record Hovercard
 {
     [JsonPropertyName("contexts")]
     public required IReadOnlyList<object> Contexts { get; init; }
@@ -27171,7 +28803,7 @@ public record Hovercard
 /// <summary>
 /// Key Simple
 /// </summary>
-public record KeySimple
+public partial record KeySimple
 {
     [JsonPropertyName("id")]
     public required int Id { get; init; }
@@ -27187,7 +28819,7 @@ public record KeySimple
 
 }
 
-public record BillingAiCreditUsageReportUser
+public partial record BillingAiCreditUsageReportUser
 {
     [JsonPropertyName("timePeriod")]
     public required object TimePeriod { get; init; }
@@ -27215,7 +28847,7 @@ public record BillingAiCreditUsageReportUser
 
 }
 
-public record BillingPremiumRequestUsageReportUser
+public partial record BillingPremiumRequestUsageReportUser
 {
     [JsonPropertyName("timePeriod")]
     public required object TimePeriod { get; init; }
@@ -27243,14 +28875,14 @@ public record BillingPremiumRequestUsageReportUser
 
 }
 
-public record BillingUsageReportUser
+public partial record BillingUsageReportUser
 {
     [JsonPropertyName("usageItems")]
     public IReadOnlyList<object>? UsageItems { get; init; }
 
 }
 
-public record BillingUsageSummaryReportUser
+public partial record BillingUsageSummaryReportUser
 {
     [JsonPropertyName("timePeriod")]
     public required object TimePeriod { get; init; }
@@ -27289,7 +28921,7 @@ public record BillingUsageSummaryReportUser
 /// on an enterprise account or an organization that's part of an enterprise account. For more information,
 /// see "[About enterprise accounts](https://docs.github.com/admin/overview/about-enterprise-accounts)."
 /// </summary>
-public record EnterpriseWebhooks
+public partial record EnterpriseWebhooks
 {
     /// <summary>
     /// A short description of the enterprise.
@@ -27343,7 +28975,7 @@ public record EnterpriseWebhooks
 /// for and sent to a GitHub App. For more information,
 /// see "[Using webhooks with GitHub Apps](https://docs.github.com/apps/creating-github-apps/registering-a-github-app/using-webhooks-with-github-apps)."
 /// </summary>
-public record SimpleInstallation
+public partial record SimpleInstallation
 {
     /// <summary>
     /// The ID of the installation.
@@ -27363,7 +28995,7 @@ public record SimpleInstallation
 /// A GitHub organization. Webhook payloads contain the `organization` property when the webhook is configured for an
 /// organization, or when the event occurs from activity in a repository owned by an organization.
 /// </summary>
-public record OrganizationSimpleWebhooks
+public partial record OrganizationSimpleWebhooks
 {
     [JsonPropertyName("login")]
     public required string Login { get; init; }
@@ -27407,7 +29039,7 @@ public record OrganizationSimpleWebhooks
 /// The repository on GitHub where the event occurred. Webhook payloads contain the `repository` property
 /// when the event occurs from activity in a repository.
 /// </summary>
-public record RepositoryWebhooks
+public partial record RepositoryWebhooks
 {
     /// <summary>
     /// Unique identifier of the repository
@@ -27830,7 +29462,7 @@ public record RepositoryWebhooks
 /// <summary>
 /// The branch protection rule. Includes a `name` and all the [branch protection settings](https://docs.github.com/github/administering-a-repository/defining-the-mergeability-of-pull-requests/about-protected-branches#about-branch-protection-settings) applied to branches that match the name. Binary settings are boolean. Multi-level configurations are one of `off`, `non_admins`, or `everyone`. Actor and build lists are arrays of strings.
 /// </summary>
-public record WebhooksRule
+public partial record WebhooksRule
 {
     [JsonPropertyName("admin_enforced")]
     public required bool AdminEnforced { get; init; }
@@ -27930,7 +29562,7 @@ public record WebhooksRule
 /// <summary>
 /// A suite of checks performed on the code of a given code change
 /// </summary>
-public record SimpleCheckSuite
+public partial record SimpleCheckSuite
 {
     [JsonPropertyName("after")]
     public string? After { get; init; }
@@ -27988,7 +29620,7 @@ public record SimpleCheckSuite
 /// <summary>
 /// A check performed on the code of a given code change
 /// </summary>
-public record CheckRunWithSimpleCheckSuite
+public partial record CheckRunWithSimpleCheckSuite
 {
     /// <summary>
     /// GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
@@ -28071,7 +29703,7 @@ public record CheckRunWithSimpleCheckSuite
 /// Type alias for string.
 /// </summary>
 [JsonConverter(typeof(OpenApiGeneratedTypeAliasJsonConverter<WebhooksCodeScanningCommitOid, string>))]
-public readonly record struct WebhooksCodeScanningCommitOid(string Value) : IOpenApiGeneratedTypeAlias<WebhooksCodeScanningCommitOid, string>
+public readonly partial record struct WebhooksCodeScanningCommitOid(string Value) : IOpenApiGeneratedTypeAlias<WebhooksCodeScanningCommitOid, string>
 {
     public static WebhooksCodeScanningCommitOid Create(string value) => new(value);
 }
@@ -28083,7 +29715,7 @@ public readonly record struct WebhooksCodeScanningCommitOid(string Value) : IOpe
 /// Type alias for string.
 /// </summary>
 [JsonConverter(typeof(OpenApiGeneratedTypeAliasJsonConverter<WebhooksCodeScanningRef, string>))]
-public readonly record struct WebhooksCodeScanningRef(string Value) : IOpenApiGeneratedTypeAlias<WebhooksCodeScanningRef, string>
+public readonly partial record struct WebhooksCodeScanningRef(string Value) : IOpenApiGeneratedTypeAlias<WebhooksCodeScanningRef, string>
 {
     public static WebhooksCodeScanningRef Create(string value) => new(value);
 }
@@ -28095,7 +29727,7 @@ public readonly record struct WebhooksCodeScanningRef(string Value) : IOpenApiGe
 /// Type alias for string.
 /// </summary>
 [JsonConverter(typeof(OpenApiGeneratedTypeAliasJsonConverter<WebhooksDeployPusherType, string>))]
-public readonly record struct WebhooksDeployPusherType(string Value) : IOpenApiGeneratedTypeAlias<WebhooksDeployPusherType, string>
+public readonly partial record struct WebhooksDeployPusherType(string Value) : IOpenApiGeneratedTypeAlias<WebhooksDeployPusherType, string>
 {
     public static WebhooksDeployPusherType Create(string value) => new(value);
 }
@@ -28107,7 +29739,7 @@ public readonly record struct WebhooksDeployPusherType(string Value) : IOpenApiG
 /// Type alias for string.
 /// </summary>
 [JsonConverter(typeof(OpenApiGeneratedTypeAliasJsonConverter<WebhooksRef0, string>))]
-public readonly record struct WebhooksRef0(string Value) : IOpenApiGeneratedTypeAlias<WebhooksRef0, string>
+public readonly partial record struct WebhooksRef0(string Value) : IOpenApiGeneratedTypeAlias<WebhooksRef0, string>
 {
     public static WebhooksRef0 Create(string value) => new(value);
 }
@@ -28115,7 +29747,7 @@ public readonly record struct WebhooksRef0(string Value) : IOpenApiGeneratedType
 /// <summary>
 /// The [`deploy key`](https://docs.github.com/rest/deploy-keys/deploy-keys#get-a-deploy-key) resource.
 /// </summary>
-public record WebhooksDeployKey
+public partial record WebhooksDeployKey
 {
     [JsonPropertyName("added_by")]
     public string? AddedBy { get; init; }
@@ -28149,7 +29781,7 @@ public record WebhooksDeployKey
 
 }
 
-public record WebhooksWorkflow
+public partial record WebhooksWorkflow
 {
     [JsonPropertyName("badge_url")]
     public required Uri BadgeUrl { get; init; }
@@ -28183,7 +29815,7 @@ public record WebhooksWorkflow
 
 }
 
-public record WebhooksApprover
+public partial record WebhooksApprover
 {
     [JsonPropertyName("avatar_url")]
     public string? AvatarUrl { get; init; }
@@ -28246,7 +29878,7 @@ public record WebhooksApprover
 
 public record WebhooksReviewers;
 
-public record WebhooksWorkflowJobRun
+public partial record WebhooksWorkflowJobRun
 {
     [JsonPropertyName("conclusion")]
     public required object? Conclusion { get; init; }
@@ -28274,7 +29906,7 @@ public record WebhooksWorkflowJobRun
 
 }
 
-public record WebhooksUser
+public partial record WebhooksUser
 {
     [JsonPropertyName("avatar_url")]
     public Uri? AvatarUrl { get; init; }
@@ -28344,7 +29976,7 @@ public record WebhooksUser
 
 }
 
-public record WebhooksAnswer
+public partial record WebhooksAnswer
 {
     /// <summary>
     /// How the author is associated with the repository.
@@ -28390,7 +30022,7 @@ public record WebhooksAnswer
 
 }
 
-public record WebhooksComment
+public partial record WebhooksComment
 {
     /// <summary>
     /// How the author is associated with the repository.
@@ -28436,7 +30068,7 @@ public record WebhooksComment
 
 }
 
-public record WebhooksLabel
+public partial record WebhooksLabel
 {
     /// <summary>
     /// 6-character hex code, without the leading #, identifying the color
@@ -28483,7 +30115,7 @@ public record WebhooksRepositoriesAdded;
 /// <summary>
 /// Describe whether all repositories have been selected or there's a selection involved
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<WebhooksRepositorySelection>))]
 public enum WebhooksRepositorySelection
 {
     [JsonStringEnumMemberName("all")]
@@ -28495,7 +30127,7 @@ public enum WebhooksRepositorySelection
 /// <summary>
 /// The [comment](https://docs.github.com/rest/issues/comments#get-an-issue-comment) itself.
 /// </summary>
-public record WebhooksIssueComment
+public partial record WebhooksIssueComment
 {
     /// <summary>
     /// How the author is associated with the repository.
@@ -28551,12 +30183,15 @@ public record WebhooksIssueComment
     [JsonPropertyName("pin")]
     public PinnedIssueComment? Pin { get; init; }
 
+    [JsonPropertyName("minimized")]
+    public IssueCommentMinimized? Minimized { get; init; }
+
 }
 
 /// <summary>
 /// The changes to the comment.
 /// </summary>
-public record WebhooksChanges
+public partial record WebhooksChanges
 {
     [JsonPropertyName("body")]
     public object? Body { get; init; }
@@ -28566,7 +30201,7 @@ public record WebhooksChanges
 /// <summary>
 /// The [issue](https://docs.github.com/rest/issues/issues#get-an-issue) itself.
 /// </summary>
-public record WebhooksIssue
+public partial record WebhooksIssue
 {
     [JsonPropertyName("active_lock_reason")]
     public required ActiveLockReason ActiveLockReason { get; init; }
@@ -28702,7 +30337,7 @@ public record WebhooksIssue
 /// <summary>
 /// A collection of related issues and pull requests.
 /// </summary>
-public record WebhooksMilestone
+public partial record WebhooksMilestone
 {
     [JsonPropertyName("closed_at")]
     public required DateTimeOffset? ClosedAt { get; init; }
@@ -28766,7 +30401,7 @@ public record WebhooksMilestone
 /// <summary>
 /// The [issue](https://docs.github.com/rest/issues/issues#get-an-issue) itself.
 /// </summary>
-public record WebhooksIssue2
+public partial record WebhooksIssue2
 {
     [JsonPropertyName("active_lock_reason")]
     public required ActiveLockReason ActiveLockReason { get; init; }
@@ -28899,7 +30534,7 @@ public record WebhooksIssue2
 
 }
 
-public record WebhooksUserMannequin
+public partial record WebhooksUserMannequin
 {
     [JsonPropertyName("avatar_url")]
     public Uri? AvatarUrl { get; init; }
@@ -28969,7 +30604,7 @@ public record WebhooksUserMannequin
 
 }
 
-public record WebhooksMarketplacePurchase
+public partial record WebhooksMarketplacePurchase
 {
     [JsonPropertyName("account")]
     public required object Account { get; init; }
@@ -28994,7 +30629,7 @@ public record WebhooksMarketplacePurchase
 
 }
 
-public record WebhooksPreviousMarketplacePurchase
+public partial record WebhooksPreviousMarketplacePurchase
 {
     [JsonPropertyName("account")]
     public required object Account { get; init; }
@@ -29022,7 +30657,7 @@ public record WebhooksPreviousMarketplacePurchase
 /// <summary>
 /// Groups of organization members that gives permissions on specified repositories.
 /// </summary>
-public record WebhooksTeam
+public partial record WebhooksTeam
 {
     [JsonPropertyName("deleted")]
     public bool? Deleted { get; init; }
@@ -29104,7 +30739,7 @@ public record WebhooksTeam
 /// <summary>
 /// A group of pull requests that the merge queue has grouped together to be merged.
 /// </summary>
-public record MergeGroup
+public partial record MergeGroup
 {
     /// <summary>
     /// The SHA of the merge group.
@@ -29141,7 +30776,7 @@ public record MergeGroup
 /// <summary>
 /// A collection of related issues and pull requests.
 /// </summary>
-public record WebhooksMilestone3
+public partial record WebhooksMilestone3
 {
     [JsonPropertyName("closed_at")]
     public required DateTimeOffset? ClosedAt { get; init; }
@@ -29205,7 +30840,7 @@ public record WebhooksMilestone3
 /// <summary>
 /// The membership between the user and the organization. Not present when the action is `member_invited`.
 /// </summary>
-public record WebhooksMembership
+public partial record WebhooksMembership
 {
     [JsonPropertyName("organization_url")]
     public required Uri OrganizationUrl { get; init; }
@@ -29240,7 +30875,7 @@ public record WebhooksMembership
 /// <summary>
 /// Details of a Personal Access Token Request.
 /// </summary>
-public record PersonalAccessTokenRequest
+public partial record PersonalAccessTokenRequest
 {
     /// <summary>
     /// Unique identifier of the request for access via fine-grained personal access token. Used as the `pat_request_id` parameter in the list and review API calls.
@@ -29328,7 +30963,7 @@ public record PersonalAccessTokenRequest
 
 }
 
-public record WebhooksProjectCard
+public partial record WebhooksProjectCard
 {
     [JsonPropertyName("after_id")]
     public int? AfterId { get; init; }
@@ -29377,7 +31012,7 @@ public record WebhooksProjectCard
 
 }
 
-public record WebhooksProject
+public partial record WebhooksProject
 {
     /// <summary>
     /// Body of the project
@@ -29429,7 +31064,7 @@ public record WebhooksProject
 
 }
 
-public record WebhooksProjectColumn
+public partial record WebhooksProjectColumn
 {
     [JsonPropertyName("after_id")]
     public int? AfterId { get; init; }
@@ -29466,7 +31101,7 @@ public record WebhooksProjectColumn
 
 }
 
-public record WebhooksProjectChanges
+public partial record WebhooksProjectChanges
 {
     [JsonPropertyName("archived_at")]
     public object? ArchivedAt { get; init; }
@@ -29476,7 +31111,7 @@ public record WebhooksProjectChanges
 /// <summary>
 /// An item belonging to a project
 /// </summary>
-public record ProjectsV2Item
+public partial record ProjectsV2Item
 {
     /// <summary>
     /// The unique identifier of the project item.
@@ -29537,7 +31172,7 @@ public record ProjectsV2Item
 /// <summary>
 /// An option for a single select field
 /// </summary>
-public record ProjectsV2SingleSelectOption
+public partial record ProjectsV2SingleSelectOption
 {
     /// <summary>
     /// The unique identifier of the option.
@@ -29568,7 +31203,7 @@ public record ProjectsV2SingleSelectOption
 /// <summary>
 /// An iteration setting for an iteration field
 /// </summary>
-public record ProjectsV2IterationSetting
+public partial record ProjectsV2IterationSetting
 {
     /// <summary>
     /// The unique identifier of the iteration setting.
@@ -29615,12 +31250,12 @@ public record ProjectsV2IterationSetting
 /// Type alias for int.
 /// </summary>
 [JsonConverter(typeof(OpenApiGeneratedTypeAliasJsonConverter<WebhooksNumber, int>))]
-public readonly record struct WebhooksNumber(int Value) : IOpenApiGeneratedTypeAlias<WebhooksNumber, int>
+public readonly partial record struct WebhooksNumber(int Value) : IOpenApiGeneratedTypeAlias<WebhooksNumber, int>
 {
     public static WebhooksNumber Create(int value) => new(value);
 }
 
-public record PullRequestWebhook : PullRequest
+public partial record PullRequestWebhook : PullRequest
 {
     /// <summary>
     /// Whether to allow auto-merge for pull requests.
@@ -29682,7 +31317,7 @@ public record PullRequestWebhook : PullRequest
 
 }
 
-public record WebhooksPullRequest5
+public partial record WebhooksPullRequest5
 {
     [JsonPropertyName("_links")]
     public required object Links { get; init; }
@@ -29829,6 +31464,12 @@ public record WebhooksPullRequest5
     public required Uri ReviewCommentsUrl { get; init; }
 
     /// <summary>
+    /// The stack information associated with a pull request.
+    /// </summary>
+    [JsonPropertyName("stack")]
+    public PullRequestStack? Stack { get; init; }
+
+    /// <summary>
     /// State of this Pull Request. Either `open` or `closed`.
     /// </summary>
     [JsonPropertyName("state")]
@@ -29857,7 +31498,7 @@ public record WebhooksPullRequest5
 /// <summary>
 /// The [comment](https://docs.github.com/rest/pulls/comments#get-a-review-comment-for-a-pull-request) itself.
 /// </summary>
-public record WebhooksReviewComment
+public partial record WebhooksReviewComment
 {
     [JsonPropertyName("_links")]
     public required object Links { get; init; }
@@ -30011,7 +31652,7 @@ public record WebhooksReviewComment
 /// <summary>
 /// The review that was affected.
 /// </summary>
-public record WebhooksReview
+public partial record WebhooksReview
 {
     [JsonPropertyName("_links")]
     public required object Links { get; init; }
@@ -30067,7 +31708,7 @@ public record WebhooksReview
 /// Type alias for string?.
 /// </summary>
 [JsonConverter(typeof(OpenApiGeneratedTypeAliasJsonConverter<WebhooksNullableString, string?>))]
-public readonly record struct WebhooksNullableString(string? Value) : IOpenApiGeneratedTypeAlias<WebhooksNullableString, string?>
+public readonly partial record struct WebhooksNullableString(string? Value) : IOpenApiGeneratedTypeAlias<WebhooksNullableString, string?>
 {
     public static WebhooksNullableString Create(string? value) => new(value);
 }
@@ -30075,7 +31716,7 @@ public readonly record struct WebhooksNullableString(string? Value) : IOpenApiGe
 /// <summary>
 /// The [release](https://docs.github.com/rest/releases/releases/#get-a-release) object.
 /// </summary>
-public record WebhooksRelease
+public partial record WebhooksRelease
 {
     [JsonPropertyName("assets")]
     public required IReadOnlyList<object> Assets { get; init; }
@@ -30163,7 +31804,7 @@ public record WebhooksRelease
 /// <summary>
 /// The [release](https://docs.github.com/rest/releases/releases/#get-a-release) object.
 /// </summary>
-public record WebhooksRelease1
+public partial record WebhooksRelease1
 {
     [JsonPropertyName("assets")]
     public required IReadOnlyList<object?> Assets { get; init; }
@@ -30251,7 +31892,7 @@ public record WebhooksRelease1
 /// <summary>
 /// The security alert of the vulnerable dependency.
 /// </summary>
-public record WebhooksAlert
+public partial record WebhooksAlert
 {
     [JsonPropertyName("affected_package_name")]
     public required string AffectedPackageName { get; init; }
@@ -30309,7 +31950,7 @@ public record WebhooksAlert
 /// <summary>
 /// The reason for resolving the alert.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<SecretScanningAlertResolutionWebhook>))]
 public enum SecretScanningAlertResolutionWebhook
 {
     [JsonStringEnumMemberName("false_positive")]
@@ -30328,7 +31969,7 @@ public enum SecretScanningAlertResolutionWebhook
     Unknown
 }
 
-public record SecretScanningAlertWebhook
+public partial record SecretScanningAlertWebhook
 {
     /// <summary>
     /// The security alert number.
@@ -30410,6 +32051,12 @@ public record SecretScanningAlertWebhook
     public string? ProviderSlug { get; init; }
 
     /// <summary>
+    /// The category of the detected secret. `default` covers specific provider patterns and custom patterns; `generic` covers non-specific patterns and AI-detected secrets.
+    /// </summary>
+    [JsonPropertyName("secret_category")]
+    public SecretCategory? SecretCategory { get; init; }
+
+    /// <summary>
     /// The token status as of the latest validity check.
     /// </summary>
     [JsonPropertyName("validity")]
@@ -30481,12 +32128,18 @@ public record SecretScanningAlertWebhook
     [JsonPropertyName("closure_request_reviewer")]
     public SimpleUser? ClosureRequestReviewer { get; init; }
 
+    /// <summary>
+    /// A list of metadata key/value pairs associated with the secret scanning alert.
+    /// </summary>
+    [JsonPropertyName("metadata")]
+    public SecretScanningAlertMetadata? Metadata { get; init; }
+
 }
 
 /// <summary>
 /// The details of the security advisory, including summary, description, and severity.
 /// </summary>
-public record WebhooksSecurityAdvisory
+public partial record WebhooksSecurityAdvisory
 {
     [JsonPropertyName("cvss")]
     public required object Cvss { get; init; }
@@ -30529,7 +32182,7 @@ public record WebhooksSecurityAdvisory
 
 }
 
-public record WebhooksSponsorship
+public partial record WebhooksSponsorship
 {
     [JsonPropertyName("created_at")]
     public required string CreatedAt { get; init; }
@@ -30564,12 +32217,12 @@ public record WebhooksSponsorship
 /// Type alias for string.
 /// </summary>
 [JsonConverter(typeof(OpenApiGeneratedTypeAliasJsonConverter<WebhooksEffectiveDate, string>))]
-public readonly record struct WebhooksEffectiveDate(string Value) : IOpenApiGeneratedTypeAlias<WebhooksEffectiveDate, string>
+public readonly partial record struct WebhooksEffectiveDate(string Value) : IOpenApiGeneratedTypeAlias<WebhooksEffectiveDate, string>
 {
     public static WebhooksEffectiveDate Create(string value) => new(value);
 }
 
-public record WebhooksChanges8
+public partial record WebhooksChanges8
 {
     [JsonPropertyName("tier")]
     public required object Tier { get; init; }
@@ -30579,7 +32232,7 @@ public record WebhooksChanges8
 /// <summary>
 /// Groups of organization members that gives permissions on specified repositories.
 /// </summary>
-public record WebhooksTeam1
+public partial record WebhooksTeam1
 {
     [JsonPropertyName("deleted")]
     public bool? Deleted { get; init; }
@@ -30661,7 +32314,7 @@ public record WebhooksTeam1
 
 }
 
-public record WebhookBranchProtectionConfigurationDisabled
+public partial record WebhookBranchProtectionConfigurationDisabled
 {
     [JsonPropertyName("action")]
     public required WebhookBranchProtectionConfigurationDisabledAction Action { get; init; }
@@ -30704,7 +32357,7 @@ public record WebhookBranchProtectionConfigurationDisabled
 
 }
 
-public record WebhookBranchProtectionConfigurationEnabled
+public partial record WebhookBranchProtectionConfigurationEnabled
 {
     [JsonPropertyName("action")]
     public required WebhookBranchProtectionConfigurationEnabledAction Action { get; init; }
@@ -30747,7 +32400,7 @@ public record WebhookBranchProtectionConfigurationEnabled
 
 }
 
-public record WebhookBranchProtectionRuleCreated
+public partial record WebhookBranchProtectionRuleCreated
 {
     [JsonPropertyName("action")]
     public required WebhookBranchProtectionRuleCreatedAction Action { get; init; }
@@ -30796,7 +32449,7 @@ public record WebhookBranchProtectionRuleCreated
 
 }
 
-public record WebhookBranchProtectionRuleDeleted
+public partial record WebhookBranchProtectionRuleDeleted
 {
     [JsonPropertyName("action")]
     public required WebhookBranchProtectionRuleDeletedAction Action { get; init; }
@@ -30845,7 +32498,7 @@ public record WebhookBranchProtectionRuleDeleted
 
 }
 
-public record WebhookBranchProtectionRuleEdited
+public partial record WebhookBranchProtectionRuleEdited
 {
     [JsonPropertyName("action")]
     public required WebhookBranchProtectionRuleEditedAction Action { get; init; }
@@ -30900,7 +32553,7 @@ public record WebhookBranchProtectionRuleEdited
 
 }
 
-public record WebhookCheckRunCompleted
+public partial record WebhookCheckRunCompleted
 {
     [JsonPropertyName("action")]
     public WebhookCheckRunCompletedAction? Action { get; init; }
@@ -30952,7 +32605,7 @@ public record WebhookCheckRunCompleted
 /// <summary>
 /// The check_run.completed webhook encoded with URL encoding
 /// </summary>
-public record WebhookCheckRunCompletedFormEncoded
+public partial record WebhookCheckRunCompletedFormEncoded
 {
     /// <summary>
     /// A URL-encoded string of the check_run.completed JSON payload. The decoded payload is a JSON object.
@@ -30962,7 +32615,7 @@ public record WebhookCheckRunCompletedFormEncoded
 
 }
 
-public record WebhookCheckRunCreated
+public partial record WebhookCheckRunCreated
 {
     [JsonPropertyName("action")]
     public WebhookBranchProtectionRuleCreatedAction? Action { get; init; }
@@ -31014,7 +32667,7 @@ public record WebhookCheckRunCreated
 /// <summary>
 /// The check_run.created webhook encoded with URL encoding
 /// </summary>
-public record WebhookCheckRunCreatedFormEncoded
+public partial record WebhookCheckRunCreatedFormEncoded
 {
     /// <summary>
     /// A URL-encoded string of the check_run.created JSON payload. The decoded payload is a JSON object.
@@ -31024,7 +32677,7 @@ public record WebhookCheckRunCreatedFormEncoded
 
 }
 
-public record WebhookCheckRunRequestedAction
+public partial record WebhookCheckRunRequestedAction
 {
     [JsonPropertyName("action")]
     public required WebhookCheckRunRequestedActionAction Action { get; init; }
@@ -31082,7 +32735,7 @@ public record WebhookCheckRunRequestedAction
 /// <summary>
 /// The check_run.requested_action webhook encoded with URL encoding
 /// </summary>
-public record WebhookCheckRunRequestedActionFormEncoded
+public partial record WebhookCheckRunRequestedActionFormEncoded
 {
     /// <summary>
     /// A URL-encoded string of the check_run.requested_action JSON payload. The decoded payload is a JSON object.
@@ -31092,7 +32745,7 @@ public record WebhookCheckRunRequestedActionFormEncoded
 
 }
 
-public record WebhookCheckRunRerequested
+public partial record WebhookCheckRunRerequested
 {
     [JsonPropertyName("action")]
     public WebhookCheckRunRerequestedAction? Action { get; init; }
@@ -31144,7 +32797,7 @@ public record WebhookCheckRunRerequested
 /// <summary>
 /// The check_run.rerequested webhook encoded with URL encoding
 /// </summary>
-public record WebhookCheckRunRerequestedFormEncoded
+public partial record WebhookCheckRunRerequestedFormEncoded
 {
     /// <summary>
     /// A URL-encoded string of the check_run.rerequested JSON payload. The decoded payload is a JSON object.
@@ -31154,7 +32807,7 @@ public record WebhookCheckRunRerequestedFormEncoded
 
 }
 
-public record WebhookCheckSuiteCompleted
+public partial record WebhookCheckSuiteCompleted
 {
     [JsonPropertyName("action")]
     public required WebhookCheckRunCompletedAction Action { get; init; }
@@ -31203,7 +32856,7 @@ public record WebhookCheckSuiteCompleted
 
 }
 
-public record WebhookCheckSuiteRequested
+public partial record WebhookCheckSuiteRequested
 {
     [JsonPropertyName("action")]
     public required WebhookCheckSuiteRequestedAction Action { get; init; }
@@ -31252,7 +32905,7 @@ public record WebhookCheckSuiteRequested
 
 }
 
-public record WebhookCheckSuiteRerequested
+public partial record WebhookCheckSuiteRerequested
 {
     [JsonPropertyName("action")]
     public required WebhookCheckRunRerequestedAction Action { get; init; }
@@ -31301,7 +32954,7 @@ public record WebhookCheckSuiteRerequested
 
 }
 
-public record WebhookCodeScanningAlertAppearedInBranch
+public partial record WebhookCodeScanningAlertAppearedInBranch
 {
     [JsonPropertyName("action")]
     public required WebhookCodeScanningAlertAppearedInBranchAction Action { get; init; }
@@ -31362,7 +33015,7 @@ public record WebhookCodeScanningAlertAppearedInBranch
 
 }
 
-public record WebhookCodeScanningAlertClosedByUser
+public partial record WebhookCodeScanningAlertClosedByUser
 {
     [JsonPropertyName("action")]
     public required WebhookCodeScanningAlertClosedByUserAction Action { get; init; }
@@ -31423,7 +33076,7 @@ public record WebhookCodeScanningAlertClosedByUser
 
 }
 
-public record WebhookCodeScanningAlertCreated
+public partial record WebhookCodeScanningAlertCreated
 {
     [JsonPropertyName("action")]
     public required WebhookBranchProtectionRuleCreatedAction Action { get; init; }
@@ -31484,7 +33137,7 @@ public record WebhookCodeScanningAlertCreated
 
 }
 
-public record WebhookCodeScanningAlertFixed
+public partial record WebhookCodeScanningAlertFixed
 {
     [JsonPropertyName("action")]
     public required WebhookCodeScanningAlertFixedAction Action { get; init; }
@@ -31545,7 +33198,7 @@ public record WebhookCodeScanningAlertFixed
 
 }
 
-public record WebhookCodeScanningAlertReopened
+public partial record WebhookCodeScanningAlertReopened
 {
     [JsonPropertyName("action")]
     public required WebhookCodeScanningAlertReopenedAction Action { get; init; }
@@ -31606,7 +33259,7 @@ public record WebhookCodeScanningAlertReopened
 
 }
 
-public record WebhookCodeScanningAlertReopenedByUser
+public partial record WebhookCodeScanningAlertReopenedByUser
 {
     [JsonPropertyName("action")]
     public required WebhookCodeScanningAlertReopenedByUserAction Action { get; init; }
@@ -31667,7 +33320,7 @@ public record WebhookCodeScanningAlertReopenedByUser
 
 }
 
-public record WebhookCodeScanningAlertUpdatedAssignment
+public partial record WebhookCodeScanningAlertUpdatedAssignment
 {
     [JsonPropertyName("action")]
     public required WebhookCodeScanningAlertUpdatedAssignmentAction Action { get; init; }
@@ -31716,7 +33369,7 @@ public record WebhookCodeScanningAlertUpdatedAssignment
 
 }
 
-public record WebhookCommitCommentCreated
+public partial record WebhookCommitCommentCreated
 {
     /// <summary>
     /// The action performed. Can be `created`.
@@ -31768,7 +33421,7 @@ public record WebhookCommitCommentCreated
 
 }
 
-public record WebhookCreate
+public partial record WebhookCreate
 {
     /// <summary>
     /// The repository's current description.
@@ -31838,7 +33491,7 @@ public record WebhookCreate
 
 }
 
-public record WebhookCustomPropertyCreated
+public partial record WebhookCustomPropertyCreated
 {
     [JsonPropertyName("action")]
     public required WebhookBranchProtectionRuleCreatedAction Action { get; init; }
@@ -31880,7 +33533,7 @@ public record WebhookCustomPropertyCreated
 
 }
 
-public record WebhookCustomPropertyDeleted
+public partial record WebhookCustomPropertyDeleted
 {
     [JsonPropertyName("action")]
     public required WebhookBranchProtectionRuleDeletedAction Action { get; init; }
@@ -31919,7 +33572,7 @@ public record WebhookCustomPropertyDeleted
 
 }
 
-public record WebhookCustomPropertyPromotedToEnterprise
+public partial record WebhookCustomPropertyPromotedToEnterprise
 {
     [JsonPropertyName("action")]
     public required WebhookCustomPropertyPromotedToEnterpriseAction Action { get; init; }
@@ -31961,7 +33614,7 @@ public record WebhookCustomPropertyPromotedToEnterprise
 
 }
 
-public record WebhookCustomPropertyUpdated
+public partial record WebhookCustomPropertyUpdated
 {
     [JsonPropertyName("action")]
     public required WebhookCustomPropertyUpdatedAction Action { get; init; }
@@ -32003,7 +33656,7 @@ public record WebhookCustomPropertyUpdated
 
 }
 
-public record WebhookCustomPropertyValuesUpdated
+public partial record WebhookCustomPropertyValuesUpdated
 {
     [JsonPropertyName("action")]
     public required WebhookCustomPropertyUpdatedAction Action { get; init; }
@@ -32058,7 +33711,7 @@ public record WebhookCustomPropertyValuesUpdated
 
 }
 
-public record WebhookDelete
+public partial record WebhookDelete
 {
     /// <summary>
     /// An enterprise on GitHub. Webhook payloads contain the `enterprise` property when the webhook is configured
@@ -32116,7 +33769,7 @@ public record WebhookDelete
 
 }
 
-public record WebhookDependabotAlertAssigneesChanged
+public partial record WebhookDependabotAlertAssigneesChanged
 {
     [JsonPropertyName("action")]
     public required WebhookDependabotAlertAssigneesChangedAction Action { get; init; }
@@ -32165,7 +33818,7 @@ public record WebhookDependabotAlertAssigneesChanged
 
 }
 
-public record WebhookDependabotAlertAutoDismissed
+public partial record WebhookDependabotAlertAutoDismissed
 {
     [JsonPropertyName("action")]
     public required WebhookDependabotAlertAutoDismissedAction Action { get; init; }
@@ -32214,7 +33867,7 @@ public record WebhookDependabotAlertAutoDismissed
 
 }
 
-public record WebhookDependabotAlertAutoReopened
+public partial record WebhookDependabotAlertAutoReopened
 {
     [JsonPropertyName("action")]
     public required WebhookDependabotAlertAutoReopenedAction Action { get; init; }
@@ -32263,7 +33916,7 @@ public record WebhookDependabotAlertAutoReopened
 
 }
 
-public record WebhookDependabotAlertCreated
+public partial record WebhookDependabotAlertCreated
 {
     [JsonPropertyName("action")]
     public required WebhookBranchProtectionRuleCreatedAction Action { get; init; }
@@ -32312,7 +33965,7 @@ public record WebhookDependabotAlertCreated
 
 }
 
-public record WebhookDependabotAlertDismissed
+public partial record WebhookDependabotAlertDismissed
 {
     [JsonPropertyName("action")]
     public required WebhookDependabotAlertDismissedAction Action { get; init; }
@@ -32361,7 +34014,7 @@ public record WebhookDependabotAlertDismissed
 
 }
 
-public record WebhookDependabotAlertFixed
+public partial record WebhookDependabotAlertFixed
 {
     [JsonPropertyName("action")]
     public required WebhookCodeScanningAlertFixedAction Action { get; init; }
@@ -32410,7 +34063,7 @@ public record WebhookDependabotAlertFixed
 
 }
 
-public record WebhookDependabotAlertReintroduced
+public partial record WebhookDependabotAlertReintroduced
 {
     [JsonPropertyName("action")]
     public required WebhookDependabotAlertReintroducedAction Action { get; init; }
@@ -32459,7 +34112,7 @@ public record WebhookDependabotAlertReintroduced
 
 }
 
-public record WebhookDependabotAlertReopened
+public partial record WebhookDependabotAlertReopened
 {
     [JsonPropertyName("action")]
     public required WebhookCodeScanningAlertReopenedAction Action { get; init; }
@@ -32508,7 +34161,7 @@ public record WebhookDependabotAlertReopened
 
 }
 
-public record WebhookDeployKeyCreated
+public partial record WebhookDeployKeyCreated
 {
     [JsonPropertyName("action")]
     public required WebhookBranchProtectionRuleCreatedAction Action { get; init; }
@@ -32557,7 +34210,7 @@ public record WebhookDeployKeyCreated
 
 }
 
-public record WebhookDeployKeyDeleted
+public partial record WebhookDeployKeyDeleted
 {
     [JsonPropertyName("action")]
     public required WebhookBranchProtectionRuleDeletedAction Action { get; init; }
@@ -32606,7 +34259,7 @@ public record WebhookDeployKeyDeleted
 
 }
 
-public record WebhookDeploymentCreated
+public partial record WebhookDeploymentCreated
 {
     [JsonPropertyName("action")]
     public required WebhookBranchProtectionRuleCreatedAction Action { get; init; }
@@ -32661,7 +34314,7 @@ public record WebhookDeploymentCreated
 
 }
 
-public record WebhookDeploymentProtectionRuleRequested
+public partial record WebhookDeploymentProtectionRuleRequested
 {
     [JsonPropertyName("action")]
     public WebhookCheckSuiteRequestedAction? Action { get; init; }
@@ -32732,7 +34385,7 @@ public record WebhookDeploymentProtectionRuleRequested
 
 }
 
-public record WebhookDeploymentReviewApproved
+public partial record WebhookDeploymentReviewApproved
 {
     [JsonPropertyName("action")]
     public required WebhookDeploymentReviewApprovedAction Action { get; init; }
@@ -32796,7 +34449,7 @@ public record WebhookDeploymentReviewApproved
 
 }
 
-public record WebhookDeploymentReviewRejected
+public partial record WebhookDeploymentReviewRejected
 {
     [JsonPropertyName("action")]
     public required WebhookDeploymentReviewRejectedAction Action { get; init; }
@@ -32860,7 +34513,7 @@ public record WebhookDeploymentReviewRejected
 
 }
 
-public record WebhookDeploymentReviewRequested
+public partial record WebhookDeploymentReviewRequested
 {
     [JsonPropertyName("action")]
     public required WebhookCheckSuiteRequestedAction Action { get; init; }
@@ -32921,7 +34574,7 @@ public record WebhookDeploymentReviewRequested
 
 }
 
-public record WebhookDeploymentStatusCreated
+public partial record WebhookDeploymentStatusCreated
 {
     [JsonPropertyName("action")]
     public required WebhookBranchProtectionRuleCreatedAction Action { get; init; }
@@ -32985,7 +34638,7 @@ public record WebhookDeploymentStatusCreated
 
 }
 
-public record WebhookDiscussionAnswered
+public partial record WebhookDiscussionAnswered
 {
     [JsonPropertyName("action")]
     public required WebhookDiscussionAnsweredAction Action { get; init; }
@@ -33037,7 +34690,7 @@ public record WebhookDiscussionAnswered
 
 }
 
-public record WebhookDiscussionCategoryChanged
+public partial record WebhookDiscussionCategoryChanged
 {
     [JsonPropertyName("action")]
     public required WebhookDiscussionCategoryChangedAction Action { get; init; }
@@ -33089,7 +34742,7 @@ public record WebhookDiscussionCategoryChanged
 
 }
 
-public record WebhookDiscussionClosed
+public partial record WebhookDiscussionClosed
 {
     [JsonPropertyName("action")]
     public required WebhookDiscussionClosedAction Action { get; init; }
@@ -33138,7 +34791,7 @@ public record WebhookDiscussionClosed
 
 }
 
-public record WebhookDiscussionCommentCreated
+public partial record WebhookDiscussionCommentCreated
 {
     [JsonPropertyName("action")]
     public required WebhookBranchProtectionRuleCreatedAction Action { get; init; }
@@ -33190,7 +34843,7 @@ public record WebhookDiscussionCommentCreated
 
 }
 
-public record WebhookDiscussionCommentDeleted
+public partial record WebhookDiscussionCommentDeleted
 {
     [JsonPropertyName("action")]
     public required WebhookBranchProtectionRuleDeletedAction Action { get; init; }
@@ -33242,7 +34895,7 @@ public record WebhookDiscussionCommentDeleted
 
 }
 
-public record WebhookDiscussionCommentEdited
+public partial record WebhookDiscussionCommentEdited
 {
     [JsonPropertyName("action")]
     public required WebhookBranchProtectionRuleEditedAction Action { get; init; }
@@ -33297,7 +34950,7 @@ public record WebhookDiscussionCommentEdited
 
 }
 
-public record WebhookDiscussionCreated
+public partial record WebhookDiscussionCreated
 {
     [JsonPropertyName("action")]
     public required WebhookBranchProtectionRuleCreatedAction Action { get; init; }
@@ -33346,7 +34999,7 @@ public record WebhookDiscussionCreated
 
 }
 
-public record WebhookDiscussionDeleted
+public partial record WebhookDiscussionDeleted
 {
     [JsonPropertyName("action")]
     public required WebhookBranchProtectionRuleDeletedAction Action { get; init; }
@@ -33395,7 +35048,7 @@ public record WebhookDiscussionDeleted
 
 }
 
-public record WebhookDiscussionEdited
+public partial record WebhookDiscussionEdited
 {
     [JsonPropertyName("action")]
     public required WebhookBranchProtectionRuleEditedAction Action { get; init; }
@@ -33447,7 +35100,7 @@ public record WebhookDiscussionEdited
 
 }
 
-public record WebhookDiscussionLabeled
+public partial record WebhookDiscussionLabeled
 {
     [JsonPropertyName("action")]
     public required WebhookDiscussionLabeledAction Action { get; init; }
@@ -33499,7 +35152,7 @@ public record WebhookDiscussionLabeled
 
 }
 
-public record WebhookDiscussionLocked
+public partial record WebhookDiscussionLocked
 {
     [JsonPropertyName("action")]
     public required WebhookDiscussionLockedAction Action { get; init; }
@@ -33548,7 +35201,7 @@ public record WebhookDiscussionLocked
 
 }
 
-public record WebhookDiscussionPinned
+public partial record WebhookDiscussionPinned
 {
     [JsonPropertyName("action")]
     public required WebhookDiscussionPinnedAction Action { get; init; }
@@ -33597,7 +35250,7 @@ public record WebhookDiscussionPinned
 
 }
 
-public record WebhookDiscussionReopened
+public partial record WebhookDiscussionReopened
 {
     [JsonPropertyName("action")]
     public required WebhookCodeScanningAlertReopenedAction Action { get; init; }
@@ -33646,7 +35299,7 @@ public record WebhookDiscussionReopened
 
 }
 
-public record WebhookDiscussionTransferred
+public partial record WebhookDiscussionTransferred
 {
     [JsonPropertyName("action")]
     public required WebhookDiscussionTransferredAction Action { get; init; }
@@ -33698,7 +35351,7 @@ public record WebhookDiscussionTransferred
 
 }
 
-public record WebhookDiscussionUnanswered
+public partial record WebhookDiscussionUnanswered
 {
     [JsonPropertyName("action")]
     public required WebhookDiscussionUnansweredAction Action { get; init; }
@@ -33734,7 +35387,7 @@ public record WebhookDiscussionUnanswered
 
 }
 
-public record WebhookDiscussionUnlabeled
+public partial record WebhookDiscussionUnlabeled
 {
     [JsonPropertyName("action")]
     public required WebhookDiscussionUnlabeledAction Action { get; init; }
@@ -33786,7 +35439,7 @@ public record WebhookDiscussionUnlabeled
 
 }
 
-public record WebhookDiscussionUnlocked
+public partial record WebhookDiscussionUnlocked
 {
     [JsonPropertyName("action")]
     public required WebhookDiscussionUnlockedAction Action { get; init; }
@@ -33835,7 +35488,7 @@ public record WebhookDiscussionUnlocked
 
 }
 
-public record WebhookDiscussionUnpinned
+public partial record WebhookDiscussionUnpinned
 {
     [JsonPropertyName("action")]
     public required WebhookDiscussionUnpinnedAction Action { get; init; }
@@ -33887,7 +35540,7 @@ public record WebhookDiscussionUnpinned
 /// <summary>
 /// A user forks a repository.
 /// </summary>
-public record WebhookFork
+public partial record WebhookFork
 {
     /// <summary>
     /// An enterprise on GitHub. Webhook payloads contain the `enterprise` property when the webhook is configured
@@ -33933,7 +35586,7 @@ public record WebhookFork
 
 }
 
-public record WebhookGithubAppAuthorizationRevoked
+public partial record WebhookGithubAppAuthorizationRevoked
 {
     [JsonPropertyName("action")]
     public required WebhookGithubAppAuthorizationRevokedAction Action { get; init; }
@@ -33946,7 +35599,7 @@ public record WebhookGithubAppAuthorizationRevoked
 
 }
 
-public record WebhookGollum
+public partial record WebhookGollum
 {
     /// <summary>
     /// An enterprise on GitHub. Webhook payloads contain the `enterprise` property when the webhook is configured
@@ -33992,7 +35645,7 @@ public record WebhookGollum
 
 }
 
-public record WebhookInstallationCreated
+public partial record WebhookInstallationCreated
 {
     [JsonPropertyName("action")]
     public required WebhookBranchProtectionRuleCreatedAction Action { get; init; }
@@ -34042,7 +35695,7 @@ public record WebhookInstallationCreated
 
 }
 
-public record WebhookInstallationDeleted
+public partial record WebhookInstallationDeleted
 {
     [JsonPropertyName("action")]
     public required WebhookBranchProtectionRuleDeletedAction Action { get; init; }
@@ -34092,7 +35745,7 @@ public record WebhookInstallationDeleted
 
 }
 
-public record WebhookInstallationNewPermissionsAccepted
+public partial record WebhookInstallationNewPermissionsAccepted
 {
     [JsonPropertyName("action")]
     public required WebhookInstallationNewPermissionsAcceptedAction Action { get; init; }
@@ -34142,7 +35795,7 @@ public record WebhookInstallationNewPermissionsAccepted
 
 }
 
-public record WebhookInstallationRepositoriesAdded
+public partial record WebhookInstallationRepositoriesAdded
 {
     [JsonPropertyName("action")]
     public required WebhookInstallationRepositoriesAddedAction Action { get; init; }
@@ -34175,7 +35828,7 @@ public record WebhookInstallationRepositoriesAdded
     public required WebhooksRepositoriesAdded RepositoriesAdded { get; init; }
 
     /// <summary>
-    /// An array of repository objects, which were removed from the installation.
+    /// An array of repository objects, which were removed from the installation. When `repository_selection` changes from `all` to `selected`, this array is empty.
     /// </summary>
     [JsonPropertyName("repositories_removed")]
     public required IReadOnlyList<object> RepositoriesRemoved { get; init; }
@@ -34204,7 +35857,7 @@ public record WebhookInstallationRepositoriesAdded
 
 }
 
-public record WebhookInstallationRepositoriesRemoved
+public partial record WebhookInstallationRepositoriesRemoved
 {
     [JsonPropertyName("action")]
     public required WebhookInstallationRepositoriesRemovedAction Action { get; init; }
@@ -34237,7 +35890,7 @@ public record WebhookInstallationRepositoriesRemoved
     public required WebhooksRepositoriesAdded RepositoriesAdded { get; init; }
 
     /// <summary>
-    /// An array of repository objects, which were removed from the installation.
+    /// An array of repository objects, which were removed from the installation. When `repository_selection` changes from `all` to `selected`, this array is empty.
     /// </summary>
     [JsonPropertyName("repositories_removed")]
     public required IReadOnlyList<object> RepositoriesRemoved { get; init; }
@@ -34266,7 +35919,7 @@ public record WebhookInstallationRepositoriesRemoved
 
 }
 
-public record WebhookInstallationSuspend
+public partial record WebhookInstallationSuspend
 {
     [JsonPropertyName("action")]
     public required WebhookInstallationSuspendAction Action { get; init; }
@@ -34316,7 +35969,7 @@ public record WebhookInstallationSuspend
 
 }
 
-public record WebhookInstallationTargetRenamed
+public partial record WebhookInstallationTargetRenamed
 {
     [JsonPropertyName("account")]
     public required object Account { get; init; }
@@ -34368,7 +36021,7 @@ public record WebhookInstallationTargetRenamed
 
 }
 
-public record WebhookInstallationUnsuspend
+public partial record WebhookInstallationUnsuspend
 {
     [JsonPropertyName("action")]
     public required WebhookInstallationUnsuspendAction Action { get; init; }
@@ -34418,7 +36071,7 @@ public record WebhookInstallationUnsuspend
 
 }
 
-public record WebhookIssueCommentCreated
+public partial record WebhookIssueCommentCreated
 {
     [JsonPropertyName("action")]
     public required WebhookBranchProtectionRuleCreatedAction Action { get; init; }
@@ -34473,7 +36126,7 @@ public record WebhookIssueCommentCreated
 
 }
 
-public record WebhookIssueCommentDeleted
+public partial record WebhookIssueCommentDeleted
 {
     [JsonPropertyName("action")]
     public required WebhookBranchProtectionRuleDeletedAction Action { get; init; }
@@ -34528,7 +36181,7 @@ public record WebhookIssueCommentDeleted
 
 }
 
-public record WebhookIssueCommentEdited
+public partial record WebhookIssueCommentEdited
 {
     [JsonPropertyName("action")]
     public required WebhookBranchProtectionRuleEditedAction Action { get; init; }
@@ -34589,7 +36242,7 @@ public record WebhookIssueCommentEdited
 
 }
 
-public record WebhookIssueCommentPinned
+public partial record WebhookIssueCommentPinned
 {
     [JsonPropertyName("action")]
     public required WebhookDiscussionPinnedAction Action { get; init; }
@@ -34644,7 +36297,7 @@ public record WebhookIssueCommentPinned
 
 }
 
-public record WebhookIssueCommentUnpinned
+public partial record WebhookIssueCommentUnpinned
 {
     [JsonPropertyName("action")]
     public required WebhookDiscussionUnpinnedAction Action { get; init; }
@@ -34699,7 +36352,7 @@ public record WebhookIssueCommentUnpinned
 
 }
 
-public record WebhookIssueDependenciesBlockedByAdded
+public partial record WebhookIssueDependenciesBlockedByAdded
 {
     [JsonPropertyName("action")]
     public required WebhookIssueDependenciesBlockedByAddedAction Action { get; init; }
@@ -34764,7 +36417,7 @@ public record WebhookIssueDependenciesBlockedByAdded
 
 }
 
-public record WebhookIssueDependenciesBlockedByRemoved
+public partial record WebhookIssueDependenciesBlockedByRemoved
 {
     [JsonPropertyName("action")]
     public required WebhookIssueDependenciesBlockedByRemovedAction Action { get; init; }
@@ -34829,7 +36482,7 @@ public record WebhookIssueDependenciesBlockedByRemoved
 
 }
 
-public record WebhookIssueDependenciesBlockingAdded
+public partial record WebhookIssueDependenciesBlockingAdded
 {
     [JsonPropertyName("action")]
     public required WebhookIssueDependenciesBlockingAddedAction Action { get; init; }
@@ -34894,7 +36547,7 @@ public record WebhookIssueDependenciesBlockingAdded
 
 }
 
-public record WebhookIssueDependenciesBlockingRemoved
+public partial record WebhookIssueDependenciesBlockingRemoved
 {
     [JsonPropertyName("action")]
     public required WebhookIssueDependenciesBlockingRemovedAction Action { get; init; }
@@ -34959,7 +36612,7 @@ public record WebhookIssueDependenciesBlockingRemoved
 
 }
 
-public record WebhookIssuesAssigned
+public partial record WebhookIssuesAssigned
 {
     /// <summary>
     /// The action that was performed.
@@ -35014,7 +36667,7 @@ public record WebhookIssuesAssigned
 
 }
 
-public record WebhookIssuesClosed
+public partial record WebhookIssuesClosed
 {
     /// <summary>
     /// The action that was performed.
@@ -35066,7 +36719,7 @@ public record WebhookIssuesClosed
 
 }
 
-public record WebhookIssuesDeleted
+public partial record WebhookIssuesDeleted
 {
     [JsonPropertyName("action")]
     public required WebhookBranchProtectionRuleDeletedAction Action { get; init; }
@@ -35115,7 +36768,7 @@ public record WebhookIssuesDeleted
 
 }
 
-public record WebhookIssuesDemilestoned
+public partial record WebhookIssuesDemilestoned
 {
     [JsonPropertyName("action")]
     public required WebhookIssuesDemilestonedAction Action { get; init; }
@@ -35170,7 +36823,7 @@ public record WebhookIssuesDemilestoned
 
 }
 
-public record WebhookIssuesEdited
+public partial record WebhookIssuesEdited
 {
     [JsonPropertyName("action")]
     public required WebhookBranchProtectionRuleEditedAction Action { get; init; }
@@ -35228,7 +36881,7 @@ public record WebhookIssuesEdited
 
 }
 
-public record WebhookIssuesFieldAdded
+public partial record WebhookIssuesFieldAdded
 {
     [JsonPropertyName("action")]
     public required WebhookIssuesFieldAddedAction Action { get; init; }
@@ -35295,7 +36948,7 @@ public record WebhookIssuesFieldAdded
 
 }
 
-public record WebhookIssuesFieldRemoved
+public partial record WebhookIssuesFieldRemoved
 {
     [JsonPropertyName("action")]
     public required WebhookIssuesFieldRemovedAction Action { get; init; }
@@ -35356,7 +37009,7 @@ public record WebhookIssuesFieldRemoved
 
 }
 
-public record WebhookIssuesLabeled
+public partial record WebhookIssuesLabeled
 {
     [JsonPropertyName("action")]
     public required WebhookDiscussionLabeledAction Action { get; init; }
@@ -35408,7 +37061,7 @@ public record WebhookIssuesLabeled
 
 }
 
-public record WebhookIssuesLocked
+public partial record WebhookIssuesLocked
 {
     [JsonPropertyName("action")]
     public required WebhookDiscussionLockedAction Action { get; init; }
@@ -35457,7 +37110,7 @@ public record WebhookIssuesLocked
 
 }
 
-public record WebhookIssuesMilestoned
+public partial record WebhookIssuesMilestoned
 {
     [JsonPropertyName("action")]
     public required WebhookIssuesMilestonedAction Action { get; init; }
@@ -35512,7 +37165,7 @@ public record WebhookIssuesMilestoned
 
 }
 
-public record WebhookIssuesOpened
+public partial record WebhookIssuesOpened
 {
     [JsonPropertyName("action")]
     public required WebhookIssuesOpenedAction Action { get; init; }
@@ -35564,7 +37217,7 @@ public record WebhookIssuesOpened
 
 }
 
-public record WebhookIssuesPinned
+public partial record WebhookIssuesPinned
 {
     [JsonPropertyName("action")]
     public required WebhookDiscussionPinnedAction Action { get; init; }
@@ -35613,7 +37266,7 @@ public record WebhookIssuesPinned
 
 }
 
-public record WebhookIssuesReopened
+public partial record WebhookIssuesReopened
 {
     [JsonPropertyName("action")]
     public required WebhookCodeScanningAlertReopenedAction Action { get; init; }
@@ -35662,7 +37315,7 @@ public record WebhookIssuesReopened
 
 }
 
-public record WebhookIssuesTransferred
+public partial record WebhookIssuesTransferred
 {
     [JsonPropertyName("action")]
     public required WebhookDiscussionTransferredAction Action { get; init; }
@@ -35714,7 +37367,7 @@ public record WebhookIssuesTransferred
 
 }
 
-public record WebhookIssuesTyped
+public partial record WebhookIssuesTyped
 {
     [JsonPropertyName("action")]
     public required WebhookIssuesTypedAction Action { get; init; }
@@ -35769,7 +37422,7 @@ public record WebhookIssuesTyped
 
 }
 
-public record WebhookIssuesUnassigned
+public partial record WebhookIssuesUnassigned
 {
     /// <summary>
     /// The action that was performed.
@@ -35824,7 +37477,7 @@ public record WebhookIssuesUnassigned
 
 }
 
-public record WebhookIssuesUnlabeled
+public partial record WebhookIssuesUnlabeled
 {
     [JsonPropertyName("action")]
     public required WebhookDiscussionUnlabeledAction Action { get; init; }
@@ -35876,7 +37529,7 @@ public record WebhookIssuesUnlabeled
 
 }
 
-public record WebhookIssuesUnlocked
+public partial record WebhookIssuesUnlocked
 {
     [JsonPropertyName("action")]
     public required WebhookDiscussionUnlockedAction Action { get; init; }
@@ -35925,7 +37578,7 @@ public record WebhookIssuesUnlocked
 
 }
 
-public record WebhookIssuesUnpinned
+public partial record WebhookIssuesUnpinned
 {
     [JsonPropertyName("action")]
     public required WebhookDiscussionUnpinnedAction Action { get; init; }
@@ -35974,7 +37627,7 @@ public record WebhookIssuesUnpinned
 
 }
 
-public record WebhookIssuesUntyped
+public partial record WebhookIssuesUntyped
 {
     [JsonPropertyName("action")]
     public required WebhookIssuesUntypedAction Action { get; init; }
@@ -36029,7 +37682,7 @@ public record WebhookIssuesUntyped
 
 }
 
-public record WebhookLabelCreated
+public partial record WebhookLabelCreated
 {
     [JsonPropertyName("action")]
     public required WebhookBranchProtectionRuleCreatedAction Action { get; init; }
@@ -36075,7 +37728,7 @@ public record WebhookLabelCreated
 
 }
 
-public record WebhookLabelDeleted
+public partial record WebhookLabelDeleted
 {
     [JsonPropertyName("action")]
     public required WebhookBranchProtectionRuleDeletedAction Action { get; init; }
@@ -36121,7 +37774,7 @@ public record WebhookLabelDeleted
 
 }
 
-public record WebhookLabelEdited
+public partial record WebhookLabelEdited
 {
     [JsonPropertyName("action")]
     public required WebhookBranchProtectionRuleEditedAction Action { get; init; }
@@ -36173,7 +37826,7 @@ public record WebhookLabelEdited
 
 }
 
-public record WebhookMarketplacePurchaseCancelled
+public partial record WebhookMarketplacePurchaseCancelled
 {
     [JsonPropertyName("action")]
     public required WebhookMarketplacePurchaseCancelledAction Action { get; init; }
@@ -36225,7 +37878,7 @@ public record WebhookMarketplacePurchaseCancelled
 
 }
 
-public record WebhookMarketplacePurchaseChanged
+public partial record WebhookMarketplacePurchaseChanged
 {
     [JsonPropertyName("action")]
     public required WebhookMarketplacePurchaseChangedAction Action { get; init; }
@@ -36277,7 +37930,7 @@ public record WebhookMarketplacePurchaseChanged
 
 }
 
-public record WebhookMarketplacePurchasePendingChange
+public partial record WebhookMarketplacePurchasePendingChange
 {
     [JsonPropertyName("action")]
     public required WebhookMarketplacePurchasePendingChangeAction Action { get; init; }
@@ -36329,7 +37982,7 @@ public record WebhookMarketplacePurchasePendingChange
 
 }
 
-public record WebhookMarketplacePurchasePendingChangeCancelled
+public partial record WebhookMarketplacePurchasePendingChangeCancelled
 {
     [JsonPropertyName("action")]
     public required WebhookMarketplacePurchasePendingChangeCancelledAction Action { get; init; }
@@ -36381,7 +38034,7 @@ public record WebhookMarketplacePurchasePendingChangeCancelled
 
 }
 
-public record WebhookMarketplacePurchasePurchased
+public partial record WebhookMarketplacePurchasePurchased
 {
     [JsonPropertyName("action")]
     public required WebhookMarketplacePurchasePurchasedAction Action { get; init; }
@@ -36433,7 +38086,7 @@ public record WebhookMarketplacePurchasePurchased
 
 }
 
-public record WebhookMemberAdded
+public partial record WebhookMemberAdded
 {
     [JsonPropertyName("action")]
     public required WebhookInstallationRepositoriesAddedAction Action { get; init; }
@@ -36482,7 +38135,7 @@ public record WebhookMemberAdded
 
 }
 
-public record WebhookMemberEdited
+public partial record WebhookMemberEdited
 {
     [JsonPropertyName("action")]
     public required WebhookBranchProtectionRuleEditedAction Action { get; init; }
@@ -36534,7 +38187,7 @@ public record WebhookMemberEdited
 
 }
 
-public record WebhookMemberRemoved
+public partial record WebhookMemberRemoved
 {
     [JsonPropertyName("action")]
     public required WebhookInstallationRepositoriesRemovedAction Action { get; init; }
@@ -36580,7 +38233,7 @@ public record WebhookMemberRemoved
 
 }
 
-public record WebhookMembershipAdded
+public partial record WebhookMembershipAdded
 {
     [JsonPropertyName("action")]
     public required WebhookInstallationRepositoriesAddedAction Action { get; init; }
@@ -36635,7 +38288,7 @@ public record WebhookMembershipAdded
 
 }
 
-public record WebhookMembershipRemoved
+public partial record WebhookMembershipRemoved
 {
     [JsonPropertyName("action")]
     public required WebhookInstallationRepositoriesRemovedAction Action { get; init; }
@@ -36690,7 +38343,7 @@ public record WebhookMembershipRemoved
 
 }
 
-public record WebhookMergeGroupChecksRequested
+public partial record WebhookMergeGroupChecksRequested
 {
     [JsonPropertyName("action")]
     public required WebhookMergeGroupChecksRequestedAction Action { get; init; }
@@ -36731,7 +38384,7 @@ public record WebhookMergeGroupChecksRequested
 
 }
 
-public record WebhookMergeGroupDestroyed
+public partial record WebhookMergeGroupDestroyed
 {
     [JsonPropertyName("action")]
     public required WebhookMergeGroupDestroyedAction Action { get; init; }
@@ -36778,7 +38431,7 @@ public record WebhookMergeGroupDestroyed
 
 }
 
-public record WebhookMetaDeleted
+public partial record WebhookMetaDeleted
 {
     [JsonPropertyName("action")]
     public required WebhookBranchProtectionRuleDeletedAction Action { get; init; }
@@ -36829,7 +38482,7 @@ public record WebhookMetaDeleted
 
 }
 
-public record WebhookMilestoneClosed
+public partial record WebhookMilestoneClosed
 {
     [JsonPropertyName("action")]
     public required WebhookDiscussionClosedAction Action { get; init; }
@@ -36878,7 +38531,7 @@ public record WebhookMilestoneClosed
 
 }
 
-public record WebhookMilestoneCreated
+public partial record WebhookMilestoneCreated
 {
     [JsonPropertyName("action")]
     public required WebhookBranchProtectionRuleCreatedAction Action { get; init; }
@@ -36927,7 +38580,7 @@ public record WebhookMilestoneCreated
 
 }
 
-public record WebhookMilestoneDeleted
+public partial record WebhookMilestoneDeleted
 {
     [JsonPropertyName("action")]
     public required WebhookBranchProtectionRuleDeletedAction Action { get; init; }
@@ -36976,7 +38629,7 @@ public record WebhookMilestoneDeleted
 
 }
 
-public record WebhookMilestoneEdited
+public partial record WebhookMilestoneEdited
 {
     [JsonPropertyName("action")]
     public required WebhookBranchProtectionRuleEditedAction Action { get; init; }
@@ -37031,7 +38684,7 @@ public record WebhookMilestoneEdited
 
 }
 
-public record WebhookMilestoneOpened
+public partial record WebhookMilestoneOpened
 {
     [JsonPropertyName("action")]
     public required WebhookIssuesOpenedAction Action { get; init; }
@@ -37080,7 +38733,7 @@ public record WebhookMilestoneOpened
 
 }
 
-public record WebhookOrgBlockBlocked
+public partial record WebhookOrgBlockBlocked
 {
     [JsonPropertyName("action")]
     public required WebhookOrgBlockBlockedAction Action { get; init; }
@@ -37126,7 +38779,7 @@ public record WebhookOrgBlockBlocked
 
 }
 
-public record WebhookOrgBlockUnblocked
+public partial record WebhookOrgBlockUnblocked
 {
     [JsonPropertyName("action")]
     public required WebhookOrgBlockUnblockedAction Action { get; init; }
@@ -37172,7 +38825,7 @@ public record WebhookOrgBlockUnblocked
 
 }
 
-public record WebhookOrganizationDeleted
+public partial record WebhookOrganizationDeleted
 {
     [JsonPropertyName("action")]
     public required WebhookBranchProtectionRuleDeletedAction Action { get; init; }
@@ -37221,7 +38874,7 @@ public record WebhookOrganizationDeleted
 
 }
 
-public record WebhookOrganizationMemberAdded
+public partial record WebhookOrganizationMemberAdded
 {
     [JsonPropertyName("action")]
     public required WebhookOrganizationMemberAddedAction Action { get; init; }
@@ -37270,7 +38923,7 @@ public record WebhookOrganizationMemberAdded
 
 }
 
-public record WebhookOrganizationMemberInvited
+public partial record WebhookOrganizationMemberInvited
 {
     [JsonPropertyName("action")]
     public required WebhookOrganizationMemberInvitedAction Action { get; init; }
@@ -37322,7 +38975,7 @@ public record WebhookOrganizationMemberInvited
 
 }
 
-public record WebhookOrganizationMemberRemoved
+public partial record WebhookOrganizationMemberRemoved
 {
     [JsonPropertyName("action")]
     public required WebhookOrganizationMemberRemovedAction Action { get; init; }
@@ -37371,7 +39024,7 @@ public record WebhookOrganizationMemberRemoved
 
 }
 
-public record WebhookOrganizationRenamed
+public partial record WebhookOrganizationRenamed
 {
     [JsonPropertyName("action")]
     public required WebhookInstallationTargetRenamedAction Action { get; init; }
@@ -37423,7 +39076,7 @@ public record WebhookOrganizationRenamed
 
 }
 
-public record WebhookRubygemsMetadata
+public partial record WebhookRubygemsMetadata
 {
     [JsonPropertyName("name")]
     public string? Name { get; init; }
@@ -37457,7 +39110,7 @@ public record WebhookRubygemsMetadata
 
 }
 
-public record WebhookPackagePublished
+public partial record WebhookPackagePublished
 {
     [JsonPropertyName("action")]
     public required WebhookPackagePublishedAction Action { get; init; }
@@ -37506,7 +39159,7 @@ public record WebhookPackagePublished
 
 }
 
-public record WebhookPackageUpdated
+public partial record WebhookPackageUpdated
 {
     [JsonPropertyName("action")]
     public required WebhookCustomPropertyUpdatedAction Action { get; init; }
@@ -37555,7 +39208,7 @@ public record WebhookPackageUpdated
 
 }
 
-public record WebhookPageBuild
+public partial record WebhookPageBuild
 {
     /// <summary>
     /// The [List GitHub Pages builds](https://docs.github.com/rest/pages/pages#list-github-pages-builds) itself.
@@ -37604,7 +39257,7 @@ public record WebhookPageBuild
 
 }
 
-public record WebhookPersonalAccessTokenRequestApproved
+public partial record WebhookPersonalAccessTokenRequestApproved
 {
     [JsonPropertyName("action")]
     public required WebhookDeploymentReviewApprovedAction Action { get; init; }
@@ -37646,7 +39299,7 @@ public record WebhookPersonalAccessTokenRequestApproved
 
 }
 
-public record WebhookPersonalAccessTokenRequestCancelled
+public partial record WebhookPersonalAccessTokenRequestCancelled
 {
     [JsonPropertyName("action")]
     public required WebhookMarketplacePurchaseCancelledAction Action { get; init; }
@@ -37688,7 +39341,7 @@ public record WebhookPersonalAccessTokenRequestCancelled
 
 }
 
-public record WebhookPersonalAccessTokenRequestCreated
+public partial record WebhookPersonalAccessTokenRequestCreated
 {
     [JsonPropertyName("action")]
     public required WebhookBranchProtectionRuleCreatedAction Action { get; init; }
@@ -37730,7 +39383,7 @@ public record WebhookPersonalAccessTokenRequestCreated
 
 }
 
-public record WebhookPersonalAccessTokenRequestDenied
+public partial record WebhookPersonalAccessTokenRequestDenied
 {
     [JsonPropertyName("action")]
     public required WebhookPersonalAccessTokenRequestDeniedAction Action { get; init; }
@@ -37772,7 +39425,7 @@ public record WebhookPersonalAccessTokenRequestDenied
 
 }
 
-public record WebhookPing
+public partial record WebhookPing
 {
     /// <summary>
     /// The webhook that is being pinged
@@ -37817,7 +39470,7 @@ public record WebhookPing
 /// <summary>
 /// The webhooks ping payload encoded with URL encoding.
 /// </summary>
-public record WebhookPingFormEncoded
+public partial record WebhookPingFormEncoded
 {
     /// <summary>
     /// A URL-encoded string of the ping JSON payload. The decoded payload is a JSON object.
@@ -37827,7 +39480,7 @@ public record WebhookPingFormEncoded
 
 }
 
-public record WebhookProjectCardConverted
+public partial record WebhookProjectCardConverted
 {
     [JsonPropertyName("action")]
     public required WebhookProjectCardConvertedAction Action { get; init; }
@@ -37876,7 +39529,7 @@ public record WebhookProjectCardConverted
 
 }
 
-public record WebhookProjectCardCreated
+public partial record WebhookProjectCardCreated
 {
     [JsonPropertyName("action")]
     public required WebhookBranchProtectionRuleCreatedAction Action { get; init; }
@@ -37922,7 +39575,7 @@ public record WebhookProjectCardCreated
 
 }
 
-public record WebhookProjectCardDeleted
+public partial record WebhookProjectCardDeleted
 {
     [JsonPropertyName("action")]
     public required WebhookBranchProtectionRuleDeletedAction Action { get; init; }
@@ -37964,7 +39617,7 @@ public record WebhookProjectCardDeleted
 
 }
 
-public record WebhookProjectCardEdited
+public partial record WebhookProjectCardEdited
 {
     [JsonPropertyName("action")]
     public required WebhookBranchProtectionRuleEditedAction Action { get; init; }
@@ -38013,7 +39666,7 @@ public record WebhookProjectCardEdited
 
 }
 
-public record WebhookProjectCardMoved
+public partial record WebhookProjectCardMoved
 {
     [JsonPropertyName("action")]
     public required WebhookProjectCardMovedAction Action { get; init; }
@@ -38062,7 +39715,7 @@ public record WebhookProjectCardMoved
 
 }
 
-public record WebhookProjectClosed
+public partial record WebhookProjectClosed
 {
     [JsonPropertyName("action")]
     public required WebhookDiscussionClosedAction Action { get; init; }
@@ -38108,7 +39761,7 @@ public record WebhookProjectClosed
 
 }
 
-public record WebhookProjectColumnCreated
+public partial record WebhookProjectColumnCreated
 {
     [JsonPropertyName("action")]
     public required WebhookBranchProtectionRuleCreatedAction Action { get; init; }
@@ -38154,7 +39807,7 @@ public record WebhookProjectColumnCreated
 
 }
 
-public record WebhookProjectColumnDeleted
+public partial record WebhookProjectColumnDeleted
 {
     [JsonPropertyName("action")]
     public required WebhookBranchProtectionRuleDeletedAction Action { get; init; }
@@ -38196,7 +39849,7 @@ public record WebhookProjectColumnDeleted
 
 }
 
-public record WebhookProjectColumnEdited
+public partial record WebhookProjectColumnEdited
 {
     [JsonPropertyName("action")]
     public required WebhookBranchProtectionRuleEditedAction Action { get; init; }
@@ -38245,7 +39898,7 @@ public record WebhookProjectColumnEdited
 
 }
 
-public record WebhookProjectColumnMoved
+public partial record WebhookProjectColumnMoved
 {
     [JsonPropertyName("action")]
     public required WebhookProjectCardMovedAction Action { get; init; }
@@ -38291,7 +39944,7 @@ public record WebhookProjectColumnMoved
 
 }
 
-public record WebhookProjectCreated
+public partial record WebhookProjectCreated
 {
     [JsonPropertyName("action")]
     public required WebhookBranchProtectionRuleCreatedAction Action { get; init; }
@@ -38337,7 +39990,7 @@ public record WebhookProjectCreated
 
 }
 
-public record WebhookProjectDeleted
+public partial record WebhookProjectDeleted
 {
     [JsonPropertyName("action")]
     public required WebhookBranchProtectionRuleDeletedAction Action { get; init; }
@@ -38379,7 +40032,7 @@ public record WebhookProjectDeleted
 
 }
 
-public record WebhookProjectEdited
+public partial record WebhookProjectEdited
 {
     [JsonPropertyName("action")]
     public required WebhookBranchProtectionRuleEditedAction Action { get; init; }
@@ -38431,7 +40084,7 @@ public record WebhookProjectEdited
 
 }
 
-public record WebhookProjectReopened
+public partial record WebhookProjectReopened
 {
     [JsonPropertyName("action")]
     public required WebhookCodeScanningAlertReopenedAction Action { get; init; }
@@ -38477,7 +40130,7 @@ public record WebhookProjectReopened
 
 }
 
-public record WebhookProjectsV2ProjectClosed
+public partial record WebhookProjectsV2ProjectClosed
 {
     [JsonPropertyName("action")]
     public required WebhookDiscussionClosedAction Action { get; init; }
@@ -38514,7 +40167,7 @@ public record WebhookProjectsV2ProjectClosed
 /// <summary>
 /// A project was created
 /// </summary>
-public record WebhookProjectsV2ProjectCreated
+public partial record WebhookProjectsV2ProjectCreated
 {
     [JsonPropertyName("action")]
     public required WebhookBranchProtectionRuleCreatedAction Action { get; init; }
@@ -38548,7 +40201,7 @@ public record WebhookProjectsV2ProjectCreated
 
 }
 
-public record WebhookProjectsV2ProjectDeleted
+public partial record WebhookProjectsV2ProjectDeleted
 {
     [JsonPropertyName("action")]
     public required WebhookBranchProtectionRuleDeletedAction Action { get; init; }
@@ -38582,7 +40235,7 @@ public record WebhookProjectsV2ProjectDeleted
 
 }
 
-public record WebhookProjectsV2ProjectEdited
+public partial record WebhookProjectsV2ProjectEdited
 {
     [JsonPropertyName("action")]
     public required WebhookBranchProtectionRuleEditedAction Action { get; init; }
@@ -38619,7 +40272,7 @@ public record WebhookProjectsV2ProjectEdited
 
 }
 
-public record WebhookProjectsV2ItemArchived
+public partial record WebhookProjectsV2ItemArchived
 {
     [JsonPropertyName("action")]
     public required WebhookProjectsV2ItemArchivedAction Action { get; init; }
@@ -38656,7 +40309,7 @@ public record WebhookProjectsV2ItemArchived
 
 }
 
-public record WebhookProjectsV2ItemConverted
+public partial record WebhookProjectsV2ItemConverted
 {
     [JsonPropertyName("action")]
     public required WebhookProjectCardConvertedAction Action { get; init; }
@@ -38693,7 +40346,7 @@ public record WebhookProjectsV2ItemConverted
 
 }
 
-public record WebhookProjectsV2ItemCreated
+public partial record WebhookProjectsV2ItemCreated
 {
     [JsonPropertyName("action")]
     public required WebhookBranchProtectionRuleCreatedAction Action { get; init; }
@@ -38727,7 +40380,7 @@ public record WebhookProjectsV2ItemCreated
 
 }
 
-public record WebhookProjectsV2ItemDeleted
+public partial record WebhookProjectsV2ItemDeleted
 {
     [JsonPropertyName("action")]
     public required WebhookBranchProtectionRuleDeletedAction Action { get; init; }
@@ -38761,7 +40414,7 @@ public record WebhookProjectsV2ItemDeleted
 
 }
 
-public record WebhookProjectsV2ItemEdited
+public partial record WebhookProjectsV2ItemEdited
 {
     [JsonPropertyName("action")]
     public required WebhookBranchProtectionRuleEditedAction Action { get; init; }
@@ -38802,7 +40455,7 @@ public record WebhookProjectsV2ItemEdited
 
 }
 
-public record WebhookProjectsV2ItemReordered
+public partial record WebhookProjectsV2ItemReordered
 {
     [JsonPropertyName("action")]
     public required WebhookProjectsV2ItemReorderedAction Action { get; init; }
@@ -38839,7 +40492,7 @@ public record WebhookProjectsV2ItemReordered
 
 }
 
-public record WebhookProjectsV2ItemRestored
+public partial record WebhookProjectsV2ItemRestored
 {
     [JsonPropertyName("action")]
     public required WebhookProjectsV2ItemRestoredAction Action { get; init; }
@@ -38876,7 +40529,7 @@ public record WebhookProjectsV2ItemRestored
 
 }
 
-public record WebhookProjectsV2ProjectReopened
+public partial record WebhookProjectsV2ProjectReopened
 {
     [JsonPropertyName("action")]
     public required WebhookCodeScanningAlertReopenedAction Action { get; init; }
@@ -38910,7 +40563,7 @@ public record WebhookProjectsV2ProjectReopened
 
 }
 
-public record WebhookProjectsV2StatusUpdateCreated
+public partial record WebhookProjectsV2StatusUpdateCreated
 {
     [JsonPropertyName("action")]
     public required WebhookBranchProtectionRuleCreatedAction Action { get; init; }
@@ -38944,7 +40597,7 @@ public record WebhookProjectsV2StatusUpdateCreated
 
 }
 
-public record WebhookProjectsV2StatusUpdateDeleted
+public partial record WebhookProjectsV2StatusUpdateDeleted
 {
     [JsonPropertyName("action")]
     public required WebhookBranchProtectionRuleDeletedAction Action { get; init; }
@@ -38978,7 +40631,7 @@ public record WebhookProjectsV2StatusUpdateDeleted
 
 }
 
-public record WebhookProjectsV2StatusUpdateEdited
+public partial record WebhookProjectsV2StatusUpdateEdited
 {
     [JsonPropertyName("action")]
     public required WebhookBranchProtectionRuleEditedAction Action { get; init; }
@@ -39015,7 +40668,7 @@ public record WebhookProjectsV2StatusUpdateEdited
 
 }
 
-public record WebhookPublic
+public partial record WebhookPublic
 {
     /// <summary>
     /// An enterprise on GitHub. Webhook payloads contain the `enterprise` property when the webhook is configured
@@ -39055,7 +40708,7 @@ public record WebhookPublic
 
 }
 
-public record WebhookPullRequestAssigned
+public partial record WebhookPullRequestAssigned
 {
     [JsonPropertyName("action")]
     public required WebhookIssuesAssignedAction Action { get; init; }
@@ -39110,7 +40763,7 @@ public record WebhookPullRequestAssigned
 
 }
 
-public record WebhookPullRequestAutoMergeDisabled
+public partial record WebhookPullRequestAutoMergeDisabled
 {
     [JsonPropertyName("action")]
     public required WebhookPullRequestAutoMergeDisabledAction Action { get; init; }
@@ -39162,7 +40815,7 @@ public record WebhookPullRequestAutoMergeDisabled
 
 }
 
-public record WebhookPullRequestAutoMergeEnabled
+public partial record WebhookPullRequestAutoMergeEnabled
 {
     [JsonPropertyName("action")]
     public required WebhookPullRequestAutoMergeEnabledAction Action { get; init; }
@@ -39214,7 +40867,7 @@ public record WebhookPullRequestAutoMergeEnabled
 
 }
 
-public record WebhookPullRequestClosed
+public partial record WebhookPullRequestClosed
 {
     [JsonPropertyName("action")]
     public required WebhookDiscussionClosedAction Action { get; init; }
@@ -39266,7 +40919,7 @@ public record WebhookPullRequestClosed
 
 }
 
-public record WebhookPullRequestConvertedToDraft
+public partial record WebhookPullRequestConvertedToDraft
 {
     [JsonPropertyName("action")]
     public required WebhookPullRequestConvertedToDraftAction Action { get; init; }
@@ -39318,7 +40971,7 @@ public record WebhookPullRequestConvertedToDraft
 
 }
 
-public record WebhookPullRequestDemilestoned
+public partial record WebhookPullRequestDemilestoned
 {
     [JsonPropertyName("action")]
     public required WebhookIssuesDemilestonedAction Action { get; init; }
@@ -39368,7 +41021,7 @@ public record WebhookPullRequestDemilestoned
 
 }
 
-public record WebhookPullRequestDequeued
+public partial record WebhookPullRequestDequeued
 {
     [JsonPropertyName("action")]
     public required WebhookPullRequestDequeuedAction Action { get; init; }
@@ -39420,7 +41073,7 @@ public record WebhookPullRequestDequeued
 
 }
 
-public record WebhookPullRequestEdited
+public partial record WebhookPullRequestEdited
 {
     [JsonPropertyName("action")]
     public required WebhookBranchProtectionRuleEditedAction Action { get; init; }
@@ -39478,7 +41131,7 @@ public record WebhookPullRequestEdited
 
 }
 
-public record WebhookPullRequestEnqueued
+public partial record WebhookPullRequestEnqueued
 {
     [JsonPropertyName("action")]
     public required WebhookPullRequestEnqueuedAction Action { get; init; }
@@ -39527,7 +41180,7 @@ public record WebhookPullRequestEnqueued
 
 }
 
-public record WebhookPullRequestLabeled
+public partial record WebhookPullRequestLabeled
 {
     [JsonPropertyName("action")]
     public required WebhookDiscussionLabeledAction Action { get; init; }
@@ -39582,7 +41235,7 @@ public record WebhookPullRequestLabeled
 
 }
 
-public record WebhookPullRequestLocked
+public partial record WebhookPullRequestLocked
 {
     [JsonPropertyName("action")]
     public required WebhookDiscussionLockedAction Action { get; init; }
@@ -39634,7 +41287,7 @@ public record WebhookPullRequestLocked
 
 }
 
-public record WebhookPullRequestMilestoned
+public partial record WebhookPullRequestMilestoned
 {
     [JsonPropertyName("action")]
     public required WebhookIssuesMilestonedAction Action { get; init; }
@@ -39684,7 +41337,7 @@ public record WebhookPullRequestMilestoned
 
 }
 
-public record WebhookPullRequestOpened
+public partial record WebhookPullRequestOpened
 {
     [JsonPropertyName("action")]
     public required WebhookIssuesOpenedAction Action { get; init; }
@@ -39736,7 +41389,7 @@ public record WebhookPullRequestOpened
 
 }
 
-public record WebhookPullRequestReadyForReview
+public partial record WebhookPullRequestReadyForReview
 {
     [JsonPropertyName("action")]
     public required WebhookPullRequestReadyForReviewAction Action { get; init; }
@@ -39788,7 +41441,7 @@ public record WebhookPullRequestReadyForReview
 
 }
 
-public record WebhookPullRequestReopened
+public partial record WebhookPullRequestReopened
 {
     [JsonPropertyName("action")]
     public required WebhookCodeScanningAlertReopenedAction Action { get; init; }
@@ -39840,7 +41493,7 @@ public record WebhookPullRequestReopened
 
 }
 
-public record WebhookPullRequestReviewCommentCreated
+public partial record WebhookPullRequestReviewCommentCreated
 {
     [JsonPropertyName("action")]
     public required WebhookBranchProtectionRuleCreatedAction Action { get; init; }
@@ -39892,7 +41545,7 @@ public record WebhookPullRequestReviewCommentCreated
 
 }
 
-public record WebhookPullRequestReviewCommentDeleted
+public partial record WebhookPullRequestReviewCommentDeleted
 {
     [JsonPropertyName("action")]
     public required WebhookBranchProtectionRuleDeletedAction Action { get; init; }
@@ -39944,7 +41597,7 @@ public record WebhookPullRequestReviewCommentDeleted
 
 }
 
-public record WebhookPullRequestReviewCommentEdited
+public partial record WebhookPullRequestReviewCommentEdited
 {
     [JsonPropertyName("action")]
     public required WebhookBranchProtectionRuleEditedAction Action { get; init; }
@@ -40002,7 +41655,7 @@ public record WebhookPullRequestReviewCommentEdited
 
 }
 
-public record WebhookPullRequestReviewDismissed
+public partial record WebhookPullRequestReviewDismissed
 {
     [JsonPropertyName("action")]
     public required WebhookDependabotAlertDismissedAction Action { get; init; }
@@ -40054,7 +41707,7 @@ public record WebhookPullRequestReviewDismissed
 
 }
 
-public record WebhookPullRequestReviewEdited
+public partial record WebhookPullRequestReviewEdited
 {
     [JsonPropertyName("action")]
     public required WebhookBranchProtectionRuleEditedAction Action { get; init; }
@@ -40109,11 +41762,11 @@ public record WebhookPullRequestReviewEdited
 
 }
 
-public abstract record WebhookPullRequestReviewRequestRemoved;
+public abstract partial record WebhookPullRequestReviewRequestRemoved;
 
-public abstract record WebhookPullRequestReviewRequested;
+public abstract partial record WebhookPullRequestReviewRequested;
 
-public record WebhookPullRequestReviewSubmitted
+public partial record WebhookPullRequestReviewSubmitted
 {
     [JsonPropertyName("action")]
     public required WebhookPullRequestReviewSubmittedAction Action { get; init; }
@@ -40165,7 +41818,7 @@ public record WebhookPullRequestReviewSubmitted
 
 }
 
-public record WebhookPullRequestReviewThreadResolved
+public partial record WebhookPullRequestReviewThreadResolved
 {
     [JsonPropertyName("action")]
     public required WebhookPullRequestReviewThreadResolvedAction Action { get; init; }
@@ -40217,7 +41870,7 @@ public record WebhookPullRequestReviewThreadResolved
 
 }
 
-public record WebhookPullRequestReviewThreadUnresolved
+public partial record WebhookPullRequestReviewThreadUnresolved
 {
     [JsonPropertyName("action")]
     public required WebhookPullRequestReviewThreadUnresolvedAction Action { get; init; }
@@ -40269,7 +41922,65 @@ public record WebhookPullRequestReviewThreadUnresolved
 
 }
 
-public record WebhookPullRequestSynchronize
+public partial record WebhookPullRequestStacked
+{
+    [JsonPropertyName("action")]
+    public required WebhookPullRequestStackedAction Action { get; init; }
+
+    /// <summary>
+    /// An enterprise on GitHub. Webhook payloads contain the `enterprise` property when the webhook is configured
+    /// on an enterprise account or an organization that's part of an enterprise account. For more information,
+    /// see "[About enterprise accounts](https://docs.github.com/admin/overview/about-enterprise-accounts)."
+    /// </summary>
+    [JsonPropertyName("enterprise")]
+    public EnterpriseWebhooks? Enterprise { get; init; }
+
+    /// <summary>
+    /// The GitHub App installation. Webhook payloads contain the `installation` property when the event is configured
+    /// for and sent to a GitHub App. For more information,
+    /// see "[Using webhooks with GitHub Apps](https://docs.github.com/apps/creating-github-apps/registering-a-github-app/using-webhooks-with-github-apps)."
+    /// </summary>
+    [JsonPropertyName("installation")]
+    public SimpleInstallation? Installation { get; init; }
+
+    /// <summary>
+    /// The stack information associated with a pull request.
+    /// </summary>
+    [JsonPropertyName("stack")]
+    public PullRequestStack? Stack { get; init; }
+
+    /// <summary>
+    /// The pull request number.
+    /// </summary>
+    [JsonPropertyName("number")]
+    public required WebhooksNumber Number { get; init; }
+
+    /// <summary>
+    /// A GitHub organization. Webhook payloads contain the `organization` property when the webhook is configured for an
+    /// organization, or when the event occurs from activity in a repository owned by an organization.
+    /// </summary>
+    [JsonPropertyName("organization")]
+    public OrganizationSimpleWebhooks? Organization { get; init; }
+
+    [JsonPropertyName("pull_request")]
+    public required object PullRequest { get; init; }
+
+    /// <summary>
+    /// The repository on GitHub where the event occurred. Webhook payloads contain the `repository` property
+    /// when the event occurs from activity in a repository.
+    /// </summary>
+    [JsonPropertyName("repository")]
+    public required RepositoryWebhooks Repository { get; init; }
+
+    /// <summary>
+    /// A GitHub user.
+    /// </summary>
+    [JsonPropertyName("sender")]
+    public required SimpleUser Sender { get; init; }
+
+}
+
+public partial record WebhookPullRequestSynchronize
 {
     [JsonPropertyName("action")]
     public required WebhookPullRequestSynchronizeAction Action { get; init; }
@@ -40327,7 +42038,7 @@ public record WebhookPullRequestSynchronize
 
 }
 
-public record WebhookPullRequestUnassigned
+public partial record WebhookPullRequestUnassigned
 {
     [JsonPropertyName("action")]
     public required WebhookIssuesUnassignedAction Action { get; init; }
@@ -40382,7 +42093,7 @@ public record WebhookPullRequestUnassigned
 
 }
 
-public record WebhookPullRequestUnlabeled
+public partial record WebhookPullRequestUnlabeled
 {
     [JsonPropertyName("action")]
     public required WebhookDiscussionUnlabeledAction Action { get; init; }
@@ -40437,7 +42148,7 @@ public record WebhookPullRequestUnlabeled
 
 }
 
-public record WebhookPullRequestUnlocked
+public partial record WebhookPullRequestUnlocked
 {
     [JsonPropertyName("action")]
     public required WebhookDiscussionUnlockedAction Action { get; init; }
@@ -40489,7 +42200,7 @@ public record WebhookPullRequestUnlocked
 
 }
 
-public record WebhookPush
+public partial record WebhookPush
 {
     /// <summary>
     /// The SHA of the most recent commit on `ref` after the push.
@@ -40588,7 +42299,7 @@ public record WebhookPush
 
 }
 
-public record WebhookRegistryPackagePublished
+public partial record WebhookRegistryPackagePublished
 {
     [JsonPropertyName("action")]
     public required WebhookPackagePublishedAction Action { get; init; }
@@ -40634,7 +42345,7 @@ public record WebhookRegistryPackagePublished
 
 }
 
-public record WebhookRegistryPackageUpdated
+public partial record WebhookRegistryPackageUpdated
 {
     [JsonPropertyName("action")]
     public required WebhookCustomPropertyUpdatedAction Action { get; init; }
@@ -40680,7 +42391,7 @@ public record WebhookRegistryPackageUpdated
 
 }
 
-public record WebhookReleaseCreated
+public partial record WebhookReleaseCreated
 {
     [JsonPropertyName("action")]
     public required WebhookBranchProtectionRuleCreatedAction Action { get; init; }
@@ -40729,7 +42440,7 @@ public record WebhookReleaseCreated
 
 }
 
-public record WebhookReleaseDeleted
+public partial record WebhookReleaseDeleted
 {
     [JsonPropertyName("action")]
     public required WebhookBranchProtectionRuleDeletedAction Action { get; init; }
@@ -40778,7 +42489,7 @@ public record WebhookReleaseDeleted
 
 }
 
-public record WebhookReleaseEdited
+public partial record WebhookReleaseEdited
 {
     [JsonPropertyName("action")]
     public required WebhookBranchProtectionRuleEditedAction Action { get; init; }
@@ -40830,7 +42541,7 @@ public record WebhookReleaseEdited
 
 }
 
-public record WebhookReleasePrereleased
+public partial record WebhookReleasePrereleased
 {
     [JsonPropertyName("action")]
     public required WebhookReleasePrereleasedAction Action { get; init; }
@@ -40879,7 +42590,7 @@ public record WebhookReleasePrereleased
 
 }
 
-public record WebhookReleasePublished
+public partial record WebhookReleasePublished
 {
     [JsonPropertyName("action")]
     public required WebhookPackagePublishedAction Action { get; init; }
@@ -40928,7 +42639,7 @@ public record WebhookReleasePublished
 
 }
 
-public record WebhookReleaseReleased
+public partial record WebhookReleaseReleased
 {
     [JsonPropertyName("action")]
     public required WebhookReleaseReleasedAction Action { get; init; }
@@ -40977,7 +42688,7 @@ public record WebhookReleaseReleased
 
 }
 
-public record WebhookReleaseUnpublished
+public partial record WebhookReleaseUnpublished
 {
     [JsonPropertyName("action")]
     public required WebhookReleaseUnpublishedAction Action { get; init; }
@@ -41026,7 +42737,7 @@ public record WebhookReleaseUnpublished
 
 }
 
-public record WebhookRepositoryAdvisoryPublished
+public partial record WebhookRepositoryAdvisoryPublished
 {
     [JsonPropertyName("action")]
     public required WebhookPackagePublishedAction Action { get; init; }
@@ -41075,7 +42786,7 @@ public record WebhookRepositoryAdvisoryPublished
 
 }
 
-public record WebhookRepositoryAdvisoryReported
+public partial record WebhookRepositoryAdvisoryReported
 {
     [JsonPropertyName("action")]
     public required WebhookRepositoryAdvisoryReportedAction Action { get; init; }
@@ -41124,7 +42835,7 @@ public record WebhookRepositoryAdvisoryReported
 
 }
 
-public record WebhookRepositoryArchived
+public partial record WebhookRepositoryArchived
 {
     [JsonPropertyName("action")]
     public required WebhookProjectsV2ItemArchivedAction Action { get; init; }
@@ -41167,7 +42878,7 @@ public record WebhookRepositoryArchived
 
 }
 
-public record WebhookRepositoryCreated
+public partial record WebhookRepositoryCreated
 {
     [JsonPropertyName("action")]
     public required WebhookBranchProtectionRuleCreatedAction Action { get; init; }
@@ -41210,7 +42921,7 @@ public record WebhookRepositoryCreated
 
 }
 
-public record WebhookRepositoryDeleted
+public partial record WebhookRepositoryDeleted
 {
     [JsonPropertyName("action")]
     public required WebhookBranchProtectionRuleDeletedAction Action { get; init; }
@@ -41253,7 +42964,7 @@ public record WebhookRepositoryDeleted
 
 }
 
-public record WebhookRepositoryDispatchSample
+public partial record WebhookRepositoryDispatchSample
 {
     /// <summary>
     /// The `event_type` that was specified in the `POST /repos/{owner}/{repo}/dispatches` request body.
@@ -41308,7 +43019,7 @@ public record WebhookRepositoryDispatchSample
 
 }
 
-public record WebhookRepositoryEdited
+public partial record WebhookRepositoryEdited
 {
     [JsonPropertyName("action")]
     public required WebhookBranchProtectionRuleEditedAction Action { get; init; }
@@ -41354,7 +43065,7 @@ public record WebhookRepositoryEdited
 
 }
 
-public record WebhookRepositoryImport
+public partial record WebhookRepositoryImport
 {
     /// <summary>
     /// An enterprise on GitHub. Webhook payloads contain the `enterprise` property when the webhook is configured
@@ -41397,7 +43108,7 @@ public record WebhookRepositoryImport
 
 }
 
-public record WebhookRepositoryPrivatized
+public partial record WebhookRepositoryPrivatized
 {
     [JsonPropertyName("action")]
     public required WebhookRepositoryPrivatizedAction Action { get; init; }
@@ -41440,7 +43151,7 @@ public record WebhookRepositoryPrivatized
 
 }
 
-public record WebhookRepositoryPublicized
+public partial record WebhookRepositoryPublicized
 {
     [JsonPropertyName("action")]
     public required WebhookRepositoryPublicizedAction Action { get; init; }
@@ -41483,7 +43194,7 @@ public record WebhookRepositoryPublicized
 
 }
 
-public record WebhookRepositoryRenamed
+public partial record WebhookRepositoryRenamed
 {
     [JsonPropertyName("action")]
     public required WebhookInstallationTargetRenamedAction Action { get; init; }
@@ -41529,7 +43240,7 @@ public record WebhookRepositoryRenamed
 
 }
 
-public record WebhookRepositoryRulesetCreated
+public partial record WebhookRepositoryRulesetCreated
 {
     [JsonPropertyName("action")]
     public required WebhookBranchProtectionRuleCreatedAction Action { get; init; }
@@ -41578,7 +43289,7 @@ public record WebhookRepositoryRulesetCreated
 
 }
 
-public record WebhookRepositoryRulesetDeleted
+public partial record WebhookRepositoryRulesetDeleted
 {
     [JsonPropertyName("action")]
     public required WebhookBranchProtectionRuleDeletedAction Action { get; init; }
@@ -41627,7 +43338,7 @@ public record WebhookRepositoryRulesetDeleted
 
 }
 
-public record WebhookRepositoryRulesetEdited
+public partial record WebhookRepositoryRulesetEdited
 {
     [JsonPropertyName("action")]
     public required WebhookBranchProtectionRuleEditedAction Action { get; init; }
@@ -41679,7 +43390,7 @@ public record WebhookRepositoryRulesetEdited
 
 }
 
-public record WebhookRepositoryTransferred
+public partial record WebhookRepositoryTransferred
 {
     [JsonPropertyName("action")]
     public required WebhookDiscussionTransferredAction Action { get; init; }
@@ -41725,7 +43436,7 @@ public record WebhookRepositoryTransferred
 
 }
 
-public record WebhookRepositoryUnarchived
+public partial record WebhookRepositoryUnarchived
 {
     [JsonPropertyName("action")]
     public required WebhookRepositoryUnarchivedAction Action { get; init; }
@@ -41768,7 +43479,7 @@ public record WebhookRepositoryUnarchived
 
 }
 
-public record WebhookRepositoryVulnerabilityAlertCreate
+public partial record WebhookRepositoryVulnerabilityAlertCreate
 {
     [JsonPropertyName("action")]
     public required WebhookRepositoryVulnerabilityAlertCreateAction Action { get; init; }
@@ -41817,7 +43528,7 @@ public record WebhookRepositoryVulnerabilityAlertCreate
 
 }
 
-public record WebhookRepositoryVulnerabilityAlertDismiss
+public partial record WebhookRepositoryVulnerabilityAlertDismiss
 {
     [JsonPropertyName("action")]
     public required WebhookRepositoryVulnerabilityAlertDismissAction Action { get; init; }
@@ -41866,7 +43577,7 @@ public record WebhookRepositoryVulnerabilityAlertDismiss
 
 }
 
-public record WebhookRepositoryVulnerabilityAlertReopen
+public partial record WebhookRepositoryVulnerabilityAlertReopen
 {
     [JsonPropertyName("action")]
     public required WebhookRepositoryVulnerabilityAlertReopenAction Action { get; init; }
@@ -41915,7 +43626,7 @@ public record WebhookRepositoryVulnerabilityAlertReopen
 
 }
 
-public record WebhookRepositoryVulnerabilityAlertResolve
+public partial record WebhookRepositoryVulnerabilityAlertResolve
 {
     [JsonPropertyName("action")]
     public required WebhookRepositoryVulnerabilityAlertResolveAction Action { get; init; }
@@ -41964,7 +43675,7 @@ public record WebhookRepositoryVulnerabilityAlertResolve
 
 }
 
-public record WebhookSecretScanningAlertAssigned
+public partial record WebhookSecretScanningAlertAssigned
 {
     [JsonPropertyName("action")]
     public required WebhookIssuesAssignedAction Action { get; init; }
@@ -42016,7 +43727,7 @@ public record WebhookSecretScanningAlertAssigned
 
 }
 
-public record WebhookSecretScanningAlertCreated
+public partial record WebhookSecretScanningAlertCreated
 {
     [JsonPropertyName("action")]
     public required WebhookBranchProtectionRuleCreatedAction Action { get; init; }
@@ -42062,7 +43773,7 @@ public record WebhookSecretScanningAlertCreated
 
 }
 
-public record WebhookSecretScanningAlertLocationCreated
+public partial record WebhookSecretScanningAlertLocationCreated
 {
     [JsonPropertyName("action")]
     public WebhookBranchProtectionRuleCreatedAction? Action { get; init; }
@@ -42103,7 +43814,7 @@ public record WebhookSecretScanningAlertLocationCreated
 
 }
 
-public record WebhookSecretScanningAlertLocationCreatedFormEncoded
+public partial record WebhookSecretScanningAlertLocationCreatedFormEncoded
 {
     /// <summary>
     /// A URL-encoded string of the secret_scanning_alert_location.created JSON payload. The decoded payload is a JSON object.
@@ -42113,7 +43824,99 @@ public record WebhookSecretScanningAlertLocationCreatedFormEncoded
 
 }
 
-public record WebhookSecretScanningAlertPubliclyLeaked
+public partial record WebhookSecretScanningAlertMetadataCreated
+{
+    [JsonPropertyName("action")]
+    public required WebhookSecretScanningAlertMetadataCreatedAction Action { get; init; }
+
+    [JsonPropertyName("alert")]
+    public required SecretScanningAlertWebhook Alert { get; init; }
+
+    /// <summary>
+    /// An enterprise on GitHub. Webhook payloads contain the `enterprise` property when the webhook is configured
+    /// on an enterprise account or an organization that's part of an enterprise account. For more information,
+    /// see "[About enterprise accounts](https://docs.github.com/admin/overview/about-enterprise-accounts)."
+    /// </summary>
+    [JsonPropertyName("enterprise")]
+    public EnterpriseWebhooks? Enterprise { get; init; }
+
+    /// <summary>
+    /// The GitHub App installation. Webhook payloads contain the `installation` property when the event is configured
+    /// for and sent to a GitHub App. For more information,
+    /// see "[Using webhooks with GitHub Apps](https://docs.github.com/apps/creating-github-apps/registering-a-github-app/using-webhooks-with-github-apps)."
+    /// </summary>
+    [JsonPropertyName("installation")]
+    public SimpleInstallation? Installation { get; init; }
+
+    /// <summary>
+    /// A GitHub organization. Webhook payloads contain the `organization` property when the webhook is configured for an
+    /// organization, or when the event occurs from activity in a repository owned by an organization.
+    /// </summary>
+    [JsonPropertyName("organization")]
+    public OrganizationSimpleWebhooks? Organization { get; init; }
+
+    /// <summary>
+    /// The repository on GitHub where the event occurred. Webhook payloads contain the `repository` property
+    /// when the event occurs from activity in a repository.
+    /// </summary>
+    [JsonPropertyName("repository")]
+    public required RepositoryWebhooks Repository { get; init; }
+
+    /// <summary>
+    /// A GitHub user.
+    /// </summary>
+    [JsonPropertyName("sender")]
+    public SimpleUser? Sender { get; init; }
+
+}
+
+public partial record WebhookSecretScanningAlertMetadataRemoved
+{
+    [JsonPropertyName("action")]
+    public required WebhookSecretScanningAlertMetadataRemovedAction Action { get; init; }
+
+    [JsonPropertyName("alert")]
+    public required SecretScanningAlertWebhook Alert { get; init; }
+
+    /// <summary>
+    /// An enterprise on GitHub. Webhook payloads contain the `enterprise` property when the webhook is configured
+    /// on an enterprise account or an organization that's part of an enterprise account. For more information,
+    /// see "[About enterprise accounts](https://docs.github.com/admin/overview/about-enterprise-accounts)."
+    /// </summary>
+    [JsonPropertyName("enterprise")]
+    public EnterpriseWebhooks? Enterprise { get; init; }
+
+    /// <summary>
+    /// The GitHub App installation. Webhook payloads contain the `installation` property when the event is configured
+    /// for and sent to a GitHub App. For more information,
+    /// see "[Using webhooks with GitHub Apps](https://docs.github.com/apps/creating-github-apps/registering-a-github-app/using-webhooks-with-github-apps)."
+    /// </summary>
+    [JsonPropertyName("installation")]
+    public SimpleInstallation? Installation { get; init; }
+
+    /// <summary>
+    /// A GitHub organization. Webhook payloads contain the `organization` property when the webhook is configured for an
+    /// organization, or when the event occurs from activity in a repository owned by an organization.
+    /// </summary>
+    [JsonPropertyName("organization")]
+    public OrganizationSimpleWebhooks? Organization { get; init; }
+
+    /// <summary>
+    /// The repository on GitHub where the event occurred. Webhook payloads contain the `repository` property
+    /// when the event occurs from activity in a repository.
+    /// </summary>
+    [JsonPropertyName("repository")]
+    public required RepositoryWebhooks Repository { get; init; }
+
+    /// <summary>
+    /// A GitHub user.
+    /// </summary>
+    [JsonPropertyName("sender")]
+    public SimpleUser? Sender { get; init; }
+
+}
+
+public partial record WebhookSecretScanningAlertPubliclyLeaked
 {
     [JsonPropertyName("action")]
     public required WebhookSecretScanningAlertPubliclyLeakedAction Action { get; init; }
@@ -42159,7 +43962,7 @@ public record WebhookSecretScanningAlertPubliclyLeaked
 
 }
 
-public record WebhookSecretScanningAlertReopened
+public partial record WebhookSecretScanningAlertReopened
 {
     [JsonPropertyName("action")]
     public required WebhookCodeScanningAlertReopenedAction Action { get; init; }
@@ -42205,7 +44008,7 @@ public record WebhookSecretScanningAlertReopened
 
 }
 
-public record WebhookSecretScanningAlertResolved
+public partial record WebhookSecretScanningAlertResolved
 {
     [JsonPropertyName("action")]
     public required WebhookPullRequestReviewThreadResolvedAction Action { get; init; }
@@ -42251,7 +44054,7 @@ public record WebhookSecretScanningAlertResolved
 
 }
 
-public record WebhookSecretScanningAlertUnassigned
+public partial record WebhookSecretScanningAlertUnassigned
 {
     [JsonPropertyName("action")]
     public required WebhookIssuesUnassignedAction Action { get; init; }
@@ -42303,7 +44106,7 @@ public record WebhookSecretScanningAlertUnassigned
 
 }
 
-public record WebhookSecretScanningAlertValidated
+public partial record WebhookSecretScanningAlertValidated
 {
     [JsonPropertyName("action")]
     public required WebhookSecretScanningAlertValidatedAction Action { get; init; }
@@ -42349,7 +44152,7 @@ public record WebhookSecretScanningAlertValidated
 
 }
 
-public record WebhookSecretScanningScanCompleted
+public partial record WebhookSecretScanningScanCompleted
 {
     [JsonPropertyName("action")]
     public required WebhookCheckRunCompletedAction Action { get; init; }
@@ -42434,7 +44237,7 @@ public record WebhookSecretScanningScanCompleted
 
 }
 
-public record WebhookSecurityAdvisoryPublished
+public partial record WebhookSecurityAdvisoryPublished
 {
     [JsonPropertyName("action")]
     public required WebhookPackagePublishedAction Action { get; init; }
@@ -42483,7 +44286,7 @@ public record WebhookSecurityAdvisoryPublished
 
 }
 
-public record WebhookSecurityAdvisoryUpdated
+public partial record WebhookSecurityAdvisoryUpdated
 {
     [JsonPropertyName("action")]
     public required WebhookCustomPropertyUpdatedAction Action { get; init; }
@@ -42532,7 +44335,7 @@ public record WebhookSecurityAdvisoryUpdated
 
 }
 
-public record WebhookSecurityAdvisoryWithdrawn
+public partial record WebhookSecurityAdvisoryWithdrawn
 {
     [JsonPropertyName("action")]
     public required WebhookSecurityAdvisoryWithdrawnAction Action { get; init; }
@@ -42581,7 +44384,7 @@ public record WebhookSecurityAdvisoryWithdrawn
 
 }
 
-public record WebhookSecurityAndAnalysis
+public partial record WebhookSecurityAndAnalysis
 {
     [JsonPropertyName("changes")]
     public required object Changes { get; init; }
@@ -42623,7 +44426,7 @@ public record WebhookSecurityAndAnalysis
 
 }
 
-public record WebhookSponsorshipCancelled
+public partial record WebhookSponsorshipCancelled
 {
     [JsonPropertyName("action")]
     public required WebhookMarketplacePurchaseCancelledAction Action { get; init; }
@@ -42669,7 +44472,7 @@ public record WebhookSponsorshipCancelled
 
 }
 
-public record WebhookSponsorshipCreated
+public partial record WebhookSponsorshipCreated
 {
     [JsonPropertyName("action")]
     public required WebhookBranchProtectionRuleCreatedAction Action { get; init; }
@@ -42715,7 +44518,7 @@ public record WebhookSponsorshipCreated
 
 }
 
-public record WebhookSponsorshipEdited
+public partial record WebhookSponsorshipEdited
 {
     [JsonPropertyName("action")]
     public required WebhookBranchProtectionRuleEditedAction Action { get; init; }
@@ -42764,7 +44567,7 @@ public record WebhookSponsorshipEdited
 
 }
 
-public record WebhookSponsorshipPendingCancellation
+public partial record WebhookSponsorshipPendingCancellation
 {
     [JsonPropertyName("action")]
     public required WebhookSponsorshipPendingCancellationAction Action { get; init; }
@@ -42816,7 +44619,7 @@ public record WebhookSponsorshipPendingCancellation
 
 }
 
-public record WebhookSponsorshipPendingTierChange
+public partial record WebhookSponsorshipPendingTierChange
 {
     [JsonPropertyName("action")]
     public required WebhookSponsorshipPendingTierChangeAction Action { get; init; }
@@ -42871,7 +44674,7 @@ public record WebhookSponsorshipPendingTierChange
 
 }
 
-public record WebhookSponsorshipTierChanged
+public partial record WebhookSponsorshipTierChanged
 {
     [JsonPropertyName("action")]
     public required WebhookSponsorshipTierChangedAction Action { get; init; }
@@ -42920,7 +44723,7 @@ public record WebhookSponsorshipTierChanged
 
 }
 
-public record WebhookStarCreated
+public partial record WebhookStarCreated
 {
     [JsonPropertyName("action")]
     public required WebhookBranchProtectionRuleCreatedAction Action { get; init; }
@@ -42969,7 +44772,7 @@ public record WebhookStarCreated
 
 }
 
-public record WebhookStarDeleted
+public partial record WebhookStarDeleted
 {
     [JsonPropertyName("action")]
     public required WebhookBranchProtectionRuleDeletedAction Action { get; init; }
@@ -43018,7 +44821,7 @@ public record WebhookStarDeleted
 
 }
 
-public record WebhookStatus
+public partial record WebhookStatus
 {
     [JsonPropertyName("avatar_url")]
     public Uri? AvatarUrl { get; init; }
@@ -43112,7 +44915,7 @@ public record WebhookStatus
 
 }
 
-public record WebhookSubIssuesParentIssueAdded
+public partial record WebhookSubIssuesParentIssueAdded
 {
     [JsonPropertyName("action")]
     public required WebhookSubIssuesParentIssueAddedAction Action { get; init; }
@@ -43177,7 +44980,7 @@ public record WebhookSubIssuesParentIssueAdded
 
 }
 
-public record WebhookSubIssuesParentIssueRemoved
+public partial record WebhookSubIssuesParentIssueRemoved
 {
     [JsonPropertyName("action")]
     public required WebhookSubIssuesParentIssueRemovedAction Action { get; init; }
@@ -43242,7 +45045,7 @@ public record WebhookSubIssuesParentIssueRemoved
 
 }
 
-public record WebhookSubIssuesSubIssueAdded
+public partial record WebhookSubIssuesSubIssueAdded
 {
     [JsonPropertyName("action")]
     public required WebhookSubIssuesSubIssueAddedAction Action { get; init; }
@@ -43307,7 +45110,7 @@ public record WebhookSubIssuesSubIssueAdded
 
 }
 
-public record WebhookSubIssuesSubIssueRemoved
+public partial record WebhookSubIssuesSubIssueRemoved
 {
     [JsonPropertyName("action")]
     public required WebhookSubIssuesSubIssueRemovedAction Action { get; init; }
@@ -43372,7 +45175,7 @@ public record WebhookSubIssuesSubIssueRemoved
 
 }
 
-public record WebhookTeamAdd
+public partial record WebhookTeamAdd
 {
     /// <summary>
     /// An enterprise on GitHub. Webhook payloads contain the `enterprise` property when the webhook is configured
@@ -43418,7 +45221,7 @@ public record WebhookTeamAdd
 
 }
 
-public record WebhookTeamAddedToRepository
+public partial record WebhookTeamAddedToRepository
 {
     [JsonPropertyName("action")]
     public required WebhookTeamAddedToRepositoryAction Action { get; init; }
@@ -43466,7 +45269,7 @@ public record WebhookTeamAddedToRepository
 
 }
 
-public record WebhookTeamCreated
+public partial record WebhookTeamCreated
 {
     [JsonPropertyName("action")]
     public required WebhookBranchProtectionRuleCreatedAction Action { get; init; }
@@ -43514,7 +45317,7 @@ public record WebhookTeamCreated
 
 }
 
-public record WebhookTeamDeleted
+public partial record WebhookTeamDeleted
 {
     [JsonPropertyName("action")]
     public required WebhookBranchProtectionRuleDeletedAction Action { get; init; }
@@ -43562,7 +45365,7 @@ public record WebhookTeamDeleted
 
 }
 
-public record WebhookTeamEdited
+public partial record WebhookTeamEdited
 {
     [JsonPropertyName("action")]
     public required WebhookBranchProtectionRuleEditedAction Action { get; init; }
@@ -43616,7 +45419,7 @@ public record WebhookTeamEdited
 
 }
 
-public record WebhookTeamRemovedFromRepository
+public partial record WebhookTeamRemovedFromRepository
 {
     [JsonPropertyName("action")]
     public required WebhookTeamRemovedFromRepositoryAction Action { get; init; }
@@ -43664,7 +45467,7 @@ public record WebhookTeamRemovedFromRepository
 
 }
 
-public record WebhookWatchStarted
+public partial record WebhookWatchStarted
 {
     [JsonPropertyName("action")]
     public required WebhookWatchStartedAction Action { get; init; }
@@ -43707,7 +45510,7 @@ public record WebhookWatchStarted
 
 }
 
-public record WebhookWorkflowDispatch
+public partial record WebhookWorkflowDispatch
 {
     /// <summary>
     /// An enterprise on GitHub. Webhook payloads contain the `enterprise` property when the webhook is configured
@@ -43756,7 +45559,7 @@ public record WebhookWorkflowDispatch
 
 }
 
-public record WebhookWorkflowJobCompleted
+public partial record WebhookWorkflowJobCompleted
 {
     [JsonPropertyName("action")]
     public required WebhookCheckRunCompletedAction Action { get; init; }
@@ -43808,7 +45611,7 @@ public record WebhookWorkflowJobCompleted
 
 }
 
-public record WebhookWorkflowJobInProgress
+public partial record WebhookWorkflowJobInProgress
 {
     [JsonPropertyName("action")]
     public required WebhookWorkflowJobInProgressAction Action { get; init; }
@@ -43860,7 +45663,7 @@ public record WebhookWorkflowJobInProgress
 
 }
 
-public record WebhookWorkflowJobQueued
+public partial record WebhookWorkflowJobQueued
 {
     [JsonPropertyName("action")]
     public required WebhookWorkflowJobQueuedAction Action { get; init; }
@@ -43912,7 +45715,7 @@ public record WebhookWorkflowJobQueued
 
 }
 
-public record WebhookWorkflowJobWaiting
+public partial record WebhookWorkflowJobWaiting
 {
     [JsonPropertyName("action")]
     public required WebhookWorkflowJobWaitingAction Action { get; init; }
@@ -43964,7 +45767,7 @@ public record WebhookWorkflowJobWaiting
 
 }
 
-public record WebhookWorkflowRunCompleted
+public partial record WebhookWorkflowRunCompleted
 {
     [JsonPropertyName("action")]
     public required WebhookCheckRunCompletedAction Action { get; init; }
@@ -44013,7 +45816,7 @@ public record WebhookWorkflowRunCompleted
 
 }
 
-public record WebhookWorkflowRunInProgress
+public partial record WebhookWorkflowRunInProgress
 {
     [JsonPropertyName("action")]
     public required WebhookWorkflowJobInProgressAction Action { get; init; }
@@ -44062,7 +45865,7 @@ public record WebhookWorkflowRunInProgress
 
 }
 
-public record WebhookWorkflowRunRequested
+public partial record WebhookWorkflowRunRequested
 {
     [JsonPropertyName("action")]
     public required WebhookCheckSuiteRequestedAction Action { get; init; }
@@ -44111,7 +45914,7 @@ public record WebhookWorkflowRunRequested
 
 }
 
-public record CreateEvent
+public partial record CreateEvent
 {
     [JsonPropertyName("ref")]
     public required string Ref { get; init; }
@@ -44133,7 +45936,7 @@ public record CreateEvent
 
 }
 
-public record DeleteEvent
+public partial record DeleteEvent
 {
     [JsonPropertyName("ref")]
     public required string Ref { get; init; }
@@ -44149,7 +45952,7 @@ public record DeleteEvent
 
 }
 
-public record DiscussionEvent
+public partial record DiscussionEvent
 {
     [JsonPropertyName("action")]
     public required string Action { get; init; }
@@ -44162,7 +45965,7 @@ public record DiscussionEvent
 
 }
 
-public record IssuesEvent
+public partial record IssuesEvent
 {
     [JsonPropertyName("action")]
     public required string Action { get; init; }
@@ -44193,7 +45996,7 @@ public record IssuesEvent
 
 }
 
-public record IssueCommentEvent
+public partial record IssueCommentEvent
 {
     [JsonPropertyName("action")]
     public required string Action { get; init; }
@@ -44212,7 +46015,7 @@ public record IssueCommentEvent
 
 }
 
-public record ForkEvent
+public partial record ForkEvent
 {
     [JsonPropertyName("action")]
     public required string Action { get; init; }
@@ -44222,14 +46025,14 @@ public record ForkEvent
 
 }
 
-public record GollumEvent
+public partial record GollumEvent
 {
     [JsonPropertyName("pages")]
     public required IReadOnlyList<object> Pages { get; init; }
 
 }
 
-public record MemberEvent
+public partial record MemberEvent
 {
     [JsonPropertyName("action")]
     public required string Action { get; init; }
@@ -44242,11 +46045,11 @@ public record MemberEvent
 
 }
 
-public record PublicEvent
+public partial record PublicEvent
 {
 }
 
-public record PushEvent
+public partial record PushEvent
 {
     [JsonPropertyName("repository_id")]
     public required int RepositoryId { get; init; }
@@ -44265,7 +46068,7 @@ public record PushEvent
 
 }
 
-public record PullRequestEvent
+public partial record PullRequestEvent
 {
     [JsonPropertyName("action")]
     public required string Action { get; init; }
@@ -44296,7 +46099,7 @@ public record PullRequestEvent
 
 }
 
-public record PullRequestReviewCommentEvent
+public partial record PullRequestReviewCommentEvent
 {
     [JsonPropertyName("action")]
     public required string Action { get; init; }
@@ -44309,7 +46112,7 @@ public record PullRequestReviewCommentEvent
 
 }
 
-public record PullRequestReviewEvent
+public partial record PullRequestReviewEvent
 {
     [JsonPropertyName("action")]
     public required string Action { get; init; }
@@ -44322,7 +46125,7 @@ public record PullRequestReviewEvent
 
 }
 
-public record CommitCommentEvent
+public partial record CommitCommentEvent
 {
     [JsonPropertyName("action")]
     public required string Action { get; init; }
@@ -44332,7 +46135,7 @@ public record CommitCommentEvent
 
 }
 
-public record ReleaseEvent
+public partial record ReleaseEvent
 {
     [JsonPropertyName("action")]
     public required string Action { get; init; }
@@ -44342,7 +46145,7 @@ public record ReleaseEvent
 
 }
 
-public record WatchEvent
+public partial record WatchEvent
 {
     [JsonPropertyName("action")]
     public required string Action { get; init; }

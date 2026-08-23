@@ -44,7 +44,7 @@ public class CSharpCodeEmitterTests
         string result = Generate(schemas);
 
         // Should contain record declaration
-        Assert.Contains("public record User", result, StringComparison.Ordinal);
+        Assert.Contains("public partial record User", result, StringComparison.Ordinal);
 
         // Required properties should have 'required' keyword
         Assert.Contains("public required string Name { get; init; }", result, StringComparison.Ordinal);
@@ -259,8 +259,8 @@ public class CSharpCodeEmitterTests
         });
 
         Assert.Contains("public enum ApiStatus", result, StringComparison.Ordinal);
-        Assert.Contains("public record ApiOrder", result, StringComparison.Ordinal);
-        Assert.Contains("public record ApiAddress", result, StringComparison.Ordinal);
+        Assert.Contains("public partial record ApiOrder", result, StringComparison.Ordinal);
+        Assert.Contains("public partial record ApiAddress", result, StringComparison.Ordinal);
         Assert.Contains("public required ApiStatus Status { get; init; }", result, StringComparison.Ordinal);
         Assert.Contains("public required ApiAddress Address { get; init; }", result, StringComparison.Ordinal);
     }
@@ -352,7 +352,7 @@ public class CSharpCodeEmitterTests
 
         string result = Generate(schemas);
 
-        Assert.Contains("public record Entry", result, StringComparison.Ordinal);
+        Assert.Contains("public partial record Entry", result, StringComparison.Ordinal);
 
         Assert.Contains("public enum Status", result, StringComparison.Ordinal);
         Assert.Contains("[JsonConverter(typeof(JsonStringEnumConverter<Status>))]", result, StringComparison.Ordinal);
@@ -406,7 +406,7 @@ public class CSharpCodeEmitterTests
         string result = Generate(schemas);
 
         // Cat should inherit from Pet
-        Assert.Contains("public record Cat : Pet", result, StringComparison.Ordinal);
+        Assert.Contains("public partial record Cat : Pet", result, StringComparison.Ordinal);
 
         // Cat's own properties
         Assert.Contains("public required bool Indoor { get; init; }", result, StringComparison.Ordinal);
@@ -460,7 +460,7 @@ public class CSharpCodeEmitterTests
 
         string result = Generate(schemas);
 
-        Assert.Contains("public abstract record Shape", result, StringComparison.Ordinal);
+        Assert.Contains("public abstract partial record Shape", result, StringComparison.Ordinal);
         Assert.Contains("[JsonDerivedType(typeof(Circle), \"circle\")]", result, StringComparison.Ordinal);
         Assert.Contains("[JsonDerivedType(typeof(Rectangle), \"rectangle\")]", result, StringComparison.Ordinal);
         Assert.Contains("[JsonPolymorphic(TypeDiscriminatorPropertyName = \"shapeType\")]", result, StringComparison.Ordinal);
@@ -499,7 +499,7 @@ public class CSharpCodeEmitterTests
 
         string result = Generate(schemas);
 
-        Assert.Contains("public abstract record Result", result, StringComparison.Ordinal);
+        Assert.Contains("public abstract partial record Result", result, StringComparison.Ordinal);
         Assert.Contains("Union of: SuccessResult | ErrorResult", result, StringComparison.Ordinal);
     }
 
@@ -523,7 +523,7 @@ public class CSharpCodeEmitterTests
         string result = Generate(schemas);
 
         Assert.Contains("[JsonConverter(typeof(OpenApiGeneratedTypeAliasJsonConverter<ObjectId, Guid>))]", result, StringComparison.Ordinal);
-        Assert.Contains("public readonly record struct ObjectId(Guid Value) : IOpenApiGeneratedTypeAlias<ObjectId, Guid>", result, StringComparison.Ordinal);
+        Assert.Contains("public readonly partial record struct ObjectId(Guid Value) : IOpenApiGeneratedTypeAlias<ObjectId, Guid>", result, StringComparison.Ordinal);
         Assert.Contains("public static ObjectId Create(Guid value) => new(value);", result, StringComparison.Ordinal);
     }
 
@@ -565,7 +565,7 @@ public class CSharpCodeEmitterTests
         Assert.Contains("using System.IO;", result, StringComparison.Ordinal);
         Assert.Contains("file sealed class OpenApiGeneratedBinaryStreamTypeAliasJsonConverter<TAlias> : JsonConverter<TAlias>", result, StringComparison.Ordinal);
         Assert.Contains("[JsonConverter(typeof(OpenApiGeneratedBinaryStreamTypeAliasJsonConverter<FileContent>))]", result, StringComparison.Ordinal);
-        Assert.Contains("public readonly record struct FileContent(Stream Value) : IOpenApiGeneratedTypeAlias<FileContent, Stream>", result, StringComparison.Ordinal);
+        Assert.Contains("public readonly partial record struct FileContent(Stream Value) : IOpenApiGeneratedTypeAlias<FileContent, Stream>", result, StringComparison.Ordinal);
     }
 
     [Fact]
@@ -776,7 +776,7 @@ public class CSharpCodeEmitterTests
 
         string result = Generate(schemas);
 
-        Assert.Contains("public record EmptyObject", result, StringComparison.Ordinal);
+        Assert.Contains("public partial record EmptyObject", result, StringComparison.Ordinal);
     }
 
     #endregion
@@ -867,14 +867,14 @@ public class CSharpCodeEmitterTests
         string result = Generate(schemas);
 
         // WorkbookTable should inherit from Entity
-        Assert.Contains("public record WorkbookTable : Entity", result, StringComparison.Ordinal);
+        Assert.Contains("public partial record WorkbookTable : Entity", result, StringComparison.Ordinal);
 
         // WorkbookTable should have its own 'name' property
         Assert.Contains("public string? Name { get; init; }", result, StringComparison.Ordinal);
 
         // Split the output to isolate the WorkbookTable record body.
         // The Entity record has odataType; WorkbookTable should NOT re-declare it.
-        string workbookSection = result.Substring(result.IndexOf("public record WorkbookTable", StringComparison.Ordinal));
+        string workbookSection = result.Substring(result.IndexOf("public partial record WorkbookTable", StringComparison.Ordinal));
         string workbookBody = workbookSection.Substring(0, workbookSection.IndexOf('}', StringComparison.Ordinal) + 1);
 
         // WorkbookTable's body should NOT contain odataType (it's inherited from Entity)
@@ -910,7 +910,7 @@ public class CSharpCodeEmitterTests
         string result = Generate(schemas);
 
         // Should have the record
-        Assert.Contains("public record Asset", result, StringComparison.Ordinal);
+        Assert.Contains("public partial record Asset", result, StringComparison.Ordinal);
 
         // Should have name property
         Assert.Contains("public string? Name { get; init; }", result, StringComparison.Ordinal);
@@ -984,13 +984,13 @@ public class CSharpCodeEmitterTests
         string result = Generate(schemas);
 
         // "myString" (more natural) keeps "MyString"
-        Assert.Contains("public readonly record struct MyString(string Value) : IOpenApiGeneratedTypeAlias<MyString, string>", result, StringComparison.Ordinal);
+        Assert.Contains("public readonly partial record struct MyString(string Value) : IOpenApiGeneratedTypeAlias<MyString, string>", result, StringComparison.Ordinal);
 
         // "my_string" (has underscore) gets differentiated
-        Assert.Contains("public readonly record struct MyUnderscoreString(string Value) : IOpenApiGeneratedTypeAlias<MyUnderscoreString, string>", result, StringComparison.Ordinal);
+        Assert.Contains("public readonly partial record struct MyUnderscoreString(string Value) : IOpenApiGeneratedTypeAlias<MyUnderscoreString, string>", result, StringComparison.Ordinal);
 
         // User is unaffected
-        Assert.Contains("public record User", result, StringComparison.Ordinal);
+        Assert.Contains("public partial record User", result, StringComparison.Ordinal);
     }
 
     [Fact]
@@ -1006,10 +1006,10 @@ public class CSharpCodeEmitterTests
         string result = Generate(schemas);
 
         // "MyType" (exact match, most natural) keeps "MyType"
-        Assert.Contains("public readonly record struct MyType(string Value) : IOpenApiGeneratedTypeAlias<MyType, string>", result, StringComparison.Ordinal);
+        Assert.Contains("public readonly partial record struct MyType(string Value) : IOpenApiGeneratedTypeAlias<MyType, string>", result, StringComparison.Ordinal);
 
         // "myType" (camelCase) gets differentiated with naming style suffix
-        Assert.Contains("public readonly record struct MyTypeCamelCase(string Value) : IOpenApiGeneratedTypeAlias<MyTypeCamelCase, string>", result, StringComparison.Ordinal);
+        Assert.Contains("public readonly partial record struct MyTypeCamelCase(string Value) : IOpenApiGeneratedTypeAlias<MyTypeCamelCase, string>", result, StringComparison.Ordinal);
     }
 
     #endregion
@@ -1035,7 +1035,7 @@ public class CSharpCodeEmitterTests
 
         string result = Generate(schemas);
 
-        Assert.Contains("public record Flexible", result, StringComparison.Ordinal);
+        Assert.Contains("public partial record Flexible", result, StringComparison.Ordinal);
         Assert.Contains("public required string Name { get; init; }", result, StringComparison.Ordinal);
         Assert.Contains("[JsonExtensionData]", result, StringComparison.Ordinal);
         Assert.Contains("AdditionalProperties", result, StringComparison.Ordinal);
@@ -1185,8 +1185,8 @@ public class CSharpCodeEmitterTests
         string result = Generate(schemas);
 
         // Both records should exist
-        Assert.Contains("public record Order", result, StringComparison.Ordinal);
-        Assert.Contains("public record User", result, StringComparison.Ordinal);
+        Assert.Contains("public partial record Order", result, StringComparison.Ordinal);
+        Assert.Contains("public partial record User", result, StringComparison.Ordinal);
 
         // Two distinct enum types should be emitted.
         // One keeps "Status", the other gets a differentiated name like "OrderStatus" / "UserStatus".

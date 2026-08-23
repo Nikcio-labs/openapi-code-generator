@@ -40,7 +40,7 @@ file sealed class OpenApiGeneratedTypeAliasJsonConverter<TAlias, TValue> : JsonC
 /// <summary>
 /// Describe whether all repositories have been selected or there's a selection involved
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<RepositorySelection>))]
 public enum RepositorySelection
 {
     [JsonStringEnumMemberName("all")]
@@ -52,7 +52,7 @@ public enum RepositorySelection
 /// <summary>
 /// The level of permission to grant the access token for GitHub Actions workflows, workflow runs, and artifacts.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Actions>))]
 public enum Actions
 {
     [JsonStringEnumMemberName("read")]
@@ -64,7 +64,7 @@ public enum Actions
 /// <summary>
 /// The level of permission to grant the access token for repository creation, deletion, settings, teams, and collaborators creation.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Administration>))]
 public enum Administration
 {
     [JsonStringEnumMemberName("read")]
@@ -76,7 +76,7 @@ public enum Administration
 /// <summary>
 /// The level of permission to grant the access token for checks on code.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Checks>))]
 public enum Checks
 {
     [JsonStringEnumMemberName("read")]
@@ -88,7 +88,7 @@ public enum Checks
 /// <summary>
 /// The level of permission to grant the access token for repository contents, commits, branches, downloads, releases, and merges.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Contents>))]
 public enum Contents
 {
     [JsonStringEnumMemberName("read")]
@@ -100,7 +100,7 @@ public enum Contents
 /// <summary>
 /// The level of permission to grant the access token for deployments and deployment statuses.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Deployments>))]
 public enum Deployments
 {
     [JsonStringEnumMemberName("read")]
@@ -112,7 +112,7 @@ public enum Deployments
 /// <summary>
 /// The level of permission to grant the access token for managing repository environments.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Environments>))]
 public enum Environments
 {
     [JsonStringEnumMemberName("read")]
@@ -124,7 +124,7 @@ public enum Environments
 /// <summary>
 /// The level of permission to grant the access token for issues and related comments, assignees, labels, and milestones.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Issues>))]
 public enum Issues
 {
     [JsonStringEnumMemberName("read")]
@@ -136,7 +136,7 @@ public enum Issues
 /// <summary>
 /// The level of permission to grant the access token to search repositories, list collaborators, and access repository metadata.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Metadata>))]
 public enum Metadata
 {
     [JsonStringEnumMemberName("read")]
@@ -148,7 +148,7 @@ public enum Metadata
 /// <summary>
 /// The level of permission to grant the access token for packages published to GitHub Packages.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Packages>))]
 public enum Packages
 {
     [JsonStringEnumMemberName("read")]
@@ -160,7 +160,7 @@ public enum Packages
 /// <summary>
 /// The level of permission to grant the access token to retrieve Pages statuses, configuration, and builds, as well as create new builds.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Pages>))]
 public enum Pages
 {
     [JsonStringEnumMemberName("read")]
@@ -172,7 +172,7 @@ public enum Pages
 /// <summary>
 /// The level of permission to grant the access token for pull requests and related comments, assignees, labels, milestones, and merges.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PullRequests>))]
 public enum PullRequests
 {
     [JsonStringEnumMemberName("read")]
@@ -184,7 +184,7 @@ public enum PullRequests
 /// <summary>
 /// The level of permission to grant the access token to manage the post-receive hooks for a repository.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<RepositoryHooks>))]
 public enum RepositoryHooks
 {
     [JsonStringEnumMemberName("read")]
@@ -196,7 +196,7 @@ public enum RepositoryHooks
 /// <summary>
 /// The level of permission to grant the access token to manage repository projects, columns, and cards.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<RepositoryProjects>))]
 public enum RepositoryProjects
 {
     [JsonStringEnumMemberName("read")]
@@ -210,7 +210,7 @@ public enum RepositoryProjects
 /// <summary>
 /// The level of permission to grant the access token to view and manage secret scanning alerts.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<SecretScanningAlerts>))]
 public enum SecretScanningAlerts
 {
     [JsonStringEnumMemberName("read")]
@@ -222,7 +222,7 @@ public enum SecretScanningAlerts
 /// <summary>
 /// The level of permission to grant the access token to manage repository secrets.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Secrets>))]
 public enum Secrets
 {
     [JsonStringEnumMemberName("read")]
@@ -234,7 +234,7 @@ public enum Secrets
 /// <summary>
 /// The level of permission to grant the access token to view and manage security events like code scanning alerts.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<SecurityEvents>))]
 public enum SecurityEvents
 {
     [JsonStringEnumMemberName("read")]
@@ -246,7 +246,7 @@ public enum SecurityEvents
 /// <summary>
 /// The level of permission to grant the access token to manage just a single file.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<SingleFile>))]
 public enum SingleFile
 {
     [JsonStringEnumMemberName("read")]
@@ -258,7 +258,7 @@ public enum SingleFile
 /// <summary>
 /// The level of permission to grant the access token for commit statuses.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Statuses>))]
 public enum Statuses
 {
     [JsonStringEnumMemberName("read")]
@@ -270,7 +270,7 @@ public enum Statuses
 /// <summary>
 /// The level of permission to grant the access token to manage Dependabot alerts.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<VulnerabilityAlerts>))]
 public enum VulnerabilityAlerts
 {
     [JsonStringEnumMemberName("read")]
@@ -282,7 +282,7 @@ public enum VulnerabilityAlerts
 /// <summary>
 /// The level of permission to grant the access token to update GitHub Actions workflow files.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Workflows>))]
 public enum Workflows
 {
     [JsonStringEnumMemberName("write")]
@@ -292,7 +292,7 @@ public enum Workflows
 /// <summary>
 /// The level of permission to grant the access token for organization teams and members.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Members>))]
 public enum Members
 {
     [JsonStringEnumMemberName("read")]
@@ -304,7 +304,7 @@ public enum Members
 /// <summary>
 /// The level of permission to grant the access token to manage access to an organization.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<OrganizationAdministration>))]
 public enum OrganizationAdministration
 {
     [JsonStringEnumMemberName("read")]
@@ -316,7 +316,7 @@ public enum OrganizationAdministration
 /// <summary>
 /// The level of permission to grant the access token to manage the post-receive hooks for an organization.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<OrganizationHooks>))]
 public enum OrganizationHooks
 {
     [JsonStringEnumMemberName("read")]
@@ -328,7 +328,7 @@ public enum OrganizationHooks
 /// <summary>
 /// The level of permission to grant the access token for viewing an organization's plan.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<OrganizationPlan>))]
 public enum OrganizationPlan
 {
     [JsonStringEnumMemberName("read")]
@@ -338,7 +338,7 @@ public enum OrganizationPlan
 /// <summary>
 /// The level of permission to grant the access token to manage organization projects and projects beta (where available).
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<OrganizationProjects>))]
 public enum OrganizationProjects
 {
     [JsonStringEnumMemberName("read")]
@@ -352,7 +352,7 @@ public enum OrganizationProjects
 /// <summary>
 /// The level of permission to grant the access token for organization packages published to GitHub Packages.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<OrganizationPackages>))]
 public enum OrganizationPackages
 {
     [JsonStringEnumMemberName("read")]
@@ -364,7 +364,7 @@ public enum OrganizationPackages
 /// <summary>
 /// The level of permission to grant the access token to manage organization secrets.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<OrganizationSecrets>))]
 public enum OrganizationSecrets
 {
     [JsonStringEnumMemberName("read")]
@@ -376,7 +376,7 @@ public enum OrganizationSecrets
 /// <summary>
 /// The level of permission to grant the access token to view and manage GitHub Actions self-hosted runners available to an organization.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<OrganizationSelfHostedRunners>))]
 public enum OrganizationSelfHostedRunners
 {
     [JsonStringEnumMemberName("read")]
@@ -388,7 +388,7 @@ public enum OrganizationSelfHostedRunners
 /// <summary>
 /// The level of permission to grant the access token to view and manage users blocked by the organization.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<OrganizationUserBlocking>))]
 public enum OrganizationUserBlocking
 {
     [JsonStringEnumMemberName("read")]
@@ -400,7 +400,7 @@ public enum OrganizationUserBlocking
 /// <summary>
 /// The level of permission to grant the access token to manage team discussions and related comments.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TeamDiscussions>))]
 public enum TeamDiscussions
 {
     [JsonStringEnumMemberName("read")]
@@ -412,7 +412,7 @@ public enum TeamDiscussions
 /// <summary>
 /// Sets the state of the secret scanning alert. You must provide `resolution` when you set the state to `resolved`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<OrganizationSecretScanningAlertState>))]
 public enum OrganizationSecretScanningAlertState
 {
     [JsonStringEnumMemberName("open")]
@@ -424,7 +424,7 @@ public enum OrganizationSecretScanningAlertState
 /// <summary>
 /// State of the release asset.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ReleaseAssetState>))]
 public enum ReleaseAssetState
 {
     [JsonStringEnumMemberName("uploaded")]
@@ -436,7 +436,7 @@ public enum ReleaseAssetState
 /// <summary>
 /// **Required when the `state` is `resolved`.** The reason for resolving the alert.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Resolution>))]
 public enum Resolution
 {
     [JsonStringEnumMemberName("false_positive")]
@@ -452,7 +452,7 @@ public enum Resolution
 /// <summary>
 /// The level of privacy this team should have
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Privacy>))]
 public enum Privacy
 {
     [JsonStringEnumMemberName("closed")]
@@ -467,7 +467,7 @@ public enum Privacy
 /// - `PR_TITLE` - default to the pull request's title.
 /// - `COMMIT_OR_PR_TITLE` - default to the commit's title (if only one commit) or the pull request's title (when more than one commit).
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<SquashMergeCommitTitle>))]
 public enum SquashMergeCommitTitle
 {
     [JsonStringEnumMemberName("PR_TITLE")]
@@ -483,7 +483,7 @@ public enum SquashMergeCommitTitle
 /// - `COMMIT_MESSAGES` - default to the branch's commit messages.
 /// - `BLANK` - default to a blank commit message.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<SquashMergeCommitMessage>))]
 public enum SquashMergeCommitMessage
 {
     [JsonStringEnumMemberName("PR_BODY")]
@@ -500,7 +500,7 @@ public enum SquashMergeCommitMessage
 ///   - `PR_TITLE` - default to the pull request's title.
 ///   - `MERGE_MESSAGE` - default to the classic title for a merge message (e.g., Merge pull request #123 from branch-name).
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<MergeCommitTitle>))]
 public enum MergeCommitTitle
 {
     [JsonStringEnumMemberName("PR_TITLE")]
@@ -516,7 +516,7 @@ public enum MergeCommitTitle
 /// - `PR_BODY` - default to the pull request's body.
 /// - `BLANK` - default to a blank commit message.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<MergeCommitMessage>))]
 public enum MergeCommitMessage
 {
     [JsonStringEnumMemberName("PR_BODY")]
@@ -527,7 +527,7 @@ public enum MergeCommitMessage
     Blank
 }
 
-public record GlobalHook
+public partial record GlobalHook
 {
     [JsonPropertyName("type")]
     public string? Type { get; init; }
@@ -561,7 +561,7 @@ public record GlobalHook
 
 }
 
-public record GlobalHook2
+public partial record GlobalHook2
 {
     [JsonPropertyName("type")]
     public string? Type { get; init; }
@@ -595,7 +595,7 @@ public record GlobalHook2
 
 }
 
-public record PublicKeyFull
+public partial record PublicKeyFull
 {
     [JsonPropertyName("id")]
     public required int Id { get; init; }
@@ -626,7 +626,7 @@ public record PublicKeyFull
 
 }
 
-public record LdapMappingTeam
+public partial record LdapMappingTeam
 {
     [JsonPropertyName("ldap_dn")]
     public string? LdapDn { get; init; }
@@ -672,7 +672,7 @@ public record LdapMappingTeam
 /// <summary>
 /// Ldap Private User
 /// </summary>
-public record LdapMappingUser
+public partial record LdapMappingUser
 {
     [JsonPropertyName("ldap_dn")]
     public string? LdapDn { get; init; }
@@ -805,7 +805,7 @@ public record LdapMappingUser
 /// <summary>
 /// Organization Simple
 /// </summary>
-public record OrganizationSimple
+public partial record OrganizationSimple
 {
     [JsonPropertyName("login")]
     public required string Login { get; init; }
@@ -845,7 +845,7 @@ public record OrganizationSimple
 
 }
 
-public record PreReceiveEnvironment
+public partial record PreReceiveEnvironment
 {
     [JsonPropertyName("id")]
     public int? Id { get; init; }
@@ -876,7 +876,7 @@ public record PreReceiveEnvironment
 
 }
 
-public record PreReceiveEnvironmentDownloadStatus
+public partial record PreReceiveEnvironmentDownloadStatus
 {
     [JsonPropertyName("url")]
     public string? Url { get; init; }
@@ -892,7 +892,7 @@ public record PreReceiveEnvironmentDownloadStatus
 
 }
 
-public record PreReceiveHook
+public partial record PreReceiveHook
 {
     [JsonPropertyName("id")]
     public int? Id { get; init; }
@@ -920,7 +920,7 @@ public record PreReceiveHook
 /// <summary>
 /// The authorization for an OAuth app, GitHub App, or a Personal Access Token.
 /// </summary>
-public record Authorization
+public partial record Authorization
 {
     [JsonPropertyName("id")]
     public required int Id { get; init; }
@@ -978,7 +978,7 @@ public record Authorization
 /// <summary>
 /// Simple User
 /// </summary>
-public record SimpleUser
+public partial record SimpleUser
 {
     [JsonPropertyName("name")]
     public string? Name { get; init; }
@@ -1048,7 +1048,7 @@ public record SimpleUser
 /// <summary>
 /// Installation
 /// </summary>
-public record Installation
+public partial record Installation
 {
     /// <summary>
     /// The ID of the installation.
@@ -1130,7 +1130,7 @@ public record Installation
 /// <summary>
 /// The permissions granted to the user-to-server access token.
 /// </summary>
-public record AppPermissions
+public partial record AppPermissions
 {
     /// <summary>
     /// The level of permission to grant the access token for GitHub Actions workflows, workflow runs, and artifacts.
@@ -1317,7 +1317,7 @@ public record AppPermissions
 /// <summary>
 /// Authentication token for a GitHub App installed on a user or org.
 /// </summary>
-public record InstallationToken
+public partial record InstallationToken
 {
     [JsonPropertyName("token")]
     public required string Token { get; init; }
@@ -1351,7 +1351,7 @@ public record InstallationToken
 /// <summary>
 /// The authorization associated with an OAuth Access.
 /// </summary>
-public record ApplicationGrant
+public partial record ApplicationGrant
 {
     [JsonPropertyName("id")]
     public required int Id { get; init; }
@@ -1382,7 +1382,7 @@ public record ApplicationGrant
 /// <summary>
 /// Enterprise global announcement
 /// </summary>
-public record Announcement
+public partial record Announcement
 {
     /// <summary>
     /// The announcement text in GitHub Flavored Markdown. For more information about GitHub Flavored Markdown, see "[Basic writing and formatting syntax](https://docs.github.com/enterprise-server@3.6/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax)."
@@ -1398,7 +1398,7 @@ public record Announcement
 
 }
 
-public record LicenseInfo
+public partial record LicenseInfo
 {
     [JsonPropertyName("seats")]
     public object? Seats { get; init; }
@@ -1420,7 +1420,7 @@ public record LicenseInfo
 
 }
 
-public record EnterpriseOverview
+public partial record EnterpriseOverview
 {
     [JsonPropertyName("repos")]
     public EnterpriseRepositoryOverview? Repos { get; init; }
@@ -1454,7 +1454,7 @@ public record EnterpriseOverview
 
 }
 
-public record EnterpriseCommentOverview
+public partial record EnterpriseCommentOverview
 {
     [JsonPropertyName("total_commit_comments")]
     public required int TotalCommitComments { get; init; }
@@ -1470,7 +1470,7 @@ public record EnterpriseCommentOverview
 
 }
 
-public record EnterpriseGistOverview
+public partial record EnterpriseGistOverview
 {
     [JsonPropertyName("total_gists")]
     public required int TotalGists { get; init; }
@@ -1483,7 +1483,7 @@ public record EnterpriseGistOverview
 
 }
 
-public record EnterpriseHookOverview
+public partial record EnterpriseHookOverview
 {
     [JsonPropertyName("total_hooks")]
     public required int TotalHooks { get; init; }
@@ -1496,7 +1496,7 @@ public record EnterpriseHookOverview
 
 }
 
-public record EnterpriseIssueOverview
+public partial record EnterpriseIssueOverview
 {
     [JsonPropertyName("total_issues")]
     public required int TotalIssues { get; init; }
@@ -1509,7 +1509,7 @@ public record EnterpriseIssueOverview
 
 }
 
-public record EnterpriseMilestoneOverview
+public partial record EnterpriseMilestoneOverview
 {
     [JsonPropertyName("total_milestones")]
     public required int TotalMilestones { get; init; }
@@ -1522,7 +1522,7 @@ public record EnterpriseMilestoneOverview
 
 }
 
-public record EnterpriseOrganizationOverview
+public partial record EnterpriseOrganizationOverview
 {
     [JsonPropertyName("total_orgs")]
     public required int TotalOrgs { get; init; }
@@ -1538,14 +1538,14 @@ public record EnterpriseOrganizationOverview
 
 }
 
-public record EnterprisePageOverview
+public partial record EnterprisePageOverview
 {
     [JsonPropertyName("total_pages")]
     public required int TotalPages { get; init; }
 
 }
 
-public record EnterprisePullRequestOverview
+public partial record EnterprisePullRequestOverview
 {
     [JsonPropertyName("total_pulls")]
     public required int TotalPulls { get; init; }
@@ -1561,7 +1561,7 @@ public record EnterprisePullRequestOverview
 
 }
 
-public record EnterpriseRepositoryOverview
+public partial record EnterpriseRepositoryOverview
 {
     [JsonPropertyName("total_repos")]
     public required int TotalRepos { get; init; }
@@ -1583,7 +1583,7 @@ public record EnterpriseRepositoryOverview
 
 }
 
-public record EnterpriseUserOverview
+public partial record EnterpriseUserOverview
 {
     [JsonPropertyName("total_users")]
     public required int TotalUsers { get; init; }
@@ -1599,7 +1599,7 @@ public record EnterpriseUserOverview
 /// <summary>
 /// GitHub Actions cache usage policy for an enterprise.
 /// </summary>
-public record ActionsCacheUsagePolicyEnterprise
+public partial record ActionsCacheUsagePolicyEnterprise
 {
     /// <summary>
     /// For repositories in an enterprise, the default size limit for the sum of all caches in a repository, in gigabytes.
@@ -1615,7 +1615,7 @@ public record ActionsCacheUsagePolicyEnterprise
 
 }
 
-public record SelectedActions
+public partial record SelectedActions
 {
     /// <summary>
     /// Whether GitHub-owned actions are allowed. For example, this includes the actions in the `actions` organization.
@@ -1631,7 +1631,7 @@ public record SelectedActions
 
 }
 
-public record AuditLogEvent
+public partial record AuditLogEvent
 {
     /// <summary>
     /// The time the audit log event occurred, given as a [Unix timestamp](http://en.wikipedia.org/wiki/Unix_time).
@@ -1794,7 +1794,7 @@ public record AuditLogEvent
 
 }
 
-public record OrganizationSecretScanningAlert
+public partial record OrganizationSecretScanningAlert
 {
     /// <summary>
     /// The security alert number.
@@ -1904,7 +1904,7 @@ public record OrganizationSecretScanningAlert
 /// <summary>
 /// Api Overview
 /// </summary>
-public record ApiOverview
+public partial record ApiOverview
 {
     [JsonPropertyName("verifiable_password_authentication")]
     public required bool VerifiablePasswordAuthentication { get; init; }
@@ -1923,7 +1923,7 @@ public record ApiOverview
 /// <summary>
 /// Custom repository roles created by organization administrators
 /// </summary>
-public record OrganizationCustomRepositoryRole
+public partial record OrganizationCustomRepositoryRole
 {
     /// <summary>
     /// The unique identifier of the custom role.
@@ -1942,7 +1942,7 @@ public record OrganizationCustomRepositoryRole
 /// <summary>
 /// Organization Full
 /// </summary>
-public record OrganizationFull
+public partial record OrganizationFull
 {
     [JsonPropertyName("login")]
     public required string Login { get; init; }
@@ -2093,7 +2093,7 @@ public record OrganizationFull
 /// <summary>
 /// Validation Error
 /// </summary>
-public record ValidationError
+public partial record ValidationError
 {
     [JsonPropertyName("message")]
     public required string Message { get; init; }
@@ -2109,7 +2109,7 @@ public record ValidationError
 /// <summary>
 /// Validation Error Simple
 /// </summary>
-public record ValidationErrorSimple
+public partial record ValidationErrorSimple
 {
     [JsonPropertyName("message")]
     public required string Message { get; init; }
@@ -2125,7 +2125,7 @@ public record ValidationErrorSimple
 /// <summary>
 /// Information about an external group's usage and its members
 /// </summary>
-public record ExternalGroup
+public partial record ExternalGroup
 {
     /// <summary>
     /// The internal ID of the group
@@ -2162,7 +2162,7 @@ public record ExternalGroup
 /// <summary>
 /// A list of external groups available to be connected to a team
 /// </summary>
-public record ExternalGroups
+public partial record ExternalGroups
 {
     /// <summary>
     /// An array of external groups available to be mapped to a team
@@ -2172,7 +2172,7 @@ public record ExternalGroups
 
 }
 
-public record OrgPreReceiveHook
+public partial record OrgPreReceiveHook
 {
     [JsonPropertyName("id")]
     public int? Id { get; init; }
@@ -2194,7 +2194,7 @@ public record OrgPreReceiveHook
 /// <summary>
 /// Groups of organization members that gives permissions on specified repositories.
 /// </summary>
-public record TeamFull
+public partial record TeamFull
 {
     /// <summary>
     /// Unique identifier of the team
@@ -2279,7 +2279,7 @@ public record TeamFull
 /// <summary>
 /// Rate Limit Overview
 /// </summary>
-public record RateLimitOverview
+public partial record RateLimitOverview
 {
     [JsonPropertyName("resources")]
     public required object Resources { get; init; }
@@ -2292,7 +2292,7 @@ public record RateLimitOverview
 /// <summary>
 /// GitHub Actions cache usage policy for repository.
 /// </summary>
-public record ActionsCacheUsagePolicyForRepository
+public partial record ActionsCacheUsagePolicyForRepository
 {
     /// <summary>
     /// The size limit for the sum of all caches, in gigabytes.
@@ -2305,7 +2305,7 @@ public record ActionsCacheUsagePolicyForRepository
 /// <summary>
 /// An invocation of a workflow
 /// </summary>
-public record WorkflowRun
+public partial record WorkflowRun
 {
     /// <summary>
     /// The ID of the workflow run.
@@ -2489,7 +2489,7 @@ public record WorkflowRun
 /// <summary>
 /// An autolink reference.
 /// </summary>
-public record Autolink
+public partial record Autolink
 {
     [JsonPropertyName("id")]
     public required int Id { get; init; }
@@ -2516,7 +2516,7 @@ public record Autolink
 /// Type alias for string.
 /// </summary>
 [JsonConverter(typeof(OpenApiGeneratedTypeAliasJsonConverter<CodeScanningRef, string>))]
-public readonly record struct CodeScanningRef(string Value) : IOpenApiGeneratedTypeAlias<CodeScanningRef, string>
+public readonly partial record struct CodeScanningRef(string Value) : IOpenApiGeneratedTypeAlias<CodeScanningRef, string>
 {
     public static CodeScanningRef Create(string value) => new(value);
 }
@@ -2528,12 +2528,12 @@ public readonly record struct CodeScanningRef(string Value) : IOpenApiGeneratedT
 /// Type alias for string.
 /// </summary>
 [JsonConverter(typeof(OpenApiGeneratedTypeAliasJsonConverter<CodeScanningAnalysisSarifId, string>))]
-public readonly record struct CodeScanningAnalysisSarifId(string Value) : IOpenApiGeneratedTypeAlias<CodeScanningAnalysisSarifId, string>
+public readonly partial record struct CodeScanningAnalysisSarifId(string Value) : IOpenApiGeneratedTypeAlias<CodeScanningAnalysisSarifId, string>
 {
     public static CodeScanningAnalysisSarifId Create(string value) => new(value);
 }
 
-public record CodeScanningAnalysis
+public partial record CodeScanningAnalysis
 {
     /// <summary>
     /// The full Git reference, formatted as `refs/heads/&lt;branch name&gt;`,
@@ -2622,7 +2622,7 @@ public record CodeScanningAnalysis
 /// <summary>
 /// Collaborator
 /// </summary>
-public record Collaborator
+public partial record Collaborator
 {
     [JsonPropertyName("login")]
     public required string Login { get; init; }
@@ -2695,7 +2695,7 @@ public record Collaborator
 /// <summary>
 /// Repository Collaborator Permission
 /// </summary>
-public record RepositoryCollaboratorPermission
+public partial record RepositoryCollaboratorPermission
 {
     [JsonPropertyName("permission")]
     public required string Permission { get; init; }
@@ -2719,7 +2719,7 @@ public record DependencyGraphDiff;
 /// <summary>
 /// Full Repository
 /// </summary>
-public record FullRepository
+public partial record FullRepository
 {
     [JsonPropertyName("id")]
     public required int Id { get; init; }
@@ -3088,7 +3088,7 @@ public record FullRepository
 /// <summary>
 /// An SSH key granting access to a single repository.
 /// </summary>
-public record DeployKey
+public partial record DeployKey
 {
     [JsonPropertyName("id")]
     public required int Id { get; init; }
@@ -3113,7 +3113,7 @@ public record DeployKey
 
 }
 
-public record RepositoryPreReceiveHook
+public partial record RepositoryPreReceiveHook
 {
     [JsonPropertyName("id")]
     public int? Id { get; init; }
@@ -3132,7 +3132,7 @@ public record RepositoryPreReceiveHook
 /// <summary>
 /// A release.
 /// </summary>
-public record Release
+public partial record Release
 {
     [JsonPropertyName("url")]
     public required Uri Url { get; init; }
@@ -3217,7 +3217,7 @@ public record Release
 
 }
 
-public record SecretScanningAlert
+public partial record SecretScanningAlert
 {
     /// <summary>
     /// The security alert number.
@@ -3321,7 +3321,7 @@ public record SecretScanningAlert
 /// <summary>
 /// Sets the state of the secret scanning alert. You must provide `resolution` when you set the state to `resolved`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<SecretScanningAlertState>))]
 public enum SecretScanningAlertState
 {
     [JsonStringEnumMemberName("open")]
@@ -3333,7 +3333,7 @@ public enum SecretScanningAlertState
 /// <summary>
 /// **Required when the `state` is `resolved`.** The reason for resolving the alert.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<SecretScanningAlertResolution>))]
 public enum SecretScanningAlertResolution
 {
     [JsonStringEnumMemberName("false_positive")]
@@ -3349,7 +3349,7 @@ public enum SecretScanningAlertResolution
 /// <summary>
 /// Minimal Repository
 /// </summary>
-public record MinimalRepository
+public partial record MinimalRepository
 {
     [JsonPropertyName("id")]
     public required int Id { get; init; }
@@ -3623,7 +3623,7 @@ public record MinimalRepository
 
 }
 
-public record ScimGroupListEnterprise
+public partial record ScimGroupListEnterprise
 {
     [JsonPropertyName("schemas")]
     public required IReadOnlyList<string> Schemas { get; init; }
@@ -3642,7 +3642,7 @@ public record ScimGroupListEnterprise
 
 }
 
-public record ScimEnterpriseGroup
+public partial record ScimEnterpriseGroup
 {
     [JsonPropertyName("schemas")]
     public required IReadOnlyList<string> Schemas { get; init; }
@@ -3664,7 +3664,7 @@ public record ScimEnterpriseGroup
 
 }
 
-public record ScimUserListEnterprise
+public partial record ScimUserListEnterprise
 {
     [JsonPropertyName("schemas")]
     public required IReadOnlyList<string> Schemas { get; init; }
@@ -3683,7 +3683,7 @@ public record ScimUserListEnterprise
 
 }
 
-public record ScimEnterpriseUser
+public partial record ScimEnterpriseUser
 {
     [JsonPropertyName("schemas")]
     public required IReadOnlyList<string> Schemas { get; init; }
@@ -3714,7 +3714,7 @@ public record ScimEnterpriseUser
 
 }
 
-public record ConfigurationStatus
+public partial record ConfigurationStatus
 {
     [JsonPropertyName("status")]
     public string? Status { get; init; }
@@ -3724,7 +3724,7 @@ public record ConfigurationStatus
 
 }
 
-public record MaintenanceStatus
+public partial record MaintenanceStatus
 {
     [JsonPropertyName("status")]
     public string? Status { get; init; }
@@ -3737,7 +3737,7 @@ public record MaintenanceStatus
 
 }
 
-public record EnterpriseSettings
+public partial record EnterpriseSettings
 {
     [JsonPropertyName("enterprise")]
     public object? Enterprise { get; init; }
@@ -3747,7 +3747,7 @@ public record EnterpriseSettings
 
 }
 
-public record SshKey
+public partial record SshKey
 {
     [JsonPropertyName("key")]
     public string? Key { get; init; }
@@ -3760,7 +3760,7 @@ public record SshKey
 /// <summary>
 /// Simple User
 /// </summary>
-public record NullableSimpleUser
+public partial record NullableSimpleUser
 {
     [JsonPropertyName("name")]
     public string? Name { get; init; }
@@ -3827,7 +3827,7 @@ public record NullableSimpleUser
 
 }
 
-public record NullableScopedInstallation
+public partial record NullableScopedInstallation
 {
     /// <summary>
     /// The permissions granted to the user-to-server access token.
@@ -3864,7 +3864,7 @@ public record NullableScopedInstallation
 /// <summary>
 /// An enterprise account
 /// </summary>
-public record Enterprise
+public partial record Enterprise
 {
     /// <summary>
     /// A short description of the enterprise.
@@ -3916,7 +3916,7 @@ public record Enterprise
 /// <summary>
 /// Basic Error
 /// </summary>
-public record BasicError
+public partial record BasicError
 {
     [JsonPropertyName("message")]
     public string? Message { get; init; }
@@ -3935,7 +3935,7 @@ public record BasicError
 /// <summary>
 /// A git repository
 /// </summary>
-public record Repository
+public partial record Repository
 {
     /// <summary>
     /// Unique identifier of the repository
@@ -4340,7 +4340,7 @@ public record Repository
 /// <summary>
 /// License Simple
 /// </summary>
-public record NullableLicenseSimple
+public partial record NullableLicenseSimple
 {
     [JsonPropertyName("key")]
     public required string Key { get; init; }
@@ -4369,7 +4369,7 @@ public record NullableLicenseSimple
 /// Type alias for string.
 /// </summary>
 [JsonConverter(typeof(OpenApiGeneratedTypeAliasJsonConverter<AnnouncementMessage, string>))]
-public readonly record struct AnnouncementMessage(string Value) : IOpenApiGeneratedTypeAlias<AnnouncementMessage, string>
+public readonly partial record struct AnnouncementMessage(string Value) : IOpenApiGeneratedTypeAlias<AnnouncementMessage, string>
 {
     public static AnnouncementMessage Create(string value) => new(value);
 }
@@ -4381,7 +4381,7 @@ public readonly record struct AnnouncementMessage(string Value) : IOpenApiGenera
 /// Type alias for DateTimeOffset?.
 /// </summary>
 [JsonConverter(typeof(OpenApiGeneratedTypeAliasJsonConverter<AnnouncementExpiration, DateTimeOffset?>))]
-public readonly record struct AnnouncementExpiration(DateTimeOffset? Value) : IOpenApiGeneratedTypeAlias<AnnouncementExpiration, DateTimeOffset?>
+public readonly partial record struct AnnouncementExpiration(DateTimeOffset? Value) : IOpenApiGeneratedTypeAlias<AnnouncementExpiration, DateTimeOffset?>
 {
     public static AnnouncementExpiration Create(DateTimeOffset? value) => new(value);
 }
@@ -4393,7 +4393,7 @@ public readonly record struct AnnouncementExpiration(DateTimeOffset? Value) : IO
 /// Type alias for int.
 /// </summary>
 [JsonConverter(typeof(OpenApiGeneratedTypeAliasJsonConverter<AlertNumber, int>))]
-public readonly record struct AlertNumber(int Value) : IOpenApiGeneratedTypeAlias<AlertNumber, int>
+public readonly partial record struct AlertNumber(int Value) : IOpenApiGeneratedTypeAlias<AlertNumber, int>
 {
     public static AlertNumber Create(int value) => new(value);
 }
@@ -4405,7 +4405,7 @@ public readonly record struct AlertNumber(int Value) : IOpenApiGeneratedTypeAlia
 /// Type alias for DateTimeOffset.
 /// </summary>
 [JsonConverter(typeof(OpenApiGeneratedTypeAliasJsonConverter<AlertCreatedAt, DateTimeOffset>))]
-public readonly record struct AlertCreatedAt(DateTimeOffset Value) : IOpenApiGeneratedTypeAlias<AlertCreatedAt, DateTimeOffset>
+public readonly partial record struct AlertCreatedAt(DateTimeOffset Value) : IOpenApiGeneratedTypeAlias<AlertCreatedAt, DateTimeOffset>
 {
     public static AlertCreatedAt Create(DateTimeOffset value) => new(value);
 }
@@ -4417,7 +4417,7 @@ public readonly record struct AlertCreatedAt(DateTimeOffset Value) : IOpenApiGen
 /// Type alias for DateTimeOffset?.
 /// </summary>
 [JsonConverter(typeof(OpenApiGeneratedTypeAliasJsonConverter<NullableAlertUpdatedAt, DateTimeOffset?>))]
-public readonly record struct NullableAlertUpdatedAt(DateTimeOffset? Value) : IOpenApiGeneratedTypeAlias<NullableAlertUpdatedAt, DateTimeOffset?>
+public readonly partial record struct NullableAlertUpdatedAt(DateTimeOffset? Value) : IOpenApiGeneratedTypeAlias<NullableAlertUpdatedAt, DateTimeOffset?>
 {
     public static NullableAlertUpdatedAt Create(DateTimeOffset? value) => new(value);
 }
@@ -4429,7 +4429,7 @@ public readonly record struct NullableAlertUpdatedAt(DateTimeOffset? Value) : IO
 /// Type alias for Uri.
 /// </summary>
 [JsonConverter(typeof(OpenApiGeneratedTypeAliasJsonConverter<AlertUrl, Uri>))]
-public readonly record struct AlertUrl(Uri Value) : IOpenApiGeneratedTypeAlias<AlertUrl, Uri>
+public readonly partial record struct AlertUrl(Uri Value) : IOpenApiGeneratedTypeAlias<AlertUrl, Uri>
 {
     public static AlertUrl Create(Uri value) => new(value);
 }
@@ -4441,7 +4441,7 @@ public readonly record struct AlertUrl(Uri Value) : IOpenApiGeneratedTypeAlias<A
 /// Type alias for Uri.
 /// </summary>
 [JsonConverter(typeof(OpenApiGeneratedTypeAliasJsonConverter<AlertHtmlUrl, Uri>))]
-public readonly record struct AlertHtmlUrl(Uri Value) : IOpenApiGeneratedTypeAlias<AlertHtmlUrl, Uri>
+public readonly partial record struct AlertHtmlUrl(Uri Value) : IOpenApiGeneratedTypeAlias<AlertHtmlUrl, Uri>
 {
     public static AlertHtmlUrl Create(Uri value) => new(value);
 }
@@ -4449,7 +4449,7 @@ public readonly record struct AlertHtmlUrl(Uri Value) : IOpenApiGeneratedTypeAli
 /// <summary>
 /// Simple Repository
 /// </summary>
-public record SimpleRepository
+public partial record SimpleRepository
 {
     /// <summary>
     /// A unique identifier of the repository.
@@ -4732,7 +4732,7 @@ public record SimpleRepository
 /// <summary>
 /// Groups of organization members that gives permissions on specified repositories.
 /// </summary>
-public record NullableTeamSimple
+public partial record NullableTeamSimple
 {
     /// <summary>
     /// Unique identifier of the team
@@ -4796,7 +4796,7 @@ public record NullableTeamSimple
 /// <summary>
 /// Team Organization
 /// </summary>
-public record TeamOrganization
+public partial record TeamOrganization
 {
     [JsonPropertyName("login")]
     public required string Login { get; init; }
@@ -4944,7 +4944,7 @@ public record TeamOrganization
 
 }
 
-public record RateLimit
+public partial record RateLimit
 {
     [JsonPropertyName("limit")]
     public required int Limit { get; init; }
@@ -4963,7 +4963,7 @@ public record RateLimit
 /// <summary>
 /// A workflow referenced/reused by the initial caller workflow
 /// </summary>
-public record ReferencedWorkflow
+public partial record ReferencedWorkflow
 {
     [JsonPropertyName("path")]
     public required string Path { get; init; }
@@ -4976,7 +4976,7 @@ public record ReferencedWorkflow
 
 }
 
-public record PullRequestMinimal
+public partial record PullRequestMinimal
 {
     [JsonPropertyName("id")]
     public required int Id { get; init; }
@@ -4998,7 +4998,7 @@ public record PullRequestMinimal
 /// <summary>
 /// Simple Commit
 /// </summary>
-public record NullableSimpleCommit
+public partial record NullableSimpleCommit
 {
     [JsonPropertyName("id")]
     public required string Id { get; init; }
@@ -5027,7 +5027,7 @@ public record NullableSimpleCommit
 /// Type alias for string.
 /// </summary>
 [JsonConverter(typeof(OpenApiGeneratedTypeAliasJsonConverter<CodeScanningAnalysisToolName, string>))]
-public readonly record struct CodeScanningAnalysisToolName(string Value) : IOpenApiGeneratedTypeAlias<CodeScanningAnalysisToolName, string>
+public readonly partial record struct CodeScanningAnalysisToolName(string Value) : IOpenApiGeneratedTypeAlias<CodeScanningAnalysisToolName, string>
 {
     public static CodeScanningAnalysisToolName Create(string value) => new(value);
 }
@@ -5039,7 +5039,7 @@ public readonly record struct CodeScanningAnalysisToolName(string Value) : IOpen
 /// Type alias for string?.
 /// </summary>
 [JsonConverter(typeof(OpenApiGeneratedTypeAliasJsonConverter<CodeScanningAnalysisToolGuid, string?>))]
-public readonly record struct CodeScanningAnalysisToolGuid(string? Value) : IOpenApiGeneratedTypeAlias<CodeScanningAnalysisToolGuid, string?>
+public readonly partial record struct CodeScanningAnalysisToolGuid(string? Value) : IOpenApiGeneratedTypeAlias<CodeScanningAnalysisToolGuid, string?>
 {
     public static CodeScanningAnalysisToolGuid Create(string? value) => new(value);
 }
@@ -5051,7 +5051,7 @@ public readonly record struct CodeScanningAnalysisToolGuid(string? Value) : IOpe
 /// Type alias for string.
 /// </summary>
 [JsonConverter(typeof(OpenApiGeneratedTypeAliasJsonConverter<CodeScanningAnalysisCommitSha, string>))]
-public readonly record struct CodeScanningAnalysisCommitSha(string Value) : IOpenApiGeneratedTypeAlias<CodeScanningAnalysisCommitSha, string>
+public readonly partial record struct CodeScanningAnalysisCommitSha(string Value) : IOpenApiGeneratedTypeAlias<CodeScanningAnalysisCommitSha, string>
 {
     public static CodeScanningAnalysisCommitSha Create(string value) => new(value);
 }
@@ -5063,7 +5063,7 @@ public readonly record struct CodeScanningAnalysisCommitSha(string Value) : IOpe
 /// Type alias for string.
 /// </summary>
 [JsonConverter(typeof(OpenApiGeneratedTypeAliasJsonConverter<CodeScanningAnalysisAnalysisKey, string>))]
-public readonly record struct CodeScanningAnalysisAnalysisKey(string Value) : IOpenApiGeneratedTypeAlias<CodeScanningAnalysisAnalysisKey, string>
+public readonly partial record struct CodeScanningAnalysisAnalysisKey(string Value) : IOpenApiGeneratedTypeAlias<CodeScanningAnalysisAnalysisKey, string>
 {
     public static CodeScanningAnalysisAnalysisKey Create(string value) => new(value);
 }
@@ -5075,7 +5075,7 @@ public readonly record struct CodeScanningAnalysisAnalysisKey(string Value) : IO
 /// Type alias for string.
 /// </summary>
 [JsonConverter(typeof(OpenApiGeneratedTypeAliasJsonConverter<CodeScanningAnalysisEnvironment, string>))]
-public readonly record struct CodeScanningAnalysisEnvironment(string Value) : IOpenApiGeneratedTypeAlias<CodeScanningAnalysisEnvironment, string>
+public readonly partial record struct CodeScanningAnalysisEnvironment(string Value) : IOpenApiGeneratedTypeAlias<CodeScanningAnalysisEnvironment, string>
 {
     public static CodeScanningAnalysisEnvironment Create(string value) => new(value);
 }
@@ -5087,7 +5087,7 @@ public readonly record struct CodeScanningAnalysisEnvironment(string Value) : IO
 /// Type alias for string.
 /// </summary>
 [JsonConverter(typeof(OpenApiGeneratedTypeAliasJsonConverter<CodeScanningAnalysisCategory, string>))]
-public readonly record struct CodeScanningAnalysisCategory(string Value) : IOpenApiGeneratedTypeAlias<CodeScanningAnalysisCategory, string>
+public readonly partial record struct CodeScanningAnalysisCategory(string Value) : IOpenApiGeneratedTypeAlias<CodeScanningAnalysisCategory, string>
 {
     public static CodeScanningAnalysisCategory Create(string value) => new(value);
 }
@@ -5099,7 +5099,7 @@ public readonly record struct CodeScanningAnalysisCategory(string Value) : IOpen
 /// Type alias for DateTimeOffset.
 /// </summary>
 [JsonConverter(typeof(OpenApiGeneratedTypeAliasJsonConverter<CodeScanningAnalysisCreatedAt, DateTimeOffset>))]
-public readonly record struct CodeScanningAnalysisCreatedAt(DateTimeOffset Value) : IOpenApiGeneratedTypeAlias<CodeScanningAnalysisCreatedAt, DateTimeOffset>
+public readonly partial record struct CodeScanningAnalysisCreatedAt(DateTimeOffset Value) : IOpenApiGeneratedTypeAlias<CodeScanningAnalysisCreatedAt, DateTimeOffset>
 {
     public static CodeScanningAnalysisCreatedAt Create(DateTimeOffset value) => new(value);
 }
@@ -5111,12 +5111,12 @@ public readonly record struct CodeScanningAnalysisCreatedAt(DateTimeOffset Value
 /// Type alias for Uri.
 /// </summary>
 [JsonConverter(typeof(OpenApiGeneratedTypeAliasJsonConverter<CodeScanningAnalysisUrl, Uri>))]
-public readonly record struct CodeScanningAnalysisUrl(Uri Value) : IOpenApiGeneratedTypeAlias<CodeScanningAnalysisUrl, Uri>
+public readonly partial record struct CodeScanningAnalysisUrl(Uri Value) : IOpenApiGeneratedTypeAlias<CodeScanningAnalysisUrl, Uri>
 {
     public static CodeScanningAnalysisUrl Create(Uri value) => new(value);
 }
 
-public record CodeScanningAnalysisTool
+public partial record CodeScanningAnalysisTool
 {
     /// <summary>
     /// The name of the tool used to generate the code scanning analysis.
@@ -5145,7 +5145,7 @@ public record CodeScanningAnalysisTool
 /// Type alias for string?.
 /// </summary>
 [JsonConverter(typeof(OpenApiGeneratedTypeAliasJsonConverter<CodeScanningAnalysisToolVersion, string?>))]
-public readonly record struct CodeScanningAnalysisToolVersion(string? Value) : IOpenApiGeneratedTypeAlias<CodeScanningAnalysisToolVersion, string?>
+public readonly partial record struct CodeScanningAnalysisToolVersion(string? Value) : IOpenApiGeneratedTypeAlias<CodeScanningAnalysisToolVersion, string?>
 {
     public static CodeScanningAnalysisToolVersion Create(string? value) => new(value);
 }
@@ -5153,7 +5153,7 @@ public readonly record struct CodeScanningAnalysisToolVersion(string? Value) : I
 /// <summary>
 /// Collaborator
 /// </summary>
-public record NullableCollaborator
+public partial record NullableCollaborator
 {
     [JsonPropertyName("login")]
     public required string Login { get; init; }
@@ -5226,7 +5226,7 @@ public record NullableCollaborator
 /// <summary>
 /// A git repository
 /// </summary>
-public record NullableRepository
+public partial record NullableRepository
 {
     /// <summary>
     /// Unique identifier of the repository
@@ -5631,7 +5631,7 @@ public record NullableRepository
 /// <summary>
 /// Code of Conduct Simple
 /// </summary>
-public record CodeOfConductSimple
+public partial record CodeOfConductSimple
 {
     [JsonPropertyName("url")]
     public required Uri Url { get; init; }
@@ -5647,7 +5647,7 @@ public record CodeOfConductSimple
 
 }
 
-public record SecurityAndAnalysis
+public partial record SecurityAndAnalysis
 {
     [JsonPropertyName("advanced_security")]
     public object? AdvancedSecurity { get; init; }
@@ -5663,7 +5663,7 @@ public record SecurityAndAnalysis
 /// <summary>
 /// Scim Error
 /// </summary>
-public record ScimError
+public partial record ScimError
 {
     [JsonPropertyName("message")]
     public string? Message { get; init; }
@@ -5688,7 +5688,7 @@ public record ScimError
 /// <summary>
 /// Data related to a release.
 /// </summary>
-public record ReleaseAsset
+public partial record ReleaseAsset
 {
     [JsonPropertyName("url")]
     public required Uri Url { get; init; }
@@ -5740,7 +5740,7 @@ public record ReleaseAsset
 
 }
 
-public record ReactionRollup
+public partial record ReactionRollup
 {
     [JsonPropertyName("url")]
     public required Uri Url { get; init; }
@@ -5781,7 +5781,7 @@ public record ReactionRollup
 /// Type alias for DateTimeOffset.
 /// </summary>
 [JsonConverter(typeof(OpenApiGeneratedTypeAliasJsonConverter<AlertUpdatedAt, DateTimeOffset>))]
-public readonly record struct AlertUpdatedAt(DateTimeOffset Value) : IOpenApiGeneratedTypeAlias<AlertUpdatedAt, DateTimeOffset>
+public readonly partial record struct AlertUpdatedAt(DateTimeOffset Value) : IOpenApiGeneratedTypeAlias<AlertUpdatedAt, DateTimeOffset>
 {
     public static AlertUpdatedAt Create(DateTimeOffset value) => new(value);
 }
@@ -5789,7 +5789,7 @@ public readonly record struct AlertUpdatedAt(DateTimeOffset Value) : IOpenApiGen
 /// <summary>
 /// Code Of Conduct
 /// </summary>
-public record CodeOfConduct
+public partial record CodeOfConduct
 {
     [JsonPropertyName("key")]
     public required string Key { get; init; }

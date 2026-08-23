@@ -627,8 +627,8 @@ internal class CSharpCodeEmitter
         EmitDocComment(schema.Description);
 
         string declaration = baseType != null
-            ? $"public record {typeName} : {baseType}"
-            : $"public record {typeName}";
+            ? $"public partial record {typeName} : {baseType}"
+            : $"public partial record {typeName}";
 
         AppendLine(declaration);
         AppendLine("{");
@@ -876,7 +876,7 @@ internal class CSharpCodeEmitter
             AppendLine($"[JsonConverter(typeof({converterType}))]");
         }
 
-        AppendLine($"public readonly record struct {typeName}({resolvedType} Value) : IOpenApiGeneratedTypeAlias<{typeName}, {resolvedType}>");
+        AppendLine($"public readonly partial record struct {typeName}({resolvedType} Value) : IOpenApiGeneratedTypeAlias<{typeName}, {resolvedType}>");
         AppendLine("{");
         _indent++;
         AppendLine($"public static {typeName} Create({resolvedType} value) => new(value);");
@@ -948,7 +948,7 @@ internal class CSharpCodeEmitter
 
         AppendLine($"[JsonPolymorphic(TypeDiscriminatorPropertyName = \"{discriminator.PropertyName}\")]");
 
-        AppendLine($"public abstract record {typeName};");
+        AppendLine($"public abstract partial record {typeName};");
         AppendLine();
     }
 
@@ -977,7 +977,7 @@ internal class CSharpCodeEmitter
             }
         }
 
-        AppendLine($"public abstract record {typeName};");
+        AppendLine($"public abstract partial record {typeName};");
         AppendLine();
     }
 

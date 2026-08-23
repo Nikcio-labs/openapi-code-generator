@@ -16,7 +16,7 @@ namespace Generated.Petstore;
 /// <summary>
 /// Order Status
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<OrderStatus>))]
 public enum OrderStatus
 {
     [JsonStringEnumMemberName("placed")]
@@ -30,7 +30,7 @@ public enum OrderStatus
 /// <summary>
 /// pet status in the store
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PetStatus>))]
 public enum PetStatus
 {
     [JsonStringEnumMemberName("available")]
@@ -41,7 +41,7 @@ public enum PetStatus
     Sold
 }
 
-public record Order
+public partial record Order
 {
     [JsonPropertyName("id")]
     public long? Id { get; init; }
@@ -66,7 +66,7 @@ public record Order
 
 }
 
-public record Category
+public partial record Category
 {
     [JsonPropertyName("id")]
     public long? Id { get; init; }
@@ -76,7 +76,7 @@ public record Category
 
 }
 
-public record User
+public partial record User
 {
     [JsonPropertyName("id")]
     public long? Id { get; init; }
@@ -107,7 +107,7 @@ public record User
 
 }
 
-public record Tag
+public partial record Tag
 {
     [JsonPropertyName("id")]
     public long? Id { get; init; }
@@ -117,7 +117,7 @@ public record Tag
 
 }
 
-public record Pet
+public partial record Pet
 {
     [JsonPropertyName("id")]
     public long? Id { get; init; }
@@ -142,7 +142,7 @@ public record Pet
 
 }
 
-public record ApiResponse
+public partial record ApiResponse
 {
     [JsonPropertyName("code")]
     public int? Code { get; init; }

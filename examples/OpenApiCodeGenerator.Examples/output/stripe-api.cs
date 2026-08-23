@@ -16,7 +16,7 @@ namespace Generated.StripeApi;
 /// <summary>
 /// The business type.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<BusinessType>))]
 public enum BusinessType
 {
     [JsonStringEnumMemberName("company")]
@@ -32,7 +32,7 @@ public enum BusinessType
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<AccountObject>))]
 public enum AccountObject
 {
     [JsonStringEnumMemberName("account")]
@@ -42,7 +42,7 @@ public enum AccountObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<AccountLinkObject>))]
 public enum AccountLinkObject
 {
     [JsonStringEnumMemberName("account_link")]
@@ -52,7 +52,7 @@ public enum AccountLinkObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<AccountSessionObject>))]
 public enum AccountSessionObject
 {
     [JsonStringEnumMemberName("account_session")]
@@ -62,7 +62,7 @@ public enum AccountSessionObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ApplePayDomainObject>))]
 public enum ApplePayDomainObject
 {
     [JsonStringEnumMemberName("apple_pay_domain")]
@@ -72,7 +72,7 @@ public enum ApplePayDomainObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ApplicationObject>))]
 public enum ApplicationObject
 {
     [JsonStringEnumMemberName("application")]
@@ -82,7 +82,7 @@ public enum ApplicationObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ApplicationFeeObject>))]
 public enum ApplicationFeeObject
 {
     [JsonStringEnumMemberName("application_fee")]
@@ -92,7 +92,7 @@ public enum ApplicationFeeObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<AppsSecretObject>))]
 public enum AppsSecretObject
 {
     [JsonStringEnumMemberName("apps.secret")]
@@ -102,7 +102,7 @@ public enum AppsSecretObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<BalanceObject>))]
 public enum BalanceObject
 {
     [JsonStringEnumMemberName("balance")]
@@ -112,7 +112,7 @@ public enum BalanceObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<BalanceSettingsObject>))]
 public enum BalanceSettingsObject
 {
     [JsonStringEnumMemberName("balance_settings")]
@@ -122,7 +122,7 @@ public enum BalanceSettingsObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<BalanceTransactionObject>))]
 public enum BalanceTransactionObject
 {
     [JsonStringEnumMemberName("balance_transaction")]
@@ -132,7 +132,7 @@ public enum BalanceTransactionObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<BankAccountObject>))]
 public enum BankAccountObject
 {
     [JsonStringEnumMemberName("bank_account")]
@@ -142,7 +142,7 @@ public enum BankAccountObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<BillingAlertObject>))]
 public enum BillingAlertObject
 {
     [JsonStringEnumMemberName("billing.alert")]
@@ -152,7 +152,7 @@ public enum BillingAlertObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<BillingCreditBalanceSummaryObject>))]
 public enum BillingCreditBalanceSummaryObject
 {
     [JsonStringEnumMemberName("billing.credit_balance_summary")]
@@ -162,7 +162,7 @@ public enum BillingCreditBalanceSummaryObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<BillingCreditBalanceTransactionObject>))]
 public enum BillingCreditBalanceTransactionObject
 {
     [JsonStringEnumMemberName("billing.credit_balance_transaction")]
@@ -172,7 +172,7 @@ public enum BillingCreditBalanceTransactionObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<BillingCreditGrantObject>))]
 public enum BillingCreditGrantObject
 {
     [JsonStringEnumMemberName("billing.credit_grant")]
@@ -182,7 +182,7 @@ public enum BillingCreditGrantObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<BillingMeterObject>))]
 public enum BillingMeterObject
 {
     [JsonStringEnumMemberName("billing.meter")]
@@ -192,7 +192,7 @@ public enum BillingMeterObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<BillingMeterEventObject>))]
 public enum BillingMeterEventObject
 {
     [JsonStringEnumMemberName("billing.meter_event")]
@@ -202,7 +202,7 @@ public enum BillingMeterEventObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<BillingMeterEventAdjustmentObject>))]
 public enum BillingMeterEventAdjustmentObject
 {
     [JsonStringEnumMemberName("billing.meter_event_adjustment")]
@@ -212,7 +212,7 @@ public enum BillingMeterEventAdjustmentObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<BillingMeterEventSummaryObject>))]
 public enum BillingMeterEventSummaryObject
 {
     [JsonStringEnumMemberName("billing.meter_event_summary")]
@@ -222,7 +222,7 @@ public enum BillingMeterEventSummaryObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<BillingPortalConfigurationObject>))]
 public enum BillingPortalConfigurationObject
 {
     [JsonStringEnumMemberName("billing_portal.configuration")]
@@ -232,7 +232,7 @@ public enum BillingPortalConfigurationObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<BillingPortalSessionObject>))]
 public enum BillingPortalSessionObject
 {
     [JsonStringEnumMemberName("billing_portal.session")]
@@ -242,7 +242,7 @@ public enum BillingPortalSessionObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CapabilityObject>))]
 public enum CapabilityObject
 {
     [JsonStringEnumMemberName("capability")]
@@ -252,7 +252,7 @@ public enum CapabilityObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CardObject>))]
 public enum CardObject
 {
     [JsonStringEnumMemberName("card")]
@@ -262,7 +262,7 @@ public enum CardObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CashBalanceObject>))]
 public enum CashBalanceObject
 {
     [JsonStringEnumMemberName("cash_balance")]
@@ -272,7 +272,7 @@ public enum CashBalanceObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ChargeObject>))]
 public enum ChargeObject
 {
     [JsonStringEnumMemberName("charge")]
@@ -282,7 +282,7 @@ public enum ChargeObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CheckoutSessionObject>))]
 public enum CheckoutSessionObject
 {
     [JsonStringEnumMemberName("checkout.session")]
@@ -292,7 +292,7 @@ public enum CheckoutSessionObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ClimateOrderObject>))]
 public enum ClimateOrderObject
 {
     [JsonStringEnumMemberName("climate.order")]
@@ -302,7 +302,7 @@ public enum ClimateOrderObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ClimateProductObject>))]
 public enum ClimateProductObject
 {
     [JsonStringEnumMemberName("climate.product")]
@@ -312,7 +312,7 @@ public enum ClimateProductObject
 /// <summary>
 /// String representing the object’s type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ClimateSupplierObject>))]
 public enum ClimateSupplierObject
 {
     [JsonStringEnumMemberName("climate.supplier")]
@@ -322,7 +322,7 @@ public enum ClimateSupplierObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ConfirmationTokenObject>))]
 public enum ConfirmationTokenObject
 {
     [JsonStringEnumMemberName("confirmation_token")]
@@ -332,7 +332,7 @@ public enum ConfirmationTokenObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ConnectCollectionTransferObject>))]
 public enum ConnectCollectionTransferObject
 {
     [JsonStringEnumMemberName("connect_collection_transfer")]
@@ -342,7 +342,7 @@ public enum ConnectCollectionTransferObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CountrySpecObject>))]
 public enum CountrySpecObject
 {
     [JsonStringEnumMemberName("country_spec")]
@@ -352,7 +352,7 @@ public enum CountrySpecObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CouponObject>))]
 public enum CouponObject
 {
     [JsonStringEnumMemberName("coupon")]
@@ -362,7 +362,7 @@ public enum CouponObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CreditNoteObject>))]
 public enum CreditNoteObject
 {
     [JsonStringEnumMemberName("credit_note")]
@@ -372,7 +372,7 @@ public enum CreditNoteObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CreditNoteLineItemObject>))]
 public enum CreditNoteLineItemObject
 {
     [JsonStringEnumMemberName("credit_note_line_item")]
@@ -382,7 +382,7 @@ public enum CreditNoteLineItemObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CustomerObject>))]
 public enum CustomerObject
 {
     [JsonStringEnumMemberName("customer")]
@@ -392,7 +392,7 @@ public enum CustomerObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CustomerBalanceTransactionObject>))]
 public enum CustomerBalanceTransactionObject
 {
     [JsonStringEnumMemberName("customer_balance_transaction")]
@@ -402,7 +402,7 @@ public enum CustomerBalanceTransactionObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CustomerCashBalanceTransactionObject>))]
 public enum CustomerCashBalanceTransactionObject
 {
     [JsonStringEnumMemberName("customer_cash_balance_transaction")]
@@ -412,7 +412,7 @@ public enum CustomerCashBalanceTransactionObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CustomerSessionObject>))]
 public enum CustomerSessionObject
 {
     [JsonStringEnumMemberName("customer_session")]
@@ -422,7 +422,7 @@ public enum CustomerSessionObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<DeletedDiscountObject>))]
 public enum DeletedDiscountObject
 {
     [JsonStringEnumMemberName("discount")]
@@ -432,7 +432,7 @@ public enum DeletedDiscountObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<DeletedInvoiceObject>))]
 public enum DeletedInvoiceObject
 {
     [JsonStringEnumMemberName("invoice")]
@@ -442,7 +442,7 @@ public enum DeletedInvoiceObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<DeletedInvoiceitemObject>))]
 public enum DeletedInvoiceitemObject
 {
     [JsonStringEnumMemberName("invoiceitem")]
@@ -452,7 +452,7 @@ public enum DeletedInvoiceitemObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<DeletedPersonObject>))]
 public enum DeletedPersonObject
 {
     [JsonStringEnumMemberName("person")]
@@ -462,7 +462,7 @@ public enum DeletedPersonObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<DeletedPlanObject>))]
 public enum DeletedPlanObject
 {
     [JsonStringEnumMemberName("plan")]
@@ -472,7 +472,7 @@ public enum DeletedPlanObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<DeletedPriceObject>))]
 public enum DeletedPriceObject
 {
     [JsonStringEnumMemberName("price")]
@@ -482,7 +482,7 @@ public enum DeletedPriceObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<DeletedProductObject>))]
 public enum DeletedProductObject
 {
     [JsonStringEnumMemberName("product")]
@@ -492,7 +492,7 @@ public enum DeletedProductObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<DeletedProductFeatureObject>))]
 public enum DeletedProductFeatureObject
 {
     [JsonStringEnumMemberName("product_feature")]
@@ -502,7 +502,7 @@ public enum DeletedProductFeatureObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<DeletedRadarValueListObject>))]
 public enum DeletedRadarValueListObject
 {
     [JsonStringEnumMemberName("radar.value_list")]
@@ -512,7 +512,7 @@ public enum DeletedRadarValueListObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<DeletedRadarValueListItemObject>))]
 public enum DeletedRadarValueListItemObject
 {
     [JsonStringEnumMemberName("radar.value_list_item")]
@@ -522,7 +522,7 @@ public enum DeletedRadarValueListItemObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<DeletedSubscriptionItemObject>))]
 public enum DeletedSubscriptionItemObject
 {
     [JsonStringEnumMemberName("subscription_item")]
@@ -532,7 +532,7 @@ public enum DeletedSubscriptionItemObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<DeletedTaxIdObject>))]
 public enum DeletedTaxIdObject
 {
     [JsonStringEnumMemberName("tax_id")]
@@ -542,7 +542,7 @@ public enum DeletedTaxIdObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<DeletedTerminalConfigurationObject>))]
 public enum DeletedTerminalConfigurationObject
 {
     [JsonStringEnumMemberName("terminal.configuration")]
@@ -552,7 +552,7 @@ public enum DeletedTerminalConfigurationObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<DeletedTerminalLocationObject>))]
 public enum DeletedTerminalLocationObject
 {
     [JsonStringEnumMemberName("terminal.location")]
@@ -562,7 +562,7 @@ public enum DeletedTerminalLocationObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<DeletedTerminalReaderObject>))]
 public enum DeletedTerminalReaderObject
 {
     [JsonStringEnumMemberName("terminal.reader")]
@@ -572,7 +572,7 @@ public enum DeletedTerminalReaderObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<DeletedTestHelpersTestClockObject>))]
 public enum DeletedTestHelpersTestClockObject
 {
     [JsonStringEnumMemberName("test_helpers.test_clock")]
@@ -582,7 +582,7 @@ public enum DeletedTestHelpersTestClockObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<DeletedWebhookEndpointObject>))]
 public enum DeletedWebhookEndpointObject
 {
     [JsonStringEnumMemberName("webhook_endpoint")]
@@ -592,7 +592,7 @@ public enum DeletedWebhookEndpointObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<DisputeObject>))]
 public enum DisputeObject
 {
     [JsonStringEnumMemberName("dispute")]
@@ -602,7 +602,7 @@ public enum DisputeObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<EntitlementsActiveEntitlementObject>))]
 public enum EntitlementsActiveEntitlementObject
 {
     [JsonStringEnumMemberName("entitlements.active_entitlement")]
@@ -612,7 +612,7 @@ public enum EntitlementsActiveEntitlementObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<EntitlementsFeatureObject>))]
 public enum EntitlementsFeatureObject
 {
     [JsonStringEnumMemberName("entitlements.feature")]
@@ -622,7 +622,7 @@ public enum EntitlementsFeatureObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<EphemeralKeyObject>))]
 public enum EphemeralKeyObject
 {
     [JsonStringEnumMemberName("ephemeral_key")]
@@ -632,7 +632,7 @@ public enum EphemeralKeyObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<EventObject>))]
 public enum EventObject
 {
     [JsonStringEnumMemberName("event")]
@@ -642,7 +642,7 @@ public enum EventObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ExchangeRateObject>))]
 public enum ExchangeRateObject
 {
     [JsonStringEnumMemberName("exchange_rate")]
@@ -652,7 +652,7 @@ public enum ExchangeRateObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<FeeRefundObject>))]
 public enum FeeRefundObject
 {
     [JsonStringEnumMemberName("fee_refund")]
@@ -662,7 +662,7 @@ public enum FeeRefundObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<FileObject>))]
 public enum FileObject
 {
     [JsonStringEnumMemberName("file")]
@@ -672,7 +672,7 @@ public enum FileObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<FileLinkObject>))]
 public enum FileLinkObject
 {
     [JsonStringEnumMemberName("file_link")]
@@ -682,7 +682,7 @@ public enum FileLinkObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<FinancialConnectionsAccountObject>))]
 public enum FinancialConnectionsAccountObject
 {
     [JsonStringEnumMemberName("financial_connections.account")]
@@ -692,7 +692,7 @@ public enum FinancialConnectionsAccountObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<FinancialConnectionsAccountOwnerObject>))]
 public enum FinancialConnectionsAccountOwnerObject
 {
     [JsonStringEnumMemberName("financial_connections.account_owner")]
@@ -702,7 +702,7 @@ public enum FinancialConnectionsAccountOwnerObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<FinancialConnectionsAccountOwnershipObject>))]
 public enum FinancialConnectionsAccountOwnershipObject
 {
     [JsonStringEnumMemberName("financial_connections.account_ownership")]
@@ -712,7 +712,7 @@ public enum FinancialConnectionsAccountOwnershipObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<FinancialConnectionsSessionObject>))]
 public enum FinancialConnectionsSessionObject
 {
     [JsonStringEnumMemberName("financial_connections.session")]
@@ -722,7 +722,7 @@ public enum FinancialConnectionsSessionObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<FinancialConnectionsTransactionObject>))]
 public enum FinancialConnectionsTransactionObject
 {
     [JsonStringEnumMemberName("financial_connections.transaction")]
@@ -732,7 +732,7 @@ public enum FinancialConnectionsTransactionObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ForwardingRequestObject>))]
 public enum ForwardingRequestObject
 {
     [JsonStringEnumMemberName("forwarding.request")]
@@ -742,7 +742,7 @@ public enum ForwardingRequestObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<FundingInstructionsObject>))]
 public enum FundingInstructionsObject
 {
     [JsonStringEnumMemberName("funding_instructions")]
@@ -752,7 +752,7 @@ public enum FundingInstructionsObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<IdentityVerificationReportObject>))]
 public enum IdentityVerificationReportObject
 {
     [JsonStringEnumMemberName("identity.verification_report")]
@@ -762,7 +762,7 @@ public enum IdentityVerificationReportObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<IdentityVerificationSessionObject>))]
 public enum IdentityVerificationSessionObject
 {
     [JsonStringEnumMemberName("identity.verification_session")]
@@ -772,7 +772,7 @@ public enum IdentityVerificationSessionObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<InvoicePaymentObject>))]
 public enum InvoicePaymentObject
 {
     [JsonStringEnumMemberName("invoice_payment")]
@@ -782,7 +782,7 @@ public enum InvoicePaymentObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<InvoiceRenderingTemplateObject>))]
 public enum InvoiceRenderingTemplateObject
 {
     [JsonStringEnumMemberName("invoice_rendering_template")]
@@ -792,7 +792,7 @@ public enum InvoiceRenderingTemplateObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<IssuingAuthorizationObject>))]
 public enum IssuingAuthorizationObject
 {
     [JsonStringEnumMemberName("issuing.authorization")]
@@ -802,7 +802,7 @@ public enum IssuingAuthorizationObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<IssuingCardObject>))]
 public enum IssuingCardObject
 {
     [JsonStringEnumMemberName("issuing.card")]
@@ -812,7 +812,7 @@ public enum IssuingCardObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<IssuingCardholderObject>))]
 public enum IssuingCardholderObject
 {
     [JsonStringEnumMemberName("issuing.cardholder")]
@@ -822,7 +822,7 @@ public enum IssuingCardholderObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<IssuingDisputeObject>))]
 public enum IssuingDisputeObject
 {
     [JsonStringEnumMemberName("issuing.dispute")]
@@ -832,7 +832,7 @@ public enum IssuingDisputeObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<IssuingPersonalizationDesignObject>))]
 public enum IssuingPersonalizationDesignObject
 {
     [JsonStringEnumMemberName("issuing.personalization_design")]
@@ -842,7 +842,7 @@ public enum IssuingPersonalizationDesignObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<IssuingPhysicalBundleObject>))]
 public enum IssuingPhysicalBundleObject
 {
     [JsonStringEnumMemberName("issuing.physical_bundle")]
@@ -852,7 +852,7 @@ public enum IssuingPhysicalBundleObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<IssuingSettlementObject>))]
 public enum IssuingSettlementObject
 {
     [JsonStringEnumMemberName("issuing.settlement")]
@@ -862,7 +862,7 @@ public enum IssuingSettlementObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<IssuingTokenObject>))]
 public enum IssuingTokenObject
 {
     [JsonStringEnumMemberName("issuing.token")]
@@ -872,7 +872,7 @@ public enum IssuingTokenObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<IssuingTransactionObject>))]
 public enum IssuingTransactionObject
 {
     [JsonStringEnumMemberName("issuing.transaction")]
@@ -882,7 +882,7 @@ public enum IssuingTransactionObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ItemObject>))]
 public enum ItemObject
 {
     [JsonStringEnumMemberName("item")]
@@ -892,7 +892,7 @@ public enum ItemObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<LineItemObject>))]
 public enum LineItemObject
 {
     [JsonStringEnumMemberName("line_item")]
@@ -902,7 +902,7 @@ public enum LineItemObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<LoginLinkObject>))]
 public enum LoginLinkObject
 {
     [JsonStringEnumMemberName("login_link")]
@@ -912,7 +912,7 @@ public enum LoginLinkObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<MandateObject>))]
 public enum MandateObject
 {
     [JsonStringEnumMemberName("mandate")]
@@ -922,7 +922,7 @@ public enum MandateObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PaymentAttemptRecordObject>))]
 public enum PaymentAttemptRecordObject
 {
     [JsonStringEnumMemberName("payment_attempt_record")]
@@ -932,7 +932,7 @@ public enum PaymentAttemptRecordObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PaymentIntentObject>))]
 public enum PaymentIntentObject
 {
     [JsonStringEnumMemberName("payment_intent")]
@@ -942,7 +942,7 @@ public enum PaymentIntentObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PaymentIntentAmountDetailsLineItemObject>))]
 public enum PaymentIntentAmountDetailsLineItemObject
 {
     [JsonStringEnumMemberName("payment_intent_amount_details_line_item")]
@@ -952,7 +952,7 @@ public enum PaymentIntentAmountDetailsLineItemObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PaymentLinkObject>))]
 public enum PaymentLinkObject
 {
     [JsonStringEnumMemberName("payment_link")]
@@ -962,7 +962,7 @@ public enum PaymentLinkObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PaymentMethodObject>))]
 public enum PaymentMethodObject
 {
     [JsonStringEnumMemberName("payment_method")]
@@ -972,7 +972,7 @@ public enum PaymentMethodObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PaymentMethodConfigurationObject>))]
 public enum PaymentMethodConfigurationObject
 {
     [JsonStringEnumMemberName("payment_method_configuration")]
@@ -982,7 +982,7 @@ public enum PaymentMethodConfigurationObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PaymentMethodDomainObject>))]
 public enum PaymentMethodDomainObject
 {
     [JsonStringEnumMemberName("payment_method_domain")]
@@ -992,7 +992,7 @@ public enum PaymentMethodDomainObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PaymentRecordObject>))]
 public enum PaymentRecordObject
 {
     [JsonStringEnumMemberName("payment_record")]
@@ -1002,7 +1002,7 @@ public enum PaymentRecordObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PayoutObject>))]
 public enum PayoutObject
 {
     [JsonStringEnumMemberName("payout")]
@@ -1012,7 +1012,7 @@ public enum PayoutObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PromotionCodeObject>))]
 public enum PromotionCodeObject
 {
     [JsonStringEnumMemberName("promotion_code")]
@@ -1022,7 +1022,7 @@ public enum PromotionCodeObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<QuoteObject>))]
 public enum QuoteObject
 {
     [JsonStringEnumMemberName("quote")]
@@ -1032,7 +1032,7 @@ public enum QuoteObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<RadarEarlyFraudWarningObject>))]
 public enum RadarEarlyFraudWarningObject
 {
     [JsonStringEnumMemberName("radar.early_fraud_warning")]
@@ -1042,7 +1042,7 @@ public enum RadarEarlyFraudWarningObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<RadarPaymentEvaluationObject>))]
 public enum RadarPaymentEvaluationObject
 {
     [JsonStringEnumMemberName("radar.payment_evaluation")]
@@ -1052,7 +1052,7 @@ public enum RadarPaymentEvaluationObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<RefundObject>))]
 public enum RefundObject
 {
     [JsonStringEnumMemberName("refund")]
@@ -1062,7 +1062,7 @@ public enum RefundObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ReportingReportRunObject>))]
 public enum ReportingReportRunObject
 {
     [JsonStringEnumMemberName("reporting.report_run")]
@@ -1072,7 +1072,7 @@ public enum ReportingReportRunObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ReportingReportTypeObject>))]
 public enum ReportingReportTypeObject
 {
     [JsonStringEnumMemberName("reporting.report_type")]
@@ -1082,7 +1082,7 @@ public enum ReportingReportTypeObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ReserveTransactionObject>))]
 public enum ReserveTransactionObject
 {
     [JsonStringEnumMemberName("reserve_transaction")]
@@ -1092,7 +1092,7 @@ public enum ReserveTransactionObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ReviewObject>))]
 public enum ReviewObject
 {
     [JsonStringEnumMemberName("review")]
@@ -1102,7 +1102,7 @@ public enum ReviewObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ScheduledQueryRunObject>))]
 public enum ScheduledQueryRunObject
 {
     [JsonStringEnumMemberName("scheduled_query_run")]
@@ -1112,7 +1112,7 @@ public enum ScheduledQueryRunObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<SetupAttemptObject>))]
 public enum SetupAttemptObject
 {
     [JsonStringEnumMemberName("setup_attempt")]
@@ -1122,7 +1122,7 @@ public enum SetupAttemptObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<SetupIntentObject>))]
 public enum SetupIntentObject
 {
     [JsonStringEnumMemberName("setup_intent")]
@@ -1132,7 +1132,7 @@ public enum SetupIntentObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ShippingRateObject>))]
 public enum ShippingRateObject
 {
     [JsonStringEnumMemberName("shipping_rate")]
@@ -1142,7 +1142,7 @@ public enum ShippingRateObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<SigmaSigmaApiQueryObject>))]
 public enum SigmaSigmaApiQueryObject
 {
     [JsonStringEnumMemberName("sigma.sigma_api_query")]
@@ -1152,7 +1152,7 @@ public enum SigmaSigmaApiQueryObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<SourceObject>))]
 public enum SourceObject
 {
     [JsonStringEnumMemberName("source")]
@@ -1162,7 +1162,7 @@ public enum SourceObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<SourceMandateNotificationObject>))]
 public enum SourceMandateNotificationObject
 {
     [JsonStringEnumMemberName("source_mandate_notification")]
@@ -1172,7 +1172,7 @@ public enum SourceMandateNotificationObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<SourceTransactionObject>))]
 public enum SourceTransactionObject
 {
     [JsonStringEnumMemberName("source_transaction")]
@@ -1182,7 +1182,7 @@ public enum SourceTransactionObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<SubscriptionObject>))]
 public enum SubscriptionObject
 {
     [JsonStringEnumMemberName("subscription")]
@@ -1192,7 +1192,7 @@ public enum SubscriptionObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<SubscriptionScheduleObject>))]
 public enum SubscriptionScheduleObject
 {
     [JsonStringEnumMemberName("subscription_schedule")]
@@ -1202,7 +1202,7 @@ public enum SubscriptionScheduleObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TaxAssociationObject>))]
 public enum TaxAssociationObject
 {
     [JsonStringEnumMemberName("tax.association")]
@@ -1212,7 +1212,7 @@ public enum TaxAssociationObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TaxCalculationObject>))]
 public enum TaxCalculationObject
 {
     [JsonStringEnumMemberName("tax.calculation")]
@@ -1222,7 +1222,7 @@ public enum TaxCalculationObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TaxCalculationLineItemObject>))]
 public enum TaxCalculationLineItemObject
 {
     [JsonStringEnumMemberName("tax.calculation_line_item")]
@@ -1232,7 +1232,7 @@ public enum TaxCalculationLineItemObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TaxRegistrationObject>))]
 public enum TaxRegistrationObject
 {
     [JsonStringEnumMemberName("tax.registration")]
@@ -1242,7 +1242,7 @@ public enum TaxRegistrationObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TaxSettingsObject>))]
 public enum TaxSettingsObject
 {
     [JsonStringEnumMemberName("tax.settings")]
@@ -1252,7 +1252,7 @@ public enum TaxSettingsObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TaxTransactionObject>))]
 public enum TaxTransactionObject
 {
     [JsonStringEnumMemberName("tax.transaction")]
@@ -1262,7 +1262,7 @@ public enum TaxTransactionObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TaxTransactionLineItemObject>))]
 public enum TaxTransactionLineItemObject
 {
     [JsonStringEnumMemberName("tax.transaction_line_item")]
@@ -1272,7 +1272,7 @@ public enum TaxTransactionLineItemObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TaxCodeObject>))]
 public enum TaxCodeObject
 {
     [JsonStringEnumMemberName("tax_code")]
@@ -1282,7 +1282,7 @@ public enum TaxCodeObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TaxDeductedAtSourceObject>))]
 public enum TaxDeductedAtSourceObject
 {
     [JsonStringEnumMemberName("tax_deducted_at_source")]
@@ -1292,7 +1292,7 @@ public enum TaxDeductedAtSourceObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TaxRateObject>))]
 public enum TaxRateObject
 {
     [JsonStringEnumMemberName("tax_rate")]
@@ -1302,14 +1302,14 @@ public enum TaxRateObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TerminalConnectionTokenObject>))]
 public enum TerminalConnectionTokenObject
 {
     [JsonStringEnumMemberName("terminal.connection_token")]
     TerminalConnectionToken
 }
 
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TerminalOnboardingLinkObject>))]
 public enum TerminalOnboardingLinkObject
 {
     [JsonStringEnumMemberName("terminal.onboarding_link")]
@@ -1319,7 +1319,7 @@ public enum TerminalOnboardingLinkObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TokenObject>))]
 public enum TokenObject
 {
     [JsonStringEnumMemberName("token")]
@@ -1329,7 +1329,7 @@ public enum TokenObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TopupObject>))]
 public enum TopupObject
 {
     [JsonStringEnumMemberName("topup")]
@@ -1339,7 +1339,7 @@ public enum TopupObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TransferObject>))]
 public enum TransferObject
 {
     [JsonStringEnumMemberName("transfer")]
@@ -1349,7 +1349,7 @@ public enum TransferObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TransferReversalObject>))]
 public enum TransferReversalObject
 {
     [JsonStringEnumMemberName("transfer_reversal")]
@@ -1359,7 +1359,7 @@ public enum TransferReversalObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TreasuryCreditReversalObject>))]
 public enum TreasuryCreditReversalObject
 {
     [JsonStringEnumMemberName("treasury.credit_reversal")]
@@ -1369,7 +1369,7 @@ public enum TreasuryCreditReversalObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TreasuryDebitReversalObject>))]
 public enum TreasuryDebitReversalObject
 {
     [JsonStringEnumMemberName("treasury.debit_reversal")]
@@ -1379,7 +1379,7 @@ public enum TreasuryDebitReversalObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TreasuryFinancialAccountObject>))]
 public enum TreasuryFinancialAccountObject
 {
     [JsonStringEnumMemberName("treasury.financial_account")]
@@ -1389,7 +1389,7 @@ public enum TreasuryFinancialAccountObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TreasuryFinancialAccountFeaturesObject>))]
 public enum TreasuryFinancialAccountFeaturesObject
 {
     [JsonStringEnumMemberName("treasury.financial_account_features")]
@@ -1399,7 +1399,7 @@ public enum TreasuryFinancialAccountFeaturesObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TreasuryInboundTransferObject>))]
 public enum TreasuryInboundTransferObject
 {
     [JsonStringEnumMemberName("treasury.inbound_transfer")]
@@ -1409,7 +1409,7 @@ public enum TreasuryInboundTransferObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TreasuryOutboundPaymentObject>))]
 public enum TreasuryOutboundPaymentObject
 {
     [JsonStringEnumMemberName("treasury.outbound_payment")]
@@ -1419,7 +1419,7 @@ public enum TreasuryOutboundPaymentObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TreasuryOutboundTransferObject>))]
 public enum TreasuryOutboundTransferObject
 {
     [JsonStringEnumMemberName("treasury.outbound_transfer")]
@@ -1429,7 +1429,7 @@ public enum TreasuryOutboundTransferObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TreasuryReceivedCreditObject>))]
 public enum TreasuryReceivedCreditObject
 {
     [JsonStringEnumMemberName("treasury.received_credit")]
@@ -1439,7 +1439,7 @@ public enum TreasuryReceivedCreditObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TreasuryReceivedDebitObject>))]
 public enum TreasuryReceivedDebitObject
 {
     [JsonStringEnumMemberName("treasury.received_debit")]
@@ -1449,7 +1449,7 @@ public enum TreasuryReceivedDebitObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TreasuryTransactionObject>))]
 public enum TreasuryTransactionObject
 {
     [JsonStringEnumMemberName("treasury.transaction")]
@@ -1459,7 +1459,7 @@ public enum TreasuryTransactionObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TreasuryTransactionEntryObject>))]
 public enum TreasuryTransactionEntryObject
 {
     [JsonStringEnumMemberName("treasury.transaction_entry")]
@@ -1469,7 +1469,7 @@ public enum TreasuryTransactionEntryObject
 /// <summary>
 /// The Stripe account type. Can be `standard`, `express`, `custom`, or `none`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<AccountType>))]
 public enum AccountType
 {
     [JsonStringEnumMemberName("custom")]
@@ -1485,7 +1485,7 @@ public enum AccountType
 /// <summary>
 /// The controller type. Can be `application`, if a Connect application controls the account, or `account`, if the account controls itself.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<AccountUnificationAccountControllerType>))]
 public enum AccountUnificationAccountControllerType
 {
     [JsonStringEnumMemberName("account")]
@@ -1497,7 +1497,7 @@ public enum AccountUnificationAccountControllerType
 /// <summary>
 /// A value indicating the Stripe dashboard this account has access to independent of the Connect application.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<AccountUnificationAccountControllerStripeDashboardType>))]
 public enum AccountUnificationAccountControllerStripeDashboardType
 {
     [JsonStringEnumMemberName("express")]
@@ -1511,7 +1511,7 @@ public enum AccountUnificationAccountControllerStripeDashboardType
 /// <summary>
 /// funding type of the underlying payment method.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<AmazonPayUnderlyingPaymentMethodFundingDetailsType>))]
 public enum AmazonPayUnderlyingPaymentMethodFundingDetailsType
 {
     [JsonStringEnumMemberName("card")]
@@ -1521,7 +1521,7 @@ public enum AmazonPayUnderlyingPaymentMethodFundingDetailsType
 /// <summary>
 /// The type of error returned. One of `api_error`, `card_error`, `idempotency_error`, or `invalid_request_error`
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ApiErrorsType>))]
 public enum ApiErrorsType
 {
     [JsonStringEnumMemberName("api_error")]
@@ -1537,7 +1537,7 @@ public enum ApiErrorsType
 /// <summary>
 /// The type of automatic transfer rule.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<BalanceSettingsResourceAutomaticTransferRuleType>))]
 public enum BalanceSettingsResourceAutomaticTransferRuleType
 {
     [JsonStringEnumMemberName("transfer_all")]
@@ -1547,9 +1547,9 @@ public enum BalanceSettingsResourceAutomaticTransferRuleType
 }
 
 /// <summary>
-/// Transaction type: `adjustment`, `advance`, `advance_funding`, `anticipation_repayment`, `application_fee`, `application_fee_refund`, `charge`, `climate_order_purchase`, `climate_order_refund`, `connect_collection_transfer`, `contribution`, `inbound_transfer`, `inbound_transfer_reversal`, `issuing_authorization_hold`, `issuing_authorization_release`, `issuing_dispute`, `issuing_transaction`, `obligation_outbound`, `obligation_reversal_inbound`, `payment`, `payment_failure_refund`, `payment_network_reserve_hold`, `payment_network_reserve_release`, `payment_refund`, `payment_reversal`, `payment_unreconciled`, `payout`, `payout_cancel`, `payout_failure`, `payout_minimum_balance_hold`, `payout_minimum_balance_release`, `refund`, `refund_failure`, `reserve_transaction`, `reserved_funds`, `reserve_hold`, `reserve_release`, `stripe_fee`, `stripe_fx_fee`, `stripe_balance_payment_debit`, `stripe_balance_payment_debit_reversal`, `tax_fee`, `topup`, `topup_reversal`, `transfer`, `transfer_cancel`, `transfer_failure`, `transfer_refund`, or `fee_credit_funding`. Learn more about [balance transaction types and what they represent](https://stripe.com/docs/reports/balance-transaction-types). To classify transactions for accounting purposes, consider `reporting_category` instead.
+/// Transaction type: `tax_fund`, `adjustment`, `advance`, `advance_funding`, `anticipation_repayment`, `application_fee`, `application_fee_refund`, `charge`, `climate_order_purchase`, `climate_order_refund`, `connect_collection_transfer`, `contribution`, `inbound_transfer`, `inbound_transfer_reversal`, `issuing_authorization_hold`, `issuing_authorization_release`, `issuing_dispute`, `issuing_transaction`, `obligation_outbound`, `obligation_reversal_inbound`, `payment`, `payment_failure_refund`, `payment_network_reserve_hold`, `payment_network_reserve_release`, `payment_refund`, `payment_reversal`, `payment_unreconciled`, `payout`, `payout_cancel`, `payout_failure`, `payout_minimum_balance_hold`, `payout_minimum_balance_release`, `refund`, `refund_failure`, `reserve_transaction`, `reserved_funds`, `reserve_hold`, `reserve_release`, `stripe_fee`, `stripe_fx_fee`, `stripe_balance_payment_debit`, `stripe_balance_payment_debit_reversal`, `tax_fee`, `topup`, `topup_reversal`, `transfer`, `transfer_cancel`, `transfer_failure`, `transfer_refund`, or `fee_credit_funding`. Learn more about [balance transaction types and what they represent](https://stripe.com/docs/reports/balance-transaction-types). To classify transactions for accounting purposes, consider `reporting_category` instead.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<BalanceTransactionType>))]
 public enum BalanceTransactionType
 {
     [JsonStringEnumMemberName("adjustment")]
@@ -1638,6 +1638,8 @@ public enum BalanceTransactionType
     StripeFxFee,
     [JsonStringEnumMemberName("tax_fee")]
     TaxFee,
+    [JsonStringEnumMemberName("tax_fund")]
+    TaxFund,
     [JsonStringEnumMemberName("topup")]
     Topup,
     [JsonStringEnumMemberName("topup_reversal")]
@@ -1655,7 +1657,7 @@ public enum BalanceTransactionType
 /// <summary>
 /// Type of account holder that this account belongs to.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<BankConnectionsResourceAccountholderType>))]
 public enum BankConnectionsResourceAccountholderType
 {
     [JsonStringEnumMemberName("account")]
@@ -1667,7 +1669,7 @@ public enum BankConnectionsResourceAccountholderType
 /// <summary>
 /// The `type` of the balance. An additional hash is included on the balance with a name matching this value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<BankConnectionsResourceBalanceType>))]
 public enum BankConnectionsResourceBalanceType
 {
     [JsonStringEnumMemberName("cash")]
@@ -1679,7 +1681,7 @@ public enum BankConnectionsResourceBalanceType
 /// <summary>
 /// The type of credit balance transaction (credit or debit).
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<BillingCreditBalanceTransactionType>))]
 public enum BillingCreditBalanceTransactionType
 {
     [JsonStringEnumMemberName("credit")]
@@ -1691,7 +1693,7 @@ public enum BillingCreditBalanceTransactionType
 /// <summary>
 /// Specifies whether to cancel a single event or a range of events for a time period. Time period cancellation is not supported yet.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<BillingMeterEventAdjustmentType>))]
 public enum BillingMeterEventAdjustmentType
 {
     [JsonStringEnumMemberName("cancel")]
@@ -1701,7 +1703,7 @@ public enum BillingMeterEventAdjustmentType
 /// <summary>
 /// The type of parent that generated this invoice item
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<BillingBillResourceInvoiceItemParentsInvoiceItemParentType>))]
 public enum BillingBillResourceInvoiceItemParentsInvoiceItemParentType
 {
     [JsonStringEnumMemberName("subscription_details")]
@@ -1711,7 +1713,7 @@ public enum BillingBillResourceInvoiceItemParentsInvoiceItemParentType
 /// <summary>
 /// The type of parent that generated this line item
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<BillingBillResourceInvoicingLinesParentsInvoiceLineItemParentType>))]
 public enum BillingBillResourceInvoicingLinesParentsInvoiceLineItemParentType
 {
     [JsonStringEnumMemberName("invoice_item_details")]
@@ -1723,7 +1725,7 @@ public enum BillingBillResourceInvoicingLinesParentsInvoiceLineItemParentType
 /// <summary>
 /// The type of parent that generated this invoice
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<BillingBillResourceInvoicingParentsInvoiceParentType>))]
 public enum BillingBillResourceInvoicingParentsInvoiceParentType
 {
     [JsonStringEnumMemberName("quote_details")]
@@ -1735,7 +1737,7 @@ public enum BillingBillResourceInvoicingParentsInvoiceParentType
 /// <summary>
 /// The type of the pricing details.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<BillingBillResourceInvoicingPricingPricingType>))]
 public enum BillingBillResourceInvoicingPricingPricingType
 {
     [JsonStringEnumMemberName("price_details")]
@@ -1745,7 +1747,7 @@ public enum BillingBillResourceInvoicingPricingPricingType
 /// <summary>
 /// The type of tax information.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<BillingBillResourceInvoicingTaxesTaxType>))]
 public enum BillingBillResourceInvoicingTaxesTaxType
 {
     [JsonStringEnumMemberName("tax_rate_details")]
@@ -1755,7 +1757,7 @@ public enum BillingBillResourceInvoicingTaxesTaxType
 /// <summary>
 /// The type of this amount. We currently only support `monetary` billing credits.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<BillingCreditGrantsResourceAmountType>))]
 public enum BillingCreditGrantsResourceAmountType
 {
     [JsonStringEnumMemberName("monetary")]
@@ -1765,7 +1767,7 @@ public enum BillingCreditGrantsResourceAmountType
 /// <summary>
 /// The type of credit transaction.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<BillingCreditGrantsResourceBalanceCreditType>))]
 public enum BillingCreditGrantsResourceBalanceCreditType
 {
     [JsonStringEnumMemberName("credits_application_invoice_voided")]
@@ -1777,7 +1779,7 @@ public enum BillingCreditGrantsResourceBalanceCreditType
 /// <summary>
 /// The type of debit transaction.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<BillingCreditGrantsResourceBalanceDebitType>))]
 public enum BillingCreditGrantsResourceBalanceDebitType
 {
     [JsonStringEnumMemberName("credits_applied")]
@@ -1791,7 +1793,7 @@ public enum BillingCreditGrantsResourceBalanceDebitType
 /// <summary>
 /// The method for mapping a meter event to a customer.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<BillingMeterResourceCustomerMappingSettingsType>))]
 public enum BillingMeterResourceCustomerMappingSettingsType
 {
     [JsonStringEnumMemberName("by_id")]
@@ -1801,7 +1803,7 @@ public enum BillingMeterResourceCustomerMappingSettingsType
 /// <summary>
 /// The bank transfer type that this PaymentIntent is allowed to use for funding Permitted values include: `eu_bank_transfer`, `gb_bank_transfer`, `jp_bank_transfer`, `mx_bank_transfer`, or `us_bank_transfer`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CheckoutCustomerBalanceBankTransferPaymentMethodOptionsType>))]
 public enum CheckoutCustomerBalanceBankTransferPaymentMethodOptionsType
 {
     [JsonStringEnumMemberName("eu_bank_transfer")]
@@ -1819,7 +1821,7 @@ public enum CheckoutCustomerBalanceBankTransferPaymentMethodOptionsType
 /// <summary>
 /// The type of the PaymentMethod. An additional hash is included on the PaymentMethod with a name matching this value. It contains additional information specific to the PaymentMethod type.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ConfirmationTokensResourcePaymentMethodPreviewType>))]
 public enum ConfirmationTokensResourcePaymentMethodPreviewType
 {
     [JsonStringEnumMemberName("acss_debit")]
@@ -1941,7 +1943,7 @@ public enum ConfirmationTokensResourcePaymentMethodPreviewType
 /// <summary>
 /// Type of the account referenced.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ConnectAccountReferenceType>))]
 public enum ConnectAccountReferenceType
 {
     [JsonStringEnumMemberName("account")]
@@ -1953,7 +1955,7 @@ public enum ConnectAccountReferenceType
 /// <summary>
 /// Type of this credit note, one of `pre_payment` or `post_payment`. A `pre_payment` credit note means it was issued when the invoice was open. A `post_payment` credit note means it was issued when the invoice was paid.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CreditNoteType>))]
 public enum CreditNoteType
 {
     [JsonStringEnumMemberName("mixed")]
@@ -1967,7 +1969,7 @@ public enum CreditNoteType
 /// <summary>
 /// The type of the credit note line item, one of `invoice_line_item` or `custom_line_item`. When the type is `invoice_line_item` there is an additional `invoice_line_item` property on the resource the value of which is the id of the credited line item on the invoice.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CreditNoteLineItemType>))]
 public enum CreditNoteLineItemType
 {
     [JsonStringEnumMemberName("custom_line_item")]
@@ -1979,7 +1981,7 @@ public enum CreditNoteLineItemType
 /// <summary>
 /// Type of the refund, one of `refund` or `payment_record_refund`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CreditNoteRefundType>))]
 public enum CreditNoteRefundType
 {
     [JsonStringEnumMemberName("payment_record_refund")]
@@ -1991,7 +1993,7 @@ public enum CreditNoteRefundType
 /// <summary>
 /// Type of the pretax credit amount referenced.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CreditNotesPretaxCreditAmountType>))]
 public enum CreditNotesPretaxCreditAmountType
 {
     [JsonStringEnumMemberName("credit_balance_transaction")]
@@ -2003,7 +2005,7 @@ public enum CreditNotesPretaxCreditAmountType
 /// <summary>
 /// The mandate includes the type of customer acceptance information, such as: `online` or `offline`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CustomerAcceptanceType>))]
 public enum CustomerAcceptanceType
 {
     [JsonStringEnumMemberName("offline")]
@@ -2015,7 +2017,7 @@ public enum CustomerAcceptanceType
 /// <summary>
 /// Transaction type: `adjustment`, `applied_to_invoice`, `credit_note`, `initial`, `invoice_overpaid`, `invoice_too_large`, `invoice_too_small`, `unspent_receiver_credit`, `unapplied_from_invoice`, `checkout_session_subscription_payment`, or `checkout_session_subscription_payment_canceled`. See the [Customer Balance page](https://docs.stripe.com/billing/customer/balance#types) to learn more about transaction types.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CustomerBalanceTransactionType>))]
 public enum CustomerBalanceTransactionType
 {
     [JsonStringEnumMemberName("adjustment")]
@@ -2047,7 +2049,7 @@ public enum CustomerBalanceTransactionType
 /// <summary>
 /// The type of the cash balance transaction. New types may be added in future. See [Customer Balance](https://docs.stripe.com/payments/customer-balance#types) to learn more about these types.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CustomerCashBalanceTransactionType>))]
 public enum CustomerCashBalanceTransactionType
 {
     [JsonStringEnumMemberName("adjusted_for_overdraft")]
@@ -2073,7 +2075,7 @@ public enum CustomerCashBalanceTransactionType
 /// <summary>
 /// The source type of the discount.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<DiscountSourceType>))]
 public enum DiscountSourceType
 {
     [JsonStringEnumMemberName("coupon")]
@@ -2083,7 +2085,7 @@ public enum DiscountSourceType
 /// <summary>
 /// Payment method type.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<DisputePaymentMethodDetailsType>))]
 public enum DisputePaymentMethodDetailsType
 {
     [JsonStringEnumMemberName("amazon_pay")]
@@ -2099,7 +2101,7 @@ public enum DisputePaymentMethodDetailsType
 /// <summary>
 /// The bank_transfer type
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<FundingInstructionsBankTransferType>))]
 public enum FundingInstructionsBankTransferType
 {
     [JsonStringEnumMemberName("eu_bank_transfer")]
@@ -2111,7 +2113,7 @@ public enum FundingInstructionsBankTransferType
 /// <summary>
 /// The type of financial address
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<FundingInstructionsBankTransferFinancialAddressType>))]
 public enum FundingInstructionsBankTransferFinancialAddressType
 {
     [JsonStringEnumMemberName("aba")]
@@ -2131,7 +2133,7 @@ public enum FundingInstructionsBankTransferFinancialAddressType
 /// <summary>
 /// Type of the document.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<GelatoDocumentReportType>))]
 public enum GelatoDocumentReportType
 {
     [JsonStringEnumMemberName("driving_license")]
@@ -2145,7 +2147,7 @@ public enum GelatoDocumentReportType
 /// <summary>
 /// Type of report.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<IdentityVerificationReportType>))]
 public enum IdentityVerificationReportType
 {
     [JsonStringEnumMemberName("document")]
@@ -2159,7 +2161,7 @@ public enum IdentityVerificationReportType
 /// <summary>
 /// The type of the payment method used in the InboundTransfer.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<InboundTransfersType>))]
 public enum InboundTransfersType
 {
     [JsonStringEnumMemberName("us_bank_account")]
@@ -2169,7 +2171,7 @@ public enum InboundTransfersType
 /// <summary>
 /// Indicates the type of event attached to the payment evaluation.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<InsightsResourcesPaymentEvaluationEventType>))]
 public enum InsightsResourcesPaymentEvaluationEventType
 {
     [JsonStringEnumMemberName("dispute_opened")]
@@ -2187,7 +2189,7 @@ public enum InsightsResourcesPaymentEvaluationEventType
 /// <summary>
 /// Indicates the outcome of the payment evaluation.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<InsightsResourcesPaymentEvaluationOutcomeType>))]
 public enum InsightsResourcesPaymentEvaluationOutcomeType
 {
     [JsonStringEnumMemberName("failed")]
@@ -2203,7 +2205,7 @@ public enum InsightsResourcesPaymentEvaluationOutcomeType
 /// <summary>
 /// Type of user intervention raised.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<InsightsResourcesPaymentEvaluationUserInterventionRaisedType>))]
 public enum InsightsResourcesPaymentEvaluationUserInterventionRaisedType
 {
     [JsonStringEnumMemberName("3ds")]
@@ -2217,7 +2219,7 @@ public enum InsightsResourcesPaymentEvaluationUserInterventionRaisedType
 /// <summary>
 /// Whether the credit references a pending invoice item or one or more invoice line items on an invoice.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<InvoiceItemProrationCreditedItemsType>))]
 public enum InvoiceItemProrationCreditedItemsType
 {
     [JsonStringEnumMemberName("invoice_item")]
@@ -2229,7 +2231,7 @@ public enum InvoiceItemProrationCreditedItemsType
 /// <summary>
 /// Type of payment object associated with this invoice payment.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<InvoicesPaymentsInvoicePaymentAssociatedPaymentType>))]
 public enum InvoicesPaymentsInvoicePaymentAssociatedPaymentType
 {
     [JsonStringEnumMemberName("charge")]
@@ -2241,9 +2243,9 @@ public enum InvoicesPaymentsInvoicePaymentAssociatedPaymentType
 }
 
 /// <summary>
-/// The type of the tax ID, one of `ad_nrt`, `ar_cuit`, `eu_vat`, `bo_tin`, `br_cnpj`, `br_cpf`, `cn_tin`, `co_nit`, `cr_tin`, `do_rcn`, `ec_ruc`, `eu_oss_vat`, `hr_oib`, `pe_ruc`, `ro_tin`, `rs_pib`, `sv_nit`, `uy_ruc`, `ve_rif`, `vn_tin`, `gb_vat`, `nz_gst`, `au_abn`, `au_arn`, `in_gst`, `no_vat`, `no_voec`, `za_vat`, `ch_vat`, `mx_rfc`, `sg_uen`, `ru_inn`, `ru_kpp`, `ca_bn`, `hk_br`, `es_cif`, `pl_nip`, `it_cf`, `fo_vat`, `gi_tin`, `py_ruc`, `tw_vat`, `th_vat`, `jp_cn`, `jp_rn`, `jp_trn`, `li_uid`, `li_vat`, `lk_vat`, `my_itn`, `us_ein`, `kr_brn`, `ca_qst`, `ca_gst_hst`, `ca_pst_bc`, `ca_pst_mb`, `ca_pst_sk`, `my_sst`, `sg_gst`, `ae_trn`, `cl_tin`, `sa_vat`, `id_npwp`, `my_frp`, `il_vat`, `ge_vat`, `ua_vat`, `is_vat`, `bg_uic`, `hu_tin`, `si_tin`, `ke_pin`, `tr_tin`, `eg_tin`, `ph_tin`, `al_tin`, `bh_vat`, `kz_bin`, `ng_tin`, `om_vat`, `de_stn`, `ch_uid`, `tz_vat`, `uz_vat`, `uz_tin`, `md_vat`, `ma_vat`, `by_tin`, `ao_tin`, `bs_tin`, `bb_tin`, `cd_nif`, `mr_nif`, `me_pib`, `zw_tin`, `ba_tin`, `gn_nif`, `mk_vat`, `sr_fin`, `sn_ninea`, `am_tin`, `np_pan`, `tj_tin`, `ug_tin`, `zm_tin`, `kh_tin`, `aw_tin`, `az_tin`, `bd_bin`, `bj_ifu`, `et_tin`, `kg_tin`, `la_tin`, `cm_niu`, `cv_nif`, `bf_ifu`, or `unknown`
+/// The type of the tax ID, one of `ad_nrt`, `ar_cuit`, `eu_vat`, `bo_tin`, `br_cnpj`, `br_cpf`, `cn_tin`, `co_nit`, `cr_tin`, `do_rcn`, `ec_ruc`, `eu_oss_vat`, `hr_oib`, `pe_ruc`, `ro_tin`, `rs_pib`, `sv_nit`, `uy_ruc`, `ve_rif`, `vn_tin`, `gb_vat`, `nz_gst`, `au_abn`, `au_arn`, `in_gst`, `no_vat`, `no_voec`, `za_vat`, `ch_vat`, `mx_rfc`, `sg_uen`, `ru_inn`, `ru_kpp`, `ca_bn`, `hk_br`, `es_cif`, `pl_nip`, `it_cf`, `fo_vat`, `gi_tin`, `py_ruc`, `tw_vat`, `th_vat`, `jp_cn`, `jp_rn`, `jp_trn`, `li_uid`, `li_vat`, `lk_vat`, `my_itn`, `us_ein`, `kr_brn`, `ca_qst`, `ca_gst_hst`, `ca_pst_bc`, `ca_pst_mb`, `ca_pst_sk`, `my_sst`, `sg_gst`, `ae_trn`, `cl_tin`, `sa_vat`, `id_npwp`, `my_frp`, `il_vat`, `ge_vat`, `ua_vat`, `is_vat`, `bg_uic`, `hu_tin`, `si_tin`, `ke_pin`, `tr_tin`, `eg_tin`, `ph_tin`, `al_tin`, `bh_vat`, `kz_bin`, `ng_tin`, `om_vat`, `de_stn`, `ch_uid`, `tz_vat`, `uz_vat`, `uz_tin`, `md_vat`, `ma_vat`, `by_tin`, `ao_tin`, `bs_tin`, `bb_tin`, `cd_nif`, `mr_nif`, `me_pib`, `zw_tin`, `ba_tin`, `gn_nif`, `mk_vat`, `sr_fin`, `sn_ninea`, `am_tin`, `np_pan`, `tj_tin`, `ug_tin`, `zm_tin`, `kh_tin`, `aw_tin`, `az_tin`, `bd_bin`, `bj_ifu`, `et_tin`, `kg_tin`, `la_tin`, `cm_niu`, `cv_nif`, `bf_ifu`, `ic_nif`, or `unknown`
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<InvoicesResourceInvoiceTaxIdType>))]
 public enum InvoicesResourceInvoiceTaxIdType
 {
     [JsonStringEnumMemberName("ad_nrt")]
@@ -2352,6 +2354,8 @@ public enum InvoicesResourceInvoiceTaxIdType
     HrOib,
     [JsonStringEnumMemberName("hu_tin")]
     HuTin,
+    [JsonStringEnumMemberName("ic_nif")]
+    IcNif,
     [JsonStringEnumMemberName("id_npwp")]
     IdNpwp,
     [JsonStringEnumMemberName("il_vat")]
@@ -2485,7 +2489,7 @@ public enum InvoicesResourceInvoiceTaxIdType
 /// <summary>
 /// The type of the card.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<IssuingCardType>))]
 public enum IssuingCardType
 {
     [JsonStringEnumMemberName("physical")]
@@ -2497,7 +2501,7 @@ public enum IssuingCardType
 /// <summary>
 /// One of `individual` or `company`. See [Choose a cardholder type](https://docs.stripe.com/issuing/other/choose-cardholder) for more details.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<IssuingCardholderType>))]
 public enum IssuingCardholderType
 {
     [JsonStringEnumMemberName("company")]
@@ -2509,7 +2513,7 @@ public enum IssuingCardholderType
 /// <summary>
 /// Whether this physical bundle is a standard Stripe offering or custom-made for you.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<IssuingPhysicalBundleType>))]
 public enum IssuingPhysicalBundleType
 {
     [JsonStringEnumMemberName("custom")]
@@ -2521,7 +2525,7 @@ public enum IssuingPhysicalBundleType
 /// <summary>
 /// The nature of the transaction.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<IssuingTransactionType>))]
 public enum IssuingTransactionType
 {
     [JsonStringEnumMemberName("capture")]
@@ -2533,7 +2537,7 @@ public enum IssuingTransactionType
 /// <summary>
 /// The specific exemption claimed for this authorization.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<IssuingAuthorizationAuthenticationExemptionType>))]
 public enum IssuingAuthorizationAuthenticationExemptionType
 {
     [JsonStringEnumMemberName("low_value_transaction")]
@@ -2547,7 +2551,7 @@ public enum IssuingAuthorizationAuthenticationExemptionType
 /// <summary>
 /// The type of fuel that was purchased.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<IssuingAuthorizationFuelDataType>))]
 public enum IssuingAuthorizationFuelDataType
 {
     [JsonStringEnumMemberName("diesel")]
@@ -2565,7 +2569,7 @@ public enum IssuingAuthorizationFuelDataType
 /// <summary>
 /// The type of fraud warning that most recently took place on this card. This field updates with every new fraud warning, so the value changes over time. If populated, cancel and reissue the card.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<IssuingCardFraudWarningType>))]
 public enum IssuingCardFraudWarningType
 {
     [JsonStringEnumMemberName("card_testing_exposure")]
@@ -2581,7 +2585,7 @@ public enum IssuingCardFraudWarningType
 /// <summary>
 /// Packaging options.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<IssuingCardShippingType>))]
 public enum IssuingCardShippingType
 {
     [JsonStringEnumMemberName("bulk")]
@@ -2593,7 +2597,7 @@ public enum IssuingCardShippingType
 /// <summary>
 /// The type of device used for tokenization.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<IssuingNetworkTokenDeviceType>))]
 public enum IssuingNetworkTokenDeviceType
 {
     [JsonStringEnumMemberName("other")]
@@ -2607,7 +2611,7 @@ public enum IssuingNetworkTokenDeviceType
 /// <summary>
 /// The network that the token is associated with. An additional hash is included with a name matching this value, containing tokenization data specific to the card network.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<IssuingNetworkTokenNetworkDataType>))]
 public enum IssuingNetworkTokenNetworkDataType
 {
     [JsonStringEnumMemberName("mastercard")]
@@ -2619,7 +2623,7 @@ public enum IssuingNetworkTokenNetworkDataType
 /// <summary>
 /// The type of the mandate.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<MandateType>))]
 public enum MandateType
 {
     [JsonStringEnumMemberName("multi_use")]
@@ -2631,7 +2635,7 @@ public enum MandateType
 /// <summary>
 /// The type of the payment method used in the OutboundPayment.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<OutboundPaymentsPaymentMethodDetailsType>))]
 public enum OutboundPaymentsPaymentMethodDetailsType
 {
     [JsonStringEnumMemberName("financial_account")]
@@ -2643,7 +2647,7 @@ public enum OutboundPaymentsPaymentMethodDetailsType
 /// <summary>
 /// The type of mobile wallet, one of `apple_pay`, `google_pay`, `samsung_pay`, or `unknown`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PaymentFlowsPrivatePaymentMethodsCardPresentCommonWalletType>))]
 public enum PaymentFlowsPrivatePaymentMethodsCardPresentCommonWalletType
 {
     [JsonStringEnumMemberName("apple_pay")]
@@ -2659,7 +2663,7 @@ public enum PaymentFlowsPrivatePaymentMethodsCardPresentCommonWalletType
 /// <summary>
 /// The specified behavior after the purchase is complete.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PaymentLinksResourceAfterCompletionType>))]
 public enum PaymentLinksResourceAfterCompletionType
 {
     [JsonStringEnumMemberName("hosted_confirmation")]
@@ -2671,7 +2675,7 @@ public enum PaymentLinksResourceAfterCompletionType
 /// <summary>
 /// The type of the field.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PaymentLinksResourceCustomFieldsType>))]
 public enum PaymentLinksResourceCustomFieldsType
 {
     [JsonStringEnumMemberName("dropdown")]
@@ -2685,7 +2689,7 @@ public enum PaymentLinksResourceCustomFieldsType
 /// <summary>
 /// The type of the label.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PaymentLinksResourceCustomFieldsLabelType>))]
 public enum PaymentLinksResourceCustomFieldsLabelType
 {
     [JsonStringEnumMemberName("custom")]
@@ -2695,7 +2699,7 @@ public enum PaymentLinksResourceCustomFieldsLabelType
 /// <summary>
 /// The type of the card wallet, one of `amex_express_checkout`, `apple_pay`, `google_pay`, `masterpass`, `samsung_pay`, `visa_checkout`, or `link`. An additional hash is included on the Wallet subhash with a name matching this value. It contains additional information specific to the card wallet type.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PaymentMethodCardWalletType>))]
 public enum PaymentMethodCardWalletType
 {
     [JsonStringEnumMemberName("amex_express_checkout")]
@@ -2717,7 +2721,7 @@ public enum PaymentMethodCardWalletType
 /// <summary>
 /// Type of installment plan, one of `fixed_count`, `bonus`, or `revolving`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PaymentMethodDetailsCardInstallmentsPlanType>))]
 public enum PaymentMethodDetailsCardInstallmentsPlanType
 {
     [JsonStringEnumMemberName("bonus")]
@@ -2731,7 +2735,7 @@ public enum PaymentMethodDetailsCardInstallmentsPlanType
 /// <summary>
 /// The method used to process this payment method offline. Only deferred is allowed.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PaymentMethodDetailsCardPresentOfflineType>))]
 public enum PaymentMethodDetailsCardPresentOfflineType
 {
     [JsonStringEnumMemberName("deferred")]
@@ -2741,7 +2745,7 @@ public enum PaymentMethodDetailsCardPresentOfflineType
 /// <summary>
 /// The type of image for the icon. Must be one of `file` or `url`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PaymentPagesCheckoutSessionBrandingSettingsIconType>))]
 public enum PaymentPagesCheckoutSessionBrandingSettingsIconType
 {
     [JsonStringEnumMemberName("file")]
@@ -2753,7 +2757,7 @@ public enum PaymentPagesCheckoutSessionBrandingSettingsIconType
 /// <summary>
 /// Can be `bank_account` or `card`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PayoutType>))]
 public enum PayoutType
 {
     [JsonStringEnumMemberName("bank_account")]
@@ -2765,7 +2769,7 @@ public enum PayoutType
 /// <summary>
 /// Type of object that created the application fee.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PlatformEarningFeeSourceType>))]
 public enum PlatformEarningFeeSourceType
 {
     [JsonStringEnumMemberName("charge")]
@@ -2777,7 +2781,7 @@ public enum PlatformEarningFeeSourceType
 /// <summary>
 /// Type of flow that the customer will go through.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PortalFlowsFlowType>))]
 public enum PortalFlowsFlowType
 {
     [JsonStringEnumMemberName("payment_method_update")]
@@ -2793,7 +2797,7 @@ public enum PortalFlowsFlowType
 /// <summary>
 /// The specified type of behavior after the flow is completed.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PortalFlowsFlowAfterCompletionType>))]
 public enum PortalFlowsFlowAfterCompletionType
 {
     [JsonStringEnumMemberName("hosted_confirmation")]
@@ -2807,7 +2811,7 @@ public enum PortalFlowsFlowAfterCompletionType
 /// <summary>
 /// Type of retention strategy that will be used.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PortalFlowsRetentionType>))]
 public enum PortalFlowsRetentionType
 {
     [JsonStringEnumMemberName("coupon_offer")]
@@ -2817,7 +2821,7 @@ public enum PortalFlowsRetentionType
 /// <summary>
 /// The type of condition.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PortalResourceScheduleUpdateAtPeriodEndConditionType>))]
 public enum PortalResourceScheduleUpdateAtPeriodEndConditionType
 {
     [JsonStringEnumMemberName("decreasing_item_amount")]
@@ -2829,7 +2833,7 @@ public enum PortalResourceScheduleUpdateAtPeriodEndConditionType
 /// <summary>
 /// One of `one_time` or `recurring` depending on whether the price is for a one-time purchase or a recurring (subscription) purchase.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PriceType>))]
 public enum PriceType
 {
     [JsonStringEnumMemberName("one_time")]
@@ -2841,7 +2845,7 @@ public enum PriceType
 /// <summary>
 /// Controls how prorations and invoices for subscriptions are calculated and orchestrated.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<QuotesResourceSubscriptionDataBillingModeType>))]
 public enum QuotesResourceSubscriptionDataBillingModeType
 {
     [JsonStringEnumMemberName("classic")]
@@ -2853,7 +2857,7 @@ public enum QuotesResourceSubscriptionDataBillingModeType
 /// <summary>
 /// The type of refund. This can be `refund`, `reversal`, or `pending`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<RefundDestinationDetailsCardType>))]
 public enum RefundDestinationDetailsCardType
 {
     [JsonStringEnumMemberName("pending")]
@@ -2867,7 +2871,7 @@ public enum RefundDestinationDetailsCardType
 /// <summary>
 /// The secret scope type.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<SecretServiceResourceScopeType>))]
 public enum SecretServiceResourceScopeType
 {
     [JsonStringEnumMemberName("account")]
@@ -2879,7 +2883,7 @@ public enum SecretServiceResourceScopeType
 /// <summary>
 /// The type of the card wallet, one of `apple_pay`, `google_pay`, or `link`. An additional hash is included on the Wallet subhash with a name matching this value. It contains additional information specific to the card wallet type.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<SetupAttemptPaymentMethodDetailsCardWalletType>))]
 public enum SetupAttemptPaymentMethodDetailsCardWalletType
 {
     [JsonStringEnumMemberName("apple_pay")]
@@ -2893,7 +2897,7 @@ public enum SetupAttemptPaymentMethodDetailsCardWalletType
 /// <summary>
 /// The type of calculation to use on the shipping rate.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ShippingRateType>))]
 public enum ShippingRateType
 {
     [JsonStringEnumMemberName("fixed_amount")]
@@ -2903,7 +2907,7 @@ public enum ShippingRateType
 /// <summary>
 /// The `type` of the source. The `type` is a payment method, one of `ach_credit_transfer`, `ach_debit`, `alipay`, `bancontact`, `card`, `card_present`, `eps`, `giropay`, `ideal`, `multibanco`, `klarna`, `p24`, `sepa_debit`, `sofort`, `three_d_secure`, or `wechat`. An additional hash is included on the source with a name matching this value. It contains additional information specific to the [payment method](https://docs.stripe.com/sources) used.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<SourceType>))]
 public enum SourceType
 {
     [JsonStringEnumMemberName("ach_credit_transfer")]
@@ -2947,7 +2951,7 @@ public enum SourceType
 /// <summary>
 /// The type of source this transaction is attached to.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<SourceTransactionType>))]
 public enum SourceTransactionType
 {
     [JsonStringEnumMemberName("ach_credit_transfer")]
@@ -2987,7 +2991,7 @@ public enum SourceTransactionType
 /// <summary>
 /// Select how to calculate the end of the invoice item period.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<SubscriptionSchedulesResourceInvoiceItemPeriodResourcePeriodEndType>))]
 public enum SubscriptionSchedulesResourceInvoiceItemPeriodResourcePeriodEndType
 {
     [JsonStringEnumMemberName("min_item_period_end")]
@@ -3001,7 +3005,7 @@ public enum SubscriptionSchedulesResourceInvoiceItemPeriodResourcePeriodEndType
 /// <summary>
 /// Select how to calculate the start of the invoice item period.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<SubscriptionSchedulesResourceInvoiceItemPeriodResourcePeriodStartType>))]
 public enum SubscriptionSchedulesResourceInvoiceItemPeriodResourcePeriodStartType
 {
     [JsonStringEnumMemberName("max_item_period_start")]
@@ -3015,7 +3019,7 @@ public enum SubscriptionSchedulesResourceInvoiceItemPeriodResourcePeriodStartTyp
 /// <summary>
 /// Controls which subscription items the billing schedule applies to.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<SubscriptionsResourceBillingSchedulesAppliesToType>))]
 public enum SubscriptionsResourceBillingSchedulesAppliesToType
 {
     [JsonStringEnumMemberName("price")]
@@ -3025,7 +3029,7 @@ public enum SubscriptionsResourceBillingSchedulesAppliesToType
 /// <summary>
 /// Describes how the billing schedule will determine the end date. Either `duration` or `timestamp`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<SubscriptionsResourceBillingSchedulesBillUntilType>))]
 public enum SubscriptionsResourceBillingSchedulesBillUntilType
 {
     [JsonStringEnumMemberName("duration")]
@@ -3037,7 +3041,7 @@ public enum SubscriptionsResourceBillingSchedulesBillUntilType
 /// <summary>
 /// If `reversal`, this transaction reverses an earlier transaction.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TaxTransactionType>))]
 public enum TaxTransactionType
 {
     [JsonStringEnumMemberName("reversal")]
@@ -3049,7 +3053,7 @@ public enum TaxTransactionType
 /// <summary>
 /// Type of owner referenced.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TaxIDsOwnerType>))]
 public enum TaxIDsOwnerType
 {
     [JsonStringEnumMemberName("account")]
@@ -3065,7 +3069,7 @@ public enum TaxIDsOwnerType
 /// <summary>
 /// Type of registration in Canada.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TaxProductRegistrationsResourceCountryOptionsCanadaType>))]
 public enum TaxProductRegistrationsResourceCountryOptionsCanadaType
 {
     [JsonStringEnumMemberName("province_standard")]
@@ -3079,7 +3083,7 @@ public enum TaxProductRegistrationsResourceCountryOptionsCanadaType
 /// <summary>
 /// Type of registration in `country`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TaxProductRegistrationsResourceCountryOptionsDefaultType>))]
 public enum TaxProductRegistrationsResourceCountryOptionsDefaultType
 {
     [JsonStringEnumMemberName("standard")]
@@ -3089,7 +3093,7 @@ public enum TaxProductRegistrationsResourceCountryOptionsDefaultType
 /// <summary>
 /// Type of registration in an EU country.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TaxProductRegistrationsResourceCountryOptionsEuropeType>))]
 public enum TaxProductRegistrationsResourceCountryOptionsEuropeType
 {
     [JsonStringEnumMemberName("ioss")]
@@ -3105,7 +3109,7 @@ public enum TaxProductRegistrationsResourceCountryOptionsEuropeType
 /// <summary>
 /// Type of registration in `country`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TaxProductRegistrationsResourceCountryOptionsSimplifiedType>))]
 public enum TaxProductRegistrationsResourceCountryOptionsSimplifiedType
 {
     [JsonStringEnumMemberName("simplified")]
@@ -3115,13 +3119,17 @@ public enum TaxProductRegistrationsResourceCountryOptionsSimplifiedType
 /// <summary>
 /// Type of registration in the US.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TaxProductRegistrationsResourceCountryOptionsUnitedStatesType>))]
 public enum TaxProductRegistrationsResourceCountryOptionsUnitedStatesType
 {
     [JsonStringEnumMemberName("local_amusement_tax")]
     LocalAmusementTax,
     [JsonStringEnumMemberName("local_lease_tax")]
     LocalLeaseTax,
+    [JsonStringEnumMemberName("mass_transit_parking_tax")]
+    MassTransitParkingTax,
+    [JsonStringEnumMemberName("parking_tax")]
+    ParkingTax,
     [JsonStringEnumMemberName("state_communications_tax")]
     StateCommunicationsTax,
     [JsonStringEnumMemberName("state_retail_delivery_fee")]
@@ -3133,7 +3141,7 @@ public enum TaxProductRegistrationsResourceCountryOptionsUnitedStatesType
 /// <summary>
 /// The type of the election for the state sales tax registration.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TaxProductRegistrationsResourceCountryOptionsUsStateSalesTaxElectionType>))]
 public enum TaxProductRegistrationsResourceCountryOptionsUsStateSalesTaxElectionType
 {
     [JsonStringEnumMemberName("local_use_tax")]
@@ -3147,7 +3155,7 @@ public enum TaxProductRegistrationsResourceCountryOptionsUsStateSalesTaxElection
 /// <summary>
 /// Security type of the WiFi network. The hash with the corresponding name contains the credentials for this security type.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TerminalConfigurationConfigurationResourceWifiConfigType>))]
 public enum TerminalConfigurationConfigurationResourceWifiConfigType
 {
     [JsonStringEnumMemberName("enterprise_eap_peap")]
@@ -3161,7 +3169,7 @@ public enum TerminalConfigurationConfigurationResourceWifiConfigType
 /// <summary>
 /// Type of input being collected.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TerminalReaderReaderResourceInputType>))]
 public enum TerminalReaderReaderResourceInputType
 {
     [JsonStringEnumMemberName("email")]
@@ -3181,7 +3189,7 @@ public enum TerminalReaderReaderResourceInputType
 /// <summary>
 /// The type of content to print. Currently supports `image`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TerminalReaderReaderResourcePrintContentType>))]
 public enum TerminalReaderReaderResourcePrintContentType
 {
     [JsonStringEnumMemberName("image")]
@@ -3191,7 +3199,7 @@ public enum TerminalReaderReaderResourcePrintContentType
 /// <summary>
 /// Type of action performed by the reader.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TerminalReaderReaderResourceReaderActionType>))]
 public enum TerminalReaderReaderResourceReaderActionType
 {
     [JsonStringEnumMemberName("collect_inputs")]
@@ -3215,14 +3223,14 @@ public enum TerminalReaderReaderResourceReaderActionType
 /// <summary>
 /// Type of information to be displayed by the reader. Only `cart` is currently supported.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TerminalReaderReaderResourceSetReaderDisplayActionType>))]
 public enum TerminalReaderReaderResourceSetReaderDisplayActionType
 {
     [JsonStringEnumMemberName("cart")]
     Cart
 }
 
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ThresholdsResourceUsageAlertFilterType>))]
 public enum ThresholdsResourceUsageAlertFilterType
 {
     [JsonStringEnumMemberName("customer")]
@@ -3232,7 +3240,7 @@ public enum ThresholdsResourceUsageAlertFilterType
 /// <summary>
 /// The specific money movement that generated the TransactionEntry.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TreasuryTransactionEntryType>))]
 public enum TreasuryTransactionEntryType
 {
     [JsonStringEnumMemberName("credit_reversal")]
@@ -3280,7 +3288,7 @@ public enum TreasuryTransactionEntryType
 /// <summary>
 /// The type of financial address
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TreasuryFinancialAccountsResourceFinancialAddressType>))]
 public enum TreasuryFinancialAccountsResourceFinancialAddressType
 {
     [JsonStringEnumMemberName("aba")]
@@ -3290,7 +3298,7 @@ public enum TreasuryFinancialAccountsResourceFinancialAddressType
 /// <summary>
 /// The US bank account network used to send funds.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TreasuryOutboundPaymentsResourceOutboundPaymentResourceTrackingDetailsType>))]
 public enum TreasuryOutboundPaymentsResourceOutboundPaymentResourceTrackingDetailsType
 {
     [JsonStringEnumMemberName("ach")]
@@ -3302,7 +3310,7 @@ public enum TreasuryOutboundPaymentsResourceOutboundPaymentResourceTrackingDetai
 /// <summary>
 /// The type of the source flow that originated the ReceivedCredit.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TreasuryReceivedCreditsResourceSourceFlowsDetailsType>))]
 public enum TreasuryReceivedCreditsResourceSourceFlowsDetailsType
 {
     [JsonStringEnumMemberName("credit_reversal")]
@@ -3320,7 +3328,7 @@ public enum TreasuryReceivedCreditsResourceSourceFlowsDetailsType
 /// <summary>
 /// Polymorphic type matching the originating money movement's source. This can be an external account, a Stripe balance, or a FinancialAccount.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TreasurySharedResourceInitiatingPaymentMethodDetailsInitiatingPaymentMethodDetailsType>))]
 public enum TreasurySharedResourceInitiatingPaymentMethodDetailsInitiatingPaymentMethodDetailsType
 {
     [JsonStringEnumMemberName("balance")]
@@ -3338,7 +3346,7 @@ public enum TreasurySharedResourceInitiatingPaymentMethodDetailsInitiatingPaymen
 /// <summary>
 /// Type of the flow that created the Transaction. Set to the same value as `flow_type`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TreasuryTransactionsResourceFlowDetailsType>))]
 public enum TreasuryTransactionsResourceFlowDetailsType
 {
     [JsonStringEnumMemberName("credit_reversal")]
@@ -3364,7 +3372,7 @@ public enum TreasuryTransactionsResourceFlowDetailsType
 /// <summary>
 /// The status of the Canadian pre-authorized debits payments capability of the account, or whether the account can directly process Canadian pre-authorized debits charges.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<AcssDebitPayments>))]
 public enum AcssDebitPayments
 {
     [JsonStringEnumMemberName("active")]
@@ -3378,7 +3386,7 @@ public enum AcssDebitPayments
 /// <summary>
 /// The status of the Affirm capability of the account, or whether the account can directly process Affirm charges.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<AffirmPayments>))]
 public enum AffirmPayments
 {
     [JsonStringEnumMemberName("active")]
@@ -3392,7 +3400,7 @@ public enum AffirmPayments
 /// <summary>
 /// The status of the Afterpay Clearpay capability of the account, or whether the account can directly process Afterpay Clearpay charges.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<AfterpayClearpayPayments>))]
 public enum AfterpayClearpayPayments
 {
     [JsonStringEnumMemberName("active")]
@@ -3406,7 +3414,7 @@ public enum AfterpayClearpayPayments
 /// <summary>
 /// The status of the Alma capability of the account, or whether the account can directly process Alma payments.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<AlmaPayments>))]
 public enum AlmaPayments
 {
     [JsonStringEnumMemberName("active")]
@@ -3420,7 +3428,7 @@ public enum AlmaPayments
 /// <summary>
 /// The status of the AmazonPay capability of the account, or whether the account can directly process AmazonPay payments.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<AmazonPayPayments>))]
 public enum AmazonPayPayments
 {
     [JsonStringEnumMemberName("active")]
@@ -3434,7 +3442,7 @@ public enum AmazonPayPayments
 /// <summary>
 /// The status of the `app_distribution` capability of the account, or whether the platform can distribute apps to other accounts.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<AppDistribution>))]
 public enum AppDistribution
 {
     [JsonStringEnumMemberName("active")]
@@ -3448,7 +3456,7 @@ public enum AppDistribution
 /// <summary>
 /// The status of the BECS Direct Debit (AU) payments capability of the account, or whether the account can directly process BECS Direct Debit (AU) charges.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<AuBecsDebitPayments>))]
 public enum AuBecsDebitPayments
 {
     [JsonStringEnumMemberName("active")]
@@ -3462,7 +3470,7 @@ public enum AuBecsDebitPayments
 /// <summary>
 /// The status of the Bacs Direct Debits payments capability of the account, or whether the account can directly process Bacs Direct Debits charges.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<BacsDebitPayments>))]
 public enum BacsDebitPayments
 {
     [JsonStringEnumMemberName("active")]
@@ -3476,7 +3484,7 @@ public enum BacsDebitPayments
 /// <summary>
 /// The status of the Bancontact payments capability of the account, or whether the account can directly process Bancontact charges.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<BancontactPayments>))]
 public enum BancontactPayments
 {
     [JsonStringEnumMemberName("active")]
@@ -3490,7 +3498,7 @@ public enum BancontactPayments
 /// <summary>
 /// The status of the customer_balance payments capability of the account, or whether the account can directly process customer_balance charges.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<BankTransferPayments>))]
 public enum BankTransferPayments
 {
     [JsonStringEnumMemberName("active")]
@@ -3504,7 +3512,7 @@ public enum BankTransferPayments
 /// <summary>
 /// The status of the Billie capability of the account, or whether the account can directly process Billie payments.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<BilliePayments>))]
 public enum BilliePayments
 {
     [JsonStringEnumMemberName("active")]
@@ -3518,7 +3526,7 @@ public enum BilliePayments
 /// <summary>
 /// The status of the Bizum capability of the account, or whether the account can directly process Bizum payments.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<BizumPayments>))]
 public enum BizumPayments
 {
     [JsonStringEnumMemberName("active")]
@@ -3532,7 +3540,7 @@ public enum BizumPayments
 /// <summary>
 /// The status of the blik payments capability of the account, or whether the account can directly process blik charges.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<BlikPayments>))]
 public enum BlikPayments
 {
     [JsonStringEnumMemberName("active")]
@@ -3546,7 +3554,7 @@ public enum BlikPayments
 /// <summary>
 /// The status of the boleto payments capability of the account, or whether the account can directly process boleto charges.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<BoletoPayments>))]
 public enum BoletoPayments
 {
     [JsonStringEnumMemberName("active")]
@@ -3560,7 +3568,7 @@ public enum BoletoPayments
 /// <summary>
 /// The status of the card issuing capability of the account, or whether you can use Issuing to distribute funds on cards
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CardIssuing>))]
 public enum CardIssuing
 {
     [JsonStringEnumMemberName("active")]
@@ -3574,7 +3582,7 @@ public enum CardIssuing
 /// <summary>
 /// The status of the card payments capability of the account, or whether the account can directly process credit and debit card charges.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CardPayments>))]
 public enum CardPayments
 {
     [JsonStringEnumMemberName("active")]
@@ -3588,7 +3596,7 @@ public enum CardPayments
 /// <summary>
 /// The status of the Cartes Bancaires payments capability of the account, or whether the account can directly process Cartes Bancaires card charges in EUR currency.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CartesBancairesPayments>))]
 public enum CartesBancairesPayments
 {
     [JsonStringEnumMemberName("active")]
@@ -3602,7 +3610,7 @@ public enum CartesBancairesPayments
 /// <summary>
 /// The status of the Cash App Pay capability of the account, or whether the account can directly process Cash App Pay payments.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CashappPayments>))]
 public enum CashappPayments
 {
     [JsonStringEnumMemberName("active")]
@@ -3616,7 +3624,7 @@ public enum CashappPayments
 /// <summary>
 /// The status of the Crypto capability of the account, or whether the account can directly process Crypto payments.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CryptoPayments>))]
 public enum CryptoPayments
 {
     [JsonStringEnumMemberName("active")]
@@ -3630,7 +3638,7 @@ public enum CryptoPayments
 /// <summary>
 /// The status of the EPS payments capability of the account, or whether the account can directly process EPS charges.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<EpsPayments>))]
 public enum EpsPayments
 {
     [JsonStringEnumMemberName("active")]
@@ -3644,7 +3652,7 @@ public enum EpsPayments
 /// <summary>
 /// The status of the FPX payments capability of the account, or whether the account can directly process FPX charges.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<FpxPayments>))]
 public enum FpxPayments
 {
     [JsonStringEnumMemberName("active")]
@@ -3658,7 +3666,7 @@ public enum FpxPayments
 /// <summary>
 /// The status of the GB customer_balance payments (GBP currency) capability of the account, or whether the account can directly process GB customer_balance charges.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<GbBankTransferPayments>))]
 public enum GbBankTransferPayments
 {
     [JsonStringEnumMemberName("active")]
@@ -3672,7 +3680,7 @@ public enum GbBankTransferPayments
 /// <summary>
 /// The status of the giropay payments capability of the account, or whether the account can directly process giropay charges.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<GiropayPayments>))]
 public enum GiropayPayments
 {
     [JsonStringEnumMemberName("active")]
@@ -3686,7 +3694,7 @@ public enum GiropayPayments
 /// <summary>
 /// The status of the GrabPay payments capability of the account, or whether the account can directly process GrabPay charges.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<GrabpayPayments>))]
 public enum GrabpayPayments
 {
     [JsonStringEnumMemberName("active")]
@@ -3700,7 +3708,7 @@ public enum GrabpayPayments
 /// <summary>
 /// The status of the iDEAL payments capability of the account, or whether the account can directly process iDEAL charges.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<IdealPayments>))]
 public enum IdealPayments
 {
     [JsonStringEnumMemberName("active")]
@@ -3714,7 +3722,7 @@ public enum IdealPayments
 /// <summary>
 /// The status of the india_international_payments capability of the account, or whether the account can process international charges (non INR) in India.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<IndiaInternationalPayments>))]
 public enum IndiaInternationalPayments
 {
     [JsonStringEnumMemberName("active")]
@@ -3728,7 +3736,7 @@ public enum IndiaInternationalPayments
 /// <summary>
 /// The status of the JCB payments capability of the account, or whether the account (Japan only) can directly process JCB credit card charges in JPY currency.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<JcbPayments>))]
 public enum JcbPayments
 {
     [JsonStringEnumMemberName("active")]
@@ -3742,7 +3750,7 @@ public enum JcbPayments
 /// <summary>
 /// The status of the Japanese customer_balance payments (JPY currency) capability of the account, or whether the account can directly process Japanese customer_balance charges.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<JpBankTransferPayments>))]
 public enum JpBankTransferPayments
 {
     [JsonStringEnumMemberName("active")]
@@ -3756,7 +3764,7 @@ public enum JpBankTransferPayments
 /// <summary>
 /// The status of the KakaoPay capability of the account, or whether the account can directly process KakaoPay payments.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<KakaoPayPayments>))]
 public enum KakaoPayPayments
 {
     [JsonStringEnumMemberName("active")]
@@ -3770,7 +3778,7 @@ public enum KakaoPayPayments
 /// <summary>
 /// The status of the Klarna payments capability of the account, or whether the account can directly process Klarna charges.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<KlarnaPayments>))]
 public enum KlarnaPayments
 {
     [JsonStringEnumMemberName("active")]
@@ -3784,7 +3792,7 @@ public enum KlarnaPayments
 /// <summary>
 /// The status of the konbini payments capability of the account, or whether the account can directly process konbini charges.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<KonbiniPayments>))]
 public enum KonbiniPayments
 {
     [JsonStringEnumMemberName("active")]
@@ -3798,7 +3806,7 @@ public enum KonbiniPayments
 /// <summary>
 /// The status of the KrCard capability of the account, or whether the account can directly process KrCard payments.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<KrCardPayments>))]
 public enum KrCardPayments
 {
     [JsonStringEnumMemberName("active")]
@@ -3812,7 +3820,7 @@ public enum KrCardPayments
 /// <summary>
 /// The status of the legacy payments capability of the account.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<LegacyPayments>))]
 public enum LegacyPayments
 {
     [JsonStringEnumMemberName("active")]
@@ -3826,7 +3834,7 @@ public enum LegacyPayments
 /// <summary>
 /// The status of the link_payments capability of the account, or whether the account can directly process Link charges.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<LinkPayments>))]
 public enum LinkPayments
 {
     [JsonStringEnumMemberName("active")]
@@ -3840,7 +3848,7 @@ public enum LinkPayments
 /// <summary>
 /// The status of the MB WAY payments capability of the account, or whether the account can directly process MB WAY charges.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<MbWayPayments>))]
 public enum MbWayPayments
 {
     [JsonStringEnumMemberName("active")]
@@ -3854,7 +3862,7 @@ public enum MbWayPayments
 /// <summary>
 /// The status of the MobilePay capability of the account, or whether the account can directly process MobilePay charges.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<MobilepayPayments>))]
 public enum MobilepayPayments
 {
     [JsonStringEnumMemberName("active")]
@@ -3868,7 +3876,7 @@ public enum MobilepayPayments
 /// <summary>
 /// The status of the Multibanco payments capability of the account, or whether the account can directly process Multibanco charges.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<MultibancoPayments>))]
 public enum MultibancoPayments
 {
     [JsonStringEnumMemberName("active")]
@@ -3882,7 +3890,7 @@ public enum MultibancoPayments
 /// <summary>
 /// The status of the Mexican customer_balance payments (MXN currency) capability of the account, or whether the account can directly process Mexican customer_balance charges.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<MxBankTransferPayments>))]
 public enum MxBankTransferPayments
 {
     [JsonStringEnumMemberName("active")]
@@ -3896,7 +3904,7 @@ public enum MxBankTransferPayments
 /// <summary>
 /// The status of the NaverPay capability of the account, or whether the account can directly process NaverPay payments.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<NaverPayPayments>))]
 public enum NaverPayPayments
 {
     [JsonStringEnumMemberName("active")]
@@ -3910,7 +3918,7 @@ public enum NaverPayPayments
 /// <summary>
 /// The status of the New Zealand BECS Direct Debit payments capability of the account, or whether the account can directly process New Zealand BECS Direct Debit charges.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<NzBankAccountBecsDebitPayments>))]
 public enum NzBankAccountBecsDebitPayments
 {
     [JsonStringEnumMemberName("active")]
@@ -3924,7 +3932,7 @@ public enum NzBankAccountBecsDebitPayments
 /// <summary>
 /// The status of the OXXO payments capability of the account, or whether the account can directly process OXXO charges.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<OxxoPayments>))]
 public enum OxxoPayments
 {
     [JsonStringEnumMemberName("active")]
@@ -3938,7 +3946,7 @@ public enum OxxoPayments
 /// <summary>
 /// The status of the P24 payments capability of the account, or whether the account can directly process P24 charges.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<P24Payments>))]
 public enum P24Payments
 {
     [JsonStringEnumMemberName("active")]
@@ -3952,7 +3960,7 @@ public enum P24Payments
 /// <summary>
 /// The status of the pay_by_bank payments capability of the account, or whether the account can directly process pay_by_bank charges.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PayByBankPayments>))]
 public enum PayByBankPayments
 {
     [JsonStringEnumMemberName("active")]
@@ -3966,7 +3974,7 @@ public enum PayByBankPayments
 /// <summary>
 /// The status of the Payco capability of the account, or whether the account can directly process Payco payments.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PaycoPayments>))]
 public enum PaycoPayments
 {
     [JsonStringEnumMemberName("active")]
@@ -3980,7 +3988,7 @@ public enum PaycoPayments
 /// <summary>
 /// The status of the paynow payments capability of the account, or whether the account can directly process paynow charges.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PaynowPayments>))]
 public enum PaynowPayments
 {
     [JsonStringEnumMemberName("active")]
@@ -3994,7 +4002,7 @@ public enum PaynowPayments
 /// <summary>
 /// The status of the PayTo capability of the account, or whether the account can directly process PayTo charges.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PaytoPayments>))]
 public enum PaytoPayments
 {
     [JsonStringEnumMemberName("active")]
@@ -4008,7 +4016,7 @@ public enum PaytoPayments
 /// <summary>
 /// The status of the pix payments capability of the account, or whether the account can directly process pix charges.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PixPayments>))]
 public enum PixPayments
 {
     [JsonStringEnumMemberName("active")]
@@ -4022,7 +4030,7 @@ public enum PixPayments
 /// <summary>
 /// The status of the promptpay payments capability of the account, or whether the account can directly process promptpay charges.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PromptpayPayments>))]
 public enum PromptpayPayments
 {
     [JsonStringEnumMemberName("active")]
@@ -4036,7 +4044,7 @@ public enum PromptpayPayments
 /// <summary>
 /// The status of the RevolutPay capability of the account, or whether the account can directly process RevolutPay payments.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<RevolutPayPayments>))]
 public enum RevolutPayPayments
 {
     [JsonStringEnumMemberName("active")]
@@ -4050,7 +4058,7 @@ public enum RevolutPayPayments
 /// <summary>
 /// The status of the SamsungPay capability of the account, or whether the account can directly process SamsungPay payments.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<SamsungPayPayments>))]
 public enum SamsungPayPayments
 {
     [JsonStringEnumMemberName("active")]
@@ -4064,7 +4072,7 @@ public enum SamsungPayPayments
 /// <summary>
 /// The status of the Satispay capability of the account, or whether the account can directly process Satispay payments.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<SatispayPayments>))]
 public enum SatispayPayments
 {
     [JsonStringEnumMemberName("active")]
@@ -4078,7 +4086,7 @@ public enum SatispayPayments
 /// <summary>
 /// The status of the Scalapay capability of the account, or whether the account can directly process Scalapay payments.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ScalapayPayments>))]
 public enum ScalapayPayments
 {
     [JsonStringEnumMemberName("active")]
@@ -4092,7 +4100,7 @@ public enum ScalapayPayments
 /// <summary>
 /// The status of the SEPA customer_balance payments (EUR currency) capability of the account, or whether the account can directly process SEPA customer_balance charges.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<SepaBankTransferPayments>))]
 public enum SepaBankTransferPayments
 {
     [JsonStringEnumMemberName("active")]
@@ -4106,7 +4114,7 @@ public enum SepaBankTransferPayments
 /// <summary>
 /// The status of the SEPA Direct Debits payments capability of the account, or whether the account can directly process SEPA Direct Debits charges.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<SepaDebitPayments>))]
 public enum SepaDebitPayments
 {
     [JsonStringEnumMemberName("active")]
@@ -4120,7 +4128,7 @@ public enum SepaDebitPayments
 /// <summary>
 /// The status of the Sofort payments capability of the account, or whether the account can directly process Sofort charges.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<SofortPayments>))]
 public enum SofortPayments
 {
     [JsonStringEnumMemberName("active")]
@@ -4134,7 +4142,7 @@ public enum SofortPayments
 /// <summary>
 /// The status of the Sunbit capability of the account, or whether the account can directly process Sunbit payments.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<SunbitPayments>))]
 public enum SunbitPayments
 {
     [JsonStringEnumMemberName("active")]
@@ -4148,7 +4156,7 @@ public enum SunbitPayments
 /// <summary>
 /// The status of the Swish capability of the account, or whether the account can directly process Swish payments.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<SwishPayments>))]
 public enum SwishPayments
 {
     [JsonStringEnumMemberName("active")]
@@ -4162,7 +4170,7 @@ public enum SwishPayments
 /// <summary>
 /// The status of the tax reporting 1099-K (US) capability of the account.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TaxReportingUs1099K>))]
 public enum TaxReportingUs1099K
 {
     [JsonStringEnumMemberName("active")]
@@ -4176,7 +4184,7 @@ public enum TaxReportingUs1099K
 /// <summary>
 /// The status of the tax reporting 1099-MISC (US) capability of the account.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TaxReportingUs1099Misc>))]
 public enum TaxReportingUs1099Misc
 {
     [JsonStringEnumMemberName("active")]
@@ -4190,7 +4198,7 @@ public enum TaxReportingUs1099Misc
 /// <summary>
 /// The status of the transfers capability of the account, or whether your platform can transfer funds to the account.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Transfers>))]
 public enum Transfers
 {
     [JsonStringEnumMemberName("active")]
@@ -4204,7 +4212,7 @@ public enum Transfers
 /// <summary>
 /// The status of the banking capability, or whether the account can have bank accounts.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Treasury>))]
 public enum Treasury
 {
     [JsonStringEnumMemberName("active")]
@@ -4218,7 +4226,7 @@ public enum Treasury
 /// <summary>
 /// The status of the TWINT capability of the account, or whether the account can directly process TWINT charges.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TwintPayments>))]
 public enum TwintPayments
 {
     [JsonStringEnumMemberName("active")]
@@ -4232,7 +4240,7 @@ public enum TwintPayments
 /// <summary>
 /// The status of the upi payments capability of the account, or whether the account can directly process upi charges.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<UpiPayments>))]
 public enum UpiPayments
 {
     [JsonStringEnumMemberName("active")]
@@ -4246,7 +4254,7 @@ public enum UpiPayments
 /// <summary>
 /// The status of the US bank account ACH payments capability of the account, or whether the account can directly process US bank account charges.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<UsBankAccountAchPayments>))]
 public enum UsBankAccountAchPayments
 {
     [JsonStringEnumMemberName("active")]
@@ -4260,7 +4268,7 @@ public enum UsBankAccountAchPayments
 /// <summary>
 /// The status of the US customer_balance payments (USD currency) capability of the account, or whether the account can directly process US customer_balance charges.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<UsBankTransferPayments>))]
 public enum UsBankTransferPayments
 {
     [JsonStringEnumMemberName("active")]
@@ -4274,7 +4282,7 @@ public enum UsBankTransferPayments
 /// <summary>
 /// The status of the Zip capability of the account, or whether the account can directly process Zip charges.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ZipPayments>))]
 public enum ZipPayments
 {
     [JsonStringEnumMemberName("active")]
@@ -4288,7 +4296,7 @@ public enum ZipPayments
 /// <summary>
 /// This is typed as an enum for consistency with `requirements.disabled_reason`, but it safe to assume `future_requirements.disabled_reason` is null because fields in `future_requirements` will never disable the account.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<AccountCapabilityFutureRequirementsDisabledReason>))]
 public enum AccountCapabilityFutureRequirementsDisabledReason
 {
     [JsonStringEnumMemberName("other")]
@@ -4316,7 +4324,7 @@ public enum AccountCapabilityFutureRequirementsDisabledReason
 /// <summary>
 /// This is typed as an enum for consistency with `requirements.disabled_reason`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<AccountFutureRequirementsDisabledReason>))]
 public enum AccountFutureRequirementsDisabledReason
 {
     [JsonStringEnumMemberName("action_required.requested_capabilities")]
@@ -4354,7 +4362,7 @@ public enum AccountFutureRequirementsDisabledReason
 /// <summary>
 /// If Stripe disabled automatic tax, this enum describes why.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<AutomaticTaxDisabledReason>))]
 public enum AutomaticTaxDisabledReason
 {
     [JsonStringEnumMemberName("finalization_requires_location_inputs")]
@@ -4366,7 +4374,7 @@ public enum AutomaticTaxDisabledReason
 /// <summary>
 /// If `disabled_reason` is present, all cards will decline authorizations with `cardholder_verification_required` reason.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<IssuingCardholderRequirementsDisabledReason>))]
 public enum IssuingCardholderRequirementsDisabledReason
 {
     [JsonStringEnumMemberName("listed")]
@@ -4382,7 +4390,7 @@ public enum IssuingCardholderRequirementsDisabledReason
 /// <summary>
 /// If Stripe disabled automatic tax, this enum describes why.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<SchedulesPhaseAutomaticTaxDisabledReason>))]
 public enum SchedulesPhaseAutomaticTaxDisabledReason
 {
     [JsonStringEnumMemberName("requires_location_inputs")]
@@ -4392,7 +4400,7 @@ public enum SchedulesPhaseAutomaticTaxDisabledReason
 /// <summary>
 /// Whether to save the payment method after a payment is completed for a one-time invoice or a subscription invoice when the customer already has a default payment method on the hosted invoice page.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<HostedPaymentMethodSave>))]
 public enum HostedPaymentMethodSave
 {
     [JsonStringEnumMemberName("always")]
@@ -4406,7 +4414,7 @@ public enum HostedPaymentMethodSave
 /// <summary>
 /// The code for the type of error.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<AccountRequirementsErrorCode>))]
 public enum AccountRequirementsErrorCode
 {
     [JsonStringEnumMemberName("external_request")]
@@ -4606,7 +4614,7 @@ public enum AccountRequirementsErrorCode
 /// <summary>
 /// A short machine-readable string giving the reason for the verification failure.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<GelatoDocumentReportErrorCode>))]
 public enum GelatoDocumentReportErrorCode
 {
     [JsonStringEnumMemberName("document_expired")]
@@ -4620,7 +4628,7 @@ public enum GelatoDocumentReportErrorCode
 /// <summary>
 /// A short machine-readable string giving the reason for the verification failure.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<GelatoEmailReportErrorCode>))]
 public enum GelatoEmailReportErrorCode
 {
     [JsonStringEnumMemberName("email_unverified_other")]
@@ -4632,7 +4640,7 @@ public enum GelatoEmailReportErrorCode
 /// <summary>
 /// A short machine-readable string giving the reason for the verification failure.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<GelatoIdNumberReportErrorCode>))]
 public enum GelatoIdNumberReportErrorCode
 {
     [JsonStringEnumMemberName("id_number_insufficient_document_data")]
@@ -4646,7 +4654,7 @@ public enum GelatoIdNumberReportErrorCode
 /// <summary>
 /// A short machine-readable string giving the reason for the verification failure.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<GelatoPhoneReportErrorCode>))]
 public enum GelatoPhoneReportErrorCode
 {
     [JsonStringEnumMemberName("phone_unverified_other")]
@@ -4658,7 +4666,7 @@ public enum GelatoPhoneReportErrorCode
 /// <summary>
 /// A short machine-readable string giving the reason for the verification failure.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<GelatoSelfieReportErrorCode>))]
 public enum GelatoSelfieReportErrorCode
 {
     [JsonStringEnumMemberName("selfie_document_missing_photo")]
@@ -4674,7 +4682,7 @@ public enum GelatoSelfieReportErrorCode
 /// <summary>
 /// A short machine-readable string giving the reason for the verification or user-session failure.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<GelatoSessionLastErrorCode>))]
 public enum GelatoSessionLastErrorCode
 {
     [JsonStringEnumMemberName("abandoned")]
@@ -4720,7 +4728,7 @@ public enum GelatoSessionLastErrorCode
 /// <summary>
 /// The code of the error that occurred when validating the current amount details.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PaymentFlowsAmountDetailsResourceErrorCode>))]
 public enum PaymentFlowsAmountDetailsResourceErrorCode
 {
     [JsonStringEnumMemberName("amount_details_amount_mismatch")]
@@ -4732,7 +4740,7 @@ public enum PaymentFlowsAmountDetailsResourceErrorCode
 /// <summary>
 /// Represents the reason why the status is `pending` or `restricted`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TreasuryFinancialAccountsResourceTogglesSettingStatusDetailsCode>))]
 public enum TreasuryFinancialAccountsResourceTogglesSettingStatusDetailsCode
 {
     [JsonStringEnumMemberName("activating")]
@@ -4758,7 +4766,7 @@ public enum TreasuryFinancialAccountsResourceTogglesSettingStatusDetailsCode
 /// <summary>
 /// Reason for the failure.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TreasuryInboundTransfersResourceFailureDetailsCode>))]
 public enum TreasuryInboundTransfersResourceFailureDetailsCode
 {
     [JsonStringEnumMemberName("account_closed")]
@@ -4792,7 +4800,7 @@ public enum TreasuryInboundTransfersResourceFailureDetailsCode
 /// <summary>
 /// Reason for the return.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TreasuryOutboundPaymentsResourceReturnedStatusCode>))]
 public enum TreasuryOutboundPaymentsResourceReturnedStatusCode
 {
     [JsonStringEnumMemberName("account_closed")]
@@ -4820,7 +4828,7 @@ public enum TreasuryOutboundPaymentsResourceReturnedStatusCode
 /// <summary>
 /// A value indicating responsibility for collecting requirements on this account. Only returned when the Connect application retrieving the resource controls the account.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<RequirementCollection>))]
 public enum RequirementCollection
 {
     [JsonStringEnumMemberName("application")]
@@ -4832,7 +4840,7 @@ public enum RequirementCollection
 /// <summary>
 /// A value indicating the responsible payer of a bundle of Stripe fees for pricing-control eligible products on this account. Learn more about [fee behavior on connected accounts](https://docs.stripe.com/connect/direct-charges-fee-payer-behavior).
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Payer>))]
 public enum Payer
 {
     [JsonStringEnumMemberName("account")]
@@ -4848,7 +4856,7 @@ public enum Payer
 /// <summary>
 /// A value indicating who is liable when this account can't pay back negative balances from payments.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Payments>))]
 public enum Payments
 {
     [JsonStringEnumMemberName("application")]
@@ -4860,7 +4868,7 @@ public enum Payments
 /// <summary>
 /// The status of the most recent automated tax calculation for this invoice.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<AutomaticTaxStatus>))]
 public enum AutomaticTaxStatus
 {
     [JsonStringEnumMemberName("complete")]
@@ -4874,7 +4882,7 @@ public enum AutomaticTaxStatus
 /// <summary>
 /// Whether the funds in this account can be paid out.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<BalanceSettingsResourcePayoutsStatus>))]
 public enum BalanceSettingsResourcePayoutsStatus
 {
     [JsonStringEnumMemberName("disabled")]
@@ -4886,7 +4894,7 @@ public enum BalanceSettingsResourcePayoutsStatus
 /// <summary>
 /// Whether the account number is currently active and usable for transactions.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<BankConnectionsResourceAccountNumberDetailsStatus>))]
 public enum BankConnectionsResourceAccountNumberDetailsStatus
 {
     [JsonStringEnumMemberName("deactivated")]
@@ -4898,7 +4906,7 @@ public enum BankConnectionsResourceAccountNumberDetailsStatus
 /// <summary>
 /// The status of the last refresh attempt.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<BankConnectionsResourceBalanceRefreshStatus>))]
 public enum BankConnectionsResourceBalanceRefreshStatus
 {
     [JsonStringEnumMemberName("failed")]
@@ -4912,7 +4920,7 @@ public enum BankConnectionsResourceBalanceRefreshStatus
 /// <summary>
 /// Status of the alert. This can be active, inactive or archived.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<BillingAlertStatus>))]
 public enum BillingAlertStatus
 {
     [JsonStringEnumMemberName("active")]
@@ -4926,7 +4934,7 @@ public enum BillingAlertStatus
 /// <summary>
 /// The meter's status.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<BillingMeterStatus>))]
 public enum BillingMeterStatus
 {
     [JsonStringEnumMemberName("active")]
@@ -4938,7 +4946,7 @@ public enum BillingMeterStatus
 /// <summary>
 /// The meter event adjustment's status.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<BillingMeterEventAdjustmentStatus>))]
 public enum BillingMeterEventAdjustmentStatus
 {
     [JsonStringEnumMemberName("complete")]
@@ -4950,7 +4958,7 @@ public enum BillingMeterEventAdjustmentStatus
 /// <summary>
 /// The status of the capability.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CapabilityStatus>))]
 public enum CapabilityStatus
 {
     [JsonStringEnumMemberName("active")]
@@ -4966,7 +4974,7 @@ public enum CapabilityStatus
 /// <summary>
 /// The status of the Checkout Session, one of `open`, `complete`, or `expired`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CheckoutSessionStatus>))]
 public enum CheckoutSessionStatus
 {
     [JsonStringEnumMemberName("complete")]
@@ -4980,7 +4988,7 @@ public enum CheckoutSessionStatus
 /// <summary>
 /// The current status of this order.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ClimateOrderStatus>))]
 public enum ClimateOrderStatus
 {
     [JsonStringEnumMemberName("awaiting_funds")]
@@ -4998,7 +5006,7 @@ public enum ClimateOrderStatus
 /// <summary>
 /// Status of this credit note, one of `issued` or `void`. Learn more about [voiding credit notes](https://docs.stripe.com/billing/invoices/credit-notes#voiding).
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CreditNoteStatus>))]
 public enum CreditNoteStatus
 {
     [JsonStringEnumMemberName("issued")]
@@ -5010,7 +5018,7 @@ public enum CreditNoteStatus
 /// <summary>
 /// The current status of a dispute. Possible values include:`warning_needs_response`, `warning_under_review`, `warning_closed`, `needs_response`, `under_review`, `won`, `lost`, or `prevented`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<DisputeStatus>))]
 public enum DisputeStatus
 {
     [JsonStringEnumMemberName("lost")]
@@ -5032,9 +5040,21 @@ public enum DisputeStatus
 }
 
 /// <summary>
+/// Mastercard compliance eligibility status.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter<DisputeEnhancedEligibilityMastercardComplianceStatus>))]
+public enum DisputeEnhancedEligibilityMastercardComplianceStatus
+{
+    [JsonStringEnumMemberName("fee_acknowledged")]
+    FeeAcknowledged,
+    [JsonStringEnumMemberName("requires_fee_acknowledgement")]
+    RequiresFeeAcknowledgement
+}
+
+/// <summary>
 /// Visa Compelling Evidence 3.0 eligibility status.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<DisputeEnhancedEligibilityVisaCompellingEvidence3Status>))]
 public enum DisputeEnhancedEligibilityVisaCompellingEvidence3Status
 {
     [JsonStringEnumMemberName("not_qualified")]
@@ -5046,21 +5066,9 @@ public enum DisputeEnhancedEligibilityVisaCompellingEvidence3Status
 }
 
 /// <summary>
-/// Visa compliance eligibility status.
-/// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum DisputeEnhancedEligibilityVisaComplianceStatus
-{
-    [JsonStringEnumMemberName("fee_acknowledged")]
-    FeeAcknowledged,
-    [JsonStringEnumMemberName("requires_fee_acknowledgement")]
-    RequiresFeeAcknowledgement
-}
-
-/// <summary>
 /// The status of the link to the account.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<FinancialConnectionsAccountStatus>))]
 public enum FinancialConnectionsAccountStatus
 {
     [JsonStringEnumMemberName("active")]
@@ -5074,7 +5082,7 @@ public enum FinancialConnectionsAccountStatus
 /// <summary>
 /// The status of the transaction.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<FinancialConnectionsTransactionStatus>))]
 public enum FinancialConnectionsTransactionStatus
 {
     [JsonStringEnumMemberName("pending")]
@@ -5088,7 +5096,7 @@ public enum FinancialConnectionsTransactionStatus
 /// <summary>
 /// Status of this `document` check.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<GelatoDocumentReportStatus>))]
 public enum GelatoDocumentReportStatus
 {
     [JsonStringEnumMemberName("unverified")]
@@ -5100,7 +5108,7 @@ public enum GelatoDocumentReportStatus
 /// <summary>
 /// Status of this VerificationSession. [Learn more about the lifecycle of sessions](https://docs.stripe.com/identity/how-sessions-work).
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<IdentityVerificationSessionStatus>))]
 public enum IdentityVerificationSessionStatus
 {
     [JsonStringEnumMemberName("canceled")]
@@ -5116,7 +5124,7 @@ public enum IdentityVerificationSessionStatus
 /// <summary>
 /// The status of the invoice, one of `draft`, `open`, `paid`, `uncollectible`, or `void`. [Learn more](https://docs.stripe.com/billing/invoices/workflow#workflow-overview)
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<InvoiceStatus>))]
 public enum InvoiceStatus
 {
     [JsonStringEnumMemberName("draft")]
@@ -5134,7 +5142,7 @@ public enum InvoiceStatus
 /// <summary>
 /// The status of the template, one of `active` or `archived`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<InvoiceRenderingTemplateStatus>))]
 public enum InvoiceRenderingTemplateStatus
 {
     [JsonStringEnumMemberName("active")]
@@ -5146,7 +5154,7 @@ public enum InvoiceRenderingTemplateStatus
 /// <summary>
 /// The current status of the authorization in its lifecycle.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<IssuingAuthorizationStatus>))]
 public enum IssuingAuthorizationStatus
 {
     [JsonStringEnumMemberName("closed")]
@@ -5162,7 +5170,7 @@ public enum IssuingAuthorizationStatus
 /// <summary>
 /// Whether authorizations can be approved on this card. May be blocked from activating cards depending on past-due Cardholder requirements. Defaults to `inactive`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<IssuingCardStatus>))]
 public enum IssuingCardStatus
 {
     [JsonStringEnumMemberName("active")]
@@ -5176,7 +5184,7 @@ public enum IssuingCardStatus
 /// <summary>
 /// Specifies whether to permit authorizations on this cardholder's cards.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<IssuingCardholderStatus>))]
 public enum IssuingCardholderStatus
 {
     [JsonStringEnumMemberName("active")]
@@ -5190,7 +5198,7 @@ public enum IssuingCardholderStatus
 /// <summary>
 /// Current status of the dispute.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<IssuingDisputeStatus>))]
 public enum IssuingDisputeStatus
 {
     [JsonStringEnumMemberName("expired")]
@@ -5208,7 +5216,7 @@ public enum IssuingDisputeStatus
 /// <summary>
 /// Whether this personalization design can be used to create cards.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<IssuingPersonalizationDesignStatus>))]
 public enum IssuingPersonalizationDesignStatus
 {
     [JsonStringEnumMemberName("active")]
@@ -5224,7 +5232,7 @@ public enum IssuingPersonalizationDesignStatus
 /// <summary>
 /// Whether this physical bundle can be used to create cards.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<IssuingPhysicalBundleStatus>))]
 public enum IssuingPhysicalBundleStatus
 {
     [JsonStringEnumMemberName("active")]
@@ -5238,7 +5246,7 @@ public enum IssuingPhysicalBundleStatus
 /// <summary>
 /// The usage state of the token.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<IssuingTokenStatus>))]
 public enum IssuingTokenStatus
 {
     [JsonStringEnumMemberName("active")]
@@ -5254,7 +5262,7 @@ public enum IssuingTokenStatus
 /// <summary>
 /// The status of the fraud challenge.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<IssuingAuthorizationFraudChallengeStatus>))]
 public enum IssuingAuthorizationFraudChallengeStatus
 {
     [JsonStringEnumMemberName("expired")]
@@ -5272,7 +5280,7 @@ public enum IssuingAuthorizationFraudChallengeStatus
 /// <summary>
 /// The delivery status of the card.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<IssuingCardShippingStatus>))]
 public enum IssuingCardShippingStatus
 {
     [JsonStringEnumMemberName("canceled")]
@@ -5294,7 +5302,7 @@ public enum IssuingCardShippingStatus
 /// <summary>
 /// The mandate status indicates whether or not you can use it to initiate a payment.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<MandateStatus>))]
 public enum MandateStatus
 {
     [JsonStringEnumMemberName("active")]
@@ -5308,7 +5316,7 @@ public enum MandateStatus
 /// <summary>
 /// Indicates whether or not the incremental authorization feature is supported.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PaymentFlowsPrivatePaymentMethodsCardDetailsApiResourceEnterpriseFeaturesIncrementalAuthorizationIncrementalAuthorizationStatus>))]
 public enum PaymentFlowsPrivatePaymentMethodsCardDetailsApiResourceEnterpriseFeaturesIncrementalAuthorizationIncrementalAuthorizationStatus
 {
     [JsonStringEnumMemberName("available")]
@@ -5320,7 +5328,7 @@ public enum PaymentFlowsPrivatePaymentMethodsCardDetailsApiResourceEnterpriseFea
 /// <summary>
 /// Status of this PaymentIntent, one of `requires_payment_method`, `requires_confirmation`, `requires_action`, `processing`, `requires_capture`, `canceled`, or `succeeded`. Read more about each PaymentIntent [status](https://docs.stripe.com/payments/intents#intent-statuses).
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PaymentIntentStatus>))]
 public enum PaymentIntentStatus
 {
     [JsonStringEnumMemberName("canceled")]
@@ -5342,7 +5350,7 @@ public enum PaymentIntentStatus
 /// <summary>
 /// Indicates whether the transaction is eligible for PayPal's seller protection.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PaypalSellerProtectionStatus>))]
 public enum PaypalSellerProtectionStatus
 {
     [JsonStringEnumMemberName("eligible")]
@@ -5356,7 +5364,7 @@ public enum PaypalSellerProtectionStatus
 /// <summary>
 /// The status of the quote.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<QuoteStatus>))]
 public enum QuoteStatus
 {
     [JsonStringEnumMemberName("accepted")]
@@ -5372,7 +5380,7 @@ public enum QuoteStatus
 /// <summary>
 /// [Status](https://docs.stripe.com/payments/intents#intent-statuses) of this SetupIntent, one of `requires_payment_method`, `requires_confirmation`, `requires_action`, `processing`, `canceled`, or `succeeded`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<SetupIntentStatus>))]
 public enum SetupIntentStatus
 {
     [JsonStringEnumMemberName("canceled")]
@@ -5402,7 +5410,7 @@ public enum SetupIntentStatus
 /// 
 /// If subscription `collection_method=send_invoice` it becomes `past_due` when its invoice is not paid by the due date, and `canceled` or `unpaid` if it is still not paid by an additional deadline after that. Note that when a subscription has a status of `unpaid`, no subsequent invoices will be attempted (invoices will be created, but then immediately automatically closed). After receiving updated payment information from a customer, you may choose to reopen and pay their closed invoices.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<SubscriptionStatus>))]
 public enum SubscriptionStatus
 {
     [JsonStringEnumMemberName("active")]
@@ -5426,7 +5434,7 @@ public enum SubscriptionStatus
 /// <summary>
 /// The present status of the subscription schedule. Possible values are `not_started`, `active`, `completed`, `released`, and `canceled`. You can read more about the different states in our [behavior guide](https://docs.stripe.com/billing/subscriptions/subscription-schedules).
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<SubscriptionScheduleStatus>))]
 public enum SubscriptionScheduleStatus
 {
     [JsonStringEnumMemberName("active")]
@@ -5444,7 +5452,7 @@ public enum SubscriptionScheduleStatus
 /// <summary>
 /// The status of the registration. This field is present for convenience and can be deduced from `active_from` and `expires_at`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TaxRegistrationStatus>))]
 public enum TaxRegistrationStatus
 {
     [JsonStringEnumMemberName("active")]
@@ -5458,7 +5466,7 @@ public enum TaxRegistrationStatus
 /// <summary>
 /// The status of the Tax `Settings`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TaxSettingsStatus>))]
 public enum TaxSettingsStatus
 {
     [JsonStringEnumMemberName("active")]
@@ -5470,7 +5478,7 @@ public enum TaxSettingsStatus
 /// <summary>
 /// Verification status, one of `pending`, `verified`, `unverified`, or `unavailable`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TaxIdVerificationStatus>))]
 public enum TaxIdVerificationStatus
 {
     [JsonStringEnumMemberName("pending")]
@@ -5486,7 +5494,7 @@ public enum TaxIdVerificationStatus
 /// <summary>
 /// The networking status of the reader. We do not recommend using this field in flows that may block taking payments.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TerminalReaderStatus>))]
 public enum TerminalReaderStatus
 {
     [JsonStringEnumMemberName("offline")]
@@ -5498,7 +5506,7 @@ public enum TerminalReaderStatus
 /// <summary>
 /// Status of the action performed by the reader.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TerminalReaderReaderResourceReaderActionStatus>))]
 public enum TerminalReaderReaderResourceReaderActionStatus
 {
     [JsonStringEnumMemberName("failed")]
@@ -5512,7 +5520,7 @@ public enum TerminalReaderReaderResourceReaderActionStatus
 /// <summary>
 /// The status of the Test Clock.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TestHelpersTestClockStatus>))]
 public enum TestHelpersTestClockStatus
 {
     [JsonStringEnumMemberName("advancing")]
@@ -5526,7 +5534,7 @@ public enum TestHelpersTestClockStatus
 /// <summary>
 /// The status of the top-up is either `canceled`, `failed`, `pending`, `reversed`, or `succeeded`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TopupStatus>))]
 public enum TopupStatus
 {
     [JsonStringEnumMemberName("canceled")]
@@ -5544,7 +5552,7 @@ public enum TopupStatus
 /// <summary>
 /// Status of the CreditReversal
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TreasuryCreditReversalStatus>))]
 public enum TreasuryCreditReversalStatus
 {
     [JsonStringEnumMemberName("canceled")]
@@ -5558,7 +5566,7 @@ public enum TreasuryCreditReversalStatus
 /// <summary>
 /// Status of the DebitReversal
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TreasuryDebitReversalStatus>))]
 public enum TreasuryDebitReversalStatus
 {
     [JsonStringEnumMemberName("failed")]
@@ -5572,7 +5580,7 @@ public enum TreasuryDebitReversalStatus
 /// <summary>
 /// Status of this FinancialAccount.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TreasuryFinancialAccountStatus>))]
 public enum TreasuryFinancialAccountStatus
 {
     [JsonStringEnumMemberName("closed")]
@@ -5584,7 +5592,7 @@ public enum TreasuryFinancialAccountStatus
 /// <summary>
 /// Status of the InboundTransfer: `processing`, `succeeded`, `failed`, and `canceled`. An InboundTransfer is `processing` if it is created and pending. The status changes to `succeeded` once the funds have been "confirmed" and a `transaction` is created and posted. The status changes to `failed` if the transfer fails.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TreasuryInboundTransferStatus>))]
 public enum TreasuryInboundTransferStatus
 {
     [JsonStringEnumMemberName("canceled")]
@@ -5600,7 +5608,7 @@ public enum TreasuryInboundTransferStatus
 /// <summary>
 /// Current status of the OutboundPayment: `processing`, `failed`, `posted`, `returned`, `canceled`. An OutboundPayment is `processing` if it has been created and is pending. The status changes to `posted` once the OutboundPayment has been "confirmed" and funds have left the account, or to `failed` or `canceled`. If an OutboundPayment fails to arrive at its destination, its status will change to `returned`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TreasuryOutboundPaymentStatus>))]
 public enum TreasuryOutboundPaymentStatus
 {
     [JsonStringEnumMemberName("canceled")]
@@ -5618,7 +5626,7 @@ public enum TreasuryOutboundPaymentStatus
 /// <summary>
 /// Status of the ReceivedCredit. ReceivedCredits are created either `succeeded` (approved) or `failed` (declined). If a ReceivedCredit is declined, the failure reason can be found in the `failure_code` field.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TreasuryReceivedCreditStatus>))]
 public enum TreasuryReceivedCreditStatus
 {
     [JsonStringEnumMemberName("failed")]
@@ -5630,7 +5638,7 @@ public enum TreasuryReceivedCreditStatus
 /// <summary>
 /// Status of the Transaction.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TreasuryTransactionStatus>))]
 public enum TreasuryTransactionStatus
 {
     [JsonStringEnumMemberName("open")]
@@ -5644,7 +5652,7 @@ public enum TreasuryTransactionStatus
 /// <summary>
 /// Whether the Feature is operational.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TreasuryFinancialAccountsResourceAbaToggleSettingsStatus>))]
 public enum TreasuryFinancialAccountsResourceAbaToggleSettingsStatus
 {
     [JsonStringEnumMemberName("active")]
@@ -5658,19 +5666,21 @@ public enum TreasuryFinancialAccountsResourceAbaToggleSettingsStatus
 /// <summary>
 /// Indicates whether this object and its related objects have been redacted or not.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<VerificationSessionRedactionStatus>))]
 public enum VerificationSessionRedactionStatus
 {
     [JsonStringEnumMemberName("processing")]
     Processing,
     [JsonStringEnumMemberName("redacted")]
-    Redacted
+    Redacted,
+    [JsonStringEnumMemberName("validated")]
+    Validated
 }
 
 /// <summary>
 /// How frequently funds will be paid out. One of `manual` (payouts only created via API call), `daily`, `weekly`, or `monthly`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<BalanceSettingsResourcePayoutScheduleInterval>))]
 public enum BalanceSettingsResourcePayoutScheduleInterval
 {
     [JsonStringEnumMemberName("daily")]
@@ -5686,7 +5696,7 @@ public enum BalanceSettingsResourcePayoutScheduleInterval
 /// <summary>
 /// Interval (or event) to which the amount applies.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<IssuingCardSpendingLimitInterval>))]
 public enum IssuingCardSpendingLimitInterval
 {
     [JsonStringEnumMemberName("all_time")]
@@ -5707,7 +5717,7 @@ public enum IssuingCardSpendingLimitInterval
 /// For `fixed_count` installment plans, this is the interval between installment payments your customer will make to their credit card.
 /// One of `month`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PaymentMethodDetailsCardInstallmentsPlanInterval>))]
 public enum PaymentMethodDetailsCardInstallmentsPlanInterval
 {
     [JsonStringEnumMemberName("month")]
@@ -5717,7 +5727,7 @@ public enum PaymentMethodDetailsCardInstallmentsPlanInterval
 /// <summary>
 /// Specifies payment frequency. One of `day`, `week`, `month`, `year`, or `sporadic`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PaymentMethodOptionsCardMandateOptionsInterval>))]
 public enum PaymentMethodOptionsCardMandateOptionsInterval
 {
     [JsonStringEnumMemberName("day")]
@@ -5735,7 +5745,7 @@ public enum PaymentMethodOptionsCardMandateOptionsInterval
 /// <summary>
 /// The frequency at which a subscription is billed. One of `day`, `week`, `month` or `year`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PlanInterval>))]
 public enum PlanInterval
 {
     [JsonStringEnumMemberName("day")]
@@ -5751,7 +5761,7 @@ public enum PlanInterval
 /// <summary>
 /// The balance that this transaction impacts.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<BalanceType>))]
 public enum BalanceType
 {
     [JsonStringEnumMemberName("issuing")]
@@ -5767,7 +5777,7 @@ public enum BalanceType
 /// <summary>
 /// The type of account number associated with the account.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<IdentifierType>))]
 public enum IdentifierType
 {
     [JsonStringEnumMemberName("account_number")]
@@ -5777,9 +5787,101 @@ public enum IdentifierType
 }
 
 /// <summary>
+/// The action (if any) to proactively relink the Account.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter<Action>))]
+public enum Action
+{
+    [JsonStringEnumMemberName("none")]
+    None,
+    [JsonStringEnumMemberName("relink_required")]
+    RelinkRequired
+}
+
+/// <summary>
+/// The underlying cause of the Account becoming inactive.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter<Cause>))]
+public enum Cause
+{
+    [JsonStringEnumMemberName("access_expired")]
+    AccessExpired,
+    [JsonStringEnumMemberName("institution_requirement")]
+    InstitutionRequirement,
+    [JsonStringEnumMemberName("unspecified")]
+    Unspecified
+}
+
+/// <summary>
+/// Whether the Session should require that linked accounts support payments and retrieve account numbers before completion.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter<RequirePaymentMethodSupport>))]
+public enum RequirePaymentMethodSupport
+{
+    [JsonStringEnumMemberName("all")]
+    All,
+    [JsonStringEnumMemberName("at_least_one")]
+    AtLeastOne,
+    [JsonStringEnumMemberName("none")]
+    None
+}
+
+/// <summary>
+/// Controls how manual entry of bank account details is presented to the user.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter<BankConnectionsResourceLinkAccountSessionManualEntryMode>))]
+public enum BankConnectionsResourceLinkAccountSessionManualEntryMode
+{
+    [JsonStringEnumMemberName("automatic")]
+    Automatic,
+    [JsonStringEnumMemberName("disabled")]
+    Disabled
+}
+
+/// <summary>
+/// The mode of the Checkout Session.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter<CheckoutSessionMode>))]
+public enum CheckoutSessionMode
+{
+    [JsonStringEnumMemberName("payment")]
+    Payment,
+    [JsonStringEnumMemberName("setup")]
+    Setup,
+    [JsonStringEnumMemberName("subscription")]
+    Subscription
+}
+
+/// <summary>
+/// The address validation capabilities to use.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter<IssuingCardShippingAddressValidationMode>))]
+public enum IssuingCardShippingAddressValidationMode
+{
+    [JsonStringEnumMemberName("disabled")]
+    Disabled,
+    [JsonStringEnumMemberName("normalization_only")]
+    NormalizationOnly,
+    [JsonStringEnumMemberName("validation_and_normalization")]
+    ValidationAndNormalization
+}
+
+/// <summary>
+/// Whether to cancel subscriptions immediately or at the end of the billing period.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter<PortalSubscriptionCancelMode>))]
+public enum PortalSubscriptionCancelMode
+{
+    [JsonStringEnumMemberName("at_period_end")]
+    AtPeriodEnd,
+    [JsonStringEnumMemberName("immediately")]
+    Immediately
+}
+
+/// <summary>
 /// Defines the type of the alert.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<AlertType>))]
 public enum AlertType
 {
     [JsonStringEnumMemberName("usage_threshold")]
@@ -5789,7 +5891,7 @@ public enum AlertType
 /// <summary>
 /// The category of this credit grant. This is for tracking purposes and isn't displayed to the customer.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<BillingCreditGrantCategory>))]
 public enum BillingCreditGrantCategory
 {
     [JsonStringEnumMemberName("paid")]
@@ -5801,7 +5903,7 @@ public enum BillingCreditGrantCategory
 /// <summary>
 /// The type of the account. Account category is further divided in `subcategory`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<FinancialConnectionsAccountCategory>))]
 public enum FinancialConnectionsAccountCategory
 {
     [JsonStringEnumMemberName("cash")]
@@ -5817,7 +5919,7 @@ public enum FinancialConnectionsAccountCategory
 /// <summary>
 /// Type of the line item.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PaymentFlowsPrivatePaymentMethodsPaypalAmountDetailsLineItemPaymentMethodOptionsCategory>))]
 public enum PaymentFlowsPrivatePaymentMethodsPaypalAmountDetailsLineItemPaymentMethodOptionsCategory
 {
     [JsonStringEnumMemberName("digital_goods")]
@@ -5831,7 +5933,7 @@ public enum PaymentFlowsPrivatePaymentMethodsPaypalAmountDetailsLineItemPaymentM
 /// <summary>
 /// The time window which meter events have been pre-aggregated for, if any.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<EventTimeWindow>))]
 public enum EventTimeWindow
 {
     [JsonStringEnumMemberName("day")]
@@ -5843,7 +5945,7 @@ public enum EventTimeWindow
 /// <summary>
 /// Whether this tax is inclusive or exclusive.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<BillingBillResourceInvoicingTaxesTaxTaxBehavior>))]
 public enum BillingBillResourceInvoicingTaxesTaxTaxBehavior
 {
     [JsonStringEnumMemberName("exclusive")]
@@ -5855,7 +5957,7 @@ public enum BillingBillResourceInvoicingTaxesTaxTaxBehavior
 /// <summary>
 /// Only required if a [default tax behavior](https://docs.stripe.com/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)) was not provided in the Stripe Tax settings. Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of `inclusive`, `exclusive`, or `unspecified`. Once specified as either `inclusive` or `exclusive`, it cannot be changed.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CurrencyOptionTaxBehavior>))]
 public enum CurrencyOptionTaxBehavior
 {
     [JsonStringEnumMemberName("exclusive")]
@@ -5869,7 +5971,7 @@ public enum CurrencyOptionTaxBehavior
 /// <summary>
 /// Default [tax behavior](https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#tax-behavior) used to specify whether the price is considered inclusive of taxes or exclusive of taxes. If the item's price has a tax behavior set, it will take precedence over the default tax behavior.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TaxProductResourceTaxSettingsDefaultsTaxBehavior>))]
 public enum TaxProductResourceTaxSettingsDefaultsTaxBehavior
 {
     [JsonStringEnumMemberName("exclusive")]
@@ -5883,7 +5985,7 @@ public enum TaxProductResourceTaxSettingsDefaultsTaxBehavior
 /// <summary>
 /// The reasoning behind this tax, for example, if the product is tax exempt. The possible values for this field may be extended as new tax rules are supported.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<BillingBillResourceInvoicingTaxesTaxTaxabilityReason>))]
 public enum BillingBillResourceInvoicingTaxesTaxTaxabilityReason
 {
     [JsonStringEnumMemberName("customer_exempt")]
@@ -5923,7 +6025,7 @@ public enum BillingBillResourceInvoicingTaxesTaxTaxabilityReason
 /// <summary>
 /// The reasoning behind this tax, for example, if the product is tax exempt. The possible values for this field may be extended as new tax rules are supported.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<LineItemsTaxAmountTaxabilityReason>))]
 public enum LineItemsTaxAmountTaxabilityReason
 {
     [JsonStringEnumMemberName("customer_exempt")]
@@ -5961,7 +6063,7 @@ public enum LineItemsTaxAmountTaxabilityReason
 /// <summary>
 /// The price type that credit grants can apply to. We currently only support the `metered` price type. This refers to prices that have a [Billing Meter](https://docs.stripe.com/api/billing/meter) attached to them. Cannot be used in combination with `prices`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PriceType2>))]
 public enum PriceType2
 {
     [JsonStringEnumMemberName("metered")]
@@ -5971,7 +6073,7 @@ public enum PriceType2
 /// <summary>
 /// Specifies how events are aggregated.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Formula>))]
 public enum Formula
 {
     [JsonStringEnumMemberName("count")]
@@ -5985,7 +6087,7 @@ public enum Formula
 /// <summary>
 /// The IETF language tag of the locale Customer Portal is displayed in. If blank or auto, the customer’s `preferred_locales` or browser’s locale is used.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<BillingPortalSessionLocale>))]
 public enum BillingPortalSessionLocale
 {
     [JsonStringEnumMemberName("auto")]
@@ -6087,7 +6189,7 @@ public enum BillingPortalSessionLocale
 /// <summary>
 /// The IETF language tag of the locale Checkout is displayed in. If blank or `auto`, the browser's locale is used.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CheckoutSessionLocale>))]
 public enum CheckoutSessionLocale
 {
     [JsonStringEnumMemberName("auto")]
@@ -6177,7 +6279,7 @@ public enum CheckoutSessionLocale
 /// <summary>
 /// The customer submitted reason for why they canceled, if the subscription was canceled explicitly by the user.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Feedback>))]
 public enum Feedback
 {
     [JsonStringEnumMemberName("customer_service")]
@@ -6201,7 +6303,7 @@ public enum Feedback
 /// <summary>
 /// Why this subscription was canceled.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CancellationDetailsReason>))]
 public enum CancellationDetailsReason
 {
     [JsonStringEnumMemberName("canceled_by_retention_policy")]
@@ -6217,7 +6319,7 @@ public enum CancellationDetailsReason
 /// <summary>
 /// Reason for issuing this credit note, one of `duplicate`, `fraudulent`, `order_change`, or `product_unsatisfactory`
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CreditNoteReason>))]
 public enum CreditNoteReason
 {
     [JsonStringEnumMemberName("duplicate")]
@@ -6233,7 +6335,7 @@ public enum CreditNoteReason
 /// <summary>
 /// Reason given by cardholder for dispute.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<InsightsResourcesPaymentEvaluationDisputeOpenedReason>))]
 public enum InsightsResourcesPaymentEvaluationDisputeOpenedReason
 {
     [JsonStringEnumMemberName("account_not_available")]
@@ -6263,7 +6365,7 @@ public enum InsightsResourcesPaymentEvaluationDisputeOpenedReason
 /// <summary>
 /// The reason the payment was blocked by the merchant.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<InsightsResourcesPaymentEvaluationMerchantBlockedReason>))]
 public enum InsightsResourcesPaymentEvaluationMerchantBlockedReason
 {
     [JsonStringEnumMemberName("authentication_required")]
@@ -6279,7 +6381,7 @@ public enum InsightsResourcesPaymentEvaluationMerchantBlockedReason
 /// <summary>
 /// Indicates the reason for the refund.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<InsightsResourcesPaymentEvaluationRefundedReason>))]
 public enum InsightsResourcesPaymentEvaluationRefundedReason
 {
     [JsonStringEnumMemberName("duplicate")]
@@ -6295,7 +6397,7 @@ public enum InsightsResourcesPaymentEvaluationRefundedReason
 /// <summary>
 /// Card issuer's reason for the network decline.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<InsightsResourcesPaymentEvaluationRejectedCardReason>))]
 public enum InsightsResourcesPaymentEvaluationRejectedCardReason
 {
     [JsonStringEnumMemberName("authentication_failed")]
@@ -6329,7 +6431,7 @@ public enum InsightsResourcesPaymentEvaluationRejectedCardReason
 /// <summary>
 /// When an authorization is approved or declined by you or by Stripe, this field provides additional detail on the reason for the outcome.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<IssuingAuthorizationRequestReason>))]
 public enum IssuingAuthorizationRequestReason
 {
     [JsonStringEnumMemberName("account_disabled")]
@@ -6360,6 +6462,8 @@ public enum IssuingAuthorizationRequestReason
     PinBlocked,
     [JsonStringEnumMemberName("spending_controls")]
     SpendingControls,
+    [JsonStringEnumMemberName("stripe_internal_error")]
+    StripeInternalError,
     [JsonStringEnumMemberName("suspected_fraud")]
     SuspectedFraud,
     [JsonStringEnumMemberName("verification_failed")]
@@ -6377,7 +6481,7 @@ public enum IssuingAuthorizationRequestReason
 /// <summary>
 /// The reason for filing the dispute. Its value will match the field containing the evidence.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<IssuingDisputeEvidenceReason>))]
 public enum IssuingDisputeEvidenceReason
 {
     [JsonStringEnumMemberName("canceled")]
@@ -6401,7 +6505,7 @@ public enum IssuingDisputeEvidenceReason
 /// <summary>
 /// The reason why this PaymentMethod's fingerprint has been blocked
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PaymentMethodUsBankAccountBlockedReason>))]
 public enum PaymentMethodUsBankAccountBlockedReason
 {
     [JsonStringEnumMemberName("bank_account_closed")]
@@ -6423,7 +6527,7 @@ public enum PaymentMethodUsBankAccountBlockedReason
 /// <summary>
 /// Reason for the refund, which is either user-provided (`duplicate`, `fraudulent`, or `requested_by_customer`) or generated by Stripe internally (`expired_uncaptured_charge`).
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<RefundReason>))]
 public enum RefundReason
 {
     [JsonStringEnumMemberName("duplicate")]
@@ -6439,7 +6543,7 @@ public enum RefundReason
 /// <summary>
 /// Details on why we couldn't commit the tax transaction.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TaxProductResourceTaxAssociationTransactionAttemptsResourceErroredReason>))]
 public enum TaxProductResourceTaxAssociationTransactionAttemptsResourceErroredReason
 {
     [JsonStringEnumMemberName("another_payment_associated_with_calculation")]
@@ -6457,7 +6561,7 @@ public enum TaxProductResourceTaxAssociationTransactionAttemptsResourceErroredRe
 /// <summary>
 /// The reason for the refund.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TerminalReaderReaderResourceRefundPaymentActionReason>))]
 public enum TerminalReaderReaderResourceRefundPaymentActionReason
 {
     [JsonStringEnumMemberName("duplicate")]
@@ -6471,7 +6575,7 @@ public enum TerminalReaderReaderResourceRefundPaymentActionReason
 /// <summary>
 /// This field indicates whether this payment method can be shown again to its customer in a checkout flow. Stripe products such as Checkout and Elements use this field to determine whether a payment method can be shown as a saved payment method in a checkout flow. The field defaults to “unspecified”.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<AllowRedisplay>))]
 public enum AllowRedisplay
 {
     [JsonStringEnumMemberName("always")]
@@ -6485,7 +6589,7 @@ public enum AllowRedisplay
 /// <summary>
 /// Status of a card based on the card issuer.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<RegulatedStatus>))]
 public enum RegulatedStatus
 {
     [JsonStringEnumMemberName("regulated")]
@@ -6497,7 +6601,7 @@ public enum RegulatedStatus
 /// <summary>
 /// An enumerated value providing a more detailed explanation on [how to proceed with an error](https://docs.stripe.com/declines#retrying-issuer-declines).
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<AdviceCode>))]
 public enum AdviceCode
 {
     [JsonStringEnumMemberName("confirm_card_data")]
@@ -6511,7 +6615,7 @@ public enum AdviceCode
 /// <summary>
 /// Describes whether Checkout should collect the customer's billing address. Defaults to `auto`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<BillingAddressCollection>))]
 public enum BillingAddressCollection
 {
     [JsonStringEnumMemberName("auto")]
@@ -6523,7 +6627,7 @@ public enum BillingAddressCollection
 /// <summary>
 /// Configure whether a Checkout Session creates a Customer when the Checkout Session completes.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CustomerCreation>))]
 public enum CustomerCreation
 {
     [JsonStringEnumMemberName("always")]
@@ -6533,49 +6637,9 @@ public enum CustomerCreation
 }
 
 /// <summary>
-/// The mode of the Checkout Session.
-/// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum CheckoutSessionMode
-{
-    [JsonStringEnumMemberName("payment")]
-    Payment,
-    [JsonStringEnumMemberName("setup")]
-    Setup,
-    [JsonStringEnumMemberName("subscription")]
-    Subscription
-}
-
-/// <summary>
-/// The address validation capabilities to use.
-/// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum IssuingCardShippingAddressValidationMode
-{
-    [JsonStringEnumMemberName("disabled")]
-    Disabled,
-    [JsonStringEnumMemberName("normalization_only")]
-    NormalizationOnly,
-    [JsonStringEnumMemberName("validation_and_normalization")]
-    ValidationAndNormalization
-}
-
-/// <summary>
-/// Whether to cancel subscriptions immediately or at the end of the billing period.
-/// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum PortalSubscriptionCancelMode
-{
-    [JsonStringEnumMemberName("at_period_end")]
-    AtPeriodEnd,
-    [JsonStringEnumMemberName("immediately")]
-    Immediately
-}
-
-/// <summary>
 /// Where the user is coming from. This informs the optimizations that are applied to the session.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<OriginContext>))]
 public enum OriginContext
 {
     [JsonStringEnumMemberName("mobile_app")]
@@ -6587,7 +6651,7 @@ public enum OriginContext
 /// <summary>
 /// Configure whether a Checkout Session should collect a payment method. Defaults to `always`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PaymentMethodCollection>))]
 public enum PaymentMethodCollection
 {
     [JsonStringEnumMemberName("always")]
@@ -6600,7 +6664,7 @@ public enum PaymentMethodCollection
 /// The payment status of the Checkout Session, one of `paid`, `unpaid`, or `no_payment_required`.
 /// You can use this value to decide when to fulfill your customer's order.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PaymentStatus>))]
 public enum PaymentStatus
 {
     [JsonStringEnumMemberName("no_payment_required")]
@@ -6614,7 +6678,7 @@ public enum PaymentStatus
 /// <summary>
 /// This parameter applies to `ui_mode: embedded_page`. Learn more about the [redirect behavior](https://docs.stripe.com/payments/checkout/custom-success-page?payment-ui=embedded-form) of embedded sessions. Defaults to `always`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<RedirectOnCompletion>))]
 public enum RedirectOnCompletion
 {
     [JsonStringEnumMemberName("always")]
@@ -6630,7 +6694,7 @@ public enum RedirectOnCompletion
 /// relevant text on the page, such as the submit button. `submit_type` can only be
 /// specified on Checkout Sessions in `payment` mode. If blank or `auto`, `pay` is used.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<SubmitType>))]
 public enum SubmitType
 {
     [JsonStringEnumMemberName("auto")]
@@ -6648,7 +6712,7 @@ public enum SubmitType
 /// <summary>
 /// The UI mode of the Session. Defaults to `hosted_page`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<UiMode>))]
 public enum UiMode
 {
     [JsonStringEnumMemberName("elements")]
@@ -6662,7 +6726,7 @@ public enum UiMode
 /// <summary>
 /// Payment schedule for the mandate.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CheckoutAcssDebitMandateOptionsPaymentSchedule>))]
 public enum CheckoutAcssDebitMandateOptionsPaymentSchedule
 {
     [JsonStringEnumMemberName("combined")]
@@ -6676,7 +6740,7 @@ public enum CheckoutAcssDebitMandateOptionsPaymentSchedule
 /// <summary>
 /// The periodicity at which payments will be collected. Defaults to `adhoc`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<MandateOptionsPaytoPaymentSchedule>))]
 public enum MandateOptionsPaytoPaymentSchedule
 {
     [JsonStringEnumMemberName("adhoc")]
@@ -6700,7 +6764,7 @@ public enum MandateOptionsPaytoPaymentSchedule
 /// <summary>
 /// Schedule at which the future payments will be charged.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<MandatePixPaymentSchedule>))]
 public enum MandatePixPaymentSchedule
 {
     [JsonStringEnumMemberName("halfyearly")]
@@ -6718,7 +6782,7 @@ public enum MandatePixPaymentSchedule
 /// <summary>
 /// Transaction type of the mandate.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TransactionType>))]
 public enum TransactionType
 {
     [JsonStringEnumMemberName("business")]
@@ -6730,7 +6794,7 @@ public enum TransactionType
 /// <summary>
 /// Currency supported by the bank account. Returned when the Session is in `setup` mode.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Currency>))]
 public enum Currency
 {
     [JsonStringEnumMemberName("cad")]
@@ -6748,7 +6812,7 @@ public enum Currency
 /// 
 /// When processing card payments, Stripe uses `setup_future_usage` to help you comply with regional legislation and network rules, such as [SCA](/strong-customer-authentication).
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CheckoutAcssDebitPaymentMethodOptionsSetupFutureUsage>))]
 public enum CheckoutAcssDebitPaymentMethodOptionsSetupFutureUsage
 {
     [JsonStringEnumMemberName("none")]
@@ -6768,7 +6832,7 @@ public enum CheckoutAcssDebitPaymentMethodOptionsSetupFutureUsage
 /// 
 /// When processing card payments, Stripe uses `setup_future_usage` to help you comply with regional legislation and network rules, such as [SCA](/strong-customer-authentication).
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CheckoutAffirmPaymentMethodOptionsSetupFutureUsage>))]
 public enum CheckoutAffirmPaymentMethodOptionsSetupFutureUsage
 {
     [JsonStringEnumMemberName("none")]
@@ -6784,7 +6848,7 @@ public enum CheckoutAffirmPaymentMethodOptionsSetupFutureUsage
 /// 
 /// When processing card payments, Stripe uses `setup_future_usage` to help you comply with regional legislation and network rules, such as [SCA](/strong-customer-authentication).
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CheckoutAmazonPayPaymentMethodOptionsSetupFutureUsage>))]
 public enum CheckoutAmazonPayPaymentMethodOptionsSetupFutureUsage
 {
     [JsonStringEnumMemberName("none")]
@@ -6798,7 +6862,7 @@ public enum CheckoutAmazonPayPaymentMethodOptionsSetupFutureUsage
 /// 
 /// The presence of this property will [attach the payment method](https://docs.stripe.com/payments/save-during-payment) to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any required actions from the user are complete.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ConfirmationTokenSetupFutureUsage>))]
 public enum ConfirmationTokenSetupFutureUsage
 {
     [JsonStringEnumMemberName("off_session")]
@@ -6810,7 +6874,7 @@ public enum ConfirmationTokenSetupFutureUsage
 /// <summary>
 /// Bank account verification method. The default value is `automatic`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CheckoutAcssDebitPaymentMethodOptionsVerificationMethod>))]
 public enum CheckoutAcssDebitPaymentMethodOptionsVerificationMethod
 {
     [JsonStringEnumMemberName("automatic")]
@@ -6824,7 +6888,7 @@ public enum CheckoutAcssDebitPaymentMethodOptionsVerificationMethod
 /// <summary>
 /// Bank account verification method. The default value is `automatic`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CheckoutUsBankAccountPaymentMethodOptionsVerificationMethod>))]
 public enum CheckoutUsBankAccountPaymentMethodOptionsVerificationMethod
 {
     [JsonStringEnumMemberName("automatic")]
@@ -6836,7 +6900,7 @@ public enum CheckoutUsBankAccountPaymentMethodOptionsVerificationMethod
 /// <summary>
 /// Controls when the funds will be captured from the customer's account.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CheckoutAffirmPaymentMethodOptionsCaptureMethod>))]
 public enum CheckoutAffirmPaymentMethodOptionsCaptureMethod
 {
     [JsonStringEnumMemberName("manual")]
@@ -6846,7 +6910,7 @@ public enum CheckoutAffirmPaymentMethodOptionsCaptureMethod
 /// <summary>
 /// Controls when the funds will be captured from the customer's account.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PaymentIntentCaptureMethod>))]
 public enum PaymentIntentCaptureMethod
 {
     [JsonStringEnumMemberName("automatic")]
@@ -6860,7 +6924,7 @@ public enum PaymentIntentCaptureMethod
 /// <summary>
 /// Controls when the funds will be captured from the customer's account.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PaymentIntentTypeSpecificPaymentMethodOptionsClientCaptureMethod>))]
 public enum PaymentIntentTypeSpecificPaymentMethodOptionsClientCaptureMethod
 {
     [JsonStringEnumMemberName("automatic_delayed")]
@@ -6874,7 +6938,7 @@ public enum PaymentIntentTypeSpecificPaymentMethodOptionsClientCaptureMethod
 /// <summary>
 /// Controls when the funds will be captured from the customer's account.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PaymentMethodOptionsCardPresentCaptureMethod>))]
 public enum PaymentMethodOptionsCardPresentCaptureMethod
 {
     [JsonStringEnumMemberName("manual")]
@@ -6886,7 +6950,7 @@ public enum PaymentMethodOptionsCardPresentCaptureMethod
 /// <summary>
 /// Request ability to [capture beyond the standard authorization validity window](/payments/extended-authorization) for this CheckoutSession.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<RequestExtendedAuthorization>))]
 public enum RequestExtendedAuthorization
 {
     [JsonStringEnumMemberName("if_available")]
@@ -6898,7 +6962,7 @@ public enum RequestExtendedAuthorization
 /// <summary>
 /// Request ability to [increment the authorization](/payments/incremental-authorization) for this CheckoutSession.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<RequestIncrementalAuthorization>))]
 public enum RequestIncrementalAuthorization
 {
     [JsonStringEnumMemberName("if_available")]
@@ -6910,7 +6974,7 @@ public enum RequestIncrementalAuthorization
 /// <summary>
 /// Request ability to make [multiple captures](/payments/multicapture) for this CheckoutSession.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<RequestMulticapture>))]
 public enum RequestMulticapture
 {
     [JsonStringEnumMemberName("if_available")]
@@ -6922,7 +6986,7 @@ public enum RequestMulticapture
 /// <summary>
 /// Request ability to [overcapture](/payments/overcapture) for this CheckoutSession.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<RequestOvercapture>))]
 public enum RequestOvercapture
 {
     [JsonStringEnumMemberName("if_available")]
@@ -6934,7 +6998,7 @@ public enum RequestOvercapture
 /// <summary>
 /// We strongly recommend that you rely on our SCA Engine to automatically prompt your customers for authentication based on risk level and [other requirements](https://docs.stripe.com/strong-customer-authentication). However, if you wish to request 3D Secure based on logic from your own fraud engine, provide this option. If not provided, this value defaults to `automatic`. Read our guide on [manually requesting 3D Secure](https://docs.stripe.com/payments/3d-secure/authentication-flow#manual-three-ds) for more information on how this configuration interacts with Radar and our SCA Engine.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<RequestThreeDSecure>))]
 public enum RequestThreeDSecure
 {
     [JsonStringEnumMemberName("any")]
@@ -6948,7 +7012,7 @@ public enum RequestThreeDSecure
 /// <summary>
 /// The funding method type to be used when there are not enough funds in the customer balance. Permitted values include: `bank_transfer`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<FundingType>))]
 public enum FundingType
 {
     [JsonStringEnumMemberName("bank_transfer")]
@@ -6958,7 +7022,7 @@ public enum FundingType
 /// <summary>
 /// Describes whether Checkout should display Link. Defaults to `auto`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Display>))]
 public enum Display
 {
     [JsonStringEnumMemberName("auto")]
@@ -6970,7 +7034,7 @@ public enum Display
 /// <summary>
 /// Determines if the amount includes the IOF tax.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<AmountIncludesIof>))]
 public enum AmountIncludesIof
 {
     [JsonStringEnumMemberName("always")]
@@ -6980,9 +7044,23 @@ public enum AmountIncludesIof
 }
 
 /// <summary>
+/// The client type that the end customer will pay from
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter<Client>))]
+public enum Client
+{
+    [JsonStringEnumMemberName("android")]
+    Android,
+    [JsonStringEnumMemberName("ios")]
+    Ios,
+    [JsonStringEnumMemberName("web")]
+    Web
+}
+
+/// <summary>
 /// Reason for the cancellation of this order.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ClimateOrderCancellationReason>))]
 public enum ClimateOrderCancellationReason
 {
     [JsonStringEnumMemberName("expired")]
@@ -6996,7 +7074,7 @@ public enum ClimateOrderCancellationReason
 /// <summary>
 /// The reason why the card was canceled.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<IssuingCardCancellationReason>))]
 public enum IssuingCardCancellationReason
 {
     [JsonStringEnumMemberName("design_rejected")]
@@ -7012,7 +7090,7 @@ public enum IssuingCardCancellationReason
 /// <summary>
 /// Reason for cancellation of this PaymentIntent, either user-provided (`duplicate`, `fraudulent`, `requested_by_customer`, or `abandoned`) or generated by Stripe internally (`failed_invoice`, `void_invoice`, `automatic`, or `expired`).
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PaymentIntentCancellationReason>))]
 public enum PaymentIntentCancellationReason
 {
     [JsonStringEnumMemberName("abandoned")]
@@ -7036,7 +7114,7 @@ public enum PaymentIntentCancellationReason
 /// <summary>
 /// Reason for cancellation of this SetupIntent, one of `abandoned`, `requested_by_customer`, or `duplicate`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<SetupIntentCancellationReason>))]
 public enum SetupIntentCancellationReason
 {
     [JsonStringEnumMemberName("abandoned")]
@@ -7050,7 +7128,7 @@ public enum SetupIntentCancellationReason
 /// <summary>
 /// The scientific pathway used for carbon removal.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<RemovalPathway>))]
 public enum RemovalPathway
 {
     [JsonStringEnumMemberName("biomass_carbon_removal_and_storage")]
@@ -7066,7 +7144,7 @@ public enum RemovalPathway
 /// <summary>
 /// One of `forever`, `once`, or `repeating`. Describes how long a customer who applies this coupon will get the discount.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Duration>))]
 public enum Duration
 {
     [JsonStringEnumMemberName("forever")]
@@ -7080,7 +7158,7 @@ public enum Duration
 /// <summary>
 /// Describes the customer's tax exemption status, which is `none`, `exempt`, or `reverse`. When set to `reverse`, invoice and receipt PDFs include the following text: **"Reverse charge"**.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TaxExempt>))]
 public enum TaxExempt
 {
     [JsonStringEnumMemberName("exempt")]
@@ -7094,7 +7172,7 @@ public enum TaxExempt
 /// <summary>
 /// The configuration for how funds that land in the customer cash balance are reconciled.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ReconciliationMode>))]
 public enum ReconciliationMode
 {
     [JsonStringEnumMemberName("automatic")]
@@ -7106,7 +7184,7 @@ public enum ReconciliationMode
 /// <summary>
 /// The banking network used for this funding.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CustomerBalanceResourceCashBalanceTransactionResourceFundedTransactionResourceBankTransferResourceUsBankTransferNetwork>))]
 public enum CustomerBalanceResourceCashBalanceTransactionResourceFundedTransactionResourceBankTransferResourceUsBankTransferNetwork
 {
     [JsonStringEnumMemberName("ach")]
@@ -7120,7 +7198,7 @@ public enum CustomerBalanceResourceCashBalanceTransactionResourceFundedTransacti
 /// <summary>
 /// The network rails used. See the [docs](https://docs.stripe.com/treasury/money-movement/timelines) to learn more about money movement timelines for each network type.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<InboundTransfersPaymentMethodDetailsUsBankAccountNetwork>))]
 public enum InboundTransfersPaymentMethodDetailsUsBankAccountNetwork
 {
     [JsonStringEnumMemberName("ach")]
@@ -7130,7 +7208,7 @@ public enum InboundTransfersPaymentMethodDetailsUsBankAccountNetwork
 /// <summary>
 /// The card network for this settlement report. One of ["visa", "maestro", "mastercard"]
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<IssuingSettlementNetwork>))]
 public enum IssuingSettlementNetwork
 {
     [JsonStringEnumMemberName("maestro")]
@@ -7144,7 +7222,7 @@ public enum IssuingSettlementNetwork
 /// <summary>
 /// The token service provider / card network associated with the token.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<IssuingTokenNetwork>))]
 public enum IssuingTokenNetwork
 {
     [JsonStringEnumMemberName("mastercard")]
@@ -7156,7 +7234,7 @@ public enum IssuingTokenNetwork
 /// <summary>
 /// The rails used to send funds.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<OutboundPaymentsPaymentMethodDetailsFinancialAccountNetwork>))]
 public enum OutboundPaymentsPaymentMethodDetailsFinancialAccountNetwork
 {
     [JsonStringEnumMemberName("stripe")]
@@ -7166,7 +7244,7 @@ public enum OutboundPaymentsPaymentMethodDetailsFinancialAccountNetwork
 /// <summary>
 /// The network rails used. See the [docs](https://docs.stripe.com/treasury/money-movement/timelines) to learn more about money movement timelines for each network type.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<OutboundPaymentsPaymentMethodDetailsUsBankAccountNetwork>))]
 public enum OutboundPaymentsPaymentMethodDetailsUsBankAccountNetwork
 {
     [JsonStringEnumMemberName("ach")]
@@ -7178,7 +7256,7 @@ public enum OutboundPaymentsPaymentMethodDetailsUsBankAccountNetwork
 /// <summary>
 /// Selected network to process this payment intent on. Depends on the available networks of the card attached to the payment intent. Can be only set confirm-time.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PaymentIntentPaymentMethodOptionsCardNetwork>))]
 public enum PaymentIntentPaymentMethodOptionsCardNetwork
 {
     [JsonStringEnumMemberName("amex")]
@@ -7212,7 +7290,7 @@ public enum PaymentIntentPaymentMethodOptionsCardNetwork
 /// <summary>
 /// The blockchain network that the transaction was sent on.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PaymentMethodDetailsCryptoNetwork>))]
 public enum PaymentMethodDetailsCryptoNetwork
 {
     [JsonStringEnumMemberName("base")]
@@ -7223,6 +7301,8 @@ public enum PaymentMethodDetailsCryptoNetwork
     Polygon,
     [JsonStringEnumMemberName("solana")]
     Solana,
+    [JsonStringEnumMemberName("sui")]
+    Sui,
     [JsonStringEnumMemberName("tempo")]
     Tempo
 }
@@ -7230,7 +7310,7 @@ public enum PaymentMethodDetailsCryptoNetwork
 /// <summary>
 /// Identifies which network this charge was processed on. Can be `amex`, `cartes_bancaires`, `diners`, `discover`, `eftpos_au`, `interac`, `jcb`, `link`, `mastercard`, `unionpay`, `visa`, or `unknown`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardDetailsNetwork>))]
 public enum PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardDetailsNetwork
 {
     [JsonStringEnumMemberName("amex")]
@@ -7262,7 +7342,7 @@ public enum PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardDetailsNetw
 /// <summary>
 /// The rails used to reverse the funds.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TreasuryCreditReversalNetwork>))]
 public enum TreasuryCreditReversalNetwork
 {
     [JsonStringEnumMemberName("ach")]
@@ -7274,7 +7354,7 @@ public enum TreasuryCreditReversalNetwork
 /// <summary>
 /// The rails used to reverse the funds.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TreasuryDebitReversalNetwork>))]
 public enum TreasuryDebitReversalNetwork
 {
     [JsonStringEnumMemberName("ach")]
@@ -7286,7 +7366,7 @@ public enum TreasuryDebitReversalNetwork
 /// <summary>
 /// The rails used to send the funds.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TreasuryReceivedCreditNetwork>))]
 public enum TreasuryReceivedCreditNetwork
 {
     [JsonStringEnumMemberName("ach")]
@@ -7302,7 +7382,7 @@ public enum TreasuryReceivedCreditNetwork
 /// <summary>
 /// The network used for the ReceivedDebit.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TreasuryReceivedDebitNetwork>))]
 public enum TreasuryReceivedDebitNetwork
 {
     [JsonStringEnumMemberName("ach")]
@@ -7318,7 +7398,7 @@ public enum TreasuryReceivedDebitNetwork
 /// 
 /// Allowing buyers to remove their saved payment methods impacts subscriptions that depend on that payment method. Removing the payment method detaches the [`customer` object](https://docs.stripe.com/api/payment_methods/object#payment_method_object-customer) from that [PaymentMethod](https://docs.stripe.com/api/payment_methods).
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PaymentMethodRemove>))]
 public enum PaymentMethodRemove
 {
     [JsonStringEnumMemberName("disabled")]
@@ -7330,7 +7410,7 @@ public enum PaymentMethodRemove
 /// <summary>
 /// Controls whether or not the mobile payment element shows saved payment methods.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PaymentMethodRedisplay>))]
 public enum PaymentMethodRedisplay
 {
     [JsonStringEnumMemberName("disabled")]
@@ -7344,7 +7424,7 @@ public enum PaymentMethodRedisplay
 /// 
 /// If a customer checks the box, the [`allow_redisplay`](https://docs.stripe.com/api/payment_methods/object#payment_method_object-allow_redisplay) value on the PaymentMethod is set to `'always'` at confirmation time. For PaymentIntents, the [`setup_future_usage`](https://docs.stripe.com/api/payment_intents/object#payment_intent_object-setup_future_usage) value is also set to the value defined in `payment_method_save_usage`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PaymentMethodSave>))]
 public enum PaymentMethodSave
 {
     [JsonStringEnumMemberName("disabled")]
@@ -7358,7 +7438,7 @@ public enum PaymentMethodSave
 /// 
 /// If not specified, defaults to `nil` (no override value).
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PaymentMethodSaveAllowRedisplayOverride>))]
 public enum PaymentMethodSaveAllowRedisplayOverride
 {
     [JsonStringEnumMemberName("always")]
@@ -7374,7 +7454,7 @@ public enum PaymentMethodSaveAllowRedisplayOverride
 /// 
 /// When using SetupIntents, directly configure the [`usage`](https://docs.stripe.com/api/setup_intents/object#setup_intent_object-usage) value on SetupIntent creation.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PaymentMethodSaveUsage>))]
 public enum PaymentMethodSaveUsage
 {
     [JsonStringEnumMemberName("off_session")]
@@ -7386,7 +7466,7 @@ public enum PaymentMethodSaveUsage
 /// <summary>
 /// Surfaces if automatic tax computation is possible given the current customer location information.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<AutomaticTax2>))]
 public enum AutomaticTax2
 {
     [JsonStringEnumMemberName("failed")]
@@ -7402,7 +7482,7 @@ public enum AutomaticTax2
 /// <summary>
 /// The tax calculation provider used for location resolution. Defaults to `stripe` when not using a [third-party provider](/tax/third-party-apps).
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Provider>))]
 public enum Provider
 {
     [JsonStringEnumMemberName("anrok")]
@@ -7418,7 +7498,7 @@ public enum Provider
 /// <summary>
 /// The data source used to infer the customer's location.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Source2>))]
 public enum Source2
 {
     [JsonStringEnumMemberName("billing_address")]
@@ -7434,7 +7514,7 @@ public enum Source2
 /// <summary>
 /// Device type of the reader.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<DeviceType>))]
 public enum DeviceType
 {
     [JsonStringEnumMemberName("bbpos_chipper2x")]
@@ -7480,7 +7560,7 @@ public enum DeviceType
 /// <summary>
 /// The AmazonPay dispute type, chargeback or claim
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<DisputeType>))]
 public enum DisputeType
 {
     [JsonStringEnumMemberName("chargeback")]
@@ -7492,7 +7572,7 @@ public enum DisputeType
 /// <summary>
 /// The type of dispute opened. Different case types may have varying fees and financial impact.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CaseType>))]
 public enum CaseType
 {
     [JsonStringEnumMemberName("block")]
@@ -7510,7 +7590,7 @@ public enum CaseType
 /// <summary>
 /// Categorization of disputed payment.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<MerchandiseOrServices>))]
 public enum MerchandiseOrServices
 {
     [JsonStringEnumMemberName("merchandise")]
@@ -7522,7 +7602,7 @@ public enum MerchandiseOrServices
 /// <summary>
 /// The [purpose](https://docs.stripe.com/file-upload#uploading-a-file) of the uploaded file.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<FilePurpose>))]
 public enum FilePurpose
 {
     [JsonStringEnumMemberName("account_requirement")]
@@ -7572,7 +7652,7 @@ public enum FilePurpose
 /// <summary>
 /// The purpose for which payments are made. Has a default value based on your merchant category code.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<InvoiceMandateOptionsPaytoPurpose>))]
 public enum InvoiceMandateOptionsPaytoPurpose
 {
     [JsonStringEnumMemberName("dependant_support")]
@@ -7615,7 +7695,7 @@ public enum InvoiceMandateOptionsPaytoPurpose
 /// 
 /// If `category` is `investment` or `other`, this will be `other`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Subcategory>))]
 public enum Subcategory
 {
     [JsonStringEnumMemberName("checking")]
@@ -7635,7 +7715,7 @@ public enum Subcategory
 /// <summary>
 /// The HTTP method used to call the destination endpoint.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<HttpMethod>))]
 public enum HttpMethod
 {
     [JsonStringEnumMemberName("POST")]
@@ -7645,7 +7725,7 @@ public enum HttpMethod
 /// <summary>
 /// Sex of the person in the document.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Sex>))]
 public enum Sex
 {
     [JsonStringEnumMemberName("[redacted]")]
@@ -7661,7 +7741,7 @@ public enum Sex
 /// <summary>
 /// Type of ID number.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<IdNumberType>))]
 public enum IdNumberType
 {
     [JsonStringEnumMemberName("br_cpf")]
@@ -7675,7 +7755,7 @@ public enum IdNumberType
 /// <summary>
 /// Strictness of the DOB matching policy to apply.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Dob>))]
 public enum Dob
 {
     [JsonStringEnumMemberName("none")]
@@ -7687,7 +7767,7 @@ public enum Dob
 /// <summary>
 /// Strictness of the name matching policy to apply.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Name>))]
 public enum Name
 {
     [JsonStringEnumMemberName("none")]
@@ -7699,7 +7779,7 @@ public enum Name
 /// <summary>
 /// Account holder type: individual or company.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<AccountHolderType>))]
 public enum AccountHolderType
 {
     [JsonStringEnumMemberName("company")]
@@ -7711,7 +7791,7 @@ public enum AccountHolderType
 /// <summary>
 /// Account type: checkings or savings. Defaults to checking if omitted.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<InboundTransfersPaymentMethodDetailsUsBankAccountAccountType>))]
 public enum InboundTransfersPaymentMethodDetailsUsBankAccountAccountType
 {
     [JsonStringEnumMemberName("checking")]
@@ -7723,7 +7803,7 @@ public enum InboundTransfersPaymentMethodDetailsUsBankAccountAccountType
 /// <summary>
 /// The type of account being debited or credited
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PaymentMethodDetailsCardPresentReceiptAccountType>))]
 public enum PaymentMethodDetailsCardPresentReceiptAccountType
 {
     [JsonStringEnumMemberName("checking")]
@@ -7739,7 +7819,7 @@ public enum PaymentMethodDetailsCardPresentReceiptAccountType
 /// <summary>
 /// The type of account being debited or credited
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PaymentMethodDetailsInteracPresentReceiptAccountType>))]
 public enum PaymentMethodDetailsInteracPresentReceiptAccountType
 {
     [JsonStringEnumMemberName("checking")]
@@ -7753,7 +7833,7 @@ public enum PaymentMethodDetailsInteracPresentReceiptAccountType
 /// <summary>
 /// The type of fraud labeled by the issuer.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<FraudType>))]
 public enum FraudType
 {
     [JsonStringEnumMemberName("made_with_lost_card")]
@@ -7769,7 +7849,7 @@ public enum FraudType
 /// <summary>
 /// Describes the presence of the customer during the payment.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CustomerPresence>))]
 public enum CustomerPresence
 {
     [JsonStringEnumMemberName("off_session")]
@@ -7781,7 +7861,7 @@ public enum CustomerPresence
 /// <summary>
 /// Describes the type of payment.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PaymentType>))]
 public enum PaymentType
 {
     [JsonStringEnumMemberName("one_off")]
@@ -7797,7 +7877,7 @@ public enum PaymentType
 /// <summary>
 /// Describes the type of money movement. Currently only `card` is supported.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<MoneyMovementType>))]
 public enum MoneyMovementType
 {
     [JsonStringEnumMemberName("card")]
@@ -7807,7 +7887,7 @@ public enum MoneyMovementType
 /// <summary>
 /// Result of the address line 1 check.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<InsightsResourcesPaymentEvaluationRejectedCardAddressLine1Check>))]
 public enum InsightsResourcesPaymentEvaluationRejectedCardAddressLine1Check
 {
     [JsonStringEnumMemberName("fail")]
@@ -7823,7 +7903,7 @@ public enum InsightsResourcesPaymentEvaluationRejectedCardAddressLine1Check
 /// <summary>
 /// Whether the cardholder provided an address first line and if it matched the cardholder’s `billing.address.line1`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<IssuingAuthorizationVerificationDataAddressLine1Check>))]
 public enum IssuingAuthorizationVerificationDataAddressLine1Check
 {
     [JsonStringEnumMemberName("match")]
@@ -7837,7 +7917,7 @@ public enum IssuingAuthorizationVerificationDataAddressLine1Check
 /// <summary>
 /// Indicates whether the cardholder provided a postal code and if it matched the cardholder’s billing address.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<InsightsResourcesPaymentEvaluationRejectedCardAddressPostalCodeCheck>))]
 public enum InsightsResourcesPaymentEvaluationRejectedCardAddressPostalCodeCheck
 {
     [JsonStringEnumMemberName("fail")]
@@ -7853,7 +7933,7 @@ public enum InsightsResourcesPaymentEvaluationRejectedCardAddressPostalCodeCheck
 /// <summary>
 /// Whether the cardholder provided a postal code and if it matched the cardholder’s `billing.address.postal_code`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<IssuingAuthorizationVerificationDataAddressPostalCodeCheck>))]
 public enum IssuingAuthorizationVerificationDataAddressPostalCodeCheck
 {
     [JsonStringEnumMemberName("match")]
@@ -7867,7 +7947,7 @@ public enum IssuingAuthorizationVerificationDataAddressPostalCodeCheck
 /// <summary>
 /// Result of the CVC check.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<InsightsResourcesPaymentEvaluationRejectedCardCvcCheck>))]
 public enum InsightsResourcesPaymentEvaluationRejectedCardCvcCheck
 {
     [JsonStringEnumMemberName("fail")]
@@ -7883,7 +7963,7 @@ public enum InsightsResourcesPaymentEvaluationRejectedCardCvcCheck
 /// <summary>
 /// Whether the cardholder provided a CVC and if it matched Stripe’s record.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<IssuingAuthorizationVerificationDataCvcCheck>))]
 public enum IssuingAuthorizationVerificationDataCvcCheck
 {
     [JsonStringEnumMemberName("match")]
@@ -7897,7 +7977,7 @@ public enum IssuingAuthorizationVerificationDataCvcCheck
 /// <summary>
 /// Risk level of this signal, based on the score.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<RiskLevel>))]
 public enum RiskLevel
 {
     [JsonStringEnumMemberName("elevated")]
@@ -7917,7 +7997,7 @@ public enum RiskLevel
 /// <summary>
 /// Result of the intervention if it has been completed.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Outcome>))]
 public enum Outcome
 {
     [JsonStringEnumMemberName("abandoned")]
@@ -7939,7 +8019,7 @@ public enum Outcome
 /// * `subscription_update`: A subscription was updated.
 /// * `upcoming`: Reserved for upcoming invoices created through the Create Preview Invoice API or when an `invoice.upcoming` event is generated for an upcoming invoice on a subscription.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<BillingReason>))]
 public enum BillingReason
 {
     [JsonStringEnumMemberName("automatic_pending_invoice_item_invoice")]
@@ -7965,7 +8045,7 @@ public enum BillingReason
 /// <summary>
 /// Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will attempt to pay this invoice using the default source attached to the customer. When sending an invoice, Stripe will email this invoice to the customer with payment instructions.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<InvoiceCollectionMethod>))]
 public enum InvoiceCollectionMethod
 {
     [JsonStringEnumMemberName("charge_automatically")]
@@ -7977,7 +8057,7 @@ public enum InvoiceCollectionMethod
 /// <summary>
 /// Mandate collection method
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<MandateUsBankAccountCollectionMethod>))]
 public enum MandateUsBankAccountCollectionMethod
 {
     [JsonStringEnumMemberName("paper")]
@@ -7987,7 +8067,7 @@ public enum MandateUsBankAccountCollectionMethod
 /// <summary>
 /// The customer's tax exempt status. Until the invoice is finalized, this field will equal `customer.tax_exempt`. Once the invoice is finalized, this field will no longer be updated.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CustomerTaxExempt>))]
 public enum CustomerTaxExempt
 {
     [JsonStringEnumMemberName("exempt")]
@@ -8001,7 +8081,7 @@ public enum CustomerTaxExempt
 /// <summary>
 /// One of `fixed` or `maximum`. If `fixed`, the `amount` param refers to the exact amount to be charged in future payments. If `maximum`, the amount charged can be up to the value passed for the `amount` param.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<AmountType>))]
 public enum AmountType
 {
     [JsonStringEnumMemberName("fixed")]
@@ -8013,7 +8093,7 @@ public enum AmountType
 /// <summary>
 /// Preferred language of the Bancontact authorization page that the customer is redirected to.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<InvoicePaymentMethodOptionsBancontactPreferredLanguage>))]
 public enum InvoicePaymentMethodOptionsBancontactPreferredLanguage
 {
     [JsonStringEnumMemberName("de")]
@@ -8029,7 +8109,7 @@ public enum InvoicePaymentMethodOptionsBancontactPreferredLanguage
 /// <summary>
 /// Preferred language of the SOFORT authorization page that the customer is redirected to. Can be one of `de`, `en`, `es`, `fr`, `it`, `nl`, or `pl`
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PaymentMethodDetailsPaymentRecordSofortPreferredLanguage>))]
 public enum PaymentMethodDetailsPaymentRecordSofortPreferredLanguage
 {
     [JsonStringEnumMemberName("de")]
@@ -8051,7 +8131,7 @@ public enum PaymentMethodDetailsPaymentRecordSofortPreferredLanguage
 /// <summary>
 /// The desired country code of the bank account information. Permitted values include: `DE`, `FR`, `IE`, or `NL`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Country>))]
 public enum Country
 {
     [JsonStringEnumMemberName("BE")]
@@ -8071,7 +8151,7 @@ public enum Country
 /// <summary>
 /// Page size of invoice pdf. Options include a4, letter, and auto. If set to auto, page size will be switched to a4 or letter based on customer locale.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PageSize>))]
 public enum PageSize
 {
     [JsonStringEnumMemberName("a4")]
@@ -8085,7 +8165,7 @@ public enum PageSize
 /// <summary>
 /// How the card details were provided.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<AuthorizationMethod>))]
 public enum AuthorizationMethod
 {
     [JsonStringEnumMemberName("chip")]
@@ -8103,7 +8183,7 @@ public enum AuthorizationMethod
 /// <summary>
 /// Whether the card was present at the point of sale for the authorization.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CardPresence>))]
 public enum CardPresence
 {
     [JsonStringEnumMemberName("not_present")]
@@ -8115,7 +8195,7 @@ public enum CardPresence
 /// <summary>
 /// The reason why the previous card needed to be replaced.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ReplacementReason>))]
 public enum ReplacementReason
 {
     [JsonStringEnumMemberName("damaged")]
@@ -8133,7 +8213,7 @@ public enum ReplacementReason
 /// <summary>
 /// The enum that describes the dispute loss outcome. If the dispute is not lost, this field will be absent. New enum values may be added in the future, so be sure to handle unknown values.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<LossReason>))]
 public enum LossReason
 {
     [JsonStringEnumMemberName("cardholder_authentication_issuer_liability")]
@@ -8181,7 +8261,7 @@ public enum LossReason
 /// <summary>
 /// The digital wallet for this token, if one was used.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<WalletProvider>))]
 public enum WalletProvider
 {
     [JsonStringEnumMemberName("apple_pay")]
@@ -8195,7 +8275,7 @@ public enum WalletProvider
 /// <summary>
 /// The digital wallet used for this transaction. One of `apple_pay`, `google_pay`, or `samsung_pay`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Wallet>))]
 public enum Wallet
 {
     [JsonStringEnumMemberName("apple_pay")]
@@ -8209,7 +8289,7 @@ public enum Wallet
 /// <summary>
 /// The entity that requested the exemption, either the acquiring merchant or the Issuing user.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ClaimedBy>))]
 public enum ClaimedBy
 {
     [JsonStringEnumMemberName("acquirer")]
@@ -8221,7 +8301,7 @@ public enum ClaimedBy
 /// <summary>
 /// The type of purchase.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PurchaseType>))]
 public enum PurchaseType
 {
     [JsonStringEnumMemberName("fuel_and_non_fuel_purchase")]
@@ -8235,7 +8315,7 @@ public enum PurchaseType
 /// <summary>
 /// The type of fuel service.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ServiceType>))]
 public enum ServiceType
 {
     [JsonStringEnumMemberName("full_service")]
@@ -8249,7 +8329,7 @@ public enum ServiceType
 /// <summary>
 /// The method by which the fraud challenge was delivered to the cardholder.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Channel>))]
 public enum Channel
 {
     [JsonStringEnumMemberName("sms")]
@@ -8259,7 +8339,7 @@ public enum Channel
 /// <summary>
 /// If the challenge is not deliverable, the reason why.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<UndeliverableReason>))]
 public enum UndeliverableReason
 {
     [JsonStringEnumMemberName("no_phone_number")]
@@ -8271,7 +8351,7 @@ public enum UndeliverableReason
 /// <summary>
 /// The units for `quantity_decimal`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<IssuingAuthorizationFuelDataUnit>))]
 public enum IssuingAuthorizationFuelDataUnit
 {
     [JsonStringEnumMemberName("charging_minute")]
@@ -8295,7 +8375,7 @@ public enum IssuingAuthorizationFuelDataUnit
 /// <summary>
 /// A unit of time.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ShippingRateDeliveryEstimateBoundUnit>))]
 public enum ShippingRateDeliveryEstimateBoundUnit
 {
     [JsonStringEnumMemberName("business_day")]
@@ -8313,7 +8393,7 @@ public enum ShippingRateDeliveryEstimateBoundUnit
 /// <summary>
 /// The outcome of the 3D Secure authentication request.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<IssuingAuthorizationThreeDSecureResult>))]
 public enum IssuingAuthorizationThreeDSecureResult
 {
     [JsonStringEnumMemberName("attempt_acknowledged")]
@@ -8329,7 +8409,7 @@ public enum IssuingAuthorizationThreeDSecureResult
 /// <summary>
 /// The validation result for the shipping address.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<IssuingCardShippingAddressValidationResult>))]
 public enum IssuingCardShippingAddressValidationResult
 {
     [JsonStringEnumMemberName("indeterminate")]
@@ -8343,13 +8423,15 @@ public enum IssuingCardShippingAddressValidationResult
 /// <summary>
 /// Indicates the outcome of 3D Secure authentication.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardDetailsResourceThreeDSecureResult>))]
 public enum PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardDetailsResourceThreeDSecureResult
 {
     [JsonStringEnumMemberName("attempt_acknowledged")]
     AttemptAcknowledged,
     [JsonStringEnumMemberName("authenticated")]
     Authenticated,
+    [JsonStringEnumMemberName("data_share_only")]
+    DataShareOnly,
     [JsonStringEnumMemberName("exempted")]
     Exempted,
     [JsonStringEnumMemberName("failed")]
@@ -8363,7 +8445,7 @@ public enum PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardDetailsReso
 /// <summary>
 /// Whether the cardholder provided an expiry date and if it matched Stripe’s record.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ExpiryCheck>))]
 public enum ExpiryCheck
 {
     [JsonStringEnumMemberName("match")]
@@ -8377,7 +8459,7 @@ public enum ExpiryCheck
 /// <summary>
 /// Reason the card is ineligible for Apple Pay
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<IneligibleReason>))]
 public enum IneligibleReason
 {
     [JsonStringEnumMemberName("missing_agreement")]
@@ -8391,9 +8473,11 @@ public enum IneligibleReason
 /// <summary>
 /// The delivery company that shipped a card.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Carrier>))]
 public enum Carrier
 {
+    [JsonStringEnumMemberName("correos")]
+    Correos,
     [JsonStringEnumMemberName("dhl")]
     Dhl,
     [JsonStringEnumMemberName("fedex")]
@@ -8407,7 +8491,7 @@ public enum Carrier
 /// <summary>
 /// Shipment service, such as `standard` or `express`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Service>))]
 public enum Service
 {
     [JsonStringEnumMemberName("express")]
@@ -8421,7 +8505,7 @@ public enum Service
 /// <summary>
 /// Whether the product was a merchandise or service.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ProductType>))]
 public enum ProductType
 {
     [JsonStringEnumMemberName("merchandise")]
@@ -8433,7 +8517,7 @@ public enum ProductType
 /// <summary>
 /// Result of cardholder's attempt to return the product.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ReturnStatus>))]
 public enum ReturnStatus
 {
     [JsonStringEnumMemberName("merchant_rejected")]
@@ -8445,7 +8529,7 @@ public enum ReturnStatus
 /// <summary>
 /// The method used for tokenizing a card.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CardNumberSource>))]
 public enum CardNumberSource
 {
     [JsonStringEnumMemberName("app")]
@@ -8461,7 +8545,7 @@ public enum CardNumberSource
 /// <summary>
 /// The recommendation on responding to the tokenization request.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<SuggestedDecision>))]
 public enum SuggestedDecision
 {
     [JsonStringEnumMemberName("approve")]
@@ -8475,7 +8559,7 @@ public enum SuggestedDecision
 /// <summary>
 /// The policy for how to use card logo images in a card design with this physical bundle.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CardLogo>))]
 public enum CardLogo
 {
     [JsonStringEnumMemberName("optional")]
@@ -8489,7 +8573,7 @@ public enum CardLogo
 /// <summary>
 /// The policy for how to use carrier letter text in a card design with this physical bundle.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CarrierText>))]
 public enum CarrierText
 {
     [JsonStringEnumMemberName("optional")]
@@ -8503,7 +8587,7 @@ public enum CarrierText
 /// <summary>
 /// The policy for how to use a second line on a card with this physical bundle.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<SecondLine>))]
 public enum SecondLine
 {
     [JsonStringEnumMemberName("optional")]
@@ -8517,7 +8601,7 @@ public enum SecondLine
 /// <summary>
 /// This value is used to determine if a business is exempt from providing ultimate beneficial owners. See [this support article](https://support.stripe.com/questions/exemption-from-providing-ownership-details) and [changelog](https://docs.stripe.com/changelog/acacia/2025-01-27/ownership-exemption-reason-accounts-api) for more details.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<OwnershipExemptionReason>))]
 public enum OwnershipExemptionReason
 {
     [JsonStringEnumMemberName("qualified_entity_exceeds_ownership_threshold")]
@@ -8529,7 +8613,7 @@ public enum OwnershipExemptionReason
 /// <summary>
 /// The category identifying the legal structure of the company or legal entity. Also available for accounts where [controller.requirement_collection](/api/accounts/object#account_object-controller-requirement_collection) is `stripe`. See [Business structure](https://docs.stripe.com/connect/identity-verification#business-structure) for more details.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Structure>))]
 public enum Structure
 {
     [JsonStringEnumMemberName("free_zone_establishment")]
@@ -8583,7 +8667,7 @@ public enum Structure
 /// <summary>
 /// The status of the mandate on the Bacs network. Can be one of `pending`, `revoked`, `refused`, or `accepted`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<NetworkStatus>))]
 public enum NetworkStatus
 {
     [JsonStringEnumMemberName("accepted")]
@@ -8599,7 +8683,7 @@ public enum NetworkStatus
 /// <summary>
 /// When the mandate is revoked on the Bacs network this field displays the reason for the revocation.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<RevocationReason>))]
 public enum RevocationReason
 {
     [JsonStringEnumMemberName("account_closed")]
@@ -8617,7 +8701,7 @@ public enum RevocationReason
 /// <summary>
 /// Indicates who reported the payment.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ReportedBy>))]
 public enum ReportedBy
 {
     [JsonStringEnumMemberName("self")]
@@ -8631,7 +8715,7 @@ public enum ReportedBy
 /// 
 /// Redirect-based payment methods may require your customer to be redirected to a payment method's app or site for authentication or additional steps. To [confirm](https://docs.stripe.com/api/payment_intents/confirm) this PaymentIntent, you may be required to provide a `return_url` to redirect customers back to your site after they authenticate or complete the payment.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<AllowRedirects>))]
 public enum AllowRedirects
 {
     [JsonStringEnumMemberName("always")]
@@ -8643,7 +8727,7 @@ public enum AllowRedirects
 /// <summary>
 /// Describes whether we can confirm this PaymentIntent automatically, or if it requires customer action to confirm the payment.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ConfirmationMethod>))]
 public enum ConfirmationMethod
 {
     [JsonStringEnumMemberName("automatic")]
@@ -8655,7 +8739,7 @@ public enum ConfirmationMethod
 /// <summary>
 /// The type of the microdeposit sent to the customer. Used to distinguish between different verification methods.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<MicrodepositType>))]
 public enum MicrodepositType
 {
     [JsonStringEnumMemberName("amounts")]
@@ -8667,7 +8751,7 @@ public enum MicrodepositType
 /// <summary>
 /// The purpose of the transaction.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TransactionPurpose>))]
 public enum TransactionPurpose
 {
     [JsonStringEnumMemberName("goods")]
@@ -8683,7 +8767,7 @@ public enum TransactionPurpose
 /// <summary>
 /// If set to `auto`, enables the collection of customer consent for promotional communications.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PaymentLinksResourceConsentCollectionPromotions>))]
 public enum PaymentLinksResourceConsentCollectionPromotions
 {
     [JsonStringEnumMemberName("auto")]
@@ -8696,7 +8780,7 @@ public enum PaymentLinksResourceConsentCollectionPromotions
 /// If `opt_in`, the customer consents to receiving promotional communications
 /// from the merchant about this Checkout Session.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PaymentPagesCheckoutSessionConsentPromotions>))]
 public enum PaymentPagesCheckoutSessionConsentPromotions
 {
     [JsonStringEnumMemberName("opt_in")]
@@ -8708,7 +8792,7 @@ public enum PaymentPagesCheckoutSessionConsentPromotions
 /// <summary>
 /// If set to `required`, it requires cutomers to accept the terms of service before being able to pay. If set to `none`, customers won't be shown a checkbox to accept the terms of service.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PaymentLinksResourceConsentCollectionTermsOfService>))]
 public enum PaymentLinksResourceConsentCollectionTermsOfService
 {
     [JsonStringEnumMemberName("none")]
@@ -8720,7 +8804,7 @@ public enum PaymentLinksResourceConsentCollectionTermsOfService
 /// <summary>
 /// If `accepted`, the customer in this Checkout Session has agreed to the merchant's terms of service.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PaymentPagesCheckoutSessionConsentTermsOfService>))]
 public enum PaymentPagesCheckoutSessionConsentTermsOfService
 {
     [JsonStringEnumMemberName("accepted")]
@@ -8732,7 +8816,7 @@ public enum PaymentPagesCheckoutSessionConsentTermsOfService
 /// 
 /// When set to `hidden`, the payment method reuse agreement text will always be hidden in the UI.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Position>))]
 public enum Position
 {
     [JsonStringEnumMemberName("auto")]
@@ -8741,7 +8825,7 @@ public enum Position
     Hidden
 }
 
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Required>))]
 public enum Required
 {
     [JsonStringEnumMemberName("if_supported")]
@@ -8753,7 +8837,7 @@ public enum Required
 /// <summary>
 /// How card details were read in this transaction.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ReadMethod>))]
 public enum ReadMethod
 {
     [JsonStringEnumMemberName("contact_emv")]
@@ -8771,7 +8855,7 @@ public enum ReadMethod
 /// <summary>
 /// The account's display preference.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Preference>))]
 public enum Preference
 {
     [JsonStringEnumMemberName("none")]
@@ -8785,7 +8869,7 @@ public enum Preference
 /// <summary>
 /// The effective display preference value.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PaymentMethodConfigResourceDisplayPreferenceValue>))]
 public enum PaymentMethodConfigResourceDisplayPreferenceValue
 {
     [JsonStringEnumMemberName("off")]
@@ -8797,7 +8881,7 @@ public enum PaymentMethodConfigResourceDisplayPreferenceValue
 /// <summary>
 /// The toggle's collected value. Can be `enabled` or `disabled`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TerminalReaderReaderResourceToggleValue>))]
 public enum TerminalReaderReaderResourceToggleValue
 {
     [JsonStringEnumMemberName("disabled")]
@@ -8809,7 +8893,7 @@ public enum TerminalReaderReaderResourceToggleValue
 /// <summary>
 /// The token currency that the transaction was sent with.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TokenCurrency>))]
 public enum TokenCurrency
 {
     [JsonStringEnumMemberName("phantom_cash")]
@@ -8820,6 +8904,8 @@ public enum TokenCurrency
     Usdg,
     [JsonStringEnumMemberName("usdp")]
     Usdp,
+    [JsonStringEnumMemberName("usdsui")]
+    Usdsui,
     [JsonStringEnumMemberName("usdt")]
     Usdt
 }
@@ -8827,7 +8913,7 @@ public enum TokenCurrency
 /// <summary>
 /// The customer's bank. Should be one of `arzte_und_apotheker_bank`, `austrian_anadi_bank_ag`, `bank_austria`, `bankhaus_carl_spangler`, `bankhaus_schelhammer_und_schattera_ag`, `bawag_psk_ag`, `bks_bank_ag`, `brull_kallmus_bank_ag`, `btv_vier_lander_bank`, `capital_bank_grawe_gruppe_ag`, `deutsche_bank_ag`, `dolomitenbank`, `easybank_ag`, `erste_bank_und_sparkassen`, `hypo_alpeadriabank_international_ag`, `hypo_noe_lb_fur_niederosterreich_u_wien`, `hypo_oberosterreich_salzburg_steiermark`, `hypo_tirol_bank_ag`, `hypo_vorarlberg_bank_ag`, `hypo_bank_burgenland_aktiengesellschaft`, `marchfelder_bank`, `oberbank_ag`, `raiffeisen_bankengruppe_osterreich`, `schoellerbank_ag`, `sparda_bank_wien`, `volksbank_gruppe`, `volkskreditbank_ag`, or `vr_bank_braunau`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PaymentMethodDetailsEpsBank>))]
 public enum PaymentMethodDetailsEpsBank
 {
     [JsonStringEnumMemberName("arzte_und_apotheker_bank")]
@@ -8889,9 +8975,9 @@ public enum PaymentMethodDetailsEpsBank
 }
 
 /// <summary>
-/// The customer's bank. Can be one of `affin_bank`, `agrobank`, `alliance_bank`, `ambank`, `bank_islam`, `bank_muamalat`, `bank_rakyat`, `bsn`, `cimb`, `hong_leong_bank`, `hsbc`, `kfh`, `maybank2u`, `ocbc`, `public_bank`, `rhb`, `standard_chartered`, `uob`, `deutsche_bank`, `maybank2e`, `pb_enterprise`, or `bank_of_china`.
+/// The customer's bank. Can be one of `affin_bank`, `agrobank`, `alliance_bank`, `ambank`, `bank_islam`, `bank_muamalat`, `bnp_paribas`, `bank_rakyat`, `bsn`, `cimb`, `citibank`, `hong_leong_bank`, `hsbc`, `kfh`, `maybank2u`, `ocbc`, `public_bank`, `rhb`, `standard_chartered`, `uob`, `deutsche_bank`, `maybank2e`, `mbsb_bank`, `pb_enterprise`, or `bank_of_china`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PaymentMethodDetailsFpxBank>))]
 public enum PaymentMethodDetailsFpxBank
 {
     [JsonStringEnumMemberName("affin_bank")]
@@ -8910,10 +8996,14 @@ public enum PaymentMethodDetailsFpxBank
     BankOfChina,
     [JsonStringEnumMemberName("bank_rakyat")]
     BankRakyat,
+    [JsonStringEnumMemberName("bnp_paribas")]
+    BnpParibas,
     [JsonStringEnumMemberName("bsn")]
     Bsn,
     [JsonStringEnumMemberName("cimb")]
     Cimb,
+    [JsonStringEnumMemberName("citibank")]
+    Citibank,
     [JsonStringEnumMemberName("deutsche_bank")]
     DeutscheBank,
     [JsonStringEnumMemberName("hong_leong_bank")]
@@ -8926,6 +9016,8 @@ public enum PaymentMethodDetailsFpxBank
     Maybank2e,
     [JsonStringEnumMemberName("maybank2u")]
     Maybank2u,
+    [JsonStringEnumMemberName("mbsb_bank")]
+    MbsbBank,
     [JsonStringEnumMemberName("ocbc")]
     Ocbc,
     [JsonStringEnumMemberName("pb_enterprise")]
@@ -8943,7 +9035,7 @@ public enum PaymentMethodDetailsFpxBank
 /// <summary>
 /// The customer's bank. Can be one of `abn_amro`, `adyen`, `asn_bank`, `bunq`, `buut`, `finom`, `handelsbanken`, `ing`, `knab`, `mollie`, `moneyou`, `n26`, `nn`, `rabobank`, `regiobank`, `revolut`, `sns_bank`, `triodos_bank`, `van_lanschot`, or `yoursafe`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PaymentMethodDetailsIdealBank>))]
 public enum PaymentMethodDetailsIdealBank
 {
     [JsonStringEnumMemberName("abn_amro")]
@@ -8991,7 +9083,7 @@ public enum PaymentMethodDetailsIdealBank
 /// <summary>
 /// The customer's bank. Can be one of `ing`, `citi_handlowy`, `tmobile_usbugi_bankowe`, `plus_bank`, `etransfer_pocztowy24`, `banki_spbdzielcze`, `bank_nowy_bfg_sa`, `getin_bank`, `velobank`, `blik`, `noble_pay`, `ideabank`, `envelobank`, `santander_przelew24`, `nest_przelew`, `mbank_mtransfer`, `inteligo`, `pbac_z_ipko`, `bnp_paribas`, `credit_agricole`, `toyota_bank`, `bank_pekao_sa`, `volkswagen_bank`, `bank_millennium`, `alior_bank`, or `boz`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PaymentMethodDetailsP24Bank>))]
 public enum PaymentMethodDetailsP24Bank
 {
     [JsonStringEnumMemberName("alior_bank")]
@@ -9051,7 +9143,7 @@ public enum PaymentMethodDetailsP24Bank
 /// <summary>
 /// The Bank Identifier Code of the customer's bank.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Bic>))]
 public enum Bic
 {
     [JsonStringEnumMemberName("ABNANL2A")]
@@ -9101,7 +9193,7 @@ public enum Bic
 /// <summary>
 /// The name of the convenience store chain where the payment was completed.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Chain>))]
 public enum Chain
 {
     [JsonStringEnumMemberName("familymart")]
@@ -9117,7 +9209,7 @@ public enum Chain
 /// <summary>
 /// The local credit or debit card brand.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PaymentMethodDetailsKrCardBrand>))]
 public enum PaymentMethodDetailsKrCardBrand
 {
     [JsonStringEnumMemberName("bc")]
@@ -9169,7 +9261,7 @@ public enum PaymentMethodDetailsKrCardBrand
 /// <summary>
 /// Card brand. Can be `amex`, `cartes_bancaires`, `diners`, `discover`, `eftpos_au`, `jcb`, `link`, `mastercard`, `unionpay`, `visa` or `unknown`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardDetailsBrand>))]
 public enum PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardDetailsBrand
 {
     [JsonStringEnumMemberName("amex")]
@@ -9201,7 +9293,7 @@ public enum PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardDetailsBran
 /// <summary>
 /// Whether to fund this transaction with Naver Pay points or a card.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PaymentMethodNaverPayFunding>))]
 public enum PaymentMethodNaverPayFunding
 {
     [JsonStringEnumMemberName("card")]
@@ -9213,7 +9305,7 @@ public enum PaymentMethodNaverPayFunding
 /// <summary>
 /// Card funding type. Can be `credit`, `debit`, `prepaid`, or `unknown`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardDetailsFunding>))]
 public enum PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardDetailsFunding
 {
     [JsonStringEnumMemberName("credit")]
@@ -9229,7 +9321,7 @@ public enum PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardDetailsFund
 /// <summary>
 /// Requested routing priority
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<RequestedPriority>))]
 public enum RequestedPriority
 {
     [JsonStringEnumMemberName("domestic")]
@@ -9239,23 +9331,9 @@ public enum RequestedPriority
 }
 
 /// <summary>
-/// The client type that the end customer will pay from
-/// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum Client
-{
-    [JsonStringEnumMemberName("android")]
-    Android,
-    [JsonStringEnumMemberName("ios")]
-    Ios,
-    [JsonStringEnumMemberName("web")]
-    Web
-}
-
-/// <summary>
 /// The ACH network code that resulted in this block.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<NetworkCode>))]
 public enum NetworkCode
 {
     [JsonStringEnumMemberName("R02")]
@@ -9287,7 +9365,7 @@ public enum NetworkCode
 /// <summary>
 /// The border style for the Checkout Session. Must be one of `rounded`, `rectangular`, or `pill`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<BorderStyle>))]
 public enum BorderStyle
 {
     [JsonStringEnumMemberName("pill")]
@@ -9305,7 +9383,7 @@ public enum BorderStyle
 /// 
 /// When set to `server_only`, you must add the onShippingDetailsChange event handler when initializing the Stripe Checkout client and manually update the shipping details from your server using the Stripe API.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<UpdateShippingDetails>))]
 public enum UpdateShippingDetails
 {
     [JsonStringEnumMemberName("client_only")]
@@ -9315,21 +9393,9 @@ public enum UpdateShippingDetails
 }
 
 /// <summary>
-/// The transaction type that was passed for an off-session, Merchant-Initiated transaction, one of `recurring` or `unscheduled`.
-/// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum StoredCredentialUsage
-{
-    [JsonStringEnumMemberName("recurring")]
-    Recurring,
-    [JsonStringEnumMemberName("unscheduled")]
-    Unscheduled
-}
-
-/// <summary>
 /// For authenticated transactions: Indicates how the issuing bank authenticated the customer.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<AuthenticationFlow>))]
 public enum AuthenticationFlow
 {
     [JsonStringEnumMemberName("challenge")]
@@ -9341,7 +9407,7 @@ public enum AuthenticationFlow
 /// <summary>
 /// The Electronic Commerce Indicator (ECI). A protocol-level field indicating what degree of authentication was performed.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardDetailsResourceThreeDSecureElectronicCommerceIndicator>))]
 public enum PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardDetailsResourceThreeDSecureElectronicCommerceIndicator
 {
     [JsonStringEnumMemberName("01")]
@@ -9364,7 +9430,7 @@ public enum PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardDetailsReso
 /// The Electronic Commerce Indicator (ECI). A protocol-level field
 /// indicating what degree of authentication was performed.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ThreeDSecureDetailsElectronicCommerceIndicator>))]
 public enum ThreeDSecureDetailsElectronicCommerceIndicator
 {
     [JsonStringEnumMemberName("01")]
@@ -9382,7 +9448,7 @@ public enum ThreeDSecureDetailsElectronicCommerceIndicator
 /// <summary>
 /// The exemption requested via 3DS and accepted by the issuer at authentication time.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ExemptionIndicator>))]
 public enum ExemptionIndicator
 {
     [JsonStringEnumMemberName("low_risk")]
@@ -9394,7 +9460,7 @@ public enum ExemptionIndicator
 /// <summary>
 /// Additional information about why 3D Secure succeeded or failed, based on the `result`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ResultReason>))]
 public enum ResultReason
 {
     [JsonStringEnumMemberName("abandoned")]
@@ -9416,7 +9482,7 @@ public enum ResultReason
 /// <summary>
 /// The version of 3D Secure that was used.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardDetailsResourceThreeDSecureVersion>))]
 public enum PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardDetailsResourceThreeDSecureVersion
 {
     [JsonStringEnumMemberName("1.0.2")]
@@ -9430,7 +9496,7 @@ public enum PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardDetailsReso
 /// <summary>
 /// The version of 3D Secure that was used.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ThreeDSecureDetailsVersion>))]
 public enum ThreeDSecureDetailsVersion
 {
     [JsonStringEnumMemberName("1.0.2")]
@@ -9448,7 +9514,7 @@ public enum ThreeDSecureDetailsVersion
 /// <summary>
 /// If `completed`, you can use the [Balance Transactions API](https://docs.stripe.com/api/balance_transactions/list#balance_transaction_list-payout) to list all balance transactions that are paid out in this payout.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ReconciliationStatus>))]
 public enum ReconciliationStatus
 {
     [JsonStringEnumMemberName("completed")]
@@ -9462,7 +9528,7 @@ public enum ReconciliationStatus
 /// <summary>
 /// Indicates if the person or any of their representatives, family members, or other closely related persons, declares that they hold or have held an important public job or function, in any jurisdiction.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PoliticalExposure>))]
 public enum PoliticalExposure
 {
     [JsonStringEnumMemberName("existing")]
@@ -9474,7 +9540,7 @@ public enum PoliticalExposure
 /// <summary>
 /// Describes how to compute the price per period. Either `per_unit` or `tiered`. `per_unit` indicates that the fixed amount (specified in `amount`) will be charged per unit in `quantity` (for plans with `usage_type=licensed`), or per unit of total usage (for plans with `usage_type=metered`). `tiered` indicates that the unit pricing will be computed using a tiering strategy as defined using the `tiers` and `tiers_mode` attributes.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<BillingScheme>))]
 public enum BillingScheme
 {
     [JsonStringEnumMemberName("per_unit")]
@@ -9486,7 +9552,7 @@ public enum BillingScheme
 /// <summary>
 /// Defines if the tiering price should be `graduated` or `volume` based. In `volume`-based tiering, the maximum quantity within a period determines the per unit price. In `graduated` tiering, pricing can change as the quantity grows.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TiersMode>))]
 public enum TiersMode
 {
     [JsonStringEnumMemberName("graduated")]
@@ -9498,7 +9564,7 @@ public enum TiersMode
 /// <summary>
 /// Configures how the quantity per period should be determined. Can be either `metered` or `licensed`. `licensed` automatically bills the `quantity` set when adding it to a subscription. `metered` aggregates the total usage based on usage records. Defaults to `licensed`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<UsageType>))]
 public enum UsageType
 {
     [JsonStringEnumMemberName("licensed")]
@@ -9510,7 +9576,7 @@ public enum UsageType
 /// <summary>
 /// Whether to create prorations when canceling subscriptions. Possible values are `none` and `create_prorations`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ProrationBehavior>))]
 public enum ProrationBehavior
 {
     [JsonStringEnumMemberName("always_invoice")]
@@ -9524,7 +9590,7 @@ public enum ProrationBehavior
 /// <summary>
 /// Determines the value to use for the billing cycle anchor on subscription updates. Valid values are `now` or `unchanged`, and the default value is `unchanged`. Setting the value to `now` resets the subscription's billing cycle anchor to the current time (in UTC). For more information, see the billing cycle [documentation](https://docs.stripe.com/billing/subscriptions/billing-cycle).
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PortalSubscriptionUpdateBillingCycleAnchor>))]
 public enum PortalSubscriptionUpdateBillingCycleAnchor
 {
     [JsonStringEnumMemberName("now")]
@@ -9536,7 +9602,7 @@ public enum PortalSubscriptionUpdateBillingCycleAnchor
 /// <summary>
 /// Possible values are `phase_start` or `automatic`. If `phase_start` then billing cycle anchor of the subscription is set to the start of the phase when entering the phase. If `automatic` then the billing cycle anchor is automatically modified as needed when entering the phase. For more information, see the billing cycle [documentation](https://docs.stripe.com/billing/subscriptions/billing-cycle).
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<SubscriptionSchedulePhaseConfigurationBillingCycleAnchor>))]
 public enum SubscriptionSchedulePhaseConfigurationBillingCycleAnchor
 {
     [JsonStringEnumMemberName("automatic")]
@@ -9548,7 +9614,7 @@ public enum SubscriptionSchedulePhaseConfigurationBillingCycleAnchor
 /// <summary>
 /// Determines how handle updates to trialing subscriptions. Valid values are `end_trial` and `continue_trial`. Defaults to a value of `end_trial` if you don't set it during creation.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TrialUpdateBehavior>))]
 public enum TrialUpdateBehavior
 {
     [JsonStringEnumMemberName("continue_trial")]
@@ -9560,7 +9626,7 @@ public enum TrialUpdateBehavior
 /// <summary>
 /// Recommended action based on the score of the `fraudulent_payment` signal. Possible values are `block`, `continue` and `request_three_d_secure`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<RecommendedAction>))]
 public enum RecommendedAction
 {
     [JsonStringEnumMemberName("block")]
@@ -9572,7 +9638,7 @@ public enum RecommendedAction
 /// <summary>
 /// The type of items in the value list. One of `card_fingerprint`, `card_bin`, `crypto_fingerprint`, `email`, `ip_address`, `country`, `string`, `case_sensitive_string`, `customer_id`, `account`, `sepa_debit_fingerprint`, or `us_bank_account_fingerprint`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ItemType>))]
 public enum ItemType
 {
     [JsonStringEnumMemberName("account")]
@@ -9604,7 +9670,7 @@ public enum ItemType
 /// <summary>
 /// Provides the reason for why the refund is pending. Possible values are: `processing`, `insufficient_funds`, or `charge_pending`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PendingReason>))]
 public enum PendingReason
 {
     [JsonStringEnumMemberName("charge_pending")]
@@ -9618,7 +9684,7 @@ public enum PendingReason
 /// <summary>
 /// The reason the review was closed, or null if it has not yet been closed. One of `approved`, `refunded`, `refunded_as_fraud`, `disputed`, `redacted`, `canceled`, `payment_never_settled`, or `acknowledged`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ClosedReason>))]
 public enum ClosedReason
 {
     [JsonStringEnumMemberName("acknowledged")]
@@ -9642,7 +9708,7 @@ public enum ClosedReason
 /// <summary>
 /// The reason the review was opened. One of `rule` or `manual`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<OpenedReason>))]
 public enum OpenedReason
 {
     [JsonStringEnumMemberName("manual")]
@@ -9654,7 +9720,7 @@ public enum OpenedReason
 /// <summary>
 /// Behavior of the subscription schedule and underlying subscription when it ends. Possible values are `release` or `cancel` with the default being `release`. `release` will end the subscription schedule and keep the underlying subscription running. `cancel` will end the subscription schedule and cancel the underlying subscription.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<EndBehavior>))]
 public enum EndBehavior
 {
     [JsonStringEnumMemberName("cancel")]
@@ -9670,7 +9736,7 @@ public enum EndBehavior
 /// <summary>
 /// Controls how invoices and invoice items display proration amounts and discount amounts.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ProrationDiscounts>))]
 public enum ProrationDiscounts
 {
     [JsonStringEnumMemberName("included")]
@@ -9682,7 +9748,7 @@ public enum ProrationDiscounts
 /// <summary>
 /// The payment collection behavior for this subscription while paused.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Behavior>))]
 public enum Behavior
 {
     [JsonStringEnumMemberName("keep_as_draft")]
@@ -9696,7 +9762,7 @@ public enum Behavior
 /// <summary>
 /// Configure whether Stripe updates `subscription.default_payment_method` when payment succeeds. Defaults to `off`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<SaveDefaultPaymentMethod>))]
 public enum SaveDefaultPaymentMethod
 {
     [JsonStringEnumMemberName("off")]
@@ -9708,7 +9774,7 @@ public enum SaveDefaultPaymentMethod
 /// <summary>
 /// Indicates how the subscription should change when the trial ends if the user did not provide a payment method.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<MissingPaymentMethod>))]
 public enum MissingPaymentMethod
 {
     [JsonStringEnumMemberName("cancel")]
@@ -9722,7 +9788,7 @@ public enum MissingPaymentMethod
 /// <summary>
 /// Place of supply scheme used in an Default standard registration.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TaxProductRegistrationsResourceCountryOptionsDefaultStandardPlaceOfSupplyScheme>))]
 public enum TaxProductRegistrationsResourceCountryOptionsDefaultStandardPlaceOfSupplyScheme
 {
     [JsonStringEnumMemberName("inbound_goods")]
@@ -9734,7 +9800,7 @@ public enum TaxProductRegistrationsResourceCountryOptionsDefaultStandardPlaceOfS
 /// <summary>
 /// Place of supply scheme used in an EU standard registration.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TaxProductRegistrationsResourceCountryOptionsEuStandardPlaceOfSupplyScheme>))]
 public enum TaxProductRegistrationsResourceCountryOptionsEuStandardPlaceOfSupplyScheme
 {
     [JsonStringEnumMemberName("inbound_goods")]
@@ -9748,7 +9814,7 @@ public enum TaxProductRegistrationsResourceCountryOptionsEuStandardPlaceOfSupply
 /// <summary>
 /// The type of customer address provided.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<AddressSource>))]
 public enum AddressSource
 {
     [JsonStringEnumMemberName("billing")]
@@ -9760,7 +9826,7 @@ public enum AddressSource
 /// <summary>
 /// The taxability override used for taxation.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TaxabilityOverride>))]
 public enum TaxabilityOverride
 {
     [JsonStringEnumMemberName("customer_exempt")]
@@ -9774,7 +9840,7 @@ public enum TaxabilityOverride
 /// <summary>
 /// Indicates the level of the jurisdiction imposing the tax.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Level>))]
 public enum Level
 {
     [JsonStringEnumMemberName("city")]
@@ -9792,7 +9858,7 @@ public enum Level
 /// <summary>
 /// Indicates whether the jurisdiction was determined by the origin (merchant's address) or destination (customer's address).
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Sourcing>))]
 public enum Sourcing
 {
     [JsonStringEnumMemberName("destination")]
@@ -9804,7 +9870,7 @@ public enum Sourcing
 /// <summary>
 /// The tax type, such as `vat` or `sales_tax`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TaxType>))]
 public enum TaxType
 {
     [JsonStringEnumMemberName("amusement_tax")]
@@ -9821,6 +9887,10 @@ public enum TaxType
     Jct,
     [JsonStringEnumMemberName("lease_tax")]
     LeaseTax,
+    [JsonStringEnumMemberName("mass_transit_parking_tax")]
+    MassTransitParkingTax,
+    [JsonStringEnumMemberName("parking_tax")]
+    ParkingTax,
     [JsonStringEnumMemberName("pst")]
     Pst,
     [JsonStringEnumMemberName("qst")]
@@ -9840,7 +9910,7 @@ public enum TaxType
 /// <summary>
 /// Indicates the type of tax rate applied to the taxable amount. This value can be `null` when no tax applies to the location. This field is only present for TaxRates created by Stripe Tax.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<RateType>))]
 public enum RateType
 {
     [JsonStringEnumMemberName("flat_amount")]
@@ -9852,7 +9922,7 @@ public enum RateType
 /// <summary>
 /// The level of the jurisdiction that imposes this tax rate. Will be `null` for manually defined tax rates.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<JurisdictionLevel>))]
 public enum JurisdictionLevel
 {
     [JsonStringEnumMemberName("city")]
@@ -9872,7 +9942,7 @@ public enum JurisdictionLevel
 /// <summary>
 /// The type of link being generated.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<LinkType>))]
 public enum LinkType
 {
     [JsonStringEnumMemberName("apple_terms_and_conditions")]
@@ -9882,7 +9952,7 @@ public enum LinkType
 /// <summary>
 /// The button style for the choice. Can be `primary` or `secondary`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Style>))]
 public enum Style
 {
     [JsonStringEnumMemberName("primary")]
@@ -9894,7 +9964,7 @@ public enum Style
 /// <summary>
 /// The toggle's default value. Can be `enabled` or `disabled`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<DefaultValue>))]
 public enum DefaultValue
 {
     [JsonStringEnumMemberName("disabled")]
@@ -9906,7 +9976,7 @@ public enum DefaultValue
 /// <summary>
 /// Defines how the alert will behave.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Recurrence>))]
 public enum Recurrence
 {
     [JsonStringEnumMemberName("one_time")]
@@ -9914,9 +9984,21 @@ public enum Recurrence
 }
 
 /// <summary>
+/// Indicates whether the top-up was initiated by Stripe or by the user.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter<InitiatedBy>))]
+public enum InitiatedBy
+{
+    [JsonStringEnumMemberName("stripe")]
+    Stripe,
+    [JsonStringEnumMemberName("user")]
+    User
+}
+
+/// <summary>
 /// After division, either round the result `up` or `down`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Round>))]
 public enum Round
 {
     [JsonStringEnumMemberName("down")]
@@ -9928,7 +10010,7 @@ public enum Round
 /// <summary>
 /// Reason for the failure. A ReceivedCredit might fail because the receiving FinancialAccount is closed or frozen.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TreasuryReceivedCreditFailureCode>))]
 public enum TreasuryReceivedCreditFailureCode
 {
     [JsonStringEnumMemberName("account_closed")]
@@ -9944,7 +10026,7 @@ public enum TreasuryReceivedCreditFailureCode
 /// <summary>
 /// Reason for the failure. A ReceivedDebit might fail because the FinancialAccount doesn't have sufficient funds, is closed, or is frozen.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<TreasuryReceivedDebitFailureCode>))]
 public enum TreasuryReceivedDebitFailureCode
 {
     [JsonStringEnumMemberName("account_closed")]
@@ -9962,7 +10044,7 @@ public enum TreasuryReceivedDebitFailureCode
 /// <summary>
 /// Type of the flow that created the Transaction.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<FlowType>))]
 public enum FlowType
 {
     [JsonStringEnumMemberName("credit_reversal")]
@@ -9988,7 +10070,7 @@ public enum FlowType
 /// <summary>
 /// Restricts all inbound money movement.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<InboundFlows>))]
 public enum InboundFlows
 {
     [JsonStringEnumMemberName("restricted")]
@@ -10000,7 +10082,7 @@ public enum InboundFlows
 /// <summary>
 /// Restricts all outbound money movement.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<OutboundFlows>))]
 public enum OutboundFlows
 {
     [JsonStringEnumMemberName("restricted")]
@@ -10012,7 +10094,7 @@ public enum OutboundFlows
 /// <summary>
 /// Represents what the user should do, if anything, to activate the Feature.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Resolution>))]
 public enum Resolution
 {
     [JsonStringEnumMemberName("contact_stripe")]
@@ -10026,7 +10108,7 @@ public enum Resolution
 /// <summary>
 /// The `platform_restrictions` that are restricting this Feature.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Restriction>))]
 public enum Restriction
 {
     [JsonStringEnumMemberName("inbound_flows")]
@@ -10038,7 +10120,7 @@ public enum Restriction
 /// <summary>
 /// Set if a ReceivedCredit cannot be reversed.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<RestrictedReason>))]
 public enum RestrictedReason
 {
     [JsonStringEnumMemberName("already_reversed")]
@@ -10056,7 +10138,7 @@ public enum RestrictedReason
 /// <summary>
 /// Set when `type` is `balance`.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<Balance2>))]
 public enum Balance2
 {
     [JsonStringEnumMemberName("payments")]
@@ -10079,7 +10161,7 @@ public enum Balance2
 /// until you create an [Account Link](/api/account_links) or [Account Session](/api/account_sessions)
 /// to start Connect Onboarding. Learn about the [differences between accounts](/connect/accounts).
 /// </summary>
-public record Account
+public partial record Account
 {
     /// <summary>
     /// Business information about the account.
@@ -10207,7 +10289,7 @@ public record Account
 
 }
 
-public record AccountAnnualRevenue
+public partial record AccountAnnualRevenue
 {
     /// <summary>
     /// A non-negative integer representing the amount in the [smallest currency unit](/currencies#zero-decimal).
@@ -10229,7 +10311,7 @@ public record AccountAnnualRevenue
 
 }
 
-public record AccountBacsDebitPaymentsSettings
+public partial record AccountBacsDebitPaymentsSettings
 {
     /// <summary>
     /// The Bacs Direct Debit display name for this account. For payments made with Bacs Direct Debit, this name appears on the mandate as the statement descriptor. Mobile banking apps display it as the name of the business. To use custom branding, set the Bacs Direct Debit Display Name during or right after creation. Custom branding incurs an additional monthly fee for the platform. The fee appears 5 business days after requesting Bacs. If you don't set the display name before requesting Bacs capability, it's automatically set as "Stripe" and the account is onboarded to Stripe branding, which is free.
@@ -10245,7 +10327,7 @@ public record AccountBacsDebitPaymentsSettings
 
 }
 
-public record AccountBrandingSettings
+public partial record AccountBrandingSettings
 {
     /// <summary>
     /// (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) An icon for the account. Must be square and at least 128px x 128px.
@@ -10273,7 +10355,7 @@ public record AccountBrandingSettings
 
 }
 
-public record AccountBusinessProfile
+public partial record AccountBusinessProfile
 {
     /// <summary>
     /// The applicant's gross annual revenue for its preceding fiscal year.
@@ -10346,7 +10428,7 @@ public record AccountBusinessProfile
 
 }
 
-public record AccountCapabilities
+public partial record AccountCapabilities
 {
     /// <summary>
     /// The status of the Canadian pre-authorized debits payments capability of the account, or whether the account can directly process Canadian pre-authorized debits charges.
@@ -10746,7 +10828,7 @@ public record AccountCapabilities
 
 }
 
-public record AccountCapabilityFutureRequirements
+public partial record AccountCapabilityFutureRequirements
 {
     /// <summary>
     /// Fields that are due and can be resolved by providing the corresponding alternative fields instead. Multiple alternatives can reference the same `original_fields_due`. When this happens, any of these alternatives can serve as a pathway for attempting to resolve the fields. Additionally, providing `original_fields_due` again also serves as a pathway for attempting to resolve the fields.
@@ -10773,7 +10855,7 @@ public record AccountCapabilityFutureRequirements
     public AccountCapabilityFutureRequirementsDisabledReason? DisabledReason { get; init; }
 
     /// <summary>
-    /// Details about validation and verification failures for `due` requirements that must be resolved.
+    /// Fields that are `currently_due` and need to be collected again because validation or verification failed.
     /// </summary>
     [JsonPropertyName("errors")]
     public required IReadOnlyList<AccountRequirementsError> Errors { get; init; }
@@ -10798,7 +10880,7 @@ public record AccountCapabilityFutureRequirements
 
 }
 
-public record AccountCapabilityRequirements
+public partial record AccountCapabilityRequirements
 {
     /// <summary>
     /// Fields that are due and can be resolved by providing the corresponding alternative fields instead. Multiple alternatives can reference the same `original_fields_due`. When this happens, any of these alternatives can serve as a pathway for attempting to resolve the fields. Additionally, providing `original_fields_due` again also serves as a pathway for attempting to resolve the fields.
@@ -10825,7 +10907,7 @@ public record AccountCapabilityRequirements
     public AccountCapabilityFutureRequirementsDisabledReason? DisabledReason { get; init; }
 
     /// <summary>
-    /// Details about validation and verification failures for `due` requirements that must be resolved.
+    /// Fields that are `currently_due` and need to be collected again because validation or verification failed.
     /// </summary>
     [JsonPropertyName("errors")]
     public required IReadOnlyList<AccountRequirementsError> Errors { get; init; }
@@ -10850,14 +10932,14 @@ public record AccountCapabilityRequirements
 
 }
 
-public record AccountCardIssuingSettings
+public partial record AccountCardIssuingSettings
 {
     [JsonPropertyName("tos_acceptance")]
     public CardIssuingAccountTermsOfService? TosAcceptance { get; init; }
 
 }
 
-public record AccountCardPaymentsSettings
+public partial record AccountCardPaymentsSettings
 {
     [JsonPropertyName("decline_on")]
     public AccountDeclineChargeOn? DeclineOn { get; init; }
@@ -10882,7 +10964,7 @@ public record AccountCardPaymentsSettings
 
 }
 
-public record AccountDashboardSettings
+public partial record AccountDashboardSettings
 {
     /// <summary>
     /// The display name for this account. This is used on the Stripe Dashboard to differentiate between accounts.
@@ -10898,7 +10980,7 @@ public record AccountDashboardSettings
 
 }
 
-public record AccountDeclineChargeOn
+public partial record AccountDeclineChargeOn
 {
     /// <summary>
     /// Whether Stripe automatically declines charges with an incorrect ZIP or postal code. This setting only applies when a ZIP or postal code is provided and they fail bank verification.
@@ -10914,7 +10996,7 @@ public record AccountDeclineChargeOn
 
 }
 
-public record AccountFutureRequirements
+public partial record AccountFutureRequirements
 {
     /// <summary>
     /// Fields that are due and can be resolved by providing the corresponding alternative fields instead. Many alternatives can list the same `original_fields_due`, and any of these alternatives can serve as a pathway for attempting to resolve the fields again. Re-providing `original_fields_due` also serves as a pathway for attempting to resolve the fields again.
@@ -10941,7 +11023,7 @@ public record AccountFutureRequirements
     public AccountFutureRequirementsDisabledReason? DisabledReason { get; init; }
 
     /// <summary>
-    /// Details about validation and verification failures for `due` requirements that must be resolved.
+    /// Fields that are `currently_due` and need to be collected again because validation or verification failed.
     /// </summary>
     [JsonPropertyName("errors")]
     public IReadOnlyList<AccountRequirementsError>? Errors { get; init; }
@@ -10966,7 +11048,7 @@ public record AccountFutureRequirements
 
 }
 
-public record AccountGroupMembership
+public partial record AccountGroupMembership
 {
     /// <summary>
     /// The group the account is in to determine their payments pricing, and null if the account is on customized pricing. [See the Platform pricing tool documentation](https://docs.stripe.com/connect/platform-pricing-tools) for details.
@@ -10976,7 +11058,7 @@ public record AccountGroupMembership
 
 }
 
-public record AccountInvoicesSettings
+public partial record AccountInvoicesSettings
 {
     /// <summary>
     /// The list of default Account Tax IDs to automatically include on invoices. Account Tax IDs get added when an invoice is finalized.
@@ -10998,7 +11080,7 @@ public record AccountInvoicesSettings
 /// 
 /// Related guide: [Connect Onboarding](https://docs.stripe.com/connect/custom/hosted-onboarding)
 /// </summary>
-public record AccountLink
+public partial record AccountLink
 {
     /// <summary>
     /// Time at which the object was created. Measured in seconds since the Unix epoch.
@@ -11026,7 +11108,7 @@ public record AccountLink
 
 }
 
-public record AccountMonthlyEstimatedRevenue
+public partial record AccountMonthlyEstimatedRevenue
 {
     /// <summary>
     /// A non-negative integer representing how much to charge in the [smallest currency unit](/currencies#zero-decimal).
@@ -11042,7 +11124,7 @@ public record AccountMonthlyEstimatedRevenue
 
 }
 
-public record AccountPaymentsSettings
+public partial record AccountPaymentsSettings
 {
     /// <summary>
     /// The default text that appears on credit card statements when a charge is made. This field prefixes any dynamic `statement_descriptor` specified on the charge.
@@ -11064,7 +11146,7 @@ public record AccountPaymentsSettings
 
 }
 
-public record AccountPayoutSettings
+public partial record AccountPayoutSettings
 {
     /// <summary>
     /// A Boolean indicating if Stripe should try to reclaim negative balances from an attached bank account. See [Understanding Connect account balances](/connect/account-balances) for details. The default value is `false` when [controller.requirement_collection](/api/accounts/object#account_object-controller-requirement_collection) is `application`, which includes Custom accounts, otherwise `true`.
@@ -11083,7 +11165,7 @@ public record AccountPayoutSettings
 
 }
 
-public record AccountRequirements
+public partial record AccountRequirements
 {
     /// <summary>
     /// Fields that are due and can be resolved by providing the corresponding alternative fields instead. Many alternatives can list the same `original_fields_due`, and any of these alternatives can serve as a pathway for attempting to resolve the fields again. Re-providing `original_fields_due` also serves as a pathway for attempting to resolve the fields again.
@@ -11098,7 +11180,7 @@ public record AccountRequirements
     public int? CurrentDeadline { get; init; }
 
     /// <summary>
-    /// Fields that need to be resolved to keep the account enabled. If not resolved by `current_deadline`, these fields will appear in `past_due` as well, and the account is disabled.
+    /// Fields that need to be resolved to keep the account enabled. If not resolved by `current_deadline`, these fields will appear in `past_due` as well, and the account will be disabled.
     /// </summary>
     [JsonPropertyName("currently_due")]
     public IReadOnlyList<string>? CurrentlyDue { get; init; }
@@ -11110,7 +11192,7 @@ public record AccountRequirements
     public AccountFutureRequirementsDisabledReason? DisabledReason { get; init; }
 
     /// <summary>
-    /// Details about validation and verification failures for `due` requirements that must be resolved.
+    /// Fields that are `currently_due` and need to be collected again because validation or verification failed.
     /// </summary>
     [JsonPropertyName("errors")]
     public IReadOnlyList<AccountRequirementsError>? Errors { get; init; }
@@ -11135,7 +11217,7 @@ public record AccountRequirements
 
 }
 
-public record AccountRequirementsAlternative
+public partial record AccountRequirementsAlternative
 {
     /// <summary>
     /// Fields that can be provided to resolve all fields in `original_fields_due`.
@@ -11151,7 +11233,7 @@ public record AccountRequirementsAlternative
 
 }
 
-public record AccountRequirementsError
+public partial record AccountRequirementsError
 {
     /// <summary>
     /// The code for the type of error.
@@ -11173,7 +11255,7 @@ public record AccountRequirementsError
 
 }
 
-public record AccountSepaDebitPaymentsSettings
+public partial record AccountSepaDebitPaymentsSettings
 {
     /// <summary>
     /// SEPA creditor identifier that identifies the company making the payment.
@@ -11192,7 +11274,7 @@ public record AccountSepaDebitPaymentsSettings
 /// 
 /// Related guide: [Connect embedded components](https://docs.stripe.com/connect/get-started-connect-embedded-components)
 /// </summary>
-public record AccountSession
+public partial record AccountSession
 {
     /// <summary>
     /// The ID of the account the AccountSession was created for
@@ -11233,7 +11315,7 @@ public record AccountSession
 
 }
 
-public record AccountSettings
+public partial record AccountSettings
 {
     [JsonPropertyName("bacs_debit_payments")]
     public AccountBacsDebitPaymentsSettings? BacsDebitPayments { get; init; }
@@ -11267,7 +11349,7 @@ public record AccountSettings
 
 }
 
-public record AccountTermsOfService
+public partial record AccountTermsOfService
 {
     /// <summary>
     /// The Unix timestamp marking when the account representative accepted the service agreement.
@@ -11289,7 +11371,7 @@ public record AccountTermsOfService
 
 }
 
-public record AccountTosAcceptance
+public partial record AccountTosAcceptance
 {
     /// <summary>
     /// The Unix timestamp marking when the account representative accepted their service agreement
@@ -11317,14 +11399,14 @@ public record AccountTosAcceptance
 
 }
 
-public record AccountTreasurySettings
+public partial record AccountTreasurySettings
 {
     [JsonPropertyName("tos_acceptance")]
     public AccountTermsOfService? TosAcceptance { get; init; }
 
 }
 
-public record AccountUnificationAccountController
+public partial record AccountUnificationAccountController
 {
     [JsonPropertyName("fees")]
     public AccountUnificationAccountControllerFees? Fees { get; init; }
@@ -11355,7 +11437,7 @@ public record AccountUnificationAccountController
 
 }
 
-public record AccountUnificationAccountControllerFees
+public partial record AccountUnificationAccountControllerFees
 {
     /// <summary>
     /// A value indicating the responsible payer of a bundle of Stripe fees for pricing-control eligible products on this account. Learn more about [fee behavior on connected accounts](https://docs.stripe.com/connect/direct-charges-fee-payer-behavior).
@@ -11365,7 +11447,7 @@ public record AccountUnificationAccountControllerFees
 
 }
 
-public record AccountUnificationAccountControllerLosses
+public partial record AccountUnificationAccountControllerLosses
 {
     /// <summary>
     /// A value indicating who is liable when this account can't pay back negative balances from payments.
@@ -11375,7 +11457,7 @@ public record AccountUnificationAccountControllerLosses
 
 }
 
-public record AccountUnificationAccountControllerStripeDashboard
+public partial record AccountUnificationAccountControllerStripeDashboard
 {
     /// <summary>
     /// A value indicating the Stripe dashboard this account has access to independent of the Connect application.
@@ -11385,7 +11467,7 @@ public record AccountUnificationAccountControllerStripeDashboard
 
 }
 
-public record Address
+public partial record Address
 {
     /// <summary>
     /// City, district, suburb, town, or village.
@@ -11425,7 +11507,7 @@ public record Address
 
 }
 
-public record AlmaInstallments
+public partial record AlmaInstallments
 {
     /// <summary>
     /// The number of installments.
@@ -11435,7 +11517,7 @@ public record AlmaInstallments
 
 }
 
-public record AmazonPayUnderlyingPaymentMethodFundingDetails
+public partial record AmazonPayUnderlyingPaymentMethodFundingDetails
 {
     [JsonPropertyName("card")]
     public PaymentMethodDetailsPassthroughCard? Card { get; init; }
@@ -11448,7 +11530,7 @@ public record AmazonPayUnderlyingPaymentMethodFundingDetails
 
 }
 
-public record ApiErrors
+public partial record ApiErrors
 {
     /// <summary>
     /// For card errors resulting from a card issuer decline, a short string indicating [how to proceed with an error](https://docs.stripe.com/declines#retrying-issuer-declines) if they provide one.
@@ -11582,7 +11664,7 @@ public record ApiErrors
 
 }
 
-public record ApplePayDomain
+public partial record ApplePayDomain
 {
     /// <summary>
     /// Time at which the object was created. Measured in seconds since the Unix epoch.
@@ -11613,7 +11695,7 @@ public record ApplePayDomain
 
 }
 
-public record Application
+public partial record Application
 {
     /// <summary>
     /// Unique identifier for the object.
@@ -11635,7 +11717,7 @@ public record Application
 
 }
 
-public record ApplicationFee
+public partial record ApplicationFee
 {
     /// <summary>
     /// ID of the Stripe account this fee was taken from.
@@ -11740,7 +11822,7 @@ public record ApplicationFee
 /// 
 /// Related guide: [Store data between page reloads](https://docs.stripe.com/stripe-apps/store-auth-data-custom-objects)
 /// </summary>
-public record AppsSecret
+public partial record AppsSecret
 {
     /// <summary>
     /// Time at which the object was created. Measured in seconds since the Unix epoch.
@@ -11795,7 +11877,7 @@ public record AppsSecret
 
 }
 
-public record AutomaticTax
+public partial record AutomaticTax
 {
     /// <summary>
     /// If Stripe disabled automatic tax, this enum describes why.
@@ -11837,7 +11919,7 @@ public record AutomaticTax
 /// 
 /// Related guide: [Balances and settlement time](https://docs.stripe.com/payments/balances), [Understanding Connect account balances](https://docs.stripe.com/connect/account-balances)
 /// </summary>
-public record Balance
+public partial record Balance
 {
     /// <summary>
     /// Available funds that you can transfer or pay out automatically by Stripe or explicitly through the [Transfers API](https://api.stripe.com#transfers) or [Payouts API](https://api.stripe.com#payouts). You can find the available balance for each currency and payment type in the `source_types` property.
@@ -11883,7 +11965,7 @@ public record Balance
 
 }
 
-public record BalanceAmount
+public partial record BalanceAmount
 {
     /// <summary>
     /// Balance amount.
@@ -11902,7 +11984,7 @@ public record BalanceAmount
 
 }
 
-public record BalanceAmountBySourceType
+public partial record BalanceAmountBySourceType
 {
     /// <summary>
     /// Amount coming from [legacy US ACH payments](https://docs.stripe.com/ach-deprecated).
@@ -11924,7 +12006,7 @@ public record BalanceAmountBySourceType
 
 }
 
-public record BalanceAmountNet
+public partial record BalanceAmountNet
 {
     /// <summary>
     /// Balance amount.
@@ -11949,7 +12031,7 @@ public record BalanceAmountNet
 
 }
 
-public record BalanceDetail
+public partial record BalanceDetail
 {
     /// <summary>
     /// Funds that are available for use.
@@ -11959,7 +12041,7 @@ public record BalanceDetail
 
 }
 
-public record BalanceDetailUngated
+public partial record BalanceDetailUngated
 {
     /// <summary>
     /// Funds that are available for use.
@@ -11975,7 +12057,7 @@ public record BalanceDetailUngated
 
 }
 
-public record BalanceNetAvailable
+public partial record BalanceNetAvailable
 {
     /// <summary>
     /// Net balance amount, subtracting fees from platform-set pricing.
@@ -11997,7 +12079,7 @@ public record BalanceNetAvailable
 /// <summary>
 /// Options for customizing account balances and payout settings for a Stripe platform’s connected accounts.
 /// </summary>
-public record BalanceSettings
+public partial record BalanceSettings
 {
     /// <summary>
     /// String representing the object's type. Objects of the same type share the same value.
@@ -12010,7 +12092,7 @@ public record BalanceSettings
 
 }
 
-public record BalanceSettingsResourceAutomaticTransferRule
+public partial record BalanceSettingsResourceAutomaticTransferRule
 {
     /// <summary>
     /// The ID of the FinancialAccount that funds will be transferred to during automatic transfers.
@@ -12032,7 +12114,7 @@ public record BalanceSettingsResourceAutomaticTransferRule
 
 }
 
-public record BalanceSettingsResourcePayments
+public partial record BalanceSettingsResourcePayments
 {
     /// <summary>
     /// A Boolean indicating if Stripe should try to reclaim negative balances from an attached bank account. See [Understanding Connect account balances](/connect/account-balances) for details. The default value is `false` when [controller.requirement_collection](/api/accounts/object#account_object-controller-requirement_collection) is `application`, which includes Custom accounts, otherwise `true`.
@@ -12051,7 +12133,7 @@ public record BalanceSettingsResourcePayments
 
 }
 
-public record BalanceSettingsResourcePayoutSchedule
+public partial record BalanceSettingsResourcePayoutSchedule
 {
     /// <summary>
     /// How frequently funds will be paid out. One of `manual` (payouts only created via API call), `daily`, `weekly`, or `monthly`.
@@ -12073,7 +12155,7 @@ public record BalanceSettingsResourcePayoutSchedule
 
 }
 
-public record BalanceSettingsResourcePayouts
+public partial record BalanceSettingsResourcePayouts
 {
     /// <summary>
     /// Configures per-currency rules for automatically transferring funds from the payments balance to a FinancialAccount.
@@ -12107,7 +12189,7 @@ public record BalanceSettingsResourcePayouts
 
 }
 
-public record BalanceSettingsResourceSettlementTiming
+public partial record BalanceSettingsResourceSettlementTiming
 {
     /// <summary>
     /// The number of days charge funds are held before becoming available.
@@ -12129,7 +12211,7 @@ public record BalanceSettingsResourceSettlementTiming
 
 }
 
-public record BalanceSettingsResourceStartOfDay
+public partial record BalanceSettingsResourceStartOfDay
 {
     /// <summary>
     /// Hour at which the customized start of day begins according to the given timezone. Must be a [supported customized start of day hour](/connect/customized-start-of-day#available-timezones-and-cutoffs).
@@ -12157,7 +12239,7 @@ public record BalanceSettingsResourceStartOfDay
 /// 
 /// Related guide: [Balance transaction types](https://docs.stripe.com/reports/balance-transaction-types)
 /// </summary>
-public record BalanceTransaction
+public partial record BalanceTransaction
 {
     /// <summary>
     /// Gross amount of this transaction (in cents (or local equivalent)). A positive value represents funds charged to another party, and a negative value represents funds sent to another party.
@@ -12196,7 +12278,7 @@ public record BalanceTransaction
     public string? Description { get; init; }
 
     /// <summary>
-    /// If applicable, this transaction uses an exchange rate. If money converts from currency A to currency B, then the `amount` in currency A, multipled by the `exchange_rate`, equals the `amount` in currency B. For example, if you charge a customer 10.00 EUR, the PaymentIntent's `amount` is `1000` and `currency` is `eur`. If this converts to 12.34 USD in your Stripe account, the BalanceTransaction's `amount` is `1234`, its `currency` is `usd`, and the `exchange_rate` is `1.234`.
+    /// If applicable, this transaction uses an exchange rate. If money converts from currency A to currency B, then the `amount` in currency A, multiplied by the `exchange_rate`, equals the `amount` in currency B. For example, if you charge a customer 10.00 EUR, the PaymentIntent's `amount` is `1000` and `currency` is `eur`. If this converts to 12.34 USD in your Stripe account, the BalanceTransaction's `amount` is `1234`, its `currency` is `usd`, and the `exchange_rate` is `1.234`.
     /// </summary>
     [JsonPropertyName("exchange_rate")]
     public double? ExchangeRate { get; init; }
@@ -12250,7 +12332,7 @@ public record BalanceTransaction
     public required string Status { get; init; }
 
     /// <summary>
-    /// Transaction type: `adjustment`, `advance`, `advance_funding`, `anticipation_repayment`, `application_fee`, `application_fee_refund`, `charge`, `climate_order_purchase`, `climate_order_refund`, `connect_collection_transfer`, `contribution`, `inbound_transfer`, `inbound_transfer_reversal`, `issuing_authorization_hold`, `issuing_authorization_release`, `issuing_dispute`, `issuing_transaction`, `obligation_outbound`, `obligation_reversal_inbound`, `payment`, `payment_failure_refund`, `payment_network_reserve_hold`, `payment_network_reserve_release`, `payment_refund`, `payment_reversal`, `payment_unreconciled`, `payout`, `payout_cancel`, `payout_failure`, `payout_minimum_balance_hold`, `payout_minimum_balance_release`, `refund`, `refund_failure`, `reserve_transaction`, `reserved_funds`, `reserve_hold`, `reserve_release`, `stripe_fee`, `stripe_fx_fee`, `stripe_balance_payment_debit`, `stripe_balance_payment_debit_reversal`, `tax_fee`, `topup`, `topup_reversal`, `transfer`, `transfer_cancel`, `transfer_failure`, `transfer_refund`, or `fee_credit_funding`. Learn more about [balance transaction types and what they represent](https://stripe.com/docs/reports/balance-transaction-types). To classify transactions for accounting purposes, consider `reporting_category` instead.
+    /// Transaction type: `tax_fund`, `adjustment`, `advance`, `advance_funding`, `anticipation_repayment`, `application_fee`, `application_fee_refund`, `charge`, `climate_order_purchase`, `climate_order_refund`, `connect_collection_transfer`, `contribution`, `inbound_transfer`, `inbound_transfer_reversal`, `issuing_authorization_hold`, `issuing_authorization_release`, `issuing_dispute`, `issuing_transaction`, `obligation_outbound`, `obligation_reversal_inbound`, `payment`, `payment_failure_refund`, `payment_network_reserve_hold`, `payment_network_reserve_release`, `payment_refund`, `payment_reversal`, `payment_unreconciled`, `payout`, `payout_cancel`, `payout_failure`, `payout_minimum_balance_hold`, `payout_minimum_balance_release`, `refund`, `refund_failure`, `reserve_transaction`, `reserved_funds`, `reserve_hold`, `reserve_release`, `stripe_fee`, `stripe_fx_fee`, `stripe_balance_payment_debit`, `stripe_balance_payment_debit_reversal`, `tax_fee`, `topup`, `topup_reversal`, `transfer`, `transfer_cancel`, `transfer_failure`, `transfer_refund`, or `fee_credit_funding`. Learn more about [balance transaction types and what they represent](https://stripe.com/docs/reports/balance-transaction-types). To classify transactions for accounting purposes, consider `reporting_category` instead.
     /// </summary>
     [JsonPropertyName("type")]
     public required BalanceTransactionType Type { get; init; }
@@ -12266,7 +12348,7 @@ public record BalanceTransaction
 /// 
 /// Related guide: [Bank debits and transfers](/payments/bank-debits-transfers)
 /// </summary>
-public record BankAccount
+public partial record BankAccount
 {
     /// <summary>
     /// The account this bank account belongs to. Only applicable on Accounts (not customers or recipients) This property is only available when returned as an [External Account](/api/external_account_bank_accounts/object) where [controller.is_controller](/api/accounts/object#account_object-controller-is_controller) is `true`.
@@ -12386,7 +12468,7 @@ public record BankAccount
 
 }
 
-public record BankConnectionsResourceAccountNumberDetails
+public partial record BankConnectionsResourceAccountNumberDetails
 {
     /// <summary>
     /// When the account number is expected to expire, if applicable.
@@ -12414,7 +12496,36 @@ public record BankConnectionsResourceAccountNumberDetails
 
 }
 
-public record BankConnectionsResourceAccountholder
+public partial record BankConnectionsResourceAccountStatusDetails
+{
+    [JsonPropertyName("active")]
+    public BankConnectionsResourceAccountStatusDetailsApiResourceActiveStatusDetails? Active { get; init; }
+
+}
+
+public partial record BankConnectionsResourceAccountStatusDetailsApiResourceActiveStatusDetails
+{
+    /// <summary>
+    /// The action (if any) to proactively relink the Account.
+    /// </summary>
+    [JsonPropertyName("action")]
+    public required Action Action { get; init; }
+
+    /// <summary>
+    /// The underlying cause of the Account becoming inactive.
+    /// </summary>
+    [JsonPropertyName("cause")]
+    public required Cause Cause { get; init; }
+
+    /// <summary>
+    /// When the Account is expected to become inactive, if applicable.
+    /// </summary>
+    [JsonPropertyName("expected_deactivation_date")]
+    public required int ExpectedDeactivationDate { get; init; }
+
+}
+
+public partial record BankConnectionsResourceAccountholder
 {
     /// <summary>
     /// The ID of the Stripe account that this account belongs to. Only available when `account_holder.type` is `account`.
@@ -12439,7 +12550,7 @@ public record BankConnectionsResourceAccountholder
 
 }
 
-public record BankConnectionsResourceBalance
+public partial record BankConnectionsResourceBalance
 {
     /// <summary>
     /// The time that the external institution calculated this balance. Measured in seconds since the Unix epoch.
@@ -12471,7 +12582,7 @@ public record BankConnectionsResourceBalance
 
 }
 
-public record BankConnectionsResourceBalanceApiResourceCashBalance
+public partial record BankConnectionsResourceBalanceApiResourceCashBalance
 {
     /// <summary>
     /// The funds available to the account holder. Typically this is the current balance after subtracting any outbound pending transactions and adding any inbound pending transactions.
@@ -12485,7 +12596,7 @@ public record BankConnectionsResourceBalanceApiResourceCashBalance
 
 }
 
-public record BankConnectionsResourceBalanceApiResourceCreditBalance
+public partial record BankConnectionsResourceBalanceApiResourceCreditBalance
 {
     /// <summary>
     /// The credit that has been used by the account holder.
@@ -12499,7 +12610,7 @@ public record BankConnectionsResourceBalanceApiResourceCreditBalance
 
 }
 
-public record BankConnectionsResourceBalanceRefresh
+public partial record BankConnectionsResourceBalanceRefresh
 {
     /// <summary>
     /// The time at which the last refresh attempt was initiated. Measured in seconds since the Unix epoch.
@@ -12521,7 +12632,7 @@ public record BankConnectionsResourceBalanceRefresh
 
 }
 
-public record BankConnectionsResourceLinkAccountSessionFilters
+public partial record BankConnectionsResourceLinkAccountSessionFilters
 {
     /// <summary>
     /// Restricts the Session to subcategories of accounts that can be linked. Valid subcategories are: `checking`, `savings`, `mortgage`, `line_of_credit`, `credit_card`.
@@ -12535,9 +12646,35 @@ public record BankConnectionsResourceLinkAccountSessionFilters
     [JsonPropertyName("countries")]
     public IReadOnlyList<string>? Countries { get; init; }
 
+    /// <summary>
+    /// Whether the Session should require that linked accounts support payments and retrieve account numbers before completion.
+    /// </summary>
+    [JsonPropertyName("require_payment_method_support")]
+    public RequirePaymentMethodSupport? RequirePaymentMethodSupport { get; init; }
+
 }
 
-public record BankConnectionsResourceOwnershipRefresh
+public partial record BankConnectionsResourceLinkAccountSessionLimits
+{
+    /// <summary>
+    /// The number of accounts that can be linked in this Session.
+    /// </summary>
+    [JsonPropertyName("accounts")]
+    public required int Accounts { get; init; }
+
+}
+
+public partial record BankConnectionsResourceLinkAccountSessionManualEntry
+{
+    /// <summary>
+    /// Controls how manual entry of bank account details is presented to the user.
+    /// </summary>
+    [JsonPropertyName("mode")]
+    public BankConnectionsResourceLinkAccountSessionManualEntryMode? Mode { get; init; }
+
+}
+
+public partial record BankConnectionsResourceOwnershipRefresh
 {
     /// <summary>
     /// The time at which the last refresh attempt was initiated. Measured in seconds since the Unix epoch.
@@ -12559,7 +12696,7 @@ public record BankConnectionsResourceOwnershipRefresh
 
 }
 
-public record BankConnectionsResourceTransactionRefresh
+public partial record BankConnectionsResourceTransactionRefresh
 {
     /// <summary>
     /// Unique identifier for the object.
@@ -12587,7 +12724,7 @@ public record BankConnectionsResourceTransactionRefresh
 
 }
 
-public record BankConnectionsResourceTransactionResourceStatusTransitions
+public partial record BankConnectionsResourceTransactionResourceStatusTransitions
 {
     /// <summary>
     /// Time at which this transaction posted. Measured in seconds since the Unix epoch.
@@ -12606,7 +12743,7 @@ public record BankConnectionsResourceTransactionResourceStatusTransitions
 /// <summary>
 /// A billing alert is a resource that notifies you when a certain usage threshold on a meter is crossed. For example, you might create a billing alert to notify you when a certain user made 100 API requests.
 /// </summary>
-public record BillingAlert
+public partial record BillingAlert
 {
     /// <summary>
     /// Defines the type of the alert.
@@ -12655,7 +12792,7 @@ public record BillingAlert
 /// <summary>
 /// Indicates the billing credit balance for billing credits granted to a customer.
 /// </summary>
-public record BillingCreditBalanceSummary
+public partial record BillingCreditBalanceSummary
 {
     /// <summary>
     /// The billing credit balances. One entry per credit grant currency. If a customer only has credit grants in a single currency, then this will have a single balance entry.
@@ -12692,7 +12829,7 @@ public record BillingCreditBalanceSummary
 /// <summary>
 /// A credit balance transaction is a resource representing a transaction (either a credit or a debit) against an existing credit grant.
 /// </summary>
-public record BillingCreditBalanceTransaction
+public partial record BillingCreditBalanceTransaction
 {
     /// <summary>
     /// Time at which the object was created. Measured in seconds since the Unix epoch.
@@ -12761,7 +12898,7 @@ public record BillingCreditBalanceTransaction
 /// 
 /// Related guide: [Billing credits](https://docs.stripe.com/billing/subscriptions/usage-based/billing-credits)
 /// </summary>
-public record BillingCreditGrant
+public partial record BillingCreditGrant
 {
     [JsonPropertyName("amount")]
     public required BillingCreditGrantsResourceAmount Amount { get; init; }
@@ -12866,7 +13003,7 @@ public record BillingCreditGrant
 /// 
 /// Related guide: [Usage based billing](https://docs.stripe.com/billing/subscriptions/usage-based)
 /// </summary>
-public record BillingMeter
+public partial record BillingMeter
 {
     /// <summary>
     /// Time at which the object was created. Measured in seconds since the Unix epoch.
@@ -12939,7 +13076,7 @@ public record BillingMeter
 /// <summary>
 /// Meter events represent actions that customers take in your system. You can use meter events to bill a customer based on their usage. Meter events are associated with billing meters, which define both the contents of the event’s payload and how to aggregate those events.
 /// </summary>
-public record BillingMeterEvent
+public partial record BillingMeterEvent
 {
     /// <summary>
     /// Time at which the object was created. Measured in seconds since the Unix epoch.
@@ -12988,7 +13125,7 @@ public record BillingMeterEvent
 /// <summary>
 /// A billing meter event adjustment is a resource that allows you to cancel a meter event. For example, you might create a billing meter event adjustment to cancel a meter event that was created in error or attached to the wrong customer.
 /// </summary>
-public record BillingMeterEventAdjustment
+public partial record BillingMeterEventAdjustment
 {
     /// <summary>
     /// Specifies which event to cancel.
@@ -13034,7 +13171,7 @@ public record BillingMeterEventAdjustment
 /// 
 /// Note: Meters events are aggregated asynchronously so the meter event summaries provide an eventually consistent view of the reported usage.
 /// </summary>
-public record BillingMeterEventSummary
+public partial record BillingMeterEventSummary
 {
     /// <summary>
     /// Aggregated value of all the events within `start_time` (inclusive) and `end_time` (inclusive). The aggregation strategy is defined on meter via `default_aggregation`.
@@ -13080,7 +13217,7 @@ public record BillingMeterEventSummary
 
 }
 
-public record BillingBillResourceInvoiceItemParentsInvoiceItemParent
+public partial record BillingBillResourceInvoiceItemParentsInvoiceItemParent
 {
     /// <summary>
     /// Details about the subscription that generated this invoice item
@@ -13096,7 +13233,7 @@ public record BillingBillResourceInvoiceItemParentsInvoiceItemParent
 
 }
 
-public record BillingBillResourceInvoiceItemParentsInvoiceItemSubscriptionParent
+public partial record BillingBillResourceInvoiceItemParentsInvoiceItemSubscriptionParent
 {
     /// <summary>
     /// The subscription that generated this invoice item
@@ -13112,7 +13249,7 @@ public record BillingBillResourceInvoiceItemParentsInvoiceItemSubscriptionParent
 
 }
 
-public record BillingBillResourceInvoicingLinesCommonCreditedItems
+public partial record BillingBillResourceInvoicingLinesCommonCreditedItems
 {
     /// <summary>
     /// Invoice containing the credited invoice line items
@@ -13128,7 +13265,7 @@ public record BillingBillResourceInvoicingLinesCommonCreditedItems
 
 }
 
-public record BillingBillResourceInvoicingLinesCommonProrationDetails
+public partial record BillingBillResourceInvoicingLinesCommonProrationDetails
 {
     /// <summary>
     /// For a credit proration `line_item`, the original debit line_items to which the credit proration applies.
@@ -13138,7 +13275,7 @@ public record BillingBillResourceInvoicingLinesCommonProrationDetails
 
 }
 
-public record BillingBillResourceInvoicingLinesParentsInvoiceLineItemInvoiceItemParent
+public partial record BillingBillResourceInvoicingLinesParentsInvoiceLineItemInvoiceItemParent
 {
     /// <summary>
     /// The invoice item that generated this line item
@@ -13166,7 +13303,7 @@ public record BillingBillResourceInvoicingLinesParentsInvoiceLineItemInvoiceItem
 
 }
 
-public record BillingBillResourceInvoicingLinesParentsInvoiceLineItemParent
+public partial record BillingBillResourceInvoicingLinesParentsInvoiceLineItemParent
 {
     /// <summary>
     /// Details about the invoice item that generated this line item
@@ -13188,7 +13325,7 @@ public record BillingBillResourceInvoicingLinesParentsInvoiceLineItemParent
 
 }
 
-public record BillingBillResourceInvoicingLinesParentsInvoiceLineItemSubscriptionItemParent
+public partial record BillingBillResourceInvoicingLinesParentsInvoiceLineItemSubscriptionItemParent
 {
     /// <summary>
     /// The invoice item that generated this line item
@@ -13222,7 +13359,7 @@ public record BillingBillResourceInvoicingLinesParentsInvoiceLineItemSubscriptio
 
 }
 
-public record BillingBillResourceInvoicingParentsInvoiceParent
+public partial record BillingBillResourceInvoicingParentsInvoiceParent
 {
     /// <summary>
     /// Details about the quote that generated this invoice
@@ -13244,7 +13381,7 @@ public record BillingBillResourceInvoicingParentsInvoiceParent
 
 }
 
-public record BillingBillResourceInvoicingParentsInvoiceQuoteParent
+public partial record BillingBillResourceInvoicingParentsInvoiceQuoteParent
 {
     /// <summary>
     /// The quote that generated this invoice
@@ -13254,7 +13391,7 @@ public record BillingBillResourceInvoicingParentsInvoiceQuoteParent
 
 }
 
-public record BillingBillResourceInvoicingParentsInvoiceSubscriptionParent
+public partial record BillingBillResourceInvoicingParentsInvoiceSubscriptionParent
 {
     /// <summary>
     /// Set of [key-value pairs](https://docs.stripe.com/api/metadata) defined as subscription metadata when an invoice is created. Becomes an immutable snapshot of the subscription metadata at the time of invoice finalization.
@@ -13277,7 +13414,7 @@ public record BillingBillResourceInvoicingParentsInvoiceSubscriptionParent
 
 }
 
-public record BillingBillResourceInvoicingPricingPricing
+public partial record BillingBillResourceInvoicingPricingPricing
 {
     [JsonPropertyName("price_details")]
     public BillingBillResourceInvoicingPricingPricingPriceDetails? PriceDetails { get; init; }
@@ -13296,7 +13433,7 @@ public record BillingBillResourceInvoicingPricingPricing
 
 }
 
-public record BillingBillResourceInvoicingPricingPricingPriceDetails
+public partial record BillingBillResourceInvoicingPricingPricingPriceDetails
 {
     /// <summary>
     /// The ID of the price this item is associated with.
@@ -13312,7 +13449,7 @@ public record BillingBillResourceInvoicingPricingPricingPriceDetails
 
 }
 
-public record BillingBillResourceInvoicingTaxesTax
+public partial record BillingBillResourceInvoicingTaxesTax
 {
     /// <summary>
     /// The amount of the tax, in cents (or local equivalent).
@@ -13352,7 +13489,7 @@ public record BillingBillResourceInvoicingTaxesTax
 
 }
 
-public record BillingBillResourceInvoicingTaxesTaxRateDetails
+public partial record BillingBillResourceInvoicingTaxesTaxRateDetails
 {
     /// <summary>
     /// ID of the tax rate
@@ -13362,7 +13499,7 @@ public record BillingBillResourceInvoicingTaxesTaxRateDetails
 
 }
 
-public record BillingClocksResourceStatusDetailsAdvancingStatusDetails
+public partial record BillingClocksResourceStatusDetailsAdvancingStatusDetails
 {
     /// <summary>
     /// The `frozen_time` that the Test Clock is advancing towards.
@@ -13372,14 +13509,14 @@ public record BillingClocksResourceStatusDetailsAdvancingStatusDetails
 
 }
 
-public record BillingClocksResourceStatusDetailsStatusDetails
+public partial record BillingClocksResourceStatusDetailsStatusDetails
 {
     [JsonPropertyName("advancing")]
     public BillingClocksResourceStatusDetailsAdvancingStatusDetails? Advancing { get; init; }
 
 }
 
-public record BillingCreditGrantsResourceAmount
+public partial record BillingCreditGrantsResourceAmount
 {
     /// <summary>
     /// The monetary amount.
@@ -13395,14 +13532,14 @@ public record BillingCreditGrantsResourceAmount
 
 }
 
-public record BillingCreditGrantsResourceApplicabilityConfig
+public partial record BillingCreditGrantsResourceApplicabilityConfig
 {
     [JsonPropertyName("scope")]
     public required BillingCreditGrantsResourceScope Scope { get; init; }
 
 }
 
-public record BillingCreditGrantsResourceApplicablePrice
+public partial record BillingCreditGrantsResourceApplicablePrice
 {
     /// <summary>
     /// Unique identifier for the object.
@@ -13412,7 +13549,7 @@ public record BillingCreditGrantsResourceApplicablePrice
 
 }
 
-public record BillingCreditGrantsResourceBalanceCredit
+public partial record BillingCreditGrantsResourceBalanceCredit
 {
     [JsonPropertyName("amount")]
     public required BillingCreditGrantsResourceAmount Amount { get; init; }
@@ -13431,7 +13568,7 @@ public record BillingCreditGrantsResourceBalanceCredit
 
 }
 
-public record BillingCreditGrantsResourceBalanceCreditsApplicationInvoiceVoided
+public partial record BillingCreditGrantsResourceBalanceCreditsApplicationInvoiceVoided
 {
     /// <summary>
     /// The invoice to which the reinstated billing credits were originally applied.
@@ -13447,7 +13584,7 @@ public record BillingCreditGrantsResourceBalanceCreditsApplicationInvoiceVoided
 
 }
 
-public record BillingCreditGrantsResourceBalanceCreditsApplied
+public partial record BillingCreditGrantsResourceBalanceCreditsApplied
 {
     /// <summary>
     /// The invoice to which the billing credits were applied.
@@ -13463,7 +13600,7 @@ public record BillingCreditGrantsResourceBalanceCreditsApplied
 
 }
 
-public record BillingCreditGrantsResourceBalanceDebit
+public partial record BillingCreditGrantsResourceBalanceDebit
 {
     [JsonPropertyName("amount")]
     public required BillingCreditGrantsResourceAmount Amount { get; init; }
@@ -13482,7 +13619,7 @@ public record BillingCreditGrantsResourceBalanceDebit
 
 }
 
-public record BillingCreditGrantsResourceMonetaryAmount
+public partial record BillingCreditGrantsResourceMonetaryAmount
 {
     /// <summary>
     /// Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
@@ -13498,7 +13635,7 @@ public record BillingCreditGrantsResourceMonetaryAmount
 
 }
 
-public record BillingCreditGrantsResourceScope
+public partial record BillingCreditGrantsResourceScope
 {
     /// <summary>
     /// The price type that credit grants can apply to. We currently only support the `metered` price type. This refers to prices that have a [Billing Meter](https://docs.stripe.com/api/billing/meter) attached to them. Cannot be used in combination with `prices`.
@@ -13514,7 +13651,7 @@ public record BillingCreditGrantsResourceScope
 
 }
 
-public record BillingDetails
+public partial record BillingDetails
 {
     /// <summary>
     /// Billing address.
@@ -13548,7 +13685,7 @@ public record BillingDetails
 
 }
 
-public record BillingMeterResourceAggregationSettings
+public partial record BillingMeterResourceAggregationSettings
 {
     /// <summary>
     /// Specifies how events are aggregated.
@@ -13558,7 +13695,7 @@ public record BillingMeterResourceAggregationSettings
 
 }
 
-public record BillingMeterResourceBillingMeterEventAdjustmentCancel
+public partial record BillingMeterResourceBillingMeterEventAdjustmentCancel
 {
     /// <summary>
     /// Unique identifier for the event.
@@ -13568,7 +13705,7 @@ public record BillingMeterResourceBillingMeterEventAdjustmentCancel
 
 }
 
-public record BillingMeterResourceBillingMeterStatusTransitions
+public partial record BillingMeterResourceBillingMeterStatusTransitions
 {
     /// <summary>
     /// The time the meter was deactivated, if any. Measured in seconds since Unix epoch.
@@ -13578,7 +13715,7 @@ public record BillingMeterResourceBillingMeterStatusTransitions
 
 }
 
-public record BillingMeterResourceBillingMeterValue
+public partial record BillingMeterResourceBillingMeterValue
 {
     /// <summary>
     /// The key in the meter event payload to use as the value for this meter.
@@ -13588,7 +13725,7 @@ public record BillingMeterResourceBillingMeterValue
 
 }
 
-public record BillingMeterResourceCustomerMappingSettings
+public partial record BillingMeterResourceCustomerMappingSettings
 {
     /// <summary>
     /// The key in the meter event payload to use for mapping the event to a customer.
@@ -13607,7 +13744,7 @@ public record BillingMeterResourceCustomerMappingSettings
 /// <summary>
 /// A portal configuration describes the functionality and behavior you embed in a portal session. Related guide: [Configure the customer portal](/customer-management/configure-portal).
 /// </summary>
-public record BillingPortalConfiguration
+public partial record BillingPortalConfiguration
 {
     /// <summary>
     /// Whether the configuration is active and can be used to create portal sessions.
@@ -13631,7 +13768,7 @@ public record BillingPortalConfiguration
     public required int Created { get; init; }
 
     /// <summary>
-    /// The default URL to redirect customers to when they click on the portal's link to return to your website. This can be [overriden](https://docs.stripe.com/api/customer_portal/sessions/create#create_portal_session-return_url) when creating the session.
+    /// The default URL to redirect customers to when they click on the portal's link to return to your website. This can be [overridden](https://docs.stripe.com/api/customer_portal/sessions/create#create_portal_session-return_url) when creating the session.
     /// </summary>
     [JsonPropertyName("default_return_url")]
     public string? DefaultReturnUrl { get; init; }
@@ -13702,7 +13839,7 @@ public record BillingPortalConfiguration
 /// 
 /// Related guide: [Customer management](/customer-management)
 /// </summary>
-public record BillingPortalSession
+public partial record BillingPortalSession
 {
     /// <summary>
     /// The configuration used by this session, describing the features available.
@@ -13778,7 +13915,7 @@ public record BillingPortalSession
 
 }
 
-public record CancellationDetails
+public partial record CancellationDetails
 {
     /// <summary>
     /// Additional comments about why the user canceled the subscription, if the subscription was canceled explicitly by the user.
@@ -13805,7 +13942,7 @@ public record CancellationDetails
 /// 
 /// Related guide: [Account capabilities](https://docs.stripe.com/connect/account-capabilities)
 /// </summary>
-public record Capability
+public partial record Capability
 {
     /// <summary>
     /// The account for which the capability enables functionality.
@@ -13858,7 +13995,7 @@ public record Capability
 /// 
 /// Related guide: [Card payments with Sources](https://docs.stripe.com/sources/cards)
 /// </summary>
-public record Card
+public partial record Card
 {
     [JsonPropertyName("account")]
     public object? Account { get; init; }
@@ -13998,12 +14135,6 @@ public record Card
     public required string Id { get; init; }
 
     /// <summary>
-    /// Issuer identification number of the card.
-    /// </summary>
-    [JsonPropertyName("iin")]
-    public string? Iin { get; init; }
-
-    /// <summary>
     /// The last four digits of the card.
     /// </summary>
     [JsonPropertyName("last4")]
@@ -14050,7 +14181,7 @@ public record Card
 
 }
 
-public record CardGeneratedFromPaymentMethodDetails
+public partial record CardGeneratedFromPaymentMethodDetails
 {
     [JsonPropertyName("card_present")]
     public PaymentMethodDetailsCardPresent? CardPresent { get; init; }
@@ -14063,7 +14194,7 @@ public record CardGeneratedFromPaymentMethodDetails
 
 }
 
-public record CardIssuingAccountTermsOfService
+public partial record CardIssuingAccountTermsOfService
 {
     /// <summary>
     /// The Unix timestamp marking when the account representative accepted the service agreement.
@@ -14085,14 +14216,14 @@ public record CardIssuingAccountTermsOfService
 
 }
 
-public record CardMandatePaymentMethodDetails
+public partial record CardMandatePaymentMethodDetails
 {
 }
 
 /// <summary>
 /// A customer's `Cash balance` represents real funds. Customers can add funds to their cash balance by sending a bank transfer. These funds can be used for payment and can eventually be paid out to your bank account.
 /// </summary>
-public record CashBalance
+public partial record CashBalance
 {
     /// <summary>
     /// A hash of all cash balances available to this customer. You cannot delete a customer with any cash balances, even if the balance is 0. Amounts are represented in the [smallest currency unit](https://docs.stripe.com/currencies#zero-decimal).
@@ -14134,7 +14265,7 @@ public record CashBalance
 /// PaymentIntent confirmation is the most common way to create Charges, but [Account Debits](https://docs.stripe.com/connect/account-debits) may also create Charges.
 /// Some legacy payment flows create Charges directly, which is not recommended for new integrations.
 /// </summary>
-public record Charge
+public partial record Charge
 {
     /// <summary>
     /// Amount intended to be collected by this payment. A positive integer representing how much to charge in the [smallest currency unit](https://docs.stripe.com/currencies#zero-decimal) (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency). The minimum amount is $0.50 US or [equivalent in charge currency](https://docs.stripe.com/currencies#minimum-and-maximum-charge-amounts). The amount value supports up to eight digits (e.g., a value of 99999999 for a USD charge of $999,999.99).
@@ -14404,7 +14535,7 @@ public record Charge
 
 }
 
-public record ChargeFraudDetails
+public partial record ChargeFraudDetails
 {
     /// <summary>
     /// Assessments from Stripe. If set, the value is `fraudulent`.
@@ -14420,7 +14551,7 @@ public record ChargeFraudDetails
 
 }
 
-public record ChargeOutcome
+public partial record ChargeOutcome
 {
     /// <summary>
     /// An enumerated value providing a more detailed explanation on [how to proceed with an error](https://docs.stripe.com/declines#retrying-issuer-declines).
@@ -14484,7 +14615,7 @@ public record ChargeOutcome
 
 }
 
-public record ChargeTransferData
+public partial record ChargeTransferData
 {
     /// <summary>
     /// The amount transferred to the destination account, if specified. By default, the entire charge amount is transferred to the destination account.
@@ -14516,7 +14647,7 @@ public record ChargeTransferData
 /// 
 /// Related guide: [Checkout quickstart](https://docs.stripe.com/checkout/quickstart)
 /// </summary>
-public record CheckoutSession
+public partial record CheckoutSession
 {
     /// <summary>
     /// Settings for price localization with [Adaptive Pricing](https://docs.stripe.com/payments/checkout/adaptive-pricing).
@@ -14926,7 +15057,7 @@ public record CheckoutSession
 
 }
 
-public record CheckoutAcssDebitMandateOptions
+public partial record CheckoutAcssDebitMandateOptions
 {
     /// <summary>
     /// A URL for custom mandate text
@@ -14960,7 +15091,7 @@ public record CheckoutAcssDebitMandateOptions
 
 }
 
-public record CheckoutAcssDebitPaymentMethodOptions
+public partial record CheckoutAcssDebitPaymentMethodOptions
 {
     /// <summary>
     /// Currency supported by the bank account. Returned when the Session is in `setup` mode.
@@ -14997,7 +15128,7 @@ public record CheckoutAcssDebitPaymentMethodOptions
 
 }
 
-public record CheckoutAffirmPaymentMethodOptions
+public partial record CheckoutAffirmPaymentMethodOptions
 {
     /// <summary>
     /// Controls when the funds will be captured from the customer's account.
@@ -15019,7 +15150,7 @@ public record CheckoutAffirmPaymentMethodOptions
 
 }
 
-public record CheckoutAfterpayClearpayPaymentMethodOptions
+public partial record CheckoutAfterpayClearpayPaymentMethodOptions
 {
     /// <summary>
     /// Controls when the funds will be captured from the customer's account.
@@ -15041,7 +15172,7 @@ public record CheckoutAfterpayClearpayPaymentMethodOptions
 
 }
 
-public record CheckoutAlipayPaymentMethodOptions
+public partial record CheckoutAlipayPaymentMethodOptions
 {
     /// <summary>
     /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
@@ -15057,7 +15188,7 @@ public record CheckoutAlipayPaymentMethodOptions
 
 }
 
-public record CheckoutAlmaPaymentMethodOptions
+public partial record CheckoutAlmaPaymentMethodOptions
 {
     /// <summary>
     /// Controls when the funds will be captured from the customer's account.
@@ -15067,7 +15198,7 @@ public record CheckoutAlmaPaymentMethodOptions
 
 }
 
-public record CheckoutAmazonPayPaymentMethodOptions
+public partial record CheckoutAmazonPayPaymentMethodOptions
 {
     /// <summary>
     /// Controls when the funds will be captured from the customer's account.
@@ -15089,7 +15220,7 @@ public record CheckoutAmazonPayPaymentMethodOptions
 
 }
 
-public record CheckoutAuBecsDebitPaymentMethodOptions
+public partial record CheckoutAuBecsDebitPaymentMethodOptions
 {
     /// <summary>
     /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
@@ -15111,7 +15242,7 @@ public record CheckoutAuBecsDebitPaymentMethodOptions
 
 }
 
-public record CheckoutBacsDebitPaymentMethodOptions
+public partial record CheckoutBacsDebitPaymentMethodOptions
 {
     [JsonPropertyName("mandate_options")]
     public CheckoutPaymentMethodOptionsMandateOptionsBacsDebit? MandateOptions { get; init; }
@@ -15136,7 +15267,7 @@ public record CheckoutBacsDebitPaymentMethodOptions
 
 }
 
-public record CheckoutBancontactPaymentMethodOptions
+public partial record CheckoutBancontactPaymentMethodOptions
 {
     /// <summary>
     /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
@@ -15152,7 +15283,7 @@ public record CheckoutBancontactPaymentMethodOptions
 
 }
 
-public record CheckoutBilliePaymentMethodOptions
+public partial record CheckoutBilliePaymentMethodOptions
 {
     /// <summary>
     /// Controls when the funds will be captured from the customer's account.
@@ -15162,7 +15293,7 @@ public record CheckoutBilliePaymentMethodOptions
 
 }
 
-public record CheckoutBoletoPaymentMethodOptions
+public partial record CheckoutBoletoPaymentMethodOptions
 {
     /// <summary>
     /// The number of calendar days before a Boleto voucher expires. For example, if you create a Boleto voucher on Monday and you set expires_after_days to 2, the Boleto voucher will expire on Wednesday at 23:59 America/Sao_Paulo time.
@@ -15184,7 +15315,7 @@ public record CheckoutBoletoPaymentMethodOptions
 
 }
 
-public record CheckoutCardInstallmentsOptions
+public partial record CheckoutCardInstallmentsOptions
 {
     /// <summary>
     /// Indicates if installments are enabled
@@ -15194,7 +15325,7 @@ public record CheckoutCardInstallmentsOptions
 
 }
 
-public record CheckoutCardPaymentMethodOptions
+public partial record CheckoutCardPaymentMethodOptions
 {
     /// <summary>
     /// Controls when the funds will be captured from the customer's account.
@@ -15264,7 +15395,7 @@ public record CheckoutCardPaymentMethodOptions
 
 }
 
-public record CheckoutCashappPaymentMethodOptions
+public partial record CheckoutCashappPaymentMethodOptions
 {
     /// <summary>
     /// Controls when the funds will be captured from the customer's account.
@@ -15286,7 +15417,7 @@ public record CheckoutCashappPaymentMethodOptions
 
 }
 
-public record CheckoutCustomerBalanceBankTransferPaymentMethodOptions
+public partial record CheckoutCustomerBalanceBankTransferPaymentMethodOptions
 {
     [JsonPropertyName("eu_bank_transfer")]
     public PaymentMethodOptionsCustomerBalanceEuBankAccount? EuBankTransfer { get; init; }
@@ -15307,7 +15438,7 @@ public record CheckoutCustomerBalanceBankTransferPaymentMethodOptions
 
 }
 
-public record CheckoutCustomerBalancePaymentMethodOptions
+public partial record CheckoutCustomerBalancePaymentMethodOptions
 {
     [JsonPropertyName("bank_transfer")]
     public CheckoutCustomerBalanceBankTransferPaymentMethodOptions? BankTransfer { get; init; }
@@ -15332,7 +15463,7 @@ public record CheckoutCustomerBalancePaymentMethodOptions
 
 }
 
-public record CheckoutEpsPaymentMethodOptions
+public partial record CheckoutEpsPaymentMethodOptions
 {
     /// <summary>
     /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
@@ -15348,7 +15479,7 @@ public record CheckoutEpsPaymentMethodOptions
 
 }
 
-public record CheckoutFpxPaymentMethodOptions
+public partial record CheckoutFpxPaymentMethodOptions
 {
     /// <summary>
     /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
@@ -15364,7 +15495,7 @@ public record CheckoutFpxPaymentMethodOptions
 
 }
 
-public record CheckoutGiropayPaymentMethodOptions
+public partial record CheckoutGiropayPaymentMethodOptions
 {
     /// <summary>
     /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
@@ -15380,7 +15511,7 @@ public record CheckoutGiropayPaymentMethodOptions
 
 }
 
-public record CheckoutGrabPayPaymentMethodOptions
+public partial record CheckoutGrabPayPaymentMethodOptions
 {
     /// <summary>
     /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
@@ -15396,7 +15527,7 @@ public record CheckoutGrabPayPaymentMethodOptions
 
 }
 
-public record CheckoutIdealPaymentMethodOptions
+public partial record CheckoutIdealPaymentMethodOptions
 {
     /// <summary>
     /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
@@ -15412,7 +15543,7 @@ public record CheckoutIdealPaymentMethodOptions
 
 }
 
-public record CheckoutKakaoPayPaymentMethodOptions
+public partial record CheckoutKakaoPayPaymentMethodOptions
 {
     /// <summary>
     /// Controls when the funds will be captured from the customer's account.
@@ -15434,7 +15565,7 @@ public record CheckoutKakaoPayPaymentMethodOptions
 
 }
 
-public record CheckoutKlarnaPaymentMethodOptions
+public partial record CheckoutKlarnaPaymentMethodOptions
 {
     /// <summary>
     /// Controls when the funds will be captured from the customer's account.
@@ -15456,7 +15587,7 @@ public record CheckoutKlarnaPaymentMethodOptions
 
 }
 
-public record CheckoutKonbiniPaymentMethodOptions
+public partial record CheckoutKonbiniPaymentMethodOptions
 {
     /// <summary>
     /// The number of calendar days (between 1 and 60) after which Konbini payment instructions will expire. For example, if a PaymentIntent is confirmed with Konbini and `expires_after_days` set to 2 on Monday JST, the instructions will expire on Wednesday 23:59:59 JST.
@@ -15478,7 +15609,7 @@ public record CheckoutKonbiniPaymentMethodOptions
 
 }
 
-public record CheckoutKrCardPaymentMethodOptions
+public partial record CheckoutKrCardPaymentMethodOptions
 {
     /// <summary>
     /// Controls when the funds will be captured from the customer's account.
@@ -15500,7 +15631,7 @@ public record CheckoutKrCardPaymentMethodOptions
 
 }
 
-public record CheckoutLinkPaymentMethodOptions
+public partial record CheckoutLinkPaymentMethodOptions
 {
     /// <summary>
     /// Controls when the funds will be captured from the customer's account.
@@ -15522,7 +15653,7 @@ public record CheckoutLinkPaymentMethodOptions
 
 }
 
-public record CheckoutLinkWalletOptions
+public partial record CheckoutLinkWalletOptions
 {
     /// <summary>
     /// Describes whether Checkout should display Link. Defaults to `auto`.
@@ -15532,7 +15663,7 @@ public record CheckoutLinkWalletOptions
 
 }
 
-public record CheckoutMobilepayPaymentMethodOptions
+public partial record CheckoutMobilepayPaymentMethodOptions
 {
     /// <summary>
     /// Controls when the funds will be captured from the customer's account.
@@ -15554,7 +15685,7 @@ public record CheckoutMobilepayPaymentMethodOptions
 
 }
 
-public record CheckoutMultibancoPaymentMethodOptions
+public partial record CheckoutMultibancoPaymentMethodOptions
 {
     /// <summary>
     /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
@@ -15570,7 +15701,7 @@ public record CheckoutMultibancoPaymentMethodOptions
 
 }
 
-public record CheckoutNaverPayPaymentMethodOptions
+public partial record CheckoutNaverPayPaymentMethodOptions
 {
     /// <summary>
     /// Controls when the funds will be captured from the customer's account.
@@ -15592,7 +15723,7 @@ public record CheckoutNaverPayPaymentMethodOptions
 
 }
 
-public record CheckoutOxxoPaymentMethodOptions
+public partial record CheckoutOxxoPaymentMethodOptions
 {
     /// <summary>
     /// The number of calendar days before an OXXO invoice expires. For example, if you create an OXXO invoice on Monday and you set expires_after_days to 2, the OXXO invoice will expire on Wednesday at 23:59 America/Mexico_City time.
@@ -15614,7 +15745,7 @@ public record CheckoutOxxoPaymentMethodOptions
 
 }
 
-public record CheckoutP24PaymentMethodOptions
+public partial record CheckoutP24PaymentMethodOptions
 {
     /// <summary>
     /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
@@ -15630,7 +15761,7 @@ public record CheckoutP24PaymentMethodOptions
 
 }
 
-public record CheckoutPaycoPaymentMethodOptions
+public partial record CheckoutPaycoPaymentMethodOptions
 {
     /// <summary>
     /// Controls when the funds will be captured from the customer's account.
@@ -15638,9 +15769,21 @@ public record CheckoutPaycoPaymentMethodOptions
     [JsonPropertyName("capture_method")]
     public CheckoutAffirmPaymentMethodOptionsCaptureMethod? CaptureMethod { get; init; }
 
+    /// <summary>
+    /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
+    /// 
+    /// If you provide a Customer with the PaymentIntent, you can use this parameter to [attach the payment method](/payments/save-during-payment) to the Customer after the PaymentIntent is confirmed and the customer completes any required actions. If you don't provide a Customer, you can still [attach](/api/payment_methods/attach) the payment method to a Customer after the transaction completes.
+    /// 
+    /// If the payment method is `card_present` and isn't a digital wallet, Stripe creates and attaches a [generated_card](/api/charges/object#charge_object-payment_method_details-card_present-generated_card) payment method representing the card to the Customer instead.
+    /// 
+    /// When processing card payments, Stripe uses `setup_future_usage` to help you comply with regional legislation and network rules, such as [SCA](/strong-customer-authentication).
+    /// </summary>
+    [JsonPropertyName("setup_future_usage")]
+    public CheckoutAffirmPaymentMethodOptionsSetupFutureUsage? SetupFutureUsage { get; init; }
+
 }
 
-public record CheckoutPaymentMethodOptionsMandateOptionsBacsDebit
+public partial record CheckoutPaymentMethodOptionsMandateOptionsBacsDebit
 {
     /// <summary>
     /// Prefix used to generate the Mandate reference. Must be at most 12 characters long. Must consist of only uppercase letters, numbers, spaces, or the following special characters: '/', '_', '-', '&amp;', '.'. Cannot begin with 'DDIC' or 'STRIPE'.
@@ -15650,7 +15793,7 @@ public record CheckoutPaymentMethodOptionsMandateOptionsBacsDebit
 
 }
 
-public record CheckoutPaymentMethodOptionsMandateOptionsSepaDebit
+public partial record CheckoutPaymentMethodOptionsMandateOptionsSepaDebit
 {
     /// <summary>
     /// Prefix used to generate the Mandate reference. Must be at most 12 characters long. Must consist of only uppercase letters, numbers, spaces, or the following special characters: '/', '_', '-', '&amp;', '.'. Cannot begin with 'STRIPE'.
@@ -15660,7 +15803,7 @@ public record CheckoutPaymentMethodOptionsMandateOptionsSepaDebit
 
 }
 
-public record CheckoutPaynowPaymentMethodOptions
+public partial record CheckoutPaynowPaymentMethodOptions
 {
     /// <summary>
     /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
@@ -15676,7 +15819,7 @@ public record CheckoutPaynowPaymentMethodOptions
 
 }
 
-public record CheckoutPaypalPaymentMethodOptions
+public partial record CheckoutPaypalPaymentMethodOptions
 {
     /// <summary>
     /// Controls when the funds will be captured from the customer's account.
@@ -15710,7 +15853,7 @@ public record CheckoutPaypalPaymentMethodOptions
 
 }
 
-public record CheckoutPaytoPaymentMethodOptions
+public partial record CheckoutPaytoPaymentMethodOptions
 {
     [JsonPropertyName("mandate_options")]
     public MandateOptionsPayto? MandateOptions { get; init; }
@@ -15729,7 +15872,7 @@ public record CheckoutPaytoPaymentMethodOptions
 
 }
 
-public record CheckoutPixPaymentMethodOptions
+public partial record CheckoutPixPaymentMethodOptions
 {
     /// <summary>
     /// Determines if the amount includes the IOF tax.
@@ -15760,7 +15903,7 @@ public record CheckoutPixPaymentMethodOptions
 
 }
 
-public record CheckoutRevolutPayPaymentMethodOptions
+public partial record CheckoutRevolutPayPaymentMethodOptions
 {
     /// <summary>
     /// Controls when the funds will be captured from the customer's account.
@@ -15782,7 +15925,29 @@ public record CheckoutRevolutPayPaymentMethodOptions
 
 }
 
-public record CheckoutSamsungPayPaymentMethodOptions
+public partial record CheckoutSamsungPayPaymentMethodOptions
+{
+    /// <summary>
+    /// Controls when the funds will be captured from the customer's account.
+    /// </summary>
+    [JsonPropertyName("capture_method")]
+    public CheckoutAffirmPaymentMethodOptionsCaptureMethod? CaptureMethod { get; init; }
+
+    /// <summary>
+    /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
+    /// 
+    /// If you provide a Customer with the PaymentIntent, you can use this parameter to [attach the payment method](/payments/save-during-payment) to the Customer after the PaymentIntent is confirmed and the customer completes any required actions. If you don't provide a Customer, you can still [attach](/api/payment_methods/attach) the payment method to a Customer after the transaction completes.
+    /// 
+    /// If the payment method is `card_present` and isn't a digital wallet, Stripe creates and attaches a [generated_card](/api/charges/object#charge_object-payment_method_details-card_present-generated_card) payment method representing the card to the Customer instead.
+    /// 
+    /// When processing card payments, Stripe uses `setup_future_usage` to help you comply with regional legislation and network rules, such as [SCA](/strong-customer-authentication).
+    /// </summary>
+    [JsonPropertyName("setup_future_usage")]
+    public CheckoutAffirmPaymentMethodOptionsSetupFutureUsage? SetupFutureUsage { get; init; }
+
+}
+
+public partial record CheckoutSatispayPaymentMethodOptions
 {
     /// <summary>
     /// Controls when the funds will be captured from the customer's account.
@@ -15792,7 +15957,7 @@ public record CheckoutSamsungPayPaymentMethodOptions
 
 }
 
-public record CheckoutSatispayPaymentMethodOptions
+public partial record CheckoutScalapayPaymentMethodOptions
 {
     /// <summary>
     /// Controls when the funds will be captured from the customer's account.
@@ -15802,17 +15967,7 @@ public record CheckoutSatispayPaymentMethodOptions
 
 }
 
-public record CheckoutScalapayPaymentMethodOptions
-{
-    /// <summary>
-    /// Controls when the funds will be captured from the customer's account.
-    /// </summary>
-    [JsonPropertyName("capture_method")]
-    public CheckoutAffirmPaymentMethodOptionsCaptureMethod? CaptureMethod { get; init; }
-
-}
-
-public record CheckoutSepaDebitPaymentMethodOptions
+public partial record CheckoutSepaDebitPaymentMethodOptions
 {
     [JsonPropertyName("mandate_options")]
     public CheckoutPaymentMethodOptionsMandateOptionsSepaDebit? MandateOptions { get; init; }
@@ -15837,7 +15992,7 @@ public record CheckoutSepaDebitPaymentMethodOptions
 
 }
 
-public record CheckoutSessionPaymentMethodOptions
+public partial record CheckoutSessionPaymentMethodOptions
 {
     [JsonPropertyName("acss_debit")]
     public CheckoutAcssDebitPaymentMethodOptions? AcssDebit { get; init; }
@@ -15959,6 +16114,9 @@ public record CheckoutSessionPaymentMethodOptions
     [JsonPropertyName("sofort")]
     public CheckoutSofortPaymentMethodOptions? Sofort { get; init; }
 
+    [JsonPropertyName("sunbit")]
+    public CheckoutSunbitPaymentMethodOptions? Sunbit { get; init; }
+
     [JsonPropertyName("swish")]
     public CheckoutSwishPaymentMethodOptions? Swish { get; init; }
 
@@ -15971,16 +16129,19 @@ public record CheckoutSessionPaymentMethodOptions
     [JsonPropertyName("us_bank_account")]
     public CheckoutUsBankAccountPaymentMethodOptions? UsBankAccount { get; init; }
 
+    [JsonPropertyName("wechat_pay")]
+    public CheckoutWechatPayPaymentMethodOptions? WechatPay { get; init; }
+
 }
 
-public record CheckoutSessionWalletOptions
+public partial record CheckoutSessionWalletOptions
 {
     [JsonPropertyName("link")]
     public CheckoutLinkWalletOptions? Link { get; init; }
 
 }
 
-public record CheckoutSofortPaymentMethodOptions
+public partial record CheckoutSofortPaymentMethodOptions
 {
     /// <summary>
     /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
@@ -15996,7 +16157,29 @@ public record CheckoutSofortPaymentMethodOptions
 
 }
 
-public record CheckoutSwishPaymentMethodOptions
+public partial record CheckoutSunbitPaymentMethodOptions
+{
+    /// <summary>
+    /// Controls when the funds will be captured from the customer's account.
+    /// </summary>
+    [JsonPropertyName("capture_method")]
+    public CheckoutAffirmPaymentMethodOptionsCaptureMethod? CaptureMethod { get; init; }
+
+    /// <summary>
+    /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
+    /// 
+    /// If you provide a Customer with the PaymentIntent, you can use this parameter to [attach the payment method](/payments/save-during-payment) to the Customer after the PaymentIntent is confirmed and the customer completes any required actions. If you don't provide a Customer, you can still [attach](/api/payment_methods/attach) the payment method to a Customer after the transaction completes.
+    /// 
+    /// If the payment method is `card_present` and isn't a digital wallet, Stripe creates and attaches a [generated_card](/api/charges/object#charge_object-payment_method_details-card_present-generated_card) payment method representing the card to the Customer instead.
+    /// 
+    /// When processing card payments, Stripe uses `setup_future_usage` to help you comply with regional legislation and network rules, such as [SCA](/strong-customer-authentication).
+    /// </summary>
+    [JsonPropertyName("setup_future_usage")]
+    public CheckoutAffirmPaymentMethodOptionsSetupFutureUsage? SetupFutureUsage { get; init; }
+
+}
+
+public partial record CheckoutSwishPaymentMethodOptions
 {
     /// <summary>
     /// The order reference that will be displayed to customers in the Swish application. Defaults to the `id` of the Payment Intent.
@@ -16006,7 +16189,7 @@ public record CheckoutSwishPaymentMethodOptions
 
 }
 
-public record CheckoutTwintPaymentMethodOptions
+public partial record CheckoutTwintPaymentMethodOptions
 {
     /// <summary>
     /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
@@ -16022,7 +16205,7 @@ public record CheckoutTwintPaymentMethodOptions
 
 }
 
-public record CheckoutUpiPaymentMethodOptions
+public partial record CheckoutUpiPaymentMethodOptions
 {
     [JsonPropertyName("mandate_options")]
     public MandateOptionsUpi? MandateOptions { get; init; }
@@ -16041,7 +16224,7 @@ public record CheckoutUpiPaymentMethodOptions
 
 }
 
-public record CheckoutUsBankAccountPaymentMethodOptions
+public partial record CheckoutUsBankAccountPaymentMethodOptions
 {
     [JsonPropertyName("financial_connections")]
     public LinkedAccountOptionsCommon? FinancialConnections { get; init; }
@@ -16072,11 +16255,39 @@ public record CheckoutUsBankAccountPaymentMethodOptions
 
 }
 
+public partial record CheckoutWechatPayPaymentMethodOptions
+{
+    /// <summary>
+    /// The app ID registered with WeChat Pay. Only required when client is iOS or Android.
+    /// </summary>
+    [JsonPropertyName("app_id")]
+    public string? AppId { get; init; }
+
+    /// <summary>
+    /// The client type that the end customer will pay from
+    /// </summary>
+    [JsonPropertyName("client")]
+    public Client? Client { get; init; }
+
+    /// <summary>
+    /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
+    /// 
+    /// If you provide a Customer with the PaymentIntent, you can use this parameter to [attach the payment method](/payments/save-during-payment) to the Customer after the PaymentIntent is confirmed and the customer completes any required actions. If you don't provide a Customer, you can still [attach](/api/payment_methods/attach) the payment method to a Customer after the transaction completes.
+    /// 
+    /// If the payment method is `card_present` and isn't a digital wallet, Stripe creates and attaches a [generated_card](/api/charges/object#charge_object-payment_method_details-card_present-generated_card) payment method representing the card to the Customer instead.
+    /// 
+    /// When processing card payments, Stripe uses `setup_future_usage` to help you comply with regional legislation and network rules, such as [SCA](/strong-customer-authentication).
+    /// </summary>
+    [JsonPropertyName("setup_future_usage")]
+    public CheckoutAffirmPaymentMethodOptionsSetupFutureUsage? SetupFutureUsage { get; init; }
+
+}
+
 /// <summary>
 /// Orders represent your intent to purchase a particular Climate product. When you create an order, the
 /// payment is deducted from your merchant balance.
 /// </summary>
-public record ClimateOrder
+public partial record ClimateOrder
 {
     /// <summary>
     /// Total amount of [Frontier](https://frontierclimate.com/)'s service fees in the currency's smallest unit.
@@ -16213,7 +16424,7 @@ public record ClimateOrder
 /// A Climate product represents a type of carbon removal unit available for reservation.
 /// You can retrieve it to see the current price and availability.
 /// </summary>
-public record ClimateProduct
+public partial record ClimateProduct
 {
     /// <summary>
     /// Time at which the object was created. Measured in seconds since the Unix epoch.
@@ -16276,7 +16487,7 @@ public record ClimateProduct
 /// <summary>
 /// A supplier of carbon removal.
 /// </summary>
-public record ClimateSupplier
+public partial record ClimateSupplier
 {
     /// <summary>
     /// Unique identifier for the object.
@@ -16322,7 +16533,7 @@ public record ClimateSupplier
 
 }
 
-public record ClimateRemovalsBeneficiary
+public partial record ClimateRemovalsBeneficiary
 {
     /// <summary>
     /// Publicly displayable name for the end beneficiary of carbon removal.
@@ -16332,7 +16543,7 @@ public record ClimateRemovalsBeneficiary
 
 }
 
-public record ClimateRemovalsLocation
+public partial record ClimateRemovalsLocation
 {
     /// <summary>
     /// The city where the supplier is located.
@@ -16369,7 +16580,7 @@ public record ClimateRemovalsLocation
 /// <summary>
 /// The delivery of a specified quantity of carbon for an order.
 /// </summary>
-public record ClimateRemovalsOrderDeliveries
+public partial record ClimateRemovalsOrderDeliveries
 {
     /// <summary>
     /// Time at which the delivery occurred. Measured in seconds since the Unix epoch.
@@ -16403,7 +16614,7 @@ public record ClimateRemovalsOrderDeliveries
 
 }
 
-public record ClimateRemovalsProductsPrice
+public partial record ClimateRemovalsProductsPrice
 {
     /// <summary>
     /// Fees for one metric ton of carbon removal in the currency's smallest unit.
@@ -16434,7 +16645,7 @@ public record ClimateRemovalsProductsPrice
 /// - [Finalize payments on the server](https://docs.stripe.com/payments/finalize-payments-on-the-server)
 /// - [Build two-step confirmation](https://docs.stripe.com/payments/build-a-two-step-confirmation).
 /// </summary>
-public record ConfirmationToken
+public partial record ConfirmationToken
 {
     /// <summary>
     /// Time at which the object was created. Measured in seconds since the Unix epoch.
@@ -16527,7 +16738,7 @@ public record ConfirmationToken
 /// <summary>
 /// Data used for generating a Mandate.
 /// </summary>
-public record ConfirmationTokensResourceMandateData
+public partial record ConfirmationTokensResourceMandateData
 {
     /// <summary>
     /// This hash contains details about the customer acceptance of the Mandate.
@@ -16540,7 +16751,7 @@ public record ConfirmationTokensResourceMandateData
 /// <summary>
 /// This hash contains details about the customer acceptance of the Mandate.
 /// </summary>
-public record ConfirmationTokensResourceMandateDataResourceCustomerAcceptance
+public partial record ConfirmationTokensResourceMandateDataResourceCustomerAcceptance
 {
     /// <summary>
     /// If this is a Mandate accepted online, this hash contains details about the online acceptance.
@@ -16559,7 +16770,7 @@ public record ConfirmationTokensResourceMandateDataResourceCustomerAcceptance
 /// <summary>
 /// This hash contains details about the online acceptance.
 /// </summary>
-public record ConfirmationTokensResourceMandateDataResourceCustomerAcceptanceResourceOnline
+public partial record ConfirmationTokensResourceMandateDataResourceCustomerAcceptanceResourceOnline
 {
     /// <summary>
     /// The IP address from which the Mandate was accepted by the customer.
@@ -16578,7 +16789,7 @@ public record ConfirmationTokensResourceMandateDataResourceCustomerAcceptanceRes
 /// <summary>
 /// Payment-method-specific configuration
 /// </summary>
-public record ConfirmationTokensResourcePaymentMethodOptions
+public partial record ConfirmationTokensResourcePaymentMethodOptions
 {
     /// <summary>
     /// This hash contains the card payment method options.
@@ -16591,7 +16802,7 @@ public record ConfirmationTokensResourcePaymentMethodOptions
 /// <summary>
 /// This hash contains the card payment method options.
 /// </summary>
-public record ConfirmationTokensResourcePaymentMethodOptionsResourceCard
+public partial record ConfirmationTokensResourcePaymentMethodOptionsResourceCard
 {
     /// <summary>
     /// The `cvc_update` Token collected from the Payment Element.
@@ -16610,7 +16821,7 @@ public record ConfirmationTokensResourcePaymentMethodOptionsResourceCard
 /// <summary>
 /// Installment configuration for payments.
 /// </summary>
-public record ConfirmationTokensResourcePaymentMethodOptionsResourceCardResourceInstallment
+public partial record ConfirmationTokensResourcePaymentMethodOptionsResourceCardResourceInstallment
 {
     [JsonPropertyName("plan")]
     public PaymentMethodDetailsCardInstallmentsPlan? Plan { get; init; }
@@ -16620,7 +16831,7 @@ public record ConfirmationTokensResourcePaymentMethodOptionsResourceCardResource
 /// <summary>
 /// Details of the PaymentMethod collected by Payment Element
 /// </summary>
-public record ConfirmationTokensResourcePaymentMethodPreview
+public partial record ConfirmationTokensResourcePaymentMethodPreview
 {
     [JsonPropertyName("acss_debit")]
     public PaymentMethodAcssDebit? AcssDebit { get; init; }
@@ -16816,7 +17027,7 @@ public record ConfirmationTokensResourcePaymentMethodPreview
 
 }
 
-public record ConfirmationTokensResourceShipping
+public partial record ConfirmationTokensResourceShipping
 {
     [JsonPropertyName("address")]
     public required Address Address { get; init; }
@@ -16835,7 +17046,7 @@ public record ConfirmationTokensResourceShipping
 
 }
 
-public record ConnectAccountReference
+public partial record ConnectAccountReference
 {
     /// <summary>
     /// The connected account being referenced when `type` is `account`.
@@ -16851,7 +17062,7 @@ public record ConnectAccountReference
 
 }
 
-public record ConnectCollectionTransfer
+public partial record ConnectCollectionTransfer
 {
     /// <summary>
     /// Amount transferred, in cents (or local equivalent).
@@ -16891,7 +17102,7 @@ public record ConnectCollectionTransfer
 
 }
 
-public record ConnectEmbeddedAccountConfigClaim
+public partial record ConnectEmbeddedAccountConfigClaim
 {
     /// <summary>
     /// Whether the embedded component is enabled.
@@ -16904,7 +17115,7 @@ public record ConnectEmbeddedAccountConfigClaim
 
 }
 
-public record ConnectEmbeddedAccountFeaturesClaim
+public partial record ConnectEmbeddedAccountFeaturesClaim
 {
     /// <summary>
     /// Whether Stripe user authentication is disabled. This value can only be `true` for accounts where `controller.requirement_collection` is `application` for the account. The default value is the opposite of the `external_account_collection` value. For example, if you don't set `external_account_collection`, it defaults to `true` and `disable_stripe_user_authentication` defaults to `false`.
@@ -16920,7 +17131,7 @@ public record ConnectEmbeddedAccountFeaturesClaim
 
 }
 
-public record ConnectEmbeddedAccountSessionCreateComponents
+public partial record ConnectEmbeddedAccountSessionCreateComponents
 {
     [JsonPropertyName("account_management")]
     public required ConnectEmbeddedAccountConfigClaim AccountManagement { get; init; }
@@ -16987,7 +17198,7 @@ public record ConnectEmbeddedAccountSessionCreateComponents
 
 }
 
-public record ConnectEmbeddedBaseConfigClaim
+public partial record ConnectEmbeddedBaseConfigClaim
 {
     /// <summary>
     /// Whether the embedded component is enabled.
@@ -17000,11 +17211,11 @@ public record ConnectEmbeddedBaseConfigClaim
 
 }
 
-public record ConnectEmbeddedBaseFeatures
+public partial record ConnectEmbeddedBaseFeatures
 {
 }
 
-public record ConnectEmbeddedDisputesListConfig
+public partial record ConnectEmbeddedDisputesListConfig
 {
     /// <summary>
     /// Whether the embedded component is enabled.
@@ -17017,7 +17228,7 @@ public record ConnectEmbeddedDisputesListConfig
 
 }
 
-public record ConnectEmbeddedDisputesListFeatures
+public partial record ConnectEmbeddedDisputesListFeatures
 {
     /// <summary>
     /// Whether to allow capturing and cancelling payment intents. This is `true` by default.
@@ -17043,9 +17254,15 @@ public record ConnectEmbeddedDisputesListFeatures
     [JsonPropertyName("refund_management")]
     public required bool RefundManagement { get; init; }
 
+    /// <summary>
+    /// Whether to allow connected accounts to submit disputes using Smart Disputes. Defaults to the value of `dispute_management`.
+    /// </summary>
+    [JsonPropertyName("smart_disputes_management")]
+    public required bool SmartDisputesManagement { get; init; }
+
 }
 
-public record ConnectEmbeddedFinancialAccountConfigClaim
+public partial record ConnectEmbeddedFinancialAccountConfigClaim
 {
     /// <summary>
     /// Whether the embedded component is enabled.
@@ -17058,7 +17275,7 @@ public record ConnectEmbeddedFinancialAccountConfigClaim
 
 }
 
-public record ConnectEmbeddedFinancialAccountFeatures
+public partial record ConnectEmbeddedFinancialAccountFeatures
 {
     /// <summary>
     /// Whether Stripe user authentication is disabled. This value can only be `true` for accounts where `controller.requirement_collection` is `application` for the account. The default value is the opposite of the `external_account_collection` value. For example, if you don't set `external_account_collection`, it defaults to `true` and `disable_stripe_user_authentication` defaults to `false`.
@@ -17086,7 +17303,7 @@ public record ConnectEmbeddedFinancialAccountFeatures
 
 }
 
-public record ConnectEmbeddedFinancialAccountTransactionsConfigClaim
+public partial record ConnectEmbeddedFinancialAccountTransactionsConfigClaim
 {
     /// <summary>
     /// Whether the embedded component is enabled.
@@ -17099,7 +17316,7 @@ public record ConnectEmbeddedFinancialAccountTransactionsConfigClaim
 
 }
 
-public record ConnectEmbeddedFinancialAccountTransactionsFeatures
+public partial record ConnectEmbeddedFinancialAccountTransactionsFeatures
 {
     /// <summary>
     /// Whether to allow card spend dispute management features.
@@ -17109,7 +17326,7 @@ public record ConnectEmbeddedFinancialAccountTransactionsFeatures
 
 }
 
-public record ConnectEmbeddedInstantPayoutsPromotionConfig
+public partial record ConnectEmbeddedInstantPayoutsPromotionConfig
 {
     /// <summary>
     /// Whether the embedded component is enabled.
@@ -17122,7 +17339,7 @@ public record ConnectEmbeddedInstantPayoutsPromotionConfig
 
 }
 
-public record ConnectEmbeddedInstantPayoutsPromotionFeatures
+public partial record ConnectEmbeddedInstantPayoutsPromotionFeatures
 {
     /// <summary>
     /// Whether Stripe user authentication is disabled. This value can only be `true` for accounts where `controller.requirement_collection` is `application` for the account. The default value is the opposite of the `external_account_collection` value. For example, if you don't set `external_account_collection`, it defaults to `true` and `disable_stripe_user_authentication` defaults to `false`.
@@ -17144,7 +17361,7 @@ public record ConnectEmbeddedInstantPayoutsPromotionFeatures
 
 }
 
-public record ConnectEmbeddedIssuingCardConfigClaim
+public partial record ConnectEmbeddedIssuingCardConfigClaim
 {
     /// <summary>
     /// Whether the embedded component is enabled.
@@ -17157,7 +17374,7 @@ public record ConnectEmbeddedIssuingCardConfigClaim
 
 }
 
-public record ConnectEmbeddedIssuingCardFeatures
+public partial record ConnectEmbeddedIssuingCardFeatures
 {
     /// <summary>
     /// Whether to allow card management features.
@@ -17185,7 +17402,7 @@ public record ConnectEmbeddedIssuingCardFeatures
 
 }
 
-public record ConnectEmbeddedIssuingCardsListConfigClaim
+public partial record ConnectEmbeddedIssuingCardsListConfigClaim
 {
     /// <summary>
     /// Whether the embedded component is enabled.
@@ -17198,7 +17415,7 @@ public record ConnectEmbeddedIssuingCardsListConfigClaim
 
 }
 
-public record ConnectEmbeddedIssuingCardsListFeatures
+public partial record ConnectEmbeddedIssuingCardsListFeatures
 {
     /// <summary>
     /// Whether to allow card management features.
@@ -17232,7 +17449,7 @@ public record ConnectEmbeddedIssuingCardsListFeatures
 
 }
 
-public record ConnectEmbeddedPaymentDisputesConfig
+public partial record ConnectEmbeddedPaymentDisputesConfig
 {
     /// <summary>
     /// Whether the embedded component is enabled.
@@ -17245,7 +17462,7 @@ public record ConnectEmbeddedPaymentDisputesConfig
 
 }
 
-public record ConnectEmbeddedPaymentDisputesFeatures
+public partial record ConnectEmbeddedPaymentDisputesFeatures
 {
     /// <summary>
     /// Whether connected accounts can manage destination charges that are created on behalf of them. This is `false` by default.
@@ -17265,9 +17482,15 @@ public record ConnectEmbeddedPaymentDisputesFeatures
     [JsonPropertyName("refund_management")]
     public required bool RefundManagement { get; init; }
 
+    /// <summary>
+    /// Whether to allow connected accounts to submit disputes using Smart Disputes. Defaults to the value of `dispute_management`.
+    /// </summary>
+    [JsonPropertyName("smart_disputes_management")]
+    public required bool SmartDisputesManagement { get; init; }
+
 }
 
-public record ConnectEmbeddedPaymentsConfigClaim
+public partial record ConnectEmbeddedPaymentsConfigClaim
 {
     /// <summary>
     /// Whether the embedded component is enabled.
@@ -17280,7 +17503,7 @@ public record ConnectEmbeddedPaymentsConfigClaim
 
 }
 
-public record ConnectEmbeddedPaymentsFeatures
+public partial record ConnectEmbeddedPaymentsFeatures
 {
     /// <summary>
     /// Whether to allow capturing and cancelling payment intents. This is `true` by default.
@@ -17306,9 +17529,15 @@ public record ConnectEmbeddedPaymentsFeatures
     [JsonPropertyName("refund_management")]
     public required bool RefundManagement { get; init; }
 
+    /// <summary>
+    /// Whether to allow connected accounts to submit disputes using Smart Disputes. Defaults to the value of `dispute_management`.
+    /// </summary>
+    [JsonPropertyName("smart_disputes_management")]
+    public required bool SmartDisputesManagement { get; init; }
+
 }
 
-public record ConnectEmbeddedPayoutsConfig
+public partial record ConnectEmbeddedPayoutsConfig
 {
     /// <summary>
     /// Whether the embedded component is enabled.
@@ -17321,7 +17550,7 @@ public record ConnectEmbeddedPayoutsConfig
 
 }
 
-public record ConnectEmbeddedPayoutsFeatures
+public partial record ConnectEmbeddedPayoutsFeatures
 {
     /// <summary>
     /// Whether Stripe user authentication is disabled. This value can only be `true` for accounts where `controller.requirement_collection` is `application` for the account. The default value is the opposite of the `external_account_collection` value. For example, if you don't set `external_account_collection`, it defaults to `true` and `disable_stripe_user_authentication` defaults to `false`.
@@ -17363,7 +17592,7 @@ public record ConnectEmbeddedPayoutsFeatures
 /// You can also view the information from this API call as [an online
 /// guide](/docs/connect/required-verification-information).
 /// </summary>
-public record CountrySpec
+public partial record CountrySpec
 {
     /// <summary>
     /// The default currency for this country. This applies to both payment methods and bank accounts.
@@ -17412,7 +17641,7 @@ public record CountrySpec
 
 }
 
-public record CountrySpecVerificationFieldDetails
+public partial record CountrySpecVerificationFieldDetails
 {
     /// <summary>
     /// Additional fields which are only required for some users.
@@ -17428,7 +17657,7 @@ public record CountrySpecVerificationFieldDetails
 
 }
 
-public record CountrySpecVerificationFields
+public partial record CountrySpecVerificationFields
 {
     [JsonPropertyName("company")]
     public required CountrySpecVerificationFieldDetails Company { get; init; }
@@ -17443,7 +17672,7 @@ public record CountrySpecVerificationFields
 /// might want to apply to a customer. Coupons may be applied to [subscriptions](https://api.stripe.com#subscriptions), [invoices](https://api.stripe.com#invoices),
 /// [checkout sessions](https://docs.stripe.com/api/checkout/sessions), [quotes](https://api.stripe.com#quotes), and more. Coupons do not work with conventional one-off [charges](/api/charges/create) or [payment intents](https://docs.stripe.com/api/payment_intents).
 /// </summary>
-public record Coupon
+public partial record Coupon
 {
     /// <summary>
     /// Amount (in the `currency` specified) that will be taken off the subtotal of any invoices for this customer.
@@ -17546,7 +17775,7 @@ public record Coupon
 
 }
 
-public record CouponAppliesTo
+public partial record CouponAppliesTo
 {
     /// <summary>
     /// A list of product IDs this coupon applies to
@@ -17556,7 +17785,7 @@ public record CouponAppliesTo
 
 }
 
-public record CouponCurrencyOption
+public partial record CouponCurrencyOption
 {
     /// <summary>
     /// Amount (in the `currency` specified) that will be taken off the subtotal of any invoices for this customer.
@@ -17566,7 +17795,7 @@ public record CouponCurrencyOption
 
 }
 
-public record CreditBalance
+public partial record CreditBalance
 {
     [JsonPropertyName("available_balance")]
     public required BillingCreditGrantsResourceAmount AvailableBalance { get; init; }
@@ -17581,7 +17810,7 @@ public record CreditBalance
 /// 
 /// Related guide: [Credit notes](https://docs.stripe.com/billing/invoices/credit-notes)
 /// </summary>
-public record CreditNote
+public partial record CreditNote
 {
     /// <summary>
     /// The integer amount in cents (or local equivalent) representing the total amount of the credit note, including tax.
@@ -17792,7 +18021,7 @@ public record CreditNote
 /// <summary>
 /// The credit note line item object
 /// </summary>
-public record CreditNoteLineItem
+public partial record CreditNoteLineItem
 {
     /// <summary>
     /// The integer amount in cents (or local equivalent) representing the gross amount being credited for this line item, excluding (exclusive) tax and discounts.
@@ -17892,7 +18121,7 @@ public record CreditNoteLineItem
 
 }
 
-public record CreditNoteRefund
+public partial record CreditNoteRefund
 {
     /// <summary>
     /// Amount of the refund that applies to this credit note, in cents (or local equivalent).
@@ -17920,7 +18149,7 @@ public record CreditNoteRefund
 
 }
 
-public record CreditNotesPaymentRecordRefund
+public partial record CreditNotesPaymentRecordRefund
 {
     /// <summary>
     /// ID of the payment record.
@@ -17936,7 +18165,7 @@ public record CreditNotesPaymentRecordRefund
 
 }
 
-public record CreditNotesPretaxCreditAmount
+public partial record CreditNotesPretaxCreditAmount
 {
     /// <summary>
     /// The amount, in cents (or local equivalent), of the pretax credit amount.
@@ -17964,7 +18193,7 @@ public record CreditNotesPretaxCreditAmount
 
 }
 
-public record CreditedItemsInvoiceLineItems
+public partial record CreditedItemsInvoiceLineItems
 {
     /// <summary>
     /// The invoice id for the debited line item(s).
@@ -17980,7 +18209,7 @@ public record CreditedItemsInvoiceLineItems
 
 }
 
-public record CurrencyOption
+public partial record CurrencyOption
 {
     /// <summary>
     /// When set, provides configuration for the amount to be adjusted by the customer during Checkout Sessions and Payment Links.
@@ -18014,7 +18243,7 @@ public record CurrencyOption
 
 }
 
-public record CustomLogo
+public partial record CustomLogo
 {
     /// <summary>
     /// Content type of the Dashboard-only CustomPaymentMethodType logo.
@@ -18030,7 +18259,7 @@ public record CustomLogo
 
 }
 
-public record CustomUnitAmount
+public partial record CustomUnitAmount
 {
     /// <summary>
     /// The maximum unit amount the customer can specify for this item.
@@ -18056,7 +18285,7 @@ public record CustomUnitAmount
 /// This object represents a customer of your business. Use it to [create recurring charges](https://docs.stripe.com/invoicing/customer), [save payment](https://docs.stripe.com/payments/save-during-payment) and contact information,
 /// and track payments that belong to the same customer.
 /// </summary>
-public record Customer
+public partial record Customer
 {
     /// <summary>
     /// The customer's address.
@@ -18246,7 +18475,7 @@ public record Customer
 
 }
 
-public record CustomerAcceptance
+public partial record CustomerAcceptance
 {
     /// <summary>
     /// The time that the customer accepts the mandate.
@@ -18268,7 +18497,7 @@ public record CustomerAcceptance
 
 }
 
-public record CustomerBalanceCustomerBalanceSettings
+public partial record CustomerBalanceCustomerBalanceSettings
 {
     /// <summary>
     /// The configuration for how funds that land in the customer cash balance are reconciled.
@@ -18284,7 +18513,7 @@ public record CustomerBalanceCustomerBalanceSettings
 
 }
 
-public record CustomerBalanceResourceCashBalanceTransactionResourceAdjustedForOverdraft
+public partial record CustomerBalanceResourceCashBalanceTransactionResourceAdjustedForOverdraft
 {
     /// <summary>
     /// The [Balance Transaction](https://docs.stripe.com/api/balance_transactions/object) that corresponds to funds taken out of your Stripe balance.
@@ -18300,7 +18529,7 @@ public record CustomerBalanceResourceCashBalanceTransactionResourceAdjustedForOv
 
 }
 
-public record CustomerBalanceResourceCashBalanceTransactionResourceAppliedToPaymentTransaction
+public partial record CustomerBalanceResourceCashBalanceTransactionResourceAppliedToPaymentTransaction
 {
     /// <summary>
     /// The [Payment Intent](https://docs.stripe.com/api/payment_intents/object) that funds were applied to.
@@ -18310,14 +18539,14 @@ public record CustomerBalanceResourceCashBalanceTransactionResourceAppliedToPaym
 
 }
 
-public record CustomerBalanceResourceCashBalanceTransactionResourceFundedTransaction
+public partial record CustomerBalanceResourceCashBalanceTransactionResourceFundedTransaction
 {
     [JsonPropertyName("bank_transfer")]
     public required CustomerBalanceResourceCashBalanceTransactionResourceFundedTransactionResourceBankTransfer BankTransfer { get; init; }
 
 }
 
-public record CustomerBalanceResourceCashBalanceTransactionResourceFundedTransactionResourceBankTransfer
+public partial record CustomerBalanceResourceCashBalanceTransactionResourceFundedTransactionResourceBankTransfer
 {
     [JsonPropertyName("eu_bank_transfer")]
     public CustomerBalanceResourceCashBalanceTransactionResourceFundedTransactionResourceBankTransferResourceEuBankTransfer? EuBankTransfer { get; init; }
@@ -18345,7 +18574,7 @@ public record CustomerBalanceResourceCashBalanceTransactionResourceFundedTransac
 
 }
 
-public record CustomerBalanceResourceCashBalanceTransactionResourceFundedTransactionResourceBankTransferResourceEuBankTransfer
+public partial record CustomerBalanceResourceCashBalanceTransactionResourceFundedTransactionResourceBankTransferResourceEuBankTransfer
 {
     /// <summary>
     /// The BIC of the bank of the sender of the funding.
@@ -18367,7 +18596,7 @@ public record CustomerBalanceResourceCashBalanceTransactionResourceFundedTransac
 
 }
 
-public record CustomerBalanceResourceCashBalanceTransactionResourceFundedTransactionResourceBankTransferResourceGbBankTransfer
+public partial record CustomerBalanceResourceCashBalanceTransactionResourceFundedTransactionResourceBankTransferResourceGbBankTransfer
 {
     /// <summary>
     /// The last 4 digits of the account number of the sender of the funding.
@@ -18389,7 +18618,7 @@ public record CustomerBalanceResourceCashBalanceTransactionResourceFundedTransac
 
 }
 
-public record CustomerBalanceResourceCashBalanceTransactionResourceFundedTransactionResourceBankTransferResourceJpBankTransfer
+public partial record CustomerBalanceResourceCashBalanceTransactionResourceFundedTransactionResourceBankTransferResourceJpBankTransfer
 {
     /// <summary>
     /// The name of the bank of the sender of the funding.
@@ -18411,7 +18640,7 @@ public record CustomerBalanceResourceCashBalanceTransactionResourceFundedTransac
 
 }
 
-public record CustomerBalanceResourceCashBalanceTransactionResourceFundedTransactionResourceBankTransferResourceUsBankTransfer
+public partial record CustomerBalanceResourceCashBalanceTransactionResourceFundedTransactionResourceBankTransferResourceUsBankTransfer
 {
     /// <summary>
     /// The banking network used for this funding.
@@ -18427,7 +18656,7 @@ public record CustomerBalanceResourceCashBalanceTransactionResourceFundedTransac
 
 }
 
-public record CustomerBalanceResourceCashBalanceTransactionResourceRefundedFromPaymentTransaction
+public partial record CustomerBalanceResourceCashBalanceTransactionResourceRefundedFromPaymentTransaction
 {
     /// <summary>
     /// The [Refund](https://docs.stripe.com/api/refunds/object) that moved these funds into the customer's cash balance.
@@ -18437,7 +18666,7 @@ public record CustomerBalanceResourceCashBalanceTransactionResourceRefundedFromP
 
 }
 
-public record CustomerBalanceResourceCashBalanceTransactionResourceTransferredToBalance
+public partial record CustomerBalanceResourceCashBalanceTransactionResourceTransferredToBalance
 {
     /// <summary>
     /// The [Balance Transaction](https://docs.stripe.com/api/balance_transactions/object) that corresponds to funds transferred to your Stripe balance.
@@ -18447,7 +18676,7 @@ public record CustomerBalanceResourceCashBalanceTransactionResourceTransferredTo
 
 }
 
-public record CustomerBalanceResourceCashBalanceTransactionResourceUnappliedFromPaymentTransaction
+public partial record CustomerBalanceResourceCashBalanceTransactionResourceUnappliedFromPaymentTransaction
 {
     /// <summary>
     /// The [Payment Intent](https://docs.stripe.com/api/payment_intents/object) that funds were unapplied from.
@@ -18465,7 +18694,7 @@ public record CustomerBalanceResourceCashBalanceTransactionResourceUnappliedFrom
 /// 
 /// Related guide: [Customer balance](https://docs.stripe.com/billing/customer/balance)
 /// </summary>
-public record CustomerBalanceTransaction
+public partial record CustomerBalanceTransaction
 {
     /// <summary>
     /// The amount of the transaction. A negative value is a credit for the customer's balance, and a positive value is a debit to the customer's `balance`.
@@ -18565,7 +18794,7 @@ public record CustomerBalanceTransaction
 /// represent when funds are moved into or out of this balance. This includes funding by the customer, allocation
 /// to payments, and refunds to the customer.
 /// </summary>
-public record CustomerCashBalanceTransaction
+public partial record CustomerCashBalanceTransaction
 {
     [JsonPropertyName("adjusted_for_overdraft")]
     public CustomerBalanceResourceCashBalanceTransactionResourceAdjustedForOverdraft? AdjustedForOverdraft { get; init; }
@@ -18655,7 +18884,7 @@ public record CustomerCashBalanceTransaction
 /// [Customer Session with the Pricing Table](/payments/checkout/pricing-table#customer-session),
 /// [Customer Session with the Buy Button](/payment-links/buy-button#pass-an-existing-customer).
 /// </summary>
-public record CustomerSession
+public partial record CustomerSession
 {
     /// <summary>
     /// The client secret of this Customer Session. Used on the client to set up secure access to the given `customer`.
@@ -18712,7 +18941,7 @@ public record CustomerSession
 /// <summary>
 /// Configuration for the components supported by this Customer Session.
 /// </summary>
-public record CustomerSessionResourceComponents
+public partial record CustomerSessionResourceComponents
 {
     /// <summary>
     /// This hash contains whether the buy button is enabled.
@@ -18749,7 +18978,7 @@ public record CustomerSessionResourceComponents
 /// <summary>
 /// This hash contains whether the buy button is enabled.
 /// </summary>
-public record CustomerSessionResourceComponentsResourceBuyButton
+public partial record CustomerSessionResourceComponentsResourceBuyButton
 {
     /// <summary>
     /// Whether the buy button is enabled.
@@ -18762,7 +18991,7 @@ public record CustomerSessionResourceComponentsResourceBuyButton
 /// <summary>
 /// This hash contains whether the customer sheet is enabled and the features it supports.
 /// </summary>
-public record CustomerSessionResourceComponentsResourceCustomerSheet
+public partial record CustomerSessionResourceComponentsResourceCustomerSheet
 {
     /// <summary>
     /// Whether the customer sheet is enabled.
@@ -18781,7 +19010,7 @@ public record CustomerSessionResourceComponentsResourceCustomerSheet
 /// <summary>
 /// This hash contains the features the customer sheet supports.
 /// </summary>
-public record CustomerSessionResourceComponentsResourceCustomerSheetResourceFeatures
+public partial record CustomerSessionResourceComponentsResourceCustomerSheetResourceFeatures
 {
     /// <summary>
     /// A list of [`allow_redisplay`](https://docs.stripe.com/api/payment_methods/object#payment_method_object-allow_redisplay) values that controls which saved payment methods the customer sheet displays by filtering to only show payment methods with an `allow_redisplay` value that is present in this list.
@@ -18804,7 +19033,7 @@ public record CustomerSessionResourceComponentsResourceCustomerSheetResourceFeat
 /// <summary>
 /// This hash contains whether the mobile payment element is enabled and the features it supports.
 /// </summary>
-public record CustomerSessionResourceComponentsResourceMobilePaymentElement
+public partial record CustomerSessionResourceComponentsResourceMobilePaymentElement
 {
     /// <summary>
     /// Whether the mobile payment element is enabled.
@@ -18823,7 +19052,7 @@ public record CustomerSessionResourceComponentsResourceMobilePaymentElement
 /// <summary>
 /// This hash contains the features the mobile payment element supports.
 /// </summary>
-public record CustomerSessionResourceComponentsResourceMobilePaymentElementResourceFeatures
+public partial record CustomerSessionResourceComponentsResourceMobilePaymentElementResourceFeatures
 {
     /// <summary>
     /// A list of [`allow_redisplay`](https://docs.stripe.com/api/payment_methods/object#payment_method_object-allow_redisplay) values that controls which saved payment methods the mobile payment element displays by filtering to only show payment methods with an `allow_redisplay` value that is present in this list.
@@ -18868,7 +19097,7 @@ public record CustomerSessionResourceComponentsResourceMobilePaymentElementResou
 /// <summary>
 /// This hash contains whether the Payment Element is enabled and the features it supports.
 /// </summary>
-public record CustomerSessionResourceComponentsResourcePaymentElement
+public partial record CustomerSessionResourceComponentsResourcePaymentElement
 {
     /// <summary>
     /// Whether the Payment Element is enabled.
@@ -18887,7 +19116,7 @@ public record CustomerSessionResourceComponentsResourcePaymentElement
 /// <summary>
 /// This hash contains the features the Payment Element supports.
 /// </summary>
-public record CustomerSessionResourceComponentsResourcePaymentElementResourceFeatures
+public partial record CustomerSessionResourceComponentsResourcePaymentElementResourceFeatures
 {
     /// <summary>
     /// A list of [`allow_redisplay`](https://docs.stripe.com/api/payment_methods/object#payment_method_object-allow_redisplay) values that controls which saved payment methods the Payment Element displays by filtering to only show payment methods with an `allow_redisplay` value that is present in this list.
@@ -18938,7 +19167,7 @@ public record CustomerSessionResourceComponentsResourcePaymentElementResourceFea
 /// <summary>
 /// This hash contains whether the pricing table is enabled.
 /// </summary>
-public record CustomerSessionResourceComponentsResourcePricingTable
+public partial record CustomerSessionResourceComponentsResourcePricingTable
 {
     /// <summary>
     /// Whether the pricing table is enabled.
@@ -18948,7 +19177,7 @@ public record CustomerSessionResourceComponentsResourcePricingTable
 
 }
 
-public record CustomerTax
+public partial record CustomerTax
 {
     /// <summary>
     /// Surfaces if automatic tax computation is possible given the current customer location information.
@@ -18976,7 +19205,7 @@ public record CustomerTax
 
 }
 
-public record CustomerTaxLocation
+public partial record CustomerTaxLocation
 {
     /// <summary>
     /// The identified tax country of the customer.
@@ -18998,7 +19227,7 @@ public record CustomerTaxLocation
 
 }
 
-public record DeletedAccount
+public partial record DeletedAccount
 {
     /// <summary>
     /// Always true for a deleted object
@@ -19020,7 +19249,7 @@ public record DeletedAccount
 
 }
 
-public record DeletedApplePayDomain
+public partial record DeletedApplePayDomain
 {
     /// <summary>
     /// Always true for a deleted object
@@ -19042,7 +19271,7 @@ public record DeletedApplePayDomain
 
 }
 
-public record DeletedApplication
+public partial record DeletedApplication
 {
     /// <summary>
     /// Always true for a deleted object
@@ -19070,7 +19299,7 @@ public record DeletedApplication
 
 }
 
-public record DeletedBankAccount
+public partial record DeletedBankAccount
 {
     /// <summary>
     /// Three-letter [ISO code for the currency](https://stripe.com/docs/payouts) paid out to the bank account.
@@ -19098,7 +19327,7 @@ public record DeletedBankAccount
 
 }
 
-public record DeletedCard
+public partial record DeletedCard
 {
     /// <summary>
     /// Three-letter [ISO code for the currency](https://stripe.com/docs/payouts) paid out to the bank account.
@@ -19126,7 +19355,7 @@ public record DeletedCard
 
 }
 
-public record DeletedCoupon
+public partial record DeletedCoupon
 {
     /// <summary>
     /// Always true for a deleted object
@@ -19148,7 +19377,7 @@ public record DeletedCoupon
 
 }
 
-public record DeletedCustomer
+public partial record DeletedCustomer
 {
     /// <summary>
     /// Always true for a deleted object
@@ -19170,7 +19399,7 @@ public record DeletedCustomer
 
 }
 
-public record DeletedDiscount
+public partial record DeletedDiscount
 {
     /// <summary>
     /// The Checkout session that this coupon is applied to, if it is applied to a particular session in payment mode. Not present for subscription mode.
@@ -19254,9 +19483,9 @@ public record DeletedDiscount
 /// </remarks>
 [JsonDerivedType(typeof(DeletedBankAccount), "deleted_bank_account")]
 [JsonDerivedType(typeof(DeletedCard), "deleted_card")]
-public abstract record DeletedExternalAccount;
+public abstract partial record DeletedExternalAccount;
 
-public record DeletedInvoice
+public partial record DeletedInvoice
 {
     /// <summary>
     /// Always true for a deleted object
@@ -19278,7 +19507,7 @@ public record DeletedInvoice
 
 }
 
-public record DeletedInvoiceitem
+public partial record DeletedInvoiceitem
 {
     /// <summary>
     /// Always true for a deleted object
@@ -19305,9 +19534,9 @@ public record DeletedInvoiceitem
 /// </remarks>
 [JsonDerivedType(typeof(DeletedBankAccount), "deleted_bank_account")]
 [JsonDerivedType(typeof(DeletedCard), "deleted_card")]
-public abstract record DeletedPaymentSource;
+public abstract partial record DeletedPaymentSource;
 
-public record DeletedPerson
+public partial record DeletedPerson
 {
     /// <summary>
     /// Always true for a deleted object
@@ -19329,7 +19558,7 @@ public record DeletedPerson
 
 }
 
-public record DeletedPlan
+public partial record DeletedPlan
 {
     /// <summary>
     /// Always true for a deleted object
@@ -19351,7 +19580,7 @@ public record DeletedPlan
 
 }
 
-public record DeletedPrice
+public partial record DeletedPrice
 {
     /// <summary>
     /// Always true for a deleted object
@@ -19373,7 +19602,7 @@ public record DeletedPrice
 
 }
 
-public record DeletedProduct
+public partial record DeletedProduct
 {
     /// <summary>
     /// Always true for a deleted object
@@ -19395,7 +19624,7 @@ public record DeletedProduct
 
 }
 
-public record DeletedProductFeature
+public partial record DeletedProductFeature
 {
     /// <summary>
     /// Always true for a deleted object
@@ -19417,7 +19646,7 @@ public record DeletedProductFeature
 
 }
 
-public record DeletedRadarValueList
+public partial record DeletedRadarValueList
 {
     /// <summary>
     /// Always true for a deleted object
@@ -19439,7 +19668,7 @@ public record DeletedRadarValueList
 
 }
 
-public record DeletedRadarValueListItem
+public partial record DeletedRadarValueListItem
 {
     /// <summary>
     /// Always true for a deleted object
@@ -19461,7 +19690,7 @@ public record DeletedRadarValueListItem
 
 }
 
-public record DeletedSubscriptionItem
+public partial record DeletedSubscriptionItem
 {
     /// <summary>
     /// Always true for a deleted object
@@ -19483,7 +19712,7 @@ public record DeletedSubscriptionItem
 
 }
 
-public record DeletedTaxId
+public partial record DeletedTaxId
 {
     /// <summary>
     /// Always true for a deleted object
@@ -19505,7 +19734,7 @@ public record DeletedTaxId
 
 }
 
-public record DeletedTerminalConfiguration
+public partial record DeletedTerminalConfiguration
 {
     /// <summary>
     /// Always true for a deleted object
@@ -19527,7 +19756,7 @@ public record DeletedTerminalConfiguration
 
 }
 
-public record DeletedTerminalLocation
+public partial record DeletedTerminalLocation
 {
     /// <summary>
     /// Always true for a deleted object
@@ -19549,7 +19778,7 @@ public record DeletedTerminalLocation
 
 }
 
-public record DeletedTerminalReader
+public partial record DeletedTerminalReader
 {
     /// <summary>
     /// Always true for a deleted object
@@ -19583,7 +19812,7 @@ public record DeletedTerminalReader
 
 }
 
-public record DeletedTestHelpersTestClock
+public partial record DeletedTestHelpersTestClock
 {
     /// <summary>
     /// Always true for a deleted object
@@ -19605,7 +19834,7 @@ public record DeletedTestHelpersTestClock
 
 }
 
-public record DeletedWebhookEndpoint
+public partial record DeletedWebhookEndpoint
 {
     /// <summary>
     /// Always true for a deleted object
@@ -19627,7 +19856,7 @@ public record DeletedWebhookEndpoint
 
 }
 
-public record DestinationDetailsUnimplemented
+public partial record DestinationDetailsUnimplemented
 {
 }
 
@@ -19637,7 +19866,7 @@ public record DestinationDetailsUnimplemented
 /// 
 /// Related guide: [Applying discounts to subscriptions](https://docs.stripe.com/billing/subscriptions/discounts)
 /// </summary>
-public record Discount
+public partial record Discount
 {
     /// <summary>
     /// The Checkout session that this coupon is applied to, if it is applied to a particular session in payment mode. Not present for subscription mode.
@@ -19716,7 +19945,7 @@ public record Discount
 
 }
 
-public record DiscountSource
+public partial record DiscountSource
 {
     /// <summary>
     /// The coupon that was redeemed to create this discount.
@@ -19732,7 +19961,7 @@ public record DiscountSource
 
 }
 
-public record DiscountsResourceDiscountAmount
+public partial record DiscountsResourceDiscountAmount
 {
     /// <summary>
     /// The amount, in cents (or local equivalent), of the discount.
@@ -19748,7 +19977,7 @@ public record DiscountsResourceDiscountAmount
 
 }
 
-public record DiscountsResourceStackableDiscountWithDiscountEnd
+public partial record DiscountsResourceStackableDiscountWithDiscountEnd
 {
     /// <summary>
     /// ID of the coupon to create a new discount for.
@@ -19777,7 +20006,7 @@ public record DiscountsResourceStackableDiscountWithDiscountEnd
 /// 
 /// Related guide: [Disputes and fraud](https://docs.stripe.com/disputes)
 /// </summary>
-public record Dispute
+public partial record Dispute
 {
     /// <summary>
     /// Disputed amount. Usually the amount of the charge, but it can differ (usually because of currency fluctuation or because only part of the order is disputed).
@@ -19874,8 +20103,11 @@ public record Dispute
 
 }
 
-public record DisputeEnhancedEligibility
+public partial record DisputeEnhancedEligibility
 {
+    [JsonPropertyName("mastercard_compliance")]
+    public DisputeEnhancedEligibilityMastercardCompliance? MastercardCompliance { get; init; }
+
     [JsonPropertyName("visa_compelling_evidence_3")]
     public DisputeEnhancedEligibilityVisaCompellingEvidence3? VisaCompellingEvidence3 { get; init; }
 
@@ -19884,7 +20116,17 @@ public record DisputeEnhancedEligibility
 
 }
 
-public record DisputeEnhancedEligibilityVisaCompellingEvidence3
+public partial record DisputeEnhancedEligibilityMastercardCompliance
+{
+    /// <summary>
+    /// Mastercard compliance eligibility status.
+    /// </summary>
+    [JsonPropertyName("status")]
+    public required DisputeEnhancedEligibilityMastercardComplianceStatus Status { get; init; }
+
+}
+
+public partial record DisputeEnhancedEligibilityVisaCompellingEvidence3
 {
     /// <summary>
     /// List of actions required to qualify dispute for Visa Compelling Evidence 3.0 evidence submission.
@@ -19900,18 +20142,21 @@ public record DisputeEnhancedEligibilityVisaCompellingEvidence3
 
 }
 
-public record DisputeEnhancedEligibilityVisaCompliance
+public partial record DisputeEnhancedEligibilityVisaCompliance
 {
     /// <summary>
     /// Visa compliance eligibility status.
     /// </summary>
     [JsonPropertyName("status")]
-    public required DisputeEnhancedEligibilityVisaComplianceStatus Status { get; init; }
+    public required DisputeEnhancedEligibilityMastercardComplianceStatus Status { get; init; }
 
 }
 
-public record DisputeEnhancedEvidence
+public partial record DisputeEnhancedEvidence
 {
+    [JsonPropertyName("mastercard_compliance")]
+    public DisputeEnhancedEvidenceMastercardCompliance? MastercardCompliance { get; init; }
+
     [JsonPropertyName("visa_compelling_evidence_3")]
     public DisputeEnhancedEvidenceVisaCompellingEvidence3? VisaCompellingEvidence3 { get; init; }
 
@@ -19920,7 +20165,17 @@ public record DisputeEnhancedEvidence
 
 }
 
-public record DisputeEnhancedEvidenceVisaCompellingEvidence3
+public partial record DisputeEnhancedEvidenceMastercardCompliance
+{
+    /// <summary>
+    /// A field acknowledging the fee incurred when countering a Mastercard compliance dispute. If this field is set to true, evidence can be submitted for the compliance dispute.
+    /// </summary>
+    [JsonPropertyName("fee_acknowledged")]
+    public required bool FeeAcknowledged { get; init; }
+
+}
+
+public partial record DisputeEnhancedEvidenceVisaCompellingEvidence3
 {
     /// <summary>
     /// Disputed transaction details for Visa Compelling Evidence 3.0 evidence submission.
@@ -19936,7 +20191,7 @@ public record DisputeEnhancedEvidenceVisaCompellingEvidence3
 
 }
 
-public record DisputeEnhancedEvidenceVisaCompliance
+public partial record DisputeEnhancedEvidenceVisaCompliance
 {
     /// <summary>
     /// A field acknowledging the fee incurred when countering a Visa compliance dispute. If this field is set to true, evidence can be submitted for the compliance dispute. Stripe collects a 500 USD (or local equivalent) amount to cover the network costs associated with resolving compliance disputes. Stripe refunds the 500 USD network fee if you win the dispute.
@@ -19946,7 +20201,7 @@ public record DisputeEnhancedEvidenceVisaCompliance
 
 }
 
-public record DisputeEvidence
+public partial record DisputeEvidence
 {
     /// <summary>
     /// Any server or activity logs showing proof that the customer accessed or downloaded the purchased digital product. This information should include IP addresses, corresponding timestamps, and any detailed recorded activity.
@@ -20115,7 +20370,7 @@ public record DisputeEvidence
 
 }
 
-public record DisputeEvidenceDetails
+public partial record DisputeEvidenceDetails
 {
     /// <summary>
     /// Date by which evidence must be submitted in order to successfully challenge dispute. Will be 0 if the customer's bank or credit card company doesn't allow a response for this particular dispute.
@@ -20146,7 +20401,7 @@ public record DisputeEvidenceDetails
 
 }
 
-public record DisputePaymentMethodDetails
+public partial record DisputePaymentMethodDetails
 {
     [JsonPropertyName("amazon_pay")]
     public DisputePaymentMethodDetailsAmazonPay? AmazonPay { get; init; }
@@ -20168,7 +20423,7 @@ public record DisputePaymentMethodDetails
 
 }
 
-public record DisputePaymentMethodDetailsAmazonPay
+public partial record DisputePaymentMethodDetailsAmazonPay
 {
     /// <summary>
     /// The AmazonPay dispute type, chargeback or claim
@@ -20178,7 +20433,7 @@ public record DisputePaymentMethodDetailsAmazonPay
 
 }
 
-public record DisputePaymentMethodDetailsCard
+public partial record DisputePaymentMethodDetailsCard
 {
     /// <summary>
     /// Card brand. Can be `amex`, `cartes_bancaires`, `diners`, `discover`, `eftpos_au`, `jcb`, `link`, `mastercard`, `unionpay`, `visa` or `unknown`.
@@ -20193,6 +20448,12 @@ public record DisputePaymentMethodDetailsCard
     public required CaseType CaseType { get; init; }
 
     /// <summary>
+    /// Identifies which network this charge was processed on. Can be `amex`, `cartes_bancaires`, `diners`, `discover`, `eftpos_au`, `interac`, `jcb`, `link`, `mastercard`, `unionpay`, `visa`, or `unknown`.
+    /// </summary>
+    [JsonPropertyName("network")]
+    public required string Network { get; init; }
+
+    /// <summary>
     /// The card network's specific dispute reason code, which maps to one of Stripe's primary dispute categories to simplify response guidance. The [Network code map](https://stripe.com/docs/disputes/categories#network-code-map) lists all available dispute reason codes by network.
     /// </summary>
     [JsonPropertyName("network_reason_code")]
@@ -20200,7 +20461,7 @@ public record DisputePaymentMethodDetailsCard
 
 }
 
-public record DisputePaymentMethodDetailsKlarna
+public partial record DisputePaymentMethodDetailsKlarna
 {
     /// <summary>
     /// Chargeback loss reason mapped by Stripe from Klarna's chargeback loss reason
@@ -20216,7 +20477,7 @@ public record DisputePaymentMethodDetailsKlarna
 
 }
 
-public record DisputePaymentMethodDetailsPaypal
+public partial record DisputePaymentMethodDetailsPaypal
 {
     /// <summary>
     /// The ID of the dispute in PayPal.
@@ -20232,7 +20493,7 @@ public record DisputePaymentMethodDetailsPaypal
 
 }
 
-public record DisputeTransactionShippingAddress
+public partial record DisputeTransactionShippingAddress
 {
     /// <summary>
     /// City, district, suburb, town, or village.
@@ -20272,7 +20533,7 @@ public record DisputeTransactionShippingAddress
 
 }
 
-public record DisputeVisaCompellingEvidence3DisputedTransaction
+public partial record DisputeVisaCompellingEvidence3DisputedTransaction
 {
     /// <summary>
     /// User Account ID used to log into business platform. Must be recognizable by the user.
@@ -20324,7 +20585,7 @@ public record DisputeVisaCompellingEvidence3DisputedTransaction
 
 }
 
-public record DisputeVisaCompellingEvidence3PriorUndisputedTransaction
+public partial record DisputeVisaCompellingEvidence3PriorUndisputedTransaction
 {
     /// <summary>
     /// Stripe charge ID for the Visa Compelling Evidence 3.0 eligible prior charge.
@@ -20376,7 +20637,7 @@ public record DisputeVisaCompellingEvidence3PriorUndisputedTransaction
 
 }
 
-public record EmailSent
+public partial record EmailSent
 {
     /// <summary>
     /// The timestamp when the email was sent.
@@ -20395,7 +20656,7 @@ public record EmailSent
 /// <summary>
 /// An active entitlement describes access to a feature for a customer.
 /// </summary>
-public record EntitlementsActiveEntitlement
+public partial record EntitlementsActiveEntitlement
 {
     /// <summary>
     /// The [Feature](https://docs.stripe.com/api/entitlements/feature) that the customer is entitled to.
@@ -20433,7 +20694,7 @@ public record EntitlementsActiveEntitlement
 /// A feature represents a monetizable ability or functionality in your system.
 /// Features can be assigned to products, and when those products are purchased, Stripe will create an entitlement to the feature for the purchasing customer.
 /// </summary>
-public record EntitlementsFeature
+public partial record EntitlementsFeature
 {
     /// <summary>
     /// Inactive features cannot be attached to new products and will not be returned from the features list endpoint.
@@ -20479,7 +20740,7 @@ public record EntitlementsFeature
 
 }
 
-public record EphemeralKey
+public partial record EphemeralKey
 {
     /// <summary>
     /// Time at which the object was created. Measured in seconds since the Unix epoch.
@@ -20522,7 +20783,7 @@ public record EphemeralKey
 /// <summary>
 /// An error response from the Stripe API
 /// </summary>
-public record Error
+public partial record Error
 {
     [JsonPropertyName("error")]
     public required ApiErrors ErrorValue { get; init; }
@@ -20549,7 +20810,7 @@ public record Error
 /// You can access events through the [Retrieve Event API](https://docs.stripe.com/api/events#retrieve_event)
 /// for 30 days.
 /// </summary>
-public record Event
+public partial record Event
 {
     /// <summary>
     /// The connected account that originates the event.
@@ -20646,7 +20907,7 @@ public record Event
 /// 
 /// *Using this Exchange Rates API beta for any purpose other than to transact on Stripe is strictly prohibited and constitutes a violation of Stripe's terms of service.*
 /// </summary>
-public record ExchangeRate
+public partial record ExchangeRate
 {
     /// <summary>
     /// Unique identifier for the object. Represented as the three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html) in lowercase.
@@ -20673,9 +20934,9 @@ public record ExchangeRate
 /// </remarks>
 [JsonDerivedType(typeof(BankAccount), "bank_account")]
 [JsonDerivedType(typeof(Card), "card")]
-public abstract record ExternalAccount;
+public abstract partial record ExternalAccount;
 
-public record ExternalAccountRequirements
+public partial record ExternalAccountRequirements
 {
     /// <summary>
     /// Fields that need to be resolved to keep the external account enabled. If not resolved by `current_deadline`, these fields will appear in `past_due` as well, and the account is disabled.
@@ -20684,7 +20945,7 @@ public record ExternalAccountRequirements
     public IReadOnlyList<string>? CurrentlyDue { get; init; }
 
     /// <summary>
-    /// Details about validation and verification failures for `due` requirements that must be resolved.
+    /// Fields that are `currently_due` and need to be collected again because validation or verification failed.
     /// </summary>
     [JsonPropertyName("errors")]
     public IReadOnlyList<AccountRequirementsError>? Errors { get; init; }
@@ -20703,7 +20964,7 @@ public record ExternalAccountRequirements
 
 }
 
-public record Fee
+public partial record Fee
 {
     /// <summary>
     /// Amount of the fee, in cents.
@@ -20744,7 +21005,7 @@ public record Fee
 /// 
 /// Related guide: [Refunding application fees](https://docs.stripe.com/connect/destination-charges#refunding-app-fee)
 /// </summary>
-public record FeeRefund
+public partial record FeeRefund
 {
     /// <summary>
     /// Amount, in cents (or local equivalent).
@@ -20805,7 +21066,7 @@ public record FeeRefund
 /// 
 /// Related guide: [File upload guide](https://docs.stripe.com/file-upload)
 /// </summary>
-public record File
+public partial record File
 {
     /// <summary>
     /// Time at which the object was created. Measured in seconds since the Unix epoch.
@@ -20880,7 +21141,7 @@ public record File
 /// create a `FileLink`. `FileLink`s contain a URL that you can use to
 /// retrieve the contents of the file without authentication.
 /// </summary>
-public record FileLink
+public partial record FileLink
 {
     /// <summary>
     /// Time at which the object was created. Measured in seconds since the Unix epoch.
@@ -20941,7 +21202,7 @@ public record FileLink
 /// <summary>
 /// A Financial Connections Account represents an account that exists outside of Stripe, to which you have been granted some degree of access.
 /// </summary>
-public record FinancialConnectionsAccount
+public partial record FinancialConnectionsAccount
 {
     /// <summary>
     /// The account holder that this account belongs to.
@@ -21039,6 +21300,9 @@ public record FinancialConnectionsAccount
     [JsonPropertyName("status")]
     public required FinancialConnectionsAccountStatus Status { get; init; }
 
+    [JsonPropertyName("status_details")]
+    public BankConnectionsResourceAccountStatusDetails? StatusDetails { get; init; }
+
     /// <summary>
     /// If `category` is `cash`, one of:
     /// 
@@ -21081,7 +21345,7 @@ public record FinancialConnectionsAccount
 /// <summary>
 /// Describes an owner of an account.
 /// </summary>
-public record FinancialConnectionsAccountOwner
+public partial record FinancialConnectionsAccountOwner
 {
     /// <summary>
     /// The email address of the owner.
@@ -21136,7 +21400,7 @@ public record FinancialConnectionsAccountOwner
 /// <summary>
 /// Describes a snapshot of the owners of an account at a particular point in time.
 /// </summary>
-public record FinancialConnectionsAccountOwnership
+public partial record FinancialConnectionsAccountOwnership
 {
     /// <summary>
     /// Time at which the object was created. Measured in seconds since the Unix epoch.
@@ -21167,7 +21431,7 @@ public record FinancialConnectionsAccountOwnership
 /// <summary>
 /// A Financial Connections Session is the secure way to programmatically launch the client-side Stripe.js modal that lets your users link their accounts.
 /// </summary>
-public record FinancialConnectionsSession
+public partial record FinancialConnectionsSession
 {
     /// <summary>
     /// The account holder for whom accounts are collected in this session.
@@ -21180,6 +21444,31 @@ public record FinancialConnectionsSession
     /// </summary>
     [JsonPropertyName("accounts")]
     public required object Accounts { get; init; }
+
+    /// <summary>
+    /// Tokenization is the process Stripe uses to collect sensitive card or bank
+    /// account details, or personally identifiable information (PII), directly from
+    /// your customers in a secure manner. A token representing this information is
+    /// returned to your server to use. Use our
+    /// [recommended payments integrations](https://docs.stripe.com/payments) to perform this process
+    /// on the client-side. This guarantees that no sensitive card data touches your server,
+    /// and allows your integration to operate in a PCI-compliant way.
+    /// 
+    /// If you can't use client-side tokenization, you can also create tokens using
+    /// the API with either your publishable or secret API key. If
+    /// your integration uses this method, you're responsible for any PCI compliance
+    /// that it might require, and you must keep your secret API key safe. Unlike with
+    /// client-side tokenization, your customer's information isn't sent directly to
+    /// Stripe, so we can't determine how it's handled or stored.
+    /// 
+    /// You can't store or use tokens more than once. To store card or bank account
+    /// information for later use, create [Customer](https://docs.stripe.com/api#customers)
+    /// objects or [External accounts](/api#external_accounts).
+    /// [Radar](https://docs.stripe.com/radar), our integrated solution for automatic fraud protection,
+    /// performs best with integrations that use client-side tokenization.
+    /// </summary>
+    [JsonPropertyName("bank_account_token")]
+    public Token? BankAccountToken { get; init; }
 
     /// <summary>
     /// A value that will be passed to the client to launch the authentication flow.
@@ -21196,11 +21485,17 @@ public record FinancialConnectionsSession
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
+    [JsonPropertyName("limits")]
+    public BankConnectionsResourceLinkAccountSessionLimits? Limits { get; init; }
+
     /// <summary>
     /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
     public required bool Livemode { get; init; }
+
+    [JsonPropertyName("manual_entry")]
+    public BankConnectionsResourceLinkAccountSessionManualEntry? ManualEntry { get; init; }
 
     /// <summary>
     /// String representing the object's type. Objects of the same type share the same value.
@@ -21231,7 +21526,7 @@ public record FinancialConnectionsSession
 /// <summary>
 /// A Transaction represents a real transaction that affects a Financial Connections Account balance.
 /// </summary>
-public record FinancialConnectionsTransaction
+public partial record FinancialConnectionsTransaction
 {
     /// <summary>
     /// The ID of the Financial Connections Account this transaction belongs to.
@@ -21304,7 +21599,7 @@ public record FinancialConnectionsTransaction
 
 }
 
-public record FinancialReportingFinanceReportRunRunParameters
+public partial record FinancialReportingFinanceReportRunRunParameters
 {
     /// <summary>
     /// The set of output columns requested for inclusion in the report run.
@@ -21359,7 +21654,7 @@ public record FinancialReportingFinanceReportRunRunParameters
 /// <summary>
 /// Metadata about the forwarded request.
 /// </summary>
-public record ForwardedRequestContext
+public partial record ForwardedRequestContext
 {
     /// <summary>
     /// The time it took in milliseconds for the destination endpoint to respond.
@@ -21378,7 +21673,7 @@ public record ForwardedRequestContext
 /// <summary>
 /// Details about the request forwarded to the destination endpoint.
 /// </summary>
-public record ForwardedRequestDetails
+public partial record ForwardedRequestDetails
 {
     /// <summary>
     /// The body payload to send to the destination endpoint.
@@ -21403,7 +21698,7 @@ public record ForwardedRequestDetails
 /// <summary>
 /// Header data.
 /// </summary>
-public record ForwardedRequestHeader
+public partial record ForwardedRequestHeader
 {
     /// <summary>
     /// The header name.
@@ -21422,7 +21717,7 @@ public record ForwardedRequestHeader
 /// <summary>
 /// Details about the response from the destination endpoint.
 /// </summary>
-public record ForwardedResponseDetails
+public partial record ForwardedResponseDetails
 {
     /// <summary>
     /// The response body from the destination endpoint to Stripe.
@@ -21462,7 +21757,7 @@ public record ForwardedResponseDetails
 /// 
 /// Related guide: [Forward card details to third-party API endpoints](https://docs.stripe.com/payments/forwarding).
 /// </summary>
-public record ForwardingRequest
+public partial record ForwardingRequest
 {
     /// <summary>
     /// Time at which the object was created. Measured in seconds since the Unix epoch.
@@ -21539,7 +21834,7 @@ public record ForwardingRequest
 /// `financial_addresses` field.
 /// Related guide: [Customer balance funding instructions](https://docs.stripe.com/payments/customer-balance/funding-instructions)
 /// </summary>
-public record FundingInstructions
+public partial record FundingInstructions
 {
     [JsonPropertyName("bank_transfer")]
     public required FundingInstructionsBankTransfer BankTransfer { get; init; }
@@ -21570,7 +21865,7 @@ public record FundingInstructions
 
 }
 
-public record FundingInstructionsBankTransfer
+public partial record FundingInstructionsBankTransfer
 {
     /// <summary>
     /// The country of the bank account to fund
@@ -21595,7 +21890,7 @@ public record FundingInstructionsBankTransfer
 /// <summary>
 /// ABA Records contain U.S. bank account details per the ABA format.
 /// </summary>
-public record FundingInstructionsBankTransferAbaRecord
+public partial record FundingInstructionsBankTransferAbaRecord
 {
     [JsonPropertyName("account_holder_address")]
     public required Address AccountHolderAddress { get; init; }
@@ -21638,7 +21933,7 @@ public record FundingInstructionsBankTransferAbaRecord
 /// <summary>
 /// FinancialAddresses contain identifying information that resolves to a FinancialAccount.
 /// </summary>
-public record FundingInstructionsBankTransferFinancialAddress
+public partial record FundingInstructionsBankTransferFinancialAddress
 {
     /// <summary>
     /// ABA Records contain U.S. bank account details per the ABA format.
@@ -21693,7 +21988,7 @@ public record FundingInstructionsBankTransferFinancialAddress
 /// <summary>
 /// Iban Records contain E.U. bank account details per the SEPA format.
 /// </summary>
-public record FundingInstructionsBankTransferIbanRecord
+public partial record FundingInstructionsBankTransferIbanRecord
 {
     [JsonPropertyName("account_holder_address")]
     public required Address AccountHolderAddress { get; init; }
@@ -21730,7 +22025,7 @@ public record FundingInstructionsBankTransferIbanRecord
 /// <summary>
 /// Sort Code Records contain U.K. bank account details per the sort code format.
 /// </summary>
-public record FundingInstructionsBankTransferSortCodeRecord
+public partial record FundingInstructionsBankTransferSortCodeRecord
 {
     [JsonPropertyName("account_holder_address")]
     public required Address AccountHolderAddress { get; init; }
@@ -21761,7 +22056,7 @@ public record FundingInstructionsBankTransferSortCodeRecord
 /// <summary>
 /// SPEI Records contain Mexico bank account details per the SPEI format.
 /// </summary>
-public record FundingInstructionsBankTransferSpeiRecord
+public partial record FundingInstructionsBankTransferSpeiRecord
 {
     [JsonPropertyName("account_holder_address")]
     public required Address AccountHolderAddress { get; init; }
@@ -21798,7 +22093,7 @@ public record FundingInstructionsBankTransferSpeiRecord
 /// <summary>
 /// SWIFT Records contain U.S. bank account details per the SWIFT format.
 /// </summary>
-public record FundingInstructionsBankTransferSwiftRecord
+public partial record FundingInstructionsBankTransferSwiftRecord
 {
     [JsonPropertyName("account_holder_address")]
     public required Address AccountHolderAddress { get; init; }
@@ -21841,7 +22136,7 @@ public record FundingInstructionsBankTransferSwiftRecord
 /// <summary>
 /// Zengin Records contain Japan bank account details per the Zengin format.
 /// </summary>
-public record FundingInstructionsBankTransferZenginRecord
+public partial record FundingInstructionsBankTransferZenginRecord
 {
     [JsonPropertyName("account_holder_address")]
     public required Address AccountHolderAddress { get; init; }
@@ -21896,7 +22191,7 @@ public record FundingInstructionsBankTransferZenginRecord
 /// <summary>
 /// Point in Time
 /// </summary>
-public record GelatoDataDocumentReportDateOfBirth
+public partial record GelatoDataDocumentReportDateOfBirth
 {
     /// <summary>
     /// Numerical day between 1 and 31.
@@ -21921,7 +22216,7 @@ public record GelatoDataDocumentReportDateOfBirth
 /// <summary>
 /// Point in Time
 /// </summary>
-public record GelatoDataDocumentReportExpirationDate
+public partial record GelatoDataDocumentReportExpirationDate
 {
     /// <summary>
     /// Numerical day between 1 and 31.
@@ -21946,7 +22241,7 @@ public record GelatoDataDocumentReportExpirationDate
 /// <summary>
 /// Point in Time
 /// </summary>
-public record GelatoDataDocumentReportIssuedDate
+public partial record GelatoDataDocumentReportIssuedDate
 {
     /// <summary>
     /// Numerical day between 1 and 31.
@@ -21971,7 +22266,7 @@ public record GelatoDataDocumentReportIssuedDate
 /// <summary>
 /// Point in Time
 /// </summary>
-public record GelatoDataIdNumberReportDate
+public partial record GelatoDataIdNumberReportDate
 {
     /// <summary>
     /// Numerical day between 1 and 31.
@@ -21996,7 +22291,7 @@ public record GelatoDataIdNumberReportDate
 /// <summary>
 /// Point in Time
 /// </summary>
-public record GelatoDataVerifiedOutputsDate
+public partial record GelatoDataVerifiedOutputsDate
 {
     /// <summary>
     /// Numerical day between 1 and 31.
@@ -22021,7 +22316,7 @@ public record GelatoDataVerifiedOutputsDate
 /// <summary>
 /// Result from a document check
 /// </summary>
-public record GelatoDocumentReport
+public partial record GelatoDocumentReport
 {
     /// <summary>
     /// Address as it appears in the document.
@@ -22115,7 +22410,7 @@ public record GelatoDocumentReport
 
 }
 
-public record GelatoDocumentReportError
+public partial record GelatoDocumentReportError
 {
     /// <summary>
     /// A short machine-readable string giving the reason for the verification failure.
@@ -22134,7 +22429,7 @@ public record GelatoDocumentReportError
 /// <summary>
 /// Result from a email check
 /// </summary>
-public record GelatoEmailReport
+public partial record GelatoEmailReport
 {
     /// <summary>
     /// Email to be verified.
@@ -22156,7 +22451,7 @@ public record GelatoEmailReport
 
 }
 
-public record GelatoEmailReportError
+public partial record GelatoEmailReportError
 {
     /// <summary>
     /// A short machine-readable string giving the reason for the verification failure.
@@ -22175,7 +22470,7 @@ public record GelatoEmailReportError
 /// <summary>
 /// Result from an id_number check
 /// </summary>
-public record GelatoIdNumberReport
+public partial record GelatoIdNumberReport
 {
     /// <summary>
     /// Date of birth.
@@ -22221,7 +22516,7 @@ public record GelatoIdNumberReport
 
 }
 
-public record GelatoIdNumberReportError
+public partial record GelatoIdNumberReportError
 {
     /// <summary>
     /// A short machine-readable string giving the reason for the verification failure.
@@ -22240,7 +22535,7 @@ public record GelatoIdNumberReportError
 /// <summary>
 /// Result from a phone check
 /// </summary>
-public record GelatoPhoneReport
+public partial record GelatoPhoneReport
 {
     /// <summary>
     /// Details on the verification error. Present when status is `unverified`.
@@ -22262,7 +22557,7 @@ public record GelatoPhoneReport
 
 }
 
-public record GelatoPhoneReportError
+public partial record GelatoPhoneReportError
 {
     /// <summary>
     /// A short machine-readable string giving the reason for the verification failure.
@@ -22278,7 +22573,7 @@ public record GelatoPhoneReportError
 
 }
 
-public record GelatoProvidedDetails
+public partial record GelatoProvidedDetails
 {
     /// <summary>
     /// Email of user being verified
@@ -22294,7 +22589,7 @@ public record GelatoProvidedDetails
 
 }
 
-public record GelatoRelatedPerson
+public partial record GelatoRelatedPerson
 {
     /// <summary>
     /// Token referencing the associated Account of the related Person resource.
@@ -22310,7 +22605,7 @@ public record GelatoRelatedPerson
 
 }
 
-public record GelatoReportDocumentOptions
+public partial record GelatoReportDocumentOptions
 {
     /// <summary>
     /// Array of strings of allowed identity document types. If the provided identity document isn’t one of the allowed types, the verification check will fail with a document_type_not_allowed error code.
@@ -22338,14 +22633,14 @@ public record GelatoReportDocumentOptions
 
 }
 
-public record GelatoReportIdNumberOptions
+public partial record GelatoReportIdNumberOptions
 {
 }
 
 /// <summary>
 /// Result from a selfie check
 /// </summary>
-public record GelatoSelfieReport
+public partial record GelatoSelfieReport
 {
     /// <summary>
     /// ID of the [File](https://docs.stripe.com/api/files) holding the image of the identity document used in this check.
@@ -22373,7 +22668,7 @@ public record GelatoSelfieReport
 
 }
 
-public record GelatoSelfieReportError
+public partial record GelatoSelfieReportError
 {
     /// <summary>
     /// A short machine-readable string giving the reason for the verification failure.
@@ -22389,7 +22684,7 @@ public record GelatoSelfieReportError
 
 }
 
-public record GelatoSessionDocumentOptions
+public partial record GelatoSessionDocumentOptions
 {
     /// <summary>
     /// Array of strings of allowed identity document types. If the provided identity document isn’t one of the allowed types, the verification check will fail with a document_type_not_allowed error code.
@@ -22417,7 +22712,7 @@ public record GelatoSessionDocumentOptions
 
 }
 
-public record GelatoSessionEmailOptions
+public partial record GelatoSessionEmailOptions
 {
     /// <summary>
     /// Request one time password verification of `provided_details.email`.
@@ -22427,14 +22722,14 @@ public record GelatoSessionEmailOptions
 
 }
 
-public record GelatoSessionIdNumberOptions
+public partial record GelatoSessionIdNumberOptions
 {
 }
 
 /// <summary>
 /// Shows last VerificationSession error
 /// </summary>
-public record GelatoSessionLastError
+public partial record GelatoSessionLastError
 {
     /// <summary>
     /// A short machine-readable string giving the reason for the verification or user-session failure.
@@ -22450,7 +22745,7 @@ public record GelatoSessionLastError
 
 }
 
-public record GelatoSessionMatchingOptions
+public partial record GelatoSessionMatchingOptions
 {
     /// <summary>
     /// Strictness of the DOB matching policy to apply.
@@ -22466,7 +22761,7 @@ public record GelatoSessionMatchingOptions
 
 }
 
-public record GelatoSessionPhoneOptions
+public partial record GelatoSessionPhoneOptions
 {
     /// <summary>
     /// Request one time password verification of `provided_details.phone`.
@@ -22476,7 +22771,7 @@ public record GelatoSessionPhoneOptions
 
 }
 
-public record GelatoVerificationReportOptions
+public partial record GelatoVerificationReportOptions
 {
     [JsonPropertyName("document")]
     public GelatoReportDocumentOptions? Document { get; init; }
@@ -22486,7 +22781,7 @@ public record GelatoVerificationReportOptions
 
 }
 
-public record GelatoVerificationSessionOptions
+public partial record GelatoVerificationSessionOptions
 {
     [JsonPropertyName("document")]
     public GelatoSessionDocumentOptions? Document { get; init; }
@@ -22505,7 +22800,7 @@ public record GelatoVerificationSessionOptions
 
 }
 
-public record GelatoVerifiedOutputs
+public partial record GelatoVerifiedOutputs
 {
     /// <summary>
     /// The user's verified address.
@@ -22588,7 +22883,7 @@ public record GelatoVerifiedOutputs
 /// 
 /// Related guide: [Accessing verification results](https://docs.stripe.com/identity/verification-sessions#results).
 /// </summary>
-public record IdentityVerificationReport
+public partial record IdentityVerificationReport
 {
     /// <summary>
     /// A string to reference this user. This can be a customer ID, a session ID, or similar, and can be used to reconcile this verification with your internal systems.
@@ -22686,7 +22981,7 @@ public record IdentityVerificationReport
 /// 
 /// Related guide: [The Verification Sessions API](https://docs.stripe.com/identity/verification-sessions)
 /// </summary>
-public record IdentityVerificationSession
+public partial record IdentityVerificationSession
 {
     /// <summary>
     /// A string to reference this user. This can be a customer ID, a session ID, or similar, and can be used to reconcile this verification with your internal systems.
@@ -22807,7 +23102,7 @@ public record IdentityVerificationSession
 
 }
 
-public record InboundTransfers
+public partial record InboundTransfers
 {
     [JsonPropertyName("billing_details")]
     public required TreasurySharedResourceBillingDetails BillingDetails { get; init; }
@@ -22823,7 +23118,7 @@ public record InboundTransfers
 
 }
 
-public record InboundTransfersPaymentMethodDetailsUsBankAccount
+public partial record InboundTransfersPaymentMethodDetailsUsBankAccount
 {
     /// <summary>
     /// Account holder type: individual or company.
@@ -22878,7 +23173,7 @@ public record InboundTransfersPaymentMethodDetailsUsBankAccount
 /// <summary>
 /// Address data.
 /// </summary>
-public record InsightsResourcesPaymentEvaluationAddress
+public partial record InsightsResourcesPaymentEvaluationAddress
 {
     /// <summary>
     /// City, district, suburb, town, or village.
@@ -22921,7 +23216,7 @@ public record InsightsResourcesPaymentEvaluationAddress
 /// <summary>
 /// Billing details attached to this payment evaluation.
 /// </summary>
-public record InsightsResourcesPaymentEvaluationBillingDetails
+public partial record InsightsResourcesPaymentEvaluationBillingDetails
 {
     /// <summary>
     /// Address data.
@@ -22952,7 +23247,7 @@ public record InsightsResourcesPaymentEvaluationBillingDetails
 /// <summary>
 /// Client device metadata attached to this payment evaluation.
 /// </summary>
-public record InsightsResourcesPaymentEvaluationClientDeviceMetadata
+public partial record InsightsResourcesPaymentEvaluationClientDeviceMetadata
 {
     /// <summary>
     /// ID for the Radar Session associated with the payment evaluation. A [Radar Session](https://docs.stripe.com/radar/radar-session) is a snapshot of the browser metadata and device details that help Radar make more accurate predictions on your payments.
@@ -22965,7 +23260,7 @@ public record InsightsResourcesPaymentEvaluationClientDeviceMetadata
 /// <summary>
 /// Customer details attached to this payment evaluation.
 /// </summary>
-public record InsightsResourcesPaymentEvaluationCustomerDetails
+public partial record InsightsResourcesPaymentEvaluationCustomerDetails
 {
     /// <summary>
     /// The ID of the customer associated with the payment evaluation.
@@ -23002,7 +23297,7 @@ public record InsightsResourcesPaymentEvaluationCustomerDetails
 /// <summary>
 /// Dispute opened event details attached to this payment evaluation.
 /// </summary>
-public record InsightsResourcesPaymentEvaluationDisputeOpened
+public partial record InsightsResourcesPaymentEvaluationDisputeOpened
 {
     /// <summary>
     /// Amount to dispute for this payment. A positive integer representing how much to charge in [the smallest currency unit](https://docs.stripe.com/currencies#zero-decimal) (for example, 100 cents to charge 1.00 USD or 100 to charge 100 Yen, a zero-decimal currency).
@@ -23027,7 +23322,7 @@ public record InsightsResourcesPaymentEvaluationDisputeOpened
 /// <summary>
 /// Early Fraud Warning Received event details attached to this payment evaluation.
 /// </summary>
-public record InsightsResourcesPaymentEvaluationEarlyFraudWarningReceived
+public partial record InsightsResourcesPaymentEvaluationEarlyFraudWarningReceived
 {
     /// <summary>
     /// The type of fraud labeled by the issuer.
@@ -23040,7 +23335,7 @@ public record InsightsResourcesPaymentEvaluationEarlyFraudWarningReceived
 /// <summary>
 /// Event reported for this payment evaluation.
 /// </summary>
-public record InsightsResourcesPaymentEvaluationEvent
+public partial record InsightsResourcesPaymentEvaluationEvent
 {
     /// <summary>
     /// Dispute opened event details attached to this payment evaluation.
@@ -23089,7 +23384,7 @@ public record InsightsResourcesPaymentEvaluationEvent
 /// <summary>
 /// Details of a merchant_blocked outcome attached to this payment evaluation.
 /// </summary>
-public record InsightsResourcesPaymentEvaluationMerchantBlocked
+public partial record InsightsResourcesPaymentEvaluationMerchantBlocked
 {
     /// <summary>
     /// The reason the payment was blocked by the merchant.
@@ -23102,7 +23397,7 @@ public record InsightsResourcesPaymentEvaluationMerchantBlocked
 /// <summary>
 /// Money Movement card details attached to this payment.
 /// </summary>
-public record InsightsResourcesPaymentEvaluationMoneyMovementCard
+public partial record InsightsResourcesPaymentEvaluationMoneyMovementCard
 {
     /// <summary>
     /// Describes the presence of the customer during the payment.
@@ -23121,7 +23416,7 @@ public record InsightsResourcesPaymentEvaluationMoneyMovementCard
 /// <summary>
 /// Money Movement details attached to this payment.
 /// </summary>
-public record InsightsResourcesPaymentEvaluationMoneyMovementDetails
+public partial record InsightsResourcesPaymentEvaluationMoneyMovementDetails
 {
     /// <summary>
     /// Describes card money movement details for the payment evaluation.
@@ -23140,7 +23435,7 @@ public record InsightsResourcesPaymentEvaluationMoneyMovementDetails
 /// <summary>
 /// Outcome details for this payment evaluation.
 /// </summary>
-public record InsightsResourcesPaymentEvaluationOutcome
+public partial record InsightsResourcesPaymentEvaluationOutcome
 {
     /// <summary>
     /// Details of a merchant_blocked outcome attached to this payment evaluation.
@@ -23177,7 +23472,7 @@ public record InsightsResourcesPaymentEvaluationOutcome
 /// <summary>
 /// Payment details attached to this payment evaluation.
 /// </summary>
-public record InsightsResourcesPaymentEvaluationPaymentDetails
+public partial record InsightsResourcesPaymentEvaluationPaymentDetails
 {
     /// <summary>
     /// Amount intended to be collected by this payment. A positive integer representing how much to charge in the [smallest currency unit](https://docs.stripe.com/currencies#zero-decimal) (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency). The minimum amount is $0.50 US or [equivalent in charge currency](https://docs.stripe.com/currencies#minimum-and-maximum-charge-amounts). The amount value supports up to eight digits (e.g., a value of 99999999 for a USD charge of $999,999.99).
@@ -23226,7 +23521,7 @@ public record InsightsResourcesPaymentEvaluationPaymentDetails
 /// <summary>
 /// Payment method details attached to this payment evaluation.
 /// </summary>
-public record InsightsResourcesPaymentEvaluationPaymentMethodDetails
+public partial record InsightsResourcesPaymentEvaluationPaymentMethodDetails
 {
     /// <summary>
     /// Billing information associated with the payment evaluation.
@@ -23245,7 +23540,7 @@ public record InsightsResourcesPaymentEvaluationPaymentMethodDetails
 /// <summary>
 /// Refunded Event details attached to this payment evaluation.
 /// </summary>
-public record InsightsResourcesPaymentEvaluationRefunded
+public partial record InsightsResourcesPaymentEvaluationRefunded
 {
     /// <summary>
     /// Amount refunded for this payment. A positive integer representing how much to charge in [the smallest currency unit](https://docs.stripe.com/currencies#zero-decimal) (for example, 100 cents to charge 1.00 USD or 100 to charge 100 Yen, a zero-decimal currency).
@@ -23270,7 +23565,7 @@ public record InsightsResourcesPaymentEvaluationRefunded
 /// <summary>
 /// Details of an rejected outcome attached to this payment evaluation.
 /// </summary>
-public record InsightsResourcesPaymentEvaluationRejected
+public partial record InsightsResourcesPaymentEvaluationRejected
 {
     /// <summary>
     /// Details of an rejected card outcome attached to this payment evaluation.
@@ -23283,7 +23578,7 @@ public record InsightsResourcesPaymentEvaluationRejected
 /// <summary>
 /// Details of an rejected card outcome attached to this payment evaluation.
 /// </summary>
-public record InsightsResourcesPaymentEvaluationRejectedCard
+public partial record InsightsResourcesPaymentEvaluationRejectedCard
 {
     /// <summary>
     /// Result of the address line 1 check.
@@ -23314,7 +23609,7 @@ public record InsightsResourcesPaymentEvaluationRejectedCard
 /// <summary>
 /// Shipping details attached to this payment.
 /// </summary>
-public record InsightsResourcesPaymentEvaluationShipping
+public partial record InsightsResourcesPaymentEvaluationShipping
 {
     /// <summary>
     /// Address data.
@@ -23339,7 +23634,7 @@ public record InsightsResourcesPaymentEvaluationShipping
 /// <summary>
 /// A payment evaluation signal with evaluated_at, risk_level, and score fields.
 /// </summary>
-public record InsightsResourcesPaymentEvaluationSignalV2
+public partial record InsightsResourcesPaymentEvaluationSignalV2
 {
     /// <summary>
     /// The time when this signal was evaluated.
@@ -23364,7 +23659,7 @@ public record InsightsResourcesPaymentEvaluationSignalV2
 /// <summary>
 /// Collection of signals for this payment evaluation.
 /// </summary>
-public record InsightsResourcesPaymentEvaluationSignals
+public partial record InsightsResourcesPaymentEvaluationSignals
 {
     /// <summary>
     /// A payment evaluation signal with evaluated_at, risk_level, and score fields.
@@ -23377,7 +23672,7 @@ public record InsightsResourcesPaymentEvaluationSignals
 /// <summary>
 /// Details of a succeeded outcome attached to this payment evaluation.
 /// </summary>
-public record InsightsResourcesPaymentEvaluationSucceeded
+public partial record InsightsResourcesPaymentEvaluationSucceeded
 {
     /// <summary>
     /// Details of an succeeded card outcome attached to this payment evaluation.
@@ -23390,7 +23685,7 @@ public record InsightsResourcesPaymentEvaluationSucceeded
 /// <summary>
 /// Details of an succeeded card outcome attached to this payment evaluation.
 /// </summary>
-public record InsightsResourcesPaymentEvaluationSucceededCard
+public partial record InsightsResourcesPaymentEvaluationSucceededCard
 {
     /// <summary>
     /// Result of the address line 1 check.
@@ -23415,7 +23710,7 @@ public record InsightsResourcesPaymentEvaluationSucceededCard
 /// <summary>
 /// User intervention raised event details attached to this payment evaluation
 /// </summary>
-public record InsightsResourcesPaymentEvaluationUserInterventionRaised
+public partial record InsightsResourcesPaymentEvaluationUserInterventionRaised
 {
     /// <summary>
     /// User intervention raised custom event details attached to this payment evaluation
@@ -23440,7 +23735,7 @@ public record InsightsResourcesPaymentEvaluationUserInterventionRaised
 /// <summary>
 /// User intervention raised custom event details attached to this payment evaluation
 /// </summary>
-public record InsightsResourcesPaymentEvaluationUserInterventionRaisedCustom
+public partial record InsightsResourcesPaymentEvaluationUserInterventionRaisedCustom
 {
     /// <summary>
     /// Custom type of user intervention raised. The string must use a snake case description for the type of intervention performed.
@@ -23453,7 +23748,7 @@ public record InsightsResourcesPaymentEvaluationUserInterventionRaisedCustom
 /// <summary>
 /// User Intervention Resolved Event details attached to this payment evaluation
 /// </summary>
-public record InsightsResourcesPaymentEvaluationUserInterventionResolved
+public partial record InsightsResourcesPaymentEvaluationUserInterventionResolved
 {
     /// <summary>
     /// Unique ID of this intervention. Use this to provide the result.
@@ -23469,7 +23764,7 @@ public record InsightsResourcesPaymentEvaluationUserInterventionResolved
 
 }
 
-public record InternalCard
+public partial record InternalCard
 {
     /// <summary>
     /// Brand of the card used in the transaction
@@ -23537,7 +23832,7 @@ public record InternalCard
 /// 
 /// Related guide: [Send invoices to customers](https://docs.stripe.com/billing/invoices/sending)
 /// </summary>
-public record Invoice
+public partial record Invoice
 {
     /// <summary>
     /// The country of the business associated with this invoice, most often the business creating the invoice.
@@ -24002,7 +24297,7 @@ public record Invoice
 
 }
 
-public record InvoiceInstallmentsCard
+public partial record InvoiceInstallmentsCard
 {
     /// <summary>
     /// Whether Installments are enabled for this Invoice.
@@ -24012,7 +24307,7 @@ public record InvoiceInstallmentsCard
 
 }
 
-public record InvoiceItemProrationCreditedItems
+public partial record InvoiceItemProrationCreditedItems
 {
     /// <summary>
     /// When `type` is `invoice_item`, the invoice item id for the debited invoice item corresponding to this credit proration.
@@ -24031,7 +24326,7 @@ public record InvoiceItemProrationCreditedItems
 
 }
 
-public record InvoiceItemThresholdReason
+public partial record InvoiceItemThresholdReason
 {
     /// <summary>
     /// The IDs of the line items that triggered the threshold invoice.
@@ -24047,7 +24342,7 @@ public record InvoiceItemThresholdReason
 
 }
 
-public record InvoiceLineItemPeriod
+public partial record InvoiceLineItemPeriod
 {
     /// <summary>
     /// The end of the period, which must be greater than or equal to the start. This value is inclusive.
@@ -24063,7 +24358,7 @@ public record InvoiceLineItemPeriod
 
 }
 
-public record InvoiceMandateOptionsCard
+public partial record InvoiceMandateOptionsCard
 {
     /// <summary>
     /// Amount to be charged for future payments, specified in the presentment currency.
@@ -24085,7 +24380,7 @@ public record InvoiceMandateOptionsCard
 
 }
 
-public record InvoiceMandateOptionsPayto
+public partial record InvoiceMandateOptionsPayto
 {
     /// <summary>
     /// The maximum amount that can be collected in a single invoice. If you don't specify a maximum, then there is no limit.
@@ -24117,7 +24412,7 @@ public record InvoiceMandateOptionsPayto
 /// This resource and its endpoints allows you to easily track if a payment is associated with a specific invoice and
 /// monitor the allocation details of the payments.
 /// </summary>
-public record InvoicePayment
+public partial record InvoicePayment
 {
     /// <summary>
     /// Amount that was actually paid for this invoice, in cents (or local equivalent). This field is null until the payment is `paid`. This amount can be less than the `amount_requested` if the PaymentIntent’s `amount_received` is not sufficient to pay all of the invoices that it is attached to.
@@ -24187,7 +24482,7 @@ public record InvoicePayment
 
 }
 
-public record InvoicePaymentMethodOptionsAcssDebit
+public partial record InvoicePaymentMethodOptionsAcssDebit
 {
     [JsonPropertyName("mandate_options")]
     public InvoicePaymentMethodOptionsAcssDebitMandateOptions? MandateOptions { get; init; }
@@ -24200,7 +24495,7 @@ public record InvoicePaymentMethodOptionsAcssDebit
 
 }
 
-public record InvoicePaymentMethodOptionsAcssDebitMandateOptions
+public partial record InvoicePaymentMethodOptionsAcssDebitMandateOptions
 {
     /// <summary>
     /// Transaction type of the mandate.
@@ -24210,7 +24505,7 @@ public record InvoicePaymentMethodOptionsAcssDebitMandateOptions
 
 }
 
-public record InvoicePaymentMethodOptionsBancontact
+public partial record InvoicePaymentMethodOptionsBancontact
 {
     /// <summary>
     /// Preferred language of the Bancontact authorization page that the customer is redirected to.
@@ -24220,7 +24515,7 @@ public record InvoicePaymentMethodOptionsBancontact
 
 }
 
-public record InvoicePaymentMethodOptionsCard
+public partial record InvoicePaymentMethodOptionsCard
 {
     [JsonPropertyName("installments")]
     public InvoiceInstallmentsCard? Installments { get; init; }
@@ -24233,7 +24528,7 @@ public record InvoicePaymentMethodOptionsCard
 
 }
 
-public record InvoicePaymentMethodOptionsCustomerBalance
+public partial record InvoicePaymentMethodOptionsCustomerBalance
 {
     [JsonPropertyName("bank_transfer")]
     public InvoicePaymentMethodOptionsCustomerBalanceBankTransfer? BankTransfer { get; init; }
@@ -24246,7 +24541,7 @@ public record InvoicePaymentMethodOptionsCustomerBalance
 
 }
 
-public record InvoicePaymentMethodOptionsCustomerBalanceBankTransfer
+public partial record InvoicePaymentMethodOptionsCustomerBalanceBankTransfer
 {
     [JsonPropertyName("eu_bank_transfer")]
     public InvoicePaymentMethodOptionsCustomerBalanceBankTransferEuBankTransfer? EuBankTransfer { get; init; }
@@ -24259,7 +24554,7 @@ public record InvoicePaymentMethodOptionsCustomerBalanceBankTransfer
 
 }
 
-public record InvoicePaymentMethodOptionsCustomerBalanceBankTransferEuBankTransfer
+public partial record InvoicePaymentMethodOptionsCustomerBalanceBankTransferEuBankTransfer
 {
     /// <summary>
     /// The desired country code of the bank account information. Permitted values include: `DE`, `FR`, `IE`, or `NL`.
@@ -24269,11 +24564,11 @@ public record InvoicePaymentMethodOptionsCustomerBalanceBankTransferEuBankTransf
 
 }
 
-public record InvoicePaymentMethodOptionsKonbini
+public partial record InvoicePaymentMethodOptionsKonbini
 {
 }
 
-public record InvoicePaymentMethodOptionsMandateOptionsUpi
+public partial record InvoicePaymentMethodOptionsMandateOptionsUpi
 {
     /// <summary>
     /// Amount to be charged for future payments.
@@ -24301,14 +24596,14 @@ public record InvoicePaymentMethodOptionsMandateOptionsUpi
 
 }
 
-public record InvoicePaymentMethodOptionsPayto
+public partial record InvoicePaymentMethodOptionsPayto
 {
     [JsonPropertyName("mandate_options")]
     public InvoiceMandateOptionsPayto? MandateOptions { get; init; }
 
 }
 
-public record InvoicePaymentMethodOptionsPix
+public partial record InvoicePaymentMethodOptionsPix
 {
     /// <summary>
     /// Determines if the amount includes the IOF tax.
@@ -24324,18 +24619,18 @@ public record InvoicePaymentMethodOptionsPix
 
 }
 
-public record InvoicePaymentMethodOptionsSepaDebit
+public partial record InvoicePaymentMethodOptionsSepaDebit
 {
 }
 
-public record InvoicePaymentMethodOptionsUpi
+public partial record InvoicePaymentMethodOptionsUpi
 {
     [JsonPropertyName("mandate_options")]
     public InvoicePaymentMethodOptionsMandateOptionsUpi? MandateOptions { get; init; }
 
 }
 
-public record InvoicePaymentMethodOptionsUsBankAccount
+public partial record InvoicePaymentMethodOptionsUsBankAccount
 {
     [JsonPropertyName("financial_connections")]
     public InvoicePaymentMethodOptionsUsBankAccountLinkedAccountOptions? FinancialConnections { get; init; }
@@ -24348,7 +24643,7 @@ public record InvoicePaymentMethodOptionsUsBankAccount
 
 }
 
-public record InvoicePaymentMethodOptionsUsBankAccountLinkedAccountOptions
+public partial record InvoicePaymentMethodOptionsUsBankAccountLinkedAccountOptions
 {
     [JsonPropertyName("filters")]
     public InvoicePaymentMethodOptionsUsBankAccountLinkedAccountOptionsFilters? Filters { get; init; }
@@ -24367,7 +24662,7 @@ public record InvoicePaymentMethodOptionsUsBankAccountLinkedAccountOptions
 
 }
 
-public record InvoicePaymentMethodOptionsUsBankAccountLinkedAccountOptionsFilters
+public partial record InvoicePaymentMethodOptionsUsBankAccountLinkedAccountOptionsFilters
 {
     /// <summary>
     /// The account subcategories to use to filter for possible accounts to link. Valid subcategories are `checking` and `savings`.
@@ -24377,7 +24672,7 @@ public record InvoicePaymentMethodOptionsUsBankAccountLinkedAccountOptionsFilter
 
 }
 
-public record InvoiceRenderingPdf
+public partial record InvoiceRenderingPdf
 {
     /// <summary>
     /// Page size of invoice pdf. Options include a4, letter, and auto. If set to auto, page size will be switched to a4 or letter based on customer locale.
@@ -24391,7 +24686,7 @@ public record InvoiceRenderingPdf
 /// Invoice Rendering Templates are used to configure how invoices are rendered on surfaces like the PDF. Invoice Rendering Templates
 /// can be created from within the Dashboard, and they can be used over the API when creating invoices.
 /// </summary>
-public record InvoiceRenderingTemplate
+public partial record InvoiceRenderingTemplate
 {
     /// <summary>
     /// Time at which the object was created. Measured in seconds since the Unix epoch.
@@ -24443,7 +24738,7 @@ public record InvoiceRenderingTemplate
 
 }
 
-public record InvoiceSettingCheckoutRenderingOptions
+public partial record InvoiceSettingCheckoutRenderingOptions
 {
     /// <summary>
     /// How line-item prices and amounts will be displayed with respect to tax on invoice PDFs.
@@ -24459,7 +24754,7 @@ public record InvoiceSettingCheckoutRenderingOptions
 
 }
 
-public record InvoiceSettingCustomField
+public partial record InvoiceSettingCustomField
 {
     /// <summary>
     /// The name of the custom field.
@@ -24475,7 +24770,7 @@ public record InvoiceSettingCustomField
 
 }
 
-public record InvoiceSettingCustomerRenderingOptions
+public partial record InvoiceSettingCustomerRenderingOptions
 {
     /// <summary>
     /// How line-item prices and amounts will be displayed with respect to tax on invoice PDFs.
@@ -24491,7 +24786,7 @@ public record InvoiceSettingCustomerRenderingOptions
 
 }
 
-public record InvoiceSettingCustomerSetting
+public partial record InvoiceSettingCustomerSetting
 {
     /// <summary>
     /// Default custom fields to be displayed on invoices for this customer.
@@ -24519,20 +24814,38 @@ public record InvoiceSettingCustomerSetting
 
 }
 
-public record InvoiceSettingQuoteSetting
+public partial record InvoiceSettingQuoteSetting
 {
+    /// <summary>
+    /// A list of up to 4 custom fields to be displayed on the invoice.
+    /// </summary>
+    [JsonPropertyName("custom_fields")]
+    public IReadOnlyList<InvoiceSettingCustomField>? CustomFields { get; init; }
+
     /// <summary>
     /// Number of days within which a customer must pay invoices generated by this quote. This value will be `null` for quotes where `collection_method=charge_automatically`.
     /// </summary>
     [JsonPropertyName("days_until_due")]
     public int? DaysUntilDue { get; init; }
 
+    /// <summary>
+    /// An arbitrary string attached to the object. Often useful for displaying to users.
+    /// </summary>
+    [JsonPropertyName("description")]
+    public string? Description { get; init; }
+
+    /// <summary>
+    /// Footer to be displayed on the invoice.
+    /// </summary>
+    [JsonPropertyName("footer")]
+    public string? Footer { get; init; }
+
     [JsonPropertyName("issuer")]
     public required ConnectAccountReference Issuer { get; init; }
 
 }
 
-public record InvoiceSettingSubscriptionSchedulePhaseSetting
+public partial record InvoiceSettingSubscriptionSchedulePhaseSetting
 {
     /// <summary>
     /// The account tax IDs associated with this phase of the subscription schedule. Will be set on invoices generated by this phase of the subscription schedule.
@@ -24541,10 +24854,28 @@ public record InvoiceSettingSubscriptionSchedulePhaseSetting
     public IReadOnlyList<object>? AccountTaxIds { get; init; }
 
     /// <summary>
+    /// A list of up to 4 custom fields to be displayed on the invoice.
+    /// </summary>
+    [JsonPropertyName("custom_fields")]
+    public IReadOnlyList<InvoiceSettingCustomField>? CustomFields { get; init; }
+
+    /// <summary>
     /// Number of days within which a customer must pay invoices generated by this subscription schedule. This value will be `null` for subscription schedules where `billing=charge_automatically`.
     /// </summary>
     [JsonPropertyName("days_until_due")]
     public int? DaysUntilDue { get; init; }
+
+    /// <summary>
+    /// An arbitrary string attached to the object. Often useful for displaying to users.
+    /// </summary>
+    [JsonPropertyName("description")]
+    public string? Description { get; init; }
+
+    /// <summary>
+    /// Footer to be displayed on the invoice.
+    /// </summary>
+    [JsonPropertyName("footer")]
+    public string? Footer { get; init; }
 
     /// <summary>
     /// The connected account that issues the invoice. The invoice is presented with the branding and support information of the specified account.
@@ -24554,7 +24885,7 @@ public record InvoiceSettingSubscriptionSchedulePhaseSetting
 
 }
 
-public record InvoiceSettingSubscriptionScheduleSetting
+public partial record InvoiceSettingSubscriptionScheduleSetting
 {
     /// <summary>
     /// The account tax IDs associated with the subscription schedule. Will be set on invoices generated by the subscription schedule.
@@ -24563,17 +24894,35 @@ public record InvoiceSettingSubscriptionScheduleSetting
     public IReadOnlyList<object>? AccountTaxIds { get; init; }
 
     /// <summary>
+    /// A list of up to 4 custom fields to be displayed on the invoice.
+    /// </summary>
+    [JsonPropertyName("custom_fields")]
+    public IReadOnlyList<InvoiceSettingCustomField>? CustomFields { get; init; }
+
+    /// <summary>
     /// Number of days within which a customer must pay invoices generated by this subscription schedule. This value will be `null` for subscription schedules where `billing=charge_automatically`.
     /// </summary>
     [JsonPropertyName("days_until_due")]
     public int? DaysUntilDue { get; init; }
+
+    /// <summary>
+    /// An arbitrary string attached to the object. Often useful for displaying to users.
+    /// </summary>
+    [JsonPropertyName("description")]
+    public string? Description { get; init; }
+
+    /// <summary>
+    /// Footer to be displayed on the invoice.
+    /// </summary>
+    [JsonPropertyName("footer")]
+    public string? Footer { get; init; }
 
     [JsonPropertyName("issuer")]
     public required ConnectAccountReference Issuer { get; init; }
 
 }
 
-public record InvoiceThresholdReason
+public partial record InvoiceThresholdReason
 {
     /// <summary>
     /// The total invoice amount threshold boundary if it triggered the threshold invoice.
@@ -24599,7 +24948,7 @@ public record InvoiceThresholdReason
 /// 
 /// Related guides: [Integrate with the Invoicing API](https://docs.stripe.com/invoicing/integration), [Subscription Invoices](https://docs.stripe.com/billing/invoices/subscription#adding-upcoming-invoice-items).
 /// </summary>
-public record Invoiceitem
+public partial record Invoiceitem
 {
     /// <summary>
     /// Amount (in the `currency` specified) of the invoice item. This should always be equal to `unit_amount * quantity`.
@@ -24735,7 +25084,7 @@ public record Invoiceitem
 
 }
 
-public record InvoicesPaymentMethodOptions
+public partial record InvoicesPaymentMethodOptions
 {
     /// <summary>
     /// If paying by `acss_debit`, this sub-hash contains details about the Canadian pre-authorized debit payment method options to pass to the invoice’s PaymentIntent.
@@ -24799,7 +25148,7 @@ public record InvoicesPaymentMethodOptions
 
 }
 
-public record InvoicesPaymentSettings
+public partial record InvoicesPaymentSettings
 {
     /// <summary>
     /// ID of the mandate to be used for this invoice. It must correspond to the payment method used to pay the invoice, including the invoice's default_payment_method or default_source, if set.
@@ -24821,7 +25170,7 @@ public record InvoicesPaymentSettings
 
 }
 
-public record InvoicesPaymentsInvoicePaymentAssociatedPayment
+public partial record InvoicesPaymentsInvoicePaymentAssociatedPayment
 {
     /// <summary>
     /// ID of the successful charge for this payment when `type` is `charge`.Note: charge is only surfaced if the charge object is not associated with a payment intent. If the charge object does have a payment intent, the Invoice Payment surfaces the payment intent instead.
@@ -24849,7 +25198,7 @@ public record InvoicesPaymentsInvoicePaymentAssociatedPayment
 
 }
 
-public record InvoicesPaymentsInvoicePaymentStatusTransitions
+public partial record InvoicesPaymentsInvoicePaymentStatusTransitions
 {
     /// <summary>
     /// The time that the payment was canceled.
@@ -24865,7 +25214,7 @@ public record InvoicesPaymentsInvoicePaymentStatusTransitions
 
 }
 
-public record InvoicesResourceConfirmationSecret
+public partial record InvoicesResourceConfirmationSecret
 {
     /// <summary>
     /// The client_secret of the payment that Stripe creates for the invoice after finalization.
@@ -24881,7 +25230,7 @@ public record InvoicesResourceConfirmationSecret
 
 }
 
-public record InvoicesResourceFromInvoice
+public partial record InvoicesResourceFromInvoice
 {
     /// <summary>
     /// The relation between this invoice and the cloned invoice
@@ -24897,7 +25246,7 @@ public record InvoicesResourceFromInvoice
 
 }
 
-public record InvoicesResourceInvoiceRendering
+public partial record InvoicesResourceInvoiceRendering
 {
     /// <summary>
     /// How line-item prices and amounts will be displayed with respect to tax on invoice PDFs.
@@ -24925,10 +25274,10 @@ public record InvoicesResourceInvoiceRendering
 
 }
 
-public record InvoicesResourceInvoiceTaxId
+public partial record InvoicesResourceInvoiceTaxId
 {
     /// <summary>
-    /// The type of the tax ID, one of `ad_nrt`, `ar_cuit`, `eu_vat`, `bo_tin`, `br_cnpj`, `br_cpf`, `cn_tin`, `co_nit`, `cr_tin`, `do_rcn`, `ec_ruc`, `eu_oss_vat`, `hr_oib`, `pe_ruc`, `ro_tin`, `rs_pib`, `sv_nit`, `uy_ruc`, `ve_rif`, `vn_tin`, `gb_vat`, `nz_gst`, `au_abn`, `au_arn`, `in_gst`, `no_vat`, `no_voec`, `za_vat`, `ch_vat`, `mx_rfc`, `sg_uen`, `ru_inn`, `ru_kpp`, `ca_bn`, `hk_br`, `es_cif`, `pl_nip`, `it_cf`, `fo_vat`, `gi_tin`, `py_ruc`, `tw_vat`, `th_vat`, `jp_cn`, `jp_rn`, `jp_trn`, `li_uid`, `li_vat`, `lk_vat`, `my_itn`, `us_ein`, `kr_brn`, `ca_qst`, `ca_gst_hst`, `ca_pst_bc`, `ca_pst_mb`, `ca_pst_sk`, `my_sst`, `sg_gst`, `ae_trn`, `cl_tin`, `sa_vat`, `id_npwp`, `my_frp`, `il_vat`, `ge_vat`, `ua_vat`, `is_vat`, `bg_uic`, `hu_tin`, `si_tin`, `ke_pin`, `tr_tin`, `eg_tin`, `ph_tin`, `al_tin`, `bh_vat`, `kz_bin`, `ng_tin`, `om_vat`, `de_stn`, `ch_uid`, `tz_vat`, `uz_vat`, `uz_tin`, `md_vat`, `ma_vat`, `by_tin`, `ao_tin`, `bs_tin`, `bb_tin`, `cd_nif`, `mr_nif`, `me_pib`, `zw_tin`, `ba_tin`, `gn_nif`, `mk_vat`, `sr_fin`, `sn_ninea`, `am_tin`, `np_pan`, `tj_tin`, `ug_tin`, `zm_tin`, `kh_tin`, `aw_tin`, `az_tin`, `bd_bin`, `bj_ifu`, `et_tin`, `kg_tin`, `la_tin`, `cm_niu`, `cv_nif`, `bf_ifu`, or `unknown`
+    /// The type of the tax ID, one of `ad_nrt`, `ar_cuit`, `eu_vat`, `bo_tin`, `br_cnpj`, `br_cpf`, `cn_tin`, `co_nit`, `cr_tin`, `do_rcn`, `ec_ruc`, `eu_oss_vat`, `hr_oib`, `pe_ruc`, `ro_tin`, `rs_pib`, `sv_nit`, `uy_ruc`, `ve_rif`, `vn_tin`, `gb_vat`, `nz_gst`, `au_abn`, `au_arn`, `in_gst`, `no_vat`, `no_voec`, `za_vat`, `ch_vat`, `mx_rfc`, `sg_uen`, `ru_inn`, `ru_kpp`, `ca_bn`, `hk_br`, `es_cif`, `pl_nip`, `it_cf`, `fo_vat`, `gi_tin`, `py_ruc`, `tw_vat`, `th_vat`, `jp_cn`, `jp_rn`, `jp_trn`, `li_uid`, `li_vat`, `lk_vat`, `my_itn`, `us_ein`, `kr_brn`, `ca_qst`, `ca_gst_hst`, `ca_pst_bc`, `ca_pst_mb`, `ca_pst_sk`, `my_sst`, `sg_gst`, `ae_trn`, `cl_tin`, `sa_vat`, `id_npwp`, `my_frp`, `il_vat`, `ge_vat`, `ua_vat`, `is_vat`, `bg_uic`, `hu_tin`, `si_tin`, `ke_pin`, `tr_tin`, `eg_tin`, `ph_tin`, `al_tin`, `bh_vat`, `kz_bin`, `ng_tin`, `om_vat`, `de_stn`, `ch_uid`, `tz_vat`, `uz_vat`, `uz_tin`, `md_vat`, `ma_vat`, `by_tin`, `ao_tin`, `bs_tin`, `bb_tin`, `cd_nif`, `mr_nif`, `me_pib`, `zw_tin`, `ba_tin`, `gn_nif`, `mk_vat`, `sr_fin`, `sn_ninea`, `am_tin`, `np_pan`, `tj_tin`, `ug_tin`, `zm_tin`, `kh_tin`, `aw_tin`, `az_tin`, `bd_bin`, `bj_ifu`, `et_tin`, `kg_tin`, `la_tin`, `cm_niu`, `cv_nif`, `bf_ifu`, `ic_nif`, or `unknown`
     /// </summary>
     [JsonPropertyName("type")]
     public required InvoicesResourceInvoiceTaxIdType Type { get; init; }
@@ -24941,7 +25290,7 @@ public record InvoicesResourceInvoiceTaxId
 
 }
 
-public record InvoicesResourcePretaxCreditAmount
+public partial record InvoicesResourcePretaxCreditAmount
 {
     /// <summary>
     /// The amount, in cents (or local equivalent), of the pretax credit amount.
@@ -24969,7 +25318,7 @@ public record InvoicesResourcePretaxCreditAmount
 
 }
 
-public record InvoicesResourceShippingCost
+public partial record InvoicesResourceShippingCost
 {
     /// <summary>
     /// Total shipping cost before any taxes are applied.
@@ -25003,7 +25352,7 @@ public record InvoicesResourceShippingCost
 
 }
 
-public record InvoicesResourceStatusTransitions
+public partial record InvoicesResourceStatusTransitions
 {
     /// <summary>
     /// The time that the invoice draft was finalized.
@@ -25038,7 +25387,7 @@ public record InvoicesResourceStatusTransitions
 /// 
 /// Related guide: [Issued card authorizations](https://docs.stripe.com/issuing/purchases/authorizations)
 /// </summary>
-public record IssuingAuthorization
+public partial record IssuingAuthorization
 {
     /// <summary>
     /// The total amount that was authorized or rejected. This amount is in `currency` and in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal). `amount` should be the same as `merchant_amount`, unless `currency` and `merchant_currency` are different.
@@ -25219,7 +25568,7 @@ public record IssuingAuthorization
 /// <summary>
 /// You can [create physical or virtual cards](https://docs.stripe.com/issuing) that are issued to cardholders.
 /// </summary>
-public record IssuingCard
+public partial record IssuingCard
 {
     /// <summary>
     /// The brand of the card.
@@ -25389,7 +25738,7 @@ public record IssuingCard
 /// 
 /// Related guide: [How to create a cardholder](https://docs.stripe.com/issuing/cards/virtual/issue-cards#create-cardholder)
 /// </summary>
-public record IssuingCardholder
+public partial record IssuingCardholder
 {
     [JsonPropertyName("billing")]
     public required IssuingCardholderAddress Billing { get; init; }
@@ -25489,7 +25838,7 @@ public record IssuingCardholder
 /// 
 /// Related guide: [Issuing disputes](https://docs.stripe.com/issuing/purchases/disputes)
 /// </summary>
-public record IssuingDispute
+public partial record IssuingDispute
 {
     /// <summary>
     /// Disputed amount in the card's currency and in the [smallest currency unit](https://docs.stripe.com/currencies#zero-decimal). Usually the amount of the `transaction`, but can differ (usually because of currency fluctuation).
@@ -25571,7 +25920,7 @@ public record IssuingDispute
 /// <summary>
 /// A Personalization Design is a logical grouping of a Physical Bundle, card logo, and carrier text that represents a product line.
 /// </summary>
-public record IssuingPersonalizationDesign
+public partial record IssuingPersonalizationDesign
 {
     /// <summary>
     /// The file for the card logo to use with physical bundles that support card logos. Must have a `purpose` value of `issuing_logo`. Image must be in PNG format with dimensions of 1000px by 200px. It must be a binary (black and white) image containing a black logo on a white background. We don't accept grayscale.
@@ -25650,7 +25999,7 @@ public record IssuingPersonalizationDesign
 /// <summary>
 /// A Physical Bundle represents the bundle of physical items - card stock, carrier letter, and envelope - that is shipped to a cardholder when you create a physical card.
 /// </summary>
-public record IssuingPhysicalBundle
+public partial record IssuingPhysicalBundle
 {
     [JsonPropertyName("features")]
     public required IssuingPhysicalBundleFeatures Features { get; init; }
@@ -25696,7 +26045,7 @@ public record IssuingPhysicalBundle
 /// <summary>
 /// When a non-stripe BIN is used, any use of an [issued card](https://docs.stripe.com/issuing) must be settled directly with the card network. The net amount owed is represented by an Issuing `Settlement` object.
 /// </summary>
-public record IssuingSettlement
+public partial record IssuingSettlement
 {
     /// <summary>
     /// The Bank Identification Number reflecting this settlement record.
@@ -25805,7 +26154,7 @@ public record IssuingSettlement
 /// <summary>
 /// An issuing token object is created when an issued card is added to a digital wallet. As a [card issuer](https://docs.stripe.com/issuing), you can [view and manage these tokens](https://docs.stripe.com/issuing/controls/token-management) through Stripe.
 /// </summary>
-public record IssuingToken
+public partial record IssuingToken
 {
     /// <summary>
     /// Card associated with this token.
@@ -25885,7 +26234,7 @@ public record IssuingToken
 /// 
 /// Related guide: [Issued card transactions](https://docs.stripe.com/issuing/purchases/transactions)
 /// </summary>
-public record IssuingTransaction
+public partial record IssuingTransaction
 {
     /// <summary>
     /// The transaction amount, which will be reflected in your balance. This amount is in your currency and in the [smallest currency unit](https://docs.stripe.com/currencies#zero-decimal).
@@ -26018,7 +26367,7 @@ public record IssuingTransaction
 
 }
 
-public record IssuingAuthorizationAmountDetails
+public partial record IssuingAuthorizationAmountDetails
 {
     /// <summary>
     /// The fee charged by the ATM for the cash withdrawal.
@@ -26034,7 +26383,7 @@ public record IssuingAuthorizationAmountDetails
 
 }
 
-public record IssuingAuthorizationAuthenticationExemption
+public partial record IssuingAuthorizationAuthenticationExemption
 {
     /// <summary>
     /// The entity that requested the exemption, either the acquiring merchant or the Issuing user.
@@ -26050,7 +26399,7 @@ public record IssuingAuthorizationAuthenticationExemption
 
 }
 
-public record IssuingAuthorizationFleetCardholderPromptData
+public partial record IssuingAuthorizationFleetCardholderPromptData
 {
     /// <summary>
     /// [Deprecated] An alphanumeric ID, though typical point of sales only support numeric entry. The card program can be configured to prompt for a vehicle ID, driver ID, or generic ID.
@@ -26090,7 +26439,7 @@ public record IssuingAuthorizationFleetCardholderPromptData
 
 }
 
-public record IssuingAuthorizationFleetData
+public partial record IssuingAuthorizationFleetData
 {
     /// <summary>
     /// Answers to prompts presented to the cardholder at the point of sale. Prompted fields vary depending on the configuration of your physical fleet cards. Typical points of sale support only numeric entry.
@@ -26118,7 +26467,7 @@ public record IssuingAuthorizationFleetData
 
 }
 
-public record IssuingAuthorizationFleetFuelPriceData
+public partial record IssuingAuthorizationFleetFuelPriceData
 {
     /// <summary>
     /// Gross fuel amount that should equal Fuel Quantity multiplied by Fuel Unit Cost, inclusive of taxes.
@@ -26128,7 +26477,7 @@ public record IssuingAuthorizationFleetFuelPriceData
 
 }
 
-public record IssuingAuthorizationFleetNonFuelPriceData
+public partial record IssuingAuthorizationFleetNonFuelPriceData
 {
     /// <summary>
     /// Gross non-fuel amount that should equal the sum of the line items, inclusive of taxes.
@@ -26138,7 +26487,7 @@ public record IssuingAuthorizationFleetNonFuelPriceData
 
 }
 
-public record IssuingAuthorizationFleetReportedBreakdown
+public partial record IssuingAuthorizationFleetReportedBreakdown
 {
     /// <summary>
     /// Breakdown of fuel portion of the purchase.
@@ -26160,7 +26509,7 @@ public record IssuingAuthorizationFleetReportedBreakdown
 
 }
 
-public record IssuingAuthorizationFleetTaxData
+public partial record IssuingAuthorizationFleetTaxData
 {
     /// <summary>
     /// Amount of state or provincial Sales Tax included in the transaction amount. `null` if not reported by merchant or not subject to tax.
@@ -26176,7 +26525,7 @@ public record IssuingAuthorizationFleetTaxData
 
 }
 
-public record IssuingAuthorizationFraudChallenge
+public partial record IssuingAuthorizationFraudChallenge
 {
     /// <summary>
     /// The method by which the fraud challenge was delivered to the cardholder.
@@ -26198,7 +26547,7 @@ public record IssuingAuthorizationFraudChallenge
 
 }
 
-public record IssuingAuthorizationFuelData
+public partial record IssuingAuthorizationFuelData
 {
     /// <summary>
     /// [Conexxus Payment System Product Code](https://www.conexxus.org/conexxus-payment-system-product-codes) identifying the primary fuel product purchased.
@@ -26232,7 +26581,7 @@ public record IssuingAuthorizationFuelData
 
 }
 
-public record IssuingAuthorizationMerchantData
+public partial record IssuingAuthorizationMerchantData
 {
     /// <summary>
     /// A categorization of the seller's type of business. See our [merchant categories guide](https://docs.stripe.com/issuing/merchant-categories) for a list of possible values.
@@ -26302,7 +26651,7 @@ public record IssuingAuthorizationMerchantData
 
 }
 
-public record IssuingAuthorizationNetworkData
+public partial record IssuingAuthorizationNetworkData
 {
     /// <summary>
     /// Identifier assigned to the acquirer by the card network. Sometimes this value is not provided by the network; in this case, the value will be `null`.
@@ -26324,7 +26673,7 @@ public record IssuingAuthorizationNetworkData
 
 }
 
-public record IssuingAuthorizationPendingRequest
+public partial record IssuingAuthorizationPendingRequest
 {
     /// <summary>
     /// The additional amount Stripe will hold if the authorization is approved, in the card's [currency](https://docs.stripe.com/api#issuing_authorization_object-pending-request-currency) and in the [smallest currency unit](https://docs.stripe.com/currencies#zero-decimal).
@@ -26370,7 +26719,7 @@ public record IssuingAuthorizationPendingRequest
 
 }
 
-public record IssuingAuthorizationRequest
+public partial record IssuingAuthorizationRequest
 {
     /// <summary>
     /// The `pending_request.amount` at the time of the request, presented in your card's currency and in the [smallest currency unit](https://docs.stripe.com/currencies#zero-decimal). Stripe held this amount from your account to fund the authorization if the request was approved.
@@ -26446,7 +26795,7 @@ public record IssuingAuthorizationRequest
 
 }
 
-public record IssuingAuthorizationThreeDSecure
+public partial record IssuingAuthorizationThreeDSecure
 {
     /// <summary>
     /// The outcome of the 3D Secure authentication request.
@@ -26456,7 +26805,7 @@ public record IssuingAuthorizationThreeDSecure
 
 }
 
-public record IssuingAuthorizationTreasury
+public partial record IssuingAuthorizationTreasury
 {
     /// <summary>
     /// The array of [ReceivedCredits](https://docs.stripe.com/api/treasury/received_credits) associated with this authorization
@@ -26478,7 +26827,7 @@ public record IssuingAuthorizationTreasury
 
 }
 
-public record IssuingAuthorizationVerificationData
+public partial record IssuingAuthorizationVerificationData
 {
     /// <summary>
     /// Whether the cardholder provided an address first line and if it matched the cardholder’s `billing.address.line1`.
@@ -26524,7 +26873,7 @@ public record IssuingAuthorizationVerificationData
 
 }
 
-public record IssuingCardApplePay
+public partial record IssuingCardApplePay
 {
     /// <summary>
     /// Apple Pay Eligibility
@@ -26540,7 +26889,7 @@ public record IssuingCardApplePay
 
 }
 
-public record IssuingCardAuthorizationControls
+public partial record IssuingCardAuthorizationControls
 {
     /// <summary>
     /// Array of card presence statuses from which authorizations will be allowed. Possible options are `present`, `not_present`. All other statuses will be blocked. Cannot be set with `blocked_card_presences`. Provide an empty value to unset this control.
@@ -26592,7 +26941,7 @@ public record IssuingCardAuthorizationControls
 
 }
 
-public record IssuingCardFraudWarning
+public partial record IssuingCardFraudWarning
 {
     /// <summary>
     /// Timestamp of the most recent fraud warning.
@@ -26608,7 +26957,7 @@ public record IssuingCardFraudWarning
 
 }
 
-public record IssuingCardGooglePay
+public partial record IssuingCardGooglePay
 {
     /// <summary>
     /// Google Pay Eligibility
@@ -26624,7 +26973,7 @@ public record IssuingCardGooglePay
 
 }
 
-public record IssuingCardLifecycleConditions
+public partial record IssuingCardLifecycleConditions
 {
     /// <summary>
     /// The card is automatically cancelled when it makes this number of non-zero payment authorizations and transactions. The count includes penny authorizations, but doesn't include non-payment actions, such as authorization advice.
@@ -26634,14 +26983,14 @@ public record IssuingCardLifecycleConditions
 
 }
 
-public record IssuingCardLifecycleControls
+public partial record IssuingCardLifecycleControls
 {
     [JsonPropertyName("cancel_after")]
     public required IssuingCardLifecycleConditions CancelAfter { get; init; }
 
 }
 
-public record IssuingCardShipping
+public partial record IssuingCardShipping
 {
     [JsonPropertyName("address")]
     public required Address Address { get; init; }
@@ -26651,6 +27000,12 @@ public record IssuingCardShipping
     /// </summary>
     [JsonPropertyName("address_validation")]
     public IssuingCardShippingAddressValidation? AddressValidation { get; init; }
+
+    /// <summary>
+    /// The name of the business at the shipping address, used on the shipping label to ensure delivery when the card is shipped to a cardholder's workplace.
+    /// </summary>
+    [JsonPropertyName("business_name")]
+    public string? BusinessName { get; init; }
 
     /// <summary>
     /// The delivery company that shipped a card.
@@ -26720,7 +27075,7 @@ public record IssuingCardShipping
 
 }
 
-public record IssuingCardShippingAddressValidation
+public partial record IssuingCardShippingAddressValidation
 {
     /// <summary>
     /// The address validation capabilities to use.
@@ -26742,7 +27097,7 @@ public record IssuingCardShippingAddressValidation
 
 }
 
-public record IssuingCardShippingCustoms
+public partial record IssuingCardShippingCustoms
 {
     /// <summary>
     /// A registration number used for customs in Europe. See [https://www.gov.uk/eori](https://www.gov.uk/eori) for the UK and [https://ec.europa.eu/taxation_customs/business/customs-procedures-import-and-export/customs-procedures/economic-operators-registration-and-identification-number-eori_en](https://ec.europa.eu/taxation_customs/business/customs-procedures-import-and-export/customs-procedures/economic-operators-registration-and-identification-number-eori_en) for the EU.
@@ -26752,7 +27107,7 @@ public record IssuingCardShippingCustoms
 
 }
 
-public record IssuingCardSpendingLimit
+public partial record IssuingCardSpendingLimit
 {
     /// <summary>
     /// Maximum amount allowed to spend per interval. This amount is in the card's currency and in the [smallest currency unit](https://docs.stripe.com/currencies#zero-decimal).
@@ -26774,7 +27129,7 @@ public record IssuingCardSpendingLimit
 
 }
 
-public record IssuingCardWallets
+public partial record IssuingCardWallets
 {
     [JsonPropertyName("apple_pay")]
     public required IssuingCardApplePay ApplePay { get; init; }
@@ -26790,14 +27145,14 @@ public record IssuingCardWallets
 
 }
 
-public record IssuingCardholderAddress
+public partial record IssuingCardholderAddress
 {
     [JsonPropertyName("address")]
     public required Address Address { get; init; }
 
 }
 
-public record IssuingCardholderAuthorizationControls
+public partial record IssuingCardholderAuthorizationControls
 {
     /// <summary>
     /// Array of card presence statuses from which authorizations will be allowed. Possible options are `present`, `not_present`. All other statuses will be blocked. Cannot be set with `blocked_card_presences`. Provide an empty value to unset this control.
@@ -26849,7 +27204,7 @@ public record IssuingCardholderAuthorizationControls
 
 }
 
-public record IssuingCardholderCardIssuing
+public partial record IssuingCardholderCardIssuing
 {
     /// <summary>
     /// Information about cardholder acceptance of Celtic [Authorized User Terms](https://stripe.com/docs/issuing/cards#accept-authorized-user-terms). Required for cards backed by a Celtic program.
@@ -26859,7 +27214,7 @@ public record IssuingCardholderCardIssuing
 
 }
 
-public record IssuingCardholderCompany
+public partial record IssuingCardholderCompany
 {
     /// <summary>
     /// Whether the company's business ID number was provided.
@@ -26869,7 +27224,7 @@ public record IssuingCardholderCompany
 
 }
 
-public record IssuingCardholderIdDocument
+public partial record IssuingCardholderIdDocument
 {
     /// <summary>
     /// The back of a document returned by a [file upload](https://api.stripe.com#create_file) with a `purpose` value of `identity_document`.
@@ -26885,7 +27240,7 @@ public record IssuingCardholderIdDocument
 
 }
 
-public record IssuingCardholderIndividual
+public partial record IssuingCardholderIndividual
 {
     /// <summary>
     /// Information related to the card_issuing program for this cardholder.
@@ -26919,7 +27274,7 @@ public record IssuingCardholderIndividual
 
 }
 
-public record IssuingCardholderIndividualDob
+public partial record IssuingCardholderIndividualDob
 {
     /// <summary>
     /// The day of birth, between 1 and 31.
@@ -26941,7 +27296,7 @@ public record IssuingCardholderIndividualDob
 
 }
 
-public record IssuingCardholderRequirements
+public partial record IssuingCardholderRequirements
 {
     /// <summary>
     /// If `disabled_reason` is present, all cards will decline authorizations with `cardholder_verification_required` reason.
@@ -26957,7 +27312,7 @@ public record IssuingCardholderRequirements
 
 }
 
-public record IssuingCardholderSpendingLimit
+public partial record IssuingCardholderSpendingLimit
 {
     /// <summary>
     /// Maximum amount allowed to spend per interval. This amount is in the card's currency and in the [smallest currency unit](https://docs.stripe.com/currencies#zero-decimal).
@@ -26979,7 +27334,7 @@ public record IssuingCardholderSpendingLimit
 
 }
 
-public record IssuingCardholderUserTermsAcceptance
+public partial record IssuingCardholderUserTermsAcceptance
 {
     /// <summary>
     /// The Unix timestamp marking when the cardholder accepted the Authorized User Terms.
@@ -27001,7 +27356,7 @@ public record IssuingCardholderUserTermsAcceptance
 
 }
 
-public record IssuingCardholderVerification
+public partial record IssuingCardholderVerification
 {
     /// <summary>
     /// An identifying document, either a passport or local ID card.
@@ -27011,7 +27366,7 @@ public record IssuingCardholderVerification
 
 }
 
-public record IssuingDisputeCanceledEvidence
+public partial record IssuingDisputeCanceledEvidence
 {
     /// <summary>
     /// (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Additional documentation supporting the dispute.
@@ -27075,7 +27430,7 @@ public record IssuingDisputeCanceledEvidence
 
 }
 
-public record IssuingDisputeDuplicateEvidence
+public partial record IssuingDisputeDuplicateEvidence
 {
     /// <summary>
     /// (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Additional documentation supporting the dispute.
@@ -27115,7 +27470,7 @@ public record IssuingDisputeDuplicateEvidence
 
 }
 
-public record IssuingDisputeEvidence
+public partial record IssuingDisputeEvidence
 {
     [JsonPropertyName("canceled")]
     public IssuingDisputeCanceledEvidence? Canceled { get; init; }
@@ -27149,7 +27504,7 @@ public record IssuingDisputeEvidence
 
 }
 
-public record IssuingDisputeFraudulentEvidence
+public partial record IssuingDisputeFraudulentEvidence
 {
     /// <summary>
     /// (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Additional documentation supporting the dispute.
@@ -27165,7 +27520,7 @@ public record IssuingDisputeFraudulentEvidence
 
 }
 
-public record IssuingDisputeMerchandiseNotAsDescribedEvidence
+public partial record IssuingDisputeMerchandiseNotAsDescribedEvidence
 {
     /// <summary>
     /// (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Additional documentation supporting the dispute.
@@ -27205,7 +27560,7 @@ public record IssuingDisputeMerchandiseNotAsDescribedEvidence
 
 }
 
-public record IssuingDisputeNoValidAuthorizationEvidence
+public partial record IssuingDisputeNoValidAuthorizationEvidence
 {
     /// <summary>
     /// (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Additional documentation supporting the dispute.
@@ -27221,7 +27576,7 @@ public record IssuingDisputeNoValidAuthorizationEvidence
 
 }
 
-public record IssuingDisputeNotReceivedEvidence
+public partial record IssuingDisputeNotReceivedEvidence
 {
     /// <summary>
     /// (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Additional documentation supporting the dispute.
@@ -27255,7 +27610,7 @@ public record IssuingDisputeNotReceivedEvidence
 
 }
 
-public record IssuingDisputeOtherEvidence
+public partial record IssuingDisputeOtherEvidence
 {
     /// <summary>
     /// (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Additional documentation supporting the dispute.
@@ -27283,7 +27638,7 @@ public record IssuingDisputeOtherEvidence
 
 }
 
-public record IssuingDisputeServiceNotAsDescribedEvidence
+public partial record IssuingDisputeServiceNotAsDescribedEvidence
 {
     /// <summary>
     /// (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Additional documentation supporting the dispute.
@@ -27317,7 +27672,7 @@ public record IssuingDisputeServiceNotAsDescribedEvidence
 
 }
 
-public record IssuingDisputeTreasury
+public partial record IssuingDisputeTreasury
 {
     /// <summary>
     /// The Treasury [DebitReversal](https://docs.stripe.com/api/treasury/debit_reversals) representing this Issuing dispute
@@ -27333,7 +27688,7 @@ public record IssuingDisputeTreasury
 
 }
 
-public record IssuingNetworkTokenAddress
+public partial record IssuingNetworkTokenAddress
 {
     /// <summary>
     /// The street address of the cardholder tokenizing the card.
@@ -27349,7 +27704,7 @@ public record IssuingNetworkTokenAddress
 
 }
 
-public record IssuingNetworkTokenDevice
+public partial record IssuingNetworkTokenDevice
 {
     /// <summary>
     /// An obfuscated ID derived from the device ID.
@@ -27389,7 +27744,7 @@ public record IssuingNetworkTokenDevice
 
 }
 
-public record IssuingNetworkTokenMastercard
+public partial record IssuingNetworkTokenMastercard
 {
     /// <summary>
     /// A unique reference ID from MasterCard to represent the card account number.
@@ -27417,7 +27772,7 @@ public record IssuingNetworkTokenMastercard
 
 }
 
-public record IssuingNetworkTokenNetworkData
+public partial record IssuingNetworkTokenNetworkData
 {
     [JsonPropertyName("device")]
     public IssuingNetworkTokenDevice? Device { get; init; }
@@ -27439,7 +27794,7 @@ public record IssuingNetworkTokenNetworkData
 
 }
 
-public record IssuingNetworkTokenVisa
+public partial record IssuingNetworkTokenVisa
 {
     /// <summary>
     /// A unique reference ID from Visa to represent the card account number.
@@ -27467,7 +27822,7 @@ public record IssuingNetworkTokenVisa
 
 }
 
-public record IssuingNetworkTokenWalletProvider
+public partial record IssuingNetworkTokenWalletProvider
 {
     /// <summary>
     /// The wallet provider-given account ID of the digital wallet the token belongs to.
@@ -27528,7 +27883,7 @@ public record IssuingNetworkTokenWalletProvider
 
 }
 
-public record IssuingPersonalizationDesignCarrierText
+public partial record IssuingPersonalizationDesignCarrierText
 {
     /// <summary>
     /// The footer body text of the carrier letter.
@@ -27556,7 +27911,7 @@ public record IssuingPersonalizationDesignCarrierText
 
 }
 
-public record IssuingPersonalizationDesignPreferences
+public partial record IssuingPersonalizationDesignPreferences
 {
     /// <summary>
     /// Whether we use this personalization design to create cards when one isn't specified. A connected account uses the Connect platform's default design if no personalization design is set as the default design.
@@ -27572,7 +27927,7 @@ public record IssuingPersonalizationDesignPreferences
 
 }
 
-public record IssuingPersonalizationDesignRejectionReasons
+public partial record IssuingPersonalizationDesignRejectionReasons
 {
     /// <summary>
     /// The reason(s) the card logo was rejected.
@@ -27588,7 +27943,7 @@ public record IssuingPersonalizationDesignRejectionReasons
 
 }
 
-public record IssuingPhysicalBundleFeatures
+public partial record IssuingPhysicalBundleFeatures
 {
     /// <summary>
     /// The policy for how to use card logo images in a card design with this physical bundle.
@@ -27610,7 +27965,7 @@ public record IssuingPhysicalBundleFeatures
 
 }
 
-public record IssuingTransactionAmountDetails
+public partial record IssuingTransactionAmountDetails
 {
     /// <summary>
     /// The fee charged by the ATM for the cash withdrawal.
@@ -27626,7 +27981,7 @@ public record IssuingTransactionAmountDetails
 
 }
 
-public record IssuingTransactionFleetCardholderPromptData
+public partial record IssuingTransactionFleetCardholderPromptData
 {
     /// <summary>
     /// Driver ID.
@@ -27660,7 +28015,7 @@ public record IssuingTransactionFleetCardholderPromptData
 
 }
 
-public record IssuingTransactionFleetData
+public partial record IssuingTransactionFleetData
 {
     /// <summary>
     /// Answers to prompts presented to cardholder at point of sale.
@@ -27688,17 +28043,17 @@ public record IssuingTransactionFleetData
 
 }
 
-public record IssuingTransactionFleetFuelPriceData
+public partial record IssuingTransactionFleetFuelPriceData
 {
     /// <summary>
-    /// Gross fuel amount that should equal Fuel Volume multipled by Fuel Unit Cost, inclusive of taxes.
+    /// Gross fuel amount that should equal Fuel Volume multiplied by Fuel Unit Cost, inclusive of taxes.
     /// </summary>
     [JsonPropertyName("gross_amount_decimal")]
     public string? GrossAmountDecimal { get; init; }
 
 }
 
-public record IssuingTransactionFleetNonFuelPriceData
+public partial record IssuingTransactionFleetNonFuelPriceData
 {
     /// <summary>
     /// Gross non-fuel amount that should equal the sum of the line items, inclusive of taxes.
@@ -27708,7 +28063,7 @@ public record IssuingTransactionFleetNonFuelPriceData
 
 }
 
-public record IssuingTransactionFleetReportedBreakdown
+public partial record IssuingTransactionFleetReportedBreakdown
 {
     /// <summary>
     /// Breakdown of fuel portion of the purchase.
@@ -27730,7 +28085,7 @@ public record IssuingTransactionFleetReportedBreakdown
 
 }
 
-public record IssuingTransactionFleetTaxData
+public partial record IssuingTransactionFleetTaxData
 {
     /// <summary>
     /// Amount of state or provincial Sales Tax included in the transaction amount. Null if not reported by merchant or not subject to tax.
@@ -27746,7 +28101,7 @@ public record IssuingTransactionFleetTaxData
 
 }
 
-public record IssuingTransactionFlightData
+public partial record IssuingTransactionFlightData
 {
     /// <summary>
     /// The time that the flight departed.
@@ -27780,7 +28135,7 @@ public record IssuingTransactionFlightData
 
 }
 
-public record IssuingTransactionFlightDataLeg
+public partial record IssuingTransactionFlightDataLeg
 {
     /// <summary>
     /// The three-letter IATA airport code of the flight's destination.
@@ -27820,7 +28175,7 @@ public record IssuingTransactionFlightDataLeg
 
 }
 
-public record IssuingTransactionFuelData
+public partial record IssuingTransactionFuelData
 {
     /// <summary>
     /// [Conexxus Payment System Product Code](https://www.conexxus.org/conexxus-payment-system-product-codes) identifying the primary fuel product purchased.
@@ -27854,7 +28209,7 @@ public record IssuingTransactionFuelData
 
 }
 
-public record IssuingTransactionLodgingData
+public partial record IssuingTransactionLodgingData
 {
     /// <summary>
     /// The time of checking into the lodging.
@@ -27870,7 +28225,7 @@ public record IssuingTransactionLodgingData
 
 }
 
-public record IssuingTransactionNetworkData
+public partial record IssuingTransactionNetworkData
 {
     /// <summary>
     /// A code created by Stripe which is shared with the merchant to validate the authorization. This field will be populated if the authorization message was approved. The code typically starts with the letter "S", followed by a six-digit number. For example, "S498162". Please note that the code is not guaranteed to be unique across authorizations.
@@ -27892,7 +28247,7 @@ public record IssuingTransactionNetworkData
 
 }
 
-public record IssuingTransactionPurchaseDetails
+public partial record IssuingTransactionPurchaseDetails
 {
     /// <summary>
     /// Fleet-specific information for transactions using Fleet cards.
@@ -27932,7 +28287,7 @@ public record IssuingTransactionPurchaseDetails
 
 }
 
-public record IssuingTransactionReceiptData
+public partial record IssuingTransactionReceiptData
 {
     /// <summary>
     /// The description of the item. The maximum length of this field is 26 characters.
@@ -27960,7 +28315,7 @@ public record IssuingTransactionReceiptData
 
 }
 
-public record IssuingTransactionTreasury
+public partial record IssuingTransactionTreasury
 {
     /// <summary>
     /// The Treasury [ReceivedCredit](https://docs.stripe.com/api/treasury/received_credits) representing this Issuing transaction if it is a refund
@@ -27979,7 +28334,7 @@ public record IssuingTransactionTreasury
 /// <summary>
 /// A line item.
 /// </summary>
-public record Item
+public partial record Item
 {
     [JsonPropertyName("adjustable_quantity")]
     public LineItemsAdjustableQuantity? AdjustableQuantity { get; init; }
@@ -28064,7 +28419,7 @@ public record Item
 
 }
 
-public record KlarnaAddress
+public partial record KlarnaAddress
 {
     /// <summary>
     /// The payer address country
@@ -28074,7 +28429,7 @@ public record KlarnaAddress
 
 }
 
-public record KlarnaPayerDetails
+public partial record KlarnaPayerDetails
 {
     /// <summary>
     /// The payer's address
@@ -28084,7 +28439,7 @@ public record KlarnaPayerDetails
 
 }
 
-public record LegalEntityCompany
+public partial record LegalEntityCompany
 {
     [JsonPropertyName("address")]
     public Address? Address { get; init; }
@@ -28100,6 +28455,9 @@ public record LegalEntityCompany
     /// </summary>
     [JsonPropertyName("address_kanji")]
     public LegalEntityJapanAddress? AddressKanji { get; init; }
+
+    [JsonPropertyName("administrative_address")]
+    public Address? AdministrativeAddress { get; init; }
 
     /// <summary>
     /// Whether the company's directors have been provided. This Boolean will be `true` if you've manually indicated that all directors are provided via [the `directors_provided` parameter](https://docs.stripe.com/api/accounts/update#update_account-company-directors_provided).
@@ -28173,6 +28531,9 @@ public record LegalEntityCompany
     [JsonPropertyName("phone")]
     public string? Phone { get; init; }
 
+    [JsonPropertyName("principal_place_of_business")]
+    public Address? PrincipalPlaceOfBusiness { get; init; }
+
     [JsonPropertyName("registration_date")]
     public LegalEntityRegistrationDate? RegistrationDate { get; init; }
 
@@ -28214,14 +28575,14 @@ public record LegalEntityCompany
 
 }
 
-public record LegalEntityCompanyVerification
+public partial record LegalEntityCompanyVerification
 {
     [JsonPropertyName("document")]
     public required LegalEntityCompanyVerificationDocument Document { get; init; }
 
 }
 
-public record LegalEntityCompanyVerificationDocument
+public partial record LegalEntityCompanyVerificationDocument
 {
     /// <summary>
     /// The back of a document returned by a [file upload](https://api.stripe.com#create_file) with a `purpose` value of `additional_verification`. Note that `additional_verification` files are [not downloadable](/file-upload#uploading-a-file).
@@ -28249,7 +28610,7 @@ public record LegalEntityCompanyVerificationDocument
 
 }
 
-public record LegalEntityDirectorshipDeclaration
+public partial record LegalEntityDirectorshipDeclaration
 {
     /// <summary>
     /// The Unix timestamp marking when the directorship declaration attestation was made.
@@ -28271,7 +28632,7 @@ public record LegalEntityDirectorshipDeclaration
 
 }
 
-public record LegalEntityDob
+public partial record LegalEntityDob
 {
     /// <summary>
     /// The day of birth, between 1 and 31.
@@ -28293,7 +28654,7 @@ public record LegalEntityDob
 
 }
 
-public record LegalEntityJapanAddress
+public partial record LegalEntityJapanAddress
 {
     /// <summary>
     /// City/Ward.
@@ -28339,7 +28700,7 @@ public record LegalEntityJapanAddress
 
 }
 
-public record LegalEntityPersonVerification
+public partial record LegalEntityPersonVerification
 {
     /// <summary>
     /// A document showing address, either a passport, local ID card, or utility bill from a well-known utility company.
@@ -28370,7 +28731,7 @@ public record LegalEntityPersonVerification
 
 }
 
-public record LegalEntityPersonVerificationDocument
+public partial record LegalEntityPersonVerificationDocument
 {
     /// <summary>
     /// The back of an ID returned by a [file upload](https://api.stripe.com#create_file) with a `purpose` value of `identity_document`.
@@ -28398,7 +28759,7 @@ public record LegalEntityPersonVerificationDocument
 
 }
 
-public record LegalEntityRegistrationDate
+public partial record LegalEntityRegistrationDate
 {
     /// <summary>
     /// The day of registration, between 1 and 31.
@@ -28420,7 +28781,7 @@ public record LegalEntityRegistrationDate
 
 }
 
-public record LegalEntityRepresentativeDeclaration
+public partial record LegalEntityRepresentativeDeclaration
 {
     /// <summary>
     /// The Unix timestamp marking when the representative declaration attestation was made.
@@ -28442,7 +28803,7 @@ public record LegalEntityRepresentativeDeclaration
 
 }
 
-public record LegalEntityUboDeclaration
+public partial record LegalEntityUboDeclaration
 {
     /// <summary>
     /// The Unix timestamp marking when the beneficial owner attestation was made.
@@ -28469,7 +28830,7 @@ public record LegalEntityUboDeclaration
 /// 
 /// Each line item is backed by either an [invoice item](https://docs.stripe.com/api/invoiceitems) or a [subscription item](https://docs.stripe.com/api/subscription_items).
 /// </summary>
-public record LineItem
+public partial record LineItem
 {
     /// <summary>
     /// The amount, in cents (or local equivalent).
@@ -28587,7 +28948,7 @@ public record LineItem
 
 }
 
-public record LineItemsAdjustableQuantity
+public partial record LineItemsAdjustableQuantity
 {
     [JsonPropertyName("enabled")]
     public required bool Enabled { get; init; }
@@ -28600,7 +28961,7 @@ public record LineItemsAdjustableQuantity
 
 }
 
-public record LineItemsDiscountAmount
+public partial record LineItemsDiscountAmount
 {
     /// <summary>
     /// The amount discounted.
@@ -28619,7 +28980,7 @@ public record LineItemsDiscountAmount
 
 }
 
-public record LineItemsTaxAmount
+public partial record LineItemsTaxAmount
 {
     /// <summary>
     /// Amount of tax applied for this rate.
@@ -28649,7 +29010,7 @@ public record LineItemsTaxAmount
 
 }
 
-public record LinkedAccountOptionsCommon
+public partial record LinkedAccountOptionsCommon
 {
     [JsonPropertyName("filters")]
     public PaymentFlowsPrivatePaymentMethodsFinancialConnectionsCommonLinkedAccountOptionsFilters? Filters { get; init; }
@@ -28678,7 +29039,7 @@ public record LinkedAccountOptionsCommon
 /// Login Links are single-use URLs that takes an Express account to the login page for their Stripe dashboard.
 /// A Login Link differs from an [Account Link](https://docs.stripe.com/api/account_links) in that it takes the user directly to their [Express dashboard for the specified account](https://docs.stripe.com/connect/integrate-express-dashboard#create-login-link)
 /// </summary>
-public record LoginLink
+public partial record LoginLink
 {
     /// <summary>
     /// Time at which the object was created. Measured in seconds since the Unix epoch.
@@ -28703,7 +29064,7 @@ public record LoginLink
 /// <summary>
 /// A Mandate is a record of the permission that your customer gives you to debit their payment method.
 /// </summary>
-public record Mandate
+public partial record Mandate
 {
     [JsonPropertyName("customer_acceptance")]
     public required CustomerAcceptance CustomerAcceptance { get; init; }
@@ -28761,7 +29122,7 @@ public record Mandate
 
 }
 
-public record MandateAcssDebit
+public partial record MandateAcssDebit
 {
     /// <summary>
     /// List of Stripe products where this mandate can be selected automatically.
@@ -28789,11 +29150,11 @@ public record MandateAcssDebit
 
 }
 
-public record MandateAmazonPay
+public partial record MandateAmazonPay
 {
 }
 
-public record MandateAuBecsDebit
+public partial record MandateAuBecsDebit
 {
     /// <summary>
     /// The URL of the mandate. This URL generally contains sensitive information about the customer and should be shared with them exclusively.
@@ -28803,7 +29164,7 @@ public record MandateAuBecsDebit
 
 }
 
-public record MandateBacsDebit
+public partial record MandateBacsDebit
 {
     /// <summary>
     /// The display name for the account on this mandate.
@@ -28843,27 +29204,27 @@ public record MandateBacsDebit
 
 }
 
-public record MandateCashapp
+public partial record MandateCashapp
 {
 }
 
-public record MandateKakaoPay
+public partial record MandateKakaoPay
 {
 }
 
-public record MandateKlarna
+public partial record MandateKlarna
 {
 }
 
-public record MandateKrCard
+public partial record MandateKrCard
 {
 }
 
-public record MandateLink
+public partial record MandateLink
 {
 }
 
-public record MandateMultiUse
+public partial record MandateMultiUse
 {
     /// <summary>
     /// The amount of the payment on a multi use mandate.
@@ -28879,15 +29240,15 @@ public record MandateMultiUse
 
 }
 
-public record MandateNaverPay
+public partial record MandateNaverPay
 {
 }
 
-public record MandateNzBankAccount
+public partial record MandateNzBankAccount
 {
 }
 
-public record MandateOptionsPayto
+public partial record MandateOptionsPayto
 {
     /// <summary>
     /// Amount that will be collected. It is required when `amount_type` is `fixed`.
@@ -28933,7 +29294,7 @@ public record MandateOptionsPayto
 
 }
 
-public record MandateOptionsUpi
+public partial record MandateOptionsUpi
 {
     /// <summary>
     /// Amount to be charged for future payments.
@@ -28961,7 +29322,7 @@ public record MandateOptionsUpi
 
 }
 
-public record MandatePaymentMethodDetails
+public partial record MandatePaymentMethodDetails
 {
     [JsonPropertyName("acss_debit")]
     public MandateAcssDebit? AcssDebit { get; init; }
@@ -29031,7 +29392,7 @@ public record MandatePaymentMethodDetails
 
 }
 
-public record MandatePaypal
+public partial record MandatePaypal
 {
     /// <summary>
     /// The PayPal Billing Agreement ID (BAID). This is an ID generated by PayPal which represents the mandate between the merchant and the customer.
@@ -29047,7 +29408,7 @@ public record MandatePaypal
 
 }
 
-public record MandatePayto
+public partial record MandatePayto
 {
     /// <summary>
     /// Amount that will be collected. It is required when `amount_type` is `fixed`.
@@ -29093,7 +29454,7 @@ public record MandatePayto
 
 }
 
-public record MandatePix
+public partial record MandatePix
 {
     /// <summary>
     /// Determines if the amount includes the IOF tax.
@@ -29133,11 +29494,11 @@ public record MandatePix
 
 }
 
-public record MandateRevolutPay
+public partial record MandateRevolutPay
 {
 }
 
-public record MandateSepaDebit
+public partial record MandateSepaDebit
 {
     /// <summary>
     /// The unique reference of the mandate.
@@ -29153,7 +29514,7 @@ public record MandateSepaDebit
 
 }
 
-public record MandateSingleUse
+public partial record MandateSingleUse
 {
     /// <summary>
     /// The amount of the payment on a single use mandate.
@@ -29169,11 +29530,11 @@ public record MandateSingleUse
 
 }
 
-public record MandateTwint
+public partial record MandateTwint
 {
 }
 
-public record MandateUpi
+public partial record MandateUpi
 {
     /// <summary>
     /// Amount to be charged for future payments.
@@ -29201,7 +29562,7 @@ public record MandateUpi
 
 }
 
-public record MandateUsBankAccount
+public partial record MandateUsBankAccount
 {
     /// <summary>
     /// Mandate collection method
@@ -29211,7 +29572,7 @@ public record MandateUsBankAccount
 
 }
 
-public record Networks
+public partial record Networks
 {
     /// <summary>
     /// All networks available for selection via [payment_method_options.card.network](/api/payment_intents/confirm#confirm_payment_intent-payment_method_options-card-network).
@@ -29227,7 +29588,7 @@ public record Networks
 
 }
 
-public record NotificationEventData
+public partial record NotificationEventData
 {
     /// <summary>
     /// Object containing the API resource relevant to the event. For example, an `invoice.created` event will have a full [invoice object](https://api.stripe.com#invoice_object) as the value of the object key.
@@ -29243,7 +29604,7 @@ public record NotificationEventData
 
 }
 
-public record NotificationEventRequest
+public partial record NotificationEventRequest
 {
     /// <summary>
     /// ID of the API request that caused the event. If null, the event was automatic (e.g., Stripe's automatic subscription handling). Request logs are available in the [dashboard](https://dashboard.stripe.com/logs), but currently not in the API.
@@ -29259,11 +29620,11 @@ public record NotificationEventRequest
 
 }
 
-public record OfflineAcceptance
+public partial record OfflineAcceptance
 {
 }
 
-public record OnlineAcceptance
+public partial record OnlineAcceptance
 {
     /// <summary>
     /// The customer accepts the mandate from this IP address.
@@ -29279,7 +29640,7 @@ public record OnlineAcceptance
 
 }
 
-public record OutboundPaymentsPaymentMethodDetails
+public partial record OutboundPaymentsPaymentMethodDetails
 {
     [JsonPropertyName("billing_details")]
     public required TreasurySharedResourceBillingDetails BillingDetails { get; init; }
@@ -29298,7 +29659,7 @@ public record OutboundPaymentsPaymentMethodDetails
 
 }
 
-public record OutboundPaymentsPaymentMethodDetailsFinancialAccount
+public partial record OutboundPaymentsPaymentMethodDetailsFinancialAccount
 {
     /// <summary>
     /// Token of the FinancialAccount.
@@ -29314,7 +29675,7 @@ public record OutboundPaymentsPaymentMethodDetailsFinancialAccount
 
 }
 
-public record OutboundPaymentsPaymentMethodDetailsUsBankAccount
+public partial record OutboundPaymentsPaymentMethodDetailsUsBankAccount
 {
     /// <summary>
     /// Account holder type: individual or company.
@@ -29366,7 +29727,7 @@ public record OutboundPaymentsPaymentMethodDetailsUsBankAccount
 
 }
 
-public record OutboundTransfersPaymentMethodDetails
+public partial record OutboundTransfersPaymentMethodDetails
 {
     [JsonPropertyName("billing_details")]
     public required TreasurySharedResourceBillingDetails BillingDetails { get; init; }
@@ -29385,7 +29746,7 @@ public record OutboundTransfersPaymentMethodDetails
 
 }
 
-public record OutboundTransfersPaymentMethodDetailsFinancialAccount
+public partial record OutboundTransfersPaymentMethodDetailsFinancialAccount
 {
     /// <summary>
     /// Token of the FinancialAccount.
@@ -29401,7 +29762,7 @@ public record OutboundTransfersPaymentMethodDetailsFinancialAccount
 
 }
 
-public record OutboundTransfersPaymentMethodDetailsUsBankAccount
+public partial record OutboundTransfersPaymentMethodDetailsUsBankAccount
 {
     /// <summary>
     /// Account holder type: individual or company.
@@ -29453,7 +29814,7 @@ public record OutboundTransfersPaymentMethodDetailsUsBankAccount
 
 }
 
-public record PackageDimensions
+public partial record PackageDimensions
 {
     /// <summary>
     /// Height, in inches.
@@ -29487,7 +29848,7 @@ public record PackageDimensions
 /// method. Payment Attempt Records are attached to Payment Records. Only one attempt per Payment Record
 /// can have guaranteed funds.
 /// </summary>
-public record PaymentAttemptRecord
+public partial record PaymentAttemptRecord
 {
     /// <summary>
     /// A representation of an amount of money, consisting of an amount and a currency.
@@ -29617,7 +29978,7 @@ public record PaymentAttemptRecord
 
 }
 
-public record PaymentData
+public partial record PaymentData
 {
     /// <summary>
     /// An arbitrary string attached to the destination payment. Often useful for displaying to users.
@@ -29633,7 +29994,7 @@ public record PaymentData
 
 }
 
-public record PaymentFlowsAmountDetails
+public partial record PaymentFlowsAmountDetails
 {
     /// <summary>
     /// The total discount applied on the transaction represented in the [smallest currency unit](https://docs.stripe.com/currencies#zero-decimal). An integer greater than 0.
@@ -29663,14 +30024,14 @@ public record PaymentFlowsAmountDetails
 
 }
 
-public record PaymentFlowsAmountDetailsClient
+public partial record PaymentFlowsAmountDetailsClient
 {
     [JsonPropertyName("tip")]
     public PaymentFlowsAmountDetailsClientResourceTip? Tip { get; init; }
 
 }
 
-public record PaymentFlowsAmountDetailsClientResourceTip
+public partial record PaymentFlowsAmountDetailsClientResourceTip
 {
     /// <summary>
     /// Portion of the amount that corresponds to a tip.
@@ -29680,7 +30041,7 @@ public record PaymentFlowsAmountDetailsClientResourceTip
 
 }
 
-public record PaymentFlowsAmountDetailsResourceError
+public partial record PaymentFlowsAmountDetailsResourceError
 {
     /// <summary>
     /// The code of the error that occurred when validating the current amount details.
@@ -29696,7 +30057,7 @@ public record PaymentFlowsAmountDetailsResourceError
 
 }
 
-public record PaymentFlowsAmountDetailsResourceLineItemsListResourceLineItemResourcePaymentMethodOptions
+public partial record PaymentFlowsAmountDetailsResourceLineItemsListResourceLineItemResourcePaymentMethodOptions
 {
     [JsonPropertyName("card")]
     public PaymentFlowsPrivatePaymentMethodsCardPaymentIntentAmountDetailsLineItemPaymentMethodOptions? Card { get; init; }
@@ -29712,7 +30073,7 @@ public record PaymentFlowsAmountDetailsResourceLineItemsListResourceLineItemReso
 
 }
 
-public record PaymentFlowsAmountDetailsResourceLineItemsListResourceLineItemResourceTax
+public partial record PaymentFlowsAmountDetailsResourceLineItemsListResourceLineItemResourceTax
 {
     /// <summary>
     /// The total amount of tax on the transaction represented in the [smallest currency unit](https://docs.stripe.com/currencies#zero-decimal). Required for L2 rates. An integer greater than or equal to 0.
@@ -29724,7 +30085,7 @@ public record PaymentFlowsAmountDetailsResourceLineItemsListResourceLineItemReso
 
 }
 
-public record PaymentFlowsAmountDetailsResourceShipping
+public partial record PaymentFlowsAmountDetailsResourceShipping
 {
     /// <summary>
     /// If a physical good is being shipped, the cost of shipping represented in the [smallest currency unit](https://docs.stripe.com/currencies#zero-decimal). An integer greater than or equal to 0.
@@ -29746,7 +30107,7 @@ public record PaymentFlowsAmountDetailsResourceShipping
 
 }
 
-public record PaymentFlowsAmountDetailsResourceTax
+public partial record PaymentFlowsAmountDetailsResourceTax
 {
     /// <summary>
     /// The total amount of tax on the transaction represented in the [smallest currency unit](https://docs.stripe.com/currencies#zero-decimal). Required for L2 rates. An integer greater than or equal to 0.
@@ -29758,7 +30119,7 @@ public record PaymentFlowsAmountDetailsResourceTax
 
 }
 
-public record PaymentFlowsAutomaticPaymentMethodsPaymentIntent
+public partial record PaymentFlowsAutomaticPaymentMethodsPaymentIntent
 {
     /// <summary>
     /// Controls whether this PaymentIntent will accept redirect-based payment methods.
@@ -29776,7 +30137,7 @@ public record PaymentFlowsAutomaticPaymentMethodsPaymentIntent
 
 }
 
-public record PaymentFlowsAutomaticPaymentMethodsSetupIntent
+public partial record PaymentFlowsAutomaticPaymentMethodsSetupIntent
 {
     /// <summary>
     /// Controls whether this SetupIntent will accept redirect-based payment methods.
@@ -29794,7 +30155,7 @@ public record PaymentFlowsAutomaticPaymentMethodsSetupIntent
 
 }
 
-public record PaymentFlowsInstallmentOptions
+public partial record PaymentFlowsInstallmentOptions
 {
     [JsonPropertyName("enabled")]
     public required bool Enabled { get; init; }
@@ -29804,7 +30165,7 @@ public record PaymentFlowsInstallmentOptions
 
 }
 
-public record PaymentFlowsPaymentDetails
+public partial record PaymentFlowsPaymentDetails
 {
     /// <summary>
     /// A unique value to identify the customer. This field is available only for card payments.
@@ -29824,21 +30185,21 @@ public record PaymentFlowsPaymentDetails
 
 }
 
-public record PaymentFlowsPaymentIntentAsyncWorkflows
+public partial record PaymentFlowsPaymentIntentAsyncWorkflows
 {
     [JsonPropertyName("inputs")]
     public PaymentFlowsPaymentIntentAsyncWorkflowsResourceInputs? Inputs { get; init; }
 
 }
 
-public record PaymentFlowsPaymentIntentAsyncWorkflowsResourceInputs
+public partial record PaymentFlowsPaymentIntentAsyncWorkflowsResourceInputs
 {
     [JsonPropertyName("tax")]
     public PaymentFlowsPaymentIntentAsyncWorkflowsResourceInputsResourceTax? Tax { get; init; }
 
 }
 
-public record PaymentFlowsPaymentIntentAsyncWorkflowsResourceInputsResourceTax
+public partial record PaymentFlowsPaymentIntentAsyncWorkflowsResourceInputsResourceTax
 {
     /// <summary>
     /// The [TaxCalculation](https://docs.stripe.com/api/tax/calculations) id
@@ -29848,7 +30209,7 @@ public record PaymentFlowsPaymentIntentAsyncWorkflowsResourceInputsResourceTax
 
 }
 
-public record PaymentFlowsPaymentIntentPresentmentDetails
+public partial record PaymentFlowsPaymentIntentPresentmentDetails
 {
     /// <summary>
     /// Amount intended to be collected by this payment, denominated in `presentment_currency`.
@@ -29864,33 +30225,11 @@ public record PaymentFlowsPaymentIntentPresentmentDetails
 
 }
 
-public record PaymentFlowsPrivatePaymentMethodsAlipay
+public partial record PaymentFlowsPrivatePaymentMethodsAlipay
 {
 }
 
-public record PaymentFlowsPrivatePaymentMethodsAlipayDetails
-{
-    /// <summary>
-    /// Uniquely identifies this particular Alipay account. You can use this attribute to check whether two Alipay accounts are the same.
-    /// </summary>
-    [JsonPropertyName("buyer_id")]
-    public string? BuyerId { get; init; }
-
-    /// <summary>
-    /// Uniquely identifies this particular Alipay account. You can use this attribute to check whether two Alipay accounts are the same.
-    /// </summary>
-    [JsonPropertyName("fingerprint")]
-    public string? Fingerprint { get; init; }
-
-    /// <summary>
-    /// Transaction ID of this particular Alipay transaction.
-    /// </summary>
-    [JsonPropertyName("transaction_id")]
-    public string? TransactionId { get; init; }
-
-}
-
-public record PaymentFlowsPrivatePaymentMethodsCardDetailsApiResourceEnterpriseFeaturesExtendedAuthorizationExtendedAuthorization
+public partial record PaymentFlowsPrivatePaymentMethodsCardDetailsApiResourceEnterpriseFeaturesExtendedAuthorizationExtendedAuthorization
 {
     /// <summary>
     /// Indicates whether or not the capture window is extended beyond the standard authorization.
@@ -29900,7 +30239,7 @@ public record PaymentFlowsPrivatePaymentMethodsCardDetailsApiResourceEnterpriseF
 
 }
 
-public record PaymentFlowsPrivatePaymentMethodsCardDetailsApiResourceEnterpriseFeaturesIncrementalAuthorizationIncrementalAuthorization
+public partial record PaymentFlowsPrivatePaymentMethodsCardDetailsApiResourceEnterpriseFeaturesIncrementalAuthorizationIncrementalAuthorization
 {
     /// <summary>
     /// Indicates whether or not the incremental authorization feature is supported.
@@ -29910,7 +30249,7 @@ public record PaymentFlowsPrivatePaymentMethodsCardDetailsApiResourceEnterpriseF
 
 }
 
-public record PaymentFlowsPrivatePaymentMethodsCardDetailsApiResourceEnterpriseFeaturesOvercaptureOvercapture
+public partial record PaymentFlowsPrivatePaymentMethodsCardDetailsApiResourceEnterpriseFeaturesOvercaptureOvercapture
 {
     /// <summary>
     /// The maximum amount that can be captured.
@@ -29926,7 +30265,7 @@ public record PaymentFlowsPrivatePaymentMethodsCardDetailsApiResourceEnterpriseF
 
 }
 
-public record PaymentFlowsPrivatePaymentMethodsCardDetailsApiResourceMulticapture
+public partial record PaymentFlowsPrivatePaymentMethodsCardDetailsApiResourceMulticapture
 {
     /// <summary>
     /// Indicates whether or not multiple captures are supported.
@@ -29936,21 +30275,21 @@ public record PaymentFlowsPrivatePaymentMethodsCardDetailsApiResourceMulticaptur
 
 }
 
-public record PaymentFlowsPrivatePaymentMethodsCardPaymentIntentAmountDetailsLineItemPaymentMethodOptions
+public partial record PaymentFlowsPrivatePaymentMethodsCardPaymentIntentAmountDetailsLineItemPaymentMethodOptions
 {
     [JsonPropertyName("commodity_code")]
     public string? CommodityCode { get; init; }
 
 }
 
-public record PaymentFlowsPrivatePaymentMethodsCardPresentAmountDetailsLineItemPaymentMethodOptions
+public partial record PaymentFlowsPrivatePaymentMethodsCardPresentAmountDetailsLineItemPaymentMethodOptions
 {
     [JsonPropertyName("commodity_code")]
     public string? CommodityCode { get; init; }
 
 }
 
-public record PaymentFlowsPrivatePaymentMethodsCardPresentCommonWallet
+public partial record PaymentFlowsPrivatePaymentMethodsCardPresentCommonWallet
 {
     /// <summary>
     /// The type of mobile wallet, one of `apple_pay`, `google_pay`, `samsung_pay`, or `unknown`.
@@ -29960,7 +30299,7 @@ public record PaymentFlowsPrivatePaymentMethodsCardPresentCommonWallet
 
 }
 
-public record PaymentFlowsPrivatePaymentMethodsFinancialConnectionsCommonLinkedAccountOptionsFilters
+public partial record PaymentFlowsPrivatePaymentMethodsFinancialConnectionsCommonLinkedAccountOptionsFilters
 {
     /// <summary>
     /// The account subcategories to use to filter for possible accounts to link. Valid subcategories are `checking` and `savings`.
@@ -29970,7 +30309,7 @@ public record PaymentFlowsPrivatePaymentMethodsFinancialConnectionsCommonLinkedA
 
 }
 
-public record PaymentFlowsPrivatePaymentMethodsKakaoPayPaymentMethodOptions
+public partial record PaymentFlowsPrivatePaymentMethodsKakaoPayPaymentMethodOptions
 {
     /// <summary>
     /// Controls when the funds will be captured from the customer's account.
@@ -29992,7 +30331,7 @@ public record PaymentFlowsPrivatePaymentMethodsKakaoPayPaymentMethodOptions
 
 }
 
-public record PaymentFlowsPrivatePaymentMethodsKlarnaDob
+public partial record PaymentFlowsPrivatePaymentMethodsKlarnaDob
 {
     /// <summary>
     /// The day of birth, between 1 and 31.
@@ -30014,7 +30353,7 @@ public record PaymentFlowsPrivatePaymentMethodsKlarnaDob
 
 }
 
-public record PaymentFlowsPrivatePaymentMethodsKlarnaPaymentIntentAmountDetailsLineItemPaymentMethodOptions
+public partial record PaymentFlowsPrivatePaymentMethodsKlarnaPaymentIntentAmountDetailsLineItemPaymentMethodOptions
 {
     [JsonPropertyName("image_url")]
     public string? ImageUrl { get; init; }
@@ -30030,7 +30369,7 @@ public record PaymentFlowsPrivatePaymentMethodsKlarnaPaymentIntentAmountDetailsL
 
 }
 
-public record PaymentFlowsPrivatePaymentMethodsNaverPayPaymentMethodOptions
+public partial record PaymentFlowsPrivatePaymentMethodsNaverPayPaymentMethodOptions
 {
     /// <summary>
     /// Controls when the funds will be captured from the customer's account.
@@ -30052,7 +30391,7 @@ public record PaymentFlowsPrivatePaymentMethodsNaverPayPaymentMethodOptions
 
 }
 
-public record PaymentFlowsPrivatePaymentMethodsPaycoPaymentMethodOptions
+public partial record PaymentFlowsPrivatePaymentMethodsPaycoPaymentMethodOptions
 {
     /// <summary>
     /// Controls when the funds will be captured from the customer's account.
@@ -30060,9 +30399,21 @@ public record PaymentFlowsPrivatePaymentMethodsPaycoPaymentMethodOptions
     [JsonPropertyName("capture_method")]
     public CheckoutAffirmPaymentMethodOptionsCaptureMethod? CaptureMethod { get; init; }
 
+    /// <summary>
+    /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
+    /// 
+    /// If you provide a Customer with the PaymentIntent, you can use this parameter to [attach the payment method](/payments/save-during-payment) to the Customer after the PaymentIntent is confirmed and the customer completes any required actions. If you don't provide a Customer, you can still [attach](/api/payment_methods/attach) the payment method to a Customer after the transaction completes.
+    /// 
+    /// If the payment method is `card_present` and isn't a digital wallet, Stripe creates and attaches a [generated_card](/api/charges/object#charge_object-payment_method_details-card_present-generated_card) payment method representing the card to the Customer instead.
+    /// 
+    /// When processing card payments, Stripe uses `setup_future_usage` to help you comply with regional legislation and network rules, such as [SCA](/strong-customer-authentication).
+    /// </summary>
+    [JsonPropertyName("setup_future_usage")]
+    public CheckoutAffirmPaymentMethodOptionsSetupFutureUsage? SetupFutureUsage { get; init; }
+
 }
 
-public record PaymentFlowsPrivatePaymentMethodsPaypalAmountDetailsLineItemPaymentMethodOptions
+public partial record PaymentFlowsPrivatePaymentMethodsPaypalAmountDetailsLineItemPaymentMethodOptions
 {
     /// <summary>
     /// Type of the line item.
@@ -30084,7 +30435,7 @@ public record PaymentFlowsPrivatePaymentMethodsPaypalAmountDetailsLineItemPaymen
 
 }
 
-public record PaymentFlowsPrivatePaymentMethodsSamsungPayPaymentMethodOptions
+public partial record PaymentFlowsPrivatePaymentMethodsSamsungPayPaymentMethodOptions
 {
     /// <summary>
     /// Controls when the funds will be captured from the customer's account.
@@ -30092,6 +30443,22 @@ public record PaymentFlowsPrivatePaymentMethodsSamsungPayPaymentMethodOptions
     [JsonPropertyName("capture_method")]
     public CheckoutAffirmPaymentMethodOptionsCaptureMethod? CaptureMethod { get; init; }
 
+    /// <summary>
+    /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
+    /// 
+    /// If you provide a Customer with the PaymentIntent, you can use this parameter to [attach the payment method](/payments/save-during-payment) to the Customer after the PaymentIntent is confirmed and the customer completes any required actions. If you don't provide a Customer, you can still [attach](/api/payment_methods/attach) the payment method to a Customer after the transaction completes.
+    /// 
+    /// If the payment method is `card_present` and isn't a digital wallet, Stripe creates and attaches a [generated_card](/api/charges/object#charge_object-payment_method_details-card_present-generated_card) payment method representing the card to the Customer instead.
+    /// 
+    /// When processing card payments, Stripe uses `setup_future_usage` to help you comply with regional legislation and network rules, such as [SCA](/strong-customer-authentication).
+    /// </summary>
+    [JsonPropertyName("setup_future_usage")]
+    public CheckoutAffirmPaymentMethodOptionsSetupFutureUsage? SetupFutureUsage { get; init; }
+
+}
+
+public partial record PaymentFlowsPrivatePaymentMethodsSatispaySetupAttemptDetails
+{
 }
 
 /// <summary>
@@ -30107,8 +30474,14 @@ public record PaymentFlowsPrivatePaymentMethodsSamsungPayPaymentMethodOptions
 /// 
 /// Related guide: [Payment Intents API](https://docs.stripe.com/payments/payment-intents)
 /// </summary>
-public record PaymentIntent
+public partial record PaymentIntent
 {
+    /// <summary>
+    /// The list of payment method types allowed for use with this payment. Stripe automatically returns compatible payment methods from this list in the `payment_method_types` field of the response, based on the other PaymentIntent parameters, such as `currency`, `amount`, and `customer`.
+    /// </summary>
+    [JsonPropertyName("allowed_payment_method_types")]
+    public IReadOnlyList<string>? AllowedPaymentMethodTypes { get; init; }
+
     /// <summary>
     /// Amount intended to be collected by this PaymentIntent. A positive integer representing how much to charge in the [smallest currency unit](https://docs.stripe.com/currencies#zero-decimal) (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency). The minimum amount is $0.50 US or [equivalent in charge currency](https://docs.stripe.com/currencies#minimum-and-maximum-charge-amounts). The amount value supports up to eight digits (e.g., a value of 99999999 for a USD charge of $999,999.99).
     /// </summary>
@@ -30384,7 +30757,7 @@ public record PaymentIntent
 
 }
 
-public record PaymentIntentAmountDetailsLineItem
+public partial record PaymentIntentAmountDetailsLineItem
 {
     /// <summary>
     /// The discount applied on this line item represented in the [smallest currency unit](https://docs.stripe.com/currencies#zero-decimal). An integer greater than 0.
@@ -30452,14 +30825,14 @@ public record PaymentIntentAmountDetailsLineItem
 
 }
 
-public record PaymentIntentCardProcessing
+public partial record PaymentIntentCardProcessing
 {
     [JsonPropertyName("customer_notification")]
     public PaymentIntentProcessingCustomerNotification? CustomerNotification { get; init; }
 
 }
 
-public record PaymentIntentNextAction
+public partial record PaymentIntentNextAction
 {
     [JsonPropertyName("alipay_handle_redirect")]
     public PaymentIntentNextActionAlipayHandleRedirect? AlipayHandleRedirect { get; init; }
@@ -30535,7 +30908,7 @@ public record PaymentIntentNextAction
 
 }
 
-public record PaymentIntentNextActionAlipayHandleRedirect
+public partial record PaymentIntentNextActionAlipayHandleRedirect
 {
     /// <summary>
     /// The native data to be used with Alipay SDK you must redirect your customer to in order to authenticate the payment in an Android App.
@@ -30563,11 +30936,11 @@ public record PaymentIntentNextActionAlipayHandleRedirect
 
 }
 
-public record PaymentIntentNextActionBlikAuthorize
+public partial record PaymentIntentNextActionBlikAuthorize
 {
 }
 
-public record PaymentIntentNextActionBoleto
+public partial record PaymentIntentNextActionBoleto
 {
     /// <summary>
     /// The timestamp after which the boleto expires.
@@ -30595,7 +30968,7 @@ public record PaymentIntentNextActionBoleto
 
 }
 
-public record PaymentIntentNextActionCardAwaitNotification
+public partial record PaymentIntentNextActionCardAwaitNotification
 {
     /// <summary>
     /// The time that payment will be attempted. If customer approval is required, they need to provide approval before this time.
@@ -30611,7 +30984,7 @@ public record PaymentIntentNextActionCardAwaitNotification
 
 }
 
-public record PaymentIntentNextActionCashappHandleRedirectOrDisplayQrCode
+public partial record PaymentIntentNextActionCashappHandleRedirectOrDisplayQrCode
 {
     /// <summary>
     /// The URL to the hosted Cash App Pay instructions page, which allows customers to view the QR code, and supports QR code refreshing on expiration.
@@ -30630,7 +31003,7 @@ public record PaymentIntentNextActionCashappHandleRedirectOrDisplayQrCode
 
 }
 
-public record PaymentIntentNextActionCashappQrCode
+public partial record PaymentIntentNextActionCashappQrCode
 {
     /// <summary>
     /// The date (unix timestamp) when the QR code expires.
@@ -30652,7 +31025,7 @@ public record PaymentIntentNextActionCashappQrCode
 
 }
 
-public record PaymentIntentNextActionDisplayBankTransferInstructions
+public partial record PaymentIntentNextActionDisplayBankTransferInstructions
 {
     /// <summary>
     /// The remaining amount that needs to be transferred to complete the payment.
@@ -30692,7 +31065,7 @@ public record PaymentIntentNextActionDisplayBankTransferInstructions
 
 }
 
-public record PaymentIntentNextActionDisplayMultibancoDetails
+public partial record PaymentIntentNextActionDisplayMultibancoDetails
 {
     /// <summary>
     /// Entity number associated with this Multibanco payment.
@@ -30720,7 +31093,7 @@ public record PaymentIntentNextActionDisplayMultibancoDetails
 
 }
 
-public record PaymentIntentNextActionDisplayOxxoDetails
+public partial record PaymentIntentNextActionDisplayOxxoDetails
 {
     /// <summary>
     /// The timestamp after which the OXXO voucher expires.
@@ -30742,7 +31115,7 @@ public record PaymentIntentNextActionDisplayOxxoDetails
 
 }
 
-public record PaymentIntentNextActionKlarnaDisplayQrCode
+public partial record PaymentIntentNextActionKlarnaDisplayQrCode
 {
     /// <summary>
     /// The data being used to generate QR code
@@ -30770,7 +31143,7 @@ public record PaymentIntentNextActionKlarnaDisplayQrCode
 
 }
 
-public record PaymentIntentNextActionKonbini
+public partial record PaymentIntentNextActionKonbini
 {
     /// <summary>
     /// The timestamp at which the pending Konbini payment expires.
@@ -30789,7 +31162,7 @@ public record PaymentIntentNextActionKonbini
 
 }
 
-public record PaymentIntentNextActionKonbiniFamilymart
+public partial record PaymentIntentNextActionKonbiniFamilymart
 {
     /// <summary>
     /// The confirmation number.
@@ -30805,7 +31178,7 @@ public record PaymentIntentNextActionKonbiniFamilymart
 
 }
 
-public record PaymentIntentNextActionKonbiniLawson
+public partial record PaymentIntentNextActionKonbiniLawson
 {
     /// <summary>
     /// The confirmation number.
@@ -30821,7 +31194,7 @@ public record PaymentIntentNextActionKonbiniLawson
 
 }
 
-public record PaymentIntentNextActionKonbiniMinistop
+public partial record PaymentIntentNextActionKonbiniMinistop
 {
     /// <summary>
     /// The confirmation number.
@@ -30837,7 +31210,7 @@ public record PaymentIntentNextActionKonbiniMinistop
 
 }
 
-public record PaymentIntentNextActionKonbiniSeicomart
+public partial record PaymentIntentNextActionKonbiniSeicomart
 {
     /// <summary>
     /// The confirmation number.
@@ -30853,7 +31226,7 @@ public record PaymentIntentNextActionKonbiniSeicomart
 
 }
 
-public record PaymentIntentNextActionKonbiniStores
+public partial record PaymentIntentNextActionKonbiniStores
 {
     /// <summary>
     /// FamilyMart instruction details.
@@ -30881,7 +31254,7 @@ public record PaymentIntentNextActionKonbiniStores
 
 }
 
-public record PaymentIntentNextActionPaynowDisplayQrCode
+public partial record PaymentIntentNextActionPaynowDisplayQrCode
 {
     /// <summary>
     /// The raw data string used to generate QR code, it should be used together with QR code library.
@@ -30909,7 +31282,7 @@ public record PaymentIntentNextActionPaynowDisplayQrCode
 
 }
 
-public record PaymentIntentNextActionPixDisplayQrCode
+public partial record PaymentIntentNextActionPixDisplayQrCode
 {
     /// <summary>
     /// The raw data string used to generate QR code, it should be used together with QR code library.
@@ -30943,7 +31316,7 @@ public record PaymentIntentNextActionPixDisplayQrCode
 
 }
 
-public record PaymentIntentNextActionPromptpayDisplayQrCode
+public partial record PaymentIntentNextActionPromptpayDisplayQrCode
 {
     /// <summary>
     /// The raw data string used to generate QR code, it should be used together with QR code library.
@@ -30971,7 +31344,7 @@ public record PaymentIntentNextActionPromptpayDisplayQrCode
 
 }
 
-public record PaymentIntentNextActionRedirectToUrl
+public partial record PaymentIntentNextActionRedirectToUrl
 {
     /// <summary>
     /// If the customer does not exit their browser while authenticating, they will be redirected to this specified URL after completion.
@@ -30987,7 +31360,7 @@ public record PaymentIntentNextActionRedirectToUrl
 
 }
 
-public record PaymentIntentNextActionSwishHandleRedirectOrDisplayQrCode
+public partial record PaymentIntentNextActionSwishHandleRedirectOrDisplayQrCode
 {
     /// <summary>
     /// The URL to the hosted Swish instructions page, which allows customers to view the QR code.
@@ -31000,7 +31373,7 @@ public record PaymentIntentNextActionSwishHandleRedirectOrDisplayQrCode
 
 }
 
-public record PaymentIntentNextActionSwishQrCode
+public partial record PaymentIntentNextActionSwishQrCode
 {
     /// <summary>
     /// The raw data string used to generate QR code, it should be used together with QR code library.
@@ -31022,7 +31395,7 @@ public record PaymentIntentNextActionSwishQrCode
 
 }
 
-public record PaymentIntentNextActionUpiHandleRedirectOrDisplayQrCode
+public partial record PaymentIntentNextActionUpiHandleRedirectOrDisplayQrCode
 {
     /// <summary>
     /// The URL to the hosted UPI instructions page, which allows customers to view the QR code.
@@ -31035,7 +31408,7 @@ public record PaymentIntentNextActionUpiHandleRedirectOrDisplayQrCode
 
 }
 
-public record PaymentIntentNextActionUpiqrCode
+public partial record PaymentIntentNextActionUpiqrCode
 {
     /// <summary>
     /// The date (unix timestamp) when the QR code expires.
@@ -31057,7 +31430,7 @@ public record PaymentIntentNextActionUpiqrCode
 
 }
 
-public record PaymentIntentNextActionVerifyWithMicrodeposits
+public partial record PaymentIntentNextActionVerifyWithMicrodeposits
 {
     /// <summary>
     /// The timestamp when the microdeposits are expected to land.
@@ -31079,7 +31452,7 @@ public record PaymentIntentNextActionVerifyWithMicrodeposits
 
 }
 
-public record PaymentIntentNextActionWechatPayDisplayQrCode
+public partial record PaymentIntentNextActionWechatPayDisplayQrCode
 {
     /// <summary>
     /// The data being used to generate QR code
@@ -31113,7 +31486,7 @@ public record PaymentIntentNextActionWechatPayDisplayQrCode
 
 }
 
-public record PaymentIntentNextActionWechatPayRedirectToAndroidApp
+public partial record PaymentIntentNextActionWechatPayRedirectToAndroidApp
 {
     /// <summary>
     /// app_id is the APP ID registered on WeChat open platform
@@ -31159,7 +31532,7 @@ public record PaymentIntentNextActionWechatPayRedirectToAndroidApp
 
 }
 
-public record PaymentIntentNextActionWechatPayRedirectToIosApp
+public partial record PaymentIntentNextActionWechatPayRedirectToIosApp
 {
     /// <summary>
     /// An universal link that redirect to WeChat Pay app
@@ -31169,7 +31542,7 @@ public record PaymentIntentNextActionWechatPayRedirectToIosApp
 
 }
 
-public record PaymentIntentPaymentMethodOptions
+public partial record PaymentIntentPaymentMethodOptions
 {
     [JsonPropertyName("acss_debit")]
     public object? AcssDebit { get; init; }
@@ -31318,6 +31691,9 @@ public record PaymentIntentPaymentMethodOptions
     [JsonPropertyName("sofort")]
     public object? Sofort { get; init; }
 
+    [JsonPropertyName("sunbit")]
+    public object? Sunbit { get; init; }
+
     [JsonPropertyName("swish")]
     public object? Swish { get; init; }
 
@@ -31338,7 +31714,7 @@ public record PaymentIntentPaymentMethodOptions
 
 }
 
-public record PaymentIntentPaymentMethodOptionsAcssDebit
+public partial record PaymentIntentPaymentMethodOptionsAcssDebit
 {
     [JsonPropertyName("mandate_options")]
     public PaymentIntentPaymentMethodOptionsMandateOptionsAcssDebit? MandateOptions { get; init; }
@@ -31369,7 +31745,7 @@ public record PaymentIntentPaymentMethodOptionsAcssDebit
 
 }
 
-public record PaymentIntentPaymentMethodOptionsAuBecsDebit
+public partial record PaymentIntentPaymentMethodOptionsAuBecsDebit
 {
     /// <summary>
     /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
@@ -31391,7 +31767,7 @@ public record PaymentIntentPaymentMethodOptionsAuBecsDebit
 
 }
 
-public record PaymentIntentPaymentMethodOptionsBacsDebit
+public partial record PaymentIntentPaymentMethodOptionsBacsDebit
 {
     [JsonPropertyName("mandate_options")]
     public PaymentIntentPaymentMethodOptionsMandateOptionsBacsDebit? MandateOptions { get; init; }
@@ -31416,7 +31792,7 @@ public record PaymentIntentPaymentMethodOptionsBacsDebit
 
 }
 
-public record PaymentIntentPaymentMethodOptionsBlik
+public partial record PaymentIntentPaymentMethodOptionsBlik
 {
     /// <summary>
     /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
@@ -31432,7 +31808,7 @@ public record PaymentIntentPaymentMethodOptionsBlik
 
 }
 
-public record PaymentIntentPaymentMethodOptionsCard
+public partial record PaymentIntentPaymentMethodOptionsCard
 {
     /// <summary>
     /// Controls when the funds will be captured from the customer's account.
@@ -31522,7 +31898,7 @@ public record PaymentIntentPaymentMethodOptionsCard
 
 }
 
-public record PaymentIntentPaymentMethodOptionsEps
+public partial record PaymentIntentPaymentMethodOptionsEps
 {
     /// <summary>
     /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
@@ -31538,7 +31914,7 @@ public record PaymentIntentPaymentMethodOptionsEps
 
 }
 
-public record PaymentIntentPaymentMethodOptionsLink
+public partial record PaymentIntentPaymentMethodOptionsLink
 {
     /// <summary>
     /// Controls when the funds will be captured from the customer's account.
@@ -31560,7 +31936,7 @@ public record PaymentIntentPaymentMethodOptionsLink
 
 }
 
-public record PaymentIntentPaymentMethodOptionsMandateOptionsAcssDebit
+public partial record PaymentIntentPaymentMethodOptionsMandateOptionsAcssDebit
 {
     /// <summary>
     /// A URL for custom mandate text
@@ -31588,7 +31964,7 @@ public record PaymentIntentPaymentMethodOptionsMandateOptionsAcssDebit
 
 }
 
-public record PaymentIntentPaymentMethodOptionsMandateOptionsBacsDebit
+public partial record PaymentIntentPaymentMethodOptionsMandateOptionsBacsDebit
 {
     /// <summary>
     /// Prefix used to generate the Mandate reference. Must be at most 12 characters long. Must consist of only uppercase letters, numbers, spaces, or the following special characters: '/', '_', '-', '&amp;', '.'. Cannot begin with 'DDIC' or 'STRIPE'.
@@ -31598,7 +31974,7 @@ public record PaymentIntentPaymentMethodOptionsMandateOptionsBacsDebit
 
 }
 
-public record PaymentIntentPaymentMethodOptionsMandateOptionsPayto
+public partial record PaymentIntentPaymentMethodOptionsMandateOptionsPayto
 {
     /// <summary>
     /// Amount that will be collected. It is required when `amount_type` is `fixed`.
@@ -31638,7 +32014,7 @@ public record PaymentIntentPaymentMethodOptionsMandateOptionsPayto
 
 }
 
-public record PaymentIntentPaymentMethodOptionsMandateOptionsSepaDebit
+public partial record PaymentIntentPaymentMethodOptionsMandateOptionsSepaDebit
 {
     /// <summary>
     /// Prefix used to generate the Mandate reference. Must be at most 12 characters long. Must consist of only uppercase letters, numbers, spaces, or the following special characters: '/', '_', '-', '&amp;', '.'. Cannot begin with 'STRIPE'.
@@ -31648,7 +32024,7 @@ public record PaymentIntentPaymentMethodOptionsMandateOptionsSepaDebit
 
 }
 
-public record PaymentIntentPaymentMethodOptionsMobilepay
+public partial record PaymentIntentPaymentMethodOptionsMobilepay
 {
     /// <summary>
     /// Controls when the funds will be captured from the customer's account.
@@ -31670,7 +32046,7 @@ public record PaymentIntentPaymentMethodOptionsMobilepay
 
 }
 
-public record PaymentIntentPaymentMethodOptionsNzBankAccount
+public partial record PaymentIntentPaymentMethodOptionsNzBankAccount
 {
     /// <summary>
     /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
@@ -31692,7 +32068,7 @@ public record PaymentIntentPaymentMethodOptionsNzBankAccount
 
 }
 
-public record PaymentIntentPaymentMethodOptionsPayto
+public partial record PaymentIntentPaymentMethodOptionsPayto
 {
     [JsonPropertyName("mandate_options")]
     public PaymentIntentPaymentMethodOptionsMandateOptionsPayto? MandateOptions { get; init; }
@@ -31711,7 +32087,7 @@ public record PaymentIntentPaymentMethodOptionsPayto
 
 }
 
-public record PaymentIntentPaymentMethodOptionsSepaDebit
+public partial record PaymentIntentPaymentMethodOptionsSepaDebit
 {
     [JsonPropertyName("mandate_options")]
     public PaymentIntentPaymentMethodOptionsMandateOptionsSepaDebit? MandateOptions { get; init; }
@@ -31736,7 +32112,7 @@ public record PaymentIntentPaymentMethodOptionsSepaDebit
 
 }
 
-public record PaymentIntentPaymentMethodOptionsSwish
+public partial record PaymentIntentPaymentMethodOptionsSwish
 {
     /// <summary>
     /// A reference for this payment to be displayed in the Swish app.
@@ -31758,7 +32134,7 @@ public record PaymentIntentPaymentMethodOptionsSwish
 
 }
 
-public record PaymentIntentPaymentMethodOptionsUsBankAccount
+public partial record PaymentIntentPaymentMethodOptionsUsBankAccount
 {
     [JsonPropertyName("financial_connections")]
     public LinkedAccountOptionsCommon? FinancialConnections { get; init; }
@@ -31798,7 +32174,7 @@ public record PaymentIntentPaymentMethodOptionsUsBankAccount
 
 }
 
-public record PaymentIntentProcessing
+public partial record PaymentIntentProcessing
 {
     [JsonPropertyName("card")]
     public PaymentIntentCardProcessing? Card { get; init; }
@@ -31811,7 +32187,7 @@ public record PaymentIntentProcessing
 
 }
 
-public record PaymentIntentProcessingCustomerNotification
+public partial record PaymentIntentProcessingCustomerNotification
 {
     /// <summary>
     /// Whether customer approval has been requested for this payment. For payments greater than INR 15000 or mandate amount, the customer must provide explicit approval of the payment with their bank.
@@ -31827,7 +32203,7 @@ public record PaymentIntentProcessingCustomerNotification
 
 }
 
-public record PaymentIntentTypeSpecificPaymentMethodOptionsClient
+public partial record PaymentIntentTypeSpecificPaymentMethodOptionsClient
 {
     /// <summary>
     /// Controls when the funds will be captured from the customer's account.
@@ -31883,7 +32259,7 @@ public record PaymentIntentTypeSpecificPaymentMethodOptionsClient
 /// 
 /// Related guide: [Payment Links API](https://docs.stripe.com/payment-links)
 /// </summary>
-public record PaymentLink
+public partial record PaymentLink
 {
     /// <summary>
     /// Whether the payment link's `url` is active. If `false`, customers visiting the URL will be shown a page saying that the link has been deactivated.
@@ -32091,7 +32467,7 @@ public record PaymentLink
 
 }
 
-public record PaymentLinksResourceAfterCompletion
+public partial record PaymentLinksResourceAfterCompletion
 {
     [JsonPropertyName("hosted_confirmation")]
     public PaymentLinksResourceCompletionBehaviorConfirmationPage? HostedConfirmation { get; init; }
@@ -32107,7 +32483,7 @@ public record PaymentLinksResourceAfterCompletion
 
 }
 
-public record PaymentLinksResourceAutomaticTax
+public partial record PaymentLinksResourceAutomaticTax
 {
     /// <summary>
     /// If `true`, tax will be calculated automatically using the customer's location.
@@ -32123,7 +32499,7 @@ public record PaymentLinksResourceAutomaticTax
 
 }
 
-public record PaymentLinksResourceBusinessName
+public partial record PaymentLinksResourceBusinessName
 {
     /// <summary>
     /// Indicates whether business name collection is enabled for the payment link.
@@ -32139,7 +32515,7 @@ public record PaymentLinksResourceBusinessName
 
 }
 
-public record PaymentLinksResourceCardPaymentMethodOptions
+public partial record PaymentLinksResourceCardPaymentMethodOptions
 {
     /// <summary>
     /// Restrictions to apply to the card payment method. For example, you can block specific card brands.
@@ -32149,7 +32525,7 @@ public record PaymentLinksResourceCardPaymentMethodOptions
 
 }
 
-public record PaymentLinksResourceCardRestrictions
+public partial record PaymentLinksResourceCardRestrictions
 {
     /// <summary>
     /// The card brands to block. If a customer enters or selects a card belonging to a blocked brand, they can't complete the payment.
@@ -32159,7 +32535,7 @@ public record PaymentLinksResourceCardRestrictions
 
 }
 
-public record PaymentLinksResourceCompletedSessions
+public partial record PaymentLinksResourceCompletedSessions
 {
     /// <summary>
     /// The current number of checkout sessions that have been completed on the payment link which count towards the `completed_sessions` restriction to be met.
@@ -32175,7 +32551,7 @@ public record PaymentLinksResourceCompletedSessions
 
 }
 
-public record PaymentLinksResourceCompletionBehaviorConfirmationPage
+public partial record PaymentLinksResourceCompletionBehaviorConfirmationPage
 {
     /// <summary>
     /// The custom message that is displayed to the customer after the purchase is complete.
@@ -32185,7 +32561,7 @@ public record PaymentLinksResourceCompletionBehaviorConfirmationPage
 
 }
 
-public record PaymentLinksResourceCompletionBehaviorRedirect
+public partial record PaymentLinksResourceCompletionBehaviorRedirect
 {
     /// <summary>
     /// The URL the customer will be redirected to after the purchase is complete.
@@ -32195,7 +32571,7 @@ public record PaymentLinksResourceCompletionBehaviorRedirect
 
 }
 
-public record PaymentLinksResourceConsentCollection
+public partial record PaymentLinksResourceConsentCollection
 {
     /// <summary>
     /// Settings related to the payment method reuse text shown in the Checkout UI.
@@ -32217,7 +32593,7 @@ public record PaymentLinksResourceConsentCollection
 
 }
 
-public record PaymentLinksResourceCustomFields
+public partial record PaymentLinksResourceCustomFields
 {
     [JsonPropertyName("dropdown")]
     public PaymentLinksResourceCustomFieldsDropdown? Dropdown { get; init; }
@@ -32251,7 +32627,7 @@ public record PaymentLinksResourceCustomFields
 
 }
 
-public record PaymentLinksResourceCustomFieldsDropdown
+public partial record PaymentLinksResourceCustomFieldsDropdown
 {
     /// <summary>
     /// The value that pre-fills on the payment page.
@@ -32267,7 +32643,7 @@ public record PaymentLinksResourceCustomFieldsDropdown
 
 }
 
-public record PaymentLinksResourceCustomFieldsDropdownOption
+public partial record PaymentLinksResourceCustomFieldsDropdownOption
 {
     /// <summary>
     /// The label for the option, displayed to the customer. Up to 100 characters.
@@ -32283,7 +32659,7 @@ public record PaymentLinksResourceCustomFieldsDropdownOption
 
 }
 
-public record PaymentLinksResourceCustomFieldsLabel
+public partial record PaymentLinksResourceCustomFieldsLabel
 {
     /// <summary>
     /// Custom text for the label, displayed to the customer. Up to 50 characters.
@@ -32299,7 +32675,7 @@ public record PaymentLinksResourceCustomFieldsLabel
 
 }
 
-public record PaymentLinksResourceCustomFieldsNumeric
+public partial record PaymentLinksResourceCustomFieldsNumeric
 {
     /// <summary>
     /// The value that pre-fills the field on the payment page.
@@ -32321,7 +32697,7 @@ public record PaymentLinksResourceCustomFieldsNumeric
 
 }
 
-public record PaymentLinksResourceCustomFieldsText
+public partial record PaymentLinksResourceCustomFieldsText
 {
     /// <summary>
     /// The value that pre-fills the field on the payment page.
@@ -32343,7 +32719,7 @@ public record PaymentLinksResourceCustomFieldsText
 
 }
 
-public record PaymentLinksResourceCustomText
+public partial record PaymentLinksResourceCustomText
 {
     /// <summary>
     /// Custom text that should be displayed after the payment confirmation button.
@@ -32371,7 +32747,7 @@ public record PaymentLinksResourceCustomText
 
 }
 
-public record PaymentLinksResourceCustomTextPosition
+public partial record PaymentLinksResourceCustomTextPosition
 {
     /// <summary>
     /// Text can be up to 1200 characters in length.
@@ -32381,7 +32757,7 @@ public record PaymentLinksResourceCustomTextPosition
 
 }
 
-public record PaymentLinksResourceIndividualName
+public partial record PaymentLinksResourceIndividualName
 {
     /// <summary>
     /// Indicates whether individual name collection is enabled for the payment link.
@@ -32397,7 +32773,7 @@ public record PaymentLinksResourceIndividualName
 
 }
 
-public record PaymentLinksResourceInvoiceCreation
+public partial record PaymentLinksResourceInvoiceCreation
 {
     /// <summary>
     /// Enable creating an invoice on successful payment.
@@ -32413,7 +32789,7 @@ public record PaymentLinksResourceInvoiceCreation
 
 }
 
-public record PaymentLinksResourceInvoiceSettings
+public partial record PaymentLinksResourceInvoiceSettings
 {
     /// <summary>
     /// The account tax IDs associated with the invoice.
@@ -32459,7 +32835,7 @@ public record PaymentLinksResourceInvoiceSettings
 
 }
 
-public record PaymentLinksResourceNameCollection
+public partial record PaymentLinksResourceNameCollection
 {
     [JsonPropertyName("business")]
     public PaymentLinksResourceBusinessName? Business { get; init; }
@@ -32469,7 +32845,7 @@ public record PaymentLinksResourceNameCollection
 
 }
 
-public record PaymentLinksResourceOptionalItem
+public partial record PaymentLinksResourceOptionalItem
 {
     [JsonPropertyName("adjustable_quantity")]
     public PaymentLinksResourceOptionalItemAdjustableQuantity? AdjustableQuantity { get; init; }
@@ -32482,7 +32858,7 @@ public record PaymentLinksResourceOptionalItem
 
 }
 
-public record PaymentLinksResourceOptionalItemAdjustableQuantity
+public partial record PaymentLinksResourceOptionalItemAdjustableQuantity
 {
     /// <summary>
     /// Set to true if the quantity can be adjusted to any non-negative integer.
@@ -32504,7 +32880,7 @@ public record PaymentLinksResourceOptionalItemAdjustableQuantity
 
 }
 
-public record PaymentLinksResourcePaymentIntentData
+public partial record PaymentLinksResourcePaymentIntentData
 {
     /// <summary>
     /// Indicates when the funds will be captured from the customer's account.
@@ -32550,7 +32926,7 @@ public record PaymentLinksResourcePaymentIntentData
 
 }
 
-public record PaymentLinksResourcePaymentMethodOptions
+public partial record PaymentLinksResourcePaymentMethodOptions
 {
     /// <summary>
     /// Configuration for `card` payment methods.
@@ -32560,7 +32936,7 @@ public record PaymentLinksResourcePaymentMethodOptions
 
 }
 
-public record PaymentLinksResourcePaymentMethodReuseAgreement
+public partial record PaymentLinksResourcePaymentMethodReuseAgreement
 {
     /// <summary>
     /// Determines the position and visibility of the payment method reuse agreement in the UI. When set to `auto`, Stripe's defaults will be used.
@@ -32572,7 +32948,7 @@ public record PaymentLinksResourcePaymentMethodReuseAgreement
 
 }
 
-public record PaymentLinksResourcePhoneNumberCollection
+public partial record PaymentLinksResourcePhoneNumberCollection
 {
     /// <summary>
     /// If `true`, a phone number will be collected during checkout.
@@ -32582,14 +32958,14 @@ public record PaymentLinksResourcePhoneNumberCollection
 
 }
 
-public record PaymentLinksResourceRestrictions
+public partial record PaymentLinksResourceRestrictions
 {
     [JsonPropertyName("completed_sessions")]
     public required PaymentLinksResourceCompletedSessions CompletedSessions { get; init; }
 
 }
 
-public record PaymentLinksResourceShippingAddressCollection
+public partial record PaymentLinksResourceShippingAddressCollection
 {
     /// <summary>
     /// An array of two-letter ISO country codes representing which countries Checkout should provide as options for shipping locations. Unsupported country codes: `AS, CX, CC, CU, HM, IR, KP, MH, FM, NF, MP, PW, SD, SY, UM, VI`.
@@ -32599,7 +32975,7 @@ public record PaymentLinksResourceShippingAddressCollection
 
 }
 
-public record PaymentLinksResourceShippingOption
+public partial record PaymentLinksResourceShippingOption
 {
     /// <summary>
     /// A non-negative integer in cents representing how much to charge.
@@ -32615,7 +32991,7 @@ public record PaymentLinksResourceShippingOption
 
 }
 
-public record PaymentLinksResourceSubscriptionData
+public partial record PaymentLinksResourceSubscriptionData
 {
     /// <summary>
     /// The subscription's description, meant to be displayable to the customer. Use this field to optionally store an explanation of the subscription for rendering in Stripe surfaces and certain local payment methods UIs.
@@ -32646,14 +33022,14 @@ public record PaymentLinksResourceSubscriptionData
 
 }
 
-public record PaymentLinksResourceSubscriptionDataInvoiceSettings
+public partial record PaymentLinksResourceSubscriptionDataInvoiceSettings
 {
     [JsonPropertyName("issuer")]
     public required ConnectAccountReference Issuer { get; init; }
 
 }
 
-public record PaymentLinksResourceTaxIdCollection
+public partial record PaymentLinksResourceTaxIdCollection
 {
     /// <summary>
     /// Indicates whether tax ID collection is enabled for the session.
@@ -32666,7 +33042,7 @@ public record PaymentLinksResourceTaxIdCollection
 
 }
 
-public record PaymentLinksResourceTransferData
+public partial record PaymentLinksResourceTransferData
 {
     /// <summary>
     /// The amount in cents (or local equivalent) that will be transferred to the destination account. By default, the entire amount is transferred to the destination.
@@ -32689,7 +33065,7 @@ public record PaymentLinksResourceTransferData
 /// 
 /// Related guides: [Payment Methods](https://docs.stripe.com/payments/payment-methods) and [More Payment Scenarios](https://docs.stripe.com/payments/more-payment-scenarios).
 /// </summary>
-public record PaymentMethod
+public partial record PaymentMethod
 {
     [JsonPropertyName("acss_debit")]
     public PaymentMethodAcssDebit? AcssDebit { get; init; }
@@ -32924,7 +33300,7 @@ public record PaymentMethod
 
 }
 
-public record PaymentMethodAcssDebit
+public partial record PaymentMethodAcssDebit
 {
     /// <summary>
     /// Name of the bank associated with the bank account.
@@ -32958,23 +33334,23 @@ public record PaymentMethodAcssDebit
 
 }
 
-public record PaymentMethodAffirm
+public partial record PaymentMethodAffirm
 {
 }
 
-public record PaymentMethodAfterpayClearpay
+public partial record PaymentMethodAfterpayClearpay
 {
 }
 
-public record PaymentMethodAlma
+public partial record PaymentMethodAlma
 {
 }
 
-public record PaymentMethodAmazonPay
+public partial record PaymentMethodAmazonPay
 {
 }
 
-public record PaymentMethodAuBecsDebit
+public partial record PaymentMethodAuBecsDebit
 {
     /// <summary>
     /// Six-digit number identifying bank and branch associated with this bank account.
@@ -32996,7 +33372,7 @@ public record PaymentMethodAuBecsDebit
 
 }
 
-public record PaymentMethodBacsDebit
+public partial record PaymentMethodBacsDebit
 {
     /// <summary>
     /// Uniquely identifies this particular bank account. You can use this attribute to check whether two bank accounts are the same.
@@ -33018,23 +33394,35 @@ public record PaymentMethodBacsDebit
 
 }
 
-public record PaymentMethodBancontact
+public partial record PaymentMethodBancontact
 {
 }
 
-public record PaymentMethodBillie
+public partial record PaymentMethodBillie
 {
 }
 
-public record PaymentMethodBizum
+public partial record PaymentMethodBizum
 {
+    /// <summary>
+    /// A unique identifier for the buyer as determined by the local payment processor.
+    /// </summary>
+    [JsonPropertyName("buyer_id")]
+    public string? BuyerId { get; init; }
+
 }
 
-public record PaymentMethodBlik
+public partial record PaymentMethodBlik
 {
+    /// <summary>
+    /// A unique and immutable identifier assigned by BLIK to every buyer.
+    /// </summary>
+    [JsonPropertyName("buyer_id")]
+    public string? BuyerId { get; init; }
+
 }
 
-public record PaymentMethodBoleto
+public partial record PaymentMethodBoleto
 {
     /// <summary>
     /// Uniquely identifies the customer tax id (CNPJ or CPF)
@@ -33044,7 +33432,7 @@ public record PaymentMethodBoleto
 
 }
 
-public record PaymentMethodCard
+public partial record PaymentMethodCard
 {
     /// <summary>
     /// Card brand. Can be `amex`, `cartes_bancaires`, `diners`, `discover`, `eftpos_au`, `jcb`, `link`, `mastercard`, `unionpay`, `visa` or `unknown`.
@@ -33134,7 +33522,7 @@ public record PaymentMethodCard
 
 }
 
-public record PaymentMethodCardChecks
+public partial record PaymentMethodCardChecks
 {
     /// <summary>
     /// If a address line1 was provided, results of the check, one of `pass`, `fail`, `unavailable`, or `unchecked`.
@@ -33156,7 +33544,7 @@ public record PaymentMethodCardChecks
 
 }
 
-public record PaymentMethodCardGeneratedCard
+public partial record PaymentMethodCardGeneratedCard
 {
     /// <summary>
     /// The charge that created this object.
@@ -33178,7 +33566,7 @@ public record PaymentMethodCardGeneratedCard
 
 }
 
-public record PaymentMethodCardPresent
+public partial record PaymentMethodCardPresent
 {
     /// <summary>
     /// Card brand. Can be `amex`, `cartes_bancaires`, `diners`, `discover`, `eftpos_au`, `jcb`, `link`, `mastercard`, `unionpay`, `visa` or `unknown`.
@@ -33277,7 +33665,7 @@ public record PaymentMethodCardPresent
 
 }
 
-public record PaymentMethodCardPresentNetworks
+public partial record PaymentMethodCardPresentNetworks
 {
     /// <summary>
     /// All networks available for selection via [payment_method_options.card.network](/api/payment_intents/confirm#confirm_payment_intent-payment_method_options-card-network).
@@ -33293,7 +33681,7 @@ public record PaymentMethodCardPresentNetworks
 
 }
 
-public record PaymentMethodCardWallet
+public partial record PaymentMethodCardWallet
 {
     [JsonPropertyName("amex_express_checkout")]
     public PaymentMethodCardWalletAmexExpressCheckout? AmexExpressCheckout { get; init; }
@@ -33330,55 +33718,23 @@ public record PaymentMethodCardWallet
 
 }
 
-public record PaymentMethodCardWalletAmexExpressCheckout
+public partial record PaymentMethodCardWalletAmexExpressCheckout
 {
 }
 
-public record PaymentMethodCardWalletApplePay
+public partial record PaymentMethodCardWalletApplePay
 {
 }
 
-public record PaymentMethodCardWalletGooglePay
+public partial record PaymentMethodCardWalletGooglePay
 {
 }
 
-public record PaymentMethodCardWalletLink
+public partial record PaymentMethodCardWalletLink
 {
 }
 
-public record PaymentMethodCardWalletMasterpass
-{
-    /// <summary>
-    /// Owner's verified billing address. Values are verified or provided by the wallet directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.
-    /// </summary>
-    [JsonPropertyName("billing_address")]
-    public Address? BillingAddress { get; init; }
-
-    /// <summary>
-    /// Owner's verified email. Values are verified or provided by the wallet directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.
-    /// </summary>
-    [JsonPropertyName("email")]
-    public string? Email { get; init; }
-
-    /// <summary>
-    /// Owner's verified full name. Values are verified or provided by the wallet directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.
-    /// </summary>
-    [JsonPropertyName("name")]
-    public string? Name { get; init; }
-
-    /// <summary>
-    /// Owner's verified shipping address. Values are verified or provided by the wallet directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.
-    /// </summary>
-    [JsonPropertyName("shipping_address")]
-    public Address? ShippingAddress { get; init; }
-
-}
-
-public record PaymentMethodCardWalletSamsungPay
-{
-}
-
-public record PaymentMethodCardWalletVisaCheckout
+public partial record PaymentMethodCardWalletMasterpass
 {
     /// <summary>
     /// Owner's verified billing address. Values are verified or provided by the wallet directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.
@@ -33406,7 +33762,39 @@ public record PaymentMethodCardWalletVisaCheckout
 
 }
 
-public record PaymentMethodCashapp
+public partial record PaymentMethodCardWalletSamsungPay
+{
+}
+
+public partial record PaymentMethodCardWalletVisaCheckout
+{
+    /// <summary>
+    /// Owner's verified billing address. Values are verified or provided by the wallet directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.
+    /// </summary>
+    [JsonPropertyName("billing_address")]
+    public Address? BillingAddress { get; init; }
+
+    /// <summary>
+    /// Owner's verified email. Values are verified or provided by the wallet directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.
+    /// </summary>
+    [JsonPropertyName("email")]
+    public string? Email { get; init; }
+
+    /// <summary>
+    /// Owner's verified full name. Values are verified or provided by the wallet directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.
+    /// </summary>
+    [JsonPropertyName("name")]
+    public string? Name { get; init; }
+
+    /// <summary>
+    /// Owner's verified shipping address. Values are verified or provided by the wallet directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.
+    /// </summary>
+    [JsonPropertyName("shipping_address")]
+    public Address? ShippingAddress { get; init; }
+
+}
+
+public partial record PaymentMethodCashapp
 {
     /// <summary>
     /// A unique and immutable identifier assigned by Cash App to every buyer.
@@ -33422,7 +33810,7 @@ public record PaymentMethodCashapp
 
 }
 
-public record PaymentMethodConfigBizPaymentMethodConfigurationDetails
+public partial record PaymentMethodConfigBizPaymentMethodConfigurationDetails
 {
     /// <summary>
     /// ID of the payment method configuration used.
@@ -33438,7 +33826,7 @@ public record PaymentMethodConfigBizPaymentMethodConfigurationDetails
 
 }
 
-public record PaymentMethodConfigResourceDisplayPreference
+public partial record PaymentMethodConfigResourceDisplayPreference
 {
     /// <summary>
     /// For child configs, whether or not the account's preference will be observed. If `false`, the parent configuration's default is used.
@@ -33460,7 +33848,7 @@ public record PaymentMethodConfigResourceDisplayPreference
 
 }
 
-public record PaymentMethodConfigResourcePaymentMethodProperties
+public partial record PaymentMethodConfigResourcePaymentMethodProperties
 {
     /// <summary>
     /// Whether this payment method may be offered at checkout. True if `display_preference` is `on` and the payment method's capability is active.
@@ -33489,7 +33877,7 @@ public record PaymentMethodConfigResourcePaymentMethodProperties
 /// - [Multiple configurations on dynamic payment methods](https://docs.stripe.com/payments/multiple-payment-method-configs)
 /// - [Multiple configurations for your Connect accounts](https://docs.stripe.com/connect/multiple-payment-method-configurations)
 /// </summary>
-public record PaymentMethodConfiguration
+public partial record PaymentMethodConfiguration
 {
     [JsonPropertyName("acss_debit")]
     public PaymentMethodConfigResourcePaymentMethodProperties? AcssDebit { get; init; }
@@ -33715,11 +34103,11 @@ public record PaymentMethodConfiguration
 
 }
 
-public record PaymentMethodCrypto
+public partial record PaymentMethodCrypto
 {
 }
 
-public record PaymentMethodCustom
+public partial record PaymentMethodCustom
 {
     /// <summary>
     /// Display name of the Dashboard-only CustomPaymentMethodType.
@@ -33741,11 +34129,11 @@ public record PaymentMethodCustom
 
 }
 
-public record PaymentMethodCustomerBalance
+public partial record PaymentMethodCustomerBalance
 {
 }
 
-public record PaymentMethodDetails
+public partial record PaymentMethodDetails
 {
     [JsonPropertyName("ach_credit_transfer")]
     public PaymentMethodDetailsAchCreditTransfer? AchCreditTransfer { get; init; }
@@ -33763,7 +34151,7 @@ public record PaymentMethodDetails
     public PaymentMethodDetailsAfterpayClearpay? AfterpayClearpay { get; init; }
 
     [JsonPropertyName("alipay")]
-    public PaymentFlowsPrivatePaymentMethodsAlipayDetails? Alipay { get; init; }
+    public PaymentMethodDetailsAlipay? Alipay { get; init; }
 
     [JsonPropertyName("alma")]
     public PaymentMethodDetailsAlma? Alma { get; init; }
@@ -33937,7 +34325,7 @@ public record PaymentMethodDetails
 
 }
 
-public record PaymentMethodDetailsAchCreditTransfer
+public partial record PaymentMethodDetailsAchCreditTransfer
 {
     /// <summary>
     /// Account number to transfer funds to.
@@ -33965,7 +34353,7 @@ public record PaymentMethodDetailsAchCreditTransfer
 
 }
 
-public record PaymentMethodDetailsAchDebit
+public partial record PaymentMethodDetailsAchDebit
 {
     /// <summary>
     /// Type of entity that holds the account. This can be either `individual` or `company`.
@@ -34005,7 +34393,7 @@ public record PaymentMethodDetailsAchDebit
 
 }
 
-public record PaymentMethodDetailsAcssDebit
+public partial record PaymentMethodDetailsAcssDebit
 {
     /// <summary>
     /// Name of the bank associated with the bank account.
@@ -34051,7 +34439,7 @@ public record PaymentMethodDetailsAcssDebit
 
 }
 
-public record PaymentMethodDetailsAffirm
+public partial record PaymentMethodDetailsAffirm
 {
     /// <summary>
     /// ID of the location that this reader is assigned to.
@@ -34073,7 +34461,7 @@ public record PaymentMethodDetailsAffirm
 
 }
 
-public record PaymentMethodDetailsAfterpayClearpay
+public partial record PaymentMethodDetailsAfterpayClearpay
 {
     /// <summary>
     /// The Afterpay order ID associated with this payment intent.
@@ -34089,7 +34477,29 @@ public record PaymentMethodDetailsAfterpayClearpay
 
 }
 
-public record PaymentMethodDetailsAlma
+public partial record PaymentMethodDetailsAlipay
+{
+    /// <summary>
+    /// Uniquely identifies this particular Alipay account. You can use this attribute to check whether two Alipay accounts are the same.
+    /// </summary>
+    [JsonPropertyName("buyer_id")]
+    public string? BuyerId { get; init; }
+
+    /// <summary>
+    /// Uniquely identifies this particular Alipay account. You can use this attribute to check whether two Alipay accounts are the same.
+    /// </summary>
+    [JsonPropertyName("fingerprint")]
+    public string? Fingerprint { get; init; }
+
+    /// <summary>
+    /// Transaction ID of this particular Alipay transaction.
+    /// </summary>
+    [JsonPropertyName("transaction_id")]
+    public string? TransactionId { get; init; }
+
+}
+
+public partial record PaymentMethodDetailsAlma
 {
     [JsonPropertyName("installments")]
     public AlmaInstallments? Installments { get; init; }
@@ -34102,7 +34512,7 @@ public record PaymentMethodDetailsAlma
 
 }
 
-public record PaymentMethodDetailsAmazonPay
+public partial record PaymentMethodDetailsAmazonPay
 {
     [JsonPropertyName("funding")]
     public AmazonPayUnderlyingPaymentMethodFundingDetails? Funding { get; init; }
@@ -34115,7 +34525,7 @@ public record PaymentMethodDetailsAmazonPay
 
 }
 
-public record PaymentMethodDetailsAuBecsDebit
+public partial record PaymentMethodDetailsAuBecsDebit
 {
     /// <summary>
     /// Bank-State-Branch number of the bank account.
@@ -34149,7 +34559,7 @@ public record PaymentMethodDetailsAuBecsDebit
 
 }
 
-public record PaymentMethodDetailsBacsDebit
+public partial record PaymentMethodDetailsBacsDebit
 {
     /// <summary>
     /// Estimated date to debit the customer's bank account. A date string in YYYY-MM-DD format.
@@ -34183,7 +34593,7 @@ public record PaymentMethodDetailsBacsDebit
 
 }
 
-public record PaymentMethodDetailsBancontact
+public partial record PaymentMethodDetailsBancontact
 {
     /// <summary>
     /// Bank code of bank associated with the bank account.
@@ -34237,7 +34647,7 @@ public record PaymentMethodDetailsBancontact
 
 }
 
-public record PaymentMethodDetailsBillie
+public partial record PaymentMethodDetailsBillie
 {
     /// <summary>
     /// The Billie transaction ID associated with this payment.
@@ -34247,8 +34657,14 @@ public record PaymentMethodDetailsBillie
 
 }
 
-public record PaymentMethodDetailsBizum
+public partial record PaymentMethodDetailsBizum
 {
+    /// <summary>
+    /// A unique identifier for the buyer as determined by the local payment processor.
+    /// </summary>
+    [JsonPropertyName("buyer_id")]
+    public string? BuyerId { get; init; }
+
     /// <summary>
     /// The Bizum transaction ID associated with this payment.
     /// </summary>
@@ -34257,7 +34673,7 @@ public record PaymentMethodDetailsBizum
 
 }
 
-public record PaymentMethodDetailsBlik
+public partial record PaymentMethodDetailsBlik
 {
     /// <summary>
     /// A unique and immutable identifier assigned by BLIK to every buyer.
@@ -34267,7 +34683,7 @@ public record PaymentMethodDetailsBlik
 
 }
 
-public record PaymentMethodDetailsBoleto
+public partial record PaymentMethodDetailsBoleto
 {
     /// <summary>
     /// The tax ID of the customer (CPF for individuals consumers or CNPJ for businesses consumers)
@@ -34277,7 +34693,7 @@ public record PaymentMethodDetailsBoleto
 
 }
 
-public record PaymentMethodDetailsCard
+public partial record PaymentMethodDetailsCard
 {
     /// <summary>
     /// The authorized amount.
@@ -34404,6 +34820,12 @@ public record PaymentMethodDetailsCard
     public ThreeDSecureDetailsCharge? ThreeDSecure { get; init; }
 
     /// <summary>
+    /// Transaction Link ID (TLID) is a unique identifier for a transaction. This is used by some card networks, such as Mastercard, for transaction linking, in addition to Network Transaction IDs. This value will be present if it is returned by the financial network in the authorization response, and null otherwise.
+    /// </summary>
+    [JsonPropertyName("transaction_link_id")]
+    public string? TransactionLinkId { get; init; }
+
+    /// <summary>
     /// If this Card is part of a card wallet, this contains the details of the card wallet.
     /// </summary>
     [JsonPropertyName("wallet")]
@@ -34411,7 +34833,7 @@ public record PaymentMethodDetailsCard
 
 }
 
-public record PaymentMethodDetailsCardChecks
+public partial record PaymentMethodDetailsCardChecks
 {
     /// <summary>
     /// If a address line1 was provided, results of the check, one of `pass`, `fail`, `unavailable`, or `unchecked`.
@@ -34433,7 +34855,7 @@ public record PaymentMethodDetailsCardChecks
 
 }
 
-public record PaymentMethodDetailsCardInstallments
+public partial record PaymentMethodDetailsCardInstallments
 {
     /// <summary>
     /// Installment plan selected for the payment.
@@ -34443,7 +34865,7 @@ public record PaymentMethodDetailsCardInstallments
 
 }
 
-public record PaymentMethodDetailsCardInstallmentsPlan
+public partial record PaymentMethodDetailsCardInstallmentsPlan
 {
     /// <summary>
     /// For `fixed_count` installment plans, this is the number of installment payments your customer will make to their credit card.
@@ -34466,7 +34888,7 @@ public record PaymentMethodDetailsCardInstallmentsPlan
 
 }
 
-public record PaymentMethodDetailsCardNetworkToken
+public partial record PaymentMethodDetailsCardNetworkToken
 {
     /// <summary>
     /// Indicates if Stripe used a network token, either user provided or Stripe managed when processing the transaction.
@@ -34476,7 +34898,7 @@ public record PaymentMethodDetailsCardNetworkToken
 
 }
 
-public record PaymentMethodDetailsCardPresent
+public partial record PaymentMethodDetailsCardPresent
 {
     /// <summary>
     /// The authorized amount
@@ -34635,7 +35057,7 @@ public record PaymentMethodDetailsCardPresent
 
 }
 
-public record PaymentMethodDetailsCardPresentOffline
+public partial record PaymentMethodDetailsCardPresentOffline
 {
     /// <summary>
     /// Time at which the payment was collected while offline
@@ -34651,7 +35073,7 @@ public record PaymentMethodDetailsCardPresentOffline
 
 }
 
-public record PaymentMethodDetailsCardPresentReceipt
+public partial record PaymentMethodDetailsCardPresentReceipt
 {
     /// <summary>
     /// The type of account being debited or credited
@@ -34709,7 +35131,7 @@ public record PaymentMethodDetailsCardPresentReceipt
 
 }
 
-public record PaymentMethodDetailsCardWallet
+public partial record PaymentMethodDetailsCardWallet
 {
     [JsonPropertyName("amex_express_checkout")]
     public PaymentMethodDetailsCardWalletAmexExpressCheckout? AmexExpressCheckout { get; init; }
@@ -34746,55 +35168,23 @@ public record PaymentMethodDetailsCardWallet
 
 }
 
-public record PaymentMethodDetailsCardWalletAmexExpressCheckout
+public partial record PaymentMethodDetailsCardWalletAmexExpressCheckout
 {
 }
 
-public record PaymentMethodDetailsCardWalletApplePay
+public partial record PaymentMethodDetailsCardWalletApplePay
 {
 }
 
-public record PaymentMethodDetailsCardWalletGooglePay
+public partial record PaymentMethodDetailsCardWalletGooglePay
 {
 }
 
-public record PaymentMethodDetailsCardWalletLink
+public partial record PaymentMethodDetailsCardWalletLink
 {
 }
 
-public record PaymentMethodDetailsCardWalletMasterpass
-{
-    /// <summary>
-    /// Owner's verified billing address. Values are verified or provided by the wallet directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.
-    /// </summary>
-    [JsonPropertyName("billing_address")]
-    public Address? BillingAddress { get; init; }
-
-    /// <summary>
-    /// Owner's verified email. Values are verified or provided by the wallet directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.
-    /// </summary>
-    [JsonPropertyName("email")]
-    public string? Email { get; init; }
-
-    /// <summary>
-    /// Owner's verified full name. Values are verified or provided by the wallet directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.
-    /// </summary>
-    [JsonPropertyName("name")]
-    public string? Name { get; init; }
-
-    /// <summary>
-    /// Owner's verified shipping address. Values are verified or provided by the wallet directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.
-    /// </summary>
-    [JsonPropertyName("shipping_address")]
-    public Address? ShippingAddress { get; init; }
-
-}
-
-public record PaymentMethodDetailsCardWalletSamsungPay
-{
-}
-
-public record PaymentMethodDetailsCardWalletVisaCheckout
+public partial record PaymentMethodDetailsCardWalletMasterpass
 {
     /// <summary>
     /// Owner's verified billing address. Values are verified or provided by the wallet directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.
@@ -34822,7 +35212,39 @@ public record PaymentMethodDetailsCardWalletVisaCheckout
 
 }
 
-public record PaymentMethodDetailsCashapp
+public partial record PaymentMethodDetailsCardWalletSamsungPay
+{
+}
+
+public partial record PaymentMethodDetailsCardWalletVisaCheckout
+{
+    /// <summary>
+    /// Owner's verified billing address. Values are verified or provided by the wallet directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.
+    /// </summary>
+    [JsonPropertyName("billing_address")]
+    public Address? BillingAddress { get; init; }
+
+    /// <summary>
+    /// Owner's verified email. Values are verified or provided by the wallet directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.
+    /// </summary>
+    [JsonPropertyName("email")]
+    public string? Email { get; init; }
+
+    /// <summary>
+    /// Owner's verified full name. Values are verified or provided by the wallet directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.
+    /// </summary>
+    [JsonPropertyName("name")]
+    public string? Name { get; init; }
+
+    /// <summary>
+    /// Owner's verified shipping address. Values are verified or provided by the wallet directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.
+    /// </summary>
+    [JsonPropertyName("shipping_address")]
+    public Address? ShippingAddress { get; init; }
+
+}
+
+public partial record PaymentMethodDetailsCashapp
 {
     /// <summary>
     /// A unique and immutable identifier assigned by Cash App to every buyer.
@@ -34844,7 +35266,7 @@ public record PaymentMethodDetailsCashapp
 
 }
 
-public record PaymentMethodDetailsCrypto
+public partial record PaymentMethodDetailsCrypto
 {
     /// <summary>
     /// The wallet address of the customer.
@@ -34872,11 +35294,11 @@ public record PaymentMethodDetailsCrypto
 
 }
 
-public record PaymentMethodDetailsCustomerBalance
+public partial record PaymentMethodDetailsCustomerBalance
 {
 }
 
-public record PaymentMethodDetailsEps
+public partial record PaymentMethodDetailsEps
 {
     /// <summary>
     /// The customer's bank. Should be one of `arzte_und_apotheker_bank`, `austrian_anadi_bank_ag`, `bank_austria`, `bankhaus_carl_spangler`, `bankhaus_schelhammer_und_schattera_ag`, `bawag_psk_ag`, `bks_bank_ag`, `brull_kallmus_bank_ag`, `btv_vier_lander_bank`, `capital_bank_grawe_gruppe_ag`, `deutsche_bank_ag`, `dolomitenbank`, `easybank_ag`, `erste_bank_und_sparkassen`, `hypo_alpeadriabank_international_ag`, `hypo_noe_lb_fur_niederosterreich_u_wien`, `hypo_oberosterreich_salzburg_steiermark`, `hypo_tirol_bank_ag`, `hypo_vorarlberg_bank_ag`, `hypo_bank_burgenland_aktiengesellschaft`, `marchfelder_bank`, `oberbank_ag`, `raiffeisen_bankengruppe_osterreich`, `schoellerbank_ag`, `sparda_bank_wien`, `volksbank_gruppe`, `volkskreditbank_ag`, or `vr_bank_braunau`.
@@ -34894,10 +35316,10 @@ public record PaymentMethodDetailsEps
 
 }
 
-public record PaymentMethodDetailsFpx
+public partial record PaymentMethodDetailsFpx
 {
     /// <summary>
-    /// The customer's bank. Can be one of `affin_bank`, `agrobank`, `alliance_bank`, `ambank`, `bank_islam`, `bank_muamalat`, `bank_rakyat`, `bsn`, `cimb`, `hong_leong_bank`, `hsbc`, `kfh`, `maybank2u`, `ocbc`, `public_bank`, `rhb`, `standard_chartered`, `uob`, `deutsche_bank`, `maybank2e`, `pb_enterprise`, or `bank_of_china`.
+    /// The customer's bank. Can be one of `affin_bank`, `agrobank`, `alliance_bank`, `ambank`, `bank_islam`, `bank_muamalat`, `bnp_paribas`, `bank_rakyat`, `bsn`, `cimb`, `citibank`, `hong_leong_bank`, `hsbc`, `kfh`, `maybank2u`, `ocbc`, `public_bank`, `rhb`, `standard_chartered`, `uob`, `deutsche_bank`, `maybank2e`, `mbsb_bank`, `pb_enterprise`, or `bank_of_china`.
     /// </summary>
     [JsonPropertyName("bank")]
     public required PaymentMethodDetailsFpxBank Bank { get; init; }
@@ -34910,7 +35332,7 @@ public record PaymentMethodDetailsFpx
 
 }
 
-public record PaymentMethodDetailsGiropay
+public partial record PaymentMethodDetailsGiropay
 {
     /// <summary>
     /// Bank code of bank associated with the bank account.
@@ -34940,7 +35362,7 @@ public record PaymentMethodDetailsGiropay
 
 }
 
-public record PaymentMethodDetailsGrabpay
+public partial record PaymentMethodDetailsGrabpay
 {
     /// <summary>
     /// Unique transaction id generated by GrabPay
@@ -34950,7 +35372,7 @@ public record PaymentMethodDetailsGrabpay
 
 }
 
-public record PaymentMethodDetailsIdeal
+public partial record PaymentMethodDetailsIdeal
 {
     /// <summary>
     /// The customer's bank. Can be one of `abn_amro`, `adyen`, `asn_bank`, `bunq`, `buut`, `finom`, `handelsbanken`, `ing`, `knab`, `mollie`, `moneyou`, `n26`, `nn`, `rabobank`, `regiobank`, `revolut`, `sns_bank`, `triodos_bank`, `van_lanschot`, or `yoursafe`.
@@ -34997,7 +35419,7 @@ public record PaymentMethodDetailsIdeal
 
 }
 
-public record PaymentMethodDetailsInteracPresent
+public partial record PaymentMethodDetailsInteracPresent
 {
     /// <summary>
     /// Card brand. Can be `interac`, `mastercard` or `visa`.
@@ -35117,7 +35539,7 @@ public record PaymentMethodDetailsInteracPresent
 
 }
 
-public record PaymentMethodDetailsInteracPresentReceipt
+public partial record PaymentMethodDetailsInteracPresentReceipt
 {
     /// <summary>
     /// The type of account being debited or credited
@@ -35175,7 +35597,7 @@ public record PaymentMethodDetailsInteracPresentReceipt
 
 }
 
-public record PaymentMethodDetailsKakaoPay
+public partial record PaymentMethodDetailsKakaoPay
 {
     /// <summary>
     /// A unique identifier for the buyer as determined by the local payment processor.
@@ -35191,7 +35613,7 @@ public record PaymentMethodDetailsKakaoPay
 
 }
 
-public record PaymentMethodDetailsKlarna
+public partial record PaymentMethodDetailsKlarna
 {
     /// <summary>
     /// ID of the [location](https://docs.stripe.com/api/terminal/locations) that this transaction's reader is assigned to.
@@ -35227,7 +35649,7 @@ public record PaymentMethodDetailsKlarna
 
 }
 
-public record PaymentMethodDetailsKonbini
+public partial record PaymentMethodDetailsKonbini
 {
     /// <summary>
     /// If the payment succeeded, this contains the details of the convenience store where the payment was completed.
@@ -35237,7 +35659,7 @@ public record PaymentMethodDetailsKonbini
 
 }
 
-public record PaymentMethodDetailsKonbiniStore
+public partial record PaymentMethodDetailsKonbiniStore
 {
     /// <summary>
     /// The name of the convenience store chain where the payment was completed.
@@ -35247,7 +35669,7 @@ public record PaymentMethodDetailsKonbiniStore
 
 }
 
-public record PaymentMethodDetailsKrCard
+public partial record PaymentMethodDetailsKrCard
 {
     /// <summary>
     /// The local credit or debit card brand.
@@ -35275,7 +35697,7 @@ public record PaymentMethodDetailsKrCard
 
 }
 
-public record PaymentMethodDetailsLink
+public partial record PaymentMethodDetailsLink
 {
     /// <summary>
     /// Two-letter ISO code representing the funding source country beneath the Link payment.
@@ -35286,11 +35708,11 @@ public record PaymentMethodDetailsLink
 
 }
 
-public record PaymentMethodDetailsMbWay
+public partial record PaymentMethodDetailsMbWay
 {
 }
 
-public record PaymentMethodDetailsMobilepay
+public partial record PaymentMethodDetailsMobilepay
 {
     /// <summary>
     /// Internal card details
@@ -35300,7 +35722,7 @@ public record PaymentMethodDetailsMobilepay
 
 }
 
-public record PaymentMethodDetailsMultibanco
+public partial record PaymentMethodDetailsMultibanco
 {
     /// <summary>
     /// Entity number associated with this Multibanco payment.
@@ -35316,7 +35738,7 @@ public record PaymentMethodDetailsMultibanco
 
 }
 
-public record PaymentMethodDetailsNaverPay
+public partial record PaymentMethodDetailsNaverPay
 {
     /// <summary>
     /// A unique identifier for the buyer as determined by the local payment processor.
@@ -35332,7 +35754,7 @@ public record PaymentMethodDetailsNaverPay
 
 }
 
-public record PaymentMethodDetailsNzBankAccount
+public partial record PaymentMethodDetailsNzBankAccount
 {
     /// <summary>
     /// The name on the bank account. Only present if the account holder name is different from the name of the authorized signatory collected in the PaymentMethod’s billing details.
@@ -35378,7 +35800,7 @@ public record PaymentMethodDetailsNzBankAccount
 
 }
 
-public record PaymentMethodDetailsOxxo
+public partial record PaymentMethodDetailsOxxo
 {
     /// <summary>
     /// OXXO reference number
@@ -35388,7 +35810,7 @@ public record PaymentMethodDetailsOxxo
 
 }
 
-public record PaymentMethodDetailsP24
+public partial record PaymentMethodDetailsP24
 {
     /// <summary>
     /// The customer's bank. Can be one of `ing`, `citi_handlowy`, `tmobile_usbugi_bankowe`, `plus_bank`, `etransfer_pocztowy24`, `banki_spbdzielcze`, `bank_nowy_bfg_sa`, `getin_bank`, `velobank`, `blik`, `noble_pay`, `ideabank`, `envelobank`, `santander_przelew24`, `nest_przelew`, `mbank_mtransfer`, `inteligo`, `pbac_z_ipko`, `bnp_paribas`, `credit_agricole`, `toyota_bank`, `bank_pekao_sa`, `volkswagen_bank`, `bank_millennium`, `alior_bank`, or `boz`.
@@ -35412,10 +35834,10 @@ public record PaymentMethodDetailsP24
 
 }
 
-public record PaymentMethodDetailsPassthroughCard
+public partial record PaymentMethodDetailsPassthroughCard
 {
     /// <summary>
-    /// Card brand. Can be `amex`, `cartes_bancaires`, `diners`, `discover`, `eftpos_au`, `jcb`, `link`, `mastercard`, `unionpay`, `visa` or `unknown`.
+    /// Card brand. Can be `American Express`, `Cartes Bancaires`, `Diners Club`, `Discover`, `Eftpos Australia`, `Girocard`, `JCB`, `MasterCard`, `UnionPay`, `Visa`, or `Unknown`.
     /// </summary>
     [JsonPropertyName("brand")]
     public string? Brand { get; init; }
@@ -35452,11 +35874,11 @@ public record PaymentMethodDetailsPassthroughCard
 
 }
 
-public record PaymentMethodDetailsPayByBank
+public partial record PaymentMethodDetailsPayByBank
 {
 }
 
-public record PaymentMethodDetailsPayco
+public partial record PaymentMethodDetailsPayco
 {
     /// <summary>
     /// A unique identifier for the buyer as determined by the local payment processor.
@@ -35472,7 +35894,7 @@ public record PaymentMethodDetailsPayco
 
 }
 
-public record PaymentMethodDetailsPaymentRecordAcssDebit
+public partial record PaymentMethodDetailsPaymentRecordAcssDebit
 {
     /// <summary>
     /// Name of the bank associated with the bank account.
@@ -35518,7 +35940,7 @@ public record PaymentMethodDetailsPaymentRecordAcssDebit
 
 }
 
-public record PaymentMethodDetailsPaymentRecordAffirm
+public partial record PaymentMethodDetailsPaymentRecordAffirm
 {
     /// <summary>
     /// ID of the location that this reader is assigned to.
@@ -35540,7 +35962,7 @@ public record PaymentMethodDetailsPaymentRecordAffirm
 
 }
 
-public record PaymentMethodDetailsPaymentRecordAfterpayClearpay
+public partial record PaymentMethodDetailsPaymentRecordAfterpayClearpay
 {
     /// <summary>
     /// The Afterpay order ID associated with this payment intent.
@@ -35556,7 +35978,29 @@ public record PaymentMethodDetailsPaymentRecordAfterpayClearpay
 
 }
 
-public record PaymentMethodDetailsPaymentRecordAlma
+public partial record PaymentMethodDetailsPaymentRecordAlipay
+{
+    /// <summary>
+    /// Uniquely identifies this particular Alipay account. You can use this attribute to check whether two Alipay accounts are the same.
+    /// </summary>
+    [JsonPropertyName("buyer_id")]
+    public string? BuyerId { get; init; }
+
+    /// <summary>
+    /// Uniquely identifies this particular Alipay account. You can use this attribute to check whether two Alipay accounts are the same.
+    /// </summary>
+    [JsonPropertyName("fingerprint")]
+    public string? Fingerprint { get; init; }
+
+    /// <summary>
+    /// Transaction ID of this particular Alipay transaction.
+    /// </summary>
+    [JsonPropertyName("transaction_id")]
+    public string? TransactionId { get; init; }
+
+}
+
+public partial record PaymentMethodDetailsPaymentRecordAlma
 {
     [JsonPropertyName("installments")]
     public PaymentsPrimitivesPaymentRecordsResourcePaymentMethodAlmaDetailsResourceInstallments? Installments { get; init; }
@@ -35569,7 +36013,7 @@ public record PaymentMethodDetailsPaymentRecordAlma
 
 }
 
-public record PaymentMethodDetailsPaymentRecordAmazonPay
+public partial record PaymentMethodDetailsPaymentRecordAmazonPay
 {
     [JsonPropertyName("funding")]
     public PaymentsPrimitivesPaymentRecordsResourcePaymentMethodAmazonPayDetailsResourceFunding? Funding { get; init; }
@@ -35582,7 +36026,75 @@ public record PaymentMethodDetailsPaymentRecordAmazonPay
 
 }
 
-public record PaymentMethodDetailsPaymentRecordBancontact
+public partial record PaymentMethodDetailsPaymentRecordAuBecsDebit
+{
+    /// <summary>
+    /// Bank-State-Branch number of the bank account.
+    /// </summary>
+    [JsonPropertyName("bsb_number")]
+    public string? BsbNumber { get; init; }
+
+    /// <summary>
+    /// Estimated date to debit the customer's bank account. A date string in YYYY-MM-DD format.
+    /// </summary>
+    [JsonPropertyName("expected_debit_date")]
+    public string? ExpectedDebitDate { get; init; }
+
+    /// <summary>
+    /// Uniquely identifies this particular bank account. You can use this attribute to check whether two bank accounts are the same.
+    /// </summary>
+    [JsonPropertyName("fingerprint")]
+    public string? Fingerprint { get; init; }
+
+    /// <summary>
+    /// Last four digits of the bank account number.
+    /// </summary>
+    [JsonPropertyName("last4")]
+    public string? Last4 { get; init; }
+
+    /// <summary>
+    /// ID of the mandate used to make this payment.
+    /// </summary>
+    [JsonPropertyName("mandate")]
+    public string? Mandate { get; init; }
+
+}
+
+public partial record PaymentMethodDetailsPaymentRecordBacsDebit
+{
+    /// <summary>
+    /// Estimated date to debit the customer's bank account. A date string in YYYY-MM-DD format.
+    /// </summary>
+    [JsonPropertyName("expected_debit_date")]
+    public string? ExpectedDebitDate { get; init; }
+
+    /// <summary>
+    /// Uniquely identifies this particular bank account. You can use this attribute to check whether two bank accounts are the same.
+    /// </summary>
+    [JsonPropertyName("fingerprint")]
+    public string? Fingerprint { get; init; }
+
+    /// <summary>
+    /// Last four digits of the bank account number.
+    /// </summary>
+    [JsonPropertyName("last4")]
+    public string? Last4 { get; init; }
+
+    /// <summary>
+    /// ID of the mandate used to make this payment.
+    /// </summary>
+    [JsonPropertyName("mandate")]
+    public string? Mandate { get; init; }
+
+    /// <summary>
+    /// Sort code of the bank account. (e.g., `10-20-30`)
+    /// </summary>
+    [JsonPropertyName("sort_code")]
+    public string? SortCode { get; init; }
+
+}
+
+public partial record PaymentMethodDetailsPaymentRecordBancontact
 {
     /// <summary>
     /// Bank code of bank associated with the bank account.
@@ -35634,7 +36146,7 @@ public record PaymentMethodDetailsPaymentRecordBancontact
 
 }
 
-public record PaymentMethodDetailsPaymentRecordBillie
+public partial record PaymentMethodDetailsPaymentRecordBillie
 {
     /// <summary>
     /// The Billie transaction ID associated with this payment.
@@ -35644,8 +36156,14 @@ public record PaymentMethodDetailsPaymentRecordBillie
 
 }
 
-public record PaymentMethodDetailsPaymentRecordBizum
+public partial record PaymentMethodDetailsPaymentRecordBizum
 {
+    /// <summary>
+    /// A unique identifier for the buyer as determined by the local payment processor.
+    /// </summary>
+    [JsonPropertyName("buyer_id")]
+    public string? BuyerId { get; init; }
+
     /// <summary>
     /// The Bizum transaction ID associated with this payment.
     /// </summary>
@@ -35654,7 +36172,7 @@ public record PaymentMethodDetailsPaymentRecordBizum
 
 }
 
-public record PaymentMethodDetailsPaymentRecordBlik
+public partial record PaymentMethodDetailsPaymentRecordBlik
 {
     /// <summary>
     /// A unique and immutable identifier assigned by BLIK to every buyer.
@@ -35664,7 +36182,7 @@ public record PaymentMethodDetailsPaymentRecordBlik
 
 }
 
-public record PaymentMethodDetailsPaymentRecordBoleto
+public partial record PaymentMethodDetailsPaymentRecordBoleto
 {
     /// <summary>
     /// The tax ID of the customer (CPF for individuals consumers or CNPJ for businesses consumers)
@@ -35674,7 +36192,7 @@ public record PaymentMethodDetailsPaymentRecordBoleto
 
 }
 
-public record PaymentMethodDetailsPaymentRecordCashapp
+public partial record PaymentMethodDetailsPaymentRecordCashapp
 {
     /// <summary>
     /// A unique and immutable identifier assigned by Cash App to every buyer.
@@ -35696,7 +36214,7 @@ public record PaymentMethodDetailsPaymentRecordCashapp
 
 }
 
-public record PaymentMethodDetailsPaymentRecordEps
+public partial record PaymentMethodDetailsPaymentRecordEps
 {
     /// <summary>
     /// The customer's bank. Should be one of `arzte_und_apotheker_bank`, `austrian_anadi_bank_ag`, `bank_austria`, `bankhaus_carl_spangler`, `bankhaus_schelhammer_und_schattera_ag`, `bawag_psk_ag`, `bks_bank_ag`, `brull_kallmus_bank_ag`, `btv_vier_lander_bank`, `capital_bank_grawe_gruppe_ag`, `deutsche_bank_ag`, `dolomitenbank`, `easybank_ag`, `erste_bank_und_sparkassen`, `hypo_alpeadriabank_international_ag`, `hypo_noe_lb_fur_niederosterreich_u_wien`, `hypo_oberosterreich_salzburg_steiermark`, `hypo_tirol_bank_ag`, `hypo_vorarlberg_bank_ag`, `hypo_bank_burgenland_aktiengesellschaft`, `marchfelder_bank`, `oberbank_ag`, `raiffeisen_bankengruppe_osterreich`, `schoellerbank_ag`, `sparda_bank_wien`, `volksbank_gruppe`, `volkskreditbank_ag`, or `vr_bank_braunau`
@@ -35712,7 +36230,7 @@ public record PaymentMethodDetailsPaymentRecordEps
 
 }
 
-public record PaymentMethodDetailsPaymentRecordGiropay
+public partial record PaymentMethodDetailsPaymentRecordGiropay
 {
     /// <summary>
     /// Bank code of bank associated with the bank account.
@@ -35740,7 +36258,7 @@ public record PaymentMethodDetailsPaymentRecordGiropay
 
 }
 
-public record PaymentMethodDetailsPaymentRecordIdeal
+public partial record PaymentMethodDetailsPaymentRecordIdeal
 {
     /// <summary>
     /// The customer's bank. Can be one of `abn_amro`, `adyen`, `asn_bank`, `bunq`, `buut`, `finom`, `handelsbanken`, `ing`, `knab`, `mollie`, `moneyou`, `n26`, `nn`, `rabobank`, `regiobank`, `revolut`, `sns_bank`, `triodos_bank`, `van_lanschot`, or `yoursafe`.
@@ -35786,7 +36304,7 @@ public record PaymentMethodDetailsPaymentRecordIdeal
 
 }
 
-public record PaymentMethodDetailsPaymentRecordKakaoPay
+public partial record PaymentMethodDetailsPaymentRecordKakaoPay
 {
     /// <summary>
     /// A unique identifier for the buyer as determined by the local payment processor.
@@ -35802,7 +36320,7 @@ public record PaymentMethodDetailsPaymentRecordKakaoPay
 
 }
 
-public record PaymentMethodDetailsPaymentRecordKlarna
+public partial record PaymentMethodDetailsPaymentRecordKlarna
 {
     /// <summary>
     /// ID of the [location](https://docs.stripe.com/api/terminal/locations) that this transaction's reader is assigned to.
@@ -35836,7 +36354,7 @@ public record PaymentMethodDetailsPaymentRecordKlarna
 
 }
 
-public record PaymentMethodDetailsPaymentRecordKonbini
+public partial record PaymentMethodDetailsPaymentRecordKonbini
 {
     /// <summary>
     /// If the payment succeeded, this contains the details of the convenience store where the payment was completed.
@@ -35846,7 +36364,7 @@ public record PaymentMethodDetailsPaymentRecordKonbini
 
 }
 
-public record PaymentMethodDetailsPaymentRecordLink
+public partial record PaymentMethodDetailsPaymentRecordLink
 {
     /// <summary>
     /// Two-letter ISO code representing the funding source country beneath the Link payment. You could use this attribute to get a sense of international fees.
@@ -35856,11 +36374,11 @@ public record PaymentMethodDetailsPaymentRecordLink
 
 }
 
-public record PaymentMethodDetailsPaymentRecordMbWay
+public partial record PaymentMethodDetailsPaymentRecordMbWay
 {
 }
 
-public record PaymentMethodDetailsPaymentRecordMobilepay
+public partial record PaymentMethodDetailsPaymentRecordMobilepay
 {
     /// <summary>
     /// Internal card details
@@ -35870,7 +36388,7 @@ public record PaymentMethodDetailsPaymentRecordMobilepay
 
 }
 
-public record PaymentMethodDetailsPaymentRecordMultibanco
+public partial record PaymentMethodDetailsPaymentRecordMultibanco
 {
     /// <summary>
     /// Entity number associated with this Multibanco payment.
@@ -35886,7 +36404,7 @@ public record PaymentMethodDetailsPaymentRecordMultibanco
 
 }
 
-public record PaymentMethodDetailsPaymentRecordNaverPay
+public partial record PaymentMethodDetailsPaymentRecordNaverPay
 {
     /// <summary>
     /// A unique identifier for the buyer as determined by the local payment processor.
@@ -35902,7 +36420,7 @@ public record PaymentMethodDetailsPaymentRecordNaverPay
 
 }
 
-public record PaymentMethodDetailsPaymentRecordOxxo
+public partial record PaymentMethodDetailsPaymentRecordOxxo
 {
     /// <summary>
     /// OXXO reference number
@@ -35912,7 +36430,7 @@ public record PaymentMethodDetailsPaymentRecordOxxo
 
 }
 
-public record PaymentMethodDetailsPaymentRecordP24
+public partial record PaymentMethodDetailsPaymentRecordP24
 {
     /// <summary>
     /// The customer's bank. Can be one of `ing`, `citi_handlowy`, `tmobile_usbugi_bankowe`, `plus_bank`, `etransfer_pocztowy24`, `banki_spbdzielcze`, `bank_nowy_bfg_sa`, `getin_bank`, `velobank`, `blik`, `noble_pay`, `ideabank`, `envelobank`, `santander_przelew24`, `nest_przelew`, `mbank_mtransfer`, `inteligo`, `pbac_z_ipko`, `bnp_paribas`, `credit_agricole`, `toyota_bank`, `bank_pekao_sa`, `volkswagen_bank`, `bank_millennium`, `alior_bank`, or `boz`.
@@ -35934,11 +36452,11 @@ public record PaymentMethodDetailsPaymentRecordP24
 
 }
 
-public record PaymentMethodDetailsPaymentRecordPayByBank
+public partial record PaymentMethodDetailsPaymentRecordPayByBank
 {
 }
 
-public record PaymentMethodDetailsPaymentRecordPayco
+public partial record PaymentMethodDetailsPaymentRecordPayco
 {
     /// <summary>
     /// A unique identifier for the buyer as determined by the local payment processor.
@@ -35954,7 +36472,7 @@ public record PaymentMethodDetailsPaymentRecordPayco
 
 }
 
-public record PaymentMethodDetailsPaymentRecordPaynow
+public partial record PaymentMethodDetailsPaymentRecordPaynow
 {
     /// <summary>
     /// ID of the [location](https://docs.stripe.com/api/terminal/locations) that this transaction's reader is assigned to.
@@ -35976,7 +36494,7 @@ public record PaymentMethodDetailsPaymentRecordPaynow
 
 }
 
-public record PaymentMethodDetailsPaymentRecordPayto
+public partial record PaymentMethodDetailsPaymentRecordPayto
 {
     /// <summary>
     /// Bank-State-Branch number of the bank account.
@@ -36004,7 +36522,7 @@ public record PaymentMethodDetailsPaymentRecordPayto
 
 }
 
-public record PaymentMethodDetailsPaymentRecordPix
+public partial record PaymentMethodDetailsPaymentRecordPix
 {
     /// <summary>
     /// Unique transaction id generated by BCB
@@ -36020,7 +36538,7 @@ public record PaymentMethodDetailsPaymentRecordPix
 
 }
 
-public record PaymentMethodDetailsPaymentRecordPromptpay
+public partial record PaymentMethodDetailsPaymentRecordPromptpay
 {
     /// <summary>
     /// Bill reference generated by PromptPay
@@ -36030,7 +36548,7 @@ public record PaymentMethodDetailsPaymentRecordPromptpay
 
 }
 
-public record PaymentMethodDetailsPaymentRecordRevolutPay
+public partial record PaymentMethodDetailsPaymentRecordRevolutPay
 {
     [JsonPropertyName("funding")]
     public PaymentsPrimitivesPaymentRecordsResourcePaymentMethodRevolutPayDetailsResourceFunding? Funding { get; init; }
@@ -36043,7 +36561,7 @@ public record PaymentMethodDetailsPaymentRecordRevolutPay
 
 }
 
-public record PaymentMethodDetailsPaymentRecordSamsungPay
+public partial record PaymentMethodDetailsPaymentRecordSamsungPay
 {
     /// <summary>
     /// A unique identifier for the buyer as determined by the local payment processor.
@@ -36059,7 +36577,7 @@ public record PaymentMethodDetailsPaymentRecordSamsungPay
 
 }
 
-public record PaymentMethodDetailsPaymentRecordSatispay
+public partial record PaymentMethodDetailsPaymentRecordSatispay
 {
     /// <summary>
     /// The Satispay transaction ID associated with this payment.
@@ -36069,7 +36587,7 @@ public record PaymentMethodDetailsPaymentRecordSatispay
 
 }
 
-public record PaymentMethodDetailsPaymentRecordScalapay
+public partial record PaymentMethodDetailsPaymentRecordScalapay
 {
     /// <summary>
     /// The Scalapay transaction ID associated with this payment.
@@ -36079,7 +36597,7 @@ public record PaymentMethodDetailsPaymentRecordScalapay
 
 }
 
-public record PaymentMethodDetailsPaymentRecordSepaDebit
+public partial record PaymentMethodDetailsPaymentRecordSepaDebit
 {
     /// <summary>
     /// Bank code of bank associated with the bank account.
@@ -36125,7 +36643,7 @@ public record PaymentMethodDetailsPaymentRecordSepaDebit
 
 }
 
-public record PaymentMethodDetailsPaymentRecordSofort
+public partial record PaymentMethodDetailsPaymentRecordSofort
 {
     /// <summary>
     /// Bank code of bank associated with the bank account.
@@ -36183,7 +36701,17 @@ public record PaymentMethodDetailsPaymentRecordSofort
 
 }
 
-public record PaymentMethodDetailsPaymentRecordSwish
+public partial record PaymentMethodDetailsPaymentRecordSunbit
+{
+    /// <summary>
+    /// The Sunbit transaction ID associated with this payment.
+    /// </summary>
+    [JsonPropertyName("transaction_id")]
+    public string? TransactionId { get; init; }
+
+}
+
+public partial record PaymentMethodDetailsPaymentRecordSwish
 {
     /// <summary>
     /// Uniquely identifies the payer's Swish account. You can use this attribute to check whether two Swish transactions were paid for by the same payer
@@ -36205,7 +36733,7 @@ public record PaymentMethodDetailsPaymentRecordSwish
 
 }
 
-public record PaymentMethodDetailsPaymentRecordTwint
+public partial record PaymentMethodDetailsPaymentRecordTwint
 {
     /// <summary>
     /// ID of the multi use Mandate generated by the PaymentIntent
@@ -36215,7 +36743,7 @@ public record PaymentMethodDetailsPaymentRecordTwint
 
 }
 
-public record PaymentMethodDetailsPaymentRecordUpi
+public partial record PaymentMethodDetailsPaymentRecordUpi
 {
     /// <summary>
     /// Customer's unique Virtual Payment Address.
@@ -36225,7 +36753,7 @@ public record PaymentMethodDetailsPaymentRecordUpi
 
 }
 
-public record PaymentMethodDetailsPaymentRecordUsBankAccount
+public partial record PaymentMethodDetailsPaymentRecordUsBankAccount
 {
     /// <summary>
     /// The type of entity that holds the account. This can be either 'individual' or 'company'.
@@ -36283,7 +36811,7 @@ public record PaymentMethodDetailsPaymentRecordUsBankAccount
 
 }
 
-public record PaymentMethodDetailsPaymentRecordWechatPay
+public partial record PaymentMethodDetailsPaymentRecordWechatPay
 {
     /// <summary>
     /// Uniquely identifies this particular WeChat Pay account. You can use this attribute to check whether two WeChat accounts are the same.
@@ -36311,11 +36839,11 @@ public record PaymentMethodDetailsPaymentRecordWechatPay
 
 }
 
-public record PaymentMethodDetailsPaymentRecordZip
+public partial record PaymentMethodDetailsPaymentRecordZip
 {
 }
 
-public record PaymentMethodDetailsPaynow
+public partial record PaymentMethodDetailsPaynow
 {
     /// <summary>
     /// ID of the [location](https://docs.stripe.com/api/terminal/locations) that this transaction's reader is assigned to.
@@ -36337,7 +36865,7 @@ public record PaymentMethodDetailsPaynow
 
 }
 
-public record PaymentMethodDetailsPaypal
+public partial record PaymentMethodDetailsPaypal
 {
     /// <summary>
     /// Two-letter ISO code representing the buyer's country. Values are provided by PayPal directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.
@@ -36379,7 +36907,7 @@ public record PaymentMethodDetailsPaypal
 
 }
 
-public record PaymentMethodDetailsPayto
+public partial record PaymentMethodDetailsPayto
 {
     /// <summary>
     /// Bank-State-Branch number of the bank account.
@@ -36407,13 +36935,19 @@ public record PaymentMethodDetailsPayto
 
 }
 
-public record PaymentMethodDetailsPix
+public partial record PaymentMethodDetailsPix
 {
     /// <summary>
     /// Unique transaction id generated by BCB
     /// </summary>
     [JsonPropertyName("bank_transaction_id")]
     public string? BankTransactionId { get; init; }
+
+    /// <summary>
+    /// Uniquely identifies this particular Pix account. You can use this attribute to check whether two Pix accounts are the same.
+    /// </summary>
+    [JsonPropertyName("fingerprint")]
+    public string? Fingerprint { get; init; }
 
     /// <summary>
     /// ID of the multi use Mandate generated by the PaymentIntent
@@ -36423,7 +36957,7 @@ public record PaymentMethodDetailsPix
 
 }
 
-public record PaymentMethodDetailsPromptpay
+public partial record PaymentMethodDetailsPromptpay
 {
     /// <summary>
     /// Bill reference generated by PromptPay
@@ -36433,7 +36967,7 @@ public record PaymentMethodDetailsPromptpay
 
 }
 
-public record PaymentMethodDetailsRevolutPay
+public partial record PaymentMethodDetailsRevolutPay
 {
     [JsonPropertyName("funding")]
     public RevolutPayUnderlyingPaymentMethodFundingDetails? Funding { get; init; }
@@ -36446,7 +36980,7 @@ public record PaymentMethodDetailsRevolutPay
 
 }
 
-public record PaymentMethodDetailsSamsungPay
+public partial record PaymentMethodDetailsSamsungPay
 {
     /// <summary>
     /// A unique identifier for the buyer as determined by the local payment processor.
@@ -36462,7 +36996,7 @@ public record PaymentMethodDetailsSamsungPay
 
 }
 
-public record PaymentMethodDetailsSatispay
+public partial record PaymentMethodDetailsSatispay
 {
     /// <summary>
     /// The Satispay transaction ID associated with this payment.
@@ -36472,7 +37006,7 @@ public record PaymentMethodDetailsSatispay
 
 }
 
-public record PaymentMethodDetailsScalapay
+public partial record PaymentMethodDetailsScalapay
 {
     /// <summary>
     /// The Scalapay transaction ID associated with this payment.
@@ -36482,7 +37016,7 @@ public record PaymentMethodDetailsScalapay
 
 }
 
-public record PaymentMethodDetailsSepaDebit
+public partial record PaymentMethodDetailsSepaDebit
 {
     /// <summary>
     /// Bank code of bank associated with the bank account.
@@ -36528,7 +37062,7 @@ public record PaymentMethodDetailsSepaDebit
 
 }
 
-public record PaymentMethodDetailsSofort
+public partial record PaymentMethodDetailsSofort
 {
     /// <summary>
     /// Bank code of bank associated with the bank account.
@@ -36588,11 +37122,11 @@ public record PaymentMethodDetailsSofort
 
 }
 
-public record PaymentMethodDetailsStripeAccount
+public partial record PaymentMethodDetailsStripeAccount
 {
 }
 
-public record PaymentMethodDetailsSunbit
+public partial record PaymentMethodDetailsSunbit
 {
     /// <summary>
     /// The Sunbit transaction ID associated with this payment.
@@ -36602,7 +37136,7 @@ public record PaymentMethodDetailsSunbit
 
 }
 
-public record PaymentMethodDetailsSwish
+public partial record PaymentMethodDetailsSwish
 {
     /// <summary>
     /// Uniquely identifies the payer's Swish account. You can use this attribute to check whether two Swish transactions were paid for by the same payer
@@ -36624,7 +37158,7 @@ public record PaymentMethodDetailsSwish
 
 }
 
-public record PaymentMethodDetailsTwint
+public partial record PaymentMethodDetailsTwint
 {
     /// <summary>
     /// ID of the multi use Mandate generated by the PaymentIntent
@@ -36634,7 +37168,7 @@ public record PaymentMethodDetailsTwint
 
 }
 
-public record PaymentMethodDetailsUpi
+public partial record PaymentMethodDetailsUpi
 {
     /// <summary>
     /// Customer's unique Virtual Payment Address.
@@ -36644,7 +37178,7 @@ public record PaymentMethodDetailsUpi
 
 }
 
-public record PaymentMethodDetailsUsBankAccount
+public partial record PaymentMethodDetailsUsBankAccount
 {
     /// <summary>
     /// Account holder type: individual or company.
@@ -36702,11 +37236,11 @@ public record PaymentMethodDetailsUsBankAccount
 
 }
 
-public record PaymentMethodDetailsWechat
+public partial record PaymentMethodDetailsWechat
 {
 }
 
-public record PaymentMethodDetailsWechatPay
+public partial record PaymentMethodDetailsWechatPay
 {
     /// <summary>
     /// Uniquely identifies this particular WeChat Pay account. You can use this attribute to check whether two WeChat accounts are the same.
@@ -36734,7 +37268,7 @@ public record PaymentMethodDetailsWechatPay
 
 }
 
-public record PaymentMethodDetailsZip
+public partial record PaymentMethodDetailsZip
 {
 }
 
@@ -36744,7 +37278,7 @@ public record PaymentMethodDetailsZip
 /// 
 /// Related guide: [Payment method domains](https://docs.stripe.com/payments/payment-methods/pmd-registration).
 /// </summary>
-public record PaymentMethodDomain
+public partial record PaymentMethodDomain
 {
     /// <summary>
     /// Indicates the status of a specific payment method on a payment method domain.
@@ -36823,7 +37357,7 @@ public record PaymentMethodDomain
 /// <summary>
 /// Indicates the status of a specific payment method on a payment method domain.
 /// </summary>
-public record PaymentMethodDomainResourcePaymentMethodStatus
+public partial record PaymentMethodDomainResourcePaymentMethodStatus
 {
     /// <summary>
     /// The status of the payment method on the domain.
@@ -36842,7 +37376,7 @@ public record PaymentMethodDomainResourcePaymentMethodStatus
 /// <summary>
 /// Contains additional details about the status of a payment method for a specific payment method domain.
 /// </summary>
-public record PaymentMethodDomainResourcePaymentMethodStatusDetails
+public partial record PaymentMethodDomainResourcePaymentMethodStatusDetails
 {
     /// <summary>
     /// The error message associated with the status of the payment method on the domain.
@@ -36852,7 +37386,7 @@ public record PaymentMethodDomainResourcePaymentMethodStatusDetails
 
 }
 
-public record PaymentMethodEps
+public partial record PaymentMethodEps
 {
     /// <summary>
     /// The customer's bank. Should be one of `arzte_und_apotheker_bank`, `austrian_anadi_bank_ag`, `bank_austria`, `bankhaus_carl_spangler`, `bankhaus_schelhammer_und_schattera_ag`, `bawag_psk_ag`, `bks_bank_ag`, `brull_kallmus_bank_ag`, `btv_vier_lander_bank`, `capital_bank_grawe_gruppe_ag`, `deutsche_bank_ag`, `dolomitenbank`, `easybank_ag`, `erste_bank_und_sparkassen`, `hypo_alpeadriabank_international_ag`, `hypo_noe_lb_fur_niederosterreich_u_wien`, `hypo_oberosterreich_salzburg_steiermark`, `hypo_tirol_bank_ag`, `hypo_vorarlberg_bank_ag`, `hypo_bank_burgenland_aktiengesellschaft`, `marchfelder_bank`, `oberbank_ag`, `raiffeisen_bankengruppe_osterreich`, `schoellerbank_ag`, `sparda_bank_wien`, `volksbank_gruppe`, `volkskreditbank_ag`, or `vr_bank_braunau`.
@@ -36862,25 +37396,25 @@ public record PaymentMethodEps
 
 }
 
-public record PaymentMethodFpx
+public partial record PaymentMethodFpx
 {
     /// <summary>
-    /// The customer's bank, if provided. Can be one of `affin_bank`, `agrobank`, `alliance_bank`, `ambank`, `bank_islam`, `bank_muamalat`, `bank_rakyat`, `bsn`, `cimb`, `hong_leong_bank`, `hsbc`, `kfh`, `maybank2u`, `ocbc`, `public_bank`, `rhb`, `standard_chartered`, `uob`, `deutsche_bank`, `maybank2e`, `pb_enterprise`, or `bank_of_china`.
+    /// The customer's bank, if provided. Can be one of `affin_bank`, `agrobank`, `alliance_bank`, `ambank`, `bank_islam`, `bank_muamalat`, `bnp_paribas`, `bank_rakyat`, `bsn`, `cimb`, `citibank`, `hong_leong_bank`, `hsbc`, `kfh`, `maybank2u`, `ocbc`, `public_bank`, `rhb`, `standard_chartered`, `uob`, `deutsche_bank`, `maybank2e`, `mbsb_bank`, `pb_enterprise`, or `bank_of_china`.
     /// </summary>
     [JsonPropertyName("bank")]
     public required PaymentMethodDetailsFpxBank Bank { get; init; }
 
 }
 
-public record PaymentMethodGiropay
+public partial record PaymentMethodGiropay
 {
 }
 
-public record PaymentMethodGrabpay
+public partial record PaymentMethodGrabpay
 {
 }
 
-public record PaymentMethodIdeal
+public partial record PaymentMethodIdeal
 {
     /// <summary>
     /// The customer's bank, if provided. Can be one of `abn_amro`, `adyen`, `asn_bank`, `bunq`, `buut`, `finom`, `handelsbanken`, `ing`, `knab`, `mollie`, `moneyou`, `n26`, `nn`, `rabobank`, `regiobank`, `revolut`, `sns_bank`, `triodos_bank`, `van_lanschot`, or `yoursafe`.
@@ -36896,7 +37430,7 @@ public record PaymentMethodIdeal
 
 }
 
-public record PaymentMethodInteracPresent
+public partial record PaymentMethodInteracPresent
 {
     /// <summary>
     /// Card brand. Can be `interac`, `mastercard` or `visa`.
@@ -36980,11 +37514,11 @@ public record PaymentMethodInteracPresent
 
 }
 
-public record PaymentMethodKakaoPay
+public partial record PaymentMethodKakaoPay
 {
 }
 
-public record PaymentMethodKlarna
+public partial record PaymentMethodKlarna
 {
     /// <summary>
     /// The customer's date of birth, if provided.
@@ -36994,11 +37528,11 @@ public record PaymentMethodKlarna
 
 }
 
-public record PaymentMethodKonbini
+public partial record PaymentMethodKonbini
 {
 }
 
-public record PaymentMethodKrCard
+public partial record PaymentMethodKrCard
 {
     /// <summary>
     /// The local credit or debit card brand.
@@ -37014,7 +37548,7 @@ public record PaymentMethodKrCard
 
 }
 
-public record PaymentMethodLink
+public partial record PaymentMethodLink
 {
     /// <summary>
     /// Account owner's email address.
@@ -37024,19 +37558,19 @@ public record PaymentMethodLink
 
 }
 
-public record PaymentMethodMbWay
+public partial record PaymentMethodMbWay
 {
 }
 
-public record PaymentMethodMobilepay
+public partial record PaymentMethodMobilepay
 {
 }
 
-public record PaymentMethodMultibanco
+public partial record PaymentMethodMultibanco
 {
 }
 
-public record PaymentMethodNaverPay
+public partial record PaymentMethodNaverPay
 {
     /// <summary>
     /// Uniquely identifies this particular Naver Pay account. You can use this attribute to check whether two Naver Pay accounts are the same.
@@ -37052,7 +37586,7 @@ public record PaymentMethodNaverPay
 
 }
 
-public record PaymentMethodNzBankAccount
+public partial record PaymentMethodNzBankAccount
 {
     /// <summary>
     /// The name on the bank account. Only present if the account holder name is different from the name of the authorized signatory collected in the PaymentMethod’s billing details.
@@ -37092,7 +37626,7 @@ public record PaymentMethodNzBankAccount
 
 }
 
-public record PaymentMethodOptionsAffirm
+public partial record PaymentMethodOptionsAffirm
 {
     /// <summary>
     /// Controls when the funds will be captured from the customer's account.
@@ -37120,7 +37654,7 @@ public record PaymentMethodOptionsAffirm
 
 }
 
-public record PaymentMethodOptionsAfterpayClearpay
+public partial record PaymentMethodOptionsAfterpayClearpay
 {
     /// <summary>
     /// Controls when the funds will be captured from the customer's account.
@@ -37149,7 +37683,7 @@ public record PaymentMethodOptionsAfterpayClearpay
 
 }
 
-public record PaymentMethodOptionsAlipay
+public partial record PaymentMethodOptionsAlipay
 {
     /// <summary>
     /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
@@ -37165,7 +37699,7 @@ public record PaymentMethodOptionsAlipay
 
 }
 
-public record PaymentMethodOptionsAlma
+public partial record PaymentMethodOptionsAlma
 {
     /// <summary>
     /// Controls when the funds will be captured from the customer's account.
@@ -37175,7 +37709,7 @@ public record PaymentMethodOptionsAlma
 
 }
 
-public record PaymentMethodOptionsAmazonPay
+public partial record PaymentMethodOptionsAmazonPay
 {
     /// <summary>
     /// Controls when the funds will be captured from the customer's account.
@@ -37197,7 +37731,7 @@ public record PaymentMethodOptionsAmazonPay
 
 }
 
-public record PaymentMethodOptionsBancontact
+public partial record PaymentMethodOptionsBancontact
 {
     /// <summary>
     /// Preferred language of the Bancontact authorization page that the customer is redirected to.
@@ -37219,7 +37753,7 @@ public record PaymentMethodOptionsBancontact
 
 }
 
-public record PaymentMethodOptionsBillie
+public partial record PaymentMethodOptionsBillie
 {
     /// <summary>
     /// Controls when the funds will be captured from the customer's account.
@@ -37229,11 +37763,11 @@ public record PaymentMethodOptionsBillie
 
 }
 
-public record PaymentMethodOptionsBizum
+public partial record PaymentMethodOptionsBizum
 {
 }
 
-public record PaymentMethodOptionsBoleto
+public partial record PaymentMethodOptionsBoleto
 {
     /// <summary>
     /// The number of calendar days before a Boleto voucher expires. For example, if you create a Boleto voucher on Monday and you set expires_after_days to 2, the Boleto voucher will expire on Wednesday at 23:59 America/Sao_Paulo time.
@@ -37255,7 +37789,7 @@ public record PaymentMethodOptionsBoleto
 
 }
 
-public record PaymentMethodOptionsCardInstallments
+public partial record PaymentMethodOptionsCardInstallments
 {
     /// <summary>
     /// Installment plans that may be selected for this PaymentIntent.
@@ -37277,7 +37811,7 @@ public record PaymentMethodOptionsCardInstallments
 
 }
 
-public record PaymentMethodOptionsCardMandateOptions
+public partial record PaymentMethodOptionsCardMandateOptions
 {
     /// <summary>
     /// Amount to be charged for future payments, specified in the presentment currency.
@@ -37335,7 +37869,7 @@ public record PaymentMethodOptionsCardMandateOptions
 
 }
 
-public record PaymentMethodOptionsCardPresent
+public partial record PaymentMethodOptionsCardPresent
 {
     /// <summary>
     /// Controls when the funds will be captured from the customer's account.
@@ -37360,7 +37894,7 @@ public record PaymentMethodOptionsCardPresent
 
 }
 
-public record PaymentMethodOptionsCardPresentRouting
+public partial record PaymentMethodOptionsCardPresentRouting
 {
     /// <summary>
     /// Requested routing priority
@@ -37370,7 +37904,7 @@ public record PaymentMethodOptionsCardPresentRouting
 
 }
 
-public record PaymentMethodOptionsCashapp
+public partial record PaymentMethodOptionsCashapp
 {
     /// <summary>
     /// Controls when the funds will be captured from the customer's account.
@@ -37392,7 +37926,7 @@ public record PaymentMethodOptionsCashapp
 
 }
 
-public record PaymentMethodOptionsCrypto
+public partial record PaymentMethodOptionsCrypto
 {
     /// <summary>
     /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
@@ -37408,7 +37942,7 @@ public record PaymentMethodOptionsCrypto
 
 }
 
-public record PaymentMethodOptionsCustomerBalance
+public partial record PaymentMethodOptionsCustomerBalance
 {
     [JsonPropertyName("bank_transfer")]
     public PaymentMethodOptionsCustomerBalanceBankTransfer? BankTransfer { get; init; }
@@ -37433,7 +37967,7 @@ public record PaymentMethodOptionsCustomerBalance
 
 }
 
-public record PaymentMethodOptionsCustomerBalanceBankTransfer
+public partial record PaymentMethodOptionsCustomerBalanceBankTransfer
 {
     [JsonPropertyName("eu_bank_transfer")]
     public PaymentMethodOptionsCustomerBalanceEuBankAccount? EuBankTransfer { get; init; }
@@ -37454,7 +37988,7 @@ public record PaymentMethodOptionsCustomerBalanceBankTransfer
 
 }
 
-public record PaymentMethodOptionsCustomerBalanceEuBankAccount
+public partial record PaymentMethodOptionsCustomerBalanceEuBankAccount
 {
     /// <summary>
     /// The desired country code of the bank account information. Permitted values include: `DE`, `FR`, `IE`, or `NL`.
@@ -37464,7 +37998,7 @@ public record PaymentMethodOptionsCustomerBalanceEuBankAccount
 
 }
 
-public record PaymentMethodOptionsFpx
+public partial record PaymentMethodOptionsFpx
 {
     /// <summary>
     /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
@@ -37480,7 +38014,7 @@ public record PaymentMethodOptionsFpx
 
 }
 
-public record PaymentMethodOptionsGiropay
+public partial record PaymentMethodOptionsGiropay
 {
     /// <summary>
     /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
@@ -37496,7 +38030,7 @@ public record PaymentMethodOptionsGiropay
 
 }
 
-public record PaymentMethodOptionsGrabpay
+public partial record PaymentMethodOptionsGrabpay
 {
     /// <summary>
     /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
@@ -37512,7 +38046,7 @@ public record PaymentMethodOptionsGrabpay
 
 }
 
-public record PaymentMethodOptionsIdeal
+public partial record PaymentMethodOptionsIdeal
 {
     /// <summary>
     /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
@@ -37528,11 +38062,11 @@ public record PaymentMethodOptionsIdeal
 
 }
 
-public record PaymentMethodOptionsInteracPresent
+public partial record PaymentMethodOptionsInteracPresent
 {
 }
 
-public record PaymentMethodOptionsKlarna
+public partial record PaymentMethodOptionsKlarna
 {
     /// <summary>
     /// Controls when the funds will be captured from the customer's account.
@@ -37560,7 +38094,7 @@ public record PaymentMethodOptionsKlarna
 
 }
 
-public record PaymentMethodOptionsKonbini
+public partial record PaymentMethodOptionsKonbini
 {
     /// <summary>
     /// An optional 10 to 11 digit numeric-only string determining the confirmation code at applicable convenience stores.
@@ -37600,7 +38134,7 @@ public record PaymentMethodOptionsKonbini
 
 }
 
-public record PaymentMethodOptionsKrCard
+public partial record PaymentMethodOptionsKrCard
 {
     /// <summary>
     /// Controls when the funds will be captured from the customer's account.
@@ -37622,7 +38156,7 @@ public record PaymentMethodOptionsKrCard
 
 }
 
-public record PaymentMethodOptionsMandateOptionsPix
+public partial record PaymentMethodOptionsMandateOptionsPix
 {
     /// <summary>
     /// Amount to be charged for future payments.
@@ -37674,7 +38208,7 @@ public record PaymentMethodOptionsMandateOptionsPix
 
 }
 
-public record PaymentMethodOptionsMandateOptionsUpi
+public partial record PaymentMethodOptionsMandateOptionsUpi
 {
     /// <summary>
     /// Amount to be charged for future payments.
@@ -37702,7 +38236,7 @@ public record PaymentMethodOptionsMandateOptionsUpi
 
 }
 
-public record PaymentMethodOptionsMbWay
+public partial record PaymentMethodOptionsMbWay
 {
     /// <summary>
     /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
@@ -37718,7 +38252,7 @@ public record PaymentMethodOptionsMbWay
 
 }
 
-public record PaymentMethodOptionsMultibanco
+public partial record PaymentMethodOptionsMultibanco
 {
     /// <summary>
     /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
@@ -37734,7 +38268,7 @@ public record PaymentMethodOptionsMultibanco
 
 }
 
-public record PaymentMethodOptionsOxxo
+public partial record PaymentMethodOptionsOxxo
 {
     /// <summary>
     /// The number of calendar days before an OXXO invoice expires. For example, if you create an OXXO invoice on Monday and you set expires_after_days to 2, the OXXO invoice will expire on Wednesday at 23:59 America/Mexico_City time.
@@ -37756,7 +38290,7 @@ public record PaymentMethodOptionsOxxo
 
 }
 
-public record PaymentMethodOptionsP24
+public partial record PaymentMethodOptionsP24
 {
     /// <summary>
     /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
@@ -37772,11 +38306,11 @@ public record PaymentMethodOptionsP24
 
 }
 
-public record PaymentMethodOptionsPayByBank
+public partial record PaymentMethodOptionsPayByBank
 {
 }
 
-public record PaymentMethodOptionsPaynow
+public partial record PaymentMethodOptionsPaynow
 {
     /// <summary>
     /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
@@ -37792,7 +38326,7 @@ public record PaymentMethodOptionsPaynow
 
 }
 
-public record PaymentMethodOptionsPaypal
+public partial record PaymentMethodOptionsPaypal
 {
     /// <summary>
     /// Controls when the funds will be captured from the customer's account.
@@ -37826,7 +38360,7 @@ public record PaymentMethodOptionsPaypal
 
 }
 
-public record PaymentMethodOptionsPix
+public partial record PaymentMethodOptionsPix
 {
     /// <summary>
     /// Determines if the amount includes the IOF tax.
@@ -37863,7 +38397,7 @@ public record PaymentMethodOptionsPix
 
 }
 
-public record PaymentMethodOptionsPromptpay
+public partial record PaymentMethodOptionsPromptpay
 {
     /// <summary>
     /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
@@ -37879,7 +38413,7 @@ public record PaymentMethodOptionsPromptpay
 
 }
 
-public record PaymentMethodOptionsRevolutPay
+public partial record PaymentMethodOptionsRevolutPay
 {
     /// <summary>
     /// Controls when the funds will be captured from the customer's account.
@@ -37901,7 +38435,29 @@ public record PaymentMethodOptionsRevolutPay
 
 }
 
-public record PaymentMethodOptionsSatispay
+public partial record PaymentMethodOptionsSatispay
+{
+    /// <summary>
+    /// Controls when the funds will be captured from the customer's account.
+    /// </summary>
+    [JsonPropertyName("capture_method")]
+    public CheckoutAffirmPaymentMethodOptionsCaptureMethod? CaptureMethod { get; init; }
+
+    /// <summary>
+    /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
+    /// 
+    /// If you provide a Customer with the PaymentIntent, you can use this parameter to [attach the payment method](/payments/save-during-payment) to the Customer after the PaymentIntent is confirmed and the customer completes any required actions. If you don't provide a Customer, you can still [attach](/api/payment_methods/attach) the payment method to a Customer after the transaction completes.
+    /// 
+    /// If the payment method is `card_present` and isn't a digital wallet, Stripe creates and attaches a [generated_card](/api/charges/object#charge_object-payment_method_details-card_present-generated_card) payment method representing the card to the Customer instead.
+    /// 
+    /// When processing card payments, Stripe uses `setup_future_usage` to help you comply with regional legislation and network rules, such as [SCA](/strong-customer-authentication).
+    /// </summary>
+    [JsonPropertyName("setup_future_usage")]
+    public CheckoutAcssDebitPaymentMethodOptionsSetupFutureUsage? SetupFutureUsage { get; init; }
+
+}
+
+public partial record PaymentMethodOptionsScalapay
 {
     /// <summary>
     /// Controls when the funds will be captured from the customer's account.
@@ -37911,17 +38467,7 @@ public record PaymentMethodOptionsSatispay
 
 }
 
-public record PaymentMethodOptionsScalapay
-{
-    /// <summary>
-    /// Controls when the funds will be captured from the customer's account.
-    /// </summary>
-    [JsonPropertyName("capture_method")]
-    public CheckoutAffirmPaymentMethodOptionsCaptureMethod? CaptureMethod { get; init; }
-
-}
-
-public record PaymentMethodOptionsSofort
+public partial record PaymentMethodOptionsSofort
 {
     /// <summary>
     /// Preferred language of the SOFORT authorization page that the customer is redirected to.
@@ -37943,7 +38489,29 @@ public record PaymentMethodOptionsSofort
 
 }
 
-public record PaymentMethodOptionsTwint
+public partial record PaymentMethodOptionsSunbit
+{
+    /// <summary>
+    /// Controls when the funds will be captured from the customer's account.
+    /// </summary>
+    [JsonPropertyName("capture_method")]
+    public CheckoutAffirmPaymentMethodOptionsCaptureMethod? CaptureMethod { get; init; }
+
+    /// <summary>
+    /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
+    /// 
+    /// If you provide a Customer with the PaymentIntent, you can use this parameter to [attach the payment method](/payments/save-during-payment) to the Customer after the PaymentIntent is confirmed and the customer completes any required actions. If you don't provide a Customer, you can still [attach](/api/payment_methods/attach) the payment method to a Customer after the transaction completes.
+    /// 
+    /// If the payment method is `card_present` and isn't a digital wallet, Stripe creates and attaches a [generated_card](/api/charges/object#charge_object-payment_method_details-card_present-generated_card) payment method representing the card to the Customer instead.
+    /// 
+    /// When processing card payments, Stripe uses `setup_future_usage` to help you comply with regional legislation and network rules, such as [SCA](/strong-customer-authentication).
+    /// </summary>
+    [JsonPropertyName("setup_future_usage")]
+    public CheckoutAffirmPaymentMethodOptionsSetupFutureUsage? SetupFutureUsage { get; init; }
+
+}
+
+public partial record PaymentMethodOptionsTwint
 {
     /// <summary>
     /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
@@ -37959,7 +38527,7 @@ public record PaymentMethodOptionsTwint
 
 }
 
-public record PaymentMethodOptionsUpi
+public partial record PaymentMethodOptionsUpi
 {
     /// <summary>
     /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
@@ -37975,7 +38543,7 @@ public record PaymentMethodOptionsUpi
 
 }
 
-public record PaymentMethodOptionsUsBankAccountMandateOptions
+public partial record PaymentMethodOptionsUsBankAccountMandateOptions
 {
     /// <summary>
     /// Mandate collection method
@@ -37985,10 +38553,10 @@ public record PaymentMethodOptionsUsBankAccountMandateOptions
 
 }
 
-public record PaymentMethodOptionsWechatPay
+public partial record PaymentMethodOptionsWechatPay
 {
     /// <summary>
-    /// The app ID registered with WeChat Pay. Only required when client is ios or android.
+    /// The app ID registered with WeChat Pay. Only required when client is ios, android, or mini_program.
     /// </summary>
     [JsonPropertyName("app_id")]
     public string? AppId { get; init; }
@@ -38013,7 +38581,7 @@ public record PaymentMethodOptionsWechatPay
 
 }
 
-public record PaymentMethodOptionsZip
+public partial record PaymentMethodOptionsZip
 {
     /// <summary>
     /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
@@ -38029,11 +38597,11 @@ public record PaymentMethodOptionsZip
 
 }
 
-public record PaymentMethodOxxo
+public partial record PaymentMethodOxxo
 {
 }
 
-public record PaymentMethodP24
+public partial record PaymentMethodP24
 {
     /// <summary>
     /// The customer's bank, if provided.
@@ -38043,19 +38611,19 @@ public record PaymentMethodP24
 
 }
 
-public record PaymentMethodPayByBank
+public partial record PaymentMethodPayByBank
 {
 }
 
-public record PaymentMethodPayco
+public partial record PaymentMethodPayco
 {
 }
 
-public record PaymentMethodPaynow
+public partial record PaymentMethodPaynow
 {
 }
 
-public record PaymentMethodPaypal
+public partial record PaymentMethodPaypal
 {
     /// <summary>
     /// Two-letter ISO code representing the buyer's country. Values are provided by PayPal directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.
@@ -38078,7 +38646,7 @@ public record PaymentMethodPaypal
 
 }
 
-public record PaymentMethodPayto
+public partial record PaymentMethodPayto
 {
     /// <summary>
     /// Bank-State-Branch number of the bank account.
@@ -38100,31 +38668,37 @@ public record PaymentMethodPayto
 
 }
 
-public record PaymentMethodPix
+public partial record PaymentMethodPix
+{
+    /// <summary>
+    /// Uniquely identifies this particular Pix account. You can use this attribute to check whether two Pix accounts are the same.
+    /// </summary>
+    [JsonPropertyName("fingerprint")]
+    public string? Fingerprint { get; init; }
+
+}
+
+public partial record PaymentMethodPromptpay
 {
 }
 
-public record PaymentMethodPromptpay
+public partial record PaymentMethodRevolutPay
 {
 }
 
-public record PaymentMethodRevolutPay
+public partial record PaymentMethodSamsungPay
 {
 }
 
-public record PaymentMethodSamsungPay
+public partial record PaymentMethodSatispay
 {
 }
 
-public record PaymentMethodSatispay
+public partial record PaymentMethodScalapay
 {
 }
 
-public record PaymentMethodScalapay
-{
-}
-
-public record PaymentMethodSepaDebit
+public partial record PaymentMethodSepaDebit
 {
     /// <summary>
     /// Bank code of bank associated with the bank account.
@@ -38164,7 +38738,7 @@ public record PaymentMethodSepaDebit
 
 }
 
-public record PaymentMethodSofort
+public partial record PaymentMethodSofort
 {
     /// <summary>
     /// Two-letter ISO code representing the country the bank account is located in.
@@ -38174,19 +38748,19 @@ public record PaymentMethodSofort
 
 }
 
-public record PaymentMethodSunbit
+public partial record PaymentMethodSunbit
 {
 }
 
-public record PaymentMethodSwish
+public partial record PaymentMethodSwish
 {
 }
 
-public record PaymentMethodTwint
+public partial record PaymentMethodTwint
 {
 }
 
-public record PaymentMethodUpi
+public partial record PaymentMethodUpi
 {
     /// <summary>
     /// Customer's unique Virtual Payment Address
@@ -38196,7 +38770,7 @@ public record PaymentMethodUpi
 
 }
 
-public record PaymentMethodUsBankAccount
+public partial record PaymentMethodUsBankAccount
 {
     /// <summary>
     /// Account holder type: individual or company.
@@ -38254,7 +38828,7 @@ public record PaymentMethodUsBankAccount
 
 }
 
-public record PaymentMethodUsBankAccountBlocked
+public partial record PaymentMethodUsBankAccountBlocked
 {
     /// <summary>
     /// The ACH network code that resulted in this block.
@@ -38270,22 +38844,22 @@ public record PaymentMethodUsBankAccountBlocked
 
 }
 
-public record PaymentMethodUsBankAccountStatusDetails
+public partial record PaymentMethodUsBankAccountStatusDetails
 {
     [JsonPropertyName("blocked")]
     public PaymentMethodUsBankAccountBlocked? Blocked { get; init; }
 
 }
 
-public record PaymentMethodWechatPay
+public partial record PaymentMethodWechatPay
 {
 }
 
-public record PaymentMethodZip
+public partial record PaymentMethodZip
 {
 }
 
-public record PaymentPagesCheckoutSessionAdaptivePricing
+public partial record PaymentPagesCheckoutSessionAdaptivePricing
 {
     /// <summary>
     /// If enabled, Adaptive Pricing is available on [eligible sessions](https://docs.stripe.com/payments/currencies/localize-prices/adaptive-pricing?payment-ui=stripe-hosted#restrictions).
@@ -38295,7 +38869,7 @@ public record PaymentPagesCheckoutSessionAdaptivePricing
 
 }
 
-public record PaymentPagesCheckoutSessionAfterExpiration
+public partial record PaymentPagesCheckoutSessionAfterExpiration
 {
     /// <summary>
     /// When set, configuration used to recover the Checkout Session on expiry.
@@ -38305,7 +38879,7 @@ public record PaymentPagesCheckoutSessionAfterExpiration
 
 }
 
-public record PaymentPagesCheckoutSessionAfterExpirationRecovery
+public partial record PaymentPagesCheckoutSessionAfterExpirationRecovery
 {
     /// <summary>
     /// Enables user redeemable promotion codes on the recovered Checkout Sessions. Defaults to `false`
@@ -38335,7 +38909,7 @@ public record PaymentPagesCheckoutSessionAfterExpirationRecovery
 
 }
 
-public record PaymentPagesCheckoutSessionAutomaticTax
+public partial record PaymentPagesCheckoutSessionAutomaticTax
 {
     /// <summary>
     /// Indicates whether automatic tax is enabled for the session
@@ -38363,7 +38937,7 @@ public record PaymentPagesCheckoutSessionAutomaticTax
 
 }
 
-public record PaymentPagesCheckoutSessionBrandingSettings
+public partial record PaymentPagesCheckoutSessionBrandingSettings
 {
     /// <summary>
     /// A hex color value starting with `#` representing the background color for the Checkout Session.
@@ -38409,7 +38983,7 @@ public record PaymentPagesCheckoutSessionBrandingSettings
 
 }
 
-public record PaymentPagesCheckoutSessionBrandingSettingsIcon
+public partial record PaymentPagesCheckoutSessionBrandingSettingsIcon
 {
     /// <summary>
     /// The ID of a [File upload](https://stripe.com/docs/api/files) representing the icon. Purpose must be `business_icon`. Required if `type` is `file` and disallowed otherwise.
@@ -38431,7 +39005,7 @@ public record PaymentPagesCheckoutSessionBrandingSettingsIcon
 
 }
 
-public record PaymentPagesCheckoutSessionBrandingSettingsLogo
+public partial record PaymentPagesCheckoutSessionBrandingSettingsLogo
 {
     /// <summary>
     /// The ID of a [File upload](https://stripe.com/docs/api/files) representing the logo. Purpose must be `business_logo`. Required if `type` is `file` and disallowed otherwise.
@@ -38453,7 +39027,7 @@ public record PaymentPagesCheckoutSessionBrandingSettingsLogo
 
 }
 
-public record PaymentPagesCheckoutSessionBusinessName
+public partial record PaymentPagesCheckoutSessionBusinessName
 {
     /// <summary>
     /// Indicates whether business name collection is enabled for the session
@@ -38469,7 +39043,7 @@ public record PaymentPagesCheckoutSessionBusinessName
 
 }
 
-public record PaymentPagesCheckoutSessionCheckoutAddressDetails
+public partial record PaymentPagesCheckoutSessionCheckoutAddressDetails
 {
     [JsonPropertyName("address")]
     public required Address Address { get; init; }
@@ -38482,7 +39056,7 @@ public record PaymentPagesCheckoutSessionCheckoutAddressDetails
 
 }
 
-public record PaymentPagesCheckoutSessionCollectedInformation
+public partial record PaymentPagesCheckoutSessionCollectedInformation
 {
     /// <summary>
     /// Customer’s business name for this Checkout Session
@@ -38504,7 +39078,7 @@ public record PaymentPagesCheckoutSessionCollectedInformation
 
 }
 
-public record PaymentPagesCheckoutSessionConsent
+public partial record PaymentPagesCheckoutSessionConsent
 {
     /// <summary>
     /// If `opt_in`, the customer consents to receiving promotional communications
@@ -38521,7 +39095,7 @@ public record PaymentPagesCheckoutSessionConsent
 
 }
 
-public record PaymentPagesCheckoutSessionConsentCollection
+public partial record PaymentPagesCheckoutSessionConsentCollection
 {
     /// <summary>
     /// If set to `hidden`, it will hide legal text related to the reuse of a payment method.
@@ -38545,7 +39119,7 @@ public record PaymentPagesCheckoutSessionConsentCollection
 
 }
 
-public record PaymentPagesCheckoutSessionCurrencyConversion
+public partial record PaymentPagesCheckoutSessionCurrencyConversion
 {
     /// <summary>
     /// Total of all items in source currency before discounts or taxes are applied.
@@ -38573,7 +39147,7 @@ public record PaymentPagesCheckoutSessionCurrencyConversion
 
 }
 
-public record PaymentPagesCheckoutSessionCustomFields
+public partial record PaymentPagesCheckoutSessionCustomFields
 {
     [JsonPropertyName("dropdown")]
     public PaymentPagesCheckoutSessionCustomFieldsDropdown? Dropdown { get; init; }
@@ -38607,7 +39181,7 @@ public record PaymentPagesCheckoutSessionCustomFields
 
 }
 
-public record PaymentPagesCheckoutSessionCustomFieldsDropdown
+public partial record PaymentPagesCheckoutSessionCustomFieldsDropdown
 {
     /// <summary>
     /// The value that pre-fills on the payment page.
@@ -38629,7 +39203,7 @@ public record PaymentPagesCheckoutSessionCustomFieldsDropdown
 
 }
 
-public record PaymentPagesCheckoutSessionCustomFieldsLabel
+public partial record PaymentPagesCheckoutSessionCustomFieldsLabel
 {
     /// <summary>
     /// Custom text for the label, displayed to the customer. Up to 50 characters.
@@ -38645,7 +39219,7 @@ public record PaymentPagesCheckoutSessionCustomFieldsLabel
 
 }
 
-public record PaymentPagesCheckoutSessionCustomFieldsNumeric
+public partial record PaymentPagesCheckoutSessionCustomFieldsNumeric
 {
     /// <summary>
     /// The value that pre-fills the field on the payment page.
@@ -38673,7 +39247,7 @@ public record PaymentPagesCheckoutSessionCustomFieldsNumeric
 
 }
 
-public record PaymentPagesCheckoutSessionCustomFieldsOption
+public partial record PaymentPagesCheckoutSessionCustomFieldsOption
 {
     /// <summary>
     /// The label for the option, displayed to the customer. Up to 100 characters.
@@ -38689,7 +39263,7 @@ public record PaymentPagesCheckoutSessionCustomFieldsOption
 
 }
 
-public record PaymentPagesCheckoutSessionCustomFieldsText
+public partial record PaymentPagesCheckoutSessionCustomFieldsText
 {
     /// <summary>
     /// The value that pre-fills the field on the payment page.
@@ -38717,7 +39291,7 @@ public record PaymentPagesCheckoutSessionCustomFieldsText
 
 }
 
-public record PaymentPagesCheckoutSessionCustomText
+public partial record PaymentPagesCheckoutSessionCustomText
 {
     /// <summary>
     /// Custom text that should be displayed after the payment confirmation button.
@@ -38745,7 +39319,7 @@ public record PaymentPagesCheckoutSessionCustomText
 
 }
 
-public record PaymentPagesCheckoutSessionCustomTextPosition
+public partial record PaymentPagesCheckoutSessionCustomTextPosition
 {
     /// <summary>
     /// Text can be up to 1200 characters in length.
@@ -38755,7 +39329,7 @@ public record PaymentPagesCheckoutSessionCustomTextPosition
 
 }
 
-public record PaymentPagesCheckoutSessionCustomerDetails
+public partial record PaymentPagesCheckoutSessionCustomerDetails
 {
     /// <summary>
     /// The customer's address after a completed Checkout Session. Note: This property is populated only for sessions on or after March 30, 2022.
@@ -38808,7 +39382,7 @@ public record PaymentPagesCheckoutSessionCustomerDetails
 
 }
 
-public record PaymentPagesCheckoutSessionDiscount
+public partial record PaymentPagesCheckoutSessionDiscount
 {
     /// <summary>
     /// Coupon attached to the Checkout Session.
@@ -38824,7 +39398,7 @@ public record PaymentPagesCheckoutSessionDiscount
 
 }
 
-public record PaymentPagesCheckoutSessionIndividualName
+public partial record PaymentPagesCheckoutSessionIndividualName
 {
     /// <summary>
     /// Indicates whether individual name collection is enabled for the session
@@ -38840,7 +39414,7 @@ public record PaymentPagesCheckoutSessionIndividualName
 
 }
 
-public record PaymentPagesCheckoutSessionInvoiceCreation
+public partial record PaymentPagesCheckoutSessionInvoiceCreation
 {
     /// <summary>
     /// Indicates whether invoice creation is enabled for the Checkout Session.
@@ -38853,7 +39427,7 @@ public record PaymentPagesCheckoutSessionInvoiceCreation
 
 }
 
-public record PaymentPagesCheckoutSessionInvoiceSettings
+public partial record PaymentPagesCheckoutSessionInvoiceSettings
 {
     /// <summary>
     /// The account tax IDs associated with the invoice.
@@ -38899,7 +39473,7 @@ public record PaymentPagesCheckoutSessionInvoiceSettings
 
 }
 
-public record PaymentPagesCheckoutSessionManagedPayments
+public partial record PaymentPagesCheckoutSessionManagedPayments
 {
     /// <summary>
     /// Set to `true` to enable [Managed Payments](https://docs.stripe.com/payments/managed-payments), Stripe's merchant of record solution, for this session.
@@ -38909,7 +39483,7 @@ public record PaymentPagesCheckoutSessionManagedPayments
 
 }
 
-public record PaymentPagesCheckoutSessionNameCollection
+public partial record PaymentPagesCheckoutSessionNameCollection
 {
     [JsonPropertyName("business")]
     public PaymentPagesCheckoutSessionBusinessName? Business { get; init; }
@@ -38919,7 +39493,7 @@ public record PaymentPagesCheckoutSessionNameCollection
 
 }
 
-public record PaymentPagesCheckoutSessionOptionalItem
+public partial record PaymentPagesCheckoutSessionOptionalItem
 {
     [JsonPropertyName("adjustable_quantity")]
     public PaymentPagesCheckoutSessionOptionalItemAdjustableQuantity? AdjustableQuantity { get; init; }
@@ -38932,7 +39506,7 @@ public record PaymentPagesCheckoutSessionOptionalItem
 
 }
 
-public record PaymentPagesCheckoutSessionOptionalItemAdjustableQuantity
+public partial record PaymentPagesCheckoutSessionOptionalItemAdjustableQuantity
 {
     /// <summary>
     /// Set to true if the quantity can be adjusted to any non-negative integer.
@@ -38954,7 +39528,7 @@ public record PaymentPagesCheckoutSessionOptionalItemAdjustableQuantity
 
 }
 
-public record PaymentPagesCheckoutSessionPaymentMethodReuseAgreement
+public partial record PaymentPagesCheckoutSessionPaymentMethodReuseAgreement
 {
     /// <summary>
     /// Determines the position and visibility of the payment method reuse agreement in the UI. When set to `auto`, Stripe's defaults will be used.
@@ -38966,7 +39540,7 @@ public record PaymentPagesCheckoutSessionPaymentMethodReuseAgreement
 
 }
 
-public record PaymentPagesCheckoutSessionPermissions
+public partial record PaymentPagesCheckoutSessionPermissions
 {
     /// <summary>
     /// Determines which entity is allowed to update the shipping details.
@@ -38980,7 +39554,7 @@ public record PaymentPagesCheckoutSessionPermissions
 
 }
 
-public record PaymentPagesCheckoutSessionPhoneNumberCollection
+public partial record PaymentPagesCheckoutSessionPhoneNumberCollection
 {
     /// <summary>
     /// Indicates whether phone number collection is enabled for the session
@@ -38990,7 +39564,7 @@ public record PaymentPagesCheckoutSessionPhoneNumberCollection
 
 }
 
-public record PaymentPagesCheckoutSessionSavedPaymentMethodOptions
+public partial record PaymentPagesCheckoutSessionSavedPaymentMethodOptions
 {
     /// <summary>
     /// Uses the `allow_redisplay` value of each saved payment method to filter the set presented to a returning customer. By default, only saved payment methods with ’allow_redisplay: ‘always’ are shown in Checkout.
@@ -39012,7 +39586,7 @@ public record PaymentPagesCheckoutSessionSavedPaymentMethodOptions
 
 }
 
-public record PaymentPagesCheckoutSessionShippingAddressCollection
+public partial record PaymentPagesCheckoutSessionShippingAddressCollection
 {
     /// <summary>
     /// An array of two-letter ISO country codes representing which countries Checkout should provide as options for
@@ -39023,7 +39597,7 @@ public record PaymentPagesCheckoutSessionShippingAddressCollection
 
 }
 
-public record PaymentPagesCheckoutSessionShippingCost
+public partial record PaymentPagesCheckoutSessionShippingCost
 {
     /// <summary>
     /// Total shipping cost before any discounts or taxes are applied.
@@ -39057,7 +39631,7 @@ public record PaymentPagesCheckoutSessionShippingCost
 
 }
 
-public record PaymentPagesCheckoutSessionShippingOption
+public partial record PaymentPagesCheckoutSessionShippingOption
 {
     /// <summary>
     /// A non-negative integer in cents representing how much to charge.
@@ -39073,10 +39647,10 @@ public record PaymentPagesCheckoutSessionShippingOption
 
 }
 
-public record PaymentPagesCheckoutSessionTaxId
+public partial record PaymentPagesCheckoutSessionTaxId
 {
     /// <summary>
-    /// The type of the tax ID, one of `ad_nrt`, `ar_cuit`, `eu_vat`, `bo_tin`, `br_cnpj`, `br_cpf`, `cn_tin`, `co_nit`, `cr_tin`, `do_rcn`, `ec_ruc`, `eu_oss_vat`, `hr_oib`, `pe_ruc`, `ro_tin`, `rs_pib`, `sv_nit`, `uy_ruc`, `ve_rif`, `vn_tin`, `gb_vat`, `nz_gst`, `au_abn`, `au_arn`, `in_gst`, `no_vat`, `no_voec`, `za_vat`, `ch_vat`, `mx_rfc`, `sg_uen`, `ru_inn`, `ru_kpp`, `ca_bn`, `hk_br`, `es_cif`, `pl_nip`, `it_cf`, `fo_vat`, `gi_tin`, `py_ruc`, `tw_vat`, `th_vat`, `jp_cn`, `jp_rn`, `jp_trn`, `li_uid`, `li_vat`, `lk_vat`, `my_itn`, `us_ein`, `kr_brn`, `ca_qst`, `ca_gst_hst`, `ca_pst_bc`, `ca_pst_mb`, `ca_pst_sk`, `my_sst`, `sg_gst`, `ae_trn`, `cl_tin`, `sa_vat`, `id_npwp`, `my_frp`, `il_vat`, `ge_vat`, `ua_vat`, `is_vat`, `bg_uic`, `hu_tin`, `si_tin`, `ke_pin`, `tr_tin`, `eg_tin`, `ph_tin`, `al_tin`, `bh_vat`, `kz_bin`, `ng_tin`, `om_vat`, `de_stn`, `ch_uid`, `tz_vat`, `uz_vat`, `uz_tin`, `md_vat`, `ma_vat`, `by_tin`, `ao_tin`, `bs_tin`, `bb_tin`, `cd_nif`, `mr_nif`, `me_pib`, `zw_tin`, `ba_tin`, `gn_nif`, `mk_vat`, `sr_fin`, `sn_ninea`, `am_tin`, `np_pan`, `tj_tin`, `ug_tin`, `zm_tin`, `kh_tin`, `aw_tin`, `az_tin`, `bd_bin`, `bj_ifu`, `et_tin`, `kg_tin`, `la_tin`, `cm_niu`, `cv_nif`, `bf_ifu`, or `unknown`
+    /// The type of the tax ID, one of `ad_nrt`, `ar_cuit`, `eu_vat`, `bo_tin`, `br_cnpj`, `br_cpf`, `cn_tin`, `co_nit`, `cr_tin`, `do_rcn`, `ec_ruc`, `eu_oss_vat`, `hr_oib`, `pe_ruc`, `ro_tin`, `rs_pib`, `sv_nit`, `uy_ruc`, `ve_rif`, `vn_tin`, `gb_vat`, `nz_gst`, `au_abn`, `au_arn`, `in_gst`, `no_vat`, `no_voec`, `za_vat`, `ch_vat`, `mx_rfc`, `sg_uen`, `ru_inn`, `ru_kpp`, `ca_bn`, `hk_br`, `es_cif`, `pl_nip`, `it_cf`, `fo_vat`, `gi_tin`, `py_ruc`, `tw_vat`, `th_vat`, `jp_cn`, `jp_rn`, `jp_trn`, `li_uid`, `li_vat`, `lk_vat`, `my_itn`, `us_ein`, `kr_brn`, `ca_qst`, `ca_gst_hst`, `ca_pst_bc`, `ca_pst_mb`, `ca_pst_sk`, `my_sst`, `sg_gst`, `ae_trn`, `cl_tin`, `sa_vat`, `id_npwp`, `my_frp`, `il_vat`, `ge_vat`, `ua_vat`, `is_vat`, `bg_uic`, `hu_tin`, `si_tin`, `ke_pin`, `tr_tin`, `eg_tin`, `ph_tin`, `al_tin`, `bh_vat`, `kz_bin`, `ng_tin`, `om_vat`, `de_stn`, `ch_uid`, `tz_vat`, `uz_vat`, `uz_tin`, `md_vat`, `ma_vat`, `by_tin`, `ao_tin`, `bs_tin`, `bb_tin`, `cd_nif`, `mr_nif`, `me_pib`, `zw_tin`, `ba_tin`, `gn_nif`, `mk_vat`, `sr_fin`, `sn_ninea`, `am_tin`, `np_pan`, `tj_tin`, `ug_tin`, `zm_tin`, `kh_tin`, `aw_tin`, `az_tin`, `bd_bin`, `bj_ifu`, `et_tin`, `kg_tin`, `la_tin`, `cm_niu`, `cv_nif`, `bf_ifu`, `ic_nif`, or `unknown`
     /// </summary>
     [JsonPropertyName("type")]
     public required InvoicesResourceInvoiceTaxIdType Type { get; init; }
@@ -39089,7 +39663,7 @@ public record PaymentPagesCheckoutSessionTaxId
 
 }
 
-public record PaymentPagesCheckoutSessionTaxIdCollection
+public partial record PaymentPagesCheckoutSessionTaxIdCollection
 {
     /// <summary>
     /// Indicates whether tax ID collection is enabled for the session
@@ -39105,7 +39679,7 @@ public record PaymentPagesCheckoutSessionTaxIdCollection
 
 }
 
-public record PaymentPagesCheckoutSessionTotalDetails
+public partial record PaymentPagesCheckoutSessionTotalDetails
 {
     /// <summary>
     /// This is the sum of all the discounts.
@@ -39130,7 +39704,7 @@ public record PaymentPagesCheckoutSessionTotalDetails
 
 }
 
-public record PaymentPagesCheckoutSessionTotalDetailsResourceBreakdown
+public partial record PaymentPagesCheckoutSessionTotalDetailsResourceBreakdown
 {
     /// <summary>
     /// The aggregated discounts.
@@ -39146,7 +39720,7 @@ public record PaymentPagesCheckoutSessionTotalDetailsResourceBreakdown
 
 }
 
-public record PaymentPagesPrivateCardPaymentMethodOptionsResourceRestrictions
+public partial record PaymentPagesPrivateCardPaymentMethodOptionsResourceRestrictions
 {
     /// <summary>
     /// The card brands to block. If a customer enters or selects a card belonging to a blocked brand, they can't complete the payment.
@@ -39162,7 +39736,7 @@ public record PaymentPagesPrivateCardPaymentMethodOptionsResourceRestrictions
 /// in order to mark an Invoice as paid and a Subscription as active. Payment Records consist of one or
 /// more Payment Attempt Records, which represent individual attempts made on a payment network.
 /// </summary>
-public record PaymentRecord
+public partial record PaymentRecord
 {
     /// <summary>
     /// A representation of an amount of money, consisting of an amount and a currency.
@@ -39299,12 +39873,12 @@ public record PaymentRecord
 [JsonDerivedType(typeof(BankAccount), "bank_account")]
 [JsonDerivedType(typeof(Card), "card")]
 [JsonDerivedType(typeof(Source), "source")]
-public abstract record PaymentSource;
+public abstract partial record PaymentSource;
 
 /// <summary>
 /// A representation of a physical address.
 /// </summary>
-public record PaymentsPrimitivesPaymentRecordsResourceAddress
+public partial record PaymentsPrimitivesPaymentRecordsResourceAddress
 {
     /// <summary>
     /// City, district, suburb, town, or village.
@@ -39347,7 +39921,7 @@ public record PaymentsPrimitivesPaymentRecordsResourceAddress
 /// <summary>
 /// A representation of an amount of money, consisting of an amount and a currency.
 /// </summary>
-public record PaymentsPrimitivesPaymentRecordsResourceAmount
+public partial record PaymentsPrimitivesPaymentRecordsResourceAmount
 {
     /// <summary>
     /// Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
@@ -39366,7 +39940,7 @@ public record PaymentsPrimitivesPaymentRecordsResourceAmount
 /// <summary>
 /// Billing details used by the customer for this payment.
 /// </summary>
-public record PaymentsPrimitivesPaymentRecordsResourceBillingDetails
+public partial record PaymentsPrimitivesPaymentRecordsResourceBillingDetails
 {
     /// <summary>
     /// A representation of a physical address.
@@ -39397,7 +39971,7 @@ public record PaymentsPrimitivesPaymentRecordsResourceBillingDetails
 /// <summary>
 /// Information about the customer for this payment.
 /// </summary>
-public record PaymentsPrimitivesPaymentRecordsResourceCustomerDetails
+public partial record PaymentsPrimitivesPaymentRecordsResourceCustomerDetails
 {
     /// <summary>
     /// ID of the Stripe Customer associated with this payment.
@@ -39425,7 +39999,7 @@ public record PaymentsPrimitivesPaymentRecordsResourceCustomerDetails
 
 }
 
-public record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodAlmaDetailsResourceInstallments
+public partial record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodAlmaDetailsResourceInstallments
 {
     /// <summary>
     /// The number of installments.
@@ -39435,7 +40009,7 @@ public record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodAlmaDetailsRe
 
 }
 
-public record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodAmazonPayDetailsResourceFunding
+public partial record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodAmazonPayDetailsResourceFunding
 {
     [JsonPropertyName("card")]
     public PaymentsPrimitivesPaymentRecordsResourcePaymentMethodAmazonPayDetailsResourceFundingResourceFundingCard? Card { get; init; }
@@ -39448,10 +40022,10 @@ public record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodAmazonPayDeta
 
 }
 
-public record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodAmazonPayDetailsResourceFundingResourceFundingCard
+public partial record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodAmazonPayDetailsResourceFundingResourceFundingCard
 {
     /// <summary>
-    /// Card brand. Can be `amex`, `cartes_bancaires`, `diners`, `discover`, `eftpos_au`, `jcb`, `link`, `mastercard`, `unionpay`, `visa` or `unknown`.
+    /// Card brand. Can be `American Express`, `Cartes Bancaires`, `Diners Club`, `Discover`, `Eftpos Australia`, `Girocard`, `JCB`, `MasterCard`, `UnionPay`, `Visa`, or `Unknown`.
     /// </summary>
     [JsonPropertyName("brand")]
     public string? Brand { get; init; }
@@ -39491,7 +40065,7 @@ public record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodAmazonPayDeta
 /// <summary>
 /// Details of the card used for this payment attempt.
 /// </summary>
-public record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardDetails
+public partial record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardDetails
 {
     /// <summary>
     /// The authorization code of the payment.
@@ -39524,12 +40098,6 @@ public record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardDetails
     public string? Country { get; init; }
 
     /// <summary>
-    /// A high-level description of the type of cards issued in this range.
-    /// </summary>
-    [JsonPropertyName("description")]
-    public string? Description { get; init; }
-
-    /// <summary>
     /// Two-digit number representing the card's expiration month.
     /// </summary>
     [JsonPropertyName("exp_month")]
@@ -39556,22 +40124,10 @@ public record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardDetails
     public PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardDetailsFunding? Funding { get; init; }
 
     /// <summary>
-    /// Issuer identification number of the card.
-    /// </summary>
-    [JsonPropertyName("iin")]
-    public string? Iin { get; init; }
-
-    /// <summary>
     /// Installment details for this payment.
     /// </summary>
     [JsonPropertyName("installments")]
     public PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardDetailsResourceInstallments? Installments { get; init; }
-
-    /// <summary>
-    /// The name of the card's issuing bank.
-    /// </summary>
-    [JsonPropertyName("issuer")]
-    public string? Issuer { get; init; }
 
     /// <summary>
     /// The last four digits of the card.
@@ -39610,12 +40166,6 @@ public record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardDetails
     public string? NetworkTransactionId { get; init; }
 
     /// <summary>
-    /// The transaction type that was passed for an off-session, Merchant-Initiated transaction, one of `recurring` or `unscheduled`.
-    /// </summary>
-    [JsonPropertyName("stored_credential_usage")]
-    public StoredCredentialUsage? StoredCredentialUsage { get; init; }
-
-    /// <summary>
     /// Populated if this transaction used 3D Secure authentication.
     /// </summary>
     [JsonPropertyName("three_d_secure")]
@@ -39629,7 +40179,7 @@ public record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardDetails
 
 }
 
-public record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardDetailsResourceChecks
+public partial record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardDetailsResourceChecks
 {
     /// <summary>
     /// If you provide a value for `address.line1`, the check result is one of `pass`, `fail`, `unavailable`, or `unchecked`.
@@ -39651,7 +40201,7 @@ public record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardDetailsRe
 
 }
 
-public record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardDetailsResourceInstallmentPlan
+public partial record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardDetailsResourceInstallmentPlan
 {
     /// <summary>
     /// For `fixed_count` installment plans, this is the number of installment payments your customer will make to their credit card.
@@ -39673,7 +40223,7 @@ public record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardDetailsRe
 
 }
 
-public record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardDetailsResourceInstallments
+public partial record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardDetailsResourceInstallments
 {
     /// <summary>
     /// Installment plan selected for the payment.
@@ -39683,7 +40233,7 @@ public record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardDetailsRe
 
 }
 
-public record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardDetailsResourceNetworkToken
+public partial record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardDetailsResourceNetworkToken
 {
     /// <summary>
     /// Indicates if Stripe used a network token, either user provided or Stripe managed when processing the transaction.
@@ -39693,7 +40243,7 @@ public record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardDetailsRe
 
 }
 
-public record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardDetailsResourceThreeDSecure
+public partial record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardDetailsResourceThreeDSecure
 {
     /// <summary>
     /// For authenticated transactions: Indicates how the issuing bank authenticated the customer.
@@ -39745,7 +40295,7 @@ public record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardDetailsRe
 
 }
 
-public record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardDetailsResourceWallet
+public partial record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardDetailsResourceWallet
 {
     [JsonPropertyName("apple_pay")]
     public PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardDetailsResourceWalletResourceApplePay? ApplePay { get; init; }
@@ -39767,7 +40317,7 @@ public record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardDetailsRe
 
 }
 
-public record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardDetailsResourceWalletResourceApplePay
+public partial record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardDetailsResourceWalletResourceApplePay
 {
     /// <summary>
     /// Type of the apple_pay transaction, one of `apple_pay` or `apple_pay_later`.
@@ -39777,7 +40327,7 @@ public record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardDetailsRe
 
 }
 
-public record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardDetailsResourceWalletResourceGooglePay
+public partial record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardDetailsResourceWalletResourceGooglePay
 {
 }
 
@@ -39786,7 +40336,7 @@ public record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardDetailsRe
 /// the Stripe API. This resource consists of details about the custom payment method
 /// used for this payment attempt.
 /// </summary>
-public record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCustomDetails
+public partial record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCustomDetails
 {
     /// <summary>
     /// Display name for the custom (user-defined) payment method type used to make this payment.
@@ -39805,7 +40355,7 @@ public record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCustomDetails
 /// <summary>
 /// Details about the Payment Method used in this payment attempt.
 /// </summary>
-public record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodDetails
+public partial record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodDetails
 {
     [JsonPropertyName("ach_credit_transfer")]
     public PaymentMethodDetailsAchCreditTransfer? AchCreditTransfer { get; init; }
@@ -39823,7 +40373,7 @@ public record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodDetails
     public PaymentMethodDetailsPaymentRecordAfterpayClearpay? AfterpayClearpay { get; init; }
 
     [JsonPropertyName("alipay")]
-    public PaymentFlowsPrivatePaymentMethodsAlipayDetails? Alipay { get; init; }
+    public PaymentMethodDetailsPaymentRecordAlipay? Alipay { get; init; }
 
     [JsonPropertyName("alma")]
     public PaymentMethodDetailsPaymentRecordAlma? Alma { get; init; }
@@ -39832,10 +40382,10 @@ public record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodDetails
     public PaymentMethodDetailsPaymentRecordAmazonPay? AmazonPay { get; init; }
 
     [JsonPropertyName("au_becs_debit")]
-    public PaymentMethodDetailsAuBecsDebit? AuBecsDebit { get; init; }
+    public PaymentMethodDetailsPaymentRecordAuBecsDebit? AuBecsDebit { get; init; }
 
     [JsonPropertyName("bacs_debit")]
-    public PaymentMethodDetailsBacsDebit? BacsDebit { get; init; }
+    public PaymentMethodDetailsPaymentRecordBacsDebit? BacsDebit { get; init; }
 
     [JsonPropertyName("bancontact")]
     public PaymentMethodDetailsPaymentRecordBancontact? Bancontact { get; init; }
@@ -39987,7 +40537,7 @@ public record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodDetails
     public PaymentMethodDetailsStripeAccount? StripeAccount { get; init; }
 
     [JsonPropertyName("sunbit")]
-    public PaymentMethodDetailsSunbit? Sunbit { get; init; }
+    public PaymentMethodDetailsPaymentRecordSunbit? Sunbit { get; init; }
 
     [JsonPropertyName("swish")]
     public PaymentMethodDetailsPaymentRecordSwish? Swish { get; init; }
@@ -40020,7 +40570,7 @@ public record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodDetails
 
 }
 
-public record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodKlarnaDetailsResourcePayerDetails
+public partial record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodKlarnaDetailsResourcePayerDetails
 {
     /// <summary>
     /// The payer's address
@@ -40030,7 +40580,7 @@ public record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodKlarnaDetails
 
 }
 
-public record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodKlarnaDetailsResourcePayerDetailsResourcePayerDetailsAddress
+public partial record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodKlarnaDetailsResourcePayerDetailsResourcePayerDetailsAddress
 {
     /// <summary>
     /// The payer address country
@@ -40040,7 +40590,7 @@ public record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodKlarnaDetails
 
 }
 
-public record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodKonbiniDetailsResourceStore
+public partial record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodKonbiniDetailsResourceStore
 {
     /// <summary>
     /// The name of the convenience store chain where the payment was completed.
@@ -40050,7 +40600,7 @@ public record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodKonbiniDetail
 
 }
 
-public record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodMobilepayDetailsResourceCard
+public partial record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodMobilepayDetailsResourceCard
 {
     /// <summary>
     /// Brand of the card used in the transaction
@@ -40084,7 +40634,7 @@ public record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodMobilepayDeta
 
 }
 
-public record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodRevolutPayDetailsResourceFunding
+public partial record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodRevolutPayDetailsResourceFunding
 {
     [JsonPropertyName("card")]
     public PaymentsPrimitivesPaymentRecordsResourcePaymentMethodRevolutPayDetailsResourceFundingResourceFundingCard? Card { get; init; }
@@ -40097,7 +40647,7 @@ public record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodRevolutPayDet
 
 }
 
-public record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodRevolutPayDetailsResourceFundingResourceFundingCard
+public partial record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodRevolutPayDetailsResourceFundingResourceFundingCard
 {
     /// <summary>
     /// Card brand. Can be `amex`, `cartes_bancaires`, `diners`, `discover`, `eftpos_au`, `jcb`, `link`, `mastercard`, `unionpay`, `visa` or `unknown`.
@@ -40140,7 +40690,7 @@ public record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodRevolutPayDet
 /// <summary>
 /// Processor information associated with this payment.
 /// </summary>
-public record PaymentsPrimitivesPaymentRecordsResourceProcessorDetails
+public partial record PaymentsPrimitivesPaymentRecordsResourceProcessorDetails
 {
     /// <summary>
     /// Custom processors represent payment processors not modeled directly in
@@ -40163,7 +40713,7 @@ public record PaymentsPrimitivesPaymentRecordsResourceProcessorDetails
 /// the Stripe API. This resource consists of details about the custom processor
 /// used for this payment attempt.
 /// </summary>
-public record PaymentsPrimitivesPaymentRecordsResourceProcessorDetailsResourceCustomDetails
+public partial record PaymentsPrimitivesPaymentRecordsResourceProcessorDetailsResourceCustomDetails
 {
     /// <summary>
     /// An opaque string for manual reconciliation of this payment, for example a check number or a payment processor ID.
@@ -40176,7 +40726,7 @@ public record PaymentsPrimitivesPaymentRecordsResourceProcessorDetailsResourceCu
 /// <summary>
 /// The customer's shipping information associated with this payment.
 /// </summary>
-public record PaymentsPrimitivesPaymentRecordsResourceShippingDetails
+public partial record PaymentsPrimitivesPaymentRecordsResourceShippingDetails
 {
     /// <summary>
     /// A representation of a physical address.
@@ -40208,7 +40758,7 @@ public record PaymentsPrimitivesPaymentRecordsResourceShippingDetails
 /// 
 /// Related guide: [Receiving payouts](https://docs.stripe.com/payouts)
 /// </summary>
-public record Payout
+public partial record Payout
 {
     /// <summary>
     /// The amount (in cents (or local equivalent)) that transfers to your bank account or debit card.
@@ -40374,7 +40924,7 @@ public record Payout
 
 }
 
-public record PayoutsTraceId
+public partial record PayoutsTraceId
 {
     /// <summary>
     /// Possible values are `pending`, `supported`, and `unsupported`. When `payout.status` is `pending` or `in_transit`, this will be `pending`. When the payout transitions to `paid`, `failed`, or `canceled`, this status will become `supported` or `unsupported` shortly after in most cases. In some cases, this may appear as `pending` for up to 10 days after `arrival_date` until transitioning to `supported` or `unsupported`.
@@ -40390,7 +40940,7 @@ public record PayoutsTraceId
 
 }
 
-public record PaypalSellerProtection
+public partial record PaypalSellerProtection
 {
     /// <summary>
     /// An array of conditions that are covered for the transaction, if applicable.
@@ -40413,7 +40963,7 @@ public record PaypalSellerProtection
 /// 
 /// See the [Standard onboarding](/connect/standard-accounts) or [Express onboarding](/connect/express-accounts) documentation for information about prefilling information and account onboarding steps. Learn more about [handling identity verification with the API](/connect/handling-api-verification#person-information).
 /// </summary>
-public record Person
+public partial record Person
 {
     /// <summary>
     /// The account the person is associated with.
@@ -40579,7 +41129,7 @@ public record Person
 
 }
 
-public record PersonAdditionalTosAcceptance
+public partial record PersonAdditionalTosAcceptance
 {
     /// <summary>
     /// The Unix timestamp marking when the legal guardian accepted the service agreement.
@@ -40601,7 +41151,7 @@ public record PersonAdditionalTosAcceptance
 
 }
 
-public record PersonAdditionalTosAcceptances
+public partial record PersonAdditionalTosAcceptances
 {
     /// <summary>
     /// Details on the legal guardian's acceptance of the main Stripe service agreement.
@@ -40611,7 +41161,7 @@ public record PersonAdditionalTosAcceptances
 
 }
 
-public record PersonEthnicityDetails
+public partial record PersonEthnicityDetails
 {
     /// <summary>
     /// The persons ethnicity
@@ -40627,7 +41177,7 @@ public record PersonEthnicityDetails
 
 }
 
-public record PersonFutureRequirements
+public partial record PersonFutureRequirements
 {
     /// <summary>
     /// Fields that are due and can be resolved by providing the corresponding alternative fields instead. Many alternatives can list the same `original_fields_due`, and any of these alternatives can serve as a pathway for attempting to resolve the fields again. Re-providing `original_fields_due` also serves as a pathway for attempting to resolve the fields again.
@@ -40642,7 +41192,7 @@ public record PersonFutureRequirements
     public required IReadOnlyList<string> CurrentlyDue { get; init; }
 
     /// <summary>
-    /// Details about validation and verification failures for `due` requirements that must be resolved.
+    /// Fields that are `currently_due` and need to be collected again because validation or verification failed.
     /// </summary>
     [JsonPropertyName("errors")]
     public required IReadOnlyList<AccountRequirementsError> Errors { get; init; }
@@ -40667,7 +41217,7 @@ public record PersonFutureRequirements
 
 }
 
-public record PersonRaceDetails
+public partial record PersonRaceDetails
 {
     /// <summary>
     /// The persons race.
@@ -40683,7 +41233,7 @@ public record PersonRaceDetails
 
 }
 
-public record PersonRelationship
+public partial record PersonRelationship
 {
     /// <summary>
     /// Whether the person is the authorizer of the account's representative.
@@ -40735,7 +41285,7 @@ public record PersonRelationship
 
 }
 
-public record PersonRequirements
+public partial record PersonRequirements
 {
     /// <summary>
     /// Fields that are due and can be resolved by providing the corresponding alternative fields instead. Many alternatives can list the same `original_fields_due`, and any of these alternatives can serve as a pathway for attempting to resolve the fields again. Re-providing `original_fields_due` also serves as a pathway for attempting to resolve the fields again.
@@ -40750,7 +41300,7 @@ public record PersonRequirements
     public required IReadOnlyList<string> CurrentlyDue { get; init; }
 
     /// <summary>
-    /// Details about validation and verification failures for `due` requirements that must be resolved.
+    /// Fields that are `currently_due` and need to be collected again because validation or verification failed.
     /// </summary>
     [JsonPropertyName("errors")]
     public required IReadOnlyList<AccountRequirementsError> Errors { get; init; }
@@ -40775,7 +41325,7 @@ public record PersonRequirements
 
 }
 
-public record PersonUsCfpbData
+public partial record PersonUsCfpbData
 {
     /// <summary>
     /// The persons ethnicity details
@@ -40807,7 +41357,7 @@ public record PersonUsCfpbData
 /// 
 /// Related guides: [Set up a subscription](https://docs.stripe.com/billing/subscriptions/set-up-subscription) and more about [products and prices](https://docs.stripe.com/products-prices/overview).
 /// </summary>
-public record Plan
+public partial record Plan
 {
     /// <summary>
     /// Whether the plan can be used for new purchases.
@@ -40931,7 +41481,7 @@ public record Plan
 
 }
 
-public record PlanTier
+public partial record PlanTier
 {
     /// <summary>
     /// Price for the entire tier.
@@ -40965,7 +41515,7 @@ public record PlanTier
 
 }
 
-public record PlatformEarningFeeSource
+public partial record PlatformEarningFeeSource
 {
     /// <summary>
     /// Charge ID that created this application fee.
@@ -40987,7 +41537,7 @@ public record PlatformEarningFeeSource
 
 }
 
-public record PortalBusinessProfile
+public partial record PortalBusinessProfile
 {
     /// <summary>
     /// The messaging shown to customers in the portal.
@@ -41009,7 +41559,7 @@ public record PortalBusinessProfile
 
 }
 
-public record PortalCustomerUpdate
+public partial record PortalCustomerUpdate
 {
     /// <summary>
     /// The types of customer updates that are supported. When empty, customers are not updateable.
@@ -41025,7 +41575,7 @@ public record PortalCustomerUpdate
 
 }
 
-public record PortalFeatures
+public partial record PortalFeatures
 {
     [JsonPropertyName("customer_update")]
     public required PortalCustomerUpdate CustomerUpdate { get; init; }
@@ -41044,7 +41594,7 @@ public record PortalFeatures
 
 }
 
-public record PortalFlowsAfterCompletionHostedConfirmation
+public partial record PortalFlowsAfterCompletionHostedConfirmation
 {
     /// <summary>
     /// A custom message to display to the customer after the flow is completed.
@@ -41054,7 +41604,7 @@ public record PortalFlowsAfterCompletionHostedConfirmation
 
 }
 
-public record PortalFlowsAfterCompletionRedirect
+public partial record PortalFlowsAfterCompletionRedirect
 {
     /// <summary>
     /// The URL the customer will be redirected to after the flow is completed.
@@ -41064,7 +41614,7 @@ public record PortalFlowsAfterCompletionRedirect
 
 }
 
-public record PortalFlowsCouponOffer
+public partial record PortalFlowsCouponOffer
 {
     /// <summary>
     /// The ID of the coupon to be offered.
@@ -41074,7 +41624,7 @@ public record PortalFlowsCouponOffer
 
 }
 
-public record PortalFlowsFlow
+public partial record PortalFlowsFlow
 {
     [JsonPropertyName("after_completion")]
     public required PortalFlowsFlowAfterCompletion AfterCompletion { get; init; }
@@ -41105,7 +41655,7 @@ public record PortalFlowsFlow
 
 }
 
-public record PortalFlowsFlowAfterCompletion
+public partial record PortalFlowsFlowAfterCompletion
 {
     /// <summary>
     /// Configuration when `after_completion.type=hosted_confirmation`.
@@ -41127,7 +41677,7 @@ public record PortalFlowsFlowAfterCompletion
 
 }
 
-public record PortalFlowsFlowSubscriptionCancel
+public partial record PortalFlowsFlowSubscriptionCancel
 {
     /// <summary>
     /// Specify a retention strategy to be used in the cancellation flow.
@@ -41143,7 +41693,7 @@ public record PortalFlowsFlowSubscriptionCancel
 
 }
 
-public record PortalFlowsFlowSubscriptionUpdate
+public partial record PortalFlowsFlowSubscriptionUpdate
 {
     /// <summary>
     /// The ID of the subscription to be updated.
@@ -41153,7 +41703,7 @@ public record PortalFlowsFlowSubscriptionUpdate
 
 }
 
-public record PortalFlowsFlowSubscriptionUpdateConfirm
+public partial record PortalFlowsFlowSubscriptionUpdateConfirm
 {
     /// <summary>
     /// The coupon or promotion code to apply to this subscription update.
@@ -41175,7 +41725,7 @@ public record PortalFlowsFlowSubscriptionUpdateConfirm
 
 }
 
-public record PortalFlowsRetention
+public partial record PortalFlowsRetention
 {
     /// <summary>
     /// Configuration when `retention.type=coupon_offer`.
@@ -41191,7 +41741,7 @@ public record PortalFlowsRetention
 
 }
 
-public record PortalFlowsSubscriptionUpdateConfirmDiscount
+public partial record PortalFlowsSubscriptionUpdateConfirmDiscount
 {
     /// <summary>
     /// The ID of the coupon to apply to this subscription update.
@@ -41207,7 +41757,7 @@ public record PortalFlowsSubscriptionUpdateConfirmDiscount
 
 }
 
-public record PortalFlowsSubscriptionUpdateConfirmItem
+public partial record PortalFlowsSubscriptionUpdateConfirmItem
 {
     /// <summary>
     /// The ID of the [subscription item](https://docs.stripe.com/api/subscriptions/object#subscription_object-items-data-id) to be updated.
@@ -41229,7 +41779,7 @@ public record PortalFlowsSubscriptionUpdateConfirmItem
 
 }
 
-public record PortalInvoiceList
+public partial record PortalInvoiceList
 {
     /// <summary>
     /// Whether the feature is enabled.
@@ -41239,7 +41789,7 @@ public record PortalInvoiceList
 
 }
 
-public record PortalLoginPage
+public partial record PortalLoginPage
 {
     /// <summary>
     /// If `true`, a shareable `url` will be generated that will take your customers to a hosted login page for the customer portal.
@@ -41257,7 +41807,7 @@ public record PortalLoginPage
 
 }
 
-public record PortalPaymentMethodUpdate
+public partial record PortalPaymentMethodUpdate
 {
     /// <summary>
     /// Whether the feature is enabled.
@@ -41273,7 +41823,7 @@ public record PortalPaymentMethodUpdate
 
 }
 
-public record PortalResourceScheduleUpdateAtPeriodEnd
+public partial record PortalResourceScheduleUpdateAtPeriodEnd
 {
     /// <summary>
     /// List of conditions. When any condition is true, an update will be scheduled at the end of the current period.
@@ -41283,7 +41833,7 @@ public record PortalResourceScheduleUpdateAtPeriodEnd
 
 }
 
-public record PortalResourceScheduleUpdateAtPeriodEndCondition
+public partial record PortalResourceScheduleUpdateAtPeriodEndCondition
 {
     /// <summary>
     /// The type of condition.
@@ -41293,7 +41843,7 @@ public record PortalResourceScheduleUpdateAtPeriodEndCondition
 
 }
 
-public record PortalSubscriptionCancel
+public partial record PortalSubscriptionCancel
 {
     [JsonPropertyName("cancellation_reason")]
     public required PortalSubscriptionCancellationReason CancellationReason { get; init; }
@@ -41318,7 +41868,7 @@ public record PortalSubscriptionCancel
 
 }
 
-public record PortalSubscriptionCancellationReason
+public partial record PortalSubscriptionCancellationReason
 {
     /// <summary>
     /// Whether the feature is enabled.
@@ -41334,7 +41884,7 @@ public record PortalSubscriptionCancellationReason
 
 }
 
-public record PortalSubscriptionUpdate
+public partial record PortalSubscriptionUpdate
 {
     /// <summary>
     /// Determines the value to use for the billing cycle anchor on subscription updates. Valid values are `now` or `unchanged`, and the default value is `unchanged`. Setting the value to `now` resets the subscription's billing cycle anchor to the current time (in UTC). For more information, see the billing cycle [documentation](https://docs.stripe.com/billing/subscriptions/billing-cycle).
@@ -41377,7 +41927,7 @@ public record PortalSubscriptionUpdate
 
 }
 
-public record PortalSubscriptionUpdateProduct
+public partial record PortalSubscriptionUpdateProduct
 {
     [JsonPropertyName("adjustable_quantity")]
     public required PortalSubscriptionUpdateProductAdjustableQuantity AdjustableQuantity { get; init; }
@@ -41396,7 +41946,7 @@ public record PortalSubscriptionUpdateProduct
 
 }
 
-public record PortalSubscriptionUpdateProductAdjustableQuantity
+public partial record PortalSubscriptionUpdateProductAdjustableQuantity
 {
     /// <summary>
     /// If true, the quantity can be adjusted to any non-negative integer.
@@ -41426,7 +41976,7 @@ public record PortalSubscriptionUpdateProductAdjustableQuantity
 /// 
 /// Related guides: [Set up a subscription](https://docs.stripe.com/billing/subscriptions/set-up-subscription), [create an invoice](https://docs.stripe.com/billing/invoices/create), and more about [products and prices](https://docs.stripe.com/products-prices/overview).
 /// </summary>
-public record Price
+public partial record Price
 {
     /// <summary>
     /// Whether the price can be used for new purchases.
@@ -41556,7 +42106,7 @@ public record Price
 
 }
 
-public record PriceTier
+public partial record PriceTier
 {
     /// <summary>
     /// Price for the entire tier.
@@ -41600,7 +42150,7 @@ public record PriceTier
 /// [accept payments with Checkout](https://docs.stripe.com/payments/accept-a-payment#create-product-prices-upfront),
 /// and more about [Products and Prices](https://docs.stripe.com/products-prices/overview)
 /// </summary>
-public record Product
+public partial record Product
 {
     /// <summary>
     /// Whether the product is currently available for purchase.
@@ -41716,7 +42266,7 @@ public record Product
 /// A product_feature represents an attachment between a feature and a product.
 /// When a product is purchased that has a feature attached, Stripe will create an entitlement to the feature for the purchasing customer.
 /// </summary>
-public record ProductFeature
+public partial record ProductFeature
 {
     /// <summary>
     /// A feature represents a monetizable ability or functionality in your system.
@@ -41745,7 +42295,7 @@ public record ProductFeature
 
 }
 
-public record ProductMarketingFeature
+public partial record ProductMarketingFeature
 {
     /// <summary>
     /// The marketing feature name. Up to 80 characters long.
@@ -41762,7 +42312,7 @@ public record ProductMarketingFeature
 /// If you enable promotion codes in your [customer portal configuration](https://docs.stripe.com/customer-management/configure-portal), then customers can redeem a code themselves when updating a subscription in the portal.
 /// Customers can also view the currently active promotion codes and coupons on each of their subscriptions in the portal.
 /// </summary>
-public record PromotionCode
+public partial record PromotionCode
 {
     /// <summary>
     /// Whether the promotion code is currently active. A promotion code is only active if the coupon is also valid.
@@ -41844,7 +42394,7 @@ public record PromotionCode
 
 }
 
-public record PromotionCodeCurrencyOption
+public partial record PromotionCodeCurrencyOption
 {
     /// <summary>
     /// Minimum amount required to redeem this Promotion Code into a Coupon (e.g., a purchase must be $100 or more to work).
@@ -41854,7 +42404,7 @@ public record PromotionCodeCurrencyOption
 
 }
 
-public record PromotionCodesResourcePromotion
+public partial record PromotionCodesResourcePromotion
 {
     /// <summary>
     /// If promotion `type` is `coupon`, the coupon for this promotion.
@@ -41870,7 +42420,7 @@ public record PromotionCodesResourcePromotion
 
 }
 
-public record PromotionCodesResourceRestrictions
+public partial record PromotionCodesResourceRestrictions
 {
     /// <summary>
     /// Promotion code restrictions defined in each available currency option. Each key must be a three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html) and a [supported currency](https://stripe.com/docs/currencies).
@@ -41898,7 +42448,7 @@ public record PromotionCodesResourceRestrictions
 
 }
 
-public record ProrationDetails
+public partial record ProrationDetails
 {
     /// <summary>
     /// For a credit proration, links to the debit invoice line items or invoice item that the credit applies to.
@@ -41918,7 +42468,7 @@ public record ProrationDetails
 /// A Quote is a way to model prices that you'd like to provide to a customer.
 /// Once accepted, it will automatically create an invoice, subscription or subscription schedule.
 /// </summary>
-public record Quote
+public partial record Quote
 {
     /// <summary>
     /// Total before any discounts or taxes are applied.
@@ -42120,7 +42670,7 @@ public record Quote
 
 }
 
-public record QuotesResourceAutomaticTax
+public partial record QuotesResourceAutomaticTax
 {
     /// <summary>
     /// Automatically calculate taxes
@@ -42148,7 +42698,7 @@ public record QuotesResourceAutomaticTax
 
 }
 
-public record QuotesResourceComputed
+public partial record QuotesResourceComputed
 {
     /// <summary>
     /// The definitive totals and line items the customer will be charged on a recurring basis. Takes into account the line items with recurring prices and discounts with `duration=forever` coupons only. Defaults to `null` if no inputted line items with recurring prices.
@@ -42161,7 +42711,7 @@ public record QuotesResourceComputed
 
 }
 
-public record QuotesResourceFromQuote
+public partial record QuotesResourceFromQuote
 {
     /// <summary>
     /// Whether this quote is a revision of a different quote.
@@ -42177,7 +42727,7 @@ public record QuotesResourceFromQuote
 
 }
 
-public record QuotesResourceRecurring
+public partial record QuotesResourceRecurring
 {
     /// <summary>
     /// Total before any discounts or taxes are applied.
@@ -42208,7 +42758,7 @@ public record QuotesResourceRecurring
 
 }
 
-public record QuotesResourceStatusTransitions
+public partial record QuotesResourceStatusTransitions
 {
     /// <summary>
     /// The time that the quote was accepted. Measured in seconds since Unix epoch.
@@ -42233,7 +42783,7 @@ public record QuotesResourceStatusTransitions
 /// <summary>
 /// The billing mode of the quote.
 /// </summary>
-public record QuotesResourceSubscriptionDataBillingMode
+public partial record QuotesResourceSubscriptionDataBillingMode
 {
     [JsonPropertyName("flexible")]
     public SubscriptionsResourceBillingModeFlexible? Flexible { get; init; }
@@ -42246,7 +42796,7 @@ public record QuotesResourceSubscriptionDataBillingMode
 
 }
 
-public record QuotesResourceSubscriptionDataSubscriptionData
+public partial record QuotesResourceSubscriptionDataSubscriptionData
 {
     /// <summary>
     /// The billing mode of the quote.
@@ -42280,7 +42830,7 @@ public record QuotesResourceSubscriptionDataSubscriptionData
 
 }
 
-public record QuotesResourceTotalDetails
+public partial record QuotesResourceTotalDetails
 {
     /// <summary>
     /// This is the sum of all the discounts.
@@ -42305,7 +42855,7 @@ public record QuotesResourceTotalDetails
 
 }
 
-public record QuotesResourceTotalDetailsResourceBreakdown
+public partial record QuotesResourceTotalDetailsResourceBreakdown
 {
     /// <summary>
     /// The aggregated discounts.
@@ -42321,7 +42871,7 @@ public record QuotesResourceTotalDetailsResourceBreakdown
 
 }
 
-public record QuotesResourceTransferData
+public partial record QuotesResourceTransferData
 {
     /// <summary>
     /// The amount in cents (or local equivalent) that will be transferred to the destination account when the invoice is paid. By default, the entire amount is transferred to the destination.
@@ -42343,7 +42893,7 @@ public record QuotesResourceTransferData
 
 }
 
-public record QuotesResourceUpfront
+public partial record QuotesResourceUpfront
 {
     /// <summary>
     /// Total before any discounts or taxes are applied.
@@ -42374,7 +42924,7 @@ public record QuotesResourceUpfront
 /// 
 /// Related guide: [Early fraud warnings](https://docs.stripe.com/disputes/measuring#early-fraud-warnings)
 /// </summary>
-public record RadarEarlyFraudWarning
+public partial record RadarEarlyFraudWarning
 {
     /// <summary>
     /// An EFW is actionable if it has not received a dispute and has not been fully refunded. You may wish to proactively refund a charge that receives an EFW, in order to avoid receiving a dispute later.
@@ -42429,7 +42979,7 @@ public record RadarEarlyFraudWarning
 /// <summary>
 /// Payment Evaluations represent the risk lifecycle of an externally processed payment. It includes the Radar risk score from Stripe, payment outcome taken by the merchant or processor, and any post transaction events, such as refunds or disputes. See the [Radar API guide](/radar/multiprocessor) for integration steps.
 /// </summary>
-public record RadarPaymentEvaluation
+public partial record RadarPaymentEvaluation
 {
     /// <summary>
     /// Client device metadata attached to this payment evaluation.
@@ -42510,7 +43060,7 @@ public record RadarPaymentEvaluation
 /// 
 /// Related guide: [Default Stripe lists](https://docs.stripe.com/radar/lists#managing-list-items)
 /// </summary>
-public record RadarValueList
+public partial record RadarValueList
 {
     /// <summary>
     /// The name of the value list for use in rules.
@@ -42579,7 +43129,7 @@ public record RadarValueList
 /// 
 /// Related guide: [Managing list items](https://docs.stripe.com/radar/lists#managing-list-items)
 /// </summary>
-public record RadarValueListItem
+public partial record RadarValueListItem
 {
     /// <summary>
     /// Time at which the object was created. Measured in seconds since the Unix epoch.
@@ -42628,7 +43178,7 @@ public record RadarValueListItem
 /// <summary>
 /// Options to configure Radar. See [Radar Session](https://docs.stripe.com/radar/radar-session) for more information.
 /// </summary>
-public record RadarRadarOptions
+public partial record RadarRadarOptions
 {
     /// <summary>
     /// A [Radar Session](https://docs.stripe.com/radar/radar-session) is a snapshot of the browser metadata and device details that help Radar make more accurate predictions on your payments.
@@ -42638,7 +43188,7 @@ public record RadarRadarOptions
 
 }
 
-public record RadarReviewResourceLocation
+public partial record RadarReviewResourceLocation
 {
     /// <summary>
     /// The city where the payment originated.
@@ -42672,7 +43222,7 @@ public record RadarReviewResourceLocation
 
 }
 
-public record RadarReviewResourceSession
+public partial record RadarReviewResourceSession
 {
     /// <summary>
     /// The browser used in this browser session (e.g., `Chrome`).
@@ -42700,7 +43250,7 @@ public record RadarReviewResourceSession
 
 }
 
-public record ReceivedPaymentMethodDetailsFinancialAccount
+public partial record ReceivedPaymentMethodDetailsFinancialAccount
 {
     /// <summary>
     /// The FinancialAccount ID.
@@ -42716,7 +43266,7 @@ public record ReceivedPaymentMethodDetailsFinancialAccount
 
 }
 
-public record Recurring
+public partial record Recurring
 {
     /// <summary>
     /// The frequency at which a subscription is billed. One of `day`, `week`, `month` or `year`.
@@ -42751,7 +43301,7 @@ public record Recurring
 /// 
 /// Related guide: [Refunds](https://docs.stripe.com/refunds)
 /// </summary>
-public record Refund
+public partial record Refund
 {
     /// <summary>
     /// Amount, in cents (or local equivalent).
@@ -42782,6 +43332,18 @@ public record Refund
     /// </summary>
     [JsonPropertyName("currency")]
     public required string Currency { get; init; }
+
+    /// <summary>
+    /// ID of the customer of this refund.
+    /// </summary>
+    [JsonPropertyName("customer")]
+    public object? Customer { get; init; }
+
+    /// <summary>
+    /// ID of the account of this refund.
+    /// </summary>
+    [JsonPropertyName("customer_account")]
+    public string? CustomerAccount { get; init; }
 
     /// <summary>
     /// An arbitrary string attached to the object. You can use this for displaying to users (available on non-card refunds only).
@@ -42838,6 +43400,12 @@ public record Refund
     public object? PaymentIntent { get; init; }
 
     /// <summary>
+    /// ID of the payment method associated with this refund.
+    /// </summary>
+    [JsonPropertyName("payment_method")]
+    public object? PaymentMethod { get; init; }
+
+    /// <summary>
     /// Provides the reason for why the refund is pending. Possible values are: `processing`, `insufficient_funds`, or `charge_pending`.
     /// </summary>
     [JsonPropertyName("pending_reason")]
@@ -42878,7 +43446,7 @@ public record Refund
 
 }
 
-public record RefundDestinationDetails
+public partial record RefundDestinationDetails
 {
     [JsonPropertyName("affirm")]
     public DestinationDetailsUnimplemented? Affirm { get; init; }
@@ -42996,7 +43564,7 @@ public record RefundDestinationDetails
 
 }
 
-public record RefundDestinationDetailsBlik
+public partial record RefundDestinationDetailsBlik
 {
     /// <summary>
     /// For refunds declined by the network, a decline code provided by the network which indicates the reason the refund failed.
@@ -43018,7 +43586,7 @@ public record RefundDestinationDetailsBlik
 
 }
 
-public record RefundDestinationDetailsBrBankTransfer
+public partial record RefundDestinationDetailsBrBankTransfer
 {
     /// <summary>
     /// The reference assigned to the refund.
@@ -43034,7 +43602,7 @@ public record RefundDestinationDetailsBrBankTransfer
 
 }
 
-public record RefundDestinationDetailsCard
+public partial record RefundDestinationDetailsCard
 {
     /// <summary>
     /// Value of the reference number assigned to the refund.
@@ -43062,7 +43630,7 @@ public record RefundDestinationDetailsCard
 
 }
 
-public record RefundDestinationDetailsCrypto
+public partial record RefundDestinationDetailsCrypto
 {
     /// <summary>
     /// The transaction hash of the refund.
@@ -43072,7 +43640,7 @@ public record RefundDestinationDetailsCrypto
 
 }
 
-public record RefundDestinationDetailsEuBankTransfer
+public partial record RefundDestinationDetailsEuBankTransfer
 {
     /// <summary>
     /// The reference assigned to the refund.
@@ -43088,7 +43656,7 @@ public record RefundDestinationDetailsEuBankTransfer
 
 }
 
-public record RefundDestinationDetailsGbBankTransfer
+public partial record RefundDestinationDetailsGbBankTransfer
 {
     /// <summary>
     /// The reference assigned to the refund.
@@ -43104,7 +43672,7 @@ public record RefundDestinationDetailsGbBankTransfer
 
 }
 
-public record RefundDestinationDetailsJpBankTransfer
+public partial record RefundDestinationDetailsJpBankTransfer
 {
     /// <summary>
     /// The reference assigned to the refund.
@@ -43120,7 +43688,7 @@ public record RefundDestinationDetailsJpBankTransfer
 
 }
 
-public record RefundDestinationDetailsMbWay
+public partial record RefundDestinationDetailsMbWay
 {
     /// <summary>
     /// The reference assigned to the refund.
@@ -43136,7 +43704,7 @@ public record RefundDestinationDetailsMbWay
 
 }
 
-public record RefundDestinationDetailsMultibanco
+public partial record RefundDestinationDetailsMultibanco
 {
     /// <summary>
     /// The reference assigned to the refund.
@@ -43152,7 +43720,7 @@ public record RefundDestinationDetailsMultibanco
 
 }
 
-public record RefundDestinationDetailsMxBankTransfer
+public partial record RefundDestinationDetailsMxBankTransfer
 {
     /// <summary>
     /// The reference assigned to the refund.
@@ -43168,7 +43736,7 @@ public record RefundDestinationDetailsMxBankTransfer
 
 }
 
-public record RefundDestinationDetailsP24
+public partial record RefundDestinationDetailsP24
 {
     /// <summary>
     /// The reference assigned to the refund.
@@ -43184,7 +43752,7 @@ public record RefundDestinationDetailsP24
 
 }
 
-public record RefundDestinationDetailsPaypal
+public partial record RefundDestinationDetailsPaypal
 {
     /// <summary>
     /// For refunds declined by the network, a decline code provided by the network which indicates the reason the refund failed.
@@ -43194,7 +43762,7 @@ public record RefundDestinationDetailsPaypal
 
 }
 
-public record RefundDestinationDetailsSwish
+public partial record RefundDestinationDetailsSwish
 {
     /// <summary>
     /// For refunds declined by the network, a decline code provided by the network which indicates the reason the refund failed.
@@ -43216,7 +43784,7 @@ public record RefundDestinationDetailsSwish
 
 }
 
-public record RefundDestinationDetailsThBankTransfer
+public partial record RefundDestinationDetailsThBankTransfer
 {
     /// <summary>
     /// The reference assigned to the refund.
@@ -43232,7 +43800,7 @@ public record RefundDestinationDetailsThBankTransfer
 
 }
 
-public record RefundDestinationDetailsUsBankTransfer
+public partial record RefundDestinationDetailsUsBankTransfer
 {
     /// <summary>
     /// The reference assigned to the refund.
@@ -43248,7 +43816,7 @@ public record RefundDestinationDetailsUsBankTransfer
 
 }
 
-public record RefundNextAction
+public partial record RefundNextAction
 {
     [JsonPropertyName("display_details")]
     public RefundNextActionDisplayDetails? DisplayDetails { get; init; }
@@ -43261,7 +43829,7 @@ public record RefundNextAction
 
 }
 
-public record RefundNextActionDisplayDetails
+public partial record RefundNextActionDisplayDetails
 {
     [JsonPropertyName("email_sent")]
     public required EmailSent EmailSent { get; init; }
@@ -43284,7 +43852,7 @@ public record RefundNextActionDisplayDetails
 /// Note that certain report types can only be run based on your live-mode data (not test-mode
 /// data), and will error when queried without a [live-mode API key](https://docs.stripe.com/keys#test-live-modes).
 /// </summary>
-public record ReportingReportRun
+public partial record ReportingReportRun
 {
     /// <summary>
     /// Time at which the object was created. Measured in seconds since the Unix epoch.
@@ -43360,7 +43928,7 @@ public record ReportingReportRun
 /// Note that certain report types can only be run based on your live-mode data (not test-mode
 /// data), and will error when queried without a [live-mode API key](https://docs.stripe.com/keys#test-live-modes).
 /// </summary>
-public record ReportingReportType
+public partial record ReportingReportType
 {
     /// <summary>
     /// Most recent time for which this Report Type is available. Measured in seconds since the Unix epoch.
@@ -43418,7 +43986,7 @@ public record ReportingReportType
 
 }
 
-public record ReserveTransaction
+public partial record ReserveTransaction
 {
     [JsonPropertyName("amount")]
     public required int Amount { get; init; }
@@ -43455,7 +44023,7 @@ public record ReserveTransaction
 /// Learn more about [Radar](/radar) and reviewing payments
 /// [here](https://docs.stripe.com/radar/reviews).
 /// </summary>
-public record Review
+public partial record Review
 {
     /// <summary>
     /// The ZIP or postal code of the card used, if applicable.
@@ -43543,7 +44111,7 @@ public record Review
 
 }
 
-public record RevolutPayUnderlyingPaymentMethodFundingDetails
+public partial record RevolutPayUnderlyingPaymentMethodFundingDetails
 {
     [JsonPropertyName("card")]
     public PaymentMethodDetailsPassthroughCard? Card { get; init; }
@@ -43556,7 +44124,7 @@ public record RevolutPayUnderlyingPaymentMethodFundingDetails
 
 }
 
-public record Rule
+public partial record Rule
 {
     /// <summary>
     /// The action taken on the payment.
@@ -43584,7 +44152,7 @@ public record Rule
 /// runs. The webhook contains a `ScheduledQueryRun` object, which you can use to
 /// retrieve the query results.
 /// </summary>
-public record ScheduledQueryRun
+public partial record ScheduledQueryRun
 {
     /// <summary>
     /// Time at which the object was created. Measured in seconds since the Unix epoch.
@@ -43651,7 +44219,7 @@ public record ScheduledQueryRun
 
 }
 
-public record SchedulesPhaseAutomaticTax
+public partial record SchedulesPhaseAutomaticTax
 {
     /// <summary>
     /// If Stripe disabled automatic tax, this enum describes why.
@@ -43673,7 +44241,7 @@ public record SchedulesPhaseAutomaticTax
 
 }
 
-public record SecretServiceResourceScope
+public partial record SecretServiceResourceScope
 {
     /// <summary>
     /// The secret scope type.
@@ -43689,7 +44257,7 @@ public record SecretServiceResourceScope
 
 }
 
-public record SepaDebitGeneratedFrom
+public partial record SepaDebitGeneratedFrom
 {
     /// <summary>
     /// The ID of the Charge that generated this PaymentMethod, if any.
@@ -43711,7 +44279,7 @@ public record SepaDebitGeneratedFrom
 /// SetupAttempts to inspect details of a specific attempt at setting up a
 /// payment method using a SetupIntent.
 /// </summary>
-public record SetupAttempt
+public partial record SetupAttempt
 {
     /// <summary>
     /// The value of [application](https://docs.stripe.com/api/setup_intents/object#setup_intent_object-application) on the SetupIntent at the time of this confirmation.
@@ -43812,7 +44380,7 @@ public record SetupAttempt
 
 }
 
-public record SetupAttemptPaymentMethodDetails
+public partial record SetupAttemptPaymentMethodDetails
 {
     [JsonPropertyName("acss_debit")]
     public SetupAttemptPaymentMethodDetailsAcssDebit? AcssDebit { get; init; }
@@ -43874,6 +44442,9 @@ public record SetupAttemptPaymentMethodDetails
     [JsonPropertyName("revolut_pay")]
     public SetupAttemptPaymentMethodDetailsRevolutPay? RevolutPay { get; init; }
 
+    [JsonPropertyName("satispay")]
+    public PaymentFlowsPrivatePaymentMethodsSatispaySetupAttemptDetails? Satispay { get; init; }
+
     [JsonPropertyName("sepa_debit")]
     public SetupAttemptPaymentMethodDetailsSepaDebit? SepaDebit { get; init; }
 
@@ -43897,23 +44468,23 @@ public record SetupAttemptPaymentMethodDetails
 
 }
 
-public record SetupAttemptPaymentMethodDetailsAcssDebit
+public partial record SetupAttemptPaymentMethodDetailsAcssDebit
 {
 }
 
-public record SetupAttemptPaymentMethodDetailsAmazonPay
+public partial record SetupAttemptPaymentMethodDetailsAmazonPay
 {
 }
 
-public record SetupAttemptPaymentMethodDetailsAuBecsDebit
+public partial record SetupAttemptPaymentMethodDetailsAuBecsDebit
 {
 }
 
-public record SetupAttemptPaymentMethodDetailsBacsDebit
+public partial record SetupAttemptPaymentMethodDetailsBacsDebit
 {
 }
 
-public record SetupAttemptPaymentMethodDetailsBancontact
+public partial record SetupAttemptPaymentMethodDetailsBancontact
 {
     /// <summary>
     /// Bank code of bank associated with the bank account.
@@ -43967,11 +44538,11 @@ public record SetupAttemptPaymentMethodDetailsBancontact
 
 }
 
-public record SetupAttemptPaymentMethodDetailsBoleto
+public partial record SetupAttemptPaymentMethodDetailsBoleto
 {
 }
 
-public record SetupAttemptPaymentMethodDetailsCard
+public partial record SetupAttemptPaymentMethodDetailsCard
 {
     /// <summary>
     /// Card brand. Can be `amex`, `cartes_bancaires`, `diners`, `discover`, `eftpos_au`, `jcb`, `link`, `mastercard`, `unionpay`, `visa` or `unknown`.
@@ -44043,7 +44614,7 @@ public record SetupAttemptPaymentMethodDetailsCard
 
 }
 
-public record SetupAttemptPaymentMethodDetailsCardChecks
+public partial record SetupAttemptPaymentMethodDetailsCardChecks
 {
     /// <summary>
     /// If a address line1 was provided, results of the check, one of `pass`, `fail`, `unavailable`, or `unchecked`.
@@ -44065,7 +44636,7 @@ public record SetupAttemptPaymentMethodDetailsCardChecks
 
 }
 
-public record SetupAttemptPaymentMethodDetailsCardPresent
+public partial record SetupAttemptPaymentMethodDetailsCardPresent
 {
     /// <summary>
     /// The ID of the Card PaymentMethod which was generated by this SetupAttempt.
@@ -44081,7 +44652,7 @@ public record SetupAttemptPaymentMethodDetailsCardPresent
 
 }
 
-public record SetupAttemptPaymentMethodDetailsCardWallet
+public partial record SetupAttemptPaymentMethodDetailsCardWallet
 {
     [JsonPropertyName("apple_pay")]
     public PaymentMethodDetailsCardWalletApplePay? ApplePay { get; init; }
@@ -44097,11 +44668,11 @@ public record SetupAttemptPaymentMethodDetailsCardWallet
 
 }
 
-public record SetupAttemptPaymentMethodDetailsCashapp
+public partial record SetupAttemptPaymentMethodDetailsCashapp
 {
 }
 
-public record SetupAttemptPaymentMethodDetailsIdeal
+public partial record SetupAttemptPaymentMethodDetailsIdeal
 {
     /// <summary>
     /// The customer's bank. Can be one of `abn_amro`, `adyen`, `asn_bank`, `bunq`, `buut`, `finom`, `handelsbanken`, `ing`, `knab`, `mollie`, `moneyou`, `n26`, `nn`, `rabobank`, `regiobank`, `revolut`, `sns_bank`, `triodos_bank`, `van_lanschot`, or `yoursafe`.
@@ -44142,23 +44713,23 @@ public record SetupAttemptPaymentMethodDetailsIdeal
 
 }
 
-public record SetupAttemptPaymentMethodDetailsKakaoPay
+public partial record SetupAttemptPaymentMethodDetailsKakaoPay
 {
 }
 
-public record SetupAttemptPaymentMethodDetailsKlarna
+public partial record SetupAttemptPaymentMethodDetailsKlarna
 {
 }
 
-public record SetupAttemptPaymentMethodDetailsKrCard
+public partial record SetupAttemptPaymentMethodDetailsKrCard
 {
 }
 
-public record SetupAttemptPaymentMethodDetailsLink
+public partial record SetupAttemptPaymentMethodDetailsLink
 {
 }
 
-public record SetupAttemptPaymentMethodDetailsNaverPay
+public partial record SetupAttemptPaymentMethodDetailsNaverPay
 {
     /// <summary>
     /// Uniquely identifies this particular Naver Pay account. You can use this attribute to check whether two Naver Pay accounts are the same.
@@ -44168,31 +44739,37 @@ public record SetupAttemptPaymentMethodDetailsNaverPay
 
 }
 
-public record SetupAttemptPaymentMethodDetailsNzBankAccount
+public partial record SetupAttemptPaymentMethodDetailsNzBankAccount
 {
 }
 
-public record SetupAttemptPaymentMethodDetailsPaypal
+public partial record SetupAttemptPaymentMethodDetailsPaypal
 {
 }
 
-public record SetupAttemptPaymentMethodDetailsPayto
+public partial record SetupAttemptPaymentMethodDetailsPayto
 {
 }
 
-public record SetupAttemptPaymentMethodDetailsPix
+public partial record SetupAttemptPaymentMethodDetailsPix
+{
+    /// <summary>
+    /// Uniquely identifies this particular Pix account. You can use this attribute to check whether two Pix accounts are the same.
+    /// </summary>
+    [JsonPropertyName("fingerprint")]
+    public string? Fingerprint { get; init; }
+
+}
+
+public partial record SetupAttemptPaymentMethodDetailsRevolutPay
 {
 }
 
-public record SetupAttemptPaymentMethodDetailsRevolutPay
+public partial record SetupAttemptPaymentMethodDetailsSepaDebit
 {
 }
 
-public record SetupAttemptPaymentMethodDetailsSepaDebit
-{
-}
-
-public record SetupAttemptPaymentMethodDetailsSofort
+public partial record SetupAttemptPaymentMethodDetailsSofort
 {
     /// <summary>
     /// Bank code of bank associated with the bank account.
@@ -44246,15 +44823,15 @@ public record SetupAttemptPaymentMethodDetailsSofort
 
 }
 
-public record SetupAttemptPaymentMethodDetailsTwint
+public partial record SetupAttemptPaymentMethodDetailsTwint
 {
 }
 
-public record SetupAttemptPaymentMethodDetailsUpi
+public partial record SetupAttemptPaymentMethodDetailsUpi
 {
 }
 
-public record SetupAttemptPaymentMethodDetailsUsBankAccount
+public partial record SetupAttemptPaymentMethodDetailsUsBankAccount
 {
 }
 
@@ -44281,8 +44858,14 @@ public record SetupAttemptPaymentMethodDetailsUsBankAccount
 /// 
 /// Related guide: [Setup Intents API](https://docs.stripe.com/payments/setup-intents)
 /// </summary>
-public record SetupIntent
+public partial record SetupIntent
 {
+    /// <summary>
+    /// The list of payment method types to allow for this SetupIntent. Stripe will only use methods in this list when determining the payment methods to offer.
+    /// </summary>
+    [JsonPropertyName("allowed_payment_method_types")]
+    public IReadOnlyList<string>? AllowedPaymentMethodTypes { get; init; }
+
     /// <summary>
     /// ID of the Connect application that created the SetupIntent.
     /// </summary>
@@ -44462,7 +45045,7 @@ public record SetupIntent
 
 }
 
-public record SetupIntentNextAction
+public partial record SetupIntentNextAction
 {
     [JsonPropertyName("blik_authorize")]
     public PaymentIntentNextActionBlikAuthorize? BlikAuthorize { get; init; }
@@ -44496,7 +45079,7 @@ public record SetupIntentNextAction
 
 }
 
-public record SetupIntentNextActionPixDisplayQrCode
+public partial record SetupIntentNextActionPixDisplayQrCode
 {
     /// <summary>
     /// The raw data string used to generate QR code, it should be used together with QR code library.
@@ -44530,7 +45113,7 @@ public record SetupIntentNextActionPixDisplayQrCode
 
 }
 
-public record SetupIntentNextActionRedirectToUrl
+public partial record SetupIntentNextActionRedirectToUrl
 {
     /// <summary>
     /// If the customer does not exit their browser while authenticating, they will be redirected to this specified URL after completion.
@@ -44546,7 +45129,7 @@ public record SetupIntentNextActionRedirectToUrl
 
 }
 
-public record SetupIntentNextActionVerifyWithMicrodeposits
+public partial record SetupIntentNextActionVerifyWithMicrodeposits
 {
     /// <summary>
     /// The timestamp when the microdeposits are expected to land.
@@ -44568,7 +45151,7 @@ public record SetupIntentNextActionVerifyWithMicrodeposits
 
 }
 
-public record SetupIntentPaymentMethodOptions
+public partial record SetupIntentPaymentMethodOptions
 {
     [JsonPropertyName("acss_debit")]
     public object? AcssDebit { get; init; }
@@ -44614,7 +45197,7 @@ public record SetupIntentPaymentMethodOptions
 
 }
 
-public record SetupIntentPaymentMethodOptionsAcssDebit
+public partial record SetupIntentPaymentMethodOptionsAcssDebit
 {
     /// <summary>
     /// Currency supported by the bank account
@@ -44633,22 +45216,22 @@ public record SetupIntentPaymentMethodOptionsAcssDebit
 
 }
 
-public record SetupIntentPaymentMethodOptionsAmazonPay
+public partial record SetupIntentPaymentMethodOptionsAmazonPay
 {
 }
 
-public record SetupIntentPaymentMethodOptionsBacsDebit
+public partial record SetupIntentPaymentMethodOptionsBacsDebit
 {
     [JsonPropertyName("mandate_options")]
     public SetupIntentPaymentMethodOptionsMandateOptionsBacsDebit? MandateOptions { get; init; }
 
 }
 
-public record SetupIntentPaymentMethodOptionsBizum
+public partial record SetupIntentPaymentMethodOptionsBizum
 {
 }
 
-public record SetupIntentPaymentMethodOptionsCard
+public partial record SetupIntentPaymentMethodOptionsCard
 {
     /// <summary>
     /// Configuration options for setting up an eMandate for cards issued in India.
@@ -44670,7 +45253,7 @@ public record SetupIntentPaymentMethodOptionsCard
 
 }
 
-public record SetupIntentPaymentMethodOptionsCardMandateOptions
+public partial record SetupIntentPaymentMethodOptionsCardMandateOptions
 {
     /// <summary>
     /// Amount to be charged for future payments, specified in the presentment currency.
@@ -44734,11 +45317,11 @@ public record SetupIntentPaymentMethodOptionsCardMandateOptions
 
 }
 
-public record SetupIntentPaymentMethodOptionsCardPresent
+public partial record SetupIntentPaymentMethodOptionsCardPresent
 {
 }
 
-public record SetupIntentPaymentMethodOptionsKlarna
+public partial record SetupIntentPaymentMethodOptionsKlarna
 {
     /// <summary>
     /// The currency of the setup intent. Three letter ISO currency code.
@@ -44754,11 +45337,11 @@ public record SetupIntentPaymentMethodOptionsKlarna
 
 }
 
-public record SetupIntentPaymentMethodOptionsLink
+public partial record SetupIntentPaymentMethodOptionsLink
 {
 }
 
-public record SetupIntentPaymentMethodOptionsMandateOptionsAcssDebit
+public partial record SetupIntentPaymentMethodOptionsMandateOptionsAcssDebit
 {
     /// <summary>
     /// A URL for custom mandate text
@@ -44792,7 +45375,7 @@ public record SetupIntentPaymentMethodOptionsMandateOptionsAcssDebit
 
 }
 
-public record SetupIntentPaymentMethodOptionsMandateOptionsBacsDebit
+public partial record SetupIntentPaymentMethodOptionsMandateOptionsBacsDebit
 {
     /// <summary>
     /// Prefix used to generate the Mandate reference. Must be at most 12 characters long. Must consist of only uppercase letters, numbers, spaces, or the following special characters: '/', '_', '-', '&amp;', '.'. Cannot begin with 'DDIC' or 'STRIPE'.
@@ -44802,7 +45385,7 @@ public record SetupIntentPaymentMethodOptionsMandateOptionsBacsDebit
 
 }
 
-public record SetupIntentPaymentMethodOptionsMandateOptionsPayto
+public partial record SetupIntentPaymentMethodOptionsMandateOptionsPayto
 {
     /// <summary>
     /// Amount that will be collected. It is required when `amount_type` is `fixed`.
@@ -44848,7 +45431,7 @@ public record SetupIntentPaymentMethodOptionsMandateOptionsPayto
 
 }
 
-public record SetupIntentPaymentMethodOptionsMandateOptionsSepaDebit
+public partial record SetupIntentPaymentMethodOptionsMandateOptionsSepaDebit
 {
     /// <summary>
     /// Prefix used to generate the Mandate reference. Must be at most 12 characters long. Must consist of only uppercase letters, numbers, spaces, or the following special characters: '/', '_', '-', '&amp;', '.'. Cannot begin with 'STRIPE'.
@@ -44858,7 +45441,7 @@ public record SetupIntentPaymentMethodOptionsMandateOptionsSepaDebit
 
 }
 
-public record SetupIntentPaymentMethodOptionsPaypal
+public partial record SetupIntentPaymentMethodOptionsPaypal
 {
     /// <summary>
     /// The PayPal Billing Agreement ID (BAID). This is an ID generated by PayPal which represents the mandate between the merchant and the customer.
@@ -44868,35 +45451,35 @@ public record SetupIntentPaymentMethodOptionsPaypal
 
 }
 
-public record SetupIntentPaymentMethodOptionsPayto
+public partial record SetupIntentPaymentMethodOptionsPayto
 {
     [JsonPropertyName("mandate_options")]
     public SetupIntentPaymentMethodOptionsMandateOptionsPayto? MandateOptions { get; init; }
 
 }
 
-public record SetupIntentPaymentMethodOptionsPix
+public partial record SetupIntentPaymentMethodOptionsPix
 {
     [JsonPropertyName("mandate_options")]
     public PaymentMethodOptionsMandateOptionsPix? MandateOptions { get; init; }
 
 }
 
-public record SetupIntentPaymentMethodOptionsSepaDebit
+public partial record SetupIntentPaymentMethodOptionsSepaDebit
 {
     [JsonPropertyName("mandate_options")]
     public SetupIntentPaymentMethodOptionsMandateOptionsSepaDebit? MandateOptions { get; init; }
 
 }
 
-public record SetupIntentPaymentMethodOptionsUpi
+public partial record SetupIntentPaymentMethodOptionsUpi
 {
     [JsonPropertyName("mandate_options")]
     public PaymentMethodOptionsMandateOptionsUpi? MandateOptions { get; init; }
 
 }
 
-public record SetupIntentPaymentMethodOptionsUsBankAccount
+public partial record SetupIntentPaymentMethodOptionsUsBankAccount
 {
     [JsonPropertyName("financial_connections")]
     public LinkedAccountOptionsCommon? FinancialConnections { get; init; }
@@ -44912,7 +45495,7 @@ public record SetupIntentPaymentMethodOptionsUsBankAccount
 
 }
 
-public record SetupIntentTypeSpecificPaymentMethodOptionsClient
+public partial record SetupIntentTypeSpecificPaymentMethodOptionsClient
 {
     [JsonPropertyName("mandate_options")]
     public SetupIntentPaymentMethodOptionsMandateOptionsPayto? MandateOptions { get; init; }
@@ -44925,7 +45508,7 @@ public record SetupIntentTypeSpecificPaymentMethodOptionsClient
 
 }
 
-public record Shipping
+public partial record Shipping
 {
     [JsonPropertyName("address")]
     public Address? Address { get; init; }
@@ -44960,7 +45543,7 @@ public record Shipping
 /// Shipping rates describe the price of shipping presented to your customers and
 /// applied to a purchase. For more information, see [Charge for shipping](https://docs.stripe.com/payments/during-payment/charge-shipping).
 /// </summary>
-public record ShippingRate
+public partial record ShippingRate
 {
     /// <summary>
     /// Whether the shipping rate can be used for new purchases. Defaults to `true`.
@@ -45033,7 +45616,7 @@ public record ShippingRate
 
 }
 
-public record ShippingRateCurrencyOption
+public partial record ShippingRateCurrencyOption
 {
     /// <summary>
     /// A non-negative integer in cents representing how much to charge.
@@ -45049,7 +45632,7 @@ public record ShippingRateCurrencyOption
 
 }
 
-public record ShippingRateDeliveryEstimate
+public partial record ShippingRateDeliveryEstimate
 {
     /// <summary>
     /// The upper bound of the estimated range. If empty, represents no upper bound i.e., infinite.
@@ -45065,7 +45648,7 @@ public record ShippingRateDeliveryEstimate
 
 }
 
-public record ShippingRateDeliveryEstimateBound
+public partial record ShippingRateDeliveryEstimateBound
 {
     /// <summary>
     /// A unit of time.
@@ -45081,7 +45664,7 @@ public record ShippingRateDeliveryEstimateBound
 
 }
 
-public record ShippingRateFixedAmount
+public partial record ShippingRateFixedAmount
 {
     /// <summary>
     /// A non-negative integer in cents representing how much to charge.
@@ -45106,7 +45689,7 @@ public record ShippingRateFixedAmount
 /// <summary>
 /// A saved query object represents a query that can be executed for a run.
 /// </summary>
-public record SigmaSigmaApiQuery
+public partial record SigmaSigmaApiQuery
 {
     /// <summary>
     /// Time at which the object was created. Measured in seconds since the Unix epoch.
@@ -45146,7 +45729,7 @@ public record SigmaSigmaApiQuery
 
 }
 
-public record SigmaScheduledQueryRunError
+public partial record SigmaScheduledQueryRunError
 {
     /// <summary>
     /// Information about the run failure.
@@ -45156,7 +45739,7 @@ public record SigmaScheduledQueryRunError
 
 }
 
-public record SmorResourceManagedPayments
+public partial record SmorResourceManagedPayments
 {
     /// <summary>
     /// Set to `true` to enable [Managed Payments](https://docs.stripe.com/payments/managed-payments), Stripe's merchant of record solution, for this session.
@@ -45178,7 +45761,7 @@ public record SmorResourceManagedPayments
 /// 
 /// Related guides: [Sources API](https://docs.stripe.com/sources) and [Sources &amp; Customers](https://docs.stripe.com/sources/customers).
 /// </summary>
-public record Source
+public partial record Source
 {
     [JsonPropertyName("ach_credit_transfer")]
     public SourceTypeAchCreditTransfer? AchCreditTransfer { get; init; }
@@ -45344,7 +45927,7 @@ public record Source
 
 }
 
-public record SourceCodeVerificationFlow
+public partial record SourceCodeVerificationFlow
 {
     /// <summary>
     /// The number of attempts remaining to authenticate the source object with a verification code.
@@ -45365,7 +45948,7 @@ public record SourceCodeVerificationFlow
 /// a source mandate must be sent to the payer. They will trigger a webhook or
 /// deliver an email to the customer.
 /// </summary>
-public record SourceMandateNotification
+public partial record SourceMandateNotification
 {
     [JsonPropertyName("acss_debit")]
     public SourceMandateNotificationAcssDebitData? AcssDebit { get; init; }
@@ -45441,7 +46024,7 @@ public record SourceMandateNotification
 
 }
 
-public record SourceMandateNotificationAcssDebitData
+public partial record SourceMandateNotificationAcssDebitData
 {
     /// <summary>
     /// The statement descriptor associate with the debit.
@@ -45451,7 +46034,7 @@ public record SourceMandateNotificationAcssDebitData
 
 }
 
-public record SourceMandateNotificationBacsDebitData
+public partial record SourceMandateNotificationBacsDebitData
 {
     /// <summary>
     /// Last 4 digits of the account number associated with the debit.
@@ -45461,7 +46044,7 @@ public record SourceMandateNotificationBacsDebitData
 
 }
 
-public record SourceMandateNotificationSepaDebitData
+public partial record SourceMandateNotificationSepaDebitData
 {
     /// <summary>
     /// SEPA creditor ID.
@@ -45483,7 +46066,7 @@ public record SourceMandateNotificationSepaDebitData
 
 }
 
-public record SourceOrder
+public partial record SourceOrder
 {
     /// <summary>
     /// A positive integer in the smallest currency unit (that is, 100 cents for $1.00, or 1 for ¥1, Japanese Yen being a zero-decimal currency) representing the total amount for the order.
@@ -45514,7 +46097,7 @@ public record SourceOrder
 
 }
 
-public record SourceOrderItem
+public partial record SourceOrderItem
 {
     /// <summary>
     /// The amount (price) for this order item.
@@ -45554,7 +46137,7 @@ public record SourceOrderItem
 
 }
 
-public record SourceOwner
+public partial record SourceOwner
 {
     /// <summary>
     /// Owner's address.
@@ -45606,7 +46189,7 @@ public record SourceOwner
 
 }
 
-public record SourceReceiverFlow
+public partial record SourceReceiverFlow
 {
     /// <summary>
     /// The address of the receiver source. This is the value that should be communicated to the customer to send their funds to.
@@ -45646,7 +46229,7 @@ public record SourceReceiverFlow
 
 }
 
-public record SourceRedirectFlow
+public partial record SourceRedirectFlow
 {
     /// <summary>
     /// The failure reason for the redirect, either `user_abort` (the customer aborted or dropped out of the redirect flow), `declined` (the authentication failed or the transaction was declined), or `processing_error` (the redirect failed due to a technical error). Present only if the redirect status is `failed`.
@@ -45680,7 +46263,7 @@ public record SourceRedirectFlow
 /// multiple transactions. As such, sources can have multiple associated
 /// transactions.
 /// </summary>
-public record SourceTransaction
+public partial record SourceTransaction
 {
     [JsonPropertyName("ach_credit_transfer")]
     public SourceTransactionAchCreditTransferData? AchCreditTransfer { get; init; }
@@ -45753,7 +46336,7 @@ public record SourceTransaction
 
 }
 
-public record SourceTransactionAchCreditTransferData
+public partial record SourceTransactionAchCreditTransferData
 {
     /// <summary>
     /// Customer data associated with the transfer.
@@ -45781,7 +46364,7 @@ public record SourceTransactionAchCreditTransferData
 
 }
 
-public record SourceTransactionChfCreditTransferData
+public partial record SourceTransactionChfCreditTransferData
 {
     /// <summary>
     /// Reference associated with the transfer.
@@ -45815,7 +46398,7 @@ public record SourceTransactionChfCreditTransferData
 
 }
 
-public record SourceTransactionGbpCreditTransferData
+public partial record SourceTransactionGbpCreditTransferData
 {
     /// <summary>
     /// Bank account fingerprint associated with the Stripe owned bank account receiving the transfer.
@@ -45861,7 +46444,7 @@ public record SourceTransactionGbpCreditTransferData
 
 }
 
-public record SourceTransactionPaperCheckData
+public partial record SourceTransactionPaperCheckData
 {
     /// <summary>
     /// Time at which the deposited funds will be available for use. Measured in seconds since the Unix epoch.
@@ -45877,7 +46460,7 @@ public record SourceTransactionPaperCheckData
 
 }
 
-public record SourceTransactionSepaCreditTransferData
+public partial record SourceTransactionSepaCreditTransferData
 {
     /// <summary>
     /// Reference associated with the transfer.
@@ -45899,7 +46482,7 @@ public record SourceTransactionSepaCreditTransferData
 
 }
 
-public record SourceTypeAchCreditTransfer
+public partial record SourceTypeAchCreditTransfer
 {
     [JsonPropertyName("account_number")]
     public string? AccountNumber { get; init; }
@@ -45927,7 +46510,7 @@ public record SourceTypeAchCreditTransfer
 
 }
 
-public record SourceTypeAchDebit
+public partial record SourceTypeAchDebit
 {
     [JsonPropertyName("bank_name")]
     public string? BankName { get; init; }
@@ -45949,7 +46532,7 @@ public record SourceTypeAchDebit
 
 }
 
-public record SourceTypeAcssDebit
+public partial record SourceTypeAcssDebit
 {
     [JsonPropertyName("bank_address_city")]
     public string? BankAddressCity { get; init; }
@@ -45983,7 +46566,7 @@ public record SourceTypeAcssDebit
 
 }
 
-public record SourceTypeAlipay
+public partial record SourceTypeAlipay
 {
     [JsonPropertyName("data_string")]
     public string? DataString { get; init; }
@@ -45996,7 +46579,7 @@ public record SourceTypeAlipay
 
 }
 
-public record SourceTypeAuBecsDebit
+public partial record SourceTypeAuBecsDebit
 {
     [JsonPropertyName("bsb_number")]
     public string? BsbNumber { get; init; }
@@ -46009,7 +46592,7 @@ public record SourceTypeAuBecsDebit
 
 }
 
-public record SourceTypeBancontact
+public partial record SourceTypeBancontact
 {
     [JsonPropertyName("bank_code")]
     public string? BankCode { get; init; }
@@ -46031,7 +46614,7 @@ public record SourceTypeBancontact
 
 }
 
-public record SourceTypeCard
+public partial record SourceTypeCard
 {
     [JsonPropertyName("address_line1_check")]
     public string? AddressLine1Check { get; init; }
@@ -46077,7 +46660,7 @@ public record SourceTypeCard
 
 }
 
-public record SourceTypeCardPresent
+public partial record SourceTypeCardPresent
 {
     [JsonPropertyName("application_cryptogram")]
     public string? ApplicationCryptogram { get; init; }
@@ -46150,7 +46733,7 @@ public record SourceTypeCardPresent
 
 }
 
-public record SourceTypeEps
+public partial record SourceTypeEps
 {
     [JsonPropertyName("reference")]
     public string? Reference { get; init; }
@@ -46160,7 +46743,7 @@ public record SourceTypeEps
 
 }
 
-public record SourceTypeGiropay
+public partial record SourceTypeGiropay
 {
     [JsonPropertyName("bank_code")]
     public string? BankCode { get; init; }
@@ -46176,7 +46759,7 @@ public record SourceTypeGiropay
 
 }
 
-public record SourceTypeIdeal
+public partial record SourceTypeIdeal
 {
     [JsonPropertyName("bank")]
     public string? Bank { get; init; }
@@ -46192,7 +46775,7 @@ public record SourceTypeIdeal
 
 }
 
-public record SourceTypeKlarna
+public partial record SourceTypeKlarna
 {
     [JsonPropertyName("background_image_url")]
     public string? BackgroundImageUrl { get; init; }
@@ -46274,7 +46857,7 @@ public record SourceTypeKlarna
 
 }
 
-public record SourceTypeMultibanco
+public partial record SourceTypeMultibanco
 {
     [JsonPropertyName("entity")]
     public string? Entity { get; init; }
@@ -46308,14 +46891,14 @@ public record SourceTypeMultibanco
 
 }
 
-public record SourceTypeP24
+public partial record SourceTypeP24
 {
     [JsonPropertyName("reference")]
     public string? Reference { get; init; }
 
 }
 
-public record SourceTypeSepaDebit
+public partial record SourceTypeSepaDebit
 {
     [JsonPropertyName("bank_code")]
     public string? BankCode { get; init; }
@@ -46340,7 +46923,7 @@ public record SourceTypeSepaDebit
 
 }
 
-public record SourceTypeSofort
+public partial record SourceTypeSofort
 {
     [JsonPropertyName("bank_code")]
     public string? BankCode { get; init; }
@@ -46365,7 +46948,7 @@ public record SourceTypeSofort
 
 }
 
-public record SourceTypeThreeDSecure
+public partial record SourceTypeThreeDSecure
 {
     [JsonPropertyName("address_line1_check")]
     public string? AddressLine1Check { get; init; }
@@ -46420,7 +47003,7 @@ public record SourceTypeThreeDSecure
 
 }
 
-public record SourceTypeWechat
+public partial record SourceTypeWechat
 {
     [JsonPropertyName("prepay_id")]
     public string? PrepayId { get; init; }
@@ -46433,7 +47016,7 @@ public record SourceTypeWechat
 
 }
 
-public record StackableDiscountWithDiscountSettings
+public partial record StackableDiscountWithDiscountSettings
 {
     /// <summary>
     /// ID of the coupon to create a new discount for.
@@ -46455,7 +47038,7 @@ public record StackableDiscountWithDiscountSettings
 
 }
 
-public record StackableDiscountWithDiscountSettingsAndDiscountEnd
+public partial record StackableDiscountWithDiscountSettingsAndDiscountEnd
 {
     /// <summary>
     /// ID of the coupon to create a new discount for.
@@ -46482,7 +47065,7 @@ public record StackableDiscountWithDiscountSettingsAndDiscountEnd
 /// 
 /// Related guide: [Creating subscriptions](https://docs.stripe.com/billing/subscriptions/creating)
 /// </summary>
-public record Subscription
+public partial record Subscription
 {
     /// <summary>
     /// ID of the Connect Application that created the subscription.
@@ -46775,7 +47358,7 @@ public record Subscription
 
 }
 
-public record SubscriptionAutomaticTax
+public partial record SubscriptionAutomaticTax
 {
     /// <summary>
     /// If Stripe disabled automatic tax, this enum describes why.
@@ -46797,7 +47380,7 @@ public record SubscriptionAutomaticTax
 
 }
 
-public record SubscriptionBillingThresholds
+public partial record SubscriptionBillingThresholds
 {
     /// <summary>
     /// Monetary threshold that triggers the subscription to create an invoice
@@ -46817,7 +47400,7 @@ public record SubscriptionBillingThresholds
 /// Subscription items allow you to create customer subscriptions with more than
 /// one plan, making it easy to represent complex billing relationships.
 /// </summary>
-public record SubscriptionItem
+public partial record SubscriptionItem
 {
     /// <summary>
     /// The time period the subscription item has been billed for.
@@ -46904,7 +47487,7 @@ public record SubscriptionItem
 
 }
 
-public record SubscriptionItemBillingThresholds
+public partial record SubscriptionItemBillingThresholds
 {
     /// <summary>
     /// Usage threshold that triggers the subscription to create an invoice
@@ -46914,7 +47497,7 @@ public record SubscriptionItemBillingThresholds
 
 }
 
-public record SubscriptionPaymentMethodOptionsCard
+public partial record SubscriptionPaymentMethodOptionsCard
 {
     [JsonPropertyName("mandate_options")]
     public InvoiceMandateOptionsCard? MandateOptions { get; init; }
@@ -46933,7 +47516,7 @@ public record SubscriptionPaymentMethodOptionsCard
 
 }
 
-public record SubscriptionPaymentMethodOptionsMandateOptionsPix
+public partial record SubscriptionPaymentMethodOptionsMandateOptionsPix
 {
     /// <summary>
     /// Amount to be charged for future payments.
@@ -46961,7 +47544,7 @@ public record SubscriptionPaymentMethodOptionsMandateOptionsPix
 
 }
 
-public record SubscriptionPaymentMethodOptionsPix
+public partial record SubscriptionPaymentMethodOptionsPix
 {
     /// <summary>
     /// The number of seconds (between 10 and 1209600) after which Pix payment will expire. Defaults to 86400 seconds.
@@ -46974,7 +47557,7 @@ public record SubscriptionPaymentMethodOptionsPix
 
 }
 
-public record SubscriptionPendingInvoiceItemInterval
+public partial record SubscriptionPendingInvoiceItemInterval
 {
     /// <summary>
     /// Specifies invoicing frequency. Either `day`, `week`, `month` or `year`.
@@ -46995,7 +47578,7 @@ public record SubscriptionPendingInvoiceItemInterval
 /// 
 /// Related guide: [Subscription schedules](https://docs.stripe.com/billing/subscriptions/subscription-schedules)
 /// </summary>
-public record SubscriptionSchedule
+public partial record SubscriptionSchedule
 {
     /// <summary>
     /// ID of the Connect Application that created the schedule.
@@ -47119,7 +47702,7 @@ public record SubscriptionSchedule
 /// <summary>
 /// An Add Invoice Item describes the prices and quantities that will be added as pending invoice items when entering a phase.
 /// </summary>
-public record SubscriptionScheduleAddInvoiceItem
+public partial record SubscriptionScheduleAddInvoiceItem
 {
     /// <summary>
     /// Controls whether discounts apply to this invoice item. Defaults to true if no value is provided.
@@ -47162,7 +47745,7 @@ public record SubscriptionScheduleAddInvoiceItem
 
 }
 
-public record SubscriptionScheduleAddInvoiceItemPeriod
+public partial record SubscriptionScheduleAddInvoiceItemPeriod
 {
     [JsonPropertyName("end")]
     public required SubscriptionSchedulesResourceInvoiceItemPeriodResourcePeriodEnd End { get; init; }
@@ -47175,7 +47758,7 @@ public record SubscriptionScheduleAddInvoiceItemPeriod
 /// <summary>
 /// A phase item describes the price and quantity of a phase.
 /// </summary>
-public record SubscriptionScheduleConfigurationItem
+public partial record SubscriptionScheduleConfigurationItem
 {
     /// <summary>
     /// Define thresholds at which an invoice will be sent, and the related subscription advanced to a new billing period
@@ -47215,7 +47798,7 @@ public record SubscriptionScheduleConfigurationItem
 
 }
 
-public record SubscriptionScheduleCurrentPhase
+public partial record SubscriptionScheduleCurrentPhase
 {
     /// <summary>
     /// The end of this phase of the subscription schedule.
@@ -47234,7 +47817,7 @@ public record SubscriptionScheduleCurrentPhase
 /// <summary>
 /// A phase describes the plans, coupon, and trialing status of a subscription for a predefined time period.
 /// </summary>
-public record SubscriptionSchedulePhaseConfiguration
+public partial record SubscriptionSchedulePhaseConfiguration
 {
     /// <summary>
     /// A list of prices and quantities that will generate invoice items appended to the next invoice for this phase.
@@ -47348,6 +47931,12 @@ public record SubscriptionSchedulePhaseConfiguration
     public SubscriptionTransferData? TransferData { get; init; }
 
     /// <summary>
+    /// If set to true the entire phase is counted as a trial and the customer will not be charged for any fees.
+    /// </summary>
+    [JsonPropertyName("trial")]
+    public bool? Trial { get; init; }
+
+    /// <summary>
     /// When the trial ends within the phase.
     /// </summary>
     [JsonPropertyName("trial_end")]
@@ -47355,7 +47944,7 @@ public record SubscriptionSchedulePhaseConfiguration
 
 }
 
-public record SubscriptionSchedulesResourceDefaultSettings
+public partial record SubscriptionSchedulesResourceDefaultSettings
 {
     /// <summary>
     /// A non-negative decimal between 0 and 100, with at most two decimal places. This represents the percentage of the subscription invoice total that will be transferred to the application owner's Stripe account during this phase of the schedule.
@@ -47413,7 +48002,7 @@ public record SubscriptionSchedulesResourceDefaultSettings
 
 }
 
-public record SubscriptionSchedulesResourceDefaultSettingsAutomaticTax
+public partial record SubscriptionSchedulesResourceDefaultSettingsAutomaticTax
 {
     /// <summary>
     /// If Stripe disabled automatic tax, this enum describes why.
@@ -47435,7 +48024,7 @@ public record SubscriptionSchedulesResourceDefaultSettingsAutomaticTax
 
 }
 
-public record SubscriptionSchedulesResourceInvoiceItemPeriodResourcePeriodEnd
+public partial record SubscriptionSchedulesResourceInvoiceItemPeriodResourcePeriodEnd
 {
     /// <summary>
     /// A precise Unix timestamp for the end of the invoice item period. Must be greater than or equal to `period.start`.
@@ -47451,7 +48040,7 @@ public record SubscriptionSchedulesResourceInvoiceItemPeriodResourcePeriodEnd
 
 }
 
-public record SubscriptionSchedulesResourceInvoiceItemPeriodResourcePeriodStart
+public partial record SubscriptionSchedulesResourceInvoiceItemPeriodResourcePeriodStart
 {
     /// <summary>
     /// A precise Unix timestamp for the start of the invoice item period. Must be less than or equal to `period.end`.
@@ -47467,7 +48056,7 @@ public record SubscriptionSchedulesResourceInvoiceItemPeriodResourcePeriodStart
 
 }
 
-public record SubscriptionTransferData
+public partial record SubscriptionTransferData
 {
     /// <summary>
     /// A non-negative decimal between 0 and 100, with at most two decimal places. This represents the percentage of the subscription invoice total that will be transferred to the destination account. By default, the entire amount is transferred to the destination.
@@ -47483,7 +48072,7 @@ public record SubscriptionTransferData
 
 }
 
-public record SubscriptionsResourceBillingCycleAnchorConfig
+public partial record SubscriptionsResourceBillingCycleAnchorConfig
 {
     /// <summary>
     /// The day of the month of the billing_cycle_anchor.
@@ -47520,7 +48109,7 @@ public record SubscriptionsResourceBillingCycleAnchorConfig
 /// <summary>
 /// The billing mode of the subscription.
 /// </summary>
-public record SubscriptionsResourceBillingMode
+public partial record SubscriptionsResourceBillingMode
 {
     /// <summary>
     /// Configure behavior for flexible billing mode
@@ -47542,7 +48131,7 @@ public record SubscriptionsResourceBillingMode
 
 }
 
-public record SubscriptionsResourceBillingModeFlexible
+public partial record SubscriptionsResourceBillingModeFlexible
 {
     /// <summary>
     /// Controls how invoices and invoice items display proration amounts and discount amounts.
@@ -47555,7 +48144,7 @@ public record SubscriptionsResourceBillingModeFlexible
 /// <summary>
 /// Sets the billing schedule for the subscription.
 /// </summary>
-public record SubscriptionsResourceBillingSchedules
+public partial record SubscriptionsResourceBillingSchedules
 {
     /// <summary>
     /// Specifies which subscription items the billing schedule applies to.
@@ -47580,7 +48169,7 @@ public record SubscriptionsResourceBillingSchedules
 /// <summary>
 /// Represents the entities that the billing schedule applies to.
 /// </summary>
-public record SubscriptionsResourceBillingSchedulesAppliesTo
+public partial record SubscriptionsResourceBillingSchedulesAppliesTo
 {
     /// <summary>
     /// The billing schedule will apply to the subscription item with the given price ID.
@@ -47599,7 +48188,7 @@ public record SubscriptionsResourceBillingSchedulesAppliesTo
 /// <summary>
 /// Specifies the end of billing period.
 /// </summary>
-public record SubscriptionsResourceBillingSchedulesBillUntil
+public partial record SubscriptionsResourceBillingSchedulesBillUntil
 {
     /// <summary>
     /// The timestamp the billing schedule will apply until.
@@ -47630,7 +48219,7 @@ public record SubscriptionsResourceBillingSchedulesBillUntil
 /// <summary>
 /// Configures the `bill_until` date based on the provided `interval` and `interval_count`.
 /// </summary>
-public record SubscriptionsResourceBillingSchedulesBillUntilDuration
+public partial record SubscriptionsResourceBillingSchedulesBillUntilDuration
 {
     /// <summary>
     /// Specifies billing duration. Either `day`, `week`, `month` or `year`.
@@ -47650,7 +48239,7 @@ public record SubscriptionsResourceBillingSchedulesBillUntilDuration
 /// The Pause Collection settings determine how we will pause collection for this subscription and for how long the subscription
 /// should be paused.
 /// </summary>
-public record SubscriptionsResourcePauseCollection
+public partial record SubscriptionsResourcePauseCollection
 {
     /// <summary>
     /// The payment collection behavior for this subscription while paused.
@@ -47666,7 +48255,7 @@ public record SubscriptionsResourcePauseCollection
 
 }
 
-public record SubscriptionsResourcePaymentMethodOptions
+public partial record SubscriptionsResourcePaymentMethodOptions
 {
     /// <summary>
     /// This sub-hash contains details about the Canadian pre-authorized debit payment method options to pass to invoices created by the subscription.
@@ -47730,7 +48319,7 @@ public record SubscriptionsResourcePaymentMethodOptions
 
 }
 
-public record SubscriptionsResourcePaymentSettings
+public partial record SubscriptionsResourcePaymentSettings
 {
     /// <summary>
     /// Payment-method-specific configuration to provide to invoices created by the subscription.
@@ -47756,7 +48345,7 @@ public record SubscriptionsResourcePaymentSettings
 /// Pending Updates store the changes pending from a previous update that will be applied
 /// to the Subscription upon successful payment.
 /// </summary>
-public record SubscriptionsResourcePendingUpdate
+public partial record SubscriptionsResourcePendingUpdate
 {
     /// <summary>
     /// If the update is applied, determines the date of the first full invoice, and, for plans with `month` or `year` intervals, the day of the month for subsequent invoices. The timestamp is in UTC format.
@@ -47808,7 +48397,7 @@ public record SubscriptionsResourcePendingUpdate
 
 }
 
-public record SubscriptionsResourceSubscriptionInvoiceSettings
+public partial record SubscriptionsResourceSubscriptionInvoiceSettings
 {
     /// <summary>
     /// The account tax IDs associated with the subscription. Will be set on invoices generated by the subscription.
@@ -47816,12 +48405,30 @@ public record SubscriptionsResourceSubscriptionInvoiceSettings
     [JsonPropertyName("account_tax_ids")]
     public IReadOnlyList<object>? AccountTaxIds { get; init; }
 
+    /// <summary>
+    /// A list of up to 4 custom fields to be displayed on the invoice.
+    /// </summary>
+    [JsonPropertyName("custom_fields")]
+    public IReadOnlyList<InvoiceSettingCustomField>? CustomFields { get; init; }
+
+    /// <summary>
+    /// An arbitrary string attached to the object. Often useful for displaying to users.
+    /// </summary>
+    [JsonPropertyName("description")]
+    public string? Description { get; init; }
+
+    /// <summary>
+    /// Footer to be displayed on the invoice.
+    /// </summary>
+    [JsonPropertyName("footer")]
+    public string? Footer { get; init; }
+
     [JsonPropertyName("issuer")]
     public required ConnectAccountReference Issuer { get; init; }
 
 }
 
-public record SubscriptionsResourceSubscriptionPresentmentDetails
+public partial record SubscriptionsResourceSubscriptionPresentmentDetails
 {
     /// <summary>
     /// Currency used for customer payments.
@@ -47834,7 +48441,7 @@ public record SubscriptionsResourceSubscriptionPresentmentDetails
 /// <summary>
 /// Defines how a subscription behaves when a trial ends.
 /// </summary>
-public record SubscriptionsResourceTrialSettingsEndBehavior
+public partial record SubscriptionsResourceTrialSettingsEndBehavior
 {
     /// <summary>
     /// Indicates how the subscription should change when the trial ends if the user did not provide a payment method.
@@ -47847,7 +48454,7 @@ public record SubscriptionsResourceTrialSettingsEndBehavior
 /// <summary>
 /// Configures how this subscription behaves during the trial period.
 /// </summary>
-public record SubscriptionsResourceTrialSettingsTrialSettings
+public partial record SubscriptionsResourceTrialSettingsTrialSettings
 {
     /// <summary>
     /// Defines how a subscription behaves when a trial ends.
@@ -47860,7 +48467,7 @@ public record SubscriptionsResourceTrialSettingsTrialSettings
 /// <summary>
 /// Defines how a subscription behaves when a free trial ends.
 /// </summary>
-public record SubscriptionsTrialsResourceEndBehavior
+public partial record SubscriptionsTrialsResourceEndBehavior
 {
     /// <summary>
     /// Indicates how the subscription should change when the trial ends if the user did not provide a payment method.
@@ -47873,7 +48480,7 @@ public record SubscriptionsTrialsResourceEndBehavior
 /// <summary>
 /// Configures how this subscription behaves during the trial period.
 /// </summary>
-public record SubscriptionsTrialsResourceTrialSettings
+public partial record SubscriptionsTrialsResourceTrialSettings
 {
     /// <summary>
     /// Defines how a subscription behaves when a free trial ends.
@@ -47886,7 +48493,7 @@ public record SubscriptionsTrialsResourceTrialSettings
 /// <summary>
 /// A Tax Association exposes the Tax Transactions that Stripe attempted to create on your behalf based on the PaymentIntent input
 /// </summary>
-public record TaxAssociation
+public partial record TaxAssociation
 {
     /// <summary>
     /// The [Tax Calculation](https://docs.stripe.com/api/tax/calculations/object) that was included in PaymentIntent.
@@ -47925,7 +48532,7 @@ public record TaxAssociation
 /// 
 /// Related guide: [Calculate tax in your custom payment flow](https://docs.stripe.com/tax/custom)
 /// </summary>
-public record TaxCalculation
+public partial record TaxCalculation
 {
     /// <summary>
     /// Total amount after taxes in the [smallest currency unit](https://docs.stripe.com/currencies#minor-units).
@@ -48016,7 +48623,7 @@ public record TaxCalculation
 
 }
 
-public record TaxCalculationLineItem
+public partial record TaxCalculationLineItem
 {
     /// <summary>
     /// The line item amount in the [smallest currency unit](https://docs.stripe.com/currencies#minor-units). If `tax_behavior=inclusive`, then this amount includes taxes. Otherwise, taxes were calculated on top of this amount.
@@ -48099,7 +48706,7 @@ public record TaxCalculationLineItem
 /// 
 /// Related guide: [Using the Registrations API](https://docs.stripe.com/tax/registrations-api)
 /// </summary>
-public record TaxRegistration
+public partial record TaxRegistration
 {
     /// <summary>
     /// Time at which the registration becomes active. Measured in seconds since the Unix epoch.
@@ -48159,7 +48766,7 @@ public record TaxRegistration
 /// 
 /// Related guide: [Using the Settings API](https://docs.stripe.com/tax/settings-api)
 /// </summary>
-public record TaxSettings
+public partial record TaxSettings
 {
     [JsonPropertyName("defaults")]
     public required TaxProductResourceTaxSettingsDefaults Defaults { get; init; }
@@ -48198,7 +48805,7 @@ public record TaxSettings
 /// 
 /// Related guide: [Calculate tax in your custom payment flow](https://docs.stripe.com/tax/custom#tax-transaction)
 /// </summary>
-public record TaxTransaction
+public partial record TaxTransaction
 {
     /// <summary>
     /// Time at which the object was created. Measured in seconds since the Unix epoch.
@@ -48295,7 +48902,7 @@ public record TaxTransaction
 
 }
 
-public record TaxTransactionLineItem
+public partial record TaxTransactionLineItem
 {
     /// <summary>
     /// The line item amount in the [smallest currency unit](https://docs.stripe.com/currencies#minor-units). If `tax_behavior=inclusive`, then this amount includes taxes. Otherwise, taxes were calculated on top of this amount.
@@ -48380,7 +48987,7 @@ public record TaxTransactionLineItem
 /// <summary>
 /// [Tax codes](https://stripe.com/docs/tax/tax-categories) classify goods and services for tax purposes.
 /// </summary>
-public record TaxCode
+public partial record TaxCode
 {
     /// <summary>
     /// A detailed description of which types of products the tax code represents.
@@ -48408,7 +49015,7 @@ public record TaxCode
 
 }
 
-public record TaxDeductedAtSource
+public partial record TaxDeductedAtSource
 {
     /// <summary>
     /// Unique identifier for the object.
@@ -48442,7 +49049,7 @@ public record TaxDeductedAtSource
 
 }
 
-public record TaxIDsOwner
+public partial record TaxIDsOwner
 {
     /// <summary>
     /// The account being referenced when `type` is `account`.
@@ -48482,7 +49089,7 @@ public record TaxIDsOwner
 /// 
 /// Related guides: [Customer tax identification numbers](https://docs.stripe.com/billing/taxes/tax-ids), [Account tax IDs](https://docs.stripe.com/invoicing/connect#account-tax-ids)
 /// </summary>
-public record TaxId
+public partial record TaxId
 {
     /// <summary>
     /// Two-letter ISO code representing the country of the tax ID.
@@ -48533,7 +49140,7 @@ public record TaxId
     public TaxIDsOwner? Owner { get; init; }
 
     /// <summary>
-    /// Type of the tax ID, one of `ad_nrt`, `ae_trn`, `al_tin`, `am_tin`, `ao_tin`, `ar_cuit`, `au_abn`, `au_arn`, `aw_tin`, `az_tin`, `ba_tin`, `bb_tin`, `bd_bin`, `bf_ifu`, `bg_uic`, `bh_vat`, `bj_ifu`, `bo_tin`, `br_cnpj`, `br_cpf`, `bs_tin`, `by_tin`, `ca_bn`, `ca_gst_hst`, `ca_pst_bc`, `ca_pst_mb`, `ca_pst_sk`, `ca_qst`, `cd_nif`, `ch_uid`, `ch_vat`, `cl_tin`, `cm_niu`, `cn_tin`, `co_nit`, `cr_tin`, `cv_nif`, `de_stn`, `do_rcn`, `ec_ruc`, `eg_tin`, `es_cif`, `et_tin`, `eu_oss_vat`, `eu_vat`, `fo_vat`, `gb_vat`, `ge_vat`, `gi_tin`, `gn_nif`, `hk_br`, `hr_oib`, `hu_tin`, `id_npwp`, `il_vat`, `in_gst`, `is_vat`, `it_cf`, `jp_cn`, `jp_rn`, `jp_trn`, `ke_pin`, `kg_tin`, `kh_tin`, `kr_brn`, `kz_bin`, `la_tin`, `li_uid`, `li_vat`, `lk_vat`, `ma_vat`, `md_vat`, `me_pib`, `mk_vat`, `mr_nif`, `mx_rfc`, `my_frp`, `my_itn`, `my_sst`, `ng_tin`, `no_vat`, `no_voec`, `np_pan`, `nz_gst`, `om_vat`, `pe_ruc`, `ph_tin`, `pl_nip`, `py_ruc`, `ro_tin`, `rs_pib`, `ru_inn`, `ru_kpp`, `sa_vat`, `sg_gst`, `sg_uen`, `si_tin`, `sn_ninea`, `sr_fin`, `sv_nit`, `th_vat`, `tj_tin`, `tr_tin`, `tw_vat`, `tz_vat`, `ua_vat`, `ug_tin`, `us_ein`, `uy_ruc`, `uz_tin`, `uz_vat`, `ve_rif`, `vn_tin`, `za_vat`, `zm_tin`, or `zw_tin`. Note that some legacy tax IDs have type `unknown`
+    /// Type of the tax ID, one of `ad_nrt`, `ae_trn`, `al_tin`, `am_tin`, `ao_tin`, `ar_cuit`, `au_abn`, `au_arn`, `aw_tin`, `az_tin`, `ba_tin`, `bb_tin`, `bd_bin`, `bf_ifu`, `bg_uic`, `bh_vat`, `bj_ifu`, `bo_tin`, `br_cnpj`, `br_cpf`, `bs_tin`, `by_tin`, `ca_bn`, `ca_gst_hst`, `ca_pst_bc`, `ca_pst_mb`, `ca_pst_sk`, `ca_qst`, `cd_nif`, `ch_uid`, `ch_vat`, `cl_tin`, `cm_niu`, `cn_tin`, `co_nit`, `cr_tin`, `cv_nif`, `de_stn`, `do_rcn`, `ec_ruc`, `eg_tin`, `es_cif`, `et_tin`, `eu_oss_vat`, `eu_vat`, `fo_vat`, `gb_vat`, `ge_vat`, `gi_tin`, `gn_nif`, `hk_br`, `hr_oib`, `hu_tin`, `ic_nif`, `id_npwp`, `il_vat`, `in_gst`, `is_vat`, `it_cf`, `jp_cn`, `jp_rn`, `jp_trn`, `ke_pin`, `kg_tin`, `kh_tin`, `kr_brn`, `kz_bin`, `la_tin`, `li_uid`, `li_vat`, `lk_vat`, `ma_vat`, `md_vat`, `me_pib`, `mk_vat`, `mr_nif`, `mx_rfc`, `my_frp`, `my_itn`, `my_sst`, `ng_tin`, `no_vat`, `no_voec`, `np_pan`, `nz_gst`, `om_vat`, `pe_ruc`, `ph_tin`, `pl_nip`, `py_ruc`, `ro_tin`, `rs_pib`, `ru_inn`, `ru_kpp`, `sa_vat`, `sg_gst`, `sg_uen`, `si_tin`, `sn_ninea`, `sr_fin`, `sv_nit`, `th_vat`, `tj_tin`, `tr_tin`, `tw_vat`, `tz_vat`, `ua_vat`, `ug_tin`, `us_ein`, `uy_ruc`, `uz_tin`, `uz_vat`, `ve_rif`, `vn_tin`, `za_vat`, `zm_tin`, or `zw_tin`. Note that some legacy tax IDs have type `unknown`
     /// </summary>
     [JsonPropertyName("type")]
     public required InvoicesResourceInvoiceTaxIdType Type { get; init; }
@@ -48552,7 +49159,7 @@ public record TaxId
 
 }
 
-public record TaxIdVerification
+public partial record TaxIdVerification
 {
     /// <summary>
     /// Verification status, one of `pending`, `verified`, `unverified`, or `unavailable`.
@@ -48574,7 +49181,7 @@ public record TaxIdVerification
 
 }
 
-public record TaxProductRegistrationsResourceCountryOptions
+public partial record TaxProductRegistrationsResourceCountryOptions
 {
     [JsonPropertyName("ae")]
     public TaxProductRegistrationsResourceCountryOptionsDefaultInboundGoods? Ae { get; init; }
@@ -48881,7 +49488,7 @@ public record TaxProductRegistrationsResourceCountryOptions
 
 }
 
-public record TaxProductRegistrationsResourceCountryOptionsCaProvinceStandard
+public partial record TaxProductRegistrationsResourceCountryOptionsCaProvinceStandard
 {
     /// <summary>
     /// Two-letter CA province code ([ISO 3166-2](https://en.wikipedia.org/wiki/ISO_3166-2)).
@@ -48891,7 +49498,7 @@ public record TaxProductRegistrationsResourceCountryOptionsCaProvinceStandard
 
 }
 
-public record TaxProductRegistrationsResourceCountryOptionsCanada
+public partial record TaxProductRegistrationsResourceCountryOptionsCanada
 {
     [JsonPropertyName("province_standard")]
     public TaxProductRegistrationsResourceCountryOptionsCaProvinceStandard? ProvinceStandard { get; init; }
@@ -48904,7 +49511,7 @@ public record TaxProductRegistrationsResourceCountryOptionsCanada
 
 }
 
-public record TaxProductRegistrationsResourceCountryOptionsDefault
+public partial record TaxProductRegistrationsResourceCountryOptionsDefault
 {
     /// <summary>
     /// Type of registration in `country`.
@@ -48914,7 +49521,7 @@ public record TaxProductRegistrationsResourceCountryOptionsDefault
 
 }
 
-public record TaxProductRegistrationsResourceCountryOptionsDefaultInboundGoods
+public partial record TaxProductRegistrationsResourceCountryOptionsDefaultInboundGoods
 {
     [JsonPropertyName("standard")]
     public TaxProductRegistrationsResourceCountryOptionsDefaultStandard? Standard { get; init; }
@@ -48927,7 +49534,7 @@ public record TaxProductRegistrationsResourceCountryOptionsDefaultInboundGoods
 
 }
 
-public record TaxProductRegistrationsResourceCountryOptionsDefaultStandard
+public partial record TaxProductRegistrationsResourceCountryOptionsDefaultStandard
 {
     /// <summary>
     /// Place of supply scheme used in an Default standard registration.
@@ -48937,7 +49544,7 @@ public record TaxProductRegistrationsResourceCountryOptionsDefaultStandard
 
 }
 
-public record TaxProductRegistrationsResourceCountryOptionsEuStandard
+public partial record TaxProductRegistrationsResourceCountryOptionsEuStandard
 {
     /// <summary>
     /// Place of supply scheme used in an EU standard registration.
@@ -48947,7 +49554,7 @@ public record TaxProductRegistrationsResourceCountryOptionsEuStandard
 
 }
 
-public record TaxProductRegistrationsResourceCountryOptionsEurope
+public partial record TaxProductRegistrationsResourceCountryOptionsEurope
 {
     [JsonPropertyName("standard")]
     public TaxProductRegistrationsResourceCountryOptionsEuStandard? Standard { get; init; }
@@ -48960,7 +49567,7 @@ public record TaxProductRegistrationsResourceCountryOptionsEurope
 
 }
 
-public record TaxProductRegistrationsResourceCountryOptionsSimplified
+public partial record TaxProductRegistrationsResourceCountryOptionsSimplified
 {
     /// <summary>
     /// Type of registration in `country`.
@@ -48970,7 +49577,7 @@ public record TaxProductRegistrationsResourceCountryOptionsSimplified
 
 }
 
-public record TaxProductRegistrationsResourceCountryOptionsThailand
+public partial record TaxProductRegistrationsResourceCountryOptionsThailand
 {
     /// <summary>
     /// Type of registration in `country`.
@@ -48980,13 +49587,19 @@ public record TaxProductRegistrationsResourceCountryOptionsThailand
 
 }
 
-public record TaxProductRegistrationsResourceCountryOptionsUnitedStates
+public partial record TaxProductRegistrationsResourceCountryOptionsUnitedStates
 {
     [JsonPropertyName("local_amusement_tax")]
     public TaxProductRegistrationsResourceCountryOptionsUsLocalAmusementTax? LocalAmusementTax { get; init; }
 
     [JsonPropertyName("local_lease_tax")]
     public TaxProductRegistrationsResourceCountryOptionsUsLocalLeaseTax? LocalLeaseTax { get; init; }
+
+    [JsonPropertyName("mass_transit_parking_tax")]
+    public TaxProductRegistrationsResourceCountryOptionsUsMassTransitParkingTax? MassTransitParkingTax { get; init; }
+
+    [JsonPropertyName("parking_tax")]
+    public TaxProductRegistrationsResourceCountryOptionsUsParkingTax? ParkingTax { get; init; }
 
     /// <summary>
     /// Two-letter US state code ([ISO 3166-2](https://en.wikipedia.org/wiki/ISO_3166-2)).
@@ -49005,7 +49618,7 @@ public record TaxProductRegistrationsResourceCountryOptionsUnitedStates
 
 }
 
-public record TaxProductRegistrationsResourceCountryOptionsUsLocalAmusementTax
+public partial record TaxProductRegistrationsResourceCountryOptionsUsLocalAmusementTax
 {
     /// <summary>
     /// A [FIPS code](https://www.census.gov/library/reference/code-lists/ansi.html) representing the local jurisdiction.
@@ -49015,7 +49628,7 @@ public record TaxProductRegistrationsResourceCountryOptionsUsLocalAmusementTax
 
 }
 
-public record TaxProductRegistrationsResourceCountryOptionsUsLocalLeaseTax
+public partial record TaxProductRegistrationsResourceCountryOptionsUsLocalLeaseTax
 {
     /// <summary>
     /// A [FIPS code](https://www.census.gov/library/reference/code-lists/ansi.html) representing the local jurisdiction.
@@ -49025,7 +49638,27 @@ public record TaxProductRegistrationsResourceCountryOptionsUsLocalLeaseTax
 
 }
 
-public record TaxProductRegistrationsResourceCountryOptionsUsStateSalesTax
+public partial record TaxProductRegistrationsResourceCountryOptionsUsMassTransitParkingTax
+{
+    /// <summary>
+    /// A [jurisdiction code](https://docs.stripe.com/tax/registering?type=mass_transit_parking_tax#registration-types) representing the local jurisdiction.
+    /// </summary>
+    [JsonPropertyName("jurisdiction")]
+    public required string Jurisdiction { get; init; }
+
+}
+
+public partial record TaxProductRegistrationsResourceCountryOptionsUsParkingTax
+{
+    /// <summary>
+    /// A [jurisdiction code](https://docs.stripe.com/tax/registering?type=parking_tax#registration-types) representing the local jurisdiction.
+    /// </summary>
+    [JsonPropertyName("jurisdiction")]
+    public required string Jurisdiction { get; init; }
+
+}
+
+public partial record TaxProductRegistrationsResourceCountryOptionsUsStateSalesTax
 {
     /// <summary>
     /// Elections for the state sales tax registration.
@@ -49035,7 +49668,7 @@ public record TaxProductRegistrationsResourceCountryOptionsUsStateSalesTax
 
 }
 
-public record TaxProductRegistrationsResourceCountryOptionsUsStateSalesTaxElection
+public partial record TaxProductRegistrationsResourceCountryOptionsUsStateSalesTaxElection
 {
     /// <summary>
     /// A [FIPS code](https://www.census.gov/library/reference/code-lists/ansi.html) representing the local jurisdiction.
@@ -49051,7 +49684,7 @@ public record TaxProductRegistrationsResourceCountryOptionsUsStateSalesTaxElecti
 
 }
 
-public record TaxProductResourceCustomerDetails
+public partial record TaxProductResourceCustomerDetails
 {
     /// <summary>
     /// The customer's postal address (for example, home or business location).
@@ -49085,10 +49718,10 @@ public record TaxProductResourceCustomerDetails
 
 }
 
-public record TaxProductResourceCustomerDetailsResourceTaxId
+public partial record TaxProductResourceCustomerDetailsResourceTaxId
 {
     /// <summary>
-    /// The type of the tax ID, one of `ad_nrt`, `ar_cuit`, `eu_vat`, `bo_tin`, `br_cnpj`, `br_cpf`, `cn_tin`, `co_nit`, `cr_tin`, `do_rcn`, `ec_ruc`, `eu_oss_vat`, `hr_oib`, `pe_ruc`, `ro_tin`, `rs_pib`, `sv_nit`, `uy_ruc`, `ve_rif`, `vn_tin`, `gb_vat`, `nz_gst`, `au_abn`, `au_arn`, `in_gst`, `no_vat`, `no_voec`, `za_vat`, `ch_vat`, `mx_rfc`, `sg_uen`, `ru_inn`, `ru_kpp`, `ca_bn`, `hk_br`, `es_cif`, `pl_nip`, `it_cf`, `fo_vat`, `gi_tin`, `py_ruc`, `tw_vat`, `th_vat`, `jp_cn`, `jp_rn`, `jp_trn`, `li_uid`, `li_vat`, `lk_vat`, `my_itn`, `us_ein`, `kr_brn`, `ca_qst`, `ca_gst_hst`, `ca_pst_bc`, `ca_pst_mb`, `ca_pst_sk`, `my_sst`, `sg_gst`, `ae_trn`, `cl_tin`, `sa_vat`, `id_npwp`, `my_frp`, `il_vat`, `ge_vat`, `ua_vat`, `is_vat`, `bg_uic`, `hu_tin`, `si_tin`, `ke_pin`, `tr_tin`, `eg_tin`, `ph_tin`, `al_tin`, `bh_vat`, `kz_bin`, `ng_tin`, `om_vat`, `de_stn`, `ch_uid`, `tz_vat`, `uz_vat`, `uz_tin`, `md_vat`, `ma_vat`, `by_tin`, `ao_tin`, `bs_tin`, `bb_tin`, `cd_nif`, `mr_nif`, `me_pib`, `zw_tin`, `ba_tin`, `gn_nif`, `mk_vat`, `sr_fin`, `sn_ninea`, `am_tin`, `np_pan`, `tj_tin`, `ug_tin`, `zm_tin`, `kh_tin`, `aw_tin`, `az_tin`, `bd_bin`, `bj_ifu`, `et_tin`, `kg_tin`, `la_tin`, `cm_niu`, `cv_nif`, `bf_ifu`, or `unknown`
+    /// The type of the tax ID, one of `ad_nrt`, `ar_cuit`, `eu_vat`, `bo_tin`, `br_cnpj`, `br_cpf`, `cn_tin`, `co_nit`, `cr_tin`, `do_rcn`, `ec_ruc`, `eu_oss_vat`, `hr_oib`, `pe_ruc`, `ro_tin`, `rs_pib`, `sv_nit`, `uy_ruc`, `ve_rif`, `vn_tin`, `gb_vat`, `nz_gst`, `au_abn`, `au_arn`, `in_gst`, `no_vat`, `no_voec`, `za_vat`, `ch_vat`, `mx_rfc`, `sg_uen`, `ru_inn`, `ru_kpp`, `ca_bn`, `hk_br`, `es_cif`, `pl_nip`, `it_cf`, `fo_vat`, `gi_tin`, `py_ruc`, `tw_vat`, `th_vat`, `jp_cn`, `jp_rn`, `jp_trn`, `li_uid`, `li_vat`, `lk_vat`, `my_itn`, `us_ein`, `kr_brn`, `ca_qst`, `ca_gst_hst`, `ca_pst_bc`, `ca_pst_mb`, `ca_pst_sk`, `my_sst`, `sg_gst`, `ae_trn`, `cl_tin`, `sa_vat`, `id_npwp`, `my_frp`, `il_vat`, `ge_vat`, `ua_vat`, `is_vat`, `bg_uic`, `hu_tin`, `si_tin`, `ke_pin`, `tr_tin`, `eg_tin`, `ph_tin`, `al_tin`, `bh_vat`, `kz_bin`, `ng_tin`, `om_vat`, `de_stn`, `ch_uid`, `tz_vat`, `uz_vat`, `uz_tin`, `md_vat`, `ma_vat`, `by_tin`, `ao_tin`, `bs_tin`, `bb_tin`, `cd_nif`, `mr_nif`, `me_pib`, `zw_tin`, `ba_tin`, `gn_nif`, `mk_vat`, `sr_fin`, `sn_ninea`, `am_tin`, `np_pan`, `tj_tin`, `ug_tin`, `zm_tin`, `kh_tin`, `aw_tin`, `az_tin`, `bd_bin`, `bj_ifu`, `et_tin`, `kg_tin`, `la_tin`, `cm_niu`, `cv_nif`, `bf_ifu`, `ic_nif`, or `unknown`
     /// </summary>
     [JsonPropertyName("type")]
     public required InvoicesResourceInvoiceTaxIdType Type { get; init; }
@@ -49101,7 +49734,7 @@ public record TaxProductResourceCustomerDetailsResourceTaxId
 
 }
 
-public record TaxProductResourceJurisdiction
+public partial record TaxProductResourceJurisdiction
 {
     /// <summary>
     /// Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
@@ -49129,7 +49762,7 @@ public record TaxProductResourceJurisdiction
 
 }
 
-public record TaxProductResourceLineItemTaxBreakdown
+public partial record TaxProductResourceLineItemTaxBreakdown
 {
     /// <summary>
     /// The amount of tax, in the [smallest currency unit](https://docs.stripe.com/currencies#minor-units).
@@ -49166,7 +49799,7 @@ public record TaxProductResourceLineItemTaxBreakdown
 
 }
 
-public record TaxProductResourceLineItemTaxRateDetails
+public partial record TaxProductResourceLineItemTaxRateDetails
 {
     /// <summary>
     /// A localized display name for tax type, intended to be human-readable. For example, "Local Sales and Use Tax", "Value-added tax (VAT)", or "Umsatzsteuer (USt.)".
@@ -49188,7 +49821,7 @@ public record TaxProductResourceLineItemTaxRateDetails
 
 }
 
-public record TaxProductResourcePostalAddress
+public partial record TaxProductResourcePostalAddress
 {
     /// <summary>
     /// City, district, suburb, town, or village.
@@ -49228,14 +49861,14 @@ public record TaxProductResourcePostalAddress
 
 }
 
-public record TaxProductResourceShipFromDetails
+public partial record TaxProductResourceShipFromDetails
 {
     [JsonPropertyName("address")]
     public required TaxProductResourcePostalAddress Address { get; init; }
 
 }
 
-public record TaxProductResourceTaxAssociationTransactionAttempts
+public partial record TaxProductResourceTaxAssociationTransactionAttempts
 {
     [JsonPropertyName("committed")]
     public TaxProductResourceTaxAssociationTransactionAttemptsResourceCommitted? Committed { get; init; }
@@ -49257,7 +49890,7 @@ public record TaxProductResourceTaxAssociationTransactionAttempts
 
 }
 
-public record TaxProductResourceTaxAssociationTransactionAttemptsResourceCommitted
+public partial record TaxProductResourceTaxAssociationTransactionAttemptsResourceCommitted
 {
     /// <summary>
     /// The [Tax Transaction](https://docs.stripe.com/api/tax/transaction/object)
@@ -49267,7 +49900,7 @@ public record TaxProductResourceTaxAssociationTransactionAttemptsResourceCommitt
 
 }
 
-public record TaxProductResourceTaxAssociationTransactionAttemptsResourceErrored
+public partial record TaxProductResourceTaxAssociationTransactionAttemptsResourceErrored
 {
     /// <summary>
     /// Details on why we couldn't commit the tax transaction.
@@ -49277,7 +49910,7 @@ public record TaxProductResourceTaxAssociationTransactionAttemptsResourceErrored
 
 }
 
-public record TaxProductResourceTaxBreakdown
+public partial record TaxProductResourceTaxBreakdown
 {
     /// <summary>
     /// The amount of tax, in the [smallest currency unit](https://docs.stripe.com/currencies#minor-units).
@@ -49308,7 +49941,7 @@ public record TaxProductResourceTaxBreakdown
 
 }
 
-public record TaxProductResourceTaxCalculationShippingCost
+public partial record TaxProductResourceTaxCalculationShippingCost
 {
     /// <summary>
     /// The shipping amount in the [smallest currency unit](https://docs.stripe.com/currencies#minor-units). If `tax_behavior=inclusive`, then this amount includes taxes. Otherwise, taxes were calculated on top of this amount.
@@ -49348,7 +49981,7 @@ public record TaxProductResourceTaxCalculationShippingCost
 
 }
 
-public record TaxProductResourceTaxRateDetails
+public partial record TaxProductResourceTaxRateDetails
 {
     /// <summary>
     /// Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
@@ -49388,7 +50021,7 @@ public record TaxProductResourceTaxRateDetails
 
 }
 
-public record TaxProductResourceTaxSettingsDefaults
+public partial record TaxProductResourceTaxSettingsDefaults
 {
     /// <summary>
     /// The tax calculation provider this account uses. Defaults to `stripe` when not using a [third-party provider](/tax/third-party-apps).
@@ -49410,14 +50043,14 @@ public record TaxProductResourceTaxSettingsDefaults
 
 }
 
-public record TaxProductResourceTaxSettingsHeadOffice
+public partial record TaxProductResourceTaxSettingsHeadOffice
 {
     [JsonPropertyName("address")]
     public required Address Address { get; init; }
 
 }
 
-public record TaxProductResourceTaxSettingsStatusDetails
+public partial record TaxProductResourceTaxSettingsStatusDetails
 {
     [JsonPropertyName("active")]
     public TaxProductResourceTaxSettingsStatusDetailsResourceActive? Active { get; init; }
@@ -49427,11 +50060,11 @@ public record TaxProductResourceTaxSettingsStatusDetails
 
 }
 
-public record TaxProductResourceTaxSettingsStatusDetailsResourceActive
+public partial record TaxProductResourceTaxSettingsStatusDetailsResourceActive
 {
 }
 
-public record TaxProductResourceTaxSettingsStatusDetailsResourcePending
+public partial record TaxProductResourceTaxSettingsStatusDetailsResourcePending
 {
     /// <summary>
     /// The list of missing fields that are required to perform calculations. It includes the entry `head_office` when the status is `pending`. It is recommended to set the optional values even if they aren't listed as required for calculating taxes. Calculations can fail if missing fields aren't explicitly provided on every call.
@@ -49441,7 +50074,7 @@ public record TaxProductResourceTaxSettingsStatusDetailsResourcePending
 
 }
 
-public record TaxProductResourceTaxTransactionLineItemResourceReversal
+public partial record TaxProductResourceTaxTransactionLineItemResourceReversal
 {
     /// <summary>
     /// The `id` of the line item to reverse in the original transaction.
@@ -49451,7 +50084,7 @@ public record TaxProductResourceTaxTransactionLineItemResourceReversal
 
 }
 
-public record TaxProductResourceTaxTransactionResourceReversal
+public partial record TaxProductResourceTaxTransactionResourceReversal
 {
     /// <summary>
     /// The `id` of the reversed `Transaction` object.
@@ -49461,7 +50094,7 @@ public record TaxProductResourceTaxTransactionResourceReversal
 
 }
 
-public record TaxProductResourceTaxTransactionShippingCost
+public partial record TaxProductResourceTaxTransactionShippingCost
 {
     /// <summary>
     /// The shipping amount in the [smallest currency unit](https://docs.stripe.com/currencies#minor-units). If `tax_behavior=inclusive`, then this amount includes taxes. Otherwise, taxes were calculated on top of this amount.
@@ -49500,7 +50133,7 @@ public record TaxProductResourceTaxTransactionShippingCost
 /// 
 /// Related guide: [Tax rates](/billing/taxes/tax-rates)
 /// </summary>
-public record TaxRate
+public partial record TaxRate
 {
     /// <summary>
     /// Defaults to `true`. When set to `false`, this tax rate cannot be used with new applications or Checkout Sessions, but will still work for subscriptions and invoices that already have it set.
@@ -49617,7 +50250,7 @@ public record TaxRate
 /// <summary>
 /// The amount of the tax rate when the `rate_type`` is `flat_amount`. Tax rates with `rate_type` `percentage` can vary based on the transaction, resulting in this field being `null`. This field exposes the amount and currency of the flat tax rate.
 /// </summary>
-public record TaxRateFlatAmount
+public partial record TaxRateFlatAmount
 {
     /// <summary>
     /// Amount of the tax when the `rate_type` is `flat_amount`. This positive integer represents how much to charge in the smallest currency unit (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency). The amount value supports up to eight digits (e.g., a value of 99999999 for a USD charge of $999,999.99).
@@ -49637,7 +50270,7 @@ public record TaxRateFlatAmount
 /// A Configurations object represents how features should be configured for terminal readers.
 /// For information about how to use it, see the [Terminal configurations documentation](https://docs.stripe.com/terminal/fleet/configurations-overview).
 /// </summary>
-public record TerminalConfiguration
+public partial record TerminalConfiguration
 {
     [JsonPropertyName("bbpos_wisepad3")]
     public TerminalConfigurationConfigurationResourceDeviceTypeSpecificConfig? BbposWisepad3 { get; init; }
@@ -49718,7 +50351,7 @@ public record TerminalConfiguration
 /// 
 /// Related guide: [Fleet management](https://docs.stripe.com/terminal/fleet/locations)
 /// </summary>
-public record TerminalConnectionToken
+public partial record TerminalConnectionToken
 {
     /// <summary>
     /// The id of the location that this connection token is scoped to. Note that location scoping only applies to internet-connected readers. For more details, see [the docs on scoping connection tokens](https://docs.stripe.com/terminal/fleet/locations-and-zones?dashboard-or-api=api#connection-tokens).
@@ -49745,7 +50378,7 @@ public record TerminalConnectionToken
 /// 
 /// Related guide: [Fleet management](https://docs.stripe.com/terminal/fleet/locations)
 /// </summary>
-public record TerminalLocation
+public partial record TerminalLocation
 {
     [JsonPropertyName("address")]
     public required Address Address { get; init; }
@@ -49815,7 +50448,7 @@ public record TerminalLocation
 /// <summary>
 /// Returns redirect links used for onboarding onto Tap to Pay on iPhone.
 /// </summary>
-public record TerminalOnboardingLink
+public partial record TerminalOnboardingLink
 {
     /// <summary>
     /// Link type options associated with the current onboarding link object.
@@ -49851,7 +50484,7 @@ public record TerminalOnboardingLink
 /// 
 /// Related guide: [Connecting to a reader](https://docs.stripe.com/terminal/payments/connect-reader)
 /// </summary>
-public record TerminalReader
+public partial record TerminalReader
 {
     /// <summary>
     /// The most recent action performed by the reader.
@@ -49936,11 +50569,11 @@ public record TerminalReader
 /// <summary>
 /// A Refund object returned by the Terminal refunds API.
 /// </summary>
-public record TerminalRefund
+public partial record TerminalRefund
 {
 }
 
-public record TerminalConfigurationConfigurationResourceCellularConfig
+public partial record TerminalConfigurationConfigurationResourceCellularConfig
 {
     /// <summary>
     /// Whether a cellular-capable reader can connect to the internet over cellular.
@@ -49950,7 +50583,7 @@ public record TerminalConfigurationConfigurationResourceCellularConfig
 
 }
 
-public record TerminalConfigurationConfigurationResourceCurrencySpecificConfig
+public partial record TerminalConfigurationConfigurationResourceCurrencySpecificConfig
 {
     /// <summary>
     /// Fixed amounts displayed when collecting a tip
@@ -49972,7 +50605,7 @@ public record TerminalConfigurationConfigurationResourceCurrencySpecificConfig
 
 }
 
-public record TerminalConfigurationConfigurationResourceDeviceTypeSpecificConfig
+public partial record TerminalConfigurationConfigurationResourceDeviceTypeSpecificConfig
 {
     /// <summary>
     /// A File ID representing an image to display on the reader
@@ -49982,7 +50615,7 @@ public record TerminalConfigurationConfigurationResourceDeviceTypeSpecificConfig
 
 }
 
-public record TerminalConfigurationConfigurationResourceEnterprisePeapWifi
+public partial record TerminalConfigurationConfigurationResourceEnterprisePeapWifi
 {
     /// <summary>
     /// A File ID representing a PEM file containing the server certificate
@@ -50010,7 +50643,7 @@ public record TerminalConfigurationConfigurationResourceEnterprisePeapWifi
 
 }
 
-public record TerminalConfigurationConfigurationResourceEnterpriseTlsWifi
+public partial record TerminalConfigurationConfigurationResourceEnterpriseTlsWifi
 {
     /// <summary>
     /// A File ID representing a PEM file containing the server certificate
@@ -50044,7 +50677,7 @@ public record TerminalConfigurationConfigurationResourceEnterpriseTlsWifi
 
 }
 
-public record TerminalConfigurationConfigurationResourceOfflineConfig
+public partial record TerminalConfigurationConfigurationResourceOfflineConfig
 {
     /// <summary>
     /// Determines whether to allow transactions to be collected while reader is offline. Defaults to false.
@@ -50054,7 +50687,7 @@ public record TerminalConfigurationConfigurationResourceOfflineConfig
 
 }
 
-public record TerminalConfigurationConfigurationResourcePersonalPskWifi
+public partial record TerminalConfigurationConfigurationResourcePersonalPskWifi
 {
     /// <summary>
     /// Password for connecting to the WiFi network
@@ -50070,7 +50703,7 @@ public record TerminalConfigurationConfigurationResourcePersonalPskWifi
 
 }
 
-public record TerminalConfigurationConfigurationResourceRebootWindow
+public partial record TerminalConfigurationConfigurationResourceRebootWindow
 {
     /// <summary>
     /// Integer between 0 to 23 that represents the end hour of the reboot time window. The value must be different than the start_hour.
@@ -50086,7 +50719,7 @@ public record TerminalConfigurationConfigurationResourceRebootWindow
 
 }
 
-public record TerminalConfigurationConfigurationResourceTipping
+public partial record TerminalConfigurationConfigurationResourceTipping
 {
     [JsonPropertyName("aed")]
     public TerminalConfigurationConfigurationResourceCurrencySpecificConfig? Aed { get; init; }
@@ -50153,7 +50786,7 @@ public record TerminalConfigurationConfigurationResourceTipping
 
 }
 
-public record TerminalConfigurationConfigurationResourceWifiConfig
+public partial record TerminalConfigurationConfigurationResourceWifiConfig
 {
     [JsonPropertyName("enterprise_eap_peap")]
     public TerminalConfigurationConfigurationResourceEnterprisePeapWifi? EnterpriseEapPeap { get; init; }
@@ -50175,7 +50808,7 @@ public record TerminalConfigurationConfigurationResourceWifiConfig
 /// <summary>
 /// Options associated with the Apple Terms and Conditions link type.
 /// </summary>
-public record TerminalOnboardingLinkAppleTermsAndConditions
+public partial record TerminalOnboardingLinkAppleTermsAndConditions
 {
     /// <summary>
     /// Whether the link should also support users relinking their Apple account.
@@ -50194,7 +50827,7 @@ public record TerminalOnboardingLinkAppleTermsAndConditions
 /// <summary>
 /// Link type options associated with the current onboarding link object.
 /// </summary>
-public record TerminalOnboardingLinkLinkOptions
+public partial record TerminalOnboardingLinkLinkOptions
 {
     /// <summary>
     /// The options associated with the Apple Terms and Conditions link type.
@@ -50207,7 +50840,7 @@ public record TerminalOnboardingLinkLinkOptions
 /// <summary>
 /// Represents a cart to be displayed on the reader
 /// </summary>
-public record TerminalReaderReaderResourceCart
+public partial record TerminalReaderReaderResourceCart
 {
     /// <summary>
     /// Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
@@ -50238,7 +50871,7 @@ public record TerminalReaderReaderResourceCart
 /// <summary>
 /// Choice to be selected on a Reader
 /// </summary>
-public record TerminalReaderReaderResourceChoice
+public partial record TerminalReaderReaderResourceChoice
 {
     /// <summary>
     /// The identifier for the selected choice. Maximum 50 characters.
@@ -50263,7 +50896,7 @@ public record TerminalReaderReaderResourceChoice
 /// <summary>
 /// Represents a per-transaction override of a reader configuration
 /// </summary>
-public record TerminalReaderReaderResourceCollectConfig
+public partial record TerminalReaderReaderResourceCollectConfig
 {
     /// <summary>
     /// Enable customer-initiated cancellation when processing this payment.
@@ -50288,7 +50921,7 @@ public record TerminalReaderReaderResourceCollectConfig
 /// <summary>
 /// Represents a reader action to collect customer inputs
 /// </summary>
-public record TerminalReaderReaderResourceCollectInputsAction
+public partial record TerminalReaderReaderResourceCollectInputsAction
 {
     /// <summary>
     /// List of inputs to be collected.
@@ -50307,7 +50940,7 @@ public record TerminalReaderReaderResourceCollectInputsAction
 /// <summary>
 /// Represents a reader action to collect a payment method
 /// </summary>
-public record TerminalReaderReaderResourceCollectPaymentMethodAction
+public partial record TerminalReaderReaderResourceCollectPaymentMethodAction
 {
     /// <summary>
     /// Represents a per-transaction override of a reader configuration
@@ -50336,7 +50969,7 @@ public record TerminalReaderReaderResourceCollectPaymentMethodAction
 /// <summary>
 /// Represents a per-transaction override of a reader configuration
 /// </summary>
-public record TerminalReaderReaderResourceConfirmConfig
+public partial record TerminalReaderReaderResourceConfirmConfig
 {
     /// <summary>
     /// If the customer doesn't abandon authenticating the payment, they're redirected to this URL after completion.
@@ -50349,7 +50982,7 @@ public record TerminalReaderReaderResourceConfirmConfig
 /// <summary>
 /// Represents a reader action to confirm a payment
 /// </summary>
-public record TerminalReaderReaderResourceConfirmPaymentIntentAction
+public partial record TerminalReaderReaderResourceConfirmPaymentIntentAction
 {
     /// <summary>
     /// Represents a per-transaction override of a reader configuration
@@ -50368,7 +51001,7 @@ public record TerminalReaderReaderResourceConfirmPaymentIntentAction
 /// <summary>
 /// Represents custom text to be displayed when collecting the input using a reader
 /// </summary>
-public record TerminalReaderReaderResourceCustomText
+public partial record TerminalReaderReaderResourceCustomText
 {
     /// <summary>
     /// Customize the default description for this input
@@ -50399,7 +51032,7 @@ public record TerminalReaderReaderResourceCustomText
 /// <summary>
 /// Information about a email being collected using a reader
 /// </summary>
-public record TerminalReaderReaderResourceEmail
+public partial record TerminalReaderReaderResourceEmail
 {
     /// <summary>
     /// The collected email address
@@ -50412,7 +51045,7 @@ public record TerminalReaderReaderResourceEmail
 /// <summary>
 /// Metadata of an uploaded file
 /// </summary>
-public record TerminalReaderReaderResourceFileMetadata
+public partial record TerminalReaderReaderResourceFileMetadata
 {
     /// <summary>
     /// Creation time of the object (in seconds since the Unix epoch).
@@ -50443,7 +51076,7 @@ public record TerminalReaderReaderResourceFileMetadata
 /// <summary>
 /// Represents an input to be collected using the reader
 /// </summary>
-public record TerminalReaderReaderResourceInput
+public partial record TerminalReaderReaderResourceInput
 {
     /// <summary>
     /// Default text of input being collected.
@@ -50516,7 +51149,7 @@ public record TerminalReaderReaderResourceInput
 /// <summary>
 /// Represents a line item to be displayed on the reader
 /// </summary>
-public record TerminalReaderReaderResourceLineItem
+public partial record TerminalReaderReaderResourceLineItem
 {
     /// <summary>
     /// The amount of the line item. A positive integer in the [smallest currency unit](https://docs.stripe.com/currencies#zero-decimal).
@@ -50541,7 +51174,7 @@ public record TerminalReaderReaderResourceLineItem
 /// <summary>
 /// Information about a number being collected using a reader
 /// </summary>
-public record TerminalReaderReaderResourceNumeric
+public partial record TerminalReaderReaderResourceNumeric
 {
     /// <summary>
     /// The collected number
@@ -50554,7 +51187,7 @@ public record TerminalReaderReaderResourceNumeric
 /// <summary>
 /// Information about a phone number being collected using a reader
 /// </summary>
-public record TerminalReaderReaderResourcePhone
+public partial record TerminalReaderReaderResourcePhone
 {
     /// <summary>
     /// The collected phone number
@@ -50567,7 +51200,7 @@ public record TerminalReaderReaderResourcePhone
 /// <summary>
 /// Represents a reader action to print content
 /// </summary>
-public record TerminalReaderReaderResourcePrintContent
+public partial record TerminalReaderReaderResourcePrintContent
 {
     /// <summary>
     /// Metadata of an uploaded file
@@ -50586,7 +51219,7 @@ public record TerminalReaderReaderResourcePrintContent
 /// <summary>
 /// Represents a per-transaction override of a reader configuration
 /// </summary>
-public record TerminalReaderReaderResourceProcessConfig
+public partial record TerminalReaderReaderResourceProcessConfig
 {
     /// <summary>
     /// Enable customer-initiated cancellation when processing this payment.
@@ -50617,7 +51250,7 @@ public record TerminalReaderReaderResourceProcessConfig
 /// <summary>
 /// Represents a reader action to process a payment intent
 /// </summary>
-public record TerminalReaderReaderResourceProcessPaymentIntentAction
+public partial record TerminalReaderReaderResourceProcessPaymentIntentAction
 {
     /// <summary>
     /// Most recent PaymentIntent processed by the reader.
@@ -50636,7 +51269,7 @@ public record TerminalReaderReaderResourceProcessPaymentIntentAction
 /// <summary>
 /// Represents a per-setup override of a reader configuration
 /// </summary>
-public record TerminalReaderReaderResourceProcessSetupConfig
+public partial record TerminalReaderReaderResourceProcessSetupConfig
 {
     /// <summary>
     /// Enable customer-initiated cancellation when processing this SetupIntent.
@@ -50649,7 +51282,7 @@ public record TerminalReaderReaderResourceProcessSetupConfig
 /// <summary>
 /// Represents a reader action to process a setup intent
 /// </summary>
-public record TerminalReaderReaderResourceProcessSetupIntentAction
+public partial record TerminalReaderReaderResourceProcessSetupIntentAction
 {
     /// <summary>
     /// ID of a card PaymentMethod generated from the card_present PaymentMethod that may be attached to a Customer for future transactions. Only present if it was possible to generate a card PaymentMethod.
@@ -50674,7 +51307,7 @@ public record TerminalReaderReaderResourceProcessSetupIntentAction
 /// <summary>
 /// Represents an action performed by the reader
 /// </summary>
-public record TerminalReaderReaderResourceReaderAction
+public partial record TerminalReaderReaderResourceReaderAction
 {
     /// <summary>
     /// The reader action failed due to an [API error](https://docs.stripe.com/api/errors). Only present when `status` is `failed` and the underlying failure was an API error. Avoid parsing the `message` field for programmatic logic; use `type` or `code` instead. The `message` field is for display to humans only and may be updated at anytime. Requires [reader version](https://docs.stripe.com/terminal/readers/stripe-reader-s700-s710#reader-software-version) 2.42 or later. Readers on older versions always return null.
@@ -50759,7 +51392,7 @@ public record TerminalReaderReaderResourceReaderAction
 /// <summary>
 /// Represents a reader action to refund a payment
 /// </summary>
-public record TerminalReaderReaderResourceRefundPaymentAction
+public partial record TerminalReaderReaderResourceRefundPaymentAction
 {
     /// <summary>
     /// The amount being refunded.
@@ -50820,7 +51453,7 @@ public record TerminalReaderReaderResourceRefundPaymentAction
 /// <summary>
 /// Represents a per-transaction override of a reader configuration
 /// </summary>
-public record TerminalReaderReaderResourceRefundPaymentConfig
+public partial record TerminalReaderReaderResourceRefundPaymentConfig
 {
     /// <summary>
     /// Enable customer-initiated cancellation when refunding this payment.
@@ -50833,7 +51466,7 @@ public record TerminalReaderReaderResourceRefundPaymentConfig
 /// <summary>
 /// Information about a selection being collected using a reader
 /// </summary>
-public record TerminalReaderReaderResourceSelection
+public partial record TerminalReaderReaderResourceSelection
 {
     /// <summary>
     /// List of possible choices to be selected
@@ -50858,7 +51491,7 @@ public record TerminalReaderReaderResourceSelection
 /// <summary>
 /// Represents a reader action to set the reader display
 /// </summary>
-public record TerminalReaderReaderResourceSetReaderDisplayAction
+public partial record TerminalReaderReaderResourceSetReaderDisplayAction
 {
     /// <summary>
     /// Cart object to be displayed by the reader, including line items, amounts, and currency.
@@ -50877,7 +51510,7 @@ public record TerminalReaderReaderResourceSetReaderDisplayAction
 /// <summary>
 /// Information about a signature being collected using a reader
 /// </summary>
-public record TerminalReaderReaderResourceSignature
+public partial record TerminalReaderReaderResourceSignature
 {
     /// <summary>
     /// The File ID of a collected signature image
@@ -50890,7 +51523,7 @@ public record TerminalReaderReaderResourceSignature
 /// <summary>
 /// Information about text being collected using a reader
 /// </summary>
-public record TerminalReaderReaderResourceText
+public partial record TerminalReaderReaderResourceText
 {
     /// <summary>
     /// The collected text value
@@ -50903,7 +51536,7 @@ public record TerminalReaderReaderResourceText
 /// <summary>
 /// Represents a per-transaction tipping configuration
 /// </summary>
-public record TerminalReaderReaderResourceTippingConfig
+public partial record TerminalReaderReaderResourceTippingConfig
 {
     /// <summary>
     /// Amount used to calculate tip suggestions on tipping selection screen for this transaction. Must be a positive integer in the smallest currency unit (e.g., 100 cents to represent $1.00 or 100 to represent ¥100, a zero-decimal currency).
@@ -50916,7 +51549,7 @@ public record TerminalReaderReaderResourceTippingConfig
 /// <summary>
 /// Information about an input's toggle
 /// </summary>
-public record TerminalReaderReaderResourceToggle
+public partial record TerminalReaderReaderResourceToggle
 {
     /// <summary>
     /// The toggle's default value. Can be `enabled` or `disabled`.
@@ -50949,7 +51582,7 @@ public record TerminalReaderReaderResourceToggle
 /// objects at a frozen time in the past or future, and advance to a specific future time to observe webhooks and state changes. After the clock advances,
 /// you can either validate the current state of your scenario (and test your assumptions), change the current state of your scenario (and test more complex scenarios), or keep advancing forward in time.
 /// </summary>
-public record TestHelpersTestClock
+public partial record TestHelpersTestClock
 {
     /// <summary>
     /// Time at which the object was created. Measured in seconds since the Unix epoch.
@@ -51004,7 +51637,7 @@ public record TestHelpersTestClock
 
 }
 
-public record ThreeDSecureDetails
+public partial record ThreeDSecureDetails
 {
     /// <summary>
     /// For authenticated transactions: how the customer was authenticated by
@@ -51048,7 +51681,7 @@ public record ThreeDSecureDetails
 
 }
 
-public record ThreeDSecureDetailsCharge
+public partial record ThreeDSecureDetailsCharge
 {
     /// <summary>
     /// For authenticated transactions: how the customer was authenticated by
@@ -51105,7 +51738,7 @@ public record ThreeDSecureDetailsCharge
 
 }
 
-public record ThreeDSecureUsage
+public partial record ThreeDSecureUsage
 {
     /// <summary>
     /// Whether 3D Secure is supported on this card.
@@ -51115,7 +51748,7 @@ public record ThreeDSecureUsage
 
 }
 
-public record ThresholdsResourceUsageAlertFilter
+public partial record ThresholdsResourceUsageAlertFilter
 {
     /// <summary>
     /// Limit the scope of the alert to this customer ID
@@ -51131,7 +51764,7 @@ public record ThresholdsResourceUsageAlertFilter
 /// <summary>
 /// The usage threshold alert configuration enables setting up alerts for when a certain usage threshold on a specific meter is crossed.
 /// </summary>
-public record ThresholdsResourceUsageThresholdConfig
+public partial record ThresholdsResourceUsageThresholdConfig
 {
     /// <summary>
     /// The filters allow limiting the scope of this usage alert. You can only specify up to one filter at this time.
@@ -51181,7 +51814,7 @@ public record ThresholdsResourceUsageThresholdConfig
 /// [Radar](https://docs.stripe.com/radar), our integrated solution for automatic fraud protection,
 /// performs best with integrations that use client-side tokenization.
 /// </summary>
-public record Token
+public partial record Token
 {
     /// <summary>
     /// These bank accounts are payment methods on `Customer` objects.
@@ -51249,7 +51882,7 @@ public record Token
 
 }
 
-public record TokenCardNetworks
+public partial record TokenCardNetworks
 {
     /// <summary>
     /// The preferred network for co-branded cards. Can be `cartes_bancaires`, `mastercard`, `visa` or `invalid_preference` if requested network is not valid for the card.
@@ -51266,7 +51899,7 @@ public record TokenCardNetworks
 /// 
 /// Related guide: [Topping up your platform account](https://docs.stripe.com/connect/top-ups)
 /// </summary>
-public record Topup
+public partial record Topup
 {
     /// <summary>
     /// Amount transferred.
@@ -51323,6 +51956,12 @@ public record Topup
     public required string Id { get; init; }
 
     /// <summary>
+    /// Indicates whether the top-up was initiated by Stripe or by the user.
+    /// </summary>
+    [JsonPropertyName("initiated_by")]
+    public InitiatedBy? InitiatedBy { get; init; }
+
+    /// <summary>
     /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
     /// </summary>
     [JsonPropertyName("livemode")]
@@ -51339,6 +51978,18 @@ public record Topup
     /// </summary>
     [JsonPropertyName("object")]
     public required TopupObject Object { get; init; }
+
+    /// <summary>
+    /// The ID of a PaymentMethod representing the payment method used for the top-up. A PaymentMethod of type `us_bank_account` can be used.
+    /// </summary>
+    [JsonPropertyName("payment_method")]
+    public object? PaymentMethod { get; init; }
+
+    /// <summary>
+    /// Payment-method-specific configuration for this top-up.
+    /// </summary>
+    [JsonPropertyName("payment_method_options")]
+    public TopupResourcePaymentMethodOptions? PaymentMethodOptions { get; init; }
 
     /// <summary>
     /// The source field is deprecated. It might not always be present in the API response.
@@ -51366,6 +52017,26 @@ public record Topup
 
 }
 
+public partial record TopupResourcePaymentMethodOptions
+{
+    /// <summary>
+    /// If this top-up is to be used with a `us_bank_account` payment method, this sub-hash contains configuration for it.
+    /// </summary>
+    [JsonPropertyName("us_bank_account")]
+    public TopupResourceUsBankAccount? UsBankAccount { get; init; }
+
+}
+
+public partial record TopupResourceUsBankAccount
+{
+    /// <summary>
+    /// The US bank transfer network used for this top-up. The default is `ach`.
+    /// </summary>
+    [JsonPropertyName("network")]
+    public required InboundTransfersPaymentMethodDetailsUsBankAccountNetwork Network { get; init; }
+
+}
+
 /// <summary>
 /// A `Transfer` object is created when you move funds between Stripe accounts as
 /// part of Connect.
@@ -51378,7 +52049,7 @@ public record Topup
 /// 
 /// Related guide: [Creating separate charges and transfers](https://docs.stripe.com/connect/separate-charges-and-transfers)
 /// </summary>
-public record Transfer
+public partial record Transfer
 {
     /// <summary>
     /// Amount in cents (or local equivalent) to be transferred.
@@ -51484,7 +52155,7 @@ public record Transfer
 
 }
 
-public record TransferData
+public partial record TransferData
 {
     /// <summary>
     /// The amount transferred to the destination account. This transfer will occur automatically after the payment succeeds. If no amount is specified, by default the entire payment amount is transferred to the destination account.
@@ -51532,7 +52203,7 @@ public record TransferData
 /// 
 /// Related guide: [Reverse transfers](https://docs.stripe.com/connect/separate-charges-and-transfers#reverse-transfers)
 /// </summary>
-public record TransferReversal
+public partial record TransferReversal
 {
     /// <summary>
     /// Amount, in cents (or local equivalent).
@@ -51596,7 +52267,7 @@ public record TransferReversal
 
 }
 
-public record TransferSchedule
+public partial record TransferSchedule
 {
     /// <summary>
     /// The number of days charges for the account will be held before being paid out.
@@ -51636,7 +52307,7 @@ public record TransferSchedule
 
 }
 
-public record TransformQuantity
+public partial record TransformQuantity
 {
     /// <summary>
     /// Divide usage by this number.
@@ -51652,7 +52323,7 @@ public record TransformQuantity
 
 }
 
-public record TransformUsage
+public partial record TransformUsage
 {
     /// <summary>
     /// Divide usage by this number.
@@ -51671,7 +52342,7 @@ public record TransformUsage
 /// <summary>
 /// You can reverse some [ReceivedCredits](https://api.stripe.com#received_credits) depending on their network and source flow. Reversing a ReceivedCredit leads to the creation of a new object known as a CreditReversal.
 /// </summary>
-public record TreasuryCreditReversal
+public partial record TreasuryCreditReversal
 {
     /// <summary>
     /// Amount (in cents) transferred.
@@ -51759,7 +52430,7 @@ public record TreasuryCreditReversal
 /// <summary>
 /// You can reverse some [ReceivedDebits](https://api.stripe.com#received_debits) depending on their network and source flow. Reversing a ReceivedDebit leads to the creation of a new object known as a DebitReversal.
 /// </summary>
-public record TreasuryDebitReversal
+public partial record TreasuryDebitReversal
 {
     /// <summary>
     /// Amount (in cents) transferred.
@@ -51854,7 +52525,7 @@ public record TreasuryDebitReversal
 /// Stripe Treasury provides users with a container for money called a FinancialAccount that is separate from their Payments balance.
 /// FinancialAccounts serve as the source and destination of Treasury’s money movement APIs.
 /// </summary>
-public record TreasuryFinancialAccount
+public partial record TreasuryFinancialAccount
 {
     /// <summary>
     /// The array of paths to active Features in the Features hash.
@@ -51965,7 +52636,7 @@ public record TreasuryFinancialAccount
 /// Encodes whether a FinancialAccount has access to a particular Feature, with a `status` enum and associated `status_details`.
 /// Stripe or the platform can control Features via the requested field.
 /// </summary>
-public record TreasuryFinancialAccountFeatures
+public partial record TreasuryFinancialAccountFeatures
 {
     /// <summary>
     /// Toggle settings for enabling/disabling a feature
@@ -52022,7 +52693,7 @@ public record TreasuryFinancialAccountFeatures
 /// 
 /// Related guide: [Moving money with Treasury using InboundTransfer objects](https://docs.stripe.com/docs/treasury/moving-money/financial-accounts/into/inbound-transfers)
 /// </summary>
-public record TreasuryInboundTransfer
+public partial record TreasuryInboundTransfer
 {
     /// <summary>
     /// Amount (in cents) transferred.
@@ -52147,7 +52818,7 @@ public record TreasuryInboundTransfer
 /// 
 /// Related guide: [Moving money with Treasury using OutboundPayment objects](https://docs.stripe.com/docs/treasury/moving-money/financial-accounts/out-of/outbound-payments)
 /// </summary>
-public record TreasuryOutboundPayment
+public partial record TreasuryOutboundPayment
 {
     /// <summary>
     /// Amount (in cents) transferred.
@@ -52287,7 +52958,7 @@ public record TreasuryOutboundPayment
 /// 
 /// Related guide: [Moving money with Treasury using OutboundTransfer objects](https://docs.stripe.com/docs/treasury/moving-money/financial-accounts/out-of/outbound-transfers)
 /// </summary>
-public record TreasuryOutboundTransfer
+public partial record TreasuryOutboundTransfer
 {
     /// <summary>
     /// Amount (in cents) transferred.
@@ -52408,7 +53079,7 @@ public record TreasuryOutboundTransfer
 /// <summary>
 /// ReceivedCredits represent funds sent to a [FinancialAccount](https://api.stripe.com#financial_accounts) (for example, via ACH or wire). These money movements are not initiated from the FinancialAccount.
 /// </summary>
-public record TreasuryReceivedCredit
+public partial record TreasuryReceivedCredit
 {
     /// <summary>
     /// Amount (in cents) transferred.
@@ -52505,7 +53176,7 @@ public record TreasuryReceivedCredit
 /// <summary>
 /// ReceivedDebits represent funds pulled from a [FinancialAccount](https://api.stripe.com#financial_accounts). These are not initiated from the FinancialAccount.
 /// </summary>
-public record TreasuryReceivedDebit
+public partial record TreasuryReceivedDebit
 {
     /// <summary>
     /// Amount (in cents) transferred.
@@ -52602,7 +53273,7 @@ public record TreasuryReceivedDebit
 /// <summary>
 /// Transactions represent changes to a [FinancialAccount's](https://api.stripe.com#financial_accounts) balance.
 /// </summary>
-public record TreasuryTransaction
+public partial record TreasuryTransaction
 {
     /// <summary>
     /// Amount (in cents) transferred.
@@ -52696,7 +53367,7 @@ public record TreasuryTransaction
 /// <summary>
 /// TransactionEntries represent individual units of money movements within a single [Transaction](https://api.stripe.com#transactions).
 /// </summary>
-public record TreasuryTransactionEntry
+public partial record TreasuryTransactionEntry
 {
     /// <summary>
     /// Change to a FinancialAccount's balance
@@ -52781,7 +53452,7 @@ public record TreasuryTransactionEntry
 /// <summary>
 /// ABA Records contain U.S. bank account details per the ABA format.
 /// </summary>
-public record TreasuryFinancialAccountsResourceAbaRecord
+public partial record TreasuryFinancialAccountsResourceAbaRecord
 {
     /// <summary>
     /// The name of the person or business that owns the bank account.
@@ -52818,7 +53489,7 @@ public record TreasuryFinancialAccountsResourceAbaRecord
 /// <summary>
 /// Toggle settings for enabling/disabling the ABA address feature
 /// </summary>
-public record TreasuryFinancialAccountsResourceAbaToggleSettings
+public partial record TreasuryFinancialAccountsResourceAbaToggleSettings
 {
     /// <summary>
     /// Whether the FinancialAccount should have the Feature.
@@ -52843,7 +53514,7 @@ public record TreasuryFinancialAccountsResourceAbaToggleSettings
 /// <summary>
 /// Balance information for the FinancialAccount
 /// </summary>
-public record TreasuryFinancialAccountsResourceBalance
+public partial record TreasuryFinancialAccountsResourceBalance
 {
     /// <summary>
     /// Funds the user can spend right now.
@@ -52865,7 +53536,7 @@ public record TreasuryFinancialAccountsResourceBalance
 
 }
 
-public record TreasuryFinancialAccountsResourceClosedStatusDetails
+public partial record TreasuryFinancialAccountsResourceClosedStatusDetails
 {
     /// <summary>
     /// The array that contains reasons for a FinancialAccount closure.
@@ -52878,7 +53549,7 @@ public record TreasuryFinancialAccountsResourceClosedStatusDetails
 /// <summary>
 /// FinancialAddresses contain identifying information that resolves to a FinancialAccount.
 /// </summary>
-public record TreasuryFinancialAccountsResourceFinancialAddress
+public partial record TreasuryFinancialAccountsResourceFinancialAddress
 {
     /// <summary>
     /// ABA Records contain U.S. bank account details per the ABA format.
@@ -52903,7 +53574,7 @@ public record TreasuryFinancialAccountsResourceFinancialAddress
 /// <summary>
 /// Settings related to Financial Addresses features on a Financial Account
 /// </summary>
-public record TreasuryFinancialAccountsResourceFinancialAddressesFeatures
+public partial record TreasuryFinancialAccountsResourceFinancialAddressesFeatures
 {
     /// <summary>
     /// Toggle settings for enabling/disabling the ABA address feature
@@ -52916,7 +53587,7 @@ public record TreasuryFinancialAccountsResourceFinancialAddressesFeatures
 /// <summary>
 /// Toggle settings for enabling/disabling an inbound ACH specific feature
 /// </summary>
-public record TreasuryFinancialAccountsResourceInboundAchToggleSettings
+public partial record TreasuryFinancialAccountsResourceInboundAchToggleSettings
 {
     /// <summary>
     /// Whether the FinancialAccount should have the Feature.
@@ -52941,7 +53612,7 @@ public record TreasuryFinancialAccountsResourceInboundAchToggleSettings
 /// <summary>
 /// InboundTransfers contains inbound transfers features for a FinancialAccount.
 /// </summary>
-public record TreasuryFinancialAccountsResourceInboundTransfers
+public partial record TreasuryFinancialAccountsResourceInboundTransfers
 {
     /// <summary>
     /// Toggle settings for enabling/disabling an inbound ACH specific feature
@@ -52954,7 +53625,7 @@ public record TreasuryFinancialAccountsResourceInboundTransfers
 /// <summary>
 /// Toggle settings for enabling/disabling an outbound ACH specific feature
 /// </summary>
-public record TreasuryFinancialAccountsResourceOutboundAchToggleSettings
+public partial record TreasuryFinancialAccountsResourceOutboundAchToggleSettings
 {
     /// <summary>
     /// Whether the FinancialAccount should have the Feature.
@@ -52979,7 +53650,7 @@ public record TreasuryFinancialAccountsResourceOutboundAchToggleSettings
 /// <summary>
 /// Settings related to Outbound Payments features on a Financial Account
 /// </summary>
-public record TreasuryFinancialAccountsResourceOutboundPayments
+public partial record TreasuryFinancialAccountsResourceOutboundPayments
 {
     /// <summary>
     /// Toggle settings for enabling/disabling an outbound ACH specific feature
@@ -52998,7 +53669,7 @@ public record TreasuryFinancialAccountsResourceOutboundPayments
 /// <summary>
 /// OutboundTransfers contains outbound transfers features for a FinancialAccount.
 /// </summary>
-public record TreasuryFinancialAccountsResourceOutboundTransfers
+public partial record TreasuryFinancialAccountsResourceOutboundTransfers
 {
     /// <summary>
     /// Toggle settings for enabling/disabling an outbound ACH specific feature
@@ -53017,7 +53688,7 @@ public record TreasuryFinancialAccountsResourceOutboundTransfers
 /// <summary>
 /// Restrictions that a Connect Platform has placed on this FinancialAccount.
 /// </summary>
-public record TreasuryFinancialAccountsResourcePlatformRestrictions
+public partial record TreasuryFinancialAccountsResourcePlatformRestrictions
 {
     /// <summary>
     /// Restricts all inbound money movement.
@@ -53033,7 +53704,7 @@ public record TreasuryFinancialAccountsResourcePlatformRestrictions
 
 }
 
-public record TreasuryFinancialAccountsResourceStatusDetails
+public partial record TreasuryFinancialAccountsResourceStatusDetails
 {
     /// <summary>
     /// Details related to the closure of this FinancialAccount
@@ -53046,7 +53717,7 @@ public record TreasuryFinancialAccountsResourceStatusDetails
 /// <summary>
 /// Toggle settings for enabling/disabling a feature
 /// </summary>
-public record TreasuryFinancialAccountsResourceToggleSettings
+public partial record TreasuryFinancialAccountsResourceToggleSettings
 {
     /// <summary>
     /// Whether the FinancialAccount should have the Feature.
@@ -53071,7 +53742,7 @@ public record TreasuryFinancialAccountsResourceToggleSettings
 /// <summary>
 /// Additional details on the FinancialAccount Features information.
 /// </summary>
-public record TreasuryFinancialAccountsResourceTogglesSettingStatusDetails
+public partial record TreasuryFinancialAccountsResourceTogglesSettingStatusDetails
 {
     /// <summary>
     /// Represents the reason why the status is `pending` or `restricted`.
@@ -53093,7 +53764,7 @@ public record TreasuryFinancialAccountsResourceTogglesSettingStatusDetails
 
 }
 
-public record TreasuryInboundTransfersResourceFailureDetails
+public partial record TreasuryInboundTransfersResourceFailureDetails
 {
     /// <summary>
     /// Reason for the failure.
@@ -53103,7 +53774,7 @@ public record TreasuryInboundTransfersResourceFailureDetails
 
 }
 
-public record TreasuryInboundTransfersResourceInboundTransferResourceLinkedFlows
+public partial record TreasuryInboundTransfersResourceInboundTransferResourceLinkedFlows
 {
     /// <summary>
     /// If funds for this flow were returned after the flow went to the `succeeded` state, this field contains a reference to the ReceivedDebit return.
@@ -53113,7 +53784,7 @@ public record TreasuryInboundTransfersResourceInboundTransferResourceLinkedFlows
 
 }
 
-public record TreasuryInboundTransfersResourceInboundTransferResourceStatusTransitions
+public partial record TreasuryInboundTransfersResourceInboundTransferResourceStatusTransitions
 {
     /// <summary>
     /// Timestamp describing when an InboundTransfer changed status to `canceled`.
@@ -53135,7 +53806,7 @@ public record TreasuryInboundTransfersResourceInboundTransferResourceStatusTrans
 
 }
 
-public record TreasuryOutboundPaymentsResourceAchTrackingDetails
+public partial record TreasuryOutboundPaymentsResourceAchTrackingDetails
 {
     /// <summary>
     /// ACH trace ID of the OutboundPayment for payments sent over the `ach` network.
@@ -53145,7 +53816,7 @@ public record TreasuryOutboundPaymentsResourceAchTrackingDetails
 
 }
 
-public record TreasuryOutboundPaymentsResourceOutboundPaymentResourceEndUserDetails
+public partial record TreasuryOutboundPaymentsResourceOutboundPaymentResourceEndUserDetails
 {
     /// <summary>
     /// IP address of the user initiating the OutboundPayment. Set if `present` is set to `true`. IP address collection is required for risk and compliance reasons. This will be used to help determine if the OutboundPayment is authorized or should be blocked.
@@ -53161,7 +53832,7 @@ public record TreasuryOutboundPaymentsResourceOutboundPaymentResourceEndUserDeta
 
 }
 
-public record TreasuryOutboundPaymentsResourceOutboundPaymentResourceStatusTransitions
+public partial record TreasuryOutboundPaymentsResourceOutboundPaymentResourceStatusTransitions
 {
     /// <summary>
     /// Timestamp describing when an OutboundPayment changed status to `canceled`.
@@ -53189,7 +53860,7 @@ public record TreasuryOutboundPaymentsResourceOutboundPaymentResourceStatusTrans
 
 }
 
-public record TreasuryOutboundPaymentsResourceOutboundPaymentResourceTrackingDetails
+public partial record TreasuryOutboundPaymentsResourceOutboundPaymentResourceTrackingDetails
 {
     [JsonPropertyName("ach")]
     public TreasuryOutboundPaymentsResourceAchTrackingDetails? Ach { get; init; }
@@ -53205,7 +53876,7 @@ public record TreasuryOutboundPaymentsResourceOutboundPaymentResourceTrackingDet
 
 }
 
-public record TreasuryOutboundPaymentsResourceReturnedStatus
+public partial record TreasuryOutboundPaymentsResourceReturnedStatus
 {
     /// <summary>
     /// Reason for the return.
@@ -53221,7 +53892,7 @@ public record TreasuryOutboundPaymentsResourceReturnedStatus
 
 }
 
-public record TreasuryOutboundPaymentsResourceUsDomesticWireTrackingDetails
+public partial record TreasuryOutboundPaymentsResourceUsDomesticWireTrackingDetails
 {
     /// <summary>
     /// CHIPS System Sequence Number (SSN) of the OutboundPayment for payments sent over the `us_domestic_wire` network.
@@ -53243,7 +53914,7 @@ public record TreasuryOutboundPaymentsResourceUsDomesticWireTrackingDetails
 
 }
 
-public record TreasuryOutboundTransfersResourceAchTrackingDetails
+public partial record TreasuryOutboundTransfersResourceAchTrackingDetails
 {
     /// <summary>
     /// ACH trace ID of the OutboundTransfer for transfers sent over the `ach` network.
@@ -53253,7 +53924,7 @@ public record TreasuryOutboundTransfersResourceAchTrackingDetails
 
 }
 
-public record TreasuryOutboundTransfersResourceOutboundTransferResourceTrackingDetails
+public partial record TreasuryOutboundTransfersResourceOutboundTransferResourceTrackingDetails
 {
     [JsonPropertyName("ach")]
     public TreasuryOutboundTransfersResourceAchTrackingDetails? Ach { get; init; }
@@ -53269,7 +53940,7 @@ public record TreasuryOutboundTransfersResourceOutboundTransferResourceTrackingD
 
 }
 
-public record TreasuryOutboundTransfersResourceReturnedDetails
+public partial record TreasuryOutboundTransfersResourceReturnedDetails
 {
     /// <summary>
     /// Reason for the return.
@@ -53285,7 +53956,7 @@ public record TreasuryOutboundTransfersResourceReturnedDetails
 
 }
 
-public record TreasuryOutboundTransfersResourceStatusTransitions
+public partial record TreasuryOutboundTransfersResourceStatusTransitions
 {
     /// <summary>
     /// Timestamp describing when an OutboundTransfer changed status to `canceled`
@@ -53313,7 +53984,7 @@ public record TreasuryOutboundTransfersResourceStatusTransitions
 
 }
 
-public record TreasuryOutboundTransfersResourceUsDomesticWireTrackingDetails
+public partial record TreasuryOutboundTransfersResourceUsDomesticWireTrackingDetails
 {
     /// <summary>
     /// CHIPS System Sequence Number (SSN) of the OutboundTransfer for transfers sent over the `us_domestic_wire` network.
@@ -53335,7 +54006,7 @@ public record TreasuryOutboundTransfersResourceUsDomesticWireTrackingDetails
 
 }
 
-public record TreasuryReceivedCreditsResourceLinkedFlows
+public partial record TreasuryReceivedCreditsResourceLinkedFlows
 {
     /// <summary>
     /// The CreditReversal created as a result of this ReceivedCredit being reversed.
@@ -53375,7 +54046,7 @@ public record TreasuryReceivedCreditsResourceLinkedFlows
 
 }
 
-public record TreasuryReceivedCreditsResourceReversalDetails
+public partial record TreasuryReceivedCreditsResourceReversalDetails
 {
     /// <summary>
     /// Time before which a ReceivedCredit can be reversed.
@@ -53391,7 +54062,7 @@ public record TreasuryReceivedCreditsResourceReversalDetails
 
 }
 
-public record TreasuryReceivedCreditsResourceSourceFlowsDetails
+public partial record TreasuryReceivedCreditsResourceSourceFlowsDetails
 {
     /// <summary>
     /// You can reverse some [ReceivedCredits](https://api.stripe.com#received_credits) depending on their network and source flow. Reversing a ReceivedCredit leads to the creation of a new object known as a CreditReversal.
@@ -53440,7 +54111,7 @@ public record TreasuryReceivedCreditsResourceSourceFlowsDetails
 
 }
 
-public record TreasuryReceivedCreditsResourceStatusTransitions
+public partial record TreasuryReceivedCreditsResourceStatusTransitions
 {
     /// <summary>
     /// Timestamp describing when the CreditReversal changed status to `posted`
@@ -53450,7 +54121,7 @@ public record TreasuryReceivedCreditsResourceStatusTransitions
 
 }
 
-public record TreasuryReceivedDebitsResourceDebitReversalLinkedFlows
+public partial record TreasuryReceivedDebitsResourceDebitReversalLinkedFlows
 {
     /// <summary>
     /// Set if there is an Issuing dispute associated with the DebitReversal.
@@ -53460,7 +54131,7 @@ public record TreasuryReceivedDebitsResourceDebitReversalLinkedFlows
 
 }
 
-public record TreasuryReceivedDebitsResourceLinkedFlows
+public partial record TreasuryReceivedDebitsResourceLinkedFlows
 {
     /// <summary>
     /// The DebitReversal created as a result of this ReceivedDebit being reversed.
@@ -53500,7 +54171,7 @@ public record TreasuryReceivedDebitsResourceLinkedFlows
 
 }
 
-public record TreasuryReceivedDebitsResourceReversalDetails
+public partial record TreasuryReceivedDebitsResourceReversalDetails
 {
     /// <summary>
     /// Time before which a ReceivedDebit can be reversed.
@@ -53516,7 +54187,7 @@ public record TreasuryReceivedDebitsResourceReversalDetails
 
 }
 
-public record TreasuryReceivedDebitsResourceStatusTransitions
+public partial record TreasuryReceivedDebitsResourceStatusTransitions
 {
     /// <summary>
     /// Timestamp describing when the DebitReversal changed status to `completed`.
@@ -53526,7 +54197,7 @@ public record TreasuryReceivedDebitsResourceStatusTransitions
 
 }
 
-public record TreasurySharedResourceBillingDetails
+public partial record TreasurySharedResourceBillingDetails
 {
     [JsonPropertyName("address")]
     public required Address Address { get; init; }
@@ -53545,7 +54216,7 @@ public record TreasurySharedResourceBillingDetails
 
 }
 
-public record TreasurySharedResourceInitiatingPaymentMethodDetailsInitiatingPaymentMethodDetails
+public partial record TreasurySharedResourceInitiatingPaymentMethodDetailsInitiatingPaymentMethodDetails
 {
     /// <summary>
     /// Set when `type` is `balance`.
@@ -53576,7 +54247,7 @@ public record TreasurySharedResourceInitiatingPaymentMethodDetailsInitiatingPaym
 
 }
 
-public record TreasurySharedResourceInitiatingPaymentMethodDetailsUsBankAccount
+public partial record TreasurySharedResourceInitiatingPaymentMethodDetailsUsBankAccount
 {
     /// <summary>
     /// Bank name.
@@ -53598,7 +54269,7 @@ public record TreasurySharedResourceInitiatingPaymentMethodDetailsUsBankAccount
 
 }
 
-public record TreasuryTransactionsResourceAbstractTransactionResourceStatusTransitions
+public partial record TreasuryTransactionsResourceAbstractTransactionResourceStatusTransitions
 {
     /// <summary>
     /// Timestamp describing when the Transaction changed status to `posted`.
@@ -53617,7 +54288,7 @@ public record TreasuryTransactionsResourceAbstractTransactionResourceStatusTrans
 /// <summary>
 /// Change to a FinancialAccount's balance
 /// </summary>
-public record TreasuryTransactionsResourceBalanceImpact
+public partial record TreasuryTransactionsResourceBalanceImpact
 {
     /// <summary>
     /// The change made to funds the user can spend right now.
@@ -53639,7 +54310,7 @@ public record TreasuryTransactionsResourceBalanceImpact
 
 }
 
-public record TreasuryTransactionsResourceFlowDetails
+public partial record TreasuryTransactionsResourceFlowDetails
 {
     /// <summary>
     /// You can reverse some [ReceivedCredits](https://api.stripe.com#received_credits) depending on their network and source flow. Reversing a ReceivedCredit leads to the creation of a new object known as a CreditReversal.
@@ -53711,7 +54382,7 @@ public record TreasuryTransactionsResourceFlowDetails
 
 }
 
-public record UsBankAccountNetworks
+public partial record UsBankAccountNetworks
 {
     /// <summary>
     /// The preferred network.
@@ -53727,7 +54398,7 @@ public record UsBankAccountNetworks
 
 }
 
-public record VerificationSessionRedaction
+public partial record VerificationSessionRedaction
 {
     /// <summary>
     /// Indicates whether this object and its related objects have been redacted or not.
@@ -53746,7 +54417,7 @@ public record VerificationSessionRedaction
 /// 
 /// Related guide: [Setting up webhooks](https://docs.stripe.com/webhooks/configure)
 /// </summary>
-public record WebhookEndpoint
+public partial record WebhookEndpoint
 {
     /// <summary>
     /// The API version events are rendered as for this webhook endpoint.
