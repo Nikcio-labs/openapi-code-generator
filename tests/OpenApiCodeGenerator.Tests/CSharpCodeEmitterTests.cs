@@ -290,7 +290,7 @@ public class CSharpCodeEmitterTests
         string result = Generate(schemas);
 
         Assert.Contains("public enum Status", result, StringComparison.Ordinal);
-        Assert.Contains("[JsonConverter(typeof(JsonStringEnumConverter))]", result, StringComparison.Ordinal);
+        Assert.Contains("[JsonConverter(typeof(JsonStringEnumConverter<Status>))]", result, StringComparison.Ordinal);
         Assert.Contains("Active", result, StringComparison.Ordinal);
         Assert.Contains("Inactive", result, StringComparison.Ordinal);
         Assert.Contains("Banned", result, StringComparison.Ordinal);
@@ -355,7 +355,7 @@ public class CSharpCodeEmitterTests
         Assert.Contains("public partial record Entry", result, StringComparison.Ordinal);
 
         Assert.Contains("public enum Status", result, StringComparison.Ordinal);
-        Assert.Contains("[JsonConverter(typeof(JsonStringEnumConverter))]", result, StringComparison.Ordinal);
+        Assert.Contains("[JsonConverter(typeof(JsonStringEnumConverter<Status>))]", result, StringComparison.Ordinal);
         Assert.Contains("Active", result, StringComparison.Ordinal);
         Assert.Contains("Inactive", result, StringComparison.Ordinal);
         Assert.Contains("Banned", result, StringComparison.Ordinal);

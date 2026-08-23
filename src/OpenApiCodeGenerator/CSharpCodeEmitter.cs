@@ -534,7 +534,7 @@ internal class CSharpCodeEmitter
 
         if (TypeResolver.HasTypeFlag(schema, JsonSchemaType.String))
         {
-            AppendLine("[JsonConverter(typeof(JsonStringEnumConverter))]");
+            AppendLine($"[JsonConverter(typeof(JsonStringEnumConverter<{typeName}>))]");
         }
 
         AppendLine($"public enum {typeName}");
