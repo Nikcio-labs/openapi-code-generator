@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.ComponentModel.DataAnnotations;
 
 namespace Generated.GithubApiNext;
 
@@ -6288,9 +6289,11 @@ public partial record CvssSeverities
 /// </summary>
 public partial record SecurityAdvisoryEpss
 {
+    [Range(0d, 100d)]
     [JsonPropertyName("percentage")]
     public double? Percentage { get; init; }
 
+    [Range(0d, 100d)]
     [JsonPropertyName("percentile")]
     public double? Percentile { get; init; }
 
@@ -6435,12 +6438,14 @@ public partial record GlobalAdvisory
     /// <summary>
     /// A short summary of the advisory.
     /// </summary>
+    [StringLength(1024)]
     [JsonPropertyName("summary")]
     public required string Summary { get; init; }
 
     /// <summary>
     /// A detailed description of what the advisory entails.
     /// </summary>
+    [StringLength(65535)]
     [JsonPropertyName("description")]
     public required string? Description { get; init; }
 
@@ -9209,6 +9214,7 @@ public partial record DependabotAlertSecurityAdvisory
     /// <summary>
     /// A short, plain text summary of the advisory.
     /// </summary>
+    [StringLength(1024)]
     [JsonPropertyName("summary")]
     public required string Summary { get; init; }
 
@@ -9487,6 +9493,7 @@ public partial record DependabotAlertWithRepository
     /// <summary>
     /// An optional comment associated with the alert's dismissal.
     /// </summary>
+    [StringLength(280)]
     [JsonPropertyName("dismissed_comment")]
     public required string? DismissedComment { get; init; }
 
@@ -10959,6 +10966,7 @@ public partial record GistComment
     /// <summary>
     /// The comment text.
     /// </summary>
+    [StringLength(65535)]
     [JsonPropertyName("body")]
     public required string Body { get; init; }
 
@@ -13179,6 +13187,7 @@ public partial record ArtifactDeploymentRecord
     /// <summary>
     /// A list of runtime risks associated with the deployment.
     /// </summary>
+    [MaxLength(4)]
     [JsonPropertyName("runtime_risks")]
     public IReadOnlyList<string>? RuntimeRisks { get; init; }
 
@@ -13891,6 +13900,7 @@ public partial record CodeScanningOrganizationAlertItems
     /// <summary>
     /// The dismissal comment associated with the dismissal of the alert.
     /// </summary>
+    [StringLength(280)]
     [JsonPropertyName("dismissed_comment")]
     public CodeScanningAlertDismissedComment? DismissedComment { get; init; }
 
@@ -14247,6 +14257,7 @@ public partial record CopilotSpace
     /// <summary>
     /// General instructions for the Copilot Space.
     /// </summary>
+    [StringLength(4000)]
     [JsonPropertyName("general_instructions")]
     public string? GeneralInstructions { get; init; }
 
@@ -15013,6 +15024,7 @@ public partial record OrgMembership
     /// The slugs of the enterprise teams providing the user with indirect membership in the organization.
     /// A limit of 100 enterprise team slugs is returned.
     /// </summary>
+    [MaxLength(100)]
     [JsonPropertyName("enterprise_teams_providing_indirect_membership")]
     public IReadOnlyList<string>? EnterpriseTeamsProvidingIndirectMembership { get; init; }
 
@@ -18986,12 +18998,14 @@ public partial record RepositoryAdvisory
     /// <summary>
     /// A short summary of the advisory.
     /// </summary>
+    [StringLength(1024)]
     [JsonPropertyName("summary")]
     public required string Summary { get; init; }
 
     /// <summary>
     /// A detailed description of what the advisory entails.
     /// </summary>
+    [StringLength(65535)]
     [JsonPropertyName("description")]
     public required string? Description { get; init; }
 
@@ -21060,6 +21074,7 @@ public partial record ProtectedBranchPullRequestReview
     [JsonPropertyName("require_code_owner_reviews")]
     public required bool RequireCodeOwnerReviews { get; init; }
 
+    [Range(0d, 6d)]
     [JsonPropertyName("required_approving_review_count")]
     public int? RequiredApprovingReviewCount { get; init; }
 
@@ -22020,6 +22035,7 @@ public partial record CodeScanningAlertItems
     /// <summary>
     /// The dismissal comment associated with the dismissal of the alert.
     /// </summary>
+    [StringLength(280)]
     [JsonPropertyName("dismissed_comment")]
     public CodeScanningAlertDismissedComment? DismissedComment { get; init; }
 
@@ -22166,6 +22182,7 @@ public partial record CodeScanningAlert
     /// <summary>
     /// The dismissal comment associated with the dismissal of the alert.
     /// </summary>
+    [StringLength(280)]
     [JsonPropertyName("dismissed_comment")]
     public CodeScanningAlertDismissedComment? DismissedComment { get; init; }
 
@@ -22461,6 +22478,8 @@ public partial record CodeScanningAnalysis
     /// <summary>
     /// The SHA of the commit to which the analysis you are uploading relates.
     /// </summary>
+    [StringLength(64, MinimumLength = 40)]
+    [RegularExpression("^([0-9a-fA-F]{40}(?:[0-9a-fA-F]{24})?)$")]
     [JsonPropertyName("commit_sha")]
     public required CodeScanningAnalysisCommitSha CommitSha { get; init; }
 
@@ -23901,6 +23920,7 @@ public partial record DependabotAlert
     /// <summary>
     /// An optional comment associated with the alert's dismissal.
     /// </summary>
+    [StringLength(280)]
     [JsonPropertyName("dismissed_comment")]
     public required string? DismissedComment { get; init; }
 
@@ -23974,6 +23994,7 @@ public partial record Dependency
     /// <summary>
     /// Package-url (PURL) of dependency. See https://github.com/package-url/purl-spec for more details.
     /// </summary>
+    [RegularExpression("^pkg")]
     [JsonPropertyName("package_url")]
     public string? PackageUrl { get; init; }
 
@@ -24045,12 +24066,14 @@ public partial record Snapshot
     /// <summary>
     /// The commit SHA associated with this dependency snapshot. Maximum length: 64 characters.
     /// </summary>
+    [StringLength(64, MinimumLength = 40)]
     [JsonPropertyName("sha")]
     public required string Sha { get; init; }
 
     /// <summary>
     /// The repository branch that triggered this snapshot.
     /// </summary>
+    [RegularExpression("^refs/")]
     [JsonPropertyName("ref")]
     public required string Ref { get; init; }
 
@@ -24106,6 +24129,7 @@ public partial record DeploymentStatus
     /// <summary>
     /// A short description of the status.
     /// </summary>
+    [StringLength(140)]
     [JsonPropertyName("description")]
     public required string Description { get; init; } = "";
 
@@ -28204,12 +28228,14 @@ public partial record RepositoryAdvisoryCreate
     /// <summary>
     /// A short summary of the advisory.
     /// </summary>
+    [StringLength(1024)]
     [JsonPropertyName("summary")]
     public required string Summary { get; init; }
 
     /// <summary>
     /// A detailed description of what the advisory impacts.
     /// </summary>
+    [StringLength(65535)]
     [JsonPropertyName("description")]
     public required string Description { get; init; }
 
@@ -28262,12 +28288,14 @@ public partial record PrivateVulnerabilityReportCreate
     /// <summary>
     /// A short summary of the advisory.
     /// </summary>
+    [StringLength(1024)]
     [JsonPropertyName("summary")]
     public required string Summary { get; init; }
 
     /// <summary>
     /// A detailed description of what the advisory impacts.
     /// </summary>
+    [StringLength(65535)]
     [JsonPropertyName("description")]
     public required string Description { get; init; }
 
@@ -28308,12 +28336,14 @@ public partial record RepositoryAdvisoryUpdate
     /// <summary>
     /// A short summary of the advisory.
     /// </summary>
+    [StringLength(1024)]
     [JsonPropertyName("summary")]
     public string? Summary { get; init; }
 
     /// <summary>
     /// A detailed description of what the advisory impacts.
     /// </summary>
+    [StringLength(65535)]
     [JsonPropertyName("description")]
     public string? Description { get; init; }
 
@@ -32049,6 +32079,7 @@ public partial record WebhooksMembership
     /// The slugs of the enterprise teams providing the user with indirect membership in the organization.
     /// A limit of 100 enterprise team slugs is returned.
     /// </summary>
+    [MaxLength(100)]
     [JsonPropertyName("enterprise_teams_providing_indirect_membership")]
     public IReadOnlyList<string>? EnterpriseTeamsProvidingIndirectMembership { get; init; }
 
@@ -47373,6 +47404,7 @@ public partial record CvssSeveritiesCvssV3
     /// <summary>
     /// The CVSS 3 score.
     /// </summary>
+    [Range(0d, 10d)]
     [JsonPropertyName("score")]
     public required double? Score { get; init; }
 
@@ -47389,6 +47421,7 @@ public partial record CvssSeveritiesCvssV4
     /// <summary>
     /// The CVSS 4 score.
     /// </summary>
+    [Range(0d, 10d)]
     [JsonPropertyName("score")]
     public required double? Score { get; init; }
 
@@ -47421,6 +47454,7 @@ public partial record GlobalAdvisoryCvss
     /// <summary>
     /// The CVSS score.
     /// </summary>
+    [Range(0d, 10d)]
     [JsonPropertyName("score")]
     public required double? Score { get; init; }
 
@@ -47707,6 +47741,7 @@ public partial record DependabotAlertSecurityAdvisoryCvss
     /// <summary>
     /// The overall CVSS score of the advisory.
     /// </summary>
+    [Range(0d, 10d)]
     [JsonPropertyName("score")]
     public required double Score { get; init; }
 
@@ -48887,6 +48922,7 @@ public partial record CreateBudgetBudget
     /// <summary>
     /// The budget amount in whole dollars. For license-based products, this represents the number of licenses.
     /// </summary>
+    [Range(0d, double.MaxValue)]
     [JsonPropertyName("budget_amount")]
     public int? BudgetAmount { get; init; }
 
@@ -48980,6 +49016,7 @@ public partial record UpdateBudgetBudget
     /// <summary>
     /// The budget amount in whole dollars. For license-based products, this represents the number of licenses.
     /// </summary>
+    [Range(0d, double.MaxValue)]
     [JsonPropertyName("budget_amount")]
     public int? BudgetAmount { get; init; }
 
@@ -50071,6 +50108,7 @@ public partial record RepositoryRuleMergeQueueParameters
     /// <summary>
     /// Maximum time for a required status check to report a conclusion. After this much time has elapsed, checks that have not reported a conclusion will be assumed to have failed
     /// </summary>
+    [Range(1d, 360d)]
     [JsonPropertyName("check_response_timeout_minutes")]
     public required int CheckResponseTimeoutMinutes { get; init; }
 
@@ -50083,12 +50121,14 @@ public partial record RepositoryRuleMergeQueueParameters
     /// <summary>
     /// Limit the number of queued pull requests requesting checks and workflow runs at the same time.
     /// </summary>
+    [Range(0d, 100d)]
     [JsonPropertyName("max_entries_to_build")]
     public required int MaxEntriesToBuild { get; init; }
 
     /// <summary>
     /// The maximum number of PRs that will be merged together in a group.
     /// </summary>
+    [Range(0d, 100d)]
     [JsonPropertyName("max_entries_to_merge")]
     public required int MaxEntriesToMerge { get; init; }
 
@@ -50101,12 +50141,14 @@ public partial record RepositoryRuleMergeQueueParameters
     /// <summary>
     /// The minimum number of PRs that will be merged together in a group.
     /// </summary>
+    [Range(0d, 100d)]
     [JsonPropertyName("min_entries_to_merge")]
     public required int MinEntriesToMerge { get; init; }
 
     /// <summary>
     /// The time merge queue should wait after the first PR is added to the queue for the minimum group size to be met. After this time has elapsed, the minimum group size will be ignored and a smaller group will be merged.
     /// </summary>
+    [Range(0d, 360d)]
     [JsonPropertyName("min_entries_to_merge_wait_minutes")]
     public required int MinEntriesToMergeWaitMinutes { get; init; }
 
@@ -50157,6 +50199,7 @@ public partial record RepositoryRulePullRequestParameters
     /// <summary>
     /// The number of approving reviews that are required before a pull request can be merged.
     /// </summary>
+    [Range(0d, 10d)]
     [JsonPropertyName("required_approving_review_count")]
     public required int RequiredApprovingReviewCount { get; init; }
 
@@ -50396,6 +50439,7 @@ public partial record RepositoryRuleMaxFilePathLengthParameters
     /// <summary>
     /// The maximum amount of characters allowed in file paths.
     /// </summary>
+    [Range(1d, 32767d)]
     [JsonPropertyName("max_file_path_length")]
     public required int MaxFilePathLength { get; init; }
 
@@ -50416,6 +50460,7 @@ public partial record RepositoryRuleMaxFileSizeParameters
     /// <summary>
     /// The maximum file size allowed in megabytes. This limit does not apply to Git Large File Storage (Git LFS).
     /// </summary>
+    [Range(1d, 100d)]
     [JsonPropertyName("max_file_size")]
     public required int MaxFileSize { get; init; }
 
@@ -50739,6 +50784,7 @@ public partial record RepositoryAdvisoryCvss
     /// <summary>
     /// The CVSS score.
     /// </summary>
+    [Range(0d, 10d)]
     [JsonPropertyName("score")]
     public required double? Score { get; init; }
 
@@ -52770,6 +52816,7 @@ public partial record GitRefObject
     /// <summary>
     /// SHA for the reference
     /// </summary>
+    [StringLength(40, MinimumLength = 40)]
     [JsonPropertyName("sha")]
     public required string Sha { get; init; }
 
@@ -61871,6 +61918,7 @@ public partial record WebhookCodeScanningAlertAppearedInBranchAlert
     /// <summary>
     /// The dismissal comment associated with the dismissal of the alert.
     /// </summary>
+    [StringLength(280)]
     [JsonPropertyName("dismissed_comment")]
     public CodeScanningAlertDismissedComment? DismissedComment { get; init; }
 
@@ -62124,6 +62172,7 @@ public partial record WebhookCodeScanningAlertClosedByUserAlert
     /// <summary>
     /// The dismissal comment associated with the dismissal of the alert.
     /// </summary>
+    [StringLength(280)]
     [JsonPropertyName("dismissed_comment")]
     public CodeScanningAlertDismissedComment? DismissedComment { get; init; }
 
@@ -62468,6 +62517,7 @@ public partial record WebhookCodeScanningAlertCreatedAlert
     /// <summary>
     /// The dismissal comment associated with the dismissal of the alert.
     /// </summary>
+    [StringLength(280)]
     [JsonPropertyName("dismissed_comment")]
     public CodeScanningAlertDismissedComment? DismissedComment { get; init; }
 
@@ -62684,6 +62734,7 @@ public partial record WebhookCodeScanningAlertFixedAlert
     /// <summary>
     /// The dismissal comment associated with the dismissal of the alert.
     /// </summary>
+    [StringLength(280)]
     [JsonPropertyName("dismissed_comment")]
     public CodeScanningAlertDismissedComment? DismissedComment { get; init; }
 
@@ -62961,6 +63012,7 @@ public partial record WebhookCodeScanningAlertReopenedAlert
     /// <summary>
     /// The dismissal comment associated with the dismissal of the alert.
     /// </summary>
+    [StringLength(280)]
     [JsonPropertyName("dismissed_comment")]
     public CodeScanningAlertDismissedComment? DismissedComment { get; init; }
 
@@ -63174,6 +63226,7 @@ public partial record WebhookCodeScanningAlertReopenedByUserAlert
     /// <summary>
     /// The dismissal comment associated with the dismissal of the alert.
     /// </summary>
+    [StringLength(280)]
     [JsonPropertyName("dismissed_comment")]
     public CodeScanningAlertDismissedComment? DismissedComment { get; init; }
 
@@ -63357,6 +63410,7 @@ public partial record WebhookCodeScanningAlertUpdatedAssignmentAlert
     /// <summary>
     /// The dismissal comment associated with the dismissal of the alert.
     /// </summary>
+    [StringLength(280)]
     [JsonPropertyName("dismissed_comment")]
     public CodeScanningAlertDismissedComment? DismissedComment { get; init; }
 

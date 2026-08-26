@@ -12,6 +12,7 @@ using System.Globalization;
 using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.ComponentModel.DataAnnotations;
 
 namespace Generated.ShowcaseOpenapi;
 
@@ -224,6 +225,7 @@ public partial record Metadata
 /// </summary>
 public partial record Attachment
 {
+    [StringLength(255, MinimumLength = 1)]
     [JsonPropertyName("fileName")]
     public required string FileName { get; init; }
 
@@ -284,9 +286,12 @@ public partial record DeliveryRecord : DeliveryBase
     [JsonPropertyName("metadata")]
     public Metadata? Metadata { get; init; }
 
+    [MinLength(1)]
+    [MaxLength(50)]
     [JsonPropertyName("tags")]
     public IReadOnlyList<string>? Tags { get; init; }
 
+    [StringLength(1000)]
     [JsonPropertyName("note")]
     public string? Note { get; init; }
 
@@ -297,6 +302,7 @@ public partial record Circle
     [JsonPropertyName("shapeType")]
     public required CircleShapeType ShapeType { get; init; }
 
+    [Range(0d, 1000d)]
     [JsonPropertyName("radius")]
     public required double Radius { get; init; }
 
@@ -322,6 +328,8 @@ public abstract partial record Shape;
 
 public partial record EmailContact
 {
+    [StringLength(254)]
+    [RegularExpression("^[^@]+@[^@]+\\.[^@]+$")]
     [JsonPropertyName("email")]
     public required string Email { get; init; }
 
