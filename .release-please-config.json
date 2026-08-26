@@ -1,0 +1,28 @@
+{
+  "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json",
+  "bootstrap-sha": "c7bdfae86ef7a99f19fe2dc11977f8e8b39554a4",
+  "last-release-sha": "c7bdfae86ef7a99f19fe2dc11977f8e8b39554a4",
+  "release-type": "simple",
+  "include-component-in-tag": false,
+  "include-v-in-tag": true,
+  "tag-separator": "v",
+  "packages": {
+    ".": {
+      "changelog-path": "CHANGELOG.md",
+      "changelog-sections": [
+        { "type": "feat", "section": "Added" },
+        { "type": "fix", "section": "Fixed" },
+        { "type": "perf", "section": "Changed" },
+        { "type": "refactor", "section": "Changed" },
+        { "type": "chore", "section": "Changed", "hidden": true },
+        { "type": "ci", "section": "Changed", "hidden": true },
+        { "type": "test", "section": "Changed", "hidden": true },
+        { "type": "docs", "section": "Changed", "hidden": true }
+      ],
+      "extra-files": [
+        "CHANGELOG.md",
+        "src/OpenApiCodeGenerator.Cli/OpenApiCodeGenerator.Cli.csproj"
+      ]
+    }
+  }
+}

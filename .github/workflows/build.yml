@@ -15,11 +15,15 @@ on:
       - 'OpenApiCodeGenerator.slnx'
       - 'nuget.config'
       - '.github/workflows/build.yml'
+      - '.release-please-config.json'
+      - '.release-please-manifest.json'
+      - '.commitlintrc.json'
   pull_request:
     branches: [ "main" ]
 
 permissions:
   contents: read
+  pull-requests: read
 
 jobs:
   build:
