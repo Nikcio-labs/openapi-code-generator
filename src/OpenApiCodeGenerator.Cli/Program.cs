@@ -34,6 +34,7 @@ static async Task<int> RunAsync(string[] args)
     bool omitJsonPropertyNameAttributes = false;
     bool inlinePrimitiveTypeAliases = false;
     bool emitValidationAttributes = true;
+    bool emitObsoleteAttribute = true;
 
     for (int i = 0; i < args.Length; i++)
     {
@@ -81,6 +82,9 @@ static async Task<int> RunAsync(string[] args)
             case "--no-validation-attributes":
                 emitValidationAttributes = false;
                 break;
+            case "--no-deprecated-attributes":
+                emitObsoleteAttribute = false;
+                break;
             default:
                 // Positional: first is input, second is output
                 if (inputPath == null)
@@ -121,6 +125,7 @@ static async Task<int> RunAsync(string[] args)
         OmitJsonPropertyNameAttributes = omitJsonPropertyNameAttributes,
         InlinePrimitiveTypeAliases = inlinePrimitiveTypeAliases,
         EmitValidationAttributes = emitValidationAttributes,
+        EmitObsoleteAttribute = emitObsoleteAttribute,
     };
 
     try
@@ -245,6 +250,7 @@ static void PrintUsage()
                 --omit-json-attributes  Skip [JsonPropertyName] on generated properties
                 --inline-type-aliases   Inline primitive aliases instead of emitting wrapper types
                 --no-validation-attributes  Skip validation attributes from OpenAPI constraints
+                --no-deprecated-attributes  Skip [Obsolete] on deprecated schemas and properties
             -v, --version               Show version information
             -h, --help                  Show this help message
 

@@ -72,6 +72,11 @@ public sealed class GeneratorOptions
     public bool EmitValidationAttributes { get; init; } = true;
 
     /// <summary>
+    /// When true, emit <c>[Obsolete]</c> on schemas and properties marked as deprecated.
+    /// </summary>
+    public bool EmitObsoleteAttribute { get; init; } = true;
+
+    /// <summary>
     /// Validates the configured options before generation starts.
     /// </summary>
     /// <exception cref="ArgumentException">Thrown when a configured option is not a valid C# identifier shape.</exception>

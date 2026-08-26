@@ -2135,4 +2135,100 @@ public class CSharpSchemaGeneratorTests
     }
 
     #endregion
+
+    #region Deprecated / Obsolete
+
+    [Fact]
+    public void Generate_DeprecatedSchema_EmitsObsoleteAttribute()
+    {
+        string spec = """
+            {
+              "openapi": "3.0.0",
+              "info": { "title": "Test", "version": "1.0" },
+              "paths": {},
+              "components": {
+                "schemas": {
+                  "OldModel": {
+                    "type": "object",
+                    "deprecated": true,
+                    "properties": {
+                      "name": { "type": "string" }
+                    }
+                  }
+                }
+              }
+            }
+            """;
+
+        var generator = new CSharpSchemaGenerator();
+        string result = generator.GenerateFromText(spec);
+
+        Assert.Contains("[Obsolete]", result, StringComparison.Ordinal);
+        Assert.Contains("public partial record OldModel", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Generate_DeprecatedProperty_EmitsObsoleteAttribute()
+    {
+        string spec = """
+            {
+              "openapi": "3.0.0",
+              "info": { "title": "Test", "version": "1.0" },
+              "paths": {},
+              "components": {
+                "schemas": {
+                  "User": {
+                    "type": "object",
+                    "properties": {
+                      "name": { "type": "string" },
+                      "oldField": { "type": "string", "deprecated": true }
+                    }
+                  }
+                }
+              }
+            }
+            """;
+
+        var generator = new CSharpSchemaGenerator();
+        string result = generator.GenerateFromText(spec);
+
+        Assert.Contains("[Obsolete]", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public async Task Generate_DeprecatedSchema_CompilesSuccessfully()
+    {
+        string spec = """
+            {
+              "openapi": "3.0.0",
+              "info": { "title": "Test", "version": "1.0" },
+              "paths": {},
+              "components": {
+                "schemas": {
+                  "OldModel": {
+                    "type": "object",
+                    "deprecated": true,
+                    "properties": {
+                      "name": { "type": "string" }
+                    }
+                  },
+                  "NewModel": {
+                    "type": "object",
+                    "properties": {
+                      "name": { "type": "string" }
+                    }
+                  }
+                }
+              }
+            }
+            """;
+
+        var generator = new CSharpSchemaGenerator();
+        string result = generator.GenerateFromText(spec);
+
+        await AssertGeneratedCodeCompilesAsync(result, implicitUsings: true);
+        await AssertGeneratedCodeCompilesAsync(result, implicitUsings: false);
+    }
+
+    #endregion
 }

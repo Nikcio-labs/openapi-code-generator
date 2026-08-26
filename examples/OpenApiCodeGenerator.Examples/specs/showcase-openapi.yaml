@@ -172,3 +172,21 @@ components:
           $ref: '#/components/schemas/Shape'
         contact:
           $ref: '#/components/schemas/ContactMethod'
+        legacyChannel:
+          type: string
+          deprecated: true
+          description: Superseded by contact; retained for backward compatibility.
+
+    LegacyStatus:
+      type: string
+      deprecated: true
+      description: Deprecated enum kept for migration; use DeliveryState instead.
+      enum:
+        - queued
+        - done
+
+    LegacyId:
+      type: string
+      format: uuid
+      deprecated: true
+      description: Deprecated UUID alias kept for migration.

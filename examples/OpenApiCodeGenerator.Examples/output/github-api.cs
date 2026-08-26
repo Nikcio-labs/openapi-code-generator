@@ -4,7 +4,7 @@
 // </auto-generated>
 
 #nullable enable
-#pragma warning disable CS8019
+#pragma warning disable CS8019, CS9042
 
 using System;
 using System.Collections.Generic;
@@ -5870,6 +5870,7 @@ public partial record Root
     [JsonPropertyName("gists_url")]
     public required string GistsUrl { get; init; }
 
+    [Obsolete]
     [JsonPropertyName("hub_url")]
     public string? HubUrl { get; init; }
 
@@ -7479,6 +7480,7 @@ public partial record Repository
     /// <summary>
     /// Whether downloads are enabled.
     /// </summary>
+    [Obsolete]
     [JsonPropertyName("has_downloads")]
     public required bool HasDownloads { get; init; } = true;
 
@@ -7563,6 +7565,7 @@ public partial record Repository
     /// <summary>
     /// Whether a squash merge commit can use the pull request title as default. **This property is closing down. Please use `squash_merge_commit_title` instead.
     /// </summary>
+    [Obsolete]
     [JsonPropertyName("use_squash_pr_title_as_default")]
     public bool UseSquashPrTitleAsDefault { get; init; } = false;
 
@@ -11150,9 +11153,11 @@ public partial record GistHistory
 /// </summary>
 public partial record GistSimple
 {
+    [Obsolete]
     [JsonPropertyName("forks")]
     public IReadOnlyList<GistSimpleForks>? Forks { get; init; }
 
+    [Obsolete]
     [JsonPropertyName("history")]
     public IReadOnlyList<GistHistory>? History { get; init; }
 
@@ -12423,6 +12428,7 @@ public partial record OrganizationFull
     /// 
     /// This field is only visible to organization owners or members of a team with the security manager role.
     /// </summary>
+    [Obsolete]
     [JsonPropertyName("advanced_security_enabled_for_new_repositories")]
     public bool? AdvancedSecurityEnabledForNewRepositories { get; init; }
 
@@ -12433,6 +12439,7 @@ public partial record OrganizationFull
     /// 
     /// This field is only visible to organization owners or members of a team with the security manager role.
     /// </summary>
+    [Obsolete]
     [JsonPropertyName("dependabot_alerts_enabled_for_new_repositories")]
     public bool? DependabotAlertsEnabledForNewRepositories { get; init; }
 
@@ -12443,6 +12450,7 @@ public partial record OrganizationFull
     /// 
     /// This field is only visible to organization owners or members of a team with the security manager role.
     /// </summary>
+    [Obsolete]
     [JsonPropertyName("dependabot_security_updates_enabled_for_new_repositories")]
     public bool? DependabotSecurityUpdatesEnabledForNewRepositories { get; init; }
 
@@ -12453,6 +12461,7 @@ public partial record OrganizationFull
     /// 
     /// This field is only visible to organization owners or members of a team with the security manager role.
     /// </summary>
+    [Obsolete]
     [JsonPropertyName("dependency_graph_enabled_for_new_repositories")]
     public bool? DependencyGraphEnabledForNewRepositories { get; init; }
 
@@ -12463,6 +12472,7 @@ public partial record OrganizationFull
     /// 
     /// This field is only visible to organization owners or members of a team with the security manager role.
     /// </summary>
+    [Obsolete]
     [JsonPropertyName("secret_scanning_enabled_for_new_repositories")]
     public bool? SecretScanningEnabledForNewRepositories { get; init; }
 
@@ -12473,6 +12483,7 @@ public partial record OrganizationFull
     /// 
     /// This field is only visible to organization owners or members of a team with the security manager role.
     /// </summary>
+    [Obsolete]
     [JsonPropertyName("secret_scanning_push_protection_enabled_for_new_repositories")]
     public bool? SecretScanningPushProtectionEnabledForNewRepositories { get; init; }
 
@@ -14861,6 +14872,7 @@ public partial record CopilotSeatDetails
     /// <summary>
     /// **Closing down notice:** This field is no longer relevant and is closing down. Use the `created_at` field to determine when the assignee was last granted access to GitHub Copilot. Timestamp of when the assignee's GitHub Copilot access was last updated, in ISO 8601 format.
     /// </summary>
+    [Obsolete]
     [JsonPropertyName("updated_at")]
     public DateTimeOffset? UpdatedAt { get; init; }
 
@@ -17845,6 +17857,7 @@ public partial record NullableRepository
     /// <summary>
     /// Whether downloads are enabled.
     /// </summary>
+    [Obsolete]
     [JsonPropertyName("has_downloads")]
     public required bool HasDownloads { get; init; } = true;
 
@@ -17929,6 +17942,7 @@ public partial record NullableRepository
     /// <summary>
     /// Whether a squash merge commit can use the pull request title as default. **This property is closing down. Please use `squash_merge_commit_title` instead.
     /// </summary>
+    [Obsolete]
     [JsonPropertyName("use_squash_pr_title_as_default")]
     public bool UseSquashPrTitleAsDefault { get; init; } = false;
 
@@ -32650,6 +32664,7 @@ public partial record RepositoryWebhooks
     /// <summary>
     /// Whether a squash merge commit can use the pull request title as default. **This property is closing down. Please use `squash_merge_commit_title` instead.
     /// </summary>
+    [Obsolete]
     [JsonPropertyName("use_squash_pr_title_as_default")]
     public bool UseSquashPrTitleAsDefault { get; init; } = false;
 
@@ -34491,6 +34506,7 @@ public partial record NullableRepositoryWebhooks
     /// <summary>
     /// Whether a squash merge commit can use the pull request title as default. **This property is closing down. Please use `squash_merge_commit_title` instead.
     /// </summary>
+    [Obsolete]
     [JsonPropertyName("use_squash_pr_title_as_default")]
     public bool UseSquashPrTitleAsDefault { get; init; } = false;
 

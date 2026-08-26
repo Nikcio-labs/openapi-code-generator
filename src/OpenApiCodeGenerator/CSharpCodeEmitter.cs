@@ -72,7 +72,7 @@ internal class CSharpCodeEmitter
         }
 
         AppendLine("#nullable enable");
-        AppendLine("#pragma warning disable CS8019");
+        AppendLine("#pragma warning disable CS8019, CS9042");
         AppendLine();
 
         AppendLine("using System;");
@@ -777,6 +777,7 @@ internal class CSharpCodeEmitter
         string typeName = typeNameOverride ?? NameHelper.ToTypeName(schemaName, _options.ModelPrefix);
 
         EmitDocComment(schema.Description);
+        EmitObsoleteAttribute(schema);
 
         if (TypeResolver.HasTypeFlag(schema, JsonSchemaType.String))
         {
@@ -885,6 +886,7 @@ internal class CSharpCodeEmitter
         }
 
         EmitDocComment(schema.Description);
+        EmitObsoleteAttribute(schema);
 
         string declaration = baseType != null
             ? $"public partial record {typeName} : {baseType}"
@@ -925,6 +927,7 @@ internal class CSharpCodeEmitter
     private void EmitProperty(string propertyName, IOpenApiSchema propertySchema, bool isRequired, string? schemaName = null, string? enclosingTypeName = null, string? csharpNameOverride = null)
     {
         EmitDocComment(propertySchema.Description);
+        EmitObsoleteAttribute(propertySchema);
 
         string csharpPropertyName = csharpNameOverride ?? NameHelper.ToPropertyName(propertyName, enclosingTypeName);
         string? jsonName = NameHelper.GetJsonPropertyName(propertyName, csharpPropertyName);
@@ -1126,6 +1129,8 @@ internal class CSharpCodeEmitter
         AppendLine($"/// Type alias for {resolvedType}.");
         AppendLine($"/// </summary>");
 
+        EmitObsoleteAttribute(schema);
+
         if (!_options.InlinePrimitiveTypeAliases)
         {
             string converterType = _typeResolver.IsBinaryStreamPropertyType(schema)
@@ -1152,6 +1157,7 @@ internal class CSharpCodeEmitter
         IList<IOpenApiSchema> variants = schema.OneOf ?? schema.AnyOf ?? [];
 
         EmitDocComment(schema.Description);
+        EmitObsoleteAttribute(schema);
 
         if (schema.Discriminator is { PropertyName: not null } disc)
         {
@@ -1551,6 +1557,14 @@ internal class CSharpCodeEmitter
         }
 
         return value;
+    }
+
+    private void EmitObsoleteAttribute(IOpenApiSchema schema)
+    {
+        if (_options.EmitObsoleteAttribute && schema.Deprecated)
+        {
+            AppendLine("[Obsolete]");
+        }
     }
 
     private static string EscapeXmlDocComment(string text)
