@@ -7,10 +7,6 @@
 - Hoist inline object schemas into named C# records (nested objects, `allOf` compositions, and `oneOf`/`anyOf` unions of `$ref`s)
 - Empty `type: object` schemas now resolve to `IReadOnlyDictionary<string, object?>` instead of `object` (per OpenAPI 3.0 where `additionalProperties` defaults to `true`)
 
-### Fixed
-
-- Run `ResolveTypeNameCollisions` and `ResolveInlineObjects` before converter-emission checks so hoisted schemas with binary properties emit matching converter classes
-
 ## [1.3.0] (2026-08-23)
 
 ### Added
