@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Text;
 using System.Text.Json.Nodes;
@@ -168,7 +169,27 @@ internal class CSharpCodeEmitter
                !string.IsNullOrEmpty(schema.Minimum) ||
                !string.IsNullOrEmpty(schema.Maximum) ||
                schema.MinItems.HasValue ||
-               schema.MaxItems.HasValue;
+               schema.MaxItems.HasValue ||
+               HasFormatValidationAttribute(schema);
+    }
+
+    /// <summary>
+    /// Checks whether the schema's string format maps to a validation attribute.
+    /// </summary>
+    private static bool HasFormatValidationAttribute(IOpenApiSchema schema)
+    {
+        return GetFormatValidationAttribute(schema.Format) != null;
+    }
+
+    [SuppressMessage("Globalization", "CA1308:Normalize strings to uppercase", Justification = "Intended")]
+    private static string? GetFormatValidationAttribute(string? format)
+    {
+        return format?.ToLowerInvariant() switch
+        {
+            "email" => "[EmailAddress]",
+            "phone" => "[Phone]",
+            _ => null
+        };
     }
 
     private void EmitTypeAliasInterface()
@@ -1496,6 +1517,16 @@ internal class CSharpCodeEmitter
         bool isString = TypeResolver.HasTypeFlag(schema, JsonSchemaType.String);
         bool isArray = TypeResolver.HasTypeFlag(schema, JsonSchemaType.Array);
         bool isNumber = TypeResolver.HasTypeFlag(schema, JsonSchemaType.Number) || TypeResolver.HasTypeFlag(schema, JsonSchemaType.Integer);
+
+        // Format-based validation attributes for strings
+        if (isString)
+        {
+            string? formatAttr = GetFormatValidationAttribute(schema.Format);
+            if (formatAttr != null)
+            {
+                AppendLine(formatAttr);
+            }
+        }
 
         if (isString)
         {

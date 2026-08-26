@@ -3183,6 +3183,159 @@ public class CSharpCodeEmitterTests
 
     #endregion
 
+    #region Format-Based Validation Attributes
+
+    [Fact]
+    public void Emit_StringWithEmailFormat_EmitsEmailAddressAttribute()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["User"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["email"] = new OpenApiSchema { Type = JsonSchemaType.String, Format = "email" }
+                }
+            }
+        };
+
+        string result = Generate(schemas);
+
+        Assert.Contains("[EmailAddress]", result, StringComparison.Ordinal);
+        Assert.Contains("using System.ComponentModel.DataAnnotations;", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Emit_StringWithPhoneFormat_EmitsPhoneAttribute()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["Contact"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["phone"] = new OpenApiSchema { Type = JsonSchemaType.String, Format = "phone" }
+                }
+            }
+        };
+
+        string result = Generate(schemas);
+
+        Assert.Contains("[Phone]", result, StringComparison.Ordinal);
+        Assert.Contains("using System.ComponentModel.DataAnnotations;", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Emit_StringWithEmailFormat_WithValidationDisabled_DoesNotEmitEmailAddress()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["User"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["email"] = new OpenApiSchema { Type = JsonSchemaType.String, Format = "email" }
+                }
+            }
+        };
+
+        string result = Generate(schemas, new GeneratorOptions
+        {
+            GenerateFileHeader = false,
+            Namespace = "TestModels",
+            EmitValidationAttributes = false
+        });
+
+        Assert.DoesNotContain("[EmailAddress]", result, StringComparison.Ordinal);
+        Assert.DoesNotContain("System.ComponentModel.DataAnnotations", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Emit_StringWithUnknownFormat_DoesNotEmitFormatValidationAttribute()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["User"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["hostname"] = new OpenApiSchema { Type = JsonSchemaType.String, Format = "hostname" }
+                }
+            }
+        };
+
+        string result = Generate(schemas);
+
+        // hostname is not a recognized format — no validation attribute
+        Assert.DoesNotContain("[EmailAddress]", result, StringComparison.Ordinal);
+        Assert.DoesNotContain("[Phone]", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public async Task Emit_EmailAndPhoneFormats_CompilesSuccessfully()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["Contact"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["email"] = new OpenApiSchema { Type = JsonSchemaType.String, Format = "email" },
+                    ["phone"] = new OpenApiSchema { Type = JsonSchemaType.String, Format = "phone" }
+                }
+            }
+        };
+
+        string result = Generate(schemas);
+
+        string tempRoot = Path.Combine(
+            AppContext.BaseDirectory, "..", "..", "..", "..",
+            "TestResults", "FormatValidationCompile", Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(tempRoot);
+        try
+        {
+            await File.WriteAllTextAsync(Path.Combine(tempRoot, "Generated.cs"), result);
+            await File.WriteAllTextAsync(Path.Combine(tempRoot, "Harness.csproj"), """
+                <Project Sdk="Microsoft.NET.Sdk">
+                  <PropertyGroup>
+                    <TargetFramework>net10.0</TargetFramework>
+                    <Nullable>enable</Nullable>
+                    <AnalysisMode>All</AnalysisMode>
+                    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+                  </PropertyGroup>
+                </Project>
+                """);
+            using var proc = new System.Diagnostics.Process();
+            proc.StartInfo = new System.Diagnostics.ProcessStartInfo
+            {
+                FileName = "dotnet",
+                Arguments = $"build \"{Path.Combine(tempRoot, "Harness.csproj")}\" -v q --nologo",
+                WorkingDirectory = tempRoot,
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                UseShellExecute = false,
+                CreateNoWindow = true
+            };
+            proc.Start();
+            string stdout = await proc.StandardOutput.ReadToEndAsync(TestContext.Current.CancellationToken);
+            string stderr = await proc.StandardError.ReadToEndAsync(TestContext.Current.CancellationToken);
+            await proc.WaitForExitAsync(TestContext.Current.CancellationToken);
+            Assert.True(proc.ExitCode == 0,
+                $"Format validation code failed to compile.{Environment.NewLine}STDOUT:{stdout}{Environment.NewLine}STDERR:{stderr}");
+        }
+        finally
+        {
+            if (Directory.Exists(tempRoot)) Directory.Delete(tempRoot, recursive: true);
+        }
+    }
+
+    #endregion
+
     #region Deprecated / Obsolete
 
     [Fact]
