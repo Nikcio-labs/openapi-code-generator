@@ -15,6 +15,7 @@ CSharpSchemaGenerator → TypeResolver → CSharpCodeEmitter
 **CSharpCodeEmitter** (`src/OpenApiCodeGenerator/CSharpCodeEmitter.cs`) — Produces C# source via `StringBuilder`. Emits records, enums, type aliases, discriminated unions, custom JSON converters, and handles two project-specific algorithms:
 
 - **Inline enum deduplication**: matching inline enums across schemas are emitted once; conflicting ones get schema-prefixed names.
+- **Inline object hoisting**: inline object schemas (object schemas with `properties` defined directly on a property rather than via `$ref` to a named component) are discovered recursively, assigned synthesized type names (e.g., `UserPermissions`), registered with `TypeResolver`, and emitted as C# records alongside component schemas.
 - **Name collision resolution**: two-pass — the most "natural" name keeps clean PascalCase; others get meaningfully differentiated names by expanding special chars to words ("Underscore", "Dot") rather than numeric suffixes.
 
 **NameHelper** (`src/OpenApiCodeGenerator/NameHelper.cs`) — converts OpenAPI names to valid C# identifiers: PascalCase conversion, keyword escaping, collision differentiation, enum member naming.

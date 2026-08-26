@@ -212,11 +212,73 @@ public class TypeResolverTests
     }
 
     [Fact]
-    public void Resolve_EmptyObject_ReturnsObject()
+    public void Resolve_EmptyObject_ReturnsDictionary()
     {
         TypeResolver resolver = CreateResolver();
         var schema = new OpenApiSchema { Type = JsonSchemaType.Object };
-        Assert.Equal("object", resolver.Resolve(schema));
+        // In OpenAPI 3.0, additionalProperties defaults to true, so an empty
+        // type:object is a free-form map.
+        Assert.Equal("IReadOnlyDictionary<string, object?>", resolver.Resolve(schema));
+    }
+
+    [Fact]
+    public void Resolve_InlineObjectWithoutRegistration_ReturnsObject()
+    {
+        TypeResolver resolver = CreateResolver();
+        var inlineSchema = new OpenApiSchema
+        {
+            Type = JsonSchemaType.Object,
+            Properties = new Dictionary<string, IOpenApiSchema>
+            {
+                ["name"] = new OpenApiSchema { Type = JsonSchemaType.String }
+            }
+        };
+        Assert.Equal("object", resolver.Resolve(inlineSchema));
+    }
+
+    [Fact]
+    public void Resolve_InlineObjectWithRegistration_ReturnsRegisteredTypeName()
+    {
+        TypeResolver resolver = CreateResolver();
+        var inlineSchema = new OpenApiSchema
+        {
+            Type = JsonSchemaType.Object,
+            Properties = new Dictionary<string, IOpenApiSchema>
+            {
+                ["name"] = new OpenApiSchema { Type = JsonSchemaType.String }
+            }
+        };
+        resolver.RegisterInlineObjectType(inlineSchema, "UserPermissions");
+        Assert.Equal("UserPermissions", resolver.Resolve(inlineSchema));
+    }
+
+    [Fact]
+    public void Resolve_InlineObjectWithoutExplicitType_WithRegistration_ReturnsRegisteredTypeName()
+    {
+        TypeResolver resolver = CreateResolver();
+        var inlineSchema = new OpenApiSchema
+        {
+            Properties = new Dictionary<string, IOpenApiSchema>
+            {
+                ["name"] = new OpenApiSchema { Type = JsonSchemaType.String }
+            }
+        };
+        resolver.RegisterInlineObjectType(inlineSchema, "UserMetadata");
+        Assert.Equal("UserMetadata", resolver.Resolve(inlineSchema));
+    }
+
+    [Fact]
+    public void Resolve_InlineObjectWithoutExplicitType_WithoutRegistration_ReturnsObject()
+    {
+        TypeResolver resolver = CreateResolver();
+        var inlineSchema = new OpenApiSchema
+        {
+            Properties = new Dictionary<string, IOpenApiSchema>
+            {
+                ["name"] = new OpenApiSchema { Type = JsonSchemaType.String }
+            }
+        };
+        Assert.Equal("object", resolver.Resolve(inlineSchema));
     }
 
     #endregion

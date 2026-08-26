@@ -303,6 +303,36 @@ public class CSharpCodeEmitterTests
     }
 
     [Fact]
+    public void Emit_EnumWithDuplicateMemberNames_DeduplicatesWithSuffixes()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["Relationship"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.String,
+                Enum = new List<JsonNode>
+                {
+                    (JsonNode)"unknown",
+                    (JsonNode)"direct",
+                    (JsonNode)"transitive",
+                    (JsonNode)"inconclusive",
+                    (JsonNode)""
+                }
+            }
+        };
+
+        string result = Generate(schemas);
+
+        Assert.Contains("public enum Relationship", result, StringComparison.Ordinal);
+        // "unknown" → Unknown (first occurrence keeps the name)
+        Assert.Contains("Unknown,", result, StringComparison.Ordinal);
+        // "" → Unknown2 (duplicate gets a suffix)
+        Assert.Contains("Unknown2", result, StringComparison.Ordinal);
+        Assert.Contains("[JsonStringEnumMemberName(\"unknown\")]", result, StringComparison.Ordinal);
+        Assert.Contains("[JsonStringEnumMemberName(\"\")]", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
     public void Emit_IntegerEnum_GeneratesCorrectCode()
     {
         var schemas = new Dictionary<string, IOpenApiSchema>
@@ -1275,6 +1305,894 @@ public class CSharpCodeEmitterTests
             index += substring.Length;
         }
         return count;
+    }
+
+    #endregion
+
+    #region Inline Object Hoisting
+
+    [Fact]
+    public void Emit_InlineObjectProperty_GeneratesNamedRecord()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["User"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Required = new HashSet<string> { "id", "permissions" },
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["id"] = new OpenApiSchema { Type = JsonSchemaType.Integer, Format = "int32" },
+                    ["permissions"] = new OpenApiSchema
+                    {
+                        Type = JsonSchemaType.Object,
+                        Properties = new Dictionary<string, IOpenApiSchema>
+                        {
+                            ["issues"] = new OpenApiSchema { Type = JsonSchemaType.Boolean },
+                            ["pullRequests"] = new OpenApiSchema { Type = JsonSchemaType.Boolean }
+                        }
+                    }
+                }
+            }
+        };
+
+        string result = Generate(schemas);
+
+        // The inline object should be hoisted to a named record
+        Assert.Contains("public partial record UserPermissions", result, StringComparison.Ordinal);
+        Assert.Contains("public bool? Issues { get; init; }", result, StringComparison.Ordinal);
+        Assert.Contains("public bool? PullRequests { get; init; }", result, StringComparison.Ordinal);
+
+        // The property should use the hoisted type, not "object"
+        Assert.Contains("public required UserPermissions Permissions { get; init; }", result, StringComparison.Ordinal);
+        Assert.DoesNotContain("public required object Permissions", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Emit_InlineObjectWithoutExplicitType_GeneratesNamedRecord()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["User"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Required = new HashSet<string> { "metadata" },
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["metadata"] = new OpenApiSchema
+                    {
+                        Properties = new Dictionary<string, IOpenApiSchema>
+                        {
+                            ["key"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                        }
+                    }
+                }
+            }
+        };
+
+        string result = Generate(schemas);
+
+        Assert.Contains("public partial record UserMetadata", result, StringComparison.Ordinal);
+        Assert.Contains("public required UserMetadata Metadata { get; init; }", result, StringComparison.Ordinal);
+        Assert.DoesNotContain("public required object Metadata", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Emit_InlineObjectOptionalProperty_MakesTypeNullable()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["User"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["profile"] = new OpenApiSchema
+                    {
+                        Type = JsonSchemaType.Object,
+                        Properties = new Dictionary<string, IOpenApiSchema>
+                        {
+                            ["bio"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                        }
+                    }
+                }
+            }
+        };
+
+        string result = Generate(schemas);
+
+        Assert.Contains("public partial record UserProfile", result, StringComparison.Ordinal);
+        // Optional → nullable
+        Assert.Contains("public UserProfile? Profile { get; init; }", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Emit_NestedInlineObjects_GeneratesAllLevels()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["App"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Required = new HashSet<string> { "config" },
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["config"] = new OpenApiSchema
+                    {
+                        Type = JsonSchemaType.Object,
+                        Required = new HashSet<string> { "database" },
+                        Properties = new Dictionary<string, IOpenApiSchema>
+                        {
+                            ["database"] = new OpenApiSchema
+                            {
+                                Type = JsonSchemaType.Object,
+                                Properties = new Dictionary<string, IOpenApiSchema>
+                                {
+                                    ["host"] = new OpenApiSchema { Type = JsonSchemaType.String },
+                                    ["port"] = new OpenApiSchema { Type = JsonSchemaType.Integer, Format = "int32" }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        };
+
+        string result = Generate(schemas);
+
+        Assert.Contains("public partial record AppConfig", result, StringComparison.Ordinal);
+        Assert.Contains("public partial record AppConfigDatabase", result, StringComparison.Ordinal);
+        Assert.Contains("public required AppConfig Config { get; init; }", result, StringComparison.Ordinal);
+        Assert.Contains("public required AppConfigDatabase Database { get; init; }", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Emit_InlineObjectInArrayItem_GeneratesNamedRecord()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["Repository"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Required = new HashSet<string> { "webhooks" },
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["webhooks"] = new OpenApiSchema
+                    {
+                        Type = JsonSchemaType.Array,
+                        Items = new OpenApiSchema
+                        {
+                            Type = JsonSchemaType.Object,
+                            Properties = new Dictionary<string, IOpenApiSchema>
+                            {
+                                ["url"] = new OpenApiSchema { Type = JsonSchemaType.String },
+                                ["active"] = new OpenApiSchema { Type = JsonSchemaType.Boolean }
+                            }
+                        }
+                    }
+                }
+            }
+        };
+
+        string result = Generate(schemas);
+
+        Assert.Contains("public partial record RepositoryWebhooks", result, StringComparison.Ordinal);
+        Assert.Contains("public required IReadOnlyList<RepositoryWebhooks> Webhooks { get; init; }", result, StringComparison.Ordinal);
+        Assert.DoesNotContain("IReadOnlyList<object>", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Emit_InlineObjectWithRefProperty_UsesRefType()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["User"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Required = new HashSet<string> { "owner" },
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["owner"] = new OpenApiSchema
+                    {
+                        Type = JsonSchemaType.Object,
+                        Properties = new Dictionary<string, IOpenApiSchema>
+                        {
+                            ["address"] = new OpenApiSchemaReference("Address")
+                        }
+                    }
+                }
+            },
+            ["Address"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["city"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                }
+            }
+        };
+
+        string result = Generate(schemas);
+
+        Assert.Contains("public partial record UserOwner", result, StringComparison.Ordinal);
+        Assert.Contains("public required UserOwner Owner { get; init; }", result, StringComparison.Ordinal);
+        // The $ref property in the hoisted inline object should use the referenced type
+        Assert.Contains("public Address? Address { get; init; }", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Emit_InlineObjectWithInlineEnum_GeneratesBothTypes()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["Repo"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Required = new HashSet<string> { "settings" },
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["settings"] = new OpenApiSchema
+                    {
+                        Type = JsonSchemaType.Object,
+                        Properties = new Dictionary<string, IOpenApiSchema>
+                        {
+                            ["visibility"] = new OpenApiSchema
+                            {
+                                Type = JsonSchemaType.String,
+                                Enum = new List<JsonNode> { (JsonNode)"public", (JsonNode)"private" }
+                            }
+                        }
+                    }
+                }
+            }
+        };
+
+        string result = Generate(schemas);
+
+        Assert.Contains("public partial record RepoSettings", result, StringComparison.Ordinal);
+        Assert.Contains("public required RepoSettings Settings { get; init; }", result, StringComparison.Ordinal);
+        // Inline enum in the hoisted object should be emitted
+        Assert.Contains("public enum Visibility", result, StringComparison.Ordinal);
+        Assert.Contains("Public", result, StringComparison.Ordinal);
+        Assert.Contains("Private", result, StringComparison.Ordinal);
+        Assert.Contains("public Visibility? Visibility { get; init; }", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Emit_InlineObjectWithModelPrefix_PrefersPrefix()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["User"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Required = new HashSet<string> { "permissions" },
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["permissions"] = new OpenApiSchema
+                    {
+                        Type = JsonSchemaType.Object,
+                        Properties = new Dictionary<string, IOpenApiSchema>
+                        {
+                            ["admin"] = new OpenApiSchema { Type = JsonSchemaType.Boolean }
+                        }
+                    }
+                }
+            }
+        };
+
+        string result = Generate(schemas, new GeneratorOptions
+        {
+            GenerateFileHeader = false,
+            Namespace = "TestModels",
+            ModelPrefix = "Api"
+        });
+
+        Assert.Contains("public partial record ApiUser", result, StringComparison.Ordinal);
+        Assert.Contains("public partial record ApiUserPermissions", result, StringComparison.Ordinal);
+        Assert.Contains("public required ApiUserPermissions Permissions { get; init; }", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Emit_InlineObjectWithAdditionalProperties_EmitsExtensionData()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["Webhook"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Required = new HashSet<string> { "config" },
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["config"] = new OpenApiSchema
+                    {
+                        Type = JsonSchemaType.Object,
+                        Properties = new Dictionary<string, IOpenApiSchema>
+                        {
+                            ["url"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                        },
+                        AdditionalProperties = new OpenApiSchema { Type = JsonSchemaType.String }
+                    }
+                }
+            }
+        };
+
+        string result = Generate(schemas);
+
+        Assert.Contains("public partial record WebhookConfig", result, StringComparison.Ordinal);
+        Assert.Contains("public required WebhookConfig Config { get; init; }", result, StringComparison.Ordinal);
+        // The hoisted object should have both the named property and JsonExtensionData
+        Assert.Contains("[JsonExtensionData]", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Emit_MultipleInlineObjectsInSameSchema_GeneratesAllTypes()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["Integration"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Required = new HashSet<string> { "owner", "permissions" },
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["owner"] = new OpenApiSchema
+                    {
+                        Type = JsonSchemaType.Object,
+                        Properties = new Dictionary<string, IOpenApiSchema>
+                        {
+                            ["login"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                        }
+                    },
+                    ["permissions"] = new OpenApiSchema
+                    {
+                        Type = JsonSchemaType.Object,
+                        Properties = new Dictionary<string, IOpenApiSchema>
+                        {
+                            ["issues"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                        }
+                    }
+                }
+            }
+        };
+
+        string result = Generate(schemas);
+
+        Assert.Contains("public partial record IntegrationOwner", result, StringComparison.Ordinal);
+        Assert.Contains("public partial record IntegrationPermissions", result, StringComparison.Ordinal);
+        Assert.Contains("public required IntegrationOwner Owner { get; init; }", result, StringComparison.Ordinal);
+        Assert.Contains("public required IntegrationPermissions Permissions { get; init; }", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Emit_InlineObjectNameCollision_DifferentiatesNames()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["User"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Required = new HashSet<string> { "address" },
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["address"] = new OpenApiSchema
+                    {
+                        Type = JsonSchemaType.Object,
+                        Properties = new Dictionary<string, IOpenApiSchema>
+                        {
+                            ["city"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                        }
+                    }
+                }
+            },
+            ["UserAddress"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["street"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                }
+            }
+        };
+
+        string result = Generate(schemas);
+
+        // The top-level UserAddress keeps its name
+        Assert.Contains("public partial record UserAddress", result, StringComparison.Ordinal);
+
+        // The inline object's synthesized name (UserAddress) collides, so it gets a suffix
+        // The hoisted type should exist with a differentiated name
+        Assert.Contains("public partial record UserAddress2", result, StringComparison.Ordinal);
+
+        // The property should reference the differentiated name
+        Assert.Contains("public required UserAddress2 Address { get; init; }", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Emit_InlineObjectInAdditionalPropertiesValue_GeneratesNamedRecord()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["Webhook"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Required = new HashSet<string> { "events" },
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["events"] = new OpenApiSchema
+                    {
+                        Type = JsonSchemaType.Object,
+                        AdditionalProperties = new OpenApiSchema
+                        {
+                            Type = JsonSchemaType.Object,
+                            Properties = new Dictionary<string, IOpenApiSchema>
+                            {
+                                ["count"] = new OpenApiSchema { Type = JsonSchemaType.Integer, Format = "int32" }
+                            }
+                        }
+                    }
+                }
+            }
+        };
+
+        string result = Generate(schemas);
+
+        Assert.Contains("public partial record WebhookEvents", result, StringComparison.Ordinal);
+        Assert.Contains("public required IReadOnlyDictionary<string, WebhookEvents> Events { get; init; }", result, StringComparison.Ordinal);
+        Assert.DoesNotContain("IReadOnlyDictionary<string, object>", result, StringComparison.Ordinal);
+    }
+
+    #endregion
+
+    #region Inline allOf / oneOf / anyOf Hoisting
+
+    [Fact]
+    public void Emit_InlineAllOfWithoutRef_GeneratesNamedRecord()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["Webhook"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Required = new HashSet<string> { "forkee" },
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["forkee"] = new OpenApiSchema
+                    {
+                        AllOf = new List<IOpenApiSchema>
+                        {
+                            new OpenApiSchema
+                            {
+                                Type = JsonSchemaType.Object,
+                                Properties = new Dictionary<string, IOpenApiSchema>
+                                {
+                                    ["id"] = new OpenApiSchema { Type = JsonSchemaType.Integer, Format = "int32" },
+                                    ["name"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        };
+
+        string result = Generate(schemas);
+
+        Assert.Contains("public partial record WebhookForkee", result, StringComparison.Ordinal);
+        Assert.Contains("public required WebhookForkee Forkee { get; init; }", result, StringComparison.Ordinal);
+        Assert.Contains("public int? Id { get; init; }", result, StringComparison.Ordinal);
+        Assert.Contains("public string? Name { get; init; }", result, StringComparison.Ordinal);
+        Assert.DoesNotContain("public required object Forkee", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Emit_InlineOneOfAllRefs_GeneratesAbstractUnionRecord()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["Integration"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Required = new HashSet<string> { "owner" },
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["owner"] = new OpenApiSchema
+                    {
+                        OneOf = new List<IOpenApiSchema>
+                        {
+                            new OpenApiSchemaReference("SimpleUser"),
+                            new OpenApiSchemaReference("Enterprise")
+                        }
+                    }
+                }
+            },
+            ["SimpleUser"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["login"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                }
+            },
+            ["Enterprise"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["slug"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                }
+            }
+        };
+
+        string result = Generate(schemas);
+
+        Assert.Contains("public abstract partial record IntegrationOwner", result, StringComparison.Ordinal);
+        Assert.Contains("[JsonDerivedType(typeof(SimpleUser), \"SimpleUser\")]", result, StringComparison.Ordinal);
+        Assert.Contains("[JsonDerivedType(typeof(Enterprise), \"Enterprise\")]", result, StringComparison.Ordinal);
+        Assert.Contains("public required IntegrationOwner Owner { get; init; }", result, StringComparison.Ordinal);
+        Assert.DoesNotContain("public required object Owner", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Emit_InlineAnyOfAllRefs_GeneratesAbstractUnionRecord()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["Deployment"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Required = new HashSet<string> { "reviewer" },
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["reviewer"] = new OpenApiSchema
+                    {
+                        AnyOf = new List<IOpenApiSchema>
+                        {
+                            new OpenApiSchemaReference("User"),
+                            new OpenApiSchemaReference("Team")
+                        }
+                    }
+                }
+            },
+            ["User"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["login"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                }
+            },
+            ["Team"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["slug"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                }
+            }
+        };
+
+        string result = Generate(schemas);
+
+        Assert.Contains("public abstract partial record DeploymentReviewer", result, StringComparison.Ordinal);
+        Assert.Contains("[JsonDerivedType(typeof(User), \"User\")]", result, StringComparison.Ordinal);
+        Assert.Contains("[JsonDerivedType(typeof(Team), \"Team\")]", result, StringComparison.Ordinal);
+        Assert.Contains("public required DeploymentReviewer Reviewer { get; init; }", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Emit_InlineOneOfInArrayItem_GeneratesUnionRecord()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["Event"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Required = new HashSet<string> { "reviewers" },
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["reviewers"] = new OpenApiSchema
+                    {
+                        Type = JsonSchemaType.Array,
+                        Items = new OpenApiSchema
+                        {
+                            OneOf = new List<IOpenApiSchema>
+                            {
+                                new OpenApiSchemaReference("User"),
+                                new OpenApiSchemaReference("Team")
+                            }
+                        }
+                    }
+                }
+            },
+            ["User"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["login"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                }
+            },
+            ["Team"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["slug"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                }
+            }
+        };
+
+        string result = Generate(schemas);
+
+        Assert.Contains("public abstract partial record EventReviewers", result, StringComparison.Ordinal);
+        Assert.Contains("public required IReadOnlyList<EventReviewers> Reviewers { get; init; }", result, StringComparison.Ordinal);
+        Assert.DoesNotContain("IReadOnlyList<object>", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Emit_InlineOneOfMixedTypes_FallsBackToObject()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["Page"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Required = new HashSet<string> { "id" },
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["id"] = new OpenApiSchema
+                    {
+                        OneOf = new List<IOpenApiSchema>
+                        {
+                            new OpenApiSchema { Type = JsonSchemaType.Integer, Format = "int32" },
+                            new OpenApiSchema { Type = JsonSchemaType.String }
+                        }
+                    }
+                }
+            }
+        };
+
+        string result = Generate(schemas);
+
+        // Mixed primitive unions can't be hoisted as a union record
+        Assert.Contains("public required object Id { get; init; }", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Emit_EmptyObjectProperty_GeneratesDictionary()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["Webhook"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Required = new HashSet<string> { "payload" },
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["payload"] = new OpenApiSchema
+                    {
+                        Type = JsonSchemaType.Object
+                    }
+                }
+            }
+        };
+
+        string result = Generate(schemas);
+
+        // Empty type:object is a free-form map per OpenAPI 3.0
+        Assert.Contains("public required IReadOnlyDictionary<string, object?> Payload { get; init; }", result, StringComparison.Ordinal);
+        Assert.DoesNotContain("public required object Payload", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Emit_InlineAllOfWithMultipleInlineMembers_MergesProperties()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["Webhook"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Required = new HashSet<string> { "data" },
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["data"] = new OpenApiSchema
+                    {
+                        AllOf = new List<IOpenApiSchema>
+                        {
+                            new OpenApiSchema
+                            {
+                                Type = JsonSchemaType.Object,
+                                Properties = new Dictionary<string, IOpenApiSchema>
+                                {
+                                    ["id"] = new OpenApiSchema { Type = JsonSchemaType.Integer, Format = "int32" }
+                                }
+                            },
+                            new OpenApiSchema
+                            {
+                                Type = JsonSchemaType.Object,
+                                Properties = new Dictionary<string, IOpenApiSchema>
+                                {
+                                    ["name"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        };
+
+        string result = Generate(schemas);
+
+        Assert.Contains("public partial record WebhookData", result, StringComparison.Ordinal);
+        Assert.Contains("public required WebhookData Data { get; init; }", result, StringComparison.Ordinal);
+        // Properties from both allOf members should be present
+        Assert.Contains("public int? Id { get; init; }", result, StringComparison.Ordinal);
+        Assert.Contains("public string? Name { get; init; }", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Emit_InlineAllOfWithRefAndInlineProps_NotHoisted_UsesInheritance()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["Container"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Required = new HashSet<string> { "item" },
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["item"] = new OpenApiSchema
+                    {
+                        AllOf = new List<IOpenApiSchema>
+                        {
+                            new OpenApiSchemaReference("Base"),
+                            new OpenApiSchema
+                            {
+                                Type = JsonSchemaType.Object,
+                                Properties = new Dictionary<string, IOpenApiSchema>
+                                {
+                                    ["extra"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            ["Base"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["id"] = new OpenApiSchema { Type = JsonSchemaType.Integer, Format = "int32" }
+                }
+            }
+        };
+
+        string result = Generate(schemas);
+
+        // Should NOT be hoisted — allOf with $ref is inheritance, resolved to Base type
+        Assert.DoesNotContain("public partial record ContainerItem", result, StringComparison.Ordinal);
+        // The property should use the $ref type
+        Assert.Contains("public required Base Item { get; init; }", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Emit_TopLevelEmptyObject_StillEmitsAsRecord()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["EmptyObject"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Description = "An empty object"
+            }
+        };
+
+        string result = Generate(schemas);
+
+        // Top-level empty objects should still be records (not dictionaries)
+        Assert.Contains("public partial record EmptyObject", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Emit_InlineAnyOfNullableUnion_GeneratesAbstractRecordWithDerivedTypes()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["Deployment"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Required = new HashSet<string> { "reviewer" },
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["reviewer"] = new OpenApiSchema
+                    {
+                        AnyOf = new List<IOpenApiSchema>
+                        {
+                            new OpenApiSchemaReference("User"),
+                            new OpenApiSchemaReference("Team"),
+                            new OpenApiSchema { Type = JsonSchemaType.Null }
+                        }
+                    }
+                }
+            },
+            ["User"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["login"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                }
+            },
+            ["Team"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["slug"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                }
+            }
+        };
+
+        string result = Generate(schemas);
+
+        Assert.Contains("public abstract partial record DeploymentReviewer", result, StringComparison.Ordinal);
+        // Should have JsonDerivedType attributes for both non-null variants
+        Assert.Contains("[JsonDerivedType(typeof(User), \"User\")]", result, StringComparison.Ordinal);
+        Assert.Contains("[JsonDerivedType(typeof(Team), \"Team\")]", result, StringComparison.Ordinal);
+        // Required property — non-nullable (null variant in anyOf is filtered by IsInlineRefUnion)
+        Assert.Contains("public required DeploymentReviewer Reviewer { get; init; }", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Emit_HoistedObjectNameCollisionBetweenTwoHoistedObjects_DifferentiatesNames()
+    {
+        // Two schemas whose hoisted inline objects would produce the same synthesized name
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["Foo"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Required = new HashSet<string> { "bar" },
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["bar"] = new OpenApiSchema
+                    {
+                        Type = JsonSchemaType.Object,
+                        Properties = new Dictionary<string, IOpenApiSchema>
+                        {
+                            ["value"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                        }
+                    }
+                }
+            },
+            ["FooBar"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Required = new HashSet<string> { "baz" },
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["baz"] = new OpenApiSchema
+                    {
+                        Type = JsonSchemaType.Object,
+                        Properties = new Dictionary<string, IOpenApiSchema>
+                        {
+                            ["value"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                        }
+                    }
+                }
+            }
+        };
+
+        string result = Generate(schemas);
+
+        // Foo's inline "bar" → FooBar (collides with top-level FooBar) → FooBar2
+        // FooBar's inline "baz" → FooBarBaz
+        Assert.Contains("public partial record FooBar2", result, StringComparison.Ordinal);
+        Assert.Contains("public partial record FooBarBaz", result, StringComparison.Ordinal);
+        Assert.Contains("public required FooBar2 Bar { get; init; }", result, StringComparison.Ordinal);
+        Assert.Contains("public required FooBarBaz Baz { get; init; }", result, StringComparison.Ordinal);
     }
 
     #endregion

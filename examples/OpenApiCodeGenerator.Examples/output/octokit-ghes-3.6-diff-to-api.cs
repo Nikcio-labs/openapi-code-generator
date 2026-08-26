@@ -527,6 +527,15 @@ public enum MergeCommitMessage
     Blank
 }
 
+[JsonConverter(typeof(JsonStringEnumConverter<Status>))]
+public enum Status
+{
+    [JsonStringEnumMemberName("enabled")]
+    Enabled,
+    [JsonStringEnumMemberName("disabled")]
+    Disabled
+}
+
 public partial record GlobalHook
 {
     [JsonPropertyName("type")]
@@ -545,7 +554,7 @@ public partial record GlobalHook
     public IReadOnlyList<string>? Events { get; init; }
 
     [JsonPropertyName("config")]
-    public object? Config { get; init; }
+    public GlobalHookConfig? Config { get; init; }
 
     [JsonPropertyName("updated_at")]
     public string? UpdatedAt { get; init; }
@@ -579,7 +588,7 @@ public partial record GlobalHook2
     public IReadOnlyList<string>? Events { get; init; }
 
     [JsonPropertyName("config")]
-    public object? Config { get; init; }
+    public GlobalHook2Config? Config { get; init; }
 
     [JsonPropertyName("updated_at")]
     public string? UpdatedAt { get; init; }
@@ -792,7 +801,7 @@ public partial record LdapMappingUser
     public required bool TwoFactorAuthentication { get; init; }
 
     [JsonPropertyName("plan")]
-    public object? Plan { get; init; }
+    public LdapMappingUserPlan? Plan { get; init; }
 
     [JsonPropertyName("suspended_at")]
     public DateTimeOffset? SuspendedAt { get; init; }
@@ -872,7 +881,7 @@ public partial record PreReceiveEnvironment
     public int? HooksCount { get; init; }
 
     [JsonPropertyName("download")]
-    public object? Download { get; init; }
+    public PreReceiveEnvironmentDownload? Download { get; init; }
 
 }
 
@@ -907,10 +916,10 @@ public partial record PreReceiveHook
     public string? Script { get; init; }
 
     [JsonPropertyName("script_repository")]
-    public object? ScriptRepository { get; init; }
+    public PreReceiveHookScriptRepository? ScriptRepository { get; init; }
 
     [JsonPropertyName("environment")]
-    public object? Environment { get; init; }
+    public PreReceiveHookEnvironment? Environment { get; init; }
 
     [JsonPropertyName("allow_downstream_configuration")]
     public bool? AllowDownstreamConfiguration { get; init; }
@@ -944,7 +953,7 @@ public partial record Authorization
     public required string? HashedToken { get; init; }
 
     [JsonPropertyName("app")]
-    public required object App { get; init; }
+    public required AuthorizationApp App { get; init; }
 
     [JsonPropertyName("note")]
     public required string? Note { get; init; }
@@ -1057,7 +1066,7 @@ public partial record Installation
     public required int Id { get; init; }
 
     [JsonPropertyName("account")]
-    public required object Account { get; init; }
+    public required InstallationAccount Account { get; init; }
 
     /// <summary>
     /// Describe whether all repositories have been selected or there's a selection involved
@@ -1360,7 +1369,7 @@ public partial record ApplicationGrant
     public required Uri Url { get; init; }
 
     [JsonPropertyName("app")]
-    public required object App { get; init; }
+    public required ApplicationGrantApp App { get; init; }
 
     [JsonPropertyName("created_at")]
     public required DateTimeOffset CreatedAt { get; init; }
@@ -1664,10 +1673,10 @@ public partial record AuditLogEvent
     public int? ActorId { get; init; }
 
     [JsonPropertyName("actor_location")]
-    public object? ActorLocation { get; init; }
+    public AuditLogEventActorLocation? ActorLocation { get; init; }
 
     [JsonPropertyName("data")]
-    public object? Data { get; init; }
+    public IReadOnlyDictionary<string, object?>? Data { get; init; }
 
     [JsonPropertyName("org_id")]
     public int? OrgId { get; init; }
@@ -1682,10 +1691,10 @@ public partial record AuditLogEvent
     public string? Business { get; init; }
 
     [JsonPropertyName("config")]
-    public IReadOnlyList<object>? Config { get; init; }
+    public IReadOnlyList<IReadOnlyDictionary<string, object?>>? Config { get; init; }
 
     [JsonPropertyName("config_was")]
-    public IReadOnlyList<object>? ConfigWas { get; init; }
+    public IReadOnlyList<IReadOnlyDictionary<string, object?>>? ConfigWas { get; init; }
 
     [JsonPropertyName("content_type")]
     public string? ContentType { get; init; }
@@ -1709,10 +1718,10 @@ public partial record AuditLogEvent
     public string? Emoji { get; init; }
 
     [JsonPropertyName("events")]
-    public IReadOnlyList<object>? Events { get; init; }
+    public IReadOnlyList<IReadOnlyDictionary<string, object?>>? Events { get; init; }
 
     [JsonPropertyName("events_were")]
-    public IReadOnlyList<object>? EventsWere { get; init; }
+    public IReadOnlyList<IReadOnlyDictionary<string, object?>>? EventsWere { get; init; }
 
     [JsonPropertyName("explanation")]
     public string? Explanation { get; init; }
@@ -2047,7 +2056,7 @@ public partial record OrganizationFull
     public string? BillingEmail { get; init; }
 
     [JsonPropertyName("plan")]
-    public object? Plan { get; init; }
+    public OrganizationFullPlan? Plan { get; init; }
 
     [JsonPropertyName("default_repository_permission")]
     public string? DefaultRepositoryPermission { get; init; }
@@ -2102,7 +2111,7 @@ public partial record ValidationError
     public required string DocumentationUrl { get; init; }
 
     [JsonPropertyName("errors")]
-    public IReadOnlyList<object>? Errors { get; init; }
+    public IReadOnlyList<ValidationErrorErrors>? Errors { get; init; }
 
 }
 
@@ -2149,13 +2158,13 @@ public partial record ExternalGroup
     /// An array of teams linked to this group
     /// </summary>
     [JsonPropertyName("teams")]
-    public required IReadOnlyList<object> Teams { get; init; }
+    public required IReadOnlyList<ExternalGroupTeams> Teams { get; init; }
 
     /// <summary>
     /// An array of external members linked to this group
     /// </summary>
     [JsonPropertyName("members")]
-    public required IReadOnlyList<object> Members { get; init; }
+    public required IReadOnlyList<ExternalGroupMembers> Members { get; init; }
 
 }
 
@@ -2168,7 +2177,7 @@ public partial record ExternalGroups
     /// An array of external groups available to be mapped to a team
     /// </summary>
     [JsonPropertyName("groups")]
-    public IReadOnlyList<object>? Groups { get; init; }
+    public IReadOnlyList<ExternalGroupsGroups>? Groups { get; init; }
 
 }
 
@@ -2282,7 +2291,7 @@ public partial record TeamFull
 public partial record RateLimitOverview
 {
     [JsonPropertyName("resources")]
-    public required object Resources { get; init; }
+    public required RateLimitOverviewResources Resources { get; init; }
 
     [JsonPropertyName("rate")]
     public required RateLimit Rate { get; init; }
@@ -2685,7 +2694,7 @@ public partial record Collaborator
     public required bool SiteAdmin { get; init; }
 
     [JsonPropertyName("permissions")]
-    public object? Permissions { get; init; }
+    public CollaboratorPermissions? Permissions { get; init; }
 
     [JsonPropertyName("role_name")]
     public string? RoleName { get; init; }
@@ -2950,7 +2959,7 @@ public partial record FullRepository
     public required DateTimeOffset UpdatedAt { get; init; }
 
     [JsonPropertyName("permissions")]
-    public object? Permissions { get; init; }
+    public FullRepositoryPermissions? Permissions { get; init; }
 
     [JsonPropertyName("allow_rebase_merge")]
     public bool? AllowRebaseMerge { get; init; }
@@ -3574,7 +3583,7 @@ public partial record MinimalRepository
     public DateTimeOffset? UpdatedAt { get; init; }
 
     [JsonPropertyName("permissions")]
-    public object? Permissions { get; init; }
+    public MinimalRepositoryPermissions? Permissions { get; init; }
 
     [JsonPropertyName("role_name")]
     public string? RoleName { get; init; }
@@ -3604,7 +3613,7 @@ public partial record MinimalRepository
     public CodeOfConduct? CodeOfConduct { get; init; }
 
     [JsonPropertyName("license")]
-    public object? License { get; init; }
+    public MinimalRepositoryLicense? License { get; init; }
 
     [JsonPropertyName("forks")]
     public int? Forks { get; init; }
@@ -3638,7 +3647,7 @@ public partial record ScimGroupListEnterprise
     public required double StartIndex { get; init; }
 
     [JsonPropertyName("Resources")]
-    public required IReadOnlyList<object> Resources { get; init; }
+    public required IReadOnlyList<ScimGroupListEnterpriseResources> Resources { get; init; }
 
 }
 
@@ -3657,10 +3666,10 @@ public partial record ScimEnterpriseGroup
     public string? DisplayName { get; init; }
 
     [JsonPropertyName("members")]
-    public IReadOnlyList<object>? Members { get; init; }
+    public IReadOnlyList<ScimEnterpriseGroupMembers>? Members { get; init; }
 
     [JsonPropertyName("meta")]
-    public object? Meta { get; init; }
+    public ScimEnterpriseGroupMeta? Meta { get; init; }
 
 }
 
@@ -3679,7 +3688,7 @@ public partial record ScimUserListEnterprise
     public required double StartIndex { get; init; }
 
     [JsonPropertyName("Resources")]
-    public required IReadOnlyList<object> Resources { get; init; }
+    public required IReadOnlyList<ScimUserListEnterpriseResources> Resources { get; init; }
 
 }
 
@@ -3698,19 +3707,19 @@ public partial record ScimEnterpriseUser
     public string? UserName { get; init; }
 
     [JsonPropertyName("name")]
-    public object? Name { get; init; }
+    public ScimEnterpriseUserName? Name { get; init; }
 
     [JsonPropertyName("emails")]
-    public IReadOnlyList<object>? Emails { get; init; }
+    public IReadOnlyList<ScimEnterpriseUserEmails>? Emails { get; init; }
 
     [JsonPropertyName("groups")]
-    public IReadOnlyList<object>? Groups { get; init; }
+    public IReadOnlyList<ScimEnterpriseUserGroups>? Groups { get; init; }
 
     [JsonPropertyName("active")]
     public bool? Active { get; init; }
 
     [JsonPropertyName("meta")]
-    public object? Meta { get; init; }
+    public ScimEnterpriseUserMeta? Meta { get; init; }
 
 }
 
@@ -3720,7 +3729,7 @@ public partial record ConfigurationStatus
     public string? Status { get; init; }
 
     [JsonPropertyName("progress")]
-    public IReadOnlyList<object>? Progress { get; init; }
+    public IReadOnlyList<ConfigurationStatusProgress>? Progress { get; init; }
 
 }
 
@@ -3733,14 +3742,14 @@ public partial record MaintenanceStatus
     public string? ScheduledTime { get; init; }
 
     [JsonPropertyName("connection_services")]
-    public IReadOnlyList<object>? ConnectionServices { get; init; }
+    public IReadOnlyList<MaintenanceStatusConnectionServices>? ConnectionServices { get; init; }
 
 }
 
 public partial record EnterpriseSettings
 {
     [JsonPropertyName("enterprise")]
-    public object? Enterprise { get; init; }
+    public EnterpriseSettingsEnterprise? Enterprise { get; init; }
 
     [JsonPropertyName("run_list")]
     public IReadOnlyList<string>? RunList { get; init; }
@@ -3971,7 +3980,7 @@ public partial record Repository
     public required int Forks { get; init; }
 
     [JsonPropertyName("permissions")]
-    public object? Permissions { get; init; }
+    public RepositoryPermissions? Permissions { get; init; }
 
     /// <summary>
     /// Simple User
@@ -4220,7 +4229,7 @@ public partial record Repository
     public bool AllowRebaseMerge { get; init; } = true;
 
     [JsonPropertyName("template_repository")]
-    public object? TemplateRepository { get; init; }
+    public RepositoryTemplateRepository? TemplateRepository { get; init; }
 
     [JsonPropertyName("temp_clone_token")]
     public string? TempCloneToken { get; init; }
@@ -4901,7 +4910,7 @@ public partial record TeamOrganization
     public string? BillingEmail { get; init; }
 
     [JsonPropertyName("plan")]
-    public object? Plan { get; init; }
+    public TeamOrganizationPlan? Plan { get; init; }
 
     [JsonPropertyName("default_repository_permission")]
     public string? DefaultRepositoryPermission { get; init; }
@@ -4988,10 +4997,10 @@ public partial record PullRequestMinimal
     public required string Url { get; init; }
 
     [JsonPropertyName("head")]
-    public required object Head { get; init; }
+    public required PullRequestMinimalHead Head { get; init; }
 
     [JsonPropertyName("base")]
-    public required object Base { get; init; }
+    public required PullRequestMinimalBase Base { get; init; }
 
 }
 
@@ -5013,10 +5022,10 @@ public partial record NullableSimpleCommit
     public required DateTimeOffset Timestamp { get; init; }
 
     [JsonPropertyName("author")]
-    public required object? Author { get; init; }
+    public required NullableSimpleCommitAuthor? Author { get; init; }
 
     [JsonPropertyName("committer")]
-    public required object? Committer { get; init; }
+    public required NullableSimpleCommitCommitter? Committer { get; init; }
 
 }
 
@@ -5216,7 +5225,7 @@ public partial record NullableCollaborator
     public required bool SiteAdmin { get; init; }
 
     [JsonPropertyName("permissions")]
-    public object? Permissions { get; init; }
+    public NullableCollaboratorPermissions? Permissions { get; init; }
 
     [JsonPropertyName("role_name")]
     public string? RoleName { get; init; }
@@ -5262,7 +5271,7 @@ public partial record NullableRepository
     public required int Forks { get; init; }
 
     [JsonPropertyName("permissions")]
-    public object? Permissions { get; init; }
+    public NullableRepositoryPermissions? Permissions { get; init; }
 
     /// <summary>
     /// Simple User
@@ -5511,7 +5520,7 @@ public partial record NullableRepository
     public bool AllowRebaseMerge { get; init; } = true;
 
     [JsonPropertyName("template_repository")]
-    public object? TemplateRepository { get; init; }
+    public NullableRepositoryTemplateRepository? TemplateRepository { get; init; }
 
     [JsonPropertyName("temp_clone_token")]
     public string? TempCloneToken { get; init; }
@@ -5650,13 +5659,13 @@ public partial record CodeOfConductSimple
 public partial record SecurityAndAnalysis
 {
     [JsonPropertyName("advanced_security")]
-    public object? AdvancedSecurity { get; init; }
+    public SecurityAndAnalysisAdvancedSecurity? AdvancedSecurity { get; init; }
 
     [JsonPropertyName("secret_scanning")]
-    public object? SecretScanning { get; init; }
+    public SecurityAndAnalysisSecretScanning? SecretScanning { get; init; }
 
     [JsonPropertyName("secret_scanning_push_protection")]
-    public object? SecretScanningPushProtection { get; init; }
+    public SecurityAndAnalysisSecretScanningPushProtection? SecretScanningPushProtection { get; init; }
 
 }
 
@@ -5805,5 +5814,1928 @@ public partial record CodeOfConduct
 
     [JsonPropertyName("html_url")]
     public required Uri? HtmlUrl { get; init; }
+
+}
+
+public partial record GlobalHookConfig
+{
+    [JsonPropertyName("url")]
+    public string? Url { get; init; }
+
+    [JsonPropertyName("content_type")]
+    public string? ContentType { get; init; }
+
+    [JsonPropertyName("insecure_ssl")]
+    public string? InsecureSsl { get; init; }
+
+    [JsonPropertyName("secret")]
+    public string? Secret { get; init; }
+
+}
+
+public partial record GlobalHook2Config
+{
+    [JsonPropertyName("url")]
+    public string? Url { get; init; }
+
+    [JsonPropertyName("content_type")]
+    public string? ContentType { get; init; }
+
+    [JsonPropertyName("insecure_ssl")]
+    public string? InsecureSsl { get; init; }
+
+}
+
+public partial record LdapMappingUserPlan
+{
+    [JsonPropertyName("collaborators")]
+    public required int Collaborators { get; init; }
+
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("space")]
+    public required int Space { get; init; }
+
+    [JsonPropertyName("private_repos")]
+    public required int PrivateRepos { get; init; }
+
+}
+
+public partial record PreReceiveEnvironmentDownload
+{
+    [JsonPropertyName("url")]
+    public string? Url { get; init; }
+
+    [JsonPropertyName("state")]
+    public string? State { get; init; }
+
+    [JsonPropertyName("downloaded_at")]
+    public string? DownloadedAt { get; init; }
+
+    [JsonPropertyName("message")]
+    public string? Message { get; init; }
+
+}
+
+public partial record PreReceiveHookScriptRepository
+{
+    [JsonPropertyName("id")]
+    public int? Id { get; init; }
+
+    [JsonPropertyName("full_name")]
+    public string? FullName { get; init; }
+
+    [JsonPropertyName("url")]
+    public string? Url { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public string? HtmlUrl { get; init; }
+
+}
+
+public partial record PreReceiveHookEnvironment
+{
+    [JsonPropertyName("id")]
+    public int? Id { get; init; }
+
+    [JsonPropertyName("name")]
+    public string? Name { get; init; }
+
+    [JsonPropertyName("image_url")]
+    public string? ImageUrl { get; init; }
+
+    [JsonPropertyName("url")]
+    public string? Url { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public string? HtmlUrl { get; init; }
+
+    [JsonPropertyName("default_environment")]
+    public bool? DefaultEnvironment { get; init; }
+
+    [JsonPropertyName("created_at")]
+    public string? CreatedAt { get; init; }
+
+    [JsonPropertyName("hooks_count")]
+    public int? HooksCount { get; init; }
+
+    [JsonPropertyName("download")]
+    public PreReceiveHookEnvironmentDownload? Download { get; init; }
+
+}
+
+public partial record PreReceiveHookEnvironmentDownload
+{
+    [JsonPropertyName("url")]
+    public string? Url { get; init; }
+
+    [JsonPropertyName("state")]
+    public string? State { get; init; }
+
+    [JsonPropertyName("downloaded_at")]
+    public string? DownloadedAt { get; init; }
+
+    [JsonPropertyName("message")]
+    public string? Message { get; init; }
+
+}
+
+public partial record AuthorizationApp
+{
+    [JsonPropertyName("client_id")]
+    public required string ClientId { get; init; }
+
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+}
+
+/// <remarks>
+/// Union of: SimpleUser | Enterprise
+/// </remarks>
+[JsonDerivedType(typeof(SimpleUser), "simple-user")]
+[JsonDerivedType(typeof(Enterprise), "enterprise")]
+public abstract partial record InstallationAccount;
+
+public partial record ApplicationGrantApp
+{
+    [JsonPropertyName("client_id")]
+    public required string ClientId { get; init; }
+
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+}
+
+public partial record AuditLogEventActorLocation
+{
+    [JsonPropertyName("country_name")]
+    public string? CountryName { get; init; }
+
+}
+
+public partial record OrganizationFullPlan
+{
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("space")]
+    public required int Space { get; init; }
+
+    [JsonPropertyName("private_repos")]
+    public required int PrivateRepos { get; init; }
+
+    [JsonPropertyName("filled_seats")]
+    public int? FilledSeats { get; init; }
+
+    [JsonPropertyName("seats")]
+    public int? Seats { get; init; }
+
+}
+
+public partial record ValidationErrorErrors
+{
+    [JsonPropertyName("resource")]
+    public string? Resource { get; init; }
+
+    [JsonPropertyName("field")]
+    public string? Field { get; init; }
+
+    [JsonPropertyName("message")]
+    public string? Message { get; init; }
+
+    [JsonPropertyName("code")]
+    public required string Code { get; init; }
+
+    [JsonPropertyName("index")]
+    public int? Index { get; init; }
+
+    [JsonPropertyName("value")]
+    public object? Value { get; init; }
+
+}
+
+public partial record ExternalGroupTeams
+{
+    /// <summary>
+    /// The id for a team
+    /// </summary>
+    [JsonPropertyName("team_id")]
+    public required int TeamId { get; init; }
+
+    /// <summary>
+    /// The name of the team
+    /// </summary>
+    [JsonPropertyName("team_name")]
+    public required string TeamName { get; init; }
+
+}
+
+public partial record ExternalGroupMembers
+{
+    /// <summary>
+    /// The internal user ID of the identity
+    /// </summary>
+    [JsonPropertyName("member_id")]
+    public required int MemberId { get; init; }
+
+    /// <summary>
+    /// The handle/login for the user
+    /// </summary>
+    [JsonPropertyName("member_login")]
+    public required string MemberLogin { get; init; }
+
+    /// <summary>
+    /// The user display name/profile name
+    /// </summary>
+    [JsonPropertyName("member_name")]
+    public required string MemberName { get; init; }
+
+    /// <summary>
+    /// An email attached to a user
+    /// </summary>
+    [JsonPropertyName("member_email")]
+    public required string MemberEmail { get; init; }
+
+}
+
+public partial record ExternalGroupsGroups
+{
+    /// <summary>
+    /// The internal ID of the group
+    /// </summary>
+    [JsonPropertyName("group_id")]
+    public required int GroupId { get; init; }
+
+    /// <summary>
+    /// The display name of the group
+    /// </summary>
+    [JsonPropertyName("group_name")]
+    public required string GroupName { get; init; }
+
+    /// <summary>
+    /// The time of the last update for this group
+    /// </summary>
+    [JsonPropertyName("updated_at")]
+    public required string UpdatedAt { get; init; }
+
+}
+
+public partial record RateLimitOverviewResources
+{
+    [JsonPropertyName("core")]
+    public required RateLimit Core { get; init; }
+
+    [JsonPropertyName("graphql")]
+    public RateLimit? Graphql { get; init; }
+
+    [JsonPropertyName("search")]
+    public required RateLimit Search { get; init; }
+
+    [JsonPropertyName("source_import")]
+    public RateLimit? SourceImport { get; init; }
+
+    [JsonPropertyName("integration_manifest")]
+    public RateLimit? IntegrationManifest { get; init; }
+
+    [JsonPropertyName("code_scanning_upload")]
+    public RateLimit? CodeScanningUpload { get; init; }
+
+    [JsonPropertyName("actions_runner_registration")]
+    public RateLimit? ActionsRunnerRegistration { get; init; }
+
+    [JsonPropertyName("scim")]
+    public RateLimit? Scim { get; init; }
+
+}
+
+public partial record CollaboratorPermissions
+{
+    [JsonPropertyName("pull")]
+    public required bool Pull { get; init; }
+
+    [JsonPropertyName("triage")]
+    public bool? Triage { get; init; }
+
+    [JsonPropertyName("push")]
+    public required bool Push { get; init; }
+
+    [JsonPropertyName("maintain")]
+    public bool? Maintain { get; init; }
+
+    [JsonPropertyName("admin")]
+    public required bool Admin { get; init; }
+
+}
+
+public partial record FullRepositoryPermissions
+{
+    [JsonPropertyName("admin")]
+    public required bool Admin { get; init; }
+
+    [JsonPropertyName("maintain")]
+    public bool? Maintain { get; init; }
+
+    [JsonPropertyName("push")]
+    public required bool Push { get; init; }
+
+    [JsonPropertyName("triage")]
+    public bool? Triage { get; init; }
+
+    [JsonPropertyName("pull")]
+    public required bool Pull { get; init; }
+
+}
+
+public partial record MinimalRepositoryPermissions
+{
+    [JsonPropertyName("admin")]
+    public bool? Admin { get; init; }
+
+    [JsonPropertyName("maintain")]
+    public bool? Maintain { get; init; }
+
+    [JsonPropertyName("push")]
+    public bool? Push { get; init; }
+
+    [JsonPropertyName("triage")]
+    public bool? Triage { get; init; }
+
+    [JsonPropertyName("pull")]
+    public bool? Pull { get; init; }
+
+}
+
+public partial record MinimalRepositoryLicense
+{
+    [JsonPropertyName("key")]
+    public string? Key { get; init; }
+
+    [JsonPropertyName("name")]
+    public string? Name { get; init; }
+
+    [JsonPropertyName("spdx_id")]
+    public string? SpdxId { get; init; }
+
+    [JsonPropertyName("url")]
+    public string? Url { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+}
+
+public partial record ScimGroupListEnterpriseResources
+{
+    [JsonPropertyName("schemas")]
+    public required IReadOnlyList<string> Schemas { get; init; }
+
+    [JsonPropertyName("id")]
+    public required string Id { get; init; }
+
+    [JsonPropertyName("externalId")]
+    public string? ExternalId { get; init; }
+
+    [JsonPropertyName("displayName")]
+    public string? DisplayName { get; init; }
+
+    [JsonPropertyName("members")]
+    public IReadOnlyList<ScimGroupListEnterpriseResourcesMembers>? Members { get; init; }
+
+    [JsonPropertyName("meta")]
+    public ScimGroupListEnterpriseResourcesMeta? Meta { get; init; }
+
+}
+
+public partial record ScimGroupListEnterpriseResourcesMembers
+{
+    [JsonPropertyName("value")]
+    public string? Value { get; init; }
+
+    [JsonPropertyName("$ref")]
+    public string? @ref { get; init; }
+
+    [JsonPropertyName("display")]
+    public string? Display { get; init; }
+
+}
+
+public partial record ScimGroupListEnterpriseResourcesMeta
+{
+    [JsonPropertyName("resourceType")]
+    public string? ResourceType { get; init; }
+
+    [JsonPropertyName("created")]
+    public string? Created { get; init; }
+
+    [JsonPropertyName("lastModified")]
+    public string? LastModified { get; init; }
+
+    [JsonPropertyName("location")]
+    public string? Location { get; init; }
+
+}
+
+public partial record ScimEnterpriseGroupMembers
+{
+    [JsonPropertyName("value")]
+    public string? Value { get; init; }
+
+    [JsonPropertyName("$ref")]
+    public string? @ref { get; init; }
+
+    [JsonPropertyName("display")]
+    public string? Display { get; init; }
+
+}
+
+public partial record ScimEnterpriseGroupMeta
+{
+    [JsonPropertyName("resourceType")]
+    public string? ResourceType { get; init; }
+
+    [JsonPropertyName("created")]
+    public string? Created { get; init; }
+
+    [JsonPropertyName("lastModified")]
+    public string? LastModified { get; init; }
+
+    [JsonPropertyName("location")]
+    public string? Location { get; init; }
+
+}
+
+public partial record ScimUserListEnterpriseResources
+{
+    [JsonPropertyName("schemas")]
+    public required IReadOnlyList<string> Schemas { get; init; }
+
+    [JsonPropertyName("id")]
+    public required string Id { get; init; }
+
+    [JsonPropertyName("externalId")]
+    public string? ExternalId { get; init; }
+
+    [JsonPropertyName("userName")]
+    public string? UserName { get; init; }
+
+    [JsonPropertyName("name")]
+    public ScimUserListEnterpriseResourcesName? Name { get; init; }
+
+    [JsonPropertyName("emails")]
+    public IReadOnlyList<ScimUserListEnterpriseResourcesEmails>? Emails { get; init; }
+
+    [JsonPropertyName("groups")]
+    public IReadOnlyList<ScimUserListEnterpriseResourcesGroups>? Groups { get; init; }
+
+    [JsonPropertyName("active")]
+    public bool? Active { get; init; }
+
+    [JsonPropertyName("meta")]
+    public ScimUserListEnterpriseResourcesMeta? Meta { get; init; }
+
+}
+
+public partial record ScimUserListEnterpriseResourcesName
+{
+    [JsonPropertyName("givenName")]
+    public string? GivenName { get; init; }
+
+    [JsonPropertyName("familyName")]
+    public string? FamilyName { get; init; }
+
+}
+
+public partial record ScimUserListEnterpriseResourcesEmails
+{
+    [JsonPropertyName("value")]
+    public string? Value { get; init; }
+
+    [JsonPropertyName("primary")]
+    public bool? Primary { get; init; }
+
+    [JsonPropertyName("type")]
+    public string? Type { get; init; }
+
+}
+
+public partial record ScimUserListEnterpriseResourcesGroups
+{
+    [JsonPropertyName("value")]
+    public string? Value { get; init; }
+
+}
+
+public partial record ScimUserListEnterpriseResourcesMeta
+{
+    [JsonPropertyName("resourceType")]
+    public string? ResourceType { get; init; }
+
+    [JsonPropertyName("created")]
+    public string? Created { get; init; }
+
+    [JsonPropertyName("lastModified")]
+    public string? LastModified { get; init; }
+
+    [JsonPropertyName("location")]
+    public string? Location { get; init; }
+
+}
+
+public partial record ScimEnterpriseUserName
+{
+    [JsonPropertyName("givenName")]
+    public string? GivenName { get; init; }
+
+    [JsonPropertyName("familyName")]
+    public string? FamilyName { get; init; }
+
+}
+
+public partial record ScimEnterpriseUserEmails
+{
+    [JsonPropertyName("value")]
+    public string? Value { get; init; }
+
+    [JsonPropertyName("type")]
+    public string? Type { get; init; }
+
+    [JsonPropertyName("primary")]
+    public bool? Primary { get; init; }
+
+}
+
+public partial record ScimEnterpriseUserGroups
+{
+    [JsonPropertyName("value")]
+    public string? Value { get; init; }
+
+}
+
+public partial record ScimEnterpriseUserMeta
+{
+    [JsonPropertyName("resourceType")]
+    public string? ResourceType { get; init; }
+
+    [JsonPropertyName("created")]
+    public string? Created { get; init; }
+
+    [JsonPropertyName("lastModified")]
+    public string? LastModified { get; init; }
+
+    [JsonPropertyName("location")]
+    public string? Location { get; init; }
+
+}
+
+public partial record ConfigurationStatusProgress
+{
+    [JsonPropertyName("status")]
+    public required string Status { get; init; }
+
+    [JsonPropertyName("key")]
+    public required string Key { get; init; }
+
+}
+
+public partial record MaintenanceStatusConnectionServices
+{
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("number")]
+    public required int Number { get; init; }
+
+}
+
+public partial record EnterpriseSettingsEnterprise
+{
+    [JsonPropertyName("private_mode")]
+    public bool? PrivateMode { get; init; }
+
+    [JsonPropertyName("public_pages")]
+    public bool? PublicPages { get; init; }
+
+    [JsonPropertyName("subdomain_isolation")]
+    public bool? SubdomainIsolation { get; init; }
+
+    [JsonPropertyName("signup_enabled")]
+    public bool? SignupEnabled { get; init; }
+
+    [JsonPropertyName("github_hostname")]
+    public string? GithubHostname { get; init; }
+
+    [JsonPropertyName("identicons_host")]
+    public string? IdenticonsHost { get; init; }
+
+    [JsonPropertyName("http_proxy")]
+    public string? HttpProxy { get; init; }
+
+    [JsonPropertyName("auth_mode")]
+    public string? AuthMode { get; init; }
+
+    [JsonPropertyName("expire_sessions")]
+    public bool? ExpireSessions { get; init; }
+
+    [JsonPropertyName("admin_password")]
+    public string? AdminPassword { get; init; }
+
+    [JsonPropertyName("configuration_id")]
+    public int? ConfigurationId { get; init; }
+
+    [JsonPropertyName("configuration_run_count")]
+    public int? ConfigurationRunCount { get; init; }
+
+    [JsonPropertyName("avatar")]
+    public EnterpriseSettingsEnterpriseAvatar? Avatar { get; init; }
+
+    [JsonPropertyName("customer")]
+    public EnterpriseSettingsEnterpriseCustomer? Customer { get; init; }
+
+    [JsonPropertyName("license")]
+    public EnterpriseSettingsEnterpriseLicense? License { get; init; }
+
+    [JsonPropertyName("github_ssl")]
+    public EnterpriseSettingsEnterpriseGithubSsl? GithubSsl { get; init; }
+
+    [JsonPropertyName("ldap")]
+    public EnterpriseSettingsEnterpriseLdap? Ldap { get; init; }
+
+    [JsonPropertyName("cas")]
+    public EnterpriseSettingsEnterpriseCas? Cas { get; init; }
+
+    [JsonPropertyName("saml")]
+    public EnterpriseSettingsEnterpriseSaml? Saml { get; init; }
+
+    [JsonPropertyName("github_oauth")]
+    public EnterpriseSettingsEnterpriseGithubOauth? GithubOauth { get; init; }
+
+    [JsonPropertyName("smtp")]
+    public EnterpriseSettingsEnterpriseSmtp? Smtp { get; init; }
+
+    [JsonPropertyName("ntp")]
+    public EnterpriseSettingsEnterpriseNtp? Ntp { get; init; }
+
+    [JsonPropertyName("timezone")]
+    public string? Timezone { get; init; }
+
+    [JsonPropertyName("snmp")]
+    public EnterpriseSettingsEnterpriseSnmp? Snmp { get; init; }
+
+    [JsonPropertyName("syslog")]
+    public EnterpriseSettingsEnterpriseSyslog? Syslog { get; init; }
+
+    [JsonPropertyName("assets")]
+    public string? Assets { get; init; }
+
+    [JsonPropertyName("pages")]
+    public EnterpriseSettingsEnterprisePages? Pages { get; init; }
+
+    [JsonPropertyName("collectd")]
+    public EnterpriseSettingsEnterpriseCollectd? Collectd { get; init; }
+
+    [JsonPropertyName("mapping")]
+    public EnterpriseSettingsEnterpriseMapping? Mapping { get; init; }
+
+    [JsonPropertyName("load_balancer")]
+    public string? LoadBalancer { get; init; }
+
+}
+
+public partial record EnterpriseSettingsEnterpriseAvatar
+{
+    [JsonPropertyName("enabled")]
+    public bool? Enabled { get; init; }
+
+    [JsonPropertyName("uri")]
+    public string? Uri { get; init; }
+
+}
+
+public partial record EnterpriseSettingsEnterpriseCustomer
+{
+    [JsonPropertyName("name")]
+    public string? Name { get; init; }
+
+    [JsonPropertyName("email")]
+    public string? Email { get; init; }
+
+    [JsonPropertyName("uuid")]
+    public string? Uuid { get; init; }
+
+    [JsonPropertyName("secret_key_data")]
+    public string? SecretKeyData { get; init; }
+
+    [JsonPropertyName("public_key_data")]
+    public string? PublicKeyData { get; init; }
+
+}
+
+public partial record EnterpriseSettingsEnterpriseLicense
+{
+    [JsonPropertyName("seats")]
+    public int? Seats { get; init; }
+
+    [JsonPropertyName("evaluation")]
+    public bool? Evaluation { get; init; }
+
+    [JsonPropertyName("perpetual")]
+    public bool? Perpetual { get; init; }
+
+    [JsonPropertyName("unlimited_seating")]
+    public bool? UnlimitedSeating { get; init; }
+
+    [JsonPropertyName("support_key")]
+    public string? SupportKey { get; init; }
+
+    [JsonPropertyName("ssh_allowed")]
+    public bool? SshAllowed { get; init; }
+
+    [JsonPropertyName("cluster_support")]
+    public bool? ClusterSupport { get; init; }
+
+    [JsonPropertyName("expire_at")]
+    public string? ExpireAt { get; init; }
+
+}
+
+public partial record EnterpriseSettingsEnterpriseGithubSsl
+{
+    [JsonPropertyName("enabled")]
+    public bool? Enabled { get; init; }
+
+    [JsonPropertyName("cert")]
+    public string? Cert { get; init; }
+
+    [JsonPropertyName("key")]
+    public string? Key { get; init; }
+
+}
+
+public partial record EnterpriseSettingsEnterpriseLdap
+{
+    [JsonPropertyName("host")]
+    public string? Host { get; init; }
+
+    [JsonPropertyName("port")]
+    public int? Port { get; init; }
+
+    [JsonPropertyName("base")]
+    public IReadOnlyList<object>? Base { get; init; }
+
+    [JsonPropertyName("uid")]
+    public string? Uid { get; init; }
+
+    [JsonPropertyName("bind_dn")]
+    public string? BindDn { get; init; }
+
+    [JsonPropertyName("password")]
+    public string? Password { get; init; }
+
+    [JsonPropertyName("method")]
+    public string? Method { get; init; }
+
+    [JsonPropertyName("search_strategy")]
+    public string? SearchStrategy { get; init; }
+
+    [JsonPropertyName("user_groups")]
+    public IReadOnlyList<object>? UserGroups { get; init; }
+
+    [JsonPropertyName("admin_group")]
+    public string? AdminGroup { get; init; }
+
+    [JsonPropertyName("virtual_attribute_enabled")]
+    public bool? VirtualAttributeEnabled { get; init; }
+
+    [JsonPropertyName("recursive_group_search")]
+    public bool? RecursiveGroupSearch { get; init; }
+
+    [JsonPropertyName("posix_support")]
+    public bool? PosixSupport { get; init; }
+
+    [JsonPropertyName("user_sync_emails")]
+    public bool? UserSyncEmails { get; init; }
+
+    [JsonPropertyName("user_sync_keys")]
+    public bool? UserSyncKeys { get; init; }
+
+    [JsonPropertyName("user_sync_interval")]
+    public int? UserSyncInterval { get; init; }
+
+    [JsonPropertyName("team_sync_interval")]
+    public int? TeamSyncInterval { get; init; }
+
+    [JsonPropertyName("sync_enabled")]
+    public bool? SyncEnabled { get; init; }
+
+    [JsonPropertyName("reconciliation")]
+    public EnterpriseSettingsEnterpriseLdapReconciliation? Reconciliation { get; init; }
+
+    [JsonPropertyName("profile")]
+    public EnterpriseSettingsEnterpriseLdapProfile? Profile { get; init; }
+
+}
+
+public partial record EnterpriseSettingsEnterpriseLdapReconciliation
+{
+    [JsonPropertyName("user")]
+    public string? User { get; init; }
+
+    [JsonPropertyName("org")]
+    public string? Org { get; init; }
+
+}
+
+public partial record EnterpriseSettingsEnterpriseLdapProfile
+{
+    [JsonPropertyName("uid")]
+    public string? Uid { get; init; }
+
+    [JsonPropertyName("name")]
+    public string? Name { get; init; }
+
+    [JsonPropertyName("mail")]
+    public string? Mail { get; init; }
+
+    [JsonPropertyName("key")]
+    public string? Key { get; init; }
+
+}
+
+public partial record EnterpriseSettingsEnterpriseCas
+{
+    [JsonPropertyName("url")]
+    public string? Url { get; init; }
+
+}
+
+public partial record EnterpriseSettingsEnterpriseSaml
+{
+    [JsonPropertyName("sso_url")]
+    public string? SsoUrl { get; init; }
+
+    [JsonPropertyName("certificate")]
+    public string? Certificate { get; init; }
+
+    [JsonPropertyName("certificate_path")]
+    public string? CertificatePath { get; init; }
+
+    [JsonPropertyName("issuer")]
+    public string? Issuer { get; init; }
+
+    [JsonPropertyName("idp_initiated_sso")]
+    public bool? IdpInitiatedSso { get; init; }
+
+    [JsonPropertyName("disable_admin_demote")]
+    public bool? DisableAdminDemote { get; init; }
+
+}
+
+public partial record EnterpriseSettingsEnterpriseGithubOauth
+{
+    [JsonPropertyName("client_id")]
+    public string? ClientId { get; init; }
+
+    [JsonPropertyName("client_secret")]
+    public string? ClientSecret { get; init; }
+
+    [JsonPropertyName("organization_name")]
+    public string? OrganizationName { get; init; }
+
+    [JsonPropertyName("organization_team")]
+    public string? OrganizationTeam { get; init; }
+
+}
+
+public partial record EnterpriseSettingsEnterpriseSmtp
+{
+    [JsonPropertyName("enabled")]
+    public bool? Enabled { get; init; }
+
+    [JsonPropertyName("address")]
+    public string? Address { get; init; }
+
+    [JsonPropertyName("authentication")]
+    public string? Authentication { get; init; }
+
+    [JsonPropertyName("port")]
+    public string? Port { get; init; }
+
+    [JsonPropertyName("domain")]
+    public string? Domain { get; init; }
+
+    [JsonPropertyName("username")]
+    public string? Username { get; init; }
+
+    [JsonPropertyName("user_name")]
+    public string? UserName { get; init; }
+
+    [JsonPropertyName("enable_starttls_auto")]
+    public bool? EnableStarttlsAuto { get; init; }
+
+    [JsonPropertyName("password")]
+    public string? Password { get; init; }
+
+    [JsonPropertyName("discard-to-noreply-address")]
+    public bool? DiscardToNoreplyAddress { get; init; }
+
+    [JsonPropertyName("support_address")]
+    public string? SupportAddress { get; init; }
+
+    [JsonPropertyName("support_address_type")]
+    public string? SupportAddressType { get; init; }
+
+    [JsonPropertyName("noreply_address")]
+    public string? NoreplyAddress { get; init; }
+
+}
+
+public partial record EnterpriseSettingsEnterpriseNtp
+{
+    [JsonPropertyName("primary_server")]
+    public string? PrimaryServer { get; init; }
+
+    [JsonPropertyName("secondary_server")]
+    public string? SecondaryServer { get; init; }
+
+}
+
+public partial record EnterpriseSettingsEnterpriseSnmp
+{
+    [JsonPropertyName("enabled")]
+    public bool? Enabled { get; init; }
+
+    [JsonPropertyName("community")]
+    public string? Community { get; init; }
+
+}
+
+public partial record EnterpriseSettingsEnterpriseSyslog
+{
+    [JsonPropertyName("enabled")]
+    public bool? Enabled { get; init; }
+
+    [JsonPropertyName("server")]
+    public string? Server { get; init; }
+
+    [JsonPropertyName("protocol_name")]
+    public string? ProtocolName { get; init; }
+
+}
+
+public partial record EnterpriseSettingsEnterprisePages
+{
+    [JsonPropertyName("enabled")]
+    public bool? Enabled { get; init; }
+
+}
+
+public partial record EnterpriseSettingsEnterpriseCollectd
+{
+    [JsonPropertyName("enabled")]
+    public bool? Enabled { get; init; }
+
+    [JsonPropertyName("server")]
+    public string? Server { get; init; }
+
+    [JsonPropertyName("port")]
+    public int? Port { get; init; }
+
+    [JsonPropertyName("encryption")]
+    public string? Encryption { get; init; }
+
+    [JsonPropertyName("username")]
+    public string? Username { get; init; }
+
+    [JsonPropertyName("password")]
+    public string? Password { get; init; }
+
+}
+
+public partial record EnterpriseSettingsEnterpriseMapping
+{
+    [JsonPropertyName("enabled")]
+    public bool? Enabled { get; init; }
+
+    [JsonPropertyName("tileserver")]
+    public string? Tileserver { get; init; }
+
+    [JsonPropertyName("basemap")]
+    public string? Basemap { get; init; }
+
+    [JsonPropertyName("token")]
+    public string? Token { get; init; }
+
+}
+
+public partial record RepositoryPermissions
+{
+    [JsonPropertyName("admin")]
+    public required bool Admin { get; init; }
+
+    [JsonPropertyName("pull")]
+    public required bool Pull { get; init; }
+
+    [JsonPropertyName("triage")]
+    public bool? Triage { get; init; }
+
+    [JsonPropertyName("push")]
+    public required bool Push { get; init; }
+
+    [JsonPropertyName("maintain")]
+    public bool? Maintain { get; init; }
+
+}
+
+public partial record RepositoryTemplateRepository
+{
+    [JsonPropertyName("id")]
+    public int? Id { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("name")]
+    public string? Name { get; init; }
+
+    [JsonPropertyName("full_name")]
+    public string? FullName { get; init; }
+
+    [JsonPropertyName("owner")]
+    public RepositoryTemplateRepositoryOwner? Owner { get; init; }
+
+    [JsonPropertyName("private")]
+    public bool? Private { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public string? HtmlUrl { get; init; }
+
+    [JsonPropertyName("description")]
+    public string? Description { get; init; }
+
+    [JsonPropertyName("fork")]
+    public bool? Fork { get; init; }
+
+    [JsonPropertyName("url")]
+    public string? Url { get; init; }
+
+    [JsonPropertyName("archive_url")]
+    public string? ArchiveUrl { get; init; }
+
+    [JsonPropertyName("assignees_url")]
+    public string? AssigneesUrl { get; init; }
+
+    [JsonPropertyName("blobs_url")]
+    public string? BlobsUrl { get; init; }
+
+    [JsonPropertyName("branches_url")]
+    public string? BranchesUrl { get; init; }
+
+    [JsonPropertyName("collaborators_url")]
+    public string? CollaboratorsUrl { get; init; }
+
+    [JsonPropertyName("comments_url")]
+    public string? CommentsUrl { get; init; }
+
+    [JsonPropertyName("commits_url")]
+    public string? CommitsUrl { get; init; }
+
+    [JsonPropertyName("compare_url")]
+    public string? CompareUrl { get; init; }
+
+    [JsonPropertyName("contents_url")]
+    public string? ContentsUrl { get; init; }
+
+    [JsonPropertyName("contributors_url")]
+    public string? ContributorsUrl { get; init; }
+
+    [JsonPropertyName("deployments_url")]
+    public string? DeploymentsUrl { get; init; }
+
+    [JsonPropertyName("downloads_url")]
+    public string? DownloadsUrl { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public string? EventsUrl { get; init; }
+
+    [JsonPropertyName("forks_url")]
+    public string? ForksUrl { get; init; }
+
+    [JsonPropertyName("git_commits_url")]
+    public string? GitCommitsUrl { get; init; }
+
+    [JsonPropertyName("git_refs_url")]
+    public string? GitRefsUrl { get; init; }
+
+    [JsonPropertyName("git_tags_url")]
+    public string? GitTagsUrl { get; init; }
+
+    [JsonPropertyName("git_url")]
+    public string? GitUrl { get; init; }
+
+    [JsonPropertyName("issue_comment_url")]
+    public string? IssueCommentUrl { get; init; }
+
+    [JsonPropertyName("issue_events_url")]
+    public string? IssueEventsUrl { get; init; }
+
+    [JsonPropertyName("issues_url")]
+    public string? IssuesUrl { get; init; }
+
+    [JsonPropertyName("keys_url")]
+    public string? KeysUrl { get; init; }
+
+    [JsonPropertyName("labels_url")]
+    public string? LabelsUrl { get; init; }
+
+    [JsonPropertyName("languages_url")]
+    public string? LanguagesUrl { get; init; }
+
+    [JsonPropertyName("merges_url")]
+    public string? MergesUrl { get; init; }
+
+    [JsonPropertyName("milestones_url")]
+    public string? MilestonesUrl { get; init; }
+
+    [JsonPropertyName("notifications_url")]
+    public string? NotificationsUrl { get; init; }
+
+    [JsonPropertyName("pulls_url")]
+    public string? PullsUrl { get; init; }
+
+    [JsonPropertyName("releases_url")]
+    public string? ReleasesUrl { get; init; }
+
+    [JsonPropertyName("ssh_url")]
+    public string? SshUrl { get; init; }
+
+    [JsonPropertyName("stargazers_url")]
+    public string? StargazersUrl { get; init; }
+
+    [JsonPropertyName("statuses_url")]
+    public string? StatusesUrl { get; init; }
+
+    [JsonPropertyName("subscribers_url")]
+    public string? SubscribersUrl { get; init; }
+
+    [JsonPropertyName("subscription_url")]
+    public string? SubscriptionUrl { get; init; }
+
+    [JsonPropertyName("tags_url")]
+    public string? TagsUrl { get; init; }
+
+    [JsonPropertyName("teams_url")]
+    public string? TeamsUrl { get; init; }
+
+    [JsonPropertyName("trees_url")]
+    public string? TreesUrl { get; init; }
+
+    [JsonPropertyName("clone_url")]
+    public string? CloneUrl { get; init; }
+
+    [JsonPropertyName("mirror_url")]
+    public string? MirrorUrl { get; init; }
+
+    [JsonPropertyName("hooks_url")]
+    public string? HooksUrl { get; init; }
+
+    [JsonPropertyName("svn_url")]
+    public string? SvnUrl { get; init; }
+
+    [JsonPropertyName("homepage")]
+    public string? Homepage { get; init; }
+
+    [JsonPropertyName("language")]
+    public string? Language { get; init; }
+
+    [JsonPropertyName("forks_count")]
+    public int? ForksCount { get; init; }
+
+    [JsonPropertyName("stargazers_count")]
+    public int? StargazersCount { get; init; }
+
+    [JsonPropertyName("watchers_count")]
+    public int? WatchersCount { get; init; }
+
+    [JsonPropertyName("size")]
+    public int? Size { get; init; }
+
+    [JsonPropertyName("default_branch")]
+    public string? DefaultBranch { get; init; }
+
+    [JsonPropertyName("open_issues_count")]
+    public int? OpenIssuesCount { get; init; }
+
+    [JsonPropertyName("is_template")]
+    public bool? IsTemplate { get; init; }
+
+    [JsonPropertyName("topics")]
+    public IReadOnlyList<string>? Topics { get; init; }
+
+    [JsonPropertyName("has_issues")]
+    public bool? HasIssues { get; init; }
+
+    [JsonPropertyName("has_projects")]
+    public bool? HasProjects { get; init; }
+
+    [JsonPropertyName("has_wiki")]
+    public bool? HasWiki { get; init; }
+
+    [JsonPropertyName("has_pages")]
+    public bool? HasPages { get; init; }
+
+    [JsonPropertyName("has_downloads")]
+    public bool? HasDownloads { get; init; }
+
+    [JsonPropertyName("archived")]
+    public bool? Archived { get; init; }
+
+    [JsonPropertyName("disabled")]
+    public bool? Disabled { get; init; }
+
+    [JsonPropertyName("visibility")]
+    public string? Visibility { get; init; }
+
+    [JsonPropertyName("pushed_at")]
+    public string? PushedAt { get; init; }
+
+    [JsonPropertyName("created_at")]
+    public string? CreatedAt { get; init; }
+
+    [JsonPropertyName("updated_at")]
+    public string? UpdatedAt { get; init; }
+
+    [JsonPropertyName("permissions")]
+    public RepositoryTemplateRepositoryPermissions? Permissions { get; init; }
+
+    [JsonPropertyName("allow_rebase_merge")]
+    public bool? AllowRebaseMerge { get; init; }
+
+    [JsonPropertyName("temp_clone_token")]
+    public string? TempCloneToken { get; init; }
+
+    [JsonPropertyName("allow_squash_merge")]
+    public bool? AllowSquashMerge { get; init; }
+
+    [JsonPropertyName("allow_auto_merge")]
+    public bool? AllowAutoMerge { get; init; }
+
+    [JsonPropertyName("delete_branch_on_merge")]
+    public bool? DeleteBranchOnMerge { get; init; }
+
+    [JsonPropertyName("allow_update_branch")]
+    public bool? AllowUpdateBranch { get; init; }
+
+    [JsonPropertyName("use_squash_pr_title_as_default")]
+    public bool? UseSquashPrTitleAsDefault { get; init; }
+
+    /// <summary>
+    /// The default value for a squash merge commit title:
+    /// 
+    /// - `PR_TITLE` - default to the pull request's title.
+    /// - `COMMIT_OR_PR_TITLE` - default to the commit's title (if only one commit) or the pull request's title (when more than one commit).
+    /// </summary>
+    [JsonPropertyName("squash_merge_commit_title")]
+    public SquashMergeCommitTitle? SquashMergeCommitTitle { get; init; }
+
+    /// <summary>
+    /// The default value for a squash merge commit message:
+    /// 
+    /// - `PR_BODY` - default to the pull request's body.
+    /// - `COMMIT_MESSAGES` - default to the branch's commit messages.
+    /// - `BLANK` - default to a blank commit message.
+    /// </summary>
+    [JsonPropertyName("squash_merge_commit_message")]
+    public SquashMergeCommitMessage? SquashMergeCommitMessage { get; init; }
+
+    /// <summary>
+    /// The default value for a merge commit title.
+    /// 
+    /// - `PR_TITLE` - default to the pull request's title.
+    /// - `MERGE_MESSAGE` - default to the classic title for a merge message (e.g., Merge pull request #123 from branch-name).
+    /// </summary>
+    [JsonPropertyName("merge_commit_title")]
+    public MergeCommitTitle? MergeCommitTitle { get; init; }
+
+    /// <summary>
+    /// The default value for a merge commit message.
+    /// 
+    /// - `PR_TITLE` - default to the pull request's title.
+    /// - `PR_BODY` - default to the pull request's body.
+    /// - `BLANK` - default to a blank commit message.
+    /// </summary>
+    [JsonPropertyName("merge_commit_message")]
+    public MergeCommitMessage? MergeCommitMessage { get; init; }
+
+    [JsonPropertyName("allow_merge_commit")]
+    public bool? AllowMergeCommit { get; init; }
+
+    [JsonPropertyName("subscribers_count")]
+    public int? SubscribersCount { get; init; }
+
+    [JsonPropertyName("network_count")]
+    public int? NetworkCount { get; init; }
+
+}
+
+public partial record RepositoryTemplateRepositoryOwner
+{
+    [JsonPropertyName("login")]
+    public string? Login { get; init; }
+
+    [JsonPropertyName("id")]
+    public int? Id { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("avatar_url")]
+    public string? AvatarUrl { get; init; }
+
+    [JsonPropertyName("gravatar_id")]
+    public string? GravatarId { get; init; }
+
+    [JsonPropertyName("url")]
+    public string? Url { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public string? HtmlUrl { get; init; }
+
+    [JsonPropertyName("followers_url")]
+    public string? FollowersUrl { get; init; }
+
+    [JsonPropertyName("following_url")]
+    public string? FollowingUrl { get; init; }
+
+    [JsonPropertyName("gists_url")]
+    public string? GistsUrl { get; init; }
+
+    [JsonPropertyName("starred_url")]
+    public string? StarredUrl { get; init; }
+
+    [JsonPropertyName("subscriptions_url")]
+    public string? SubscriptionsUrl { get; init; }
+
+    [JsonPropertyName("organizations_url")]
+    public string? OrganizationsUrl { get; init; }
+
+    [JsonPropertyName("repos_url")]
+    public string? ReposUrl { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public string? EventsUrl { get; init; }
+
+    [JsonPropertyName("received_events_url")]
+    public string? ReceivedEventsUrl { get; init; }
+
+    [JsonPropertyName("type")]
+    public string? Type { get; init; }
+
+    [JsonPropertyName("site_admin")]
+    public bool? SiteAdmin { get; init; }
+
+}
+
+public partial record RepositoryTemplateRepositoryPermissions
+{
+    [JsonPropertyName("admin")]
+    public bool? Admin { get; init; }
+
+    [JsonPropertyName("maintain")]
+    public bool? Maintain { get; init; }
+
+    [JsonPropertyName("push")]
+    public bool? Push { get; init; }
+
+    [JsonPropertyName("triage")]
+    public bool? Triage { get; init; }
+
+    [JsonPropertyName("pull")]
+    public bool? Pull { get; init; }
+
+}
+
+public partial record TeamOrganizationPlan
+{
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("space")]
+    public required int Space { get; init; }
+
+    [JsonPropertyName("private_repos")]
+    public required int PrivateRepos { get; init; }
+
+    [JsonPropertyName("filled_seats")]
+    public int? FilledSeats { get; init; }
+
+    [JsonPropertyName("seats")]
+    public int? Seats { get; init; }
+
+}
+
+public partial record PullRequestMinimalHead
+{
+    [JsonPropertyName("ref")]
+    public required string Ref { get; init; }
+
+    [JsonPropertyName("sha")]
+    public required string Sha { get; init; }
+
+    [JsonPropertyName("repo")]
+    public required PullRequestMinimalHeadRepo Repo { get; init; }
+
+}
+
+public partial record PullRequestMinimalHeadRepo
+{
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("url")]
+    public required string Url { get; init; }
+
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+}
+
+public partial record PullRequestMinimalBase
+{
+    [JsonPropertyName("ref")]
+    public required string Ref { get; init; }
+
+    [JsonPropertyName("sha")]
+    public required string Sha { get; init; }
+
+    [JsonPropertyName("repo")]
+    public required PullRequestMinimalBaseRepo Repo { get; init; }
+
+}
+
+public partial record PullRequestMinimalBaseRepo
+{
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("url")]
+    public required string Url { get; init; }
+
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+}
+
+public partial record NullableSimpleCommitAuthor
+{
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("email")]
+    public required string Email { get; init; }
+
+}
+
+public partial record NullableSimpleCommitCommitter
+{
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("email")]
+    public required string Email { get; init; }
+
+}
+
+public partial record NullableCollaboratorPermissions
+{
+    [JsonPropertyName("pull")]
+    public required bool Pull { get; init; }
+
+    [JsonPropertyName("triage")]
+    public bool? Triage { get; init; }
+
+    [JsonPropertyName("push")]
+    public required bool Push { get; init; }
+
+    [JsonPropertyName("maintain")]
+    public bool? Maintain { get; init; }
+
+    [JsonPropertyName("admin")]
+    public required bool Admin { get; init; }
+
+}
+
+public partial record NullableRepositoryPermissions
+{
+    [JsonPropertyName("admin")]
+    public required bool Admin { get; init; }
+
+    [JsonPropertyName("pull")]
+    public required bool Pull { get; init; }
+
+    [JsonPropertyName("triage")]
+    public bool? Triage { get; init; }
+
+    [JsonPropertyName("push")]
+    public required bool Push { get; init; }
+
+    [JsonPropertyName("maintain")]
+    public bool? Maintain { get; init; }
+
+}
+
+public partial record NullableRepositoryTemplateRepository
+{
+    [JsonPropertyName("id")]
+    public int? Id { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("name")]
+    public string? Name { get; init; }
+
+    [JsonPropertyName("full_name")]
+    public string? FullName { get; init; }
+
+    [JsonPropertyName("owner")]
+    public NullableRepositoryTemplateRepositoryOwner? Owner { get; init; }
+
+    [JsonPropertyName("private")]
+    public bool? Private { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public string? HtmlUrl { get; init; }
+
+    [JsonPropertyName("description")]
+    public string? Description { get; init; }
+
+    [JsonPropertyName("fork")]
+    public bool? Fork { get; init; }
+
+    [JsonPropertyName("url")]
+    public string? Url { get; init; }
+
+    [JsonPropertyName("archive_url")]
+    public string? ArchiveUrl { get; init; }
+
+    [JsonPropertyName("assignees_url")]
+    public string? AssigneesUrl { get; init; }
+
+    [JsonPropertyName("blobs_url")]
+    public string? BlobsUrl { get; init; }
+
+    [JsonPropertyName("branches_url")]
+    public string? BranchesUrl { get; init; }
+
+    [JsonPropertyName("collaborators_url")]
+    public string? CollaboratorsUrl { get; init; }
+
+    [JsonPropertyName("comments_url")]
+    public string? CommentsUrl { get; init; }
+
+    [JsonPropertyName("commits_url")]
+    public string? CommitsUrl { get; init; }
+
+    [JsonPropertyName("compare_url")]
+    public string? CompareUrl { get; init; }
+
+    [JsonPropertyName("contents_url")]
+    public string? ContentsUrl { get; init; }
+
+    [JsonPropertyName("contributors_url")]
+    public string? ContributorsUrl { get; init; }
+
+    [JsonPropertyName("deployments_url")]
+    public string? DeploymentsUrl { get; init; }
+
+    [JsonPropertyName("downloads_url")]
+    public string? DownloadsUrl { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public string? EventsUrl { get; init; }
+
+    [JsonPropertyName("forks_url")]
+    public string? ForksUrl { get; init; }
+
+    [JsonPropertyName("git_commits_url")]
+    public string? GitCommitsUrl { get; init; }
+
+    [JsonPropertyName("git_refs_url")]
+    public string? GitRefsUrl { get; init; }
+
+    [JsonPropertyName("git_tags_url")]
+    public string? GitTagsUrl { get; init; }
+
+    [JsonPropertyName("git_url")]
+    public string? GitUrl { get; init; }
+
+    [JsonPropertyName("issue_comment_url")]
+    public string? IssueCommentUrl { get; init; }
+
+    [JsonPropertyName("issue_events_url")]
+    public string? IssueEventsUrl { get; init; }
+
+    [JsonPropertyName("issues_url")]
+    public string? IssuesUrl { get; init; }
+
+    [JsonPropertyName("keys_url")]
+    public string? KeysUrl { get; init; }
+
+    [JsonPropertyName("labels_url")]
+    public string? LabelsUrl { get; init; }
+
+    [JsonPropertyName("languages_url")]
+    public string? LanguagesUrl { get; init; }
+
+    [JsonPropertyName("merges_url")]
+    public string? MergesUrl { get; init; }
+
+    [JsonPropertyName("milestones_url")]
+    public string? MilestonesUrl { get; init; }
+
+    [JsonPropertyName("notifications_url")]
+    public string? NotificationsUrl { get; init; }
+
+    [JsonPropertyName("pulls_url")]
+    public string? PullsUrl { get; init; }
+
+    [JsonPropertyName("releases_url")]
+    public string? ReleasesUrl { get; init; }
+
+    [JsonPropertyName("ssh_url")]
+    public string? SshUrl { get; init; }
+
+    [JsonPropertyName("stargazers_url")]
+    public string? StargazersUrl { get; init; }
+
+    [JsonPropertyName("statuses_url")]
+    public string? StatusesUrl { get; init; }
+
+    [JsonPropertyName("subscribers_url")]
+    public string? SubscribersUrl { get; init; }
+
+    [JsonPropertyName("subscription_url")]
+    public string? SubscriptionUrl { get; init; }
+
+    [JsonPropertyName("tags_url")]
+    public string? TagsUrl { get; init; }
+
+    [JsonPropertyName("teams_url")]
+    public string? TeamsUrl { get; init; }
+
+    [JsonPropertyName("trees_url")]
+    public string? TreesUrl { get; init; }
+
+    [JsonPropertyName("clone_url")]
+    public string? CloneUrl { get; init; }
+
+    [JsonPropertyName("mirror_url")]
+    public string? MirrorUrl { get; init; }
+
+    [JsonPropertyName("hooks_url")]
+    public string? HooksUrl { get; init; }
+
+    [JsonPropertyName("svn_url")]
+    public string? SvnUrl { get; init; }
+
+    [JsonPropertyName("homepage")]
+    public string? Homepage { get; init; }
+
+    [JsonPropertyName("language")]
+    public string? Language { get; init; }
+
+    [JsonPropertyName("forks_count")]
+    public int? ForksCount { get; init; }
+
+    [JsonPropertyName("stargazers_count")]
+    public int? StargazersCount { get; init; }
+
+    [JsonPropertyName("watchers_count")]
+    public int? WatchersCount { get; init; }
+
+    [JsonPropertyName("size")]
+    public int? Size { get; init; }
+
+    [JsonPropertyName("default_branch")]
+    public string? DefaultBranch { get; init; }
+
+    [JsonPropertyName("open_issues_count")]
+    public int? OpenIssuesCount { get; init; }
+
+    [JsonPropertyName("is_template")]
+    public bool? IsTemplate { get; init; }
+
+    [JsonPropertyName("topics")]
+    public IReadOnlyList<string>? Topics { get; init; }
+
+    [JsonPropertyName("has_issues")]
+    public bool? HasIssues { get; init; }
+
+    [JsonPropertyName("has_projects")]
+    public bool? HasProjects { get; init; }
+
+    [JsonPropertyName("has_wiki")]
+    public bool? HasWiki { get; init; }
+
+    [JsonPropertyName("has_pages")]
+    public bool? HasPages { get; init; }
+
+    [JsonPropertyName("has_downloads")]
+    public bool? HasDownloads { get; init; }
+
+    [JsonPropertyName("archived")]
+    public bool? Archived { get; init; }
+
+    [JsonPropertyName("disabled")]
+    public bool? Disabled { get; init; }
+
+    [JsonPropertyName("visibility")]
+    public string? Visibility { get; init; }
+
+    [JsonPropertyName("pushed_at")]
+    public string? PushedAt { get; init; }
+
+    [JsonPropertyName("created_at")]
+    public string? CreatedAt { get; init; }
+
+    [JsonPropertyName("updated_at")]
+    public string? UpdatedAt { get; init; }
+
+    [JsonPropertyName("permissions")]
+    public NullableRepositoryTemplateRepositoryPermissions? Permissions { get; init; }
+
+    [JsonPropertyName("allow_rebase_merge")]
+    public bool? AllowRebaseMerge { get; init; }
+
+    [JsonPropertyName("temp_clone_token")]
+    public string? TempCloneToken { get; init; }
+
+    [JsonPropertyName("allow_squash_merge")]
+    public bool? AllowSquashMerge { get; init; }
+
+    [JsonPropertyName("allow_auto_merge")]
+    public bool? AllowAutoMerge { get; init; }
+
+    [JsonPropertyName("delete_branch_on_merge")]
+    public bool? DeleteBranchOnMerge { get; init; }
+
+    [JsonPropertyName("allow_update_branch")]
+    public bool? AllowUpdateBranch { get; init; }
+
+    [JsonPropertyName("use_squash_pr_title_as_default")]
+    public bool? UseSquashPrTitleAsDefault { get; init; }
+
+    /// <summary>
+    /// The default value for a squash merge commit title:
+    /// 
+    /// - `PR_TITLE` - default to the pull request's title.
+    /// - `COMMIT_OR_PR_TITLE` - default to the commit's title (if only one commit) or the pull request's title (when more than one commit).
+    /// </summary>
+    [JsonPropertyName("squash_merge_commit_title")]
+    public SquashMergeCommitTitle? SquashMergeCommitTitle { get; init; }
+
+    /// <summary>
+    /// The default value for a squash merge commit message:
+    /// 
+    /// - `PR_BODY` - default to the pull request's body.
+    /// - `COMMIT_MESSAGES` - default to the branch's commit messages.
+    /// - `BLANK` - default to a blank commit message.
+    /// </summary>
+    [JsonPropertyName("squash_merge_commit_message")]
+    public SquashMergeCommitMessage? SquashMergeCommitMessage { get; init; }
+
+    /// <summary>
+    /// The default value for a merge commit title.
+    /// 
+    /// - `PR_TITLE` - default to the pull request's title.
+    /// - `MERGE_MESSAGE` - default to the classic title for a merge message (e.g., Merge pull request #123 from branch-name).
+    /// </summary>
+    [JsonPropertyName("merge_commit_title")]
+    public MergeCommitTitle? MergeCommitTitle { get; init; }
+
+    /// <summary>
+    /// The default value for a merge commit message.
+    /// 
+    /// - `PR_TITLE` - default to the pull request's title.
+    /// - `PR_BODY` - default to the pull request's body.
+    /// - `BLANK` - default to a blank commit message.
+    /// </summary>
+    [JsonPropertyName("merge_commit_message")]
+    public MergeCommitMessage? MergeCommitMessage { get; init; }
+
+    [JsonPropertyName("allow_merge_commit")]
+    public bool? AllowMergeCommit { get; init; }
+
+    [JsonPropertyName("subscribers_count")]
+    public int? SubscribersCount { get; init; }
+
+    [JsonPropertyName("network_count")]
+    public int? NetworkCount { get; init; }
+
+}
+
+public partial record NullableRepositoryTemplateRepositoryOwner
+{
+    [JsonPropertyName("login")]
+    public string? Login { get; init; }
+
+    [JsonPropertyName("id")]
+    public int? Id { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("avatar_url")]
+    public string? AvatarUrl { get; init; }
+
+    [JsonPropertyName("gravatar_id")]
+    public string? GravatarId { get; init; }
+
+    [JsonPropertyName("url")]
+    public string? Url { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public string? HtmlUrl { get; init; }
+
+    [JsonPropertyName("followers_url")]
+    public string? FollowersUrl { get; init; }
+
+    [JsonPropertyName("following_url")]
+    public string? FollowingUrl { get; init; }
+
+    [JsonPropertyName("gists_url")]
+    public string? GistsUrl { get; init; }
+
+    [JsonPropertyName("starred_url")]
+    public string? StarredUrl { get; init; }
+
+    [JsonPropertyName("subscriptions_url")]
+    public string? SubscriptionsUrl { get; init; }
+
+    [JsonPropertyName("organizations_url")]
+    public string? OrganizationsUrl { get; init; }
+
+    [JsonPropertyName("repos_url")]
+    public string? ReposUrl { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public string? EventsUrl { get; init; }
+
+    [JsonPropertyName("received_events_url")]
+    public string? ReceivedEventsUrl { get; init; }
+
+    [JsonPropertyName("type")]
+    public string? Type { get; init; }
+
+    [JsonPropertyName("site_admin")]
+    public bool? SiteAdmin { get; init; }
+
+}
+
+public partial record NullableRepositoryTemplateRepositoryPermissions
+{
+    [JsonPropertyName("admin")]
+    public bool? Admin { get; init; }
+
+    [JsonPropertyName("maintain")]
+    public bool? Maintain { get; init; }
+
+    [JsonPropertyName("push")]
+    public bool? Push { get; init; }
+
+    [JsonPropertyName("triage")]
+    public bool? Triage { get; init; }
+
+    [JsonPropertyName("pull")]
+    public bool? Pull { get; init; }
+
+}
+
+public partial record SecurityAndAnalysisAdvancedSecurity
+{
+    [JsonPropertyName("status")]
+    public Status? Status { get; init; }
+
+}
+
+public partial record SecurityAndAnalysisSecretScanning
+{
+    [JsonPropertyName("status")]
+    public Status? Status { get; init; }
+
+}
+
+public partial record SecurityAndAnalysisSecretScanningPushProtection
+{
+    [JsonPropertyName("status")]
+    public Status? Status { get; init; }
 
 }

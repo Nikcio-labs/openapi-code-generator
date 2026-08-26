@@ -1467,6 +1467,16 @@ public enum TreasuryTransactionEntryObject
 }
 
 /// <summary>
+/// String representing the object's type. Objects of the same type share the same value. Always has the value `list`.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter<AccountExternalAccountsObject>))]
+public enum AccountExternalAccountsObject
+{
+    [JsonStringEnumMemberName("list")]
+    List
+}
+
+/// <summary>
 /// The Stripe account type. Can be `standard`, `express`, `custom`, or `none`.
 /// </summary>
 [JsonConverter(typeof(JsonStringEnumConverter<AccountType>))]
@@ -10224,7 +10234,7 @@ public partial record Account
     /// External accounts (bank accounts and debit cards) currently attached to this account. External accounts are only returned for requests where `controller[is_controller]` is true.
     /// </summary>
     [JsonPropertyName("external_accounts")]
-    public object? ExternalAccounts { get; init; }
+    public AccountExternalAccounts? ExternalAccounts { get; init; }
 
     [JsonPropertyName("future_requirements")]
     public AccountFutureRequirements? FutureRequirements { get; init; }
@@ -11654,7 +11664,7 @@ public partial record ApiErrors
     /// The [source object](https://docs.stripe.com/api/sources/object) for errors returned on a request involving a source.
     /// </summary>
     [JsonPropertyName("source")]
-    public object? Source { get; init; }
+    public ApiErrorsSource? Source { get; init; }
 
     /// <summary>
     /// The type of error returned. One of `api_error`, `card_error`, `idempotency_error`, or `invalid_request_error`
@@ -11807,7 +11817,7 @@ public partial record ApplicationFee
     /// A list of refunds that have been applied to the fee.
     /// </summary>
     [JsonPropertyName("refunds")]
-    public required object Refunds { get; init; }
+    public required ApplicationFeeRefunds Refunds { get; init; }
 
 }
 
@@ -14475,7 +14485,7 @@ public partial record Charge
     /// A list of refunds that have been applied to the charge.
     /// </summary>
     [JsonPropertyName("refunds")]
-    public object? Refunds { get; init; }
+    public ChargeRefunds? Refunds { get; init; }
 
     /// <summary>
     /// ID of the review associated with this charge if one exists.
@@ -14841,7 +14851,7 @@ public partial record CheckoutSession
     /// The line items purchased by the customer.
     /// </summary>
     [JsonPropertyName("line_items")]
-    public object? LineItems { get; init; }
+    public CheckoutSessionLineItems? LineItems { get; init; }
 
     /// <summary>
     /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
@@ -17888,7 +17898,7 @@ public partial record CreditNote
     /// Line items that make up the credit note
     /// </summary>
     [JsonPropertyName("lines")]
-    public required object Lines { get; init; }
+    public required CreditNoteLines Lines { get; init; }
 
     /// <summary>
     /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
@@ -18444,13 +18454,13 @@ public partial record Customer
     /// The customer's payment sources, if any.
     /// </summary>
     [JsonPropertyName("sources")]
-    public object? Sources { get; init; }
+    public CustomerSources? Sources { get; init; }
 
     /// <summary>
     /// The customer's current subscriptions, if any.
     /// </summary>
     [JsonPropertyName("subscriptions")]
-    public object? Subscriptions { get; init; }
+    public CustomerSubscriptions? Subscriptions { get; init; }
 
     [JsonPropertyName("tax")]
     public CustomerTax? Tax { get; init; }
@@ -18465,7 +18475,7 @@ public partial record Customer
     /// The customer's tax IDs.
     /// </summary>
     [JsonPropertyName("tax_ids")]
-    public object? TaxIds { get; init; }
+    public CustomerTaxIds? TaxIds { get; init; }
 
     /// <summary>
     /// ID of the test clock that this customer belongs to.
@@ -21096,7 +21106,7 @@ public partial record File
     /// A list of [file links](https://api.stripe.com#file_links) that point at this file.
     /// </summary>
     [JsonPropertyName("links")]
-    public object? Links { get; init; }
+    public FileLinks? Links { get; init; }
 
     /// <summary>
     /// String representing the object's type. Objects of the same type share the same value.
@@ -21424,7 +21434,7 @@ public partial record FinancialConnectionsAccountOwnership
     /// A paginated list of owners for this account.
     /// </summary>
     [JsonPropertyName("owners")]
-    public required object Owners { get; init; }
+    public required FinancialConnectionsAccountOwnershipOwners Owners { get; init; }
 
 }
 
@@ -21443,7 +21453,7 @@ public partial record FinancialConnectionsSession
     /// The accounts that were collected as part of this Session.
     /// </summary>
     [JsonPropertyName("accounts")]
-    public required object Accounts { get; init; }
+    public required FinancialConnectionsSessionAccounts Accounts { get; init; }
 
     /// <summary>
     /// Tokenization is the process Stripe uses to collect sensitive card or bank
@@ -24116,7 +24126,7 @@ public partial record Invoice
     /// The individual line items that make up the invoice. `lines` is sorted as follows: (1) pending invoice items (including prorations) in reverse chronological order, (2) subscription items in reverse chronological order, and (3) invoice items added after invoice creation in chronological order.
     /// </summary>
     [JsonPropertyName("lines")]
-    public required object Lines { get; init; }
+    public required InvoiceLines Lines { get; init; }
 
     /// <summary>
     /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
@@ -24167,7 +24177,7 @@ public partial record Invoice
     /// Payments for this invoice. Use [invoice payment](/api/invoice-payment) to get more details.
     /// </summary>
     [JsonPropertyName("payments")]
-    public object? Payments { get; init; }
+    public InvoicePayments? Payments { get; init; }
 
     /// <summary>
     /// The latest timestamp at which invoice items can be associated with this invoice. Use the [line item period](/api/invoices/line_item#invoice_line_item_object-period) to get the service period for each price.
@@ -29594,13 +29604,13 @@ public partial record NotificationEventData
     /// Object containing the API resource relevant to the event. For example, an `invoice.created` event will have a full [invoice object](https://api.stripe.com#invoice_object) as the value of the object key.
     /// </summary>
     [JsonPropertyName("object")]
-    public required object Object { get; init; }
+    public required IReadOnlyDictionary<string, object?> Object { get; init; }
 
     /// <summary>
     /// Object containing the names of the updated attributes and their values prior to the event (only included in events of type `*.updated`). If an array attribute has any updated elements, this object contains the entire array. In Stripe API versions 2017-04-06 or earlier, an updated array attribute in this object includes only the updated array elements.
     /// </summary>
     [JsonPropertyName("previous_attributes")]
-    public object? PreviousAttributes { get; init; }
+    public IReadOnlyDictionary<string, object?>? PreviousAttributes { get; init; }
 
 }
 
@@ -30011,7 +30021,7 @@ public partial record PaymentFlowsAmountDetails
     /// A list of line items, each containing information about a product in the PaymentIntent. There is a maximum of 200 line items.
     /// </summary>
     [JsonPropertyName("line_items")]
-    public object? LineItems { get; init; }
+    public PaymentFlowsAmountDetailsLineItems? LineItems { get; init; }
 
     [JsonPropertyName("shipping")]
     public PaymentFlowsAmountDetailsResourceShipping? Shipping { get; init; }
@@ -30495,7 +30505,7 @@ public partial record PaymentIntent
     public int? AmountCapturable { get; init; }
 
     [JsonPropertyName("amount_details")]
-    public object? AmountDetails { get; init; }
+    public PaymentIntentAmountDetails? AmountDetails { get; init; }
 
     /// <summary>
     /// Amount that this PaymentIntent collects.
@@ -30892,7 +30902,7 @@ public partial record PaymentIntentNextAction
     /// When confirming a PaymentIntent with Stripe.js, Stripe.js depends on the contents of this dictionary to invoke authentication flows. The shape of the contents is subject to change and is only intended to be used by Stripe.js.
     /// </summary>
     [JsonPropertyName("use_stripe_sdk")]
-    public object? UseStripeSdk { get; init; }
+    public IReadOnlyDictionary<string, object?>? UseStripeSdk { get; init; }
 
     [JsonPropertyName("verify_with_microdeposits")]
     public PaymentIntentNextActionVerifyWithMicrodeposits? VerifyWithMicrodeposits { get; init; }
@@ -31545,172 +31555,172 @@ public partial record PaymentIntentNextActionWechatPayRedirectToIosApp
 public partial record PaymentIntentPaymentMethodOptions
 {
     [JsonPropertyName("acss_debit")]
-    public object? AcssDebit { get; init; }
+    public PaymentIntentPaymentMethodOptionsAcssDebit2? AcssDebit { get; init; }
 
     [JsonPropertyName("affirm")]
-    public object? Affirm { get; init; }
+    public PaymentIntentPaymentMethodOptionsAffirm? Affirm { get; init; }
 
     [JsonPropertyName("afterpay_clearpay")]
-    public object? AfterpayClearpay { get; init; }
+    public PaymentIntentPaymentMethodOptionsAfterpayClearpay? AfterpayClearpay { get; init; }
 
     [JsonPropertyName("alipay")]
-    public object? Alipay { get; init; }
+    public PaymentIntentPaymentMethodOptionsAlipay? Alipay { get; init; }
 
     [JsonPropertyName("alma")]
-    public object? Alma { get; init; }
+    public PaymentIntentPaymentMethodOptionsAlma? Alma { get; init; }
 
     [JsonPropertyName("amazon_pay")]
-    public object? AmazonPay { get; init; }
+    public PaymentIntentPaymentMethodOptionsAmazonPay? AmazonPay { get; init; }
 
     [JsonPropertyName("au_becs_debit")]
-    public object? AuBecsDebit { get; init; }
+    public PaymentIntentPaymentMethodOptionsAuBecsDebit2? AuBecsDebit { get; init; }
 
     [JsonPropertyName("bacs_debit")]
-    public object? BacsDebit { get; init; }
+    public PaymentIntentPaymentMethodOptionsBacsDebit2? BacsDebit { get; init; }
 
     [JsonPropertyName("bancontact")]
-    public object? Bancontact { get; init; }
+    public PaymentIntentPaymentMethodOptionsBancontact? Bancontact { get; init; }
 
     [JsonPropertyName("billie")]
-    public object? Billie { get; init; }
+    public PaymentIntentPaymentMethodOptionsBillie? Billie { get; init; }
 
     [JsonPropertyName("bizum")]
-    public object? Bizum { get; init; }
+    public PaymentIntentPaymentMethodOptionsBizum? Bizum { get; init; }
 
     [JsonPropertyName("blik")]
-    public object? Blik { get; init; }
+    public PaymentIntentPaymentMethodOptionsBlik2? Blik { get; init; }
 
     [JsonPropertyName("boleto")]
-    public object? Boleto { get; init; }
+    public PaymentIntentPaymentMethodOptionsBoleto? Boleto { get; init; }
 
     [JsonPropertyName("card")]
-    public object? Card { get; init; }
+    public PaymentIntentPaymentMethodOptionsCard2? Card { get; init; }
 
     [JsonPropertyName("card_present")]
-    public object? CardPresent { get; init; }
+    public PaymentIntentPaymentMethodOptionsCardPresent? CardPresent { get; init; }
 
     [JsonPropertyName("cashapp")]
-    public object? Cashapp { get; init; }
+    public PaymentIntentPaymentMethodOptionsCashapp? Cashapp { get; init; }
 
     [JsonPropertyName("crypto")]
-    public object? Crypto { get; init; }
+    public PaymentIntentPaymentMethodOptionsCrypto? Crypto { get; init; }
 
     [JsonPropertyName("customer_balance")]
-    public object? CustomerBalance { get; init; }
+    public PaymentIntentPaymentMethodOptionsCustomerBalance? CustomerBalance { get; init; }
 
     [JsonPropertyName("eps")]
-    public object? Eps { get; init; }
+    public PaymentIntentPaymentMethodOptionsEps2? Eps { get; init; }
 
     [JsonPropertyName("fpx")]
-    public object? Fpx { get; init; }
+    public PaymentIntentPaymentMethodOptionsFpx? Fpx { get; init; }
 
     [JsonPropertyName("giropay")]
-    public object? Giropay { get; init; }
+    public PaymentIntentPaymentMethodOptionsGiropay? Giropay { get; init; }
 
     [JsonPropertyName("grabpay")]
-    public object? Grabpay { get; init; }
+    public PaymentIntentPaymentMethodOptionsGrabpay? Grabpay { get; init; }
 
     [JsonPropertyName("ideal")]
-    public object? Ideal { get; init; }
+    public PaymentIntentPaymentMethodOptionsIdeal? Ideal { get; init; }
 
     [JsonPropertyName("interac_present")]
-    public object? InteracPresent { get; init; }
+    public PaymentIntentPaymentMethodOptionsInteracPresent? InteracPresent { get; init; }
 
     [JsonPropertyName("kakao_pay")]
-    public object? KakaoPay { get; init; }
+    public PaymentIntentPaymentMethodOptionsKakaoPay? KakaoPay { get; init; }
 
     [JsonPropertyName("klarna")]
-    public object? Klarna { get; init; }
+    public PaymentIntentPaymentMethodOptionsKlarna? Klarna { get; init; }
 
     [JsonPropertyName("konbini")]
-    public object? Konbini { get; init; }
+    public PaymentIntentPaymentMethodOptionsKonbini? Konbini { get; init; }
 
     [JsonPropertyName("kr_card")]
-    public object? KrCard { get; init; }
+    public PaymentIntentPaymentMethodOptionsKrCard? KrCard { get; init; }
 
     [JsonPropertyName("link")]
-    public object? Link { get; init; }
+    public PaymentIntentPaymentMethodOptionsLink2? Link { get; init; }
 
     [JsonPropertyName("mb_way")]
-    public object? MbWay { get; init; }
+    public PaymentIntentPaymentMethodOptionsMbWay? MbWay { get; init; }
 
     [JsonPropertyName("mobilepay")]
-    public object? Mobilepay { get; init; }
+    public PaymentIntentPaymentMethodOptionsMobilepay2? Mobilepay { get; init; }
 
     [JsonPropertyName("multibanco")]
-    public object? Multibanco { get; init; }
+    public PaymentIntentPaymentMethodOptionsMultibanco? Multibanco { get; init; }
 
     [JsonPropertyName("naver_pay")]
-    public object? NaverPay { get; init; }
+    public PaymentIntentPaymentMethodOptionsNaverPay? NaverPay { get; init; }
 
     [JsonPropertyName("nz_bank_account")]
-    public object? NzBankAccount { get; init; }
+    public PaymentIntentPaymentMethodOptionsNzBankAccount2? NzBankAccount { get; init; }
 
     [JsonPropertyName("oxxo")]
-    public object? Oxxo { get; init; }
+    public PaymentIntentPaymentMethodOptionsOxxo? Oxxo { get; init; }
 
     [JsonPropertyName("p24")]
-    public object? P24 { get; init; }
+    public PaymentIntentPaymentMethodOptionsP24? P24 { get; init; }
 
     [JsonPropertyName("pay_by_bank")]
-    public object? PayByBank { get; init; }
+    public PaymentIntentPaymentMethodOptionsPayByBank? PayByBank { get; init; }
 
     [JsonPropertyName("payco")]
-    public object? Payco { get; init; }
+    public PaymentIntentPaymentMethodOptionsPayco? Payco { get; init; }
 
     [JsonPropertyName("paynow")]
-    public object? Paynow { get; init; }
+    public PaymentIntentPaymentMethodOptionsPaynow? Paynow { get; init; }
 
     [JsonPropertyName("paypal")]
-    public object? Paypal { get; init; }
+    public PaymentIntentPaymentMethodOptionsPaypal? Paypal { get; init; }
 
     [JsonPropertyName("payto")]
-    public object? Payto { get; init; }
+    public PaymentIntentPaymentMethodOptionsPayto2? Payto { get; init; }
 
     [JsonPropertyName("pix")]
-    public object? Pix { get; init; }
+    public PaymentIntentPaymentMethodOptionsPix? Pix { get; init; }
 
     [JsonPropertyName("promptpay")]
-    public object? Promptpay { get; init; }
+    public PaymentIntentPaymentMethodOptionsPromptpay? Promptpay { get; init; }
 
     [JsonPropertyName("revolut_pay")]
-    public object? RevolutPay { get; init; }
+    public PaymentIntentPaymentMethodOptionsRevolutPay? RevolutPay { get; init; }
 
     [JsonPropertyName("samsung_pay")]
-    public object? SamsungPay { get; init; }
+    public PaymentIntentPaymentMethodOptionsSamsungPay? SamsungPay { get; init; }
 
     [JsonPropertyName("satispay")]
-    public object? Satispay { get; init; }
+    public PaymentIntentPaymentMethodOptionsSatispay? Satispay { get; init; }
 
     [JsonPropertyName("scalapay")]
-    public object? Scalapay { get; init; }
+    public PaymentIntentPaymentMethodOptionsScalapay? Scalapay { get; init; }
 
     [JsonPropertyName("sepa_debit")]
-    public object? SepaDebit { get; init; }
+    public PaymentIntentPaymentMethodOptionsSepaDebit2? SepaDebit { get; init; }
 
     [JsonPropertyName("sofort")]
-    public object? Sofort { get; init; }
+    public PaymentIntentPaymentMethodOptionsSofort? Sofort { get; init; }
 
     [JsonPropertyName("sunbit")]
-    public object? Sunbit { get; init; }
+    public PaymentIntentPaymentMethodOptionsSunbit? Sunbit { get; init; }
 
     [JsonPropertyName("swish")]
-    public object? Swish { get; init; }
+    public PaymentIntentPaymentMethodOptionsSwish2? Swish { get; init; }
 
     [JsonPropertyName("twint")]
-    public object? Twint { get; init; }
+    public PaymentIntentPaymentMethodOptionsTwint? Twint { get; init; }
 
     [JsonPropertyName("upi")]
-    public object? Upi { get; init; }
+    public PaymentIntentPaymentMethodOptionsUpi? Upi { get; init; }
 
     [JsonPropertyName("us_bank_account")]
-    public object? UsBankAccount { get; init; }
+    public PaymentIntentPaymentMethodOptionsUsBankAccount2? UsBankAccount { get; init; }
 
     [JsonPropertyName("wechat_pay")]
-    public object? WechatPay { get; init; }
+    public PaymentIntentPaymentMethodOptionsWechatPay? WechatPay { get; init; }
 
     [JsonPropertyName("zip")]
-    public object? Zip { get; init; }
+    public PaymentIntentPaymentMethodOptionsZip? Zip { get; init; }
 
 }
 
@@ -32352,7 +32362,7 @@ public partial record PaymentLink
     /// The line items representing what is being sold.
     /// </summary>
     [JsonPropertyName("line_items")]
-    public object? LineItems { get; init; }
+    public PaymentLinkLineItems? LineItems { get; init; }
 
     /// <summary>
     /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
@@ -42597,7 +42607,7 @@ public partial record Quote
     /// A list of items the customer is being quoted for.
     /// </summary>
     [JsonPropertyName("line_items")]
-    public object? LineItems { get; init; }
+    public QuoteLineItems? LineItems { get; init; }
 
     /// <summary>
     /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
@@ -42911,7 +42921,7 @@ public partial record QuotesResourceUpfront
     /// The line items that will appear on the next invoice after this quote is accepted. This does not include pending invoice items that exist on the customer but may still be included in the next invoice.
     /// </summary>
     [JsonPropertyName("line_items")]
-    public object? LineItems { get; init; }
+    public QuotesResourceUpfrontLineItems? LineItems { get; init; }
 
     [JsonPropertyName("total_details")]
     public required QuotesResourceTotalDetails TotalDetails { get; init; }
@@ -43096,7 +43106,7 @@ public partial record RadarValueList
     /// List of items contained within this value list.
     /// </summary>
     [JsonPropertyName("list_items")]
-    public required object ListItems { get; init; }
+    public required RadarValueListListItems ListItems { get; init; }
 
     /// <summary>
     /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
@@ -45072,7 +45082,7 @@ public partial record SetupIntentNextAction
     /// When confirming a SetupIntent with Stripe.js, Stripe.js depends on the contents of this dictionary to invoke authentication flows. The shape of the contents is subject to change and is only intended to be used by Stripe.js.
     /// </summary>
     [JsonPropertyName("use_stripe_sdk")]
-    public object? UseStripeSdk { get; init; }
+    public IReadOnlyDictionary<string, object?>? UseStripeSdk { get; init; }
 
     [JsonPropertyName("verify_with_microdeposits")]
     public SetupIntentNextActionVerifyWithMicrodeposits? VerifyWithMicrodeposits { get; init; }
@@ -45154,46 +45164,46 @@ public partial record SetupIntentNextActionVerifyWithMicrodeposits
 public partial record SetupIntentPaymentMethodOptions
 {
     [JsonPropertyName("acss_debit")]
-    public object? AcssDebit { get; init; }
+    public SetupIntentPaymentMethodOptionsAcssDebit2? AcssDebit { get; init; }
 
     [JsonPropertyName("amazon_pay")]
-    public object? AmazonPay { get; init; }
+    public SetupIntentPaymentMethodOptionsAmazonPay2? AmazonPay { get; init; }
 
     [JsonPropertyName("bacs_debit")]
-    public object? BacsDebit { get; init; }
+    public SetupIntentPaymentMethodOptionsBacsDebit2? BacsDebit { get; init; }
 
     [JsonPropertyName("bizum")]
-    public object? Bizum { get; init; }
+    public SetupIntentPaymentMethodOptionsBizum2? Bizum { get; init; }
 
     [JsonPropertyName("card")]
-    public object? Card { get; init; }
+    public SetupIntentPaymentMethodOptionsCard2? Card { get; init; }
 
     [JsonPropertyName("card_present")]
-    public object? CardPresent { get; init; }
+    public SetupIntentPaymentMethodOptionsCardPresent2? CardPresent { get; init; }
 
     [JsonPropertyName("klarna")]
-    public object? Klarna { get; init; }
+    public SetupIntentPaymentMethodOptionsKlarna2? Klarna { get; init; }
 
     [JsonPropertyName("link")]
-    public object? Link { get; init; }
+    public SetupIntentPaymentMethodOptionsLink2? Link { get; init; }
 
     [JsonPropertyName("paypal")]
-    public object? Paypal { get; init; }
+    public SetupIntentPaymentMethodOptionsPaypal2? Paypal { get; init; }
 
     [JsonPropertyName("payto")]
-    public object? Payto { get; init; }
+    public SetupIntentPaymentMethodOptionsPayto2? Payto { get; init; }
 
     [JsonPropertyName("pix")]
-    public object? Pix { get; init; }
+    public SetupIntentPaymentMethodOptionsPix2? Pix { get; init; }
 
     [JsonPropertyName("sepa_debit")]
-    public object? SepaDebit { get; init; }
+    public SetupIntentPaymentMethodOptionsSepaDebit2? SepaDebit { get; init; }
 
     [JsonPropertyName("upi")]
-    public object? Upi { get; init; }
+    public SetupIntentPaymentMethodOptionsUpi2? Upi { get; init; }
 
     [JsonPropertyName("us_bank_account")]
-    public object? UsBankAccount { get; init; }
+    public SetupIntentPaymentMethodOptionsUsBankAccount2? UsBankAccount { get; init; }
 
 }
 
@@ -47221,7 +47231,7 @@ public partial record Subscription
     /// List of subscription items, each with an attached price.
     /// </summary>
     [JsonPropertyName("items")]
-    public required object Items { get; init; }
+    public required SubscriptionItems Items { get; init; }
 
     /// <summary>
     /// The most recent invoice this subscription has generated over its lifecycle (for example, when it cycles or is updated).
@@ -48571,7 +48581,7 @@ public partial record TaxCalculation
     /// The list of items the customer is purchasing.
     /// </summary>
     [JsonPropertyName("line_items")]
-    public object? LineItems { get; init; }
+    public TaxCalculationLineItems? LineItems { get; init; }
 
     /// <summary>
     /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
@@ -48838,7 +48848,7 @@ public partial record TaxTransaction
     /// The tax collected or refunded, by line item.
     /// </summary>
     [JsonPropertyName("line_items")]
-    public object? LineItems { get; init; }
+    public TaxTransactionLineItems? LineItems { get; init; }
 
     /// <summary>
     /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
@@ -52127,7 +52137,7 @@ public partial record Transfer
     /// A list of reversals that have been applied to the transfer.
     /// </summary>
     [JsonPropertyName("reversals")]
-    public required object Reversals { get; init; }
+    public required TransferReversals Reversals { get; init; }
 
     /// <summary>
     /// Whether the transfer has been fully reversed. If the transfer is only partially reversed, this attribute will still be false.
@@ -53309,7 +53319,7 @@ public partial record TreasuryTransaction
     /// A list of TransactionEntries that are part of this Transaction. This cannot be expanded in any list endpoints.
     /// </summary>
     [JsonPropertyName("entries")]
-    public object? Entries { get; init; }
+    public TreasuryTransactionEntries? Entries { get; init; }
 
     /// <summary>
     /// The FinancialAccount associated with this object.
@@ -54487,6 +54497,1242 @@ public partial record WebhookEndpoint
 
     /// <summary>
     /// The URL of the webhook endpoint.
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required string Url { get; init; }
+
+}
+
+/// <summary>
+/// External accounts (bank accounts and debit cards) currently attached to this account. External accounts are only returned for requests where `controller[is_controller]` is true.
+/// </summary>
+public partial record AccountExternalAccounts
+{
+    /// <summary>
+    /// The list contains all external accounts that have been attached to the Stripe account. These may be bank accounts or cards.
+    /// </summary>
+    [JsonPropertyName("data")]
+    public required IReadOnlyList<AccountExternalAccountsData> Data { get; init; }
+
+    /// <summary>
+    /// True if this list has another page of items after this one that can be fetched.
+    /// </summary>
+    [JsonPropertyName("has_more")]
+    public required bool HasMore { get; init; }
+
+    /// <summary>
+    /// String representing the object's type. Objects of the same type share the same value. Always has the value `list`.
+    /// </summary>
+    [JsonPropertyName("object")]
+    public required AccountExternalAccountsObject Object { get; init; }
+
+    /// <summary>
+    /// The URL where this list can be accessed.
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required string Url { get; init; }
+
+}
+
+/// <remarks>
+/// Union of: BankAccount | Card
+/// </remarks>
+[JsonDerivedType(typeof(BankAccount), "bank_account")]
+[JsonDerivedType(typeof(Card), "card")]
+public abstract partial record AccountExternalAccountsData;
+
+/// <summary>
+/// The [source object](https://docs.stripe.com/api/sources/object) for errors returned on a request involving a source.
+/// </summary>
+/// <remarks>
+/// Union of: BankAccount | Card | Source
+/// </remarks>
+[JsonDerivedType(typeof(BankAccount), "bank_account")]
+[JsonDerivedType(typeof(Card), "card")]
+[JsonDerivedType(typeof(Source), "source")]
+public abstract partial record ApiErrorsSource;
+
+/// <summary>
+/// A list of refunds that have been applied to the fee.
+/// </summary>
+public partial record ApplicationFeeRefunds
+{
+    /// <summary>
+    /// Details about each object.
+    /// </summary>
+    [JsonPropertyName("data")]
+    public required IReadOnlyList<FeeRefund> Data { get; init; }
+
+    /// <summary>
+    /// True if this list has another page of items after this one that can be fetched.
+    /// </summary>
+    [JsonPropertyName("has_more")]
+    public required bool HasMore { get; init; }
+
+    /// <summary>
+    /// String representing the object's type. Objects of the same type share the same value. Always has the value `list`.
+    /// </summary>
+    [JsonPropertyName("object")]
+    public required AccountExternalAccountsObject Object { get; init; }
+
+    /// <summary>
+    /// The URL where this list can be accessed.
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required string Url { get; init; }
+
+}
+
+/// <summary>
+/// A list of refunds that have been applied to the charge.
+/// </summary>
+public partial record ChargeRefunds
+{
+    /// <summary>
+    /// Details about each object.
+    /// </summary>
+    [JsonPropertyName("data")]
+    public required IReadOnlyList<Refund> Data { get; init; }
+
+    /// <summary>
+    /// True if this list has another page of items after this one that can be fetched.
+    /// </summary>
+    [JsonPropertyName("has_more")]
+    public required bool HasMore { get; init; }
+
+    /// <summary>
+    /// String representing the object's type. Objects of the same type share the same value. Always has the value `list`.
+    /// </summary>
+    [JsonPropertyName("object")]
+    public required AccountExternalAccountsObject Object { get; init; }
+
+    /// <summary>
+    /// The URL where this list can be accessed.
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required string Url { get; init; }
+
+}
+
+/// <summary>
+/// The line items purchased by the customer.
+/// </summary>
+public partial record CheckoutSessionLineItems
+{
+    /// <summary>
+    /// Details about each object.
+    /// </summary>
+    [JsonPropertyName("data")]
+    public required IReadOnlyList<Item> Data { get; init; }
+
+    /// <summary>
+    /// True if this list has another page of items after this one that can be fetched.
+    /// </summary>
+    [JsonPropertyName("has_more")]
+    public required bool HasMore { get; init; }
+
+    /// <summary>
+    /// String representing the object's type. Objects of the same type share the same value. Always has the value `list`.
+    /// </summary>
+    [JsonPropertyName("object")]
+    public required AccountExternalAccountsObject Object { get; init; }
+
+    /// <summary>
+    /// The URL where this list can be accessed.
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required string Url { get; init; }
+
+}
+
+/// <summary>
+/// Line items that make up the credit note
+/// </summary>
+public partial record CreditNoteLines
+{
+    /// <summary>
+    /// Details about each object.
+    /// </summary>
+    [JsonPropertyName("data")]
+    public required IReadOnlyList<CreditNoteLineItem> Data { get; init; }
+
+    /// <summary>
+    /// True if this list has another page of items after this one that can be fetched.
+    /// </summary>
+    [JsonPropertyName("has_more")]
+    public required bool HasMore { get; init; }
+
+    /// <summary>
+    /// String representing the object's type. Objects of the same type share the same value. Always has the value `list`.
+    /// </summary>
+    [JsonPropertyName("object")]
+    public required AccountExternalAccountsObject Object { get; init; }
+
+    /// <summary>
+    /// The URL where this list can be accessed.
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required string Url { get; init; }
+
+}
+
+/// <summary>
+/// The customer's payment sources, if any.
+/// </summary>
+public partial record CustomerSources
+{
+    /// <summary>
+    /// Details about each object.
+    /// </summary>
+    [JsonPropertyName("data")]
+    public required IReadOnlyList<CustomerSourcesData> Data { get; init; }
+
+    /// <summary>
+    /// True if this list has another page of items after this one that can be fetched.
+    /// </summary>
+    [JsonPropertyName("has_more")]
+    public required bool HasMore { get; init; }
+
+    /// <summary>
+    /// String representing the object's type. Objects of the same type share the same value. Always has the value `list`.
+    /// </summary>
+    [JsonPropertyName("object")]
+    public required AccountExternalAccountsObject Object { get; init; }
+
+    /// <summary>
+    /// The URL where this list can be accessed.
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required string Url { get; init; }
+
+}
+
+/// <remarks>
+/// Union of: BankAccount | Card | Source
+/// </remarks>
+[JsonDerivedType(typeof(BankAccount), "bank_account")]
+[JsonDerivedType(typeof(Card), "card")]
+[JsonDerivedType(typeof(Source), "source")]
+public abstract partial record CustomerSourcesData;
+
+/// <summary>
+/// The customer's current subscriptions, if any.
+/// </summary>
+public partial record CustomerSubscriptions
+{
+    /// <summary>
+    /// Details about each object.
+    /// </summary>
+    [JsonPropertyName("data")]
+    public required IReadOnlyList<Subscription> Data { get; init; }
+
+    /// <summary>
+    /// True if this list has another page of items after this one that can be fetched.
+    /// </summary>
+    [JsonPropertyName("has_more")]
+    public required bool HasMore { get; init; }
+
+    /// <summary>
+    /// String representing the object's type. Objects of the same type share the same value. Always has the value `list`.
+    /// </summary>
+    [JsonPropertyName("object")]
+    public required AccountExternalAccountsObject Object { get; init; }
+
+    /// <summary>
+    /// The URL where this list can be accessed.
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required string Url { get; init; }
+
+}
+
+/// <summary>
+/// The customer's tax IDs.
+/// </summary>
+public partial record CustomerTaxIds
+{
+    /// <summary>
+    /// Details about each object.
+    /// </summary>
+    [JsonPropertyName("data")]
+    public required IReadOnlyList<TaxId> Data { get; init; }
+
+    /// <summary>
+    /// True if this list has another page of items after this one that can be fetched.
+    /// </summary>
+    [JsonPropertyName("has_more")]
+    public required bool HasMore { get; init; }
+
+    /// <summary>
+    /// String representing the object's type. Objects of the same type share the same value. Always has the value `list`.
+    /// </summary>
+    [JsonPropertyName("object")]
+    public required AccountExternalAccountsObject Object { get; init; }
+
+    /// <summary>
+    /// The URL where this list can be accessed.
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required string Url { get; init; }
+
+}
+
+/// <summary>
+/// A list of [file links](https://api.stripe.com#file_links) that point at this file.
+/// </summary>
+public partial record FileLinks
+{
+    /// <summary>
+    /// Details about each object.
+    /// </summary>
+    [JsonPropertyName("data")]
+    public required IReadOnlyList<FileLink> Data { get; init; }
+
+    /// <summary>
+    /// True if this list has another page of items after this one that can be fetched.
+    /// </summary>
+    [JsonPropertyName("has_more")]
+    public required bool HasMore { get; init; }
+
+    /// <summary>
+    /// String representing the object's type. Objects of the same type share the same value. Always has the value `list`.
+    /// </summary>
+    [JsonPropertyName("object")]
+    public required AccountExternalAccountsObject Object { get; init; }
+
+    /// <summary>
+    /// The URL where this list can be accessed.
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required string Url { get; init; }
+
+}
+
+/// <summary>
+/// A paginated list of owners for this account.
+/// </summary>
+public partial record FinancialConnectionsAccountOwnershipOwners
+{
+    /// <summary>
+    /// Details about each object.
+    /// </summary>
+    [JsonPropertyName("data")]
+    public required IReadOnlyList<FinancialConnectionsAccountOwner> Data { get; init; }
+
+    /// <summary>
+    /// True if this list has another page of items after this one that can be fetched.
+    /// </summary>
+    [JsonPropertyName("has_more")]
+    public required bool HasMore { get; init; }
+
+    /// <summary>
+    /// String representing the object's type. Objects of the same type share the same value. Always has the value `list`.
+    /// </summary>
+    [JsonPropertyName("object")]
+    public required AccountExternalAccountsObject Object { get; init; }
+
+    /// <summary>
+    /// The URL where this list can be accessed.
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required string Url { get; init; }
+
+}
+
+/// <summary>
+/// The accounts that were collected as part of this Session.
+/// </summary>
+public partial record FinancialConnectionsSessionAccounts
+{
+    /// <summary>
+    /// Details about each object.
+    /// </summary>
+    [JsonPropertyName("data")]
+    public required IReadOnlyList<FinancialConnectionsAccount> Data { get; init; }
+
+    /// <summary>
+    /// True if this list has another page of items after this one that can be fetched.
+    /// </summary>
+    [JsonPropertyName("has_more")]
+    public required bool HasMore { get; init; }
+
+    /// <summary>
+    /// String representing the object's type. Objects of the same type share the same value. Always has the value `list`.
+    /// </summary>
+    [JsonPropertyName("object")]
+    public required AccountExternalAccountsObject Object { get; init; }
+
+    /// <summary>
+    /// The URL where this list can be accessed.
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required string Url { get; init; }
+
+}
+
+/// <summary>
+/// The individual line items that make up the invoice. `lines` is sorted as follows: (1) pending invoice items (including prorations) in reverse chronological order, (2) subscription items in reverse chronological order, and (3) invoice items added after invoice creation in chronological order.
+/// </summary>
+public partial record InvoiceLines
+{
+    /// <summary>
+    /// Details about each object.
+    /// </summary>
+    [JsonPropertyName("data")]
+    public required IReadOnlyList<LineItem> Data { get; init; }
+
+    /// <summary>
+    /// True if this list has another page of items after this one that can be fetched.
+    /// </summary>
+    [JsonPropertyName("has_more")]
+    public required bool HasMore { get; init; }
+
+    /// <summary>
+    /// String representing the object's type. Objects of the same type share the same value. Always has the value `list`.
+    /// </summary>
+    [JsonPropertyName("object")]
+    public required AccountExternalAccountsObject Object { get; init; }
+
+    /// <summary>
+    /// The URL where this list can be accessed.
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required string Url { get; init; }
+
+}
+
+/// <summary>
+/// Payments for this invoice. Use [invoice payment](/api/invoice-payment) to get more details.
+/// </summary>
+public partial record InvoicePayments
+{
+    /// <summary>
+    /// Details about each object.
+    /// </summary>
+    [JsonPropertyName("data")]
+    public required IReadOnlyList<InvoicePayment> Data { get; init; }
+
+    /// <summary>
+    /// True if this list has another page of items after this one that can be fetched.
+    /// </summary>
+    [JsonPropertyName("has_more")]
+    public required bool HasMore { get; init; }
+
+    /// <summary>
+    /// String representing the object's type. Objects of the same type share the same value. Always has the value `list`.
+    /// </summary>
+    [JsonPropertyName("object")]
+    public required AccountExternalAccountsObject Object { get; init; }
+
+    /// <summary>
+    /// The URL where this list can be accessed.
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required string Url { get; init; }
+
+}
+
+/// <summary>
+/// A list of line items, each containing information about a product in the PaymentIntent. There is a maximum of 200 line items.
+/// </summary>
+public partial record PaymentFlowsAmountDetailsLineItems
+{
+    /// <summary>
+    /// Details about each object.
+    /// </summary>
+    [JsonPropertyName("data")]
+    public required IReadOnlyList<PaymentIntentAmountDetailsLineItem> Data { get; init; }
+
+    /// <summary>
+    /// True if this list has another page of items after this one that can be fetched.
+    /// </summary>
+    [JsonPropertyName("has_more")]
+    public required bool HasMore { get; init; }
+
+    /// <summary>
+    /// String representing the object's type. Objects of the same type share the same value. Always has the value `list`.
+    /// </summary>
+    [JsonPropertyName("object")]
+    public required AccountExternalAccountsObject Object { get; init; }
+
+    /// <summary>
+    /// The URL where this list can be accessed.
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required string Url { get; init; }
+
+}
+
+/// <remarks>
+/// Union of: PaymentFlowsAmountDetails | PaymentFlowsAmountDetailsClient
+/// </remarks>
+[JsonDerivedType(typeof(PaymentFlowsAmountDetails), "payment_flows_amount_details")]
+[JsonDerivedType(typeof(PaymentFlowsAmountDetailsClient), "payment_flows_amount_details_client")]
+public abstract partial record PaymentIntentAmountDetails;
+
+/// <remarks>
+/// Union of: PaymentIntentPaymentMethodOptionsAcssDebit | PaymentIntentTypeSpecificPaymentMethodOptionsClient
+/// </remarks>
+[JsonDerivedType(typeof(PaymentIntentPaymentMethodOptionsAcssDebit), "payment_intent_payment_method_options_acss_debit")]
+[JsonDerivedType(typeof(PaymentIntentTypeSpecificPaymentMethodOptionsClient), "payment_intent_type_specific_payment_method_options_client")]
+public abstract partial record PaymentIntentPaymentMethodOptionsAcssDebit2;
+
+/// <remarks>
+/// Union of: PaymentMethodOptionsAffirm | PaymentIntentTypeSpecificPaymentMethodOptionsClient
+/// </remarks>
+[JsonDerivedType(typeof(PaymentMethodOptionsAffirm), "payment_method_options_affirm")]
+[JsonDerivedType(typeof(PaymentIntentTypeSpecificPaymentMethodOptionsClient), "payment_intent_type_specific_payment_method_options_client")]
+public abstract partial record PaymentIntentPaymentMethodOptionsAffirm;
+
+/// <remarks>
+/// Union of: PaymentMethodOptionsAfterpayClearpay | PaymentIntentTypeSpecificPaymentMethodOptionsClient
+/// </remarks>
+[JsonDerivedType(typeof(PaymentMethodOptionsAfterpayClearpay), "payment_method_options_afterpay_clearpay")]
+[JsonDerivedType(typeof(PaymentIntentTypeSpecificPaymentMethodOptionsClient), "payment_intent_type_specific_payment_method_options_client")]
+public abstract partial record PaymentIntentPaymentMethodOptionsAfterpayClearpay;
+
+/// <remarks>
+/// Union of: PaymentMethodOptionsAlipay | PaymentIntentTypeSpecificPaymentMethodOptionsClient
+/// </remarks>
+[JsonDerivedType(typeof(PaymentMethodOptionsAlipay), "payment_method_options_alipay")]
+[JsonDerivedType(typeof(PaymentIntentTypeSpecificPaymentMethodOptionsClient), "payment_intent_type_specific_payment_method_options_client")]
+public abstract partial record PaymentIntentPaymentMethodOptionsAlipay;
+
+/// <remarks>
+/// Union of: PaymentMethodOptionsAlma | PaymentIntentTypeSpecificPaymentMethodOptionsClient
+/// </remarks>
+[JsonDerivedType(typeof(PaymentMethodOptionsAlma), "payment_method_options_alma")]
+[JsonDerivedType(typeof(PaymentIntentTypeSpecificPaymentMethodOptionsClient), "payment_intent_type_specific_payment_method_options_client")]
+public abstract partial record PaymentIntentPaymentMethodOptionsAlma;
+
+/// <remarks>
+/// Union of: PaymentMethodOptionsAmazonPay | PaymentIntentTypeSpecificPaymentMethodOptionsClient
+/// </remarks>
+[JsonDerivedType(typeof(PaymentMethodOptionsAmazonPay), "payment_method_options_amazon_pay")]
+[JsonDerivedType(typeof(PaymentIntentTypeSpecificPaymentMethodOptionsClient), "payment_intent_type_specific_payment_method_options_client")]
+public abstract partial record PaymentIntentPaymentMethodOptionsAmazonPay;
+
+/// <remarks>
+/// Union of: PaymentIntentPaymentMethodOptionsAuBecsDebit | PaymentIntentTypeSpecificPaymentMethodOptionsClient
+/// </remarks>
+[JsonDerivedType(typeof(PaymentIntentPaymentMethodOptionsAuBecsDebit), "payment_intent_payment_method_options_au_becs_debit")]
+[JsonDerivedType(typeof(PaymentIntentTypeSpecificPaymentMethodOptionsClient), "payment_intent_type_specific_payment_method_options_client")]
+public abstract partial record PaymentIntentPaymentMethodOptionsAuBecsDebit2;
+
+/// <remarks>
+/// Union of: PaymentIntentPaymentMethodOptionsBacsDebit | PaymentIntentTypeSpecificPaymentMethodOptionsClient
+/// </remarks>
+[JsonDerivedType(typeof(PaymentIntentPaymentMethodOptionsBacsDebit), "payment_intent_payment_method_options_bacs_debit")]
+[JsonDerivedType(typeof(PaymentIntentTypeSpecificPaymentMethodOptionsClient), "payment_intent_type_specific_payment_method_options_client")]
+public abstract partial record PaymentIntentPaymentMethodOptionsBacsDebit2;
+
+/// <remarks>
+/// Union of: PaymentMethodOptionsBancontact | PaymentIntentTypeSpecificPaymentMethodOptionsClient
+/// </remarks>
+[JsonDerivedType(typeof(PaymentMethodOptionsBancontact), "payment_method_options_bancontact")]
+[JsonDerivedType(typeof(PaymentIntentTypeSpecificPaymentMethodOptionsClient), "payment_intent_type_specific_payment_method_options_client")]
+public abstract partial record PaymentIntentPaymentMethodOptionsBancontact;
+
+/// <remarks>
+/// Union of: PaymentMethodOptionsBillie | PaymentIntentTypeSpecificPaymentMethodOptionsClient
+/// </remarks>
+[JsonDerivedType(typeof(PaymentMethodOptionsBillie), "payment_method_options_billie")]
+[JsonDerivedType(typeof(PaymentIntentTypeSpecificPaymentMethodOptionsClient), "payment_intent_type_specific_payment_method_options_client")]
+public abstract partial record PaymentIntentPaymentMethodOptionsBillie;
+
+/// <remarks>
+/// Union of: PaymentMethodOptionsBizum | PaymentIntentTypeSpecificPaymentMethodOptionsClient
+/// </remarks>
+[JsonDerivedType(typeof(PaymentMethodOptionsBizum), "payment_method_options_bizum")]
+[JsonDerivedType(typeof(PaymentIntentTypeSpecificPaymentMethodOptionsClient), "payment_intent_type_specific_payment_method_options_client")]
+public abstract partial record PaymentIntentPaymentMethodOptionsBizum;
+
+/// <remarks>
+/// Union of: PaymentIntentPaymentMethodOptionsBlik | PaymentIntentTypeSpecificPaymentMethodOptionsClient
+/// </remarks>
+[JsonDerivedType(typeof(PaymentIntentPaymentMethodOptionsBlik), "payment_intent_payment_method_options_blik")]
+[JsonDerivedType(typeof(PaymentIntentTypeSpecificPaymentMethodOptionsClient), "payment_intent_type_specific_payment_method_options_client")]
+public abstract partial record PaymentIntentPaymentMethodOptionsBlik2;
+
+/// <remarks>
+/// Union of: PaymentMethodOptionsBoleto | PaymentIntentTypeSpecificPaymentMethodOptionsClient
+/// </remarks>
+[JsonDerivedType(typeof(PaymentMethodOptionsBoleto), "payment_method_options_boleto")]
+[JsonDerivedType(typeof(PaymentIntentTypeSpecificPaymentMethodOptionsClient), "payment_intent_type_specific_payment_method_options_client")]
+public abstract partial record PaymentIntentPaymentMethodOptionsBoleto;
+
+/// <remarks>
+/// Union of: PaymentIntentPaymentMethodOptionsCard | PaymentIntentTypeSpecificPaymentMethodOptionsClient
+/// </remarks>
+[JsonDerivedType(typeof(PaymentIntentPaymentMethodOptionsCard), "payment_intent_payment_method_options_card")]
+[JsonDerivedType(typeof(PaymentIntentTypeSpecificPaymentMethodOptionsClient), "payment_intent_type_specific_payment_method_options_client")]
+public abstract partial record PaymentIntentPaymentMethodOptionsCard2;
+
+/// <remarks>
+/// Union of: PaymentMethodOptionsCardPresent | PaymentIntentTypeSpecificPaymentMethodOptionsClient
+/// </remarks>
+[JsonDerivedType(typeof(PaymentMethodOptionsCardPresent), "payment_method_options_card_present")]
+[JsonDerivedType(typeof(PaymentIntentTypeSpecificPaymentMethodOptionsClient), "payment_intent_type_specific_payment_method_options_client")]
+public abstract partial record PaymentIntentPaymentMethodOptionsCardPresent;
+
+/// <remarks>
+/// Union of: PaymentMethodOptionsCashapp | PaymentIntentTypeSpecificPaymentMethodOptionsClient
+/// </remarks>
+[JsonDerivedType(typeof(PaymentMethodOptionsCashapp), "payment_method_options_cashapp")]
+[JsonDerivedType(typeof(PaymentIntentTypeSpecificPaymentMethodOptionsClient), "payment_intent_type_specific_payment_method_options_client")]
+public abstract partial record PaymentIntentPaymentMethodOptionsCashapp;
+
+/// <remarks>
+/// Union of: PaymentMethodOptionsCrypto | PaymentIntentTypeSpecificPaymentMethodOptionsClient
+/// </remarks>
+[JsonDerivedType(typeof(PaymentMethodOptionsCrypto), "payment_method_options_crypto")]
+[JsonDerivedType(typeof(PaymentIntentTypeSpecificPaymentMethodOptionsClient), "payment_intent_type_specific_payment_method_options_client")]
+public abstract partial record PaymentIntentPaymentMethodOptionsCrypto;
+
+/// <remarks>
+/// Union of: PaymentMethodOptionsCustomerBalance | PaymentIntentTypeSpecificPaymentMethodOptionsClient
+/// </remarks>
+[JsonDerivedType(typeof(PaymentMethodOptionsCustomerBalance), "payment_method_options_customer_balance")]
+[JsonDerivedType(typeof(PaymentIntentTypeSpecificPaymentMethodOptionsClient), "payment_intent_type_specific_payment_method_options_client")]
+public abstract partial record PaymentIntentPaymentMethodOptionsCustomerBalance;
+
+/// <remarks>
+/// Union of: PaymentIntentPaymentMethodOptionsEps | PaymentIntentTypeSpecificPaymentMethodOptionsClient
+/// </remarks>
+[JsonDerivedType(typeof(PaymentIntentPaymentMethodOptionsEps), "payment_intent_payment_method_options_eps")]
+[JsonDerivedType(typeof(PaymentIntentTypeSpecificPaymentMethodOptionsClient), "payment_intent_type_specific_payment_method_options_client")]
+public abstract partial record PaymentIntentPaymentMethodOptionsEps2;
+
+/// <remarks>
+/// Union of: PaymentMethodOptionsFpx | PaymentIntentTypeSpecificPaymentMethodOptionsClient
+/// </remarks>
+[JsonDerivedType(typeof(PaymentMethodOptionsFpx), "payment_method_options_fpx")]
+[JsonDerivedType(typeof(PaymentIntentTypeSpecificPaymentMethodOptionsClient), "payment_intent_type_specific_payment_method_options_client")]
+public abstract partial record PaymentIntentPaymentMethodOptionsFpx;
+
+/// <remarks>
+/// Union of: PaymentMethodOptionsGiropay | PaymentIntentTypeSpecificPaymentMethodOptionsClient
+/// </remarks>
+[JsonDerivedType(typeof(PaymentMethodOptionsGiropay), "payment_method_options_giropay")]
+[JsonDerivedType(typeof(PaymentIntentTypeSpecificPaymentMethodOptionsClient), "payment_intent_type_specific_payment_method_options_client")]
+public abstract partial record PaymentIntentPaymentMethodOptionsGiropay;
+
+/// <remarks>
+/// Union of: PaymentMethodOptionsGrabpay | PaymentIntentTypeSpecificPaymentMethodOptionsClient
+/// </remarks>
+[JsonDerivedType(typeof(PaymentMethodOptionsGrabpay), "payment_method_options_grabpay")]
+[JsonDerivedType(typeof(PaymentIntentTypeSpecificPaymentMethodOptionsClient), "payment_intent_type_specific_payment_method_options_client")]
+public abstract partial record PaymentIntentPaymentMethodOptionsGrabpay;
+
+/// <remarks>
+/// Union of: PaymentMethodOptionsIdeal | PaymentIntentTypeSpecificPaymentMethodOptionsClient
+/// </remarks>
+[JsonDerivedType(typeof(PaymentMethodOptionsIdeal), "payment_method_options_ideal")]
+[JsonDerivedType(typeof(PaymentIntentTypeSpecificPaymentMethodOptionsClient), "payment_intent_type_specific_payment_method_options_client")]
+public abstract partial record PaymentIntentPaymentMethodOptionsIdeal;
+
+/// <remarks>
+/// Union of: PaymentMethodOptionsInteracPresent | PaymentIntentTypeSpecificPaymentMethodOptionsClient
+/// </remarks>
+[JsonDerivedType(typeof(PaymentMethodOptionsInteracPresent), "payment_method_options_interac_present")]
+[JsonDerivedType(typeof(PaymentIntentTypeSpecificPaymentMethodOptionsClient), "payment_intent_type_specific_payment_method_options_client")]
+public abstract partial record PaymentIntentPaymentMethodOptionsInteracPresent;
+
+/// <remarks>
+/// Union of: PaymentFlowsPrivatePaymentMethodsKakaoPayPaymentMethodOptions | PaymentIntentTypeSpecificPaymentMethodOptionsClient
+/// </remarks>
+[JsonDerivedType(typeof(PaymentFlowsPrivatePaymentMethodsKakaoPayPaymentMethodOptions), "payment_flows_private_payment_methods_kakao_pay_payment_method_options")]
+[JsonDerivedType(typeof(PaymentIntentTypeSpecificPaymentMethodOptionsClient), "payment_intent_type_specific_payment_method_options_client")]
+public abstract partial record PaymentIntentPaymentMethodOptionsKakaoPay;
+
+/// <remarks>
+/// Union of: PaymentMethodOptionsKlarna | PaymentIntentTypeSpecificPaymentMethodOptionsClient
+/// </remarks>
+[JsonDerivedType(typeof(PaymentMethodOptionsKlarna), "payment_method_options_klarna")]
+[JsonDerivedType(typeof(PaymentIntentTypeSpecificPaymentMethodOptionsClient), "payment_intent_type_specific_payment_method_options_client")]
+public abstract partial record PaymentIntentPaymentMethodOptionsKlarna;
+
+/// <remarks>
+/// Union of: PaymentMethodOptionsKonbini | PaymentIntentTypeSpecificPaymentMethodOptionsClient
+/// </remarks>
+[JsonDerivedType(typeof(PaymentMethodOptionsKonbini), "payment_method_options_konbini")]
+[JsonDerivedType(typeof(PaymentIntentTypeSpecificPaymentMethodOptionsClient), "payment_intent_type_specific_payment_method_options_client")]
+public abstract partial record PaymentIntentPaymentMethodOptionsKonbini;
+
+/// <remarks>
+/// Union of: PaymentMethodOptionsKrCard | PaymentIntentTypeSpecificPaymentMethodOptionsClient
+/// </remarks>
+[JsonDerivedType(typeof(PaymentMethodOptionsKrCard), "payment_method_options_kr_card")]
+[JsonDerivedType(typeof(PaymentIntentTypeSpecificPaymentMethodOptionsClient), "payment_intent_type_specific_payment_method_options_client")]
+public abstract partial record PaymentIntentPaymentMethodOptionsKrCard;
+
+/// <remarks>
+/// Union of: PaymentIntentPaymentMethodOptionsLink | PaymentIntentTypeSpecificPaymentMethodOptionsClient
+/// </remarks>
+[JsonDerivedType(typeof(PaymentIntentPaymentMethodOptionsLink), "payment_intent_payment_method_options_link")]
+[JsonDerivedType(typeof(PaymentIntentTypeSpecificPaymentMethodOptionsClient), "payment_intent_type_specific_payment_method_options_client")]
+public abstract partial record PaymentIntentPaymentMethodOptionsLink2;
+
+/// <remarks>
+/// Union of: PaymentMethodOptionsMbWay | PaymentIntentTypeSpecificPaymentMethodOptionsClient
+/// </remarks>
+[JsonDerivedType(typeof(PaymentMethodOptionsMbWay), "payment_method_options_mb_way")]
+[JsonDerivedType(typeof(PaymentIntentTypeSpecificPaymentMethodOptionsClient), "payment_intent_type_specific_payment_method_options_client")]
+public abstract partial record PaymentIntentPaymentMethodOptionsMbWay;
+
+/// <remarks>
+/// Union of: PaymentIntentPaymentMethodOptionsMobilepay | PaymentIntentTypeSpecificPaymentMethodOptionsClient
+/// </remarks>
+[JsonDerivedType(typeof(PaymentIntentPaymentMethodOptionsMobilepay), "payment_intent_payment_method_options_mobilepay")]
+[JsonDerivedType(typeof(PaymentIntentTypeSpecificPaymentMethodOptionsClient), "payment_intent_type_specific_payment_method_options_client")]
+public abstract partial record PaymentIntentPaymentMethodOptionsMobilepay2;
+
+/// <remarks>
+/// Union of: PaymentMethodOptionsMultibanco | PaymentIntentTypeSpecificPaymentMethodOptionsClient
+/// </remarks>
+[JsonDerivedType(typeof(PaymentMethodOptionsMultibanco), "payment_method_options_multibanco")]
+[JsonDerivedType(typeof(PaymentIntentTypeSpecificPaymentMethodOptionsClient), "payment_intent_type_specific_payment_method_options_client")]
+public abstract partial record PaymentIntentPaymentMethodOptionsMultibanco;
+
+/// <remarks>
+/// Union of: PaymentFlowsPrivatePaymentMethodsNaverPayPaymentMethodOptions | PaymentIntentTypeSpecificPaymentMethodOptionsClient
+/// </remarks>
+[JsonDerivedType(typeof(PaymentFlowsPrivatePaymentMethodsNaverPayPaymentMethodOptions), "payment_flows_private_payment_methods_naver_pay_payment_method_options")]
+[JsonDerivedType(typeof(PaymentIntentTypeSpecificPaymentMethodOptionsClient), "payment_intent_type_specific_payment_method_options_client")]
+public abstract partial record PaymentIntentPaymentMethodOptionsNaverPay;
+
+/// <remarks>
+/// Union of: PaymentIntentPaymentMethodOptionsNzBankAccount | PaymentIntentTypeSpecificPaymentMethodOptionsClient
+/// </remarks>
+[JsonDerivedType(typeof(PaymentIntentPaymentMethodOptionsNzBankAccount), "payment_intent_payment_method_options_nz_bank_account")]
+[JsonDerivedType(typeof(PaymentIntentTypeSpecificPaymentMethodOptionsClient), "payment_intent_type_specific_payment_method_options_client")]
+public abstract partial record PaymentIntentPaymentMethodOptionsNzBankAccount2;
+
+/// <remarks>
+/// Union of: PaymentMethodOptionsOxxo | PaymentIntentTypeSpecificPaymentMethodOptionsClient
+/// </remarks>
+[JsonDerivedType(typeof(PaymentMethodOptionsOxxo), "payment_method_options_oxxo")]
+[JsonDerivedType(typeof(PaymentIntentTypeSpecificPaymentMethodOptionsClient), "payment_intent_type_specific_payment_method_options_client")]
+public abstract partial record PaymentIntentPaymentMethodOptionsOxxo;
+
+/// <remarks>
+/// Union of: PaymentMethodOptionsP24 | PaymentIntentTypeSpecificPaymentMethodOptionsClient
+/// </remarks>
+[JsonDerivedType(typeof(PaymentMethodOptionsP24), "payment_method_options_p24")]
+[JsonDerivedType(typeof(PaymentIntentTypeSpecificPaymentMethodOptionsClient), "payment_intent_type_specific_payment_method_options_client")]
+public abstract partial record PaymentIntentPaymentMethodOptionsP24;
+
+/// <remarks>
+/// Union of: PaymentMethodOptionsPayByBank | PaymentIntentTypeSpecificPaymentMethodOptionsClient
+/// </remarks>
+[JsonDerivedType(typeof(PaymentMethodOptionsPayByBank), "payment_method_options_pay_by_bank")]
+[JsonDerivedType(typeof(PaymentIntentTypeSpecificPaymentMethodOptionsClient), "payment_intent_type_specific_payment_method_options_client")]
+public abstract partial record PaymentIntentPaymentMethodOptionsPayByBank;
+
+/// <remarks>
+/// Union of: PaymentFlowsPrivatePaymentMethodsPaycoPaymentMethodOptions | PaymentIntentTypeSpecificPaymentMethodOptionsClient
+/// </remarks>
+[JsonDerivedType(typeof(PaymentFlowsPrivatePaymentMethodsPaycoPaymentMethodOptions), "payment_flows_private_payment_methods_payco_payment_method_options")]
+[JsonDerivedType(typeof(PaymentIntentTypeSpecificPaymentMethodOptionsClient), "payment_intent_type_specific_payment_method_options_client")]
+public abstract partial record PaymentIntentPaymentMethodOptionsPayco;
+
+/// <remarks>
+/// Union of: PaymentMethodOptionsPaynow | PaymentIntentTypeSpecificPaymentMethodOptionsClient
+/// </remarks>
+[JsonDerivedType(typeof(PaymentMethodOptionsPaynow), "payment_method_options_paynow")]
+[JsonDerivedType(typeof(PaymentIntentTypeSpecificPaymentMethodOptionsClient), "payment_intent_type_specific_payment_method_options_client")]
+public abstract partial record PaymentIntentPaymentMethodOptionsPaynow;
+
+/// <remarks>
+/// Union of: PaymentMethodOptionsPaypal | PaymentIntentTypeSpecificPaymentMethodOptionsClient
+/// </remarks>
+[JsonDerivedType(typeof(PaymentMethodOptionsPaypal), "payment_method_options_paypal")]
+[JsonDerivedType(typeof(PaymentIntentTypeSpecificPaymentMethodOptionsClient), "payment_intent_type_specific_payment_method_options_client")]
+public abstract partial record PaymentIntentPaymentMethodOptionsPaypal;
+
+/// <remarks>
+/// Union of: PaymentIntentPaymentMethodOptionsPayto | PaymentIntentTypeSpecificPaymentMethodOptionsClient
+/// </remarks>
+[JsonDerivedType(typeof(PaymentIntentPaymentMethodOptionsPayto), "payment_intent_payment_method_options_payto")]
+[JsonDerivedType(typeof(PaymentIntentTypeSpecificPaymentMethodOptionsClient), "payment_intent_type_specific_payment_method_options_client")]
+public abstract partial record PaymentIntentPaymentMethodOptionsPayto2;
+
+/// <remarks>
+/// Union of: PaymentMethodOptionsPix | PaymentIntentTypeSpecificPaymentMethodOptionsClient
+/// </remarks>
+[JsonDerivedType(typeof(PaymentMethodOptionsPix), "payment_method_options_pix")]
+[JsonDerivedType(typeof(PaymentIntentTypeSpecificPaymentMethodOptionsClient), "payment_intent_type_specific_payment_method_options_client")]
+public abstract partial record PaymentIntentPaymentMethodOptionsPix;
+
+/// <remarks>
+/// Union of: PaymentMethodOptionsPromptpay | PaymentIntentTypeSpecificPaymentMethodOptionsClient
+/// </remarks>
+[JsonDerivedType(typeof(PaymentMethodOptionsPromptpay), "payment_method_options_promptpay")]
+[JsonDerivedType(typeof(PaymentIntentTypeSpecificPaymentMethodOptionsClient), "payment_intent_type_specific_payment_method_options_client")]
+public abstract partial record PaymentIntentPaymentMethodOptionsPromptpay;
+
+/// <remarks>
+/// Union of: PaymentMethodOptionsRevolutPay | PaymentIntentTypeSpecificPaymentMethodOptionsClient
+/// </remarks>
+[JsonDerivedType(typeof(PaymentMethodOptionsRevolutPay), "payment_method_options_revolut_pay")]
+[JsonDerivedType(typeof(PaymentIntentTypeSpecificPaymentMethodOptionsClient), "payment_intent_type_specific_payment_method_options_client")]
+public abstract partial record PaymentIntentPaymentMethodOptionsRevolutPay;
+
+/// <remarks>
+/// Union of: PaymentFlowsPrivatePaymentMethodsSamsungPayPaymentMethodOptions | PaymentIntentTypeSpecificPaymentMethodOptionsClient
+/// </remarks>
+[JsonDerivedType(typeof(PaymentFlowsPrivatePaymentMethodsSamsungPayPaymentMethodOptions), "payment_flows_private_payment_methods_samsung_pay_payment_method_options")]
+[JsonDerivedType(typeof(PaymentIntentTypeSpecificPaymentMethodOptionsClient), "payment_intent_type_specific_payment_method_options_client")]
+public abstract partial record PaymentIntentPaymentMethodOptionsSamsungPay;
+
+/// <remarks>
+/// Union of: PaymentMethodOptionsSatispay | PaymentIntentTypeSpecificPaymentMethodOptionsClient
+/// </remarks>
+[JsonDerivedType(typeof(PaymentMethodOptionsSatispay), "payment_method_options_satispay")]
+[JsonDerivedType(typeof(PaymentIntentTypeSpecificPaymentMethodOptionsClient), "payment_intent_type_specific_payment_method_options_client")]
+public abstract partial record PaymentIntentPaymentMethodOptionsSatispay;
+
+/// <remarks>
+/// Union of: PaymentMethodOptionsScalapay | PaymentIntentTypeSpecificPaymentMethodOptionsClient
+/// </remarks>
+[JsonDerivedType(typeof(PaymentMethodOptionsScalapay), "payment_method_options_scalapay")]
+[JsonDerivedType(typeof(PaymentIntentTypeSpecificPaymentMethodOptionsClient), "payment_intent_type_specific_payment_method_options_client")]
+public abstract partial record PaymentIntentPaymentMethodOptionsScalapay;
+
+/// <remarks>
+/// Union of: PaymentIntentPaymentMethodOptionsSepaDebit | PaymentIntentTypeSpecificPaymentMethodOptionsClient
+/// </remarks>
+[JsonDerivedType(typeof(PaymentIntentPaymentMethodOptionsSepaDebit), "payment_intent_payment_method_options_sepa_debit")]
+[JsonDerivedType(typeof(PaymentIntentTypeSpecificPaymentMethodOptionsClient), "payment_intent_type_specific_payment_method_options_client")]
+public abstract partial record PaymentIntentPaymentMethodOptionsSepaDebit2;
+
+/// <remarks>
+/// Union of: PaymentMethodOptionsSofort | PaymentIntentTypeSpecificPaymentMethodOptionsClient
+/// </remarks>
+[JsonDerivedType(typeof(PaymentMethodOptionsSofort), "payment_method_options_sofort")]
+[JsonDerivedType(typeof(PaymentIntentTypeSpecificPaymentMethodOptionsClient), "payment_intent_type_specific_payment_method_options_client")]
+public abstract partial record PaymentIntentPaymentMethodOptionsSofort;
+
+/// <remarks>
+/// Union of: PaymentMethodOptionsSunbit | PaymentIntentTypeSpecificPaymentMethodOptionsClient
+/// </remarks>
+[JsonDerivedType(typeof(PaymentMethodOptionsSunbit), "payment_method_options_sunbit")]
+[JsonDerivedType(typeof(PaymentIntentTypeSpecificPaymentMethodOptionsClient), "payment_intent_type_specific_payment_method_options_client")]
+public abstract partial record PaymentIntentPaymentMethodOptionsSunbit;
+
+/// <remarks>
+/// Union of: PaymentIntentPaymentMethodOptionsSwish | PaymentIntentTypeSpecificPaymentMethodOptionsClient
+/// </remarks>
+[JsonDerivedType(typeof(PaymentIntentPaymentMethodOptionsSwish), "payment_intent_payment_method_options_swish")]
+[JsonDerivedType(typeof(PaymentIntentTypeSpecificPaymentMethodOptionsClient), "payment_intent_type_specific_payment_method_options_client")]
+public abstract partial record PaymentIntentPaymentMethodOptionsSwish2;
+
+/// <remarks>
+/// Union of: PaymentMethodOptionsTwint | PaymentIntentTypeSpecificPaymentMethodOptionsClient
+/// </remarks>
+[JsonDerivedType(typeof(PaymentMethodOptionsTwint), "payment_method_options_twint")]
+[JsonDerivedType(typeof(PaymentIntentTypeSpecificPaymentMethodOptionsClient), "payment_intent_type_specific_payment_method_options_client")]
+public abstract partial record PaymentIntentPaymentMethodOptionsTwint;
+
+/// <remarks>
+/// Union of: PaymentMethodOptionsUpi | PaymentIntentTypeSpecificPaymentMethodOptionsClient
+/// </remarks>
+[JsonDerivedType(typeof(PaymentMethodOptionsUpi), "payment_method_options_upi")]
+[JsonDerivedType(typeof(PaymentIntentTypeSpecificPaymentMethodOptionsClient), "payment_intent_type_specific_payment_method_options_client")]
+public abstract partial record PaymentIntentPaymentMethodOptionsUpi;
+
+/// <remarks>
+/// Union of: PaymentIntentPaymentMethodOptionsUsBankAccount | PaymentIntentTypeSpecificPaymentMethodOptionsClient
+/// </remarks>
+[JsonDerivedType(typeof(PaymentIntentPaymentMethodOptionsUsBankAccount), "payment_intent_payment_method_options_us_bank_account")]
+[JsonDerivedType(typeof(PaymentIntentTypeSpecificPaymentMethodOptionsClient), "payment_intent_type_specific_payment_method_options_client")]
+public abstract partial record PaymentIntentPaymentMethodOptionsUsBankAccount2;
+
+/// <remarks>
+/// Union of: PaymentMethodOptionsWechatPay | PaymentIntentTypeSpecificPaymentMethodOptionsClient
+/// </remarks>
+[JsonDerivedType(typeof(PaymentMethodOptionsWechatPay), "payment_method_options_wechat_pay")]
+[JsonDerivedType(typeof(PaymentIntentTypeSpecificPaymentMethodOptionsClient), "payment_intent_type_specific_payment_method_options_client")]
+public abstract partial record PaymentIntentPaymentMethodOptionsWechatPay;
+
+/// <remarks>
+/// Union of: PaymentMethodOptionsZip | PaymentIntentTypeSpecificPaymentMethodOptionsClient
+/// </remarks>
+[JsonDerivedType(typeof(PaymentMethodOptionsZip), "payment_method_options_zip")]
+[JsonDerivedType(typeof(PaymentIntentTypeSpecificPaymentMethodOptionsClient), "payment_intent_type_specific_payment_method_options_client")]
+public abstract partial record PaymentIntentPaymentMethodOptionsZip;
+
+/// <summary>
+/// The line items representing what is being sold.
+/// </summary>
+public partial record PaymentLinkLineItems
+{
+    /// <summary>
+    /// Details about each object.
+    /// </summary>
+    [JsonPropertyName("data")]
+    public required IReadOnlyList<Item> Data { get; init; }
+
+    /// <summary>
+    /// True if this list has another page of items after this one that can be fetched.
+    /// </summary>
+    [JsonPropertyName("has_more")]
+    public required bool HasMore { get; init; }
+
+    /// <summary>
+    /// String representing the object's type. Objects of the same type share the same value. Always has the value `list`.
+    /// </summary>
+    [JsonPropertyName("object")]
+    public required AccountExternalAccountsObject Object { get; init; }
+
+    /// <summary>
+    /// The URL where this list can be accessed.
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required string Url { get; init; }
+
+}
+
+/// <summary>
+/// A list of items the customer is being quoted for.
+/// </summary>
+public partial record QuoteLineItems
+{
+    /// <summary>
+    /// Details about each object.
+    /// </summary>
+    [JsonPropertyName("data")]
+    public required IReadOnlyList<Item> Data { get; init; }
+
+    /// <summary>
+    /// True if this list has another page of items after this one that can be fetched.
+    /// </summary>
+    [JsonPropertyName("has_more")]
+    public required bool HasMore { get; init; }
+
+    /// <summary>
+    /// String representing the object's type. Objects of the same type share the same value. Always has the value `list`.
+    /// </summary>
+    [JsonPropertyName("object")]
+    public required AccountExternalAccountsObject Object { get; init; }
+
+    /// <summary>
+    /// The URL where this list can be accessed.
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required string Url { get; init; }
+
+}
+
+/// <summary>
+/// The line items that will appear on the next invoice after this quote is accepted. This does not include pending invoice items that exist on the customer but may still be included in the next invoice.
+/// </summary>
+public partial record QuotesResourceUpfrontLineItems
+{
+    /// <summary>
+    /// Details about each object.
+    /// </summary>
+    [JsonPropertyName("data")]
+    public required IReadOnlyList<Item> Data { get; init; }
+
+    /// <summary>
+    /// True if this list has another page of items after this one that can be fetched.
+    /// </summary>
+    [JsonPropertyName("has_more")]
+    public required bool HasMore { get; init; }
+
+    /// <summary>
+    /// String representing the object's type. Objects of the same type share the same value. Always has the value `list`.
+    /// </summary>
+    [JsonPropertyName("object")]
+    public required AccountExternalAccountsObject Object { get; init; }
+
+    /// <summary>
+    /// The URL where this list can be accessed.
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required string Url { get; init; }
+
+}
+
+/// <summary>
+/// List of items contained within this value list.
+/// </summary>
+public partial record RadarValueListListItems
+{
+    /// <summary>
+    /// Details about each object.
+    /// </summary>
+    [JsonPropertyName("data")]
+    public required IReadOnlyList<RadarValueListItem> Data { get; init; }
+
+    /// <summary>
+    /// True if this list has another page of items after this one that can be fetched.
+    /// </summary>
+    [JsonPropertyName("has_more")]
+    public required bool HasMore { get; init; }
+
+    /// <summary>
+    /// String representing the object's type. Objects of the same type share the same value. Always has the value `list`.
+    /// </summary>
+    [JsonPropertyName("object")]
+    public required AccountExternalAccountsObject Object { get; init; }
+
+    /// <summary>
+    /// The URL where this list can be accessed.
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required string Url { get; init; }
+
+}
+
+/// <remarks>
+/// Union of: SetupIntentPaymentMethodOptionsAcssDebit | SetupIntentTypeSpecificPaymentMethodOptionsClient
+/// </remarks>
+[JsonDerivedType(typeof(SetupIntentPaymentMethodOptionsAcssDebit), "setup_intent_payment_method_options_acss_debit")]
+[JsonDerivedType(typeof(SetupIntentTypeSpecificPaymentMethodOptionsClient), "setup_intent_type_specific_payment_method_options_client")]
+public abstract partial record SetupIntentPaymentMethodOptionsAcssDebit2;
+
+/// <remarks>
+/// Union of: SetupIntentPaymentMethodOptionsAmazonPay | SetupIntentTypeSpecificPaymentMethodOptionsClient
+/// </remarks>
+[JsonDerivedType(typeof(SetupIntentPaymentMethodOptionsAmazonPay), "setup_intent_payment_method_options_amazon_pay")]
+[JsonDerivedType(typeof(SetupIntentTypeSpecificPaymentMethodOptionsClient), "setup_intent_type_specific_payment_method_options_client")]
+public abstract partial record SetupIntentPaymentMethodOptionsAmazonPay2;
+
+/// <remarks>
+/// Union of: SetupIntentPaymentMethodOptionsBacsDebit | SetupIntentTypeSpecificPaymentMethodOptionsClient
+/// </remarks>
+[JsonDerivedType(typeof(SetupIntentPaymentMethodOptionsBacsDebit), "setup_intent_payment_method_options_bacs_debit")]
+[JsonDerivedType(typeof(SetupIntentTypeSpecificPaymentMethodOptionsClient), "setup_intent_type_specific_payment_method_options_client")]
+public abstract partial record SetupIntentPaymentMethodOptionsBacsDebit2;
+
+/// <remarks>
+/// Union of: SetupIntentPaymentMethodOptionsBizum | SetupIntentTypeSpecificPaymentMethodOptionsClient
+/// </remarks>
+[JsonDerivedType(typeof(SetupIntentPaymentMethodOptionsBizum), "setup_intent_payment_method_options_bizum")]
+[JsonDerivedType(typeof(SetupIntentTypeSpecificPaymentMethodOptionsClient), "setup_intent_type_specific_payment_method_options_client")]
+public abstract partial record SetupIntentPaymentMethodOptionsBizum2;
+
+/// <remarks>
+/// Union of: SetupIntentPaymentMethodOptionsCard | SetupIntentTypeSpecificPaymentMethodOptionsClient
+/// </remarks>
+[JsonDerivedType(typeof(SetupIntentPaymentMethodOptionsCard), "setup_intent_payment_method_options_card")]
+[JsonDerivedType(typeof(SetupIntentTypeSpecificPaymentMethodOptionsClient), "setup_intent_type_specific_payment_method_options_client")]
+public abstract partial record SetupIntentPaymentMethodOptionsCard2;
+
+/// <remarks>
+/// Union of: SetupIntentPaymentMethodOptionsCardPresent | SetupIntentTypeSpecificPaymentMethodOptionsClient
+/// </remarks>
+[JsonDerivedType(typeof(SetupIntentPaymentMethodOptionsCardPresent), "setup_intent_payment_method_options_card_present")]
+[JsonDerivedType(typeof(SetupIntentTypeSpecificPaymentMethodOptionsClient), "setup_intent_type_specific_payment_method_options_client")]
+public abstract partial record SetupIntentPaymentMethodOptionsCardPresent2;
+
+/// <remarks>
+/// Union of: SetupIntentPaymentMethodOptionsKlarna | SetupIntentTypeSpecificPaymentMethodOptionsClient
+/// </remarks>
+[JsonDerivedType(typeof(SetupIntentPaymentMethodOptionsKlarna), "setup_intent_payment_method_options_klarna")]
+[JsonDerivedType(typeof(SetupIntentTypeSpecificPaymentMethodOptionsClient), "setup_intent_type_specific_payment_method_options_client")]
+public abstract partial record SetupIntentPaymentMethodOptionsKlarna2;
+
+/// <remarks>
+/// Union of: SetupIntentPaymentMethodOptionsLink | SetupIntentTypeSpecificPaymentMethodOptionsClient
+/// </remarks>
+[JsonDerivedType(typeof(SetupIntentPaymentMethodOptionsLink), "setup_intent_payment_method_options_link")]
+[JsonDerivedType(typeof(SetupIntentTypeSpecificPaymentMethodOptionsClient), "setup_intent_type_specific_payment_method_options_client")]
+public abstract partial record SetupIntentPaymentMethodOptionsLink2;
+
+/// <remarks>
+/// Union of: SetupIntentPaymentMethodOptionsPaypal | SetupIntentTypeSpecificPaymentMethodOptionsClient
+/// </remarks>
+[JsonDerivedType(typeof(SetupIntentPaymentMethodOptionsPaypal), "setup_intent_payment_method_options_paypal")]
+[JsonDerivedType(typeof(SetupIntentTypeSpecificPaymentMethodOptionsClient), "setup_intent_type_specific_payment_method_options_client")]
+public abstract partial record SetupIntentPaymentMethodOptionsPaypal2;
+
+/// <remarks>
+/// Union of: SetupIntentPaymentMethodOptionsPayto | SetupIntentTypeSpecificPaymentMethodOptionsClient
+/// </remarks>
+[JsonDerivedType(typeof(SetupIntentPaymentMethodOptionsPayto), "setup_intent_payment_method_options_payto")]
+[JsonDerivedType(typeof(SetupIntentTypeSpecificPaymentMethodOptionsClient), "setup_intent_type_specific_payment_method_options_client")]
+public abstract partial record SetupIntentPaymentMethodOptionsPayto2;
+
+/// <remarks>
+/// Union of: SetupIntentPaymentMethodOptionsPix | SetupIntentTypeSpecificPaymentMethodOptionsClient
+/// </remarks>
+[JsonDerivedType(typeof(SetupIntentPaymentMethodOptionsPix), "setup_intent_payment_method_options_pix")]
+[JsonDerivedType(typeof(SetupIntentTypeSpecificPaymentMethodOptionsClient), "setup_intent_type_specific_payment_method_options_client")]
+public abstract partial record SetupIntentPaymentMethodOptionsPix2;
+
+/// <remarks>
+/// Union of: SetupIntentPaymentMethodOptionsSepaDebit | SetupIntentTypeSpecificPaymentMethodOptionsClient
+/// </remarks>
+[JsonDerivedType(typeof(SetupIntentPaymentMethodOptionsSepaDebit), "setup_intent_payment_method_options_sepa_debit")]
+[JsonDerivedType(typeof(SetupIntentTypeSpecificPaymentMethodOptionsClient), "setup_intent_type_specific_payment_method_options_client")]
+public abstract partial record SetupIntentPaymentMethodOptionsSepaDebit2;
+
+/// <remarks>
+/// Union of: SetupIntentPaymentMethodOptionsUpi | SetupIntentTypeSpecificPaymentMethodOptionsClient
+/// </remarks>
+[JsonDerivedType(typeof(SetupIntentPaymentMethodOptionsUpi), "setup_intent_payment_method_options_upi")]
+[JsonDerivedType(typeof(SetupIntentTypeSpecificPaymentMethodOptionsClient), "setup_intent_type_specific_payment_method_options_client")]
+public abstract partial record SetupIntentPaymentMethodOptionsUpi2;
+
+/// <remarks>
+/// Union of: SetupIntentPaymentMethodOptionsUsBankAccount | SetupIntentTypeSpecificPaymentMethodOptionsClient
+/// </remarks>
+[JsonDerivedType(typeof(SetupIntentPaymentMethodOptionsUsBankAccount), "setup_intent_payment_method_options_us_bank_account")]
+[JsonDerivedType(typeof(SetupIntentTypeSpecificPaymentMethodOptionsClient), "setup_intent_type_specific_payment_method_options_client")]
+public abstract partial record SetupIntentPaymentMethodOptionsUsBankAccount2;
+
+/// <summary>
+/// List of subscription items, each with an attached price.
+/// </summary>
+public partial record SubscriptionItems
+{
+    /// <summary>
+    /// Details about each object.
+    /// </summary>
+    [JsonPropertyName("data")]
+    public required IReadOnlyList<SubscriptionItem> Data { get; init; }
+
+    /// <summary>
+    /// True if this list has another page of items after this one that can be fetched.
+    /// </summary>
+    [JsonPropertyName("has_more")]
+    public required bool HasMore { get; init; }
+
+    /// <summary>
+    /// String representing the object's type. Objects of the same type share the same value. Always has the value `list`.
+    /// </summary>
+    [JsonPropertyName("object")]
+    public required AccountExternalAccountsObject Object { get; init; }
+
+    /// <summary>
+    /// The URL where this list can be accessed.
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required string Url { get; init; }
+
+}
+
+/// <summary>
+/// The list of items the customer is purchasing.
+/// </summary>
+public partial record TaxCalculationLineItems
+{
+    /// <summary>
+    /// Details about each object.
+    /// </summary>
+    [JsonPropertyName("data")]
+    public required IReadOnlyList<TaxCalculationLineItem> Data { get; init; }
+
+    /// <summary>
+    /// True if this list has another page of items after this one that can be fetched.
+    /// </summary>
+    [JsonPropertyName("has_more")]
+    public required bool HasMore { get; init; }
+
+    /// <summary>
+    /// String representing the object's type. Objects of the same type share the same value. Always has the value `list`.
+    /// </summary>
+    [JsonPropertyName("object")]
+    public required AccountExternalAccountsObject Object { get; init; }
+
+    /// <summary>
+    /// The URL where this list can be accessed.
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required string Url { get; init; }
+
+}
+
+/// <summary>
+/// The tax collected or refunded, by line item.
+/// </summary>
+public partial record TaxTransactionLineItems
+{
+    /// <summary>
+    /// Details about each object.
+    /// </summary>
+    [JsonPropertyName("data")]
+    public required IReadOnlyList<TaxTransactionLineItem> Data { get; init; }
+
+    /// <summary>
+    /// True if this list has another page of items after this one that can be fetched.
+    /// </summary>
+    [JsonPropertyName("has_more")]
+    public required bool HasMore { get; init; }
+
+    /// <summary>
+    /// String representing the object's type. Objects of the same type share the same value. Always has the value `list`.
+    /// </summary>
+    [JsonPropertyName("object")]
+    public required AccountExternalAccountsObject Object { get; init; }
+
+    /// <summary>
+    /// The URL where this list can be accessed.
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required string Url { get; init; }
+
+}
+
+/// <summary>
+/// A list of reversals that have been applied to the transfer.
+/// </summary>
+public partial record TransferReversals
+{
+    /// <summary>
+    /// Details about each object.
+    /// </summary>
+    [JsonPropertyName("data")]
+    public required IReadOnlyList<TransferReversal> Data { get; init; }
+
+    /// <summary>
+    /// True if this list has another page of items after this one that can be fetched.
+    /// </summary>
+    [JsonPropertyName("has_more")]
+    public required bool HasMore { get; init; }
+
+    /// <summary>
+    /// String representing the object's type. Objects of the same type share the same value. Always has the value `list`.
+    /// </summary>
+    [JsonPropertyName("object")]
+    public required AccountExternalAccountsObject Object { get; init; }
+
+    /// <summary>
+    /// The URL where this list can be accessed.
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required string Url { get; init; }
+
+}
+
+/// <summary>
+/// A list of TransactionEntries that are part of this Transaction. This cannot be expanded in any list endpoints.
+/// </summary>
+public partial record TreasuryTransactionEntries
+{
+    /// <summary>
+    /// Details about each object.
+    /// </summary>
+    [JsonPropertyName("data")]
+    public required IReadOnlyList<TreasuryTransactionEntry> Data { get; init; }
+
+    /// <summary>
+    /// True if this list has another page of items after this one that can be fetched.
+    /// </summary>
+    [JsonPropertyName("has_more")]
+    public required bool HasMore { get; init; }
+
+    /// <summary>
+    /// String representing the object's type. Objects of the same type share the same value. Always has the value `list`.
+    /// </summary>
+    [JsonPropertyName("object")]
+    public required AccountExternalAccountsObject Object { get; init; }
+
+    /// <summary>
+    /// The URL where this list can be accessed.
     /// </summary>
     [JsonPropertyName("url")]
     public required string Url { get; init; }
