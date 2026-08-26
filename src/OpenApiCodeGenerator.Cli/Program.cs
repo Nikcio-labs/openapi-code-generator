@@ -33,6 +33,7 @@ static async Task<int> RunAsync(string[] args)
     var includeSchemas = new List<string>();
     bool omitJsonPropertyNameAttributes = false;
     bool inlinePrimitiveTypeAliases = false;
+    bool emitObsoleteAttribute = true;
 
     for (int i = 0; i < args.Length; i++)
     {
@@ -77,6 +78,9 @@ static async Task<int> RunAsync(string[] args)
             case "--inline-type-aliases":
                 inlinePrimitiveTypeAliases = true;
                 break;
+            case "--no-deprecated-attributes":
+                emitObsoleteAttribute = false;
+                break;
             default:
                 // Positional: first is input, second is output
                 if (inputPath == null)
@@ -116,6 +120,7 @@ static async Task<int> RunAsync(string[] args)
         IncludeSchemas = includeSchemas,
         OmitJsonPropertyNameAttributes = omitJsonPropertyNameAttributes,
         InlinePrimitiveTypeAliases = inlinePrimitiveTypeAliases,
+        EmitObsoleteAttribute = emitObsoleteAttribute,
     };
 
     try
@@ -239,6 +244,7 @@ static void PrintUsage()
                 --mutable-dictionaries  Use Dictionary<K,V> instead of IReadOnlyDictionary<K,V>
                 --omit-json-attributes  Skip [JsonPropertyName] on generated properties
                 --inline-type-aliases   Inline primitive aliases instead of emitting wrapper types
+                --no-deprecated-attributes  Skip [Obsolete] on deprecated schemas and properties
             -v, --version               Show version information
             -h, --help                  Show this help message
 
