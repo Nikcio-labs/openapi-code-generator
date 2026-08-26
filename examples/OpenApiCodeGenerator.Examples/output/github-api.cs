@@ -9733,6 +9733,70 @@ public partial record OrganizationSimple
 }
 
 /// <summary>
+/// Group of enterprise owners and/or members
+/// </summary>
+public partial record EnterpriseTeamWithMemberCount
+{
+    [JsonPropertyName("id")]
+    public required long Id { get; init; }
+
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("description")]
+    public string? Description { get; init; }
+
+    [JsonPropertyName("slug")]
+    public required string Slug { get; init; }
+
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+    /// <summary>
+    /// Retired: this field will not be returned with GHEC enterprise teams.
+    /// </summary>
+    [JsonPropertyName("sync_to_organizations")]
+    public string? SyncToOrganizations { get; init; }
+
+    [JsonPropertyName("organization_selection_type")]
+    public string? OrganizationSelectionType { get; init; }
+
+    [JsonPropertyName("group_id")]
+    public required string? GroupId { get; init; }
+
+    /// <summary>
+    /// Retired: this field will not be returned with GHEC enterprise teams.
+    /// </summary>
+    [JsonPropertyName("group_name")]
+    public string? GroupName { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public required Uri HtmlUrl { get; init; }
+
+    [JsonPropertyName("members_url")]
+    public required string MembersUrl { get; init; }
+
+    /// <summary>
+    /// The number of members in the enterprise team.
+    /// </summary>
+    [JsonPropertyName("members_count")]
+    public required int MembersCount { get; init; }
+
+    [JsonPropertyName("created_at")]
+    public required DateTimeOffset CreatedAt { get; init; }
+
+    [JsonPropertyName("updated_at")]
+    public required DateTimeOffset UpdatedAt { get; init; }
+
+    /// <summary>
+    /// Whether team members will receive notifications when the team is mentioned.
+    /// </summary>
+    [JsonPropertyName("notification_setting")]
+    public NotificationSetting? NotificationSetting { get; init; }
+
+}
+
+/// <summary>
 /// Actor
 /// </summary>
 public partial record Actor

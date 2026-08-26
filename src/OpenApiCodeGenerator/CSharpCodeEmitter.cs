@@ -145,159 +145,116 @@ internal class CSharpCodeEmitter
 
     private void EmitTypeAliasInterface()
     {
-        AppendLine("file interface IOpenApiGeneratedTypeAlias<TSelf, TValue>");
-        AppendLine("    where TSelf : struct, IOpenApiGeneratedTypeAlias<TSelf, TValue>");
-        AppendLine("{");
-        _indent++;
-        AppendLine("static abstract TSelf Create(TValue value);");
-        AppendLine();
-        AppendLine("TValue Value { get; }");
-        _indent--;
-        AppendLine("}");
+        AppendBlock("file interface IOpenApiGeneratedTypeAlias<TSelf, TValue>\n    where TSelf : struct, IOpenApiGeneratedTypeAlias<TSelf, TValue>", () =>
+        {
+            AppendLine("static abstract TSelf Create(TValue value);");
+            AppendLine();
+            AppendLine("TValue Value { get; }");
+        });
         AppendLine();
     }
 
     private void EmitBinaryStreamJsonConverter()
     {
-        AppendLine("file sealed class OpenApiGeneratedBinaryStreamJsonConverter : JsonConverter<Stream>");
-        AppendLine("{");
-        _indent++;
-        AppendLine("public override Stream? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)");
-        AppendLine("{");
-        _indent++;
-        AppendLine("if (reader.TokenType == JsonTokenType.Null)");
-        AppendLine("{");
-        _indent++;
-        AppendLine("return null;");
-        _indent--;
-        AppendLine("}");
-        AppendLine();
-        AppendLine("if (reader.TokenType != JsonTokenType.String)");
-        AppendLine("{");
-        _indent++;
-        AppendLine("throw new JsonException(\"Expected a base64-encoded string for binary content.\");");
-        _indent--;
-        AppendLine("}");
-        AppendLine();
-        AppendLine("string? base64 = reader.GetString();");
-        AppendLine("if (string.IsNullOrEmpty(base64))");
-        AppendLine("{");
-        _indent++;
-        AppendLine("return new MemoryStream();");
-        _indent--;
-        AppendLine("}");
-        AppendLine();
-        AppendLine("try");
-        AppendLine("{");
-        _indent++;
-        AppendLine("byte[] bytes = Convert.FromBase64String(base64);");
-        AppendLine("return new MemoryStream(bytes, writable: false);");
-        _indent--;
-        AppendLine("}");
-        AppendLine("catch (FormatException exception)");
-        AppendLine("{");
-        _indent++;
-        AppendLine("throw new JsonException(\"Expected a base64-encoded string for binary content.\", exception);");
-        _indent--;
-        AppendLine("}");
-        _indent--;
-        AppendLine("}");
-        AppendLine();
-        AppendLine("public override void Write(Utf8JsonWriter writer, Stream? value, JsonSerializerOptions options)");
-        AppendLine("{");
-        _indent++;
-        AppendLine("if (value is null)");
-        AppendLine("{");
-        _indent++;
-        AppendLine("writer.WriteNullValue();");
-        AppendLine("return;");
-        _indent--;
-        AppendLine("}");
-        AppendLine();
-        AppendLine("long originalPosition = 0;");
-        AppendLine("if (value.CanSeek)");
-        AppendLine("{");
-        _indent++;
-        AppendLine("originalPosition = value.Position;");
-        AppendLine("value.Position = 0;");
-        _indent--;
-        AppendLine("}");
-        AppendLine();
-        AppendLine("try");
-        AppendLine("{");
-        _indent++;
-        AppendLine("using var buffer = new MemoryStream();");
-        AppendLine("value.CopyTo(buffer);");
-        AppendLine("writer.WriteStringValue(Convert.ToBase64String(buffer.ToArray()));");
-        _indent--;
-        AppendLine("}");
-        AppendLine("finally");
-        AppendLine("{");
-        _indent++;
-        AppendLine("if (value.CanSeek)");
-        AppendLine("{");
-        _indent++;
-        AppendLine("value.Position = originalPosition;");
-        _indent--;
-        AppendLine("}");
-        _indent--;
-        AppendLine("}");
-        _indent--;
-        AppendLine("}");
-        _indent--;
-        AppendLine("}");
+        AppendBlock("file sealed class OpenApiGeneratedBinaryStreamJsonConverter : JsonConverter<Stream>", () =>
+        {
+            AppendBlock("public override Stream? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)", () =>
+            {
+                AppendBlock("if (reader.TokenType == JsonTokenType.Null)", () =>
+                {
+                    AppendLine("return null;");
+                });
+                AppendLine();
+                AppendBlock("if (reader.TokenType != JsonTokenType.String)", () =>
+                {
+                    AppendLine("throw new JsonException(\"Expected a base64-encoded string for binary content.\");");
+                });
+                AppendLine();
+                AppendLine("string? base64 = reader.GetString();");
+                AppendBlock("if (string.IsNullOrEmpty(base64))", () =>
+                {
+                    AppendLine("return new MemoryStream();");
+                });
+                AppendLine();
+                AppendBlock("try", () =>
+                {
+                    AppendLine("byte[] bytes = Convert.FromBase64String(base64);");
+                    AppendLine("return new MemoryStream(bytes, writable: false);");
+                });
+                AppendBlock("catch (FormatException exception)", () =>
+                {
+                    AppendLine("throw new JsonException(\"Expected a base64-encoded string for binary content.\", exception);");
+                });
+            });
+            AppendLine();
+            AppendBlock("public override void Write(Utf8JsonWriter writer, Stream? value, JsonSerializerOptions options)", () =>
+            {
+                AppendBlock("if (value is null)", () =>
+                {
+                    AppendLine("writer.WriteNullValue();");
+                    AppendLine("return;");
+                });
+                AppendLine();
+                AppendLine("long originalPosition = 0;");
+                AppendBlock("if (value.CanSeek)", () =>
+                {
+                    AppendLine("originalPosition = value.Position;");
+                    AppendLine("value.Position = 0;");
+                });
+                AppendLine();
+                AppendBlock("try", () =>
+                {
+                    AppendLine("using var buffer = new MemoryStream();");
+                    AppendLine("value.CopyTo(buffer);");
+                    AppendLine("writer.WriteStringValue(Convert.ToBase64String(buffer.ToArray()));");
+                });
+                AppendBlock("finally", () =>
+                {
+                    AppendBlock("if (value.CanSeek)", () =>
+                    {
+                        AppendLine("value.Position = originalPosition;");
+                    });
+                });
+            });
+        });
         AppendLine();
     }
 
     private void EmitGenericTypeAliasJsonConverter()
     {
-        AppendLine("file sealed class OpenApiGeneratedTypeAliasJsonConverter<TAlias, TValue> : JsonConverter<TAlias>");
-        AppendLine("    where TAlias : struct, IOpenApiGeneratedTypeAlias<TAlias, TValue>");
-        AppendLine("{");
-        _indent++;
-        AppendLine("public override TAlias Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)");
-        AppendLine("{");
-        _indent++;
-        AppendLine("TValue value = JsonSerializer.Deserialize<TValue>(ref reader, options)!;");
-        AppendLine("return TAlias.Create(value);");
-        _indent--;
-        AppendLine("}");
-        AppendLine();
-        AppendLine("public override void Write(Utf8JsonWriter writer, TAlias value, JsonSerializerOptions options)");
-        AppendLine("{");
-        _indent++;
-        AppendLine("JsonSerializer.Serialize(writer, value.Value, options);");
-        _indent--;
-        AppendLine("}");
-        _indent--;
-        AppendLine("}");
+        AppendBlock("file sealed class OpenApiGeneratedTypeAliasJsonConverter<TAlias, TValue> : JsonConverter<TAlias>\n    where TAlias : struct, IOpenApiGeneratedTypeAlias<TAlias, TValue>", () =>
+        {
+            AppendBlock("public override TAlias Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)", () =>
+            {
+                AppendLine("TValue value = JsonSerializer.Deserialize<TValue>(ref reader, options)!;");
+                AppendLine("return TAlias.Create(value);");
+            });
+            AppendLine();
+            AppendBlock("public override void Write(Utf8JsonWriter writer, TAlias value, JsonSerializerOptions options)", () =>
+            {
+                AppendLine("JsonSerializer.Serialize(writer, value.Value, options);");
+            });
+        });
         AppendLine();
     }
 
     private void EmitBinaryStreamTypeAliasJsonConverter()
     {
-        AppendLine("file sealed class OpenApiGeneratedBinaryStreamTypeAliasJsonConverter<TAlias> : JsonConverter<TAlias>");
-        AppendLine("    where TAlias : struct, IOpenApiGeneratedTypeAlias<TAlias, Stream>");
-        AppendLine("{");
-        _indent++;
-        AppendLine("private static readonly OpenApiGeneratedBinaryStreamJsonConverter StreamConverter = new();");
-        AppendLine();
-        AppendLine("public override TAlias Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)");
-        AppendLine("{");
-        _indent++;
-        AppendLine("Stream stream = StreamConverter.Read(ref reader, typeof(Stream), options) ?? new MemoryStream();");
-        AppendLine("return TAlias.Create(stream);");
-        _indent--;
-        AppendLine("}");
-        AppendLine();
-        AppendLine("public override void Write(Utf8JsonWriter writer, TAlias value, JsonSerializerOptions options)");
-        AppendLine("{");
-        _indent++;
-        AppendLine("StreamConverter.Write(writer, value.Value, options);");
-        _indent--;
-        AppendLine("}");
-        _indent--;
-        AppendLine("}");
+        AppendBlock("file sealed class OpenApiGeneratedBinaryStreamTypeAliasJsonConverter<TAlias> : JsonConverter<TAlias>\n    where TAlias : struct, IOpenApiGeneratedTypeAlias<TAlias, Stream>", () =>
+        {
+            AppendLine("private static readonly OpenApiGeneratedBinaryStreamJsonConverter StreamConverter = new();");
+            AppendLine();
+            AppendBlock("public override TAlias Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)", () =>
+            {
+                AppendLine("Stream stream = StreamConverter.Read(ref reader, typeof(Stream), options) ?? new MemoryStream();");
+                AppendLine("return TAlias.Create(stream);");
+            });
+            AppendLine();
+            AppendBlock("public override void Write(Utf8JsonWriter writer, TAlias value, JsonSerializerOptions options)", () =>
+            {
+                AppendLine("StreamConverter.Write(writer, value.Value, options);");
+            });
+        });
         AppendLine();
     }
 
@@ -798,83 +755,79 @@ internal class CSharpCodeEmitter
             AppendLine($"[JsonConverter(typeof(JsonStringEnumConverter<{typeName}>))]");
         }
 
-        AppendLine($"public enum {typeName}");
-        AppendLine("{");
-        _indent++;
-
-        var enumValues = schema.Enum!
-            .Where(e => e is null || !JsonNullSentinel.IsJsonNullSentinel(e))
-            .Select(e =>
-            {
-                if (e is JsonValue jv)
+        AppendBlock($"public enum {typeName}", () =>
+        {
+            var enumValues = schema.Enum!
+                .Where(e => e is null || !JsonNullSentinel.IsJsonNullSentinel(e))
+                .Select(e =>
                 {
-                    if (jv.TryGetValue(out string? s))
+                    if (e is JsonValue jv)
                     {
-                        return s;
-                    }
+                        if (jv.TryGetValue(out string? s))
+                        {
+                            return s;
+                        }
 
-                    if (jv.TryGetValue(out int i))
-                    {
-                        return i.ToString(CultureInfo.InvariantCulture);
-                    }
+                        if (jv.TryGetValue(out int i))
+                        {
+                            return i.ToString(CultureInfo.InvariantCulture);
+                        }
 
-                    if (jv.TryGetValue(out long l))
-                    {
-                        return l.ToString(CultureInfo.InvariantCulture);
-                    }
+                        if (jv.TryGetValue(out long l))
+                        {
+                            return l.ToString(CultureInfo.InvariantCulture);
+                        }
 
-                    if (jv.TryGetValue(out double d))
-                    {
-                        return d.ToString(CultureInfo.InvariantCulture);
+                        if (jv.TryGetValue(out double d))
+                        {
+                            return d.ToString(CultureInfo.InvariantCulture);
+                        }
                     }
+                    return e?.ToString() ?? "Unknown";
+                })
+                .ToList();
+
+            // Resolve duplicate enum member names by appending numeric suffixes
+            var memberNames = new string[enumValues.Count];
+            var usedMemberNames = new HashSet<string>(StringComparer.Ordinal);
+            for (int i = 0; i < enumValues.Count; i++)
+            {
+                string baseName = NameHelper.ToEnumMemberName(enumValues[i]);
+                string memberName = baseName;
+                int suffix = 2;
+                while (usedMemberNames.Contains(memberName))
+                {
+                    memberName = baseName + suffix;
+                    suffix++;
                 }
-                return e?.ToString() ?? "Unknown";
-            })
-            .ToList();
-
-        // Resolve duplicate enum member names by appending numeric suffixes
-        var memberNames = new string[enumValues.Count];
-        var usedMemberNames = new HashSet<string>(StringComparer.Ordinal);
-        for (int i = 0; i < enumValues.Count; i++)
-        {
-            string baseName = NameHelper.ToEnumMemberName(enumValues[i]);
-            string memberName = baseName;
-            int suffix = 2;
-            while (usedMemberNames.Contains(memberName))
-            {
-                memberName = baseName + suffix;
-                suffix++;
-            }
-            usedMemberNames.Add(memberName);
-            memberNames[i] = memberName;
-        }
-
-        for (int i = 0; i < enumValues.Count; i++)
-        {
-            string rawValue = enumValues[i];
-            string memberName = memberNames[i];
-            bool isLast = i == enumValues.Count - 1;
-
-            if (TypeResolver.HasTypeFlag(schema, JsonSchemaType.String))
-            {
-                AppendLine($"[JsonStringEnumMemberName(\"{EscapeCSharpStringLiteral(rawValue)}\")]");
+                usedMemberNames.Add(memberName);
+                memberNames[i] = memberName;
             }
 
-            if ((TypeResolver.HasTypeFlag(schema, JsonSchemaType.Integer) || TypeResolver.HasTypeFlag(schema, JsonSchemaType.Number))
-                && double.TryParse(rawValue, NumberStyles.Any, CultureInfo.InvariantCulture, out _))
+            for (int i = 0; i < enumValues.Count; i++)
             {
-                Append($"{memberName} = {rawValue}");
-            }
-            else
-            {
-                Append($"{memberName}");
-            }
+                string rawValue = enumValues[i];
+                string memberName = memberNames[i];
+                bool isLast = i == enumValues.Count - 1;
 
-            AppendLineRaw(isLast ? "" : ",");
-        }
+                if (TypeResolver.HasTypeFlag(schema, JsonSchemaType.String))
+                {
+                    AppendLine($"[JsonStringEnumMemberName(\"{EscapeCSharpStringLiteral(rawValue)}\")]");
+                }
 
-        _indent--;
-        AppendLine("}");
+                if ((TypeResolver.HasTypeFlag(schema, JsonSchemaType.Integer) || TypeResolver.HasTypeFlag(schema, JsonSchemaType.Number))
+                    && double.TryParse(rawValue, NumberStyles.Any, CultureInfo.InvariantCulture, out _))
+                {
+                    Append($"{memberName} = {rawValue}");
+                }
+                else
+                {
+                    Append($"{memberName}");
+                }
+
+                AppendLineRaw(isLast ? "" : ",");
+            }
+        });
         AppendLine();
     }
 
@@ -909,39 +862,35 @@ internal class CSharpCodeEmitter
             ? $"public partial record {typeName} : {baseType}"
             : $"public partial record {typeName}";
 
-        AppendLine(declaration);
-        AppendLine("{");
-        _indent++;
-
-        // Filter out properties already defined in a base type
-        var filteredProps = properties
-            .Where(p => basePropertyNames == null || !basePropertyNames.Contains(p.Key))
-            .ToList();
-
-        // Two-pass property name resolution: detect collisions, assign clean names to
-        // the most natural property name, differentiate others meaningfully.
-        Dictionary<string, string> propertyNameMap = ResolvePropertyNameCollisions(filteredProps.Select(p => p.Key), typeName);
-
-        foreach ((string? propName, IOpenApiSchema? propSchema) in filteredProps)
+        AppendBlock(declaration, () =>
         {
-            EmitProperty(propName, propSchema, requiredProps.Contains(propName), schemaName, typeName, propertyNameMap[propName]);
-        }
+            // Filter out properties already defined in a base type
+            var filteredProps = properties
+                .Where(p => basePropertyNames == null || !basePropertyNames.Contains(p.Key))
+                .ToList();
 
-        // If object has additionalProperties alongside regular properties
-        if (schema.AdditionalProperties is { } additionalProps &&
-            schema.Properties is { Count: > 0 })
-        {
-            string valueType = _typeResolver.Resolve(additionalProps);
-            string dictType = _options.UseImmutableDictionaries ? "IReadOnlyDictionary" : "Dictionary";
-            AppendLine();
+            // Two-pass property name resolution: detect collisions, assign clean names to
+            // the most natural property name, differentiate others meaningfully.
+            Dictionary<string, string> propertyNameMap = ResolvePropertyNameCollisions(filteredProps.Select(p => p.Key), typeName);
 
-            AppendLine("[JsonExtensionData]");
+            foreach ((string? propName, IOpenApiSchema? propSchema) in filteredProps)
+            {
+                EmitProperty(propName, propSchema, requiredProps.Contains(propName), schemaName, typeName, propertyNameMap[propName]);
+            }
 
-            AppendLine($"public {dictType}<string, {valueType}>? AdditionalProperties {{ get; init; }}");
-        }
+            // If object has additionalProperties alongside regular properties
+            if (schema.AdditionalProperties is { } additionalProps &&
+                schema.Properties is { Count: > 0 })
+            {
+                string valueType = _typeResolver.Resolve(additionalProps);
+                string dictType = _options.UseImmutableDictionaries ? "IReadOnlyDictionary" : "Dictionary";
+                AppendLine();
 
-        _indent--;
-        AppendLine("}");
+                AppendLine("[JsonExtensionData]");
+
+                AppendLine($"public {dictType}<string, {valueType}>? AdditionalProperties {{ get; init; }}");
+            }
+        });
         AppendLine();
     }
 
@@ -1155,12 +1104,10 @@ internal class CSharpCodeEmitter
             AppendLine($"[JsonConverter(typeof({converterType}))]");
         }
 
-        AppendLine($"public readonly partial record struct {typeName}({resolvedType} Value) : IOpenApiGeneratedTypeAlias<{typeName}, {resolvedType}>");
-        AppendLine("{");
-        _indent++;
-        AppendLine($"public static {typeName} Create({resolvedType} value) => new(value);");
-        _indent--;
-        AppendLine("}");
+        AppendBlock($"public readonly partial record struct {typeName}({resolvedType} Value) : IOpenApiGeneratedTypeAlias<{typeName}, {resolvedType}>", () =>
+        {
+            AppendLine($"public static {typeName} Create({resolvedType} value) => new(value);");
+        });
         AppendLine();
     }
 
@@ -1563,6 +1510,26 @@ internal class CSharpCodeEmitter
         }
 
         return builder.ToString();
+    }
+
+    /// <summary>
+    /// Emits a C# block: the prefix line(s), an opening brace, the body
+    /// (at an increased indent level), and a closing brace. Supports
+    /// multi-line prefixes (e.g. a declaration followed by a where clause)
+    /// by splitting on newlines.
+    /// </summary>
+    private void AppendBlock(string prefix, Action act)
+    {
+        foreach (string line in prefix.Split('\n'))
+        {
+            AppendLine(line.TrimEnd('\r'));
+        }
+
+        AppendLine("{");
+        _indent++;
+        act();
+        _indent--;
+        AppendLine("}");
     }
 
     private void AppendLine(string? text = null)
