@@ -64,4 +64,26 @@ public class GeneratorOptionsTests
 
         Assert.Throws<ArgumentException>(() => options.Validate());
     }
+
+    [Fact]
+    public void Validate_BlankExcludedSchema_ThrowsArgumentException()
+    {
+        var options = new GeneratorOptions
+        {
+            ExcludeSchemas = ["User", ""]
+        };
+
+        Assert.Throws<ArgumentException>(() => options.Validate());
+    }
+
+    [Fact]
+    public void Validate_ExcludeSchemas_Null_DoesNotThrow()
+    {
+        var options = new GeneratorOptions
+        {
+            ExcludeSchemas = null
+        };
+
+        options.Validate();
+    }
 }

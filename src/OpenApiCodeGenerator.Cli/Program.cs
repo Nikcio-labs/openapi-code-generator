@@ -31,10 +31,12 @@ static async Task<int> RunAsync(string[] args)
     bool immutableArrays = true;
     bool immutableDictionaries = true;
     var includeSchemas = new List<string>();
+    var excludeSchemas = new List<string>();
     bool omitJsonPropertyNameAttributes = false;
     bool inlinePrimitiveTypeAliases = false;
     bool emitValidationAttributes = true;
     bool emitObsoleteAttribute = true;
+    bool verbose = false;
 
     for (int i = 0; i < args.Length; i++)
     {
@@ -54,6 +56,9 @@ static async Task<int> RunAsync(string[] args)
                 break;
             case "--include-schema":
                 includeSchemas.Add(GetNextArg(args, ref i, "--include-schema"));
+                break;
+            case "--exclude-schema":
+                excludeSchemas.Add(GetNextArg(args, ref i, "--exclude-schema"));
                 break;
             case "--no-doc-comments":
                 docComments = false;
@@ -84,6 +89,9 @@ static async Task<int> RunAsync(string[] args)
                 break;
             case "--no-deprecated-attributes":
                 emitObsoleteAttribute = false;
+                break;
+            case "--verbose":
+                verbose = true;
                 break;
             default:
                 // Positional: first is input, second is output
@@ -122,10 +130,12 @@ static async Task<int> RunAsync(string[] args)
         UseImmutableDictionaries = immutableDictionaries,
         AddDefaultValuesToProperties = addDefaultValuesToProperties,
         IncludeSchemas = includeSchemas,
+        ExcludeSchemas = excludeSchemas,
         OmitJsonPropertyNameAttributes = omitJsonPropertyNameAttributes,
         InlinePrimitiveTypeAliases = inlinePrimitiveTypeAliases,
         EmitValidationAttributes = emitValidationAttributes,
         EmitObsoleteAttribute = emitObsoleteAttribute,
+        Verbose = verbose,
     };
 
     try
@@ -241,6 +251,7 @@ static void PrintUsage()
             -n, --namespace <name>      C# namespace (default: GeneratedModels)
                 --model-prefix <prefix> Prefix every generated model type name
                 --include-schema <name> Include only the named schema and its dependencies (repeatable)
+                --exclude-schema <name> Exclude the named schema from generation (repeatable)
                 --no-doc-comments       Disable XML doc comment generation
                 --no-header             Disable auto-generated file header
                 --no-default-non-nullable  Don't treat defaults as non-nullable
@@ -251,6 +262,7 @@ static void PrintUsage()
                 --inline-type-aliases   Inline primitive aliases instead of emitting wrapper types
                 --no-validation-attributes  Skip validation attributes from OpenAPI constraints
                 --no-deprecated-attributes  Skip [Obsolete] on deprecated schemas and properties
+                --verbose               Print OpenAPI diagnostics to stderr
             -v, --version               Show version information
             -h, --help                  Show this help message
 

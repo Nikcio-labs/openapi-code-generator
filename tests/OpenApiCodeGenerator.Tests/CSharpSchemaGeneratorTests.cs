@@ -2480,4 +2480,119 @@ public class CSharpSchemaGeneratorTests
     }
 
     #endregion
+
+    #region ExcludeSchemas
+
+    [Fact]
+    public void Generate_WithExcludeSchemas_RemovesExcludedSchemas()
+    {
+        string spec = """
+            {
+              "openapi": "3.0.0",
+              "info": { "title": "Test", "version": "1.0" },
+              "paths": {},
+              "components": {
+                "schemas": {
+                  "User": {
+                    "type": "object",
+                    "properties": { "name": { "type": "string" } }
+                  },
+                  "Address": {
+                    "type": "object",
+                    "properties": { "city": { "type": "string" } }
+                  },
+                  "IgnoreMe": {
+                    "type": "object",
+                    "properties": { "foo": { "type": "string" } }
+                  }
+                }
+              }
+            }
+            """;
+
+        var generator = new CSharpSchemaGenerator(new GeneratorOptions
+        {
+            ExcludeSchemas = ["IgnoreMe"]
+        });
+        string result = generator.GenerateFromText(spec);
+
+        Assert.Contains("public partial record User", result, StringComparison.Ordinal);
+        Assert.Contains("public partial record Address", result, StringComparison.Ordinal);
+        Assert.DoesNotContain("public partial record IgnoreMe", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Generate_WithExcludeSchemas_AndIncludeSchemas_WorksTogether()
+    {
+        string spec = """
+            {
+              "openapi": "3.0.0",
+              "info": { "title": "Test", "version": "1.0" },
+              "paths": {},
+              "components": {
+                "schemas": {
+                  "User": {
+                    "type": "object",
+                    "properties": {
+                      "name": { "type": "string" },
+                      "address": { "$ref": "#/components/schemas/Address" }
+                    }
+                  },
+                  "Address": {
+                    "type": "object",
+                    "properties": { "city": { "type": "string" } }
+                  },
+                  "IgnoreMe": {
+                    "type": "object",
+                    "properties": { "foo": { "type": "string" } }
+                  }
+                }
+              }
+            }
+            """;
+
+        var generator = new CSharpSchemaGenerator(new GeneratorOptions
+        {
+            IncludeSchemas = ["User"],
+            ExcludeSchemas = ["IgnoreMe"]
+        });
+        string result = generator.GenerateFromText(spec);
+
+        // User and its dependency Address should be included
+        Assert.Contains("public partial record User", result, StringComparison.Ordinal);
+        Assert.Contains("public partial record Address", result, StringComparison.Ordinal);
+        // IgnoreMe should be excluded
+        Assert.DoesNotContain("public partial record IgnoreMe", result, StringComparison.Ordinal);
+    }
+
+    #endregion
+
+    #region Verbose Diagnostics
+
+    [Fact]
+    public void Generate_WithVerbose_DoesNotThrow()
+    {
+        string spec = """
+            {
+              "openapi": "3.0.0",
+              "info": { "title": "Test", "version": "1.0" },
+              "paths": {},
+              "components": {
+                "schemas": {
+                  "User": {
+                    "type": "object",
+                    "properties": { "name": { "type": "string" } }
+                  }
+                }
+              }
+            }
+            """;
+
+        var generator = new CSharpSchemaGenerator(new GeneratorOptions { Verbose = true });
+        string result = generator.GenerateFromText(spec);
+
+        Assert.Contains("public partial record User", result, StringComparison.Ordinal);
+    }
+
+    #endregion
 }
