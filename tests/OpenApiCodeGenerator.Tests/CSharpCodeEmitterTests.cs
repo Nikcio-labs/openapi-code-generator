@@ -2988,7 +2988,7 @@ public class CSharpCodeEmitterTests
         Directory.CreateDirectory(tempRoot);
         try
         {
-            await File.WriteAllTextAsync(Path.Combine(tempRoot, "Generated.cs"), result);
+            await File.WriteAllTextAsync(Path.Combine(tempRoot, "Generated.cs"), result, TestContext.Current.CancellationToken);
             await File.WriteAllTextAsync(Path.Combine(tempRoot, "Harness.csproj"), """
                 <Project Sdk="Microsoft.NET.Sdk">
                   <PropertyGroup>
@@ -2997,7 +2997,7 @@ public class CSharpCodeEmitterTests
                     <AnalysisMode>All</AnalysisMode>
                   </PropertyGroup>
                 </Project>
-                """);
+                """, TestContext.Current.CancellationToken);
             using var proc = new System.Diagnostics.Process();
             proc.StartInfo = new System.Diagnostics.ProcessStartInfo
             {
@@ -3010,9 +3010,9 @@ public class CSharpCodeEmitterTests
                 CreateNoWindow = true
             };
             proc.Start();
-            string stdout = await proc.StandardOutput.ReadToEndAsync();
-            string stderr = await proc.StandardError.ReadToEndAsync();
-            await proc.WaitForExitAsync();
+            string stdout = await proc.StandardOutput.ReadToEndAsync(TestContext.Current.CancellationToken);
+            string stderr = await proc.StandardError.ReadToEndAsync(TestContext.Current.CancellationToken);
+            await proc.WaitForExitAsync(TestContext.Current.CancellationToken);
             Assert.True(proc.ExitCode == 0,
                 $"Validation attributes code failed to compile.{Environment.NewLine}STDOUT:{stdout}{Environment.NewLine}STDERR:{stderr}");
         }
