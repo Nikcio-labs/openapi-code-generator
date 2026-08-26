@@ -2197,6 +2197,231 @@ public class CSharpCodeEmitterTests
 
     #endregion
 
+    #region oneOf/anyOf with Inline Object Variants
+
+    [Fact]
+    public void Emit_InlineOneOfWithRefAndInlineObject_HoistsInlineObject()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["A"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["name"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                }
+            },
+            ["MyRecord"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["value"] = new OpenApiSchema
+                    {
+                        OneOf = new List<IOpenApiSchema>
+                        {
+                            new OpenApiSchemaReference("A"),
+                            new OpenApiSchema
+                            {
+                                Type = JsonSchemaType.Object,
+                                Properties = new Dictionary<string, IOpenApiSchema>
+                                {
+                                    ["x"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        };
+
+        string result = Generate(schemas);
+
+        // Property should reference the hoisted union type, not "object"
+        Assert.Contains("public MyRecordValue? Value { get; init; }", result, StringComparison.Ordinal);
+
+        // Union should have [JsonDerivedType] for both $ref and hoisted inline object
+        Assert.Contains("[JsonDerivedType(typeof(A), \"A\")]", result, StringComparison.Ordinal);
+        Assert.Contains("[JsonDerivedType(typeof(MyRecordValueVariant2), \"MyRecordValueVariant2\")]", result, StringComparison.Ordinal);
+
+        // Inline object variant should be hoisted to a named record
+        Assert.Contains("public partial record MyRecordValueVariant2", result, StringComparison.Ordinal);
+        Assert.Contains("public string? X { get; init; }", result, StringComparison.Ordinal);
+
+        // Union should be an abstract record
+        Assert.Contains("public abstract partial record MyRecordValue;", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Emit_InlineOneOfAllInlineObjects_HoistsAllVariants()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["MyRecord"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["value"] = new OpenApiSchema
+                    {
+                        OneOf = new List<IOpenApiSchema>
+                        {
+                            new OpenApiSchema
+                            {
+                                Type = JsonSchemaType.Object,
+                                Properties = new Dictionary<string, IOpenApiSchema>
+                                {
+                                    ["type"] = new OpenApiSchema { Type = JsonSchemaType.String },
+                                    ["name"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                                }
+                            },
+                            new OpenApiSchema
+                            {
+                                Type = JsonSchemaType.Object,
+                                Properties = new Dictionary<string, IOpenApiSchema>
+                                {
+                                    ["type"] = new OpenApiSchema { Type = JsonSchemaType.String },
+                                    ["count"] = new OpenApiSchema { Type = JsonSchemaType.Integer }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        };
+
+        string result = Generate(schemas);
+
+        Assert.Contains("public MyRecordValue? Value { get; init; }", result, StringComparison.Ordinal);
+        Assert.Contains("public abstract partial record MyRecordValue;", result, StringComparison.Ordinal);
+        Assert.Contains("public partial record MyRecordValueVariant1", result, StringComparison.Ordinal);
+        Assert.Contains("public partial record MyRecordValueVariant2", result, StringComparison.Ordinal);
+        Assert.Contains("[JsonDerivedType(typeof(MyRecordValueVariant1), \"MyRecordValueVariant1\")]", result, StringComparison.Ordinal);
+        Assert.Contains("[JsonDerivedType(typeof(MyRecordValueVariant2), \"MyRecordValueVariant2\")]", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Emit_ComponentLevelOneOfWithRefAndInlineObject_HoistsInlineObject()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["A"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["name"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                }
+            },
+            ["MyUnion"] = new OpenApiSchema
+            {
+                OneOf = new List<IOpenApiSchema>
+                {
+                    new OpenApiSchemaReference("A"),
+                    new OpenApiSchema
+                    {
+                        Type = JsonSchemaType.Object,
+                        Properties = new Dictionary<string, IOpenApiSchema>
+                        {
+                            ["label"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                        }
+                    }
+                }
+            }
+        };
+
+        string result = Generate(schemas);
+
+        Assert.Contains("public abstract partial record MyUnion;", result, StringComparison.Ordinal);
+        Assert.Contains("[JsonDerivedType(typeof(A), \"A\")]", result, StringComparison.Ordinal);
+        Assert.Contains("[JsonDerivedType(typeof(MyUnionVariant2), \"MyUnionVariant2\")]", result, StringComparison.Ordinal);
+        Assert.Contains("public partial record MyUnionVariant2", result, StringComparison.Ordinal);
+        Assert.Contains("public string? Label { get; init; }", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public async Task Emit_InlineOneOfWithRefAndInlineObject_CompilesSuccessfully()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["A"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["name"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                }
+            },
+            ["MyRecord"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["value"] = new OpenApiSchema
+                    {
+                        OneOf = new List<IOpenApiSchema>
+                        {
+                            new OpenApiSchemaReference("A"),
+                            new OpenApiSchema
+                            {
+                                Type = JsonSchemaType.Object,
+                                Properties = new Dictionary<string, IOpenApiSchema>
+                                {
+                                    ["x"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        };
+
+        string result = Generate(schemas);
+
+        string tempRoot = Path.Combine(
+            AppContext.BaseDirectory, "..", "..", "..", "..",
+            "TestResults", "InlineUnionCompile", Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(tempRoot);
+        try
+        {
+            await File.WriteAllTextAsync(Path.Combine(tempRoot, "Generated.cs"), result);
+            await File.WriteAllTextAsync(Path.Combine(tempRoot, "Harness.csproj"), """
+                <Project Sdk="Microsoft.NET.Sdk">
+                  <PropertyGroup>
+                    <TargetFramework>net10.0</TargetFramework>
+                    <Nullable>enable</Nullable>
+                    <AnalysisMode>All</AnalysisMode>
+                    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+                  </PropertyGroup>
+                </Project>
+                """);
+            using var proc = new System.Diagnostics.Process();
+            proc.StartInfo = new System.Diagnostics.ProcessStartInfo
+            {
+                FileName = "dotnet",
+                Arguments = $"build \"{Path.Combine(tempRoot, "Harness.csproj")}\" -v q --nologo",
+                WorkingDirectory = tempRoot,
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                UseShellExecute = false,
+                CreateNoWindow = true
+            };
+            proc.Start();
+            string stdout = await proc.StandardOutput.ReadToEndAsync();
+            string stderr = await proc.StandardError.ReadToEndAsync();
+            await proc.WaitForExitAsync();
+            Assert.True(proc.ExitCode == 0,
+                $"Inline union code failed to compile.{Environment.NewLine}STDOUT:{stdout}{Environment.NewLine}STDERR:{stderr}");
+        }
+        finally
+        {
+            if (Directory.Exists(tempRoot)) Directory.Delete(tempRoot, recursive: true);
+        }
+    }
+
+    #endregion
+
     #region Default Value Emission
 
     [Fact]

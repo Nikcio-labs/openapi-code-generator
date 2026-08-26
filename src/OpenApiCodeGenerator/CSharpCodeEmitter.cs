@@ -517,6 +517,25 @@ internal class CSharpCodeEmitter
         {
             TryHoistPropertySchema(ownAddProps, enclosingTypeName, "Value", typeNameMap, usedNames, visited);
         }
+
+        // Scan oneOf/anyOf variants for inline objects (handles component-level union schemas
+        // where variants include inline object definitions that need to be hoisted)
+        IList<IOpenApiSchema>? unionVariants = schema.OneOf ?? schema.AnyOf;
+        if (unionVariants != null)
+        {
+            int variantIndex = 1;
+            foreach (IOpenApiSchema variant in unionVariants)
+            {
+                if (variant is not OpenApiSchemaReference && !_knownSchemas.Contains(variant))
+                {
+                    // Try to hoist inline objects within union variants
+                    string variantPropName = $"Variant{variantIndex}";
+                    TryHoistPropertySchema(variant, enclosingTypeName, variantPropName, typeNameMap, usedNames, visited);
+                }
+
+                variantIndex++;
+            }
+        }
     }
 
     /// <summary>
@@ -548,9 +567,29 @@ internal class CSharpCodeEmitter
             return inlineTypeName;
         }
 
-        if (IsInlineRefUnion(propSchema))
+        if (IsInlineUnion(propSchema))
         {
             string inlineTypeName = SynthesizeInlineTypeName(enclosingTypeName, propName, usedNames);
+
+            // Hoist any inline object variants within the union before hoisting the union itself.
+            // This ensures the inline objects are registered with TypeResolver and emitted as records.
+            IList<IOpenApiSchema>? variants = propSchema.OneOf ?? propSchema.AnyOf;
+            if (variants != null)
+            {
+                int variantIndex = 1;
+                foreach (IOpenApiSchema variant in variants)
+                {
+                    if (IsInlineObject(variant))
+                    {
+                        string variantTypeName = SynthesizeInlineTypeName(inlineTypeName, $"Variant{variantIndex}", usedNames);
+                        HoistInlineObject(variant, variantTypeName, typeNameMap, usedNames);
+                        DiscoverInlineObjects(variant, variantTypeName, typeNameMap, usedNames, visited);
+                    }
+
+                    variantIndex++;
+                }
+            }
+
             HoistInlineObject(propSchema, inlineTypeName, typeNameMap, usedNames);
             return inlineTypeName;
         }
@@ -642,10 +681,11 @@ internal class CSharpCodeEmitter
     }
 
     /// <summary>
-    /// Detects an inline oneOf/anyOf where all variants are $refs — should be
-    /// hoisted as an abstract record with [JsonDerivedType] attributes.
+    /// Detects an inline oneOf/anyOf where all variants are $refs or inline objects —
+    /// should be hoisted as an abstract record with [JsonDerivedType] attributes.
+    /// Inline object variants are hoisted to named records before the union is hoisted.
     /// </summary>
-    private bool IsInlineRefUnion(IOpenApiSchema schema)
+    private bool IsInlineUnion(IOpenApiSchema schema)
     {
         // Skip $ref schemas
         if (schema is OpenApiSchemaReference)
@@ -682,8 +722,8 @@ internal class CSharpCodeEmitter
             return false;
         }
 
-        // All variants must be $refs
-        return variants.All(v => v is OpenApiSchemaReference);
+        // All variants must be $refs or inline objects (hoistable to records)
+        return variants.All(v => v is OpenApiSchemaReference || IsInlineObject(v));
     }
 
     private static string SynthesizeInlineTypeName(string enclosingTypeName, string propName, HashSet<string> usedNames)
@@ -1223,10 +1263,22 @@ internal class CSharpCodeEmitter
             .ToList();
 
         // Collect the variant type names for documentation
-        var variantNames = nonNullVariants
-            .OfType<OpenApiSchemaReference>()
-            .Select(v => NameHelper.ToTypeName(v.Reference.Id, _options.ModelPrefix))
-            .ToList();
+        var variantNames = new List<string>();
+        foreach (IOpenApiSchema variant in nonNullVariants)
+        {
+            if (variant is OpenApiSchemaReference refVariant)
+            {
+                variantNames.Add(NameHelper.ToTypeName(refVariant.Reference.Id, _options.ModelPrefix));
+            }
+            else
+            {
+                string? hoistedName = _typeResolver.GetInlineObjectTypeName(variant);
+                if (hoistedName != null)
+                {
+                    variantNames.Add(hoistedName);
+                }
+            }
+        }
 
         if (variantNames.Count > 0)
         {
@@ -1235,13 +1287,21 @@ internal class CSharpCodeEmitter
             AppendLine($"/// </remarks>");
         }
 
-        // If all non-null variants are $refs, emit as an abstract record with JsonDerivedType attributes
-        if (nonNullVariants.Count > 0 && nonNullVariants.All(v => v is OpenApiSchemaReference))
+        // Emit [JsonDerivedType] for each resolvable variant
+        foreach (IOpenApiSchema variant in nonNullVariants)
         {
-            foreach (OpenApiSchemaReference variant in nonNullVariants.OfType<OpenApiSchemaReference>())
+            if (variant is OpenApiSchemaReference refVariant)
             {
-                string derivedName = NameHelper.ToTypeName(variant.Reference.Id, _options.ModelPrefix);
-                AppendLine($"[JsonDerivedType(typeof({derivedName}), \"{variant.Reference.Id}\")]");
+                string derivedName = NameHelper.ToTypeName(refVariant.Reference.Id, _options.ModelPrefix);
+                AppendLine($"[JsonDerivedType(typeof({derivedName}), \"{refVariant.Reference.Id}\")]");
+            }
+            else
+            {
+                string? hoistedName = _typeResolver.GetInlineObjectTypeName(variant);
+                if (hoistedName != null)
+                {
+                    AppendLine($"[JsonDerivedType(typeof({hoistedName}), \"{hoistedName}\")]");
+                }
             }
         }
 
