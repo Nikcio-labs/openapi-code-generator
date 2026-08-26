@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\OpenApiCodeGenerator\OpenApiCodeGenerator.csproj" />
+    <ProjectReference Include="..\..\src\OpenApiCodeGenerator.Cli\OpenApiCodeGenerator.Cli.csproj" />
   </ItemGroup>
 
   <ItemGroup>
