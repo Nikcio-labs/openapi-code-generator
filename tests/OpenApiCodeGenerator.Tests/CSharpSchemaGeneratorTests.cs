@@ -2135,4 +2135,255 @@ public class CSharpSchemaGeneratorTests
     }
 
     #endregion
+
+    #region Circular References
+
+    [Fact]
+    public void Generate_SelfReferencingSchema_DoesNotInfiniteLoop()
+    {
+        string spec = """
+            {
+              "openapi": "3.0.0",
+              "info": { "title": "Test", "version": "1.0" },
+              "paths": {},
+              "components": {
+                "schemas": {
+                  "TreeNode": {
+                    "type": "object",
+                    "properties": {
+                      "value": { "type": "string" },
+                      "children": {
+                        "type": "array",
+                        "items": { "$ref": "#/components/schemas/TreeNode" }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            """;
+
+        var generator = new CSharpSchemaGenerator();
+        string result = generator.GenerateFromText(spec);
+
+        Assert.Contains("public partial record TreeNode", result, StringComparison.Ordinal);
+        Assert.Contains("IReadOnlyList<TreeNode>", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Generate_MutuallyReferencingSchemas_DoesNotInfiniteLoop()
+    {
+        string spec = """
+            {
+              "openapi": "3.0.0",
+              "info": { "title": "Test", "version": "1.0" },
+              "paths": {},
+              "components": {
+                "schemas": {
+                  "A": {
+                    "type": "object",
+                    "properties": {
+                      "name": { "type": "string" },
+                      "b": { "$ref": "#/components/schemas/B" }
+                    }
+                  },
+                  "B": {
+                    "type": "object",
+                    "properties": {
+                      "name": { "type": "string" },
+                      "a": { "$ref": "#/components/schemas/A" }
+                    }
+                  }
+                }
+              }
+            }
+            """;
+
+        var generator = new CSharpSchemaGenerator();
+        string result = generator.GenerateFromText(spec);
+
+        Assert.Contains("public partial record A", result, StringComparison.Ordinal);
+        Assert.Contains("public partial record B", result, StringComparison.Ordinal);
+        Assert.Contains("public B? B { get; init; }", result, StringComparison.Ordinal);
+        Assert.Contains("public A? A { get; init; }", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public async Task Generate_SelfReferencingSchema_CompilesSuccessfully()
+    {
+        string spec = """
+            {
+              "openapi": "3.0.0",
+              "info": { "title": "Test", "version": "1.0" },
+              "paths": {},
+              "components": {
+                "schemas": {
+                  "TreeNode": {
+                    "type": "object",
+                    "properties": {
+                      "value": { "type": "string" },
+                      "children": {
+                        "type": "array",
+                        "items": { "$ref": "#/components/schemas/TreeNode" }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            """;
+
+        var generator = new CSharpSchemaGenerator();
+        string result = generator.GenerateFromText(spec);
+
+        await AssertGeneratedCodeCompilesAsync(result, implicitUsings: true);
+        await AssertGeneratedCodeCompilesAsync(result, implicitUsings: false);
+        await AssertGeneratedCodeCompilesAsync(result, implicitUsings: true, treatWarningsAsErrors: true);
+    }
+
+    [Fact]
+    public async Task Generate_MutuallyReferencingSchemas_CompilesSuccessfully()
+    {
+        string spec = """
+            {
+              "openapi": "3.0.0",
+              "info": { "title": "Test", "version": "1.0" },
+              "paths": {},
+              "components": {
+                "schemas": {
+                  "A": {
+                    "type": "object",
+                    "properties": {
+                      "name": { "type": "string" },
+                      "b": { "$ref": "#/components/schemas/B" }
+                    }
+                  },
+                  "B": {
+                    "type": "object",
+                    "properties": {
+                      "name": { "type": "string" },
+                      "a": { "$ref": "#/components/schemas/A" }
+                    }
+                  }
+                }
+              }
+            }
+            """;
+
+        var generator = new CSharpSchemaGenerator();
+        string result = generator.GenerateFromText(spec);
+
+        await AssertGeneratedCodeCompilesAsync(result, implicitUsings: true);
+        await AssertGeneratedCodeCompilesAsync(result, implicitUsings: false);
+        await AssertGeneratedCodeCompilesAsync(result, implicitUsings: true, treatWarningsAsErrors: true);
+    }
+
+    [Fact]
+    public void Generate_CircularReference_WithIncludeSchemas_DoesNotInfiniteLoop()
+    {
+        string spec = """
+            {
+              "openapi": "3.0.0",
+              "info": { "title": "Test", "version": "1.0" },
+              "paths": {},
+              "components": {
+                "schemas": {
+                  "A": {
+                    "type": "object",
+                    "properties": {
+                      "name": { "type": "string" },
+                      "b": { "$ref": "#/components/schemas/B" }
+                    }
+                  },
+                  "B": {
+                    "type": "object",
+                    "properties": {
+                      "name": { "type": "string" },
+                      "a": { "$ref": "#/components/schemas/A" }
+                    }
+                  },
+                  "C": {
+                    "type": "object",
+                    "properties": {
+                      "name": { "type": "string" }
+                    }
+                  }
+                }
+              }
+            }
+            """;
+
+        var generator = new CSharpSchemaGenerator(new GeneratorOptions
+        {
+            IncludeSchemas = ["A"]
+        });
+        string result = generator.GenerateFromText(spec);
+
+        // A and B should both be included (B is a dependency of A)
+        Assert.Contains("public partial record A", result, StringComparison.Ordinal);
+        Assert.Contains("public partial record B", result, StringComparison.Ordinal);
+        // C should NOT be included
+        Assert.DoesNotContain("public partial record C", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public async Task Generate_CircularReference_SerializationRoundTrip()
+    {
+        string spec = """
+            {
+              "openapi": "3.0.0",
+              "info": { "title": "Test", "version": "1.0" },
+              "paths": {},
+              "components": {
+                "schemas": {
+                  "TreeNode": {
+                    "type": "object",
+                    "properties": {
+                      "value": { "type": "string" },
+                      "children": {
+                        "type": "array",
+                        "items": { "$ref": "#/components/schemas/TreeNode" }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            """;
+
+        var generator = new CSharpSchemaGenerator();
+        string generatedCode = generator.GenerateFromText(spec);
+
+        string programSource = """
+            using System.Text.Json;
+            using GeneratedModels;
+
+            var node = new TreeNode
+            {
+                Value = "root",
+                Children =
+                [
+                    new TreeNode { Value = "child1" },
+                    new TreeNode { Value = "child2", Children = [new TreeNode { Value = "grandchild" }] }
+                ]
+            };
+
+            string json = JsonSerializer.Serialize(node);
+            TreeNode? deserialized = JsonSerializer.Deserialize<TreeNode>(json);
+
+            Console.WriteLine(deserialized!.Value);
+            Console.WriteLine(deserialized.Children![0].Value);
+            Console.WriteLine(deserialized.Children[1].Value);
+            Console.WriteLine(deserialized.Children[1].Children![0].Value);
+            """;
+
+        string[] lines = await GetSerializationLinesAsync(generatedCode, programSource);
+
+        Assert.Equal("root", lines[0]);
+        Assert.Equal("child1", lines[1]);
+        Assert.Equal("child2", lines[2]);
+        Assert.Equal("grandchild", lines[3]);
+    }
+
+    #endregion
 }
