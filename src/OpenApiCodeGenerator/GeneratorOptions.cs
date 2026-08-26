@@ -77,6 +77,16 @@ public sealed class GeneratorOptions
     public bool EmitObsoleteAttribute { get; init; } = true;
 
     /// <summary>
+    /// When true, print OpenAPI diagnostic warnings and errors to stderr during generation.
+    /// </summary>
+    public bool Verbose { get; init; }
+
+    /// <summary>
+    /// Schemas to exclude from generation. When null or empty, no schemas are excluded.
+    /// </summary>
+    public IReadOnlyCollection<string>? ExcludeSchemas { get; init; }
+
+    /// <summary>
     /// Validates the configured options before generation starts.
     /// </summary>
     /// <exception cref="ArgumentException">Thrown when a configured option is not a valid C# identifier shape.</exception>
@@ -99,6 +109,19 @@ public sealed class GeneratorOptions
                 }
 
                 throw new ArgumentException("IncludeSchemas must not contain null or blank schema names.", nameof(IncludeSchemas));
+            }
+        }
+
+        if (ExcludeSchemas is { Count: > 0 } excludedSchemas)
+        {
+            foreach (string schemaName in excludedSchemas)
+            {
+                if (!string.IsNullOrWhiteSpace(schemaName))
+                {
+                    continue;
+                }
+
+                throw new ArgumentException("ExcludeSchemas must not contain null or blank schema names.", nameof(ExcludeSchemas));
             }
         }
     }

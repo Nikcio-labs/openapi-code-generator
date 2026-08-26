@@ -97,6 +97,15 @@ public sealed class CSharpSchemaGenerator
 
     private IDictionary<string, IOpenApiSchema> SelectSchemas(IDictionary<string, IOpenApiSchema> schemas)
     {
+        // Apply ExcludeSchemas first
+        if (_options.ExcludeSchemas is { Count: > 0 } excludedSchemas)
+        {
+            var excludedSet = new HashSet<string>(excludedSchemas, StringComparer.Ordinal);
+            schemas = schemas
+                .Where(kvp => !excludedSet.Contains(kvp.Key))
+                .ToDictionary(kvp => kvp.Key, kvp => kvp.Value, StringComparer.Ordinal);
+        }
+
         if (_options.IncludeSchemas is not { Count: > 0 } includedSchemas)
         {
             return schemas;
@@ -200,8 +209,28 @@ public sealed class CSharpSchemaGenerator
         }
     }
 
-    private static void HandleDiagnostics(ReadResult result)
+    private void HandleDiagnostics(ReadResult result)
     {
+        // Print diagnostics in verbose mode
+        if (_options.Verbose && result.Diagnostic is { } diag)
+        {
+            if (diag.Errors is { Count: > 0 } diagErrors)
+            {
+                foreach (OpenApiError error in diagErrors)
+                {
+                    Console.Error.WriteLine($"[ERROR] {error.Message}");
+                }
+            }
+
+            if (diag.Warnings is { Count: > 0 } warnings)
+            {
+                foreach (OpenApiError warning in warnings)
+                {
+                    Console.Error.WriteLine($"[WARN] {warning.Message}");
+                }
+            }
+        }
+
         // If the document parsed successfully with components/schemas, proceed
         // even if there are path-level or other non-schema validation errors.
         if (result.Document?.Components?.Schemas is { Count: > 0 })
