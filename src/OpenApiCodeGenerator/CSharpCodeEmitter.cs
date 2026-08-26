@@ -1090,7 +1090,6 @@ internal class CSharpCodeEmitter
         string resolvedType = _typeResolver.ResolveUnderlyingType(schema);
 
         EmitDocComment(schema.Description);
-        EmitObsoleteAttribute(schema);
 
         // C# doesn't have direct type aliases at the top level.
         // We emit a global using alias or a wrapper record.
@@ -1098,6 +1097,8 @@ internal class CSharpCodeEmitter
         AppendLine($"/// <summary>");
         AppendLine($"/// Type alias for {resolvedType}.");
         AppendLine($"/// </summary>");
+
+        EmitObsoleteAttribute(schema);
 
         if (!_options.InlinePrimitiveTypeAliases)
         {

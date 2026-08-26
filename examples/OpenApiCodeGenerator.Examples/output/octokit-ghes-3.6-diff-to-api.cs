@@ -4261,6 +4261,7 @@ public partial record Repository
     /// <summary>
     /// Whether a squash merge commit can use the pull request title as default. **This property has been deprecated. Please use `squash_merge_commit_title` instead.
     /// </summary>
+    [Obsolete]
     [JsonPropertyName("use_squash_pr_title_as_default")]
     public bool UseSquashPrTitleAsDefault { get; init; } = false;
 
@@ -5552,6 +5553,7 @@ public partial record NullableRepository
     /// <summary>
     /// Whether a squash merge commit can use the pull request title as default. **This property has been deprecated. Please use `squash_merge_commit_title` instead.
     /// </summary>
+    [Obsolete]
     [JsonPropertyName("use_squash_pr_title_as_default")]
     public bool UseSquashPrTitleAsDefault { get; init; } = false;
 

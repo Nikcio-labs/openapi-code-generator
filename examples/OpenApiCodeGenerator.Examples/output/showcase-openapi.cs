@@ -352,4 +352,37 @@ public partial record Notification
     [JsonPropertyName("contact")]
     public required ContactMethod Contact { get; init; }
 
+    /// <summary>
+    /// Superseded by contact; retained for backward compatibility.
+    /// </summary>
+    [Obsolete]
+    [JsonPropertyName("legacyChannel")]
+    public string? LegacyChannel { get; init; }
+
+}
+
+/// <summary>
+/// Deprecated enum kept for migration; use DeliveryState instead.
+/// </summary>
+[Obsolete]
+[JsonConverter(typeof(JsonStringEnumConverter<LegacyStatus>))]
+public enum LegacyStatus
+{
+    [JsonStringEnumMemberName("queued")]
+    Queued,
+    [JsonStringEnumMemberName("done")]
+    Done
+}
+
+/// <summary>
+/// Deprecated UUID alias kept for migration.
+/// </summary>
+/// <summary>
+/// Type alias for Guid.
+/// </summary>
+[Obsolete]
+[JsonConverter(typeof(OpenApiGeneratedTypeAliasJsonConverter<LegacyId, Guid>))]
+public readonly partial record struct LegacyId(Guid Value) : IOpenApiGeneratedTypeAlias<LegacyId, Guid>
+{
+    public static LegacyId Create(Guid value) => new(value);
 }

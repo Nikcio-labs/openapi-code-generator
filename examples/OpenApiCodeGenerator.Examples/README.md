@@ -26,6 +26,7 @@ The local showcase spec is intentionally compact and demonstrates:
 - `anyOf` union generation
 - string enums and inline enums
 - arrays, nullable fields, and `additionalProperties`
+- `deprecated` schemas and properties emitted with `[Obsolete]`
 
 ## Running
 
