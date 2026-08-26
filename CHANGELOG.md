@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.4.1](https://github.com/Nikcio-labs/openapi-code-generator/compare/v1.4.0...v1.4.1) (2026-08-26)
+
+
+### Fixed
+
+* **ci:** Point version-file to manifest to avoid creating version.txt ([20dbc49](https://github.com/Nikcio-labs/openapi-code-generator/commit/20dbc499954d578b2edc8675ee95d6cf63480c1e))
+* **ci:** Remove version-file override, rely on extra-files for csproj ([8a21436](https://github.com/Nikcio-labs/openapi-code-generator/commit/8a2143628c9e931b09819212e33f87a1b0dbe479))
+* **ci:** Use xml xpath updater for csproj version instead of version-file ([dabe4be](https://github.com/Nikcio-labs/openapi-code-generator/commit/dabe4be65af316bfd4fa3f286e9f6a1800f2e292))
+
 ## [1.4.0] (2026-08-26)
 
 ### Added

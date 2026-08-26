@@ -9,7 +9,7 @@
 
     <!-- NuGet Package -->
     <PackageId>Nikcio.OpenApiCodeGen</PackageId>
-    <Version>1.4.0</Version>
+    <Version>1.4.1</Version>
     <Authors>Nikcio</Authors>
     <Description>A fast, opinionated C# code generator for OpenAPI specifications. Generates records, enums, and type aliases from OpenAPI 3.x schemas.</Description>
     <PackageTags>openapi;codegen;csharp;code-generator;swagger;rest-api;dotnet-tool</PackageTags>
@@ -28,12 +28,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\OpenApiCodeGenerator\OpenApiCodeGenerator.csproj" />
+    <ProjectReference Include="..\OpenApiCodeGenerator\OpenApiCodeGenerator.csproj"/>
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="..\..\logo.png" Pack="true" PackagePath="\" />
-    <None Include="..\..\README.md" Pack="true" PackagePath="\" />
+    <None Include="..\..\logo.png" Pack="true" PackagePath="\"/>
+    <None Include="..\..\README.md" Pack="true" PackagePath="\"/>
   </ItemGroup>
 
 </Project>
