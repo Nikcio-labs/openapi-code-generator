@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0] (2026-08-26)
+
+### Added
+
+- Hoist inline object schemas into named C# records (nested objects, `allOf` compositions, and `oneOf`/`anyOf` unions of `$ref`s)
+- Empty `type: object` schemas now resolve to `IReadOnlyDictionary<string, object?>` instead of `object` (per OpenAPI 3.0 where `additionalProperties` defaults to `true`)
+
 ## [1.3.0] (2026-08-23)
 
 ### Added
@@ -76,6 +83,7 @@
 - URL input support for remote OpenAPI specifications
 - Configurable generation options (namespace, enums, nullable, collections, etc.)
 
+[1.4.0]: https://github.com/Nikcio-labs/openapi-code-generator/releases/tag/v1.4.0
 [1.3.0]: https://github.com/Nikcio-labs/openapi-code-generator/releases/tag/v1.3.0
 [1.2.0]: https://github.com/Nikcio-labs/openapi-code-generator/releases/tag/v1.2.0
 [1.1.0]: https://github.com/Nikcio-labs/openapi-code-generator/releases/tag/v1.1.0
