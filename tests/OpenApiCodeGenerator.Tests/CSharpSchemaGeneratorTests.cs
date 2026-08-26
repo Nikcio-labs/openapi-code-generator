@@ -1590,6 +1590,537 @@ public class CSharpSchemaGeneratorTests
 
     #endregion
 
+    #region Inline Object Hoisting
+
+    [Fact]
+    public async Task Generate_FromText_InlineObjectProperty_RoundTripsWithSystemTextJsonDefaults()
+    {
+        const string spec = """
+                        {
+                            "openapi": "3.0.3",
+                            "info": { "title": "Inline Object Test", "version": "1.0.0" },
+                            "components": {
+                                "schemas": {
+                                    "Integration": {
+                                        "type": "object",
+                                        "required": ["id", "permissions"],
+                                        "properties": {
+                                            "id": { "type": "integer", "format": "int32" },
+                                            "permissions": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "issues": { "type": "boolean" },
+                                                    "pullRequests": { "type": "boolean" }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        """;
+
+        var generator = new CSharpSchemaGenerator(new GeneratorOptions
+        {
+            GenerateFileHeader = false,
+            Namespace = "GeneratedModels"
+        });
+
+        string generatedCode = generator.GenerateFromText(spec);
+
+        // Verify the inline object is hoisted
+        Assert.Contains("public partial record IntegrationPermissions", generatedCode, StringComparison.Ordinal);
+        Assert.Contains("public required IntegrationPermissions Permissions { get; init; }", generatedCode, StringComparison.Ordinal);
+        Assert.DoesNotContain("public required object Permissions", generatedCode, StringComparison.Ordinal);
+
+        string[] lines = await GetSerializationLinesAsync(generatedCode, """
+                using System.Text.Json;
+                using GeneratedModels;
+
+                Integration? integration = JsonSerializer.Deserialize<Integration>("{\"id\":7,\"permissions\":{\"issues\":true,\"pullRequests\":false}}");
+                Console.WriteLine($"{integration?.Id}|{integration?.Permissions.Issues}|{integration?.Permissions.PullRequests}");
+                Console.WriteLine(JsonSerializer.Serialize(integration));
+                """);
+
+        Assert.Equal("7|True|False", lines[^2]);
+        Assert.Equal("""{"id":7,"permissions":{"issues":true,"pullRequests":false}}""", lines[^1]);
+    }
+
+    [Fact]
+    public async Task Generate_FromText_NestedInlineObjects_RoundTripsWithSystemTextJsonDefaults()
+    {
+        const string spec = """
+                        {
+                            "openapi": "3.0.3",
+                            "info": { "title": "Nested Inline Object Test", "version": "1.0.0" },
+                            "components": {
+                                "schemas": {
+                                    "App": {
+                                        "type": "object",
+                                        "required": ["config"],
+                                        "properties": {
+                                            "config": {
+                                                "type": "object",
+                                                "required": ["database"],
+                                                "properties": {
+                                                    "database": {
+                                                        "type": "object",
+                                                        "required": ["host"],
+                                                        "properties": {
+                                                            "host": { "type": "string" },
+                                                            "port": { "type": "integer", "format": "int32" }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        """;
+
+        var generator = new CSharpSchemaGenerator(new GeneratorOptions
+        {
+            GenerateFileHeader = false,
+            Namespace = "GeneratedModels"
+        });
+
+        string generatedCode = generator.GenerateFromText(spec);
+
+        Assert.Contains("public partial record AppConfig", generatedCode, StringComparison.Ordinal);
+        Assert.Contains("public partial record AppConfigDatabase", generatedCode, StringComparison.Ordinal);
+
+        string[] lines = await GetSerializationLinesAsync(generatedCode, """
+                using System.Text.Json;
+                using GeneratedModels;
+
+                App? app = JsonSerializer.Deserialize<App>("{\"config\":{\"database\":{\"host\":\"localhost\",\"port\":5432}}}");
+                Console.WriteLine($"{app?.Config.Database.Host}:{app?.Config.Database.Port}");
+                Console.WriteLine(JsonSerializer.Serialize(app));
+                """);
+
+        Assert.Equal("localhost:5432", lines[^2]);
+        Assert.Equal("""{"config":{"database":{"host":"localhost","port":5432}}}""", lines[^1]);
+    }
+
+    [Fact]
+    public async Task Generate_FromText_InlineObjectInArray_RoundTripsWithSystemTextJsonDefaults()
+    {
+        const string spec = """
+                        {
+                            "openapi": "3.0.3",
+                            "info": { "title": "Array Inline Object Test", "version": "1.0.0" },
+                            "components": {
+                                "schemas": {
+                                    "Repository": {
+                                        "type": "object",
+                                        "required": ["webhooks"],
+                                        "properties": {
+                                            "webhooks": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "object",
+                                                    "required": ["url"],
+                                                    "properties": {
+                                                        "url": { "type": "string" },
+                                                        "active": { "type": "boolean" }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        """;
+
+        var generator = new CSharpSchemaGenerator(new GeneratorOptions
+        {
+            GenerateFileHeader = false,
+            Namespace = "GeneratedModels"
+        });
+
+        string generatedCode = generator.GenerateFromText(spec);
+
+        Assert.Contains("public partial record RepositoryWebhooks", generatedCode, StringComparison.Ordinal);
+        Assert.Contains("public required IReadOnlyList<RepositoryWebhooks> Webhooks { get; init; }", generatedCode, StringComparison.Ordinal);
+
+        string[] lines = await GetSerializationLinesAsync(generatedCode, """
+                using System.Text.Json;
+                using GeneratedModels;
+
+                Repository? repo = JsonSerializer.Deserialize<Repository>("{\"webhooks\":[{\"url\":\"https://example.com/hook\",\"active\":true}]}");
+                Console.WriteLine($"{repo?.Webhooks[0].Url}|{repo?.Webhooks[0].Active}");
+                Console.WriteLine(JsonSerializer.Serialize(repo));
+                """);
+
+        Assert.Equal("https://example.com/hook|True", lines[^2]);
+        Assert.Equal("""{"webhooks":[{"url":"https://example.com/hook","active":true}]}""", lines[^1]);
+    }
+
+    [Fact]
+    public async Task Generate_FromText_InlineObjectWithRefProperty_RoundTripsWithSystemTextJsonDefaults()
+    {
+        const string spec = """
+                        {
+                            "openapi": "3.0.3",
+                            "info": { "title": "Inline Object With Ref Test", "version": "1.0.0" },
+                            "components": {
+                                "schemas": {
+                                    "Address": {
+                                        "type": "object",
+                                        "required": ["city"],
+                                        "properties": {
+                                            "city": { "type": "string" }
+                                        }
+                                    },
+                                    "User": {
+                                        "type": "object",
+                                        "required": ["id", "profile"],
+                                        "properties": {
+                                            "id": { "type": "integer", "format": "int32" },
+                                            "profile": {
+                                                "type": "object",
+                                                "required": ["address"],
+                                                "properties": {
+                                                    "address": { "$ref": "#/components/schemas/Address" }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        """;
+
+        var generator = new CSharpSchemaGenerator(new GeneratorOptions
+        {
+            GenerateFileHeader = false,
+            Namespace = "GeneratedModels"
+        });
+
+        string generatedCode = generator.GenerateFromText(spec);
+
+        Assert.Contains("public partial record UserProfile", generatedCode, StringComparison.Ordinal);
+        Assert.Contains("public required UserProfile Profile { get; init; }", generatedCode, StringComparison.Ordinal);
+        Assert.Contains("public required Address Address { get; init; }", generatedCode, StringComparison.Ordinal);
+
+        string[] lines = await GetSerializationLinesAsync(generatedCode, """
+                using System.Text.Json;
+                using GeneratedModels;
+
+                User? user = JsonSerializer.Deserialize<User>("{\"id\":1,\"profile\":{\"address\":{\"city\":\"London\"}}}");
+                Console.WriteLine($"{user?.Id}|{user?.Profile.Address.City}");
+                Console.WriteLine(JsonSerializer.Serialize(user));
+                """);
+
+        Assert.Equal("1|London", lines[^2]);
+        Assert.Equal("""{"id":1,"profile":{"address":{"city":"London"}}}""", lines[^1]);
+    }
+
+    [Fact]
+    public async Task Generate_FromText_InlineObject_CompilesWithImplicitUsingsAndWarningsAsErrors()
+    {
+        const string spec = """
+                        {
+                            "openapi": "3.0.3",
+                            "info": { "title": "Compile Test", "version": "1.0.0" },
+                            "components": {
+                                "schemas": {
+                                    "Webhook": {
+                                        "type": "object",
+                                        "required": ["config"],
+                                        "properties": {
+                                            "config": {
+                                                "type": "object",
+                                                "required": ["url"],
+                                                "properties": {
+                                                    "url": { "type": "string" },
+                                                    "contentType": { "type": "string" }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        """;
+
+        var generator = new CSharpSchemaGenerator(new GeneratorOptions
+        {
+            GenerateFileHeader = false,
+            Namespace = "GeneratedModels"
+        });
+
+        string generatedCode = generator.GenerateFromText(spec);
+
+        await AssertGeneratedCodeCompilesAsync(generatedCode, implicitUsings: true, treatWarningsAsErrors: true);
+    }
+
+    [Fact]
+    public async Task Generate_FromText_InlineObject_CompilesWithoutImplicitUsings()
+    {
+        const string spec = """
+                        {
+                            "openapi": "3.0.3",
+                            "info": { "title": "Compile Test", "version": "1.0.0" },
+                            "components": {
+                                "schemas": {
+                                    "Webhook": {
+                                        "type": "object",
+                                        "required": ["config"],
+                                        "properties": {
+                                            "config": {
+                                                "type": "object",
+                                                "required": ["url"],
+                                                "properties": {
+                                                    "url": { "type": "string" },
+                                                    "contentType": { "type": "string" }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        """;
+
+        var generator = new CSharpSchemaGenerator(new GeneratorOptions
+        {
+            GenerateFileHeader = false,
+            Namespace = "GeneratedModels"
+        });
+
+        string generatedCode = generator.GenerateFromText(spec);
+
+        await AssertGeneratedCodeCompilesAsync(generatedCode, implicitUsings: false);
+    }
+
+    #endregion
+
+    #region Inline allOf / oneOf / anyOf Hoisting
+
+    [Fact]
+    public async Task Generate_FromText_InlineOneOfAllRefs_CompilesAndGeneratesCorrectStructure()
+    {
+        const string spec = """
+                        {
+                            "openapi": "3.0.3",
+                            "info": { "title": "Union Test", "version": "1.0.0" },
+                            "components": {
+                                "schemas": {
+                                    "Integration": {
+                                        "type": "object",
+                                        "required": ["id", "owner"],
+                                        "properties": {
+                                            "id": { "type": "integer", "format": "int32" },
+                                            "owner": {
+                                                "oneOf": [
+                                                    { "$ref": "#/components/schemas/SimpleUser" },
+                                                    { "$ref": "#/components/schemas/Enterprise" }
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "SimpleUser": {
+                                        "type": "object",
+                                        "required": ["login"],
+                                        "properties": {
+                                            "login": { "type": "string" }
+                                        }
+                                    },
+                                    "Enterprise": {
+                                        "type": "object",
+                                        "required": ["slug"],
+                                        "properties": {
+                                            "slug": { "type": "string" }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        """;
+
+        var generator = new CSharpSchemaGenerator(new GeneratorOptions
+        {
+            GenerateFileHeader = false,
+            Namespace = "GeneratedModels"
+        });
+
+        string generatedCode = generator.GenerateFromText(spec);
+
+        Assert.Contains("public abstract partial record IntegrationOwner", generatedCode, StringComparison.Ordinal);
+        Assert.Contains("[JsonDerivedType(typeof(SimpleUser), \"SimpleUser\")]", generatedCode, StringComparison.Ordinal);
+        Assert.Contains("[JsonDerivedType(typeof(Enterprise), \"Enterprise\")]", generatedCode, StringComparison.Ordinal);
+        Assert.Contains("public required IntegrationOwner Owner { get; init; }", generatedCode, StringComparison.Ordinal);
+        Assert.DoesNotContain("public required object Owner", generatedCode, StringComparison.Ordinal);
+
+        await AssertGeneratedCodeCompilesAsync(generatedCode, implicitUsings: true, treatWarningsAsErrors: true);
+    }
+
+    [Fact]
+    public async Task Generate_FromText_InlineAllOfWithoutRef_RoundTripsWithSystemTextJsonDefaults()
+    {
+        const string spec = """
+                        {
+                            "openapi": "3.0.3",
+                            "info": { "title": "AllOf Test", "version": "1.0.0" },
+                            "components": {
+                                "schemas": {
+                                    "Webhook": {
+                                        "type": "object",
+                                        "required": ["forkee"],
+                                        "properties": {
+                                            "forkee": {
+                                                "allOf": [
+                                                    {
+                                                        "type": "object",
+                                                        "required": ["id"],
+                                                        "properties": {
+                                                            "id": { "type": "integer", "format": "int32" },
+                                                            "name": { "type": "string" }
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        """;
+
+        var generator = new CSharpSchemaGenerator(new GeneratorOptions
+        {
+            GenerateFileHeader = false,
+            Namespace = "GeneratedModels"
+        });
+
+        string generatedCode = generator.GenerateFromText(spec);
+
+        Assert.Contains("public partial record WebhookForkee", generatedCode, StringComparison.Ordinal);
+        Assert.Contains("public required WebhookForkee Forkee { get; init; }", generatedCode, StringComparison.Ordinal);
+
+        string[] lines = await GetSerializationLinesAsync(generatedCode, """
+                using System.Text.Json;
+                using GeneratedModels;
+
+                Webhook? webhook = JsonSerializer.Deserialize<Webhook>("{\"forkee\":{\"id\":42,\"name\":\"repo\"}}");
+                Console.WriteLine($"{webhook?.Forkee.Id}|{webhook?.Forkee.Name}");
+                Console.WriteLine(JsonSerializer.Serialize(webhook));
+                """);
+
+        Assert.Equal("42|repo", lines[^2]);
+        Assert.Equal("""{"forkee":{"id":42,"name":"repo"}}""", lines[^1]);
+    }
+
+    [Fact]
+    public async Task Generate_FromText_EmptyObjectProperty_RoundTripsAsDictionary()
+    {
+        const string spec = """
+                        {
+                            "openapi": "3.0.3",
+                            "info": { "title": "Empty Object Test", "version": "1.0.0" },
+                            "components": {
+                                "schemas": {
+                                    "Webhook": {
+                                        "type": "object",
+                                        "required": ["payload"],
+                                        "properties": {
+                                            "payload": {
+                                                "type": "object",
+                                                "additionalProperties": true
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        """;
+
+        var generator = new CSharpSchemaGenerator(new GeneratorOptions
+        {
+            GenerateFileHeader = false,
+            Namespace = "GeneratedModels"
+        });
+
+        string generatedCode = generator.GenerateFromText(spec);
+
+        Assert.Contains("public required IReadOnlyDictionary<string, object?> Payload { get; init; }", generatedCode, StringComparison.Ordinal);
+
+        string[] lines = await GetSerializationLinesAsync(generatedCode, """
+                using System.Text.Json;
+                using System.Text.Json.Nodes;
+                using GeneratedModels;
+
+                Webhook? webhook = JsonSerializer.Deserialize<Webhook>("{\"payload\":{\"action\":\"opened\",\"number\":42}}");
+                Console.WriteLine(webhook?.Payload?["action"]);
+                Console.WriteLine(JsonSerializer.Serialize(webhook));
+                """);
+
+        Assert.Equal("opened", lines[^2]);
+        Assert.Equal("""{"payload":{"action":"opened","number":42}}""", lines[^1]);
+    }
+
+    [Fact]
+    public async Task Generate_FromText_InlineAllOfAndOneOf_CompilesWithWarningsAsErrors()
+    {
+        const string spec = """
+                        {
+                            "openapi": "3.0.3",
+                            "info": { "title": "Compile Test", "version": "1.0.0" },
+                            "components": {
+                                "schemas": {
+                                    "Container": {
+                                        "type": "object",
+                                        "required": ["union", "composed"],
+                                        "properties": {
+                                            "union": {
+                                                "oneOf": [
+                                                    { "$ref": "#/components/schemas/Cat" },
+                                                    { "$ref": "#/components/schemas/Dog" }
+                                                ]
+                                            },
+                                            "composed": {
+                                                "allOf": [
+                                                    {
+                                                        "type": "object",
+                                                        "required": ["name"],
+                                                        "properties": {
+                                                            "name": { "type": "string" }
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "Cat": {
+                                        "type": "object",
+                                        "properties": { "meow": { "type": "string" } }
+                                    },
+                                    "Dog": {
+                                        "type": "object",
+                                        "properties": { "bark": { "type": "string" } }
+                                    }
+                                }
+                            }
+                        }
+                        """;
+
+        var generator = new CSharpSchemaGenerator(new GeneratorOptions
+        {
+            GenerateFileHeader = false,
+            Namespace = "GeneratedModels"
+        });
+
+        string generatedCode = generator.GenerateFromText(spec);
+
+        await AssertGeneratedCodeCompilesAsync(generatedCode, implicitUsings: true, treatWarningsAsErrors: true);
+    }
+
+    #endregion
+
     #region HandleDiagnostics
 
     [Fact]

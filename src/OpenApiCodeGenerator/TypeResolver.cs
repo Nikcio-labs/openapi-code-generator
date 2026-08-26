@@ -12,11 +12,22 @@ internal class TypeResolver
 {
     private readonly GeneratorOptions _options;
     private readonly IDictionary<string, IOpenApiSchema> _allSchemas;
+    private readonly Dictionary<IOpenApiSchema, string> _inlineObjectTypes = new(ReferenceEqualityComparer.Instance);
 
     public TypeResolver(GeneratorOptions options, IDictionary<string, IOpenApiSchema> allSchemas)
     {
         _options = options;
         _allSchemas = allSchemas;
+    }
+
+    /// <summary>
+    /// Registers a synthesized type name for an inline object schema so that
+    /// <see cref="ResolveObjectType"/> returns the type name instead of "object".
+    /// Called by <see cref="CSharpCodeEmitter"/> during the inline-object hoisting pass.
+    /// </summary>
+    public void RegisterInlineObjectType(IOpenApiSchema schema, string typeName)
+    {
+        _inlineObjectTypes[schema] = typeName;
     }
 
     /// <summary>
@@ -105,6 +116,14 @@ internal class TypeResolver
         }
 
         JsonSchemaType? baseType = GetBaseType(schema);
+
+        // In OpenAPI 3.0, a schema with properties but no explicit type is implicitly an object.
+        // Treat it as such so that inline objects can be resolved to their hoisted type names.
+        if (baseType is null && schema.Properties is { Count: > 0 })
+        {
+            baseType = JsonSchemaType.Object;
+        }
+
         string type = baseType switch
         {
             JsonSchemaType.String => ResolveStringType(schema),
@@ -181,18 +200,31 @@ internal class TypeResolver
             return $"{dictType}<string, {valueType}>";
         }
 
-        // Typed object with properties → will be a named record, return object as fallback
+        // Inline object with properties — return the hoisted type name if registered
         if (schema.Properties is { Count: > 0 })
         {
+            if (_inlineObjectTypes.TryGetValue(schema, out string? inlineTypeName))
+            {
+                return inlineTypeName;
+            }
+
             return "object";
         }
 
-        // Empty object
-        return "object";
+        // Empty object — in OpenAPI 3.0, additionalProperties defaults to true,
+        // so a type:object with no properties is a free-form map.
+        string emptyDictType = _options.UseImmutableDictionaries ? "IReadOnlyDictionary" : "Dictionary";
+        return $"{emptyDictType}<string, object?>";
     }
 
     private string ResolveAllOf(IOpenApiSchema schema, bool nullable)
     {
+        // Check if this allOf composition was hoisted to a named type
+        if (_inlineObjectTypes.TryGetValue(schema, out string? inlineTypeName))
+        {
+            return nullable ? inlineTypeName + "?" : inlineTypeName;
+        }
+
         // Common pattern: allOf with a single $ref (possibly + additional properties)
         // Return the $ref type name
         OpenApiSchemaReference? refSchema = schema.AllOf!.OfType<OpenApiSchemaReference>().FirstOrDefault();
@@ -238,6 +270,12 @@ internal class TypeResolver
 
     private string ResolveOneOf(IOpenApiSchema schema, bool nullable)
     {
+        // Check if this oneOf union was hoisted to a named type
+        if (_inlineObjectTypes.TryGetValue(schema, out string? inlineTypeName))
+        {
+            return nullable ? inlineTypeName + "?" : inlineTypeName;
+        }
+
         // If all oneOf entries are $refs, in C# we can't easily express a union.
         // Return object. The generator will produce a marker interface or base class if appropriate.
         // If there's a discriminator, the generator handles inheritance.
@@ -251,6 +289,12 @@ internal class TypeResolver
 
     private string ResolveAnyOf(IOpenApiSchema schema, bool nullable)
     {
+        // Check if this anyOf union was hoisted to a named type
+        if (_inlineObjectTypes.TryGetValue(schema, out string? inlineTypeName))
+        {
+            return nullable ? inlineTypeName + "?" : inlineTypeName;
+        }
+
         if (schema.AnyOf!.Count == 1)
         {
             return ResolveCore(schema.AnyOf[0], nullable);

@@ -13,7 +13,8 @@ internal class CSharpCodeEmitter
 {
     private readonly GeneratorOptions _options;
     private readonly TypeResolver _typeResolver;
-    private readonly IDictionary<string, IOpenApiSchema> _allSchemas;
+    private readonly Dictionary<string, IOpenApiSchema> _allSchemas;
+    private readonly HashSet<IOpenApiSchema> _knownSchemas;
     private readonly StringBuilder _sb = new();
     private int _indent;
 
@@ -31,7 +32,8 @@ internal class CSharpCodeEmitter
     {
         _options = options;
         _typeResolver = typeResolver;
-        _allSchemas = allSchemas;
+        _allSchemas = new Dictionary<string, IOpenApiSchema>(allSchemas, StringComparer.Ordinal);
+        _knownSchemas = new HashSet<IOpenApiSchema>(_allSchemas.Values, ReferenceEqualityComparer.Instance);
     }
 
     /// <summary>
@@ -41,6 +43,20 @@ internal class CSharpCodeEmitter
     {
         _sb.Clear();
         _indent = 0;
+
+        // Two-pass type name resolution: detect collisions, assign clean names to
+        // the most natural schema name, differentiate others meaningfully.
+        Dictionary<string, string> typeNameMap = ResolveTypeNameCollisions(_allSchemas.Keys);
+
+        // Hoist inline object schemas into synthesized named types so that
+        // inline objects (properties defined as type:object with properties
+        // directly, rather than via $ref) become proper C# records instead
+        // of degrading to "object".
+        // This must run before the converter checks below, so that hoisted
+        // schemas (which may contain binary-stream properties) are visible
+        // to ShouldEmit*JsonConverter and the converter classes get emitted.
+        ResolveInlineObjects(typeNameMap);
+
         bool emitGenericTypeAliasConverters = ShouldEmitGenericTypeAliasConverters();
         bool emitBinaryStreamTypeAliasConverters = ShouldEmitBinaryStreamTypeAliasConverters();
         bool emitBinaryStreamJsonConverter = ShouldEmitBinaryStreamJsonConverter() || emitBinaryStreamTypeAliasConverters;
@@ -97,10 +113,6 @@ internal class CSharpCodeEmitter
         {
             EmitBinaryStreamTypeAliasJsonConverter();
         }
-
-        // Two-pass type name resolution: detect collisions, assign clean names to
-        // the most natural schema name, differentiate others meaningfully.
-        Dictionary<string, string> typeNameMap = ResolveTypeNameCollisions(_allSchemas.Keys);
 
         // Pre-collect, deduplicate, and emit all inline enums before emitting records.
         // This ensures matching inline enums across schemas are emitted once, and
@@ -310,7 +322,7 @@ internal class CSharpCodeEmitter
             Dictionary<string, IOpenApiSchema> properties = CollectProperties(schema);
             foreach ((string? propName, IOpenApiSchema? propSchema) in properties)
             {
-                if (TypeResolver.IsEnum(propSchema) && !_allSchemas.Values.Contains(propSchema))
+                if (TypeResolver.IsEnum(propSchema) && !_knownSchemas.Contains(propSchema))
                 {
                     string enumTypeName = NameHelper.ToPropertyName(propName, typeNameMap.GetValueOrDefault(schemaName));
                     List<string> values = ExtractEnumValues(propSchema);
@@ -456,6 +468,254 @@ internal class CSharpCodeEmitter
 
     #endregion
 
+    #region Inline Object Hoisting
+
+    /// <summary>
+    /// Discovers inline object schemas (object schemas with properties defined
+    /// directly on a property rather than via $ref to a named component) and
+    /// hoists them into synthesized named types. Each discovered inline object
+    /// is registered with the <see cref="TypeResolver"/> so that type resolution
+    /// returns the synthesized name instead of "object", and added to
+    /// <see cref="_allSchemas"/> so it is emitted as a C# record.
+    /// </summary>
+    private void ResolveInlineObjects(Dictionary<string, string> typeNameMap)
+    {
+        var usedNames = new HashSet<string>(typeNameMap.Values, StringComparer.Ordinal);
+        var visited = new HashSet<IOpenApiSchema>(ReferenceEqualityComparer.Instance);
+
+        // Snapshot the original schema keys before adding hoisted inline objects.
+        var originalKeys = _allSchemas.Keys.ToList();
+
+        foreach (string schemaKey in originalKeys)
+        {
+            IOpenApiSchema schema = _allSchemas[schemaKey];
+            string enclosingTypeName = typeNameMap.GetValueOrDefault(schemaKey, schemaKey);
+            DiscoverInlineObjects(schema, enclosingTypeName, typeNameMap, usedNames, visited);
+        }
+    }
+
+    private void DiscoverInlineObjects(
+        IOpenApiSchema schema,
+        string enclosingTypeName,
+        Dictionary<string, string> typeNameMap,
+        HashSet<string> usedNames,
+        HashSet<IOpenApiSchema> visited)
+    {
+        if (!visited.Add(schema))
+        {
+            return;
+        }
+
+        Dictionary<string, IOpenApiSchema> properties = CollectProperties(schema);
+
+        foreach ((string propName, IOpenApiSchema propSchema) in properties)
+        {
+            string? hoistedName = TryHoistPropertySchema(propSchema, enclosingTypeName, propName, typeNameMap, usedNames, visited);
+
+            // If the property itself wasn't hoisted, check array items and additionalProperties
+            if (hoistedName == null)
+            {
+                if (TypeResolver.HasTypeFlag(propSchema, JsonSchemaType.Array) && propSchema.Items is { } items)
+                {
+                    TryHoistPropertySchema(items, enclosingTypeName, propName, typeNameMap, usedNames, visited);
+                }
+
+                if (propSchema.AdditionalProperties is { } addProps)
+                {
+                    TryHoistPropertySchema(addProps, enclosingTypeName, propName, typeNameMap, usedNames, visited);
+                }
+            }
+        }
+
+        // Scan the schema's own AdditionalProperties (JsonExtensionData value type)
+        if (schema.AdditionalProperties is { } ownAddProps && (schema.Properties == null || schema.Properties.Count == 0))
+        {
+            TryHoistPropertySchema(ownAddProps, enclosingTypeName, "Value", typeNameMap, usedNames, visited);
+        }
+    }
+
+    /// <summary>
+    /// Checks if a property schema is an inline object, allOf composition, or oneOf/anyOf
+    /// union of $refs, and if so hoists it to a named type. Returns the synthesized type
+    /// name if hoisted, null otherwise.
+    /// </summary>
+    private string? TryHoistPropertySchema(
+        IOpenApiSchema propSchema,
+        string enclosingTypeName,
+        string propName,
+        Dictionary<string, string> typeNameMap,
+        HashSet<string> usedNames,
+        HashSet<IOpenApiSchema> visited)
+    {
+        if (IsInlineObject(propSchema))
+        {
+            string inlineTypeName = SynthesizeInlineTypeName(enclosingTypeName, propName, usedNames);
+            HoistInlineObject(propSchema, inlineTypeName, typeNameMap, usedNames);
+            DiscoverInlineObjects(propSchema, inlineTypeName, typeNameMap, usedNames, visited);
+            return inlineTypeName;
+        }
+
+        if (IsInlineAllOfComposition(propSchema))
+        {
+            string inlineTypeName = SynthesizeInlineTypeName(enclosingTypeName, propName, usedNames);
+            HoistInlineObject(propSchema, inlineTypeName, typeNameMap, usedNames);
+            DiscoverInlineObjects(propSchema, inlineTypeName, typeNameMap, usedNames, visited);
+            return inlineTypeName;
+        }
+
+        if (IsInlineRefUnion(propSchema))
+        {
+            string inlineTypeName = SynthesizeInlineTypeName(enclosingTypeName, propName, usedNames);
+            HoistInlineObject(propSchema, inlineTypeName, typeNameMap, usedNames);
+            return inlineTypeName;
+        }
+
+        return null;
+    }
+
+    private void HoistInlineObject(
+        IOpenApiSchema schema,
+        string typeName,
+        Dictionary<string, string> typeNameMap,
+        HashSet<string> usedNames)
+    {
+        _typeResolver.RegisterInlineObjectType(schema, typeName);
+        _allSchemas[typeName] = schema;
+        _knownSchemas.Add(schema);
+        typeNameMap[typeName] = typeName;
+        usedNames.Add(typeName);
+    }
+
+    private bool IsInlineObject(IOpenApiSchema schema)
+    {
+        // Skip $ref schemas — they already have a type name
+        if (schema is OpenApiSchemaReference)
+        {
+            return false;
+        }
+
+        // Skip schemas that are already named component schemas (or already hoisted)
+        if (_knownSchemas.Contains(schema))
+        {
+            return false;
+        }
+
+        // Skip enums — handled by the inline enum pass
+        if (TypeResolver.IsEnum(schema))
+        {
+            return false;
+        }
+
+        // Skip composition schemas — handled by IsInlineAllOfComposition / IsInlineRefUnion
+        if (schema.AllOf is { Count: > 0 } ||
+            schema.OneOf is { Count: > 0 } ||
+            schema.AnyOf is { Count: > 0 })
+        {
+            return false;
+        }
+
+        // Must have properties to be an inline object
+        if (schema.Properties is not { Count: > 0 })
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    /// <summary>
+    /// Detects an inline allOf composition (no $ref member) that has properties
+    /// via one of its members — should be hoisted as a record.
+    /// </summary>
+    private bool IsInlineAllOfComposition(IOpenApiSchema schema)
+    {
+        // Skip $ref schemas
+        if (schema is OpenApiSchemaReference)
+        {
+            return false;
+        }
+
+        // Skip already known schemas
+        if (_knownSchemas.Contains(schema))
+        {
+            return false;
+        }
+
+        if (schema.AllOf is not { Count: > 0 })
+        {
+            return false;
+        }
+
+        // Must NOT have a single $ref member (that's inheritance, handled by ResolveAllOf)
+        if (schema.AllOf.OfType<OpenApiSchemaReference>().Any())
+        {
+            return false;
+        }
+
+        // At least one member must have properties
+        return schema.AllOf.Any(s => s.Properties is { Count: > 0 });
+    }
+
+    /// <summary>
+    /// Detects an inline oneOf/anyOf where all variants are $refs — should be
+    /// hoisted as an abstract record with [JsonDerivedType] attributes.
+    /// </summary>
+    private bool IsInlineRefUnion(IOpenApiSchema schema)
+    {
+        // Skip $ref schemas
+        if (schema is OpenApiSchemaReference)
+        {
+            return false;
+        }
+
+        // Skip already known schemas
+        if (_knownSchemas.Contains(schema))
+        {
+            return false;
+        }
+
+        IList<IOpenApiSchema>? variants = schema.OneOf ?? schema.AnyOf;
+        if (variants is null or { Count: 0 })
+        {
+            return false;
+        }
+
+        // For anyOf, skip the nullable [type, null] pattern
+        if (schema.AnyOf is { } anyOf)
+        {
+            var nonNull = anyOf.Where(s =>
+                !(s.Type.HasValue && s.Type.Value == JsonSchemaType.Null)).ToList();
+            if (nonNull.Count == 1)
+            {
+                return false; // single non-null variant — resolved directly
+            }
+            variants = nonNull;
+        }
+
+        if (variants.Count < 2)
+        {
+            return false;
+        }
+
+        // All variants must be $refs
+        return variants.All(v => v is OpenApiSchemaReference);
+    }
+
+    private static string SynthesizeInlineTypeName(string enclosingTypeName, string propName, HashSet<string> usedNames)
+    {
+        string pascalProp = NameHelper.ToPropertyName(propName);
+        string candidate = enclosingTypeName + pascalProp;
+
+        if (!usedNames.Contains(candidate))
+        {
+            return candidate;
+        }
+
+        return FindUniqueName(candidate, usedNames);
+    }
+
+    #endregion
+
     private void EmitSchemaWithTypeName(string schemaName, IOpenApiSchema schema, string typeName)
     {
         if (TypeResolver.IsEnum(schema))
@@ -572,10 +832,27 @@ internal class CSharpCodeEmitter
             })
             .ToList();
 
+        // Resolve duplicate enum member names by appending numeric suffixes
+        var memberNames = new string[enumValues.Count];
+        var usedMemberNames = new HashSet<string>(StringComparer.Ordinal);
+        for (int i = 0; i < enumValues.Count; i++)
+        {
+            string baseName = NameHelper.ToEnumMemberName(enumValues[i]);
+            string memberName = baseName;
+            int suffix = 2;
+            while (usedMemberNames.Contains(memberName))
+            {
+                memberName = baseName + suffix;
+                suffix++;
+            }
+            usedMemberNames.Add(memberName);
+            memberNames[i] = memberName;
+        }
+
         for (int i = 0; i < enumValues.Count; i++)
         {
             string rawValue = enumValues[i];
-            string memberName = NameHelper.ToEnumMemberName(rawValue);
+            string memberName = memberNames[i];
             bool isLast = i == enumValues.Count - 1;
 
             if (TypeResolver.HasTypeFlag(schema, JsonSchemaType.String))
@@ -677,7 +954,7 @@ internal class CSharpCodeEmitter
 
         // Resolve the type
         string typeName;
-        if (TypeResolver.IsEnum(propertySchema) && !_allSchemas.Values.Contains(propertySchema))
+        if (TypeResolver.IsEnum(propertySchema) && !_knownSchemas.Contains(propertySchema))
         {
             // Inline enum — look up the resolved enum type name from the
             // pre-computed inline enum map (handles dedup & conflict resolution).
@@ -956,8 +1233,13 @@ internal class CSharpCodeEmitter
 
     private void EmitSimpleUnion(string typeName, IList<IOpenApiSchema> variants)
     {
+        // Filter out null-type variants (from nullable anyOf patterns like [type, null])
+        var nonNullVariants = variants
+            .Where(v => !(v.Type.HasValue && v.Type.Value == JsonSchemaType.Null))
+            .ToList();
+
         // Collect the variant type names for documentation
-        var variantNames = variants
+        var variantNames = nonNullVariants
             .OfType<OpenApiSchemaReference>()
             .Select(v => NameHelper.ToTypeName(v.Reference.Id, _options.ModelPrefix))
             .ToList();
@@ -969,10 +1251,10 @@ internal class CSharpCodeEmitter
             AppendLine($"/// </remarks>");
         }
 
-        // If all variants are $refs, emit as an abstract record with JsonDerivedType attributes
-        if (variants.All(v => v is OpenApiSchemaReference))
+        // If all non-null variants are $refs, emit as an abstract record with JsonDerivedType attributes
+        if (nonNullVariants.Count > 0 && nonNullVariants.All(v => v is OpenApiSchemaReference))
         {
-            foreach (OpenApiSchemaReference variant in variants.OfType<OpenApiSchemaReference>())
+            foreach (OpenApiSchemaReference variant in nonNullVariants.OfType<OpenApiSchemaReference>())
             {
                 string derivedName = NameHelper.ToTypeName(variant.Reference.Id, _options.ModelPrefix);
                 AppendLine($"[JsonDerivedType(typeof({derivedName}), \"{variant.Reference.Id}\")]");
