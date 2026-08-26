@@ -60,6 +60,7 @@ internal class CSharpCodeEmitter
         bool emitGenericTypeAliasConverters = ShouldEmitGenericTypeAliasConverters();
         bool emitBinaryStreamTypeAliasConverters = ShouldEmitBinaryStreamTypeAliasConverters();
         bool emitBinaryStreamJsonConverter = ShouldEmitBinaryStreamJsonConverter() || emitBinaryStreamTypeAliasConverters;
+        bool emitValidationAttributes = ShouldEmitValidationAttributes();
 
         if (_options.GenerateFileHeader)
         {
@@ -89,6 +90,12 @@ internal class CSharpCodeEmitter
         }
 
         AppendLine("using System.Text.Json.Serialization;");
+
+        if (emitValidationAttributes)
+        {
+            AppendLine("using System.ComponentModel.DataAnnotations;");
+        }
+
         AppendLine();
 
         AppendLine($"namespace {_options.Namespace};");
@@ -141,6 +148,27 @@ internal class CSharpCodeEmitter
     private bool ShouldEmitBinaryStreamTypeAliasConverters()
     {
         return !_options.InlinePrimitiveTypeAliases && _allSchemas.Values.Any(schema => TypeResolver.IsTypeAlias(schema) && _typeResolver.IsBinaryStreamPropertyType(schema));
+    }
+
+    private bool ShouldEmitValidationAttributes()
+    {
+        if (!_options.EmitValidationAttributes)
+        {
+            return false;
+        }
+
+        return _allSchemas.Values.Any(schema => CollectProperties(schema).Values.Any(HasValidationConstraints));
+    }
+
+    private static bool HasValidationConstraints(IOpenApiSchema schema)
+    {
+        return schema.MinLength.HasValue ||
+               schema.MaxLength.HasValue ||
+               !string.IsNullOrEmpty(schema.Pattern) ||
+               !string.IsNullOrEmpty(schema.Minimum) ||
+               !string.IsNullOrEmpty(schema.Maximum) ||
+               schema.MinItems.HasValue ||
+               schema.MaxItems.HasValue;
     }
 
     private void EmitTypeAliasInterface()
@@ -924,6 +952,9 @@ internal class CSharpCodeEmitter
             typeName = _typeResolver.ResolveWithNullability(propertySchema, isRequired);
         }
 
+        // Add validation attributes
+        EmitValidationAttributes(propertySchema);
+
         // Add JSON attribute
         if (!_options.OmitJsonPropertyNameAttributes && jsonName != null)
         {
@@ -1447,6 +1478,79 @@ internal class CSharpCodeEmitter
             AppendLine($"/// {EscapeXmlDocComment(line)}");
         }
         AppendLine("/// </summary>");
+    }
+
+    private void EmitValidationAttributes(IOpenApiSchema schema)
+    {
+        if (!_options.EmitValidationAttributes)
+        {
+            return;
+        }
+
+        bool isString = TypeResolver.HasTypeFlag(schema, JsonSchemaType.String);
+        bool isArray = TypeResolver.HasTypeFlag(schema, JsonSchemaType.Array);
+        bool isNumber = TypeResolver.HasTypeFlag(schema, JsonSchemaType.Number) || TypeResolver.HasTypeFlag(schema, JsonSchemaType.Integer);
+
+        if (isString)
+        {
+            int? minLength = schema.MinLength;
+            int? maxLength = schema.MaxLength;
+
+            if (minLength.HasValue || maxLength.HasValue)
+            {
+                if (minLength.HasValue && maxLength.HasValue)
+                {
+                    AppendLine($"[StringLength({maxLength.Value}, MinimumLength = {minLength.Value})]");
+                }
+                else if (maxLength.HasValue)
+                {
+                    AppendLine($"[StringLength({maxLength.Value})]");
+                }
+                else
+                {
+                    AppendLine($"[MinLength({minLength!.Value})]");
+                }
+            }
+        }
+        else if (isArray)
+        {
+            if (schema.MinItems.HasValue)
+            {
+                AppendLine($"[MinLength({schema.MinItems.Value})]");
+            }
+
+            if (schema.MaxItems.HasValue)
+            {
+                AppendLine($"[MaxLength({schema.MaxItems.Value})]");
+            }
+        }
+
+        if (isString && !string.IsNullOrEmpty(schema.Pattern))
+        {
+            AppendLine($"[RegularExpression(\"{EscapeCSharpStringLiteral(schema.Pattern)}\")]");
+        }
+
+        if (isNumber && (!string.IsNullOrEmpty(schema.Minimum) || !string.IsNullOrEmpty(schema.Maximum)))
+        {
+            string min = !string.IsNullOrEmpty(schema.Minimum) ? FormatNumberLiteral(schema.Minimum) : "double.MinValue";
+            string max = !string.IsNullOrEmpty(schema.Maximum) ? FormatNumberLiteral(schema.Maximum) : "double.MaxValue";
+            AppendLine($"[Range({min}, {max})]");
+        }
+    }
+
+    private static string FormatNumberLiteral(string value)
+    {
+        if (decimal.TryParse(value, NumberStyles.Any, CultureInfo.InvariantCulture, out decimal dec))
+        {
+            if (dec == decimal.Truncate(dec))
+            {
+                return dec.ToString("0", CultureInfo.InvariantCulture) + "d";
+            }
+
+            return dec.ToString(CultureInfo.InvariantCulture) + "d";
+        }
+
+        return value;
     }
 
     private static string EscapeXmlDocComment(string text)

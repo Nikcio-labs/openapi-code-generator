@@ -66,6 +66,12 @@ public sealed class GeneratorOptions
     public bool InlinePrimitiveTypeAliases { get; init; }
 
     /// <summary>
+    /// When true, emit validation attributes (<c>[Range]</c>, <c>[StringLength]</c>,
+    /// <c>[RegularExpression]</c>, <c>[MinLength]</c>, <c>[MaxLength]</c>) from OpenAPI constraints.
+    /// </summary>
+    public bool EmitValidationAttributes { get; init; } = true;
+
+    /// <summary>
     /// Validates the configured options before generation starts.
     /// </summary>
     /// <exception cref="ArgumentException">Thrown when a configured option is not a valid C# identifier shape.</exception>
