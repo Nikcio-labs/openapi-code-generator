@@ -60,6 +60,7 @@ internal class CSharpCodeEmitter
         bool emitGenericTypeAliasConverters = ShouldEmitGenericTypeAliasConverters();
         bool emitBinaryStreamTypeAliasConverters = ShouldEmitBinaryStreamTypeAliasConverters();
         bool emitBinaryStreamJsonConverter = ShouldEmitBinaryStreamJsonConverter() || emitBinaryStreamTypeAliasConverters;
+        bool emitValidationAttributes = ShouldEmitValidationAttributes();
 
         if (_options.GenerateFileHeader)
         {
@@ -71,7 +72,7 @@ internal class CSharpCodeEmitter
         }
 
         AppendLine("#nullable enable");
-        AppendLine("#pragma warning disable CS8019");
+        AppendLine("#pragma warning disable CS8019, CS9042");
         AppendLine();
 
         AppendLine("using System;");
@@ -89,6 +90,12 @@ internal class CSharpCodeEmitter
         }
 
         AppendLine("using System.Text.Json.Serialization;");
+
+        if (emitValidationAttributes)
+        {
+            AppendLine("using System.ComponentModel.DataAnnotations;");
+        }
+
         AppendLine();
 
         AppendLine($"namespace {_options.Namespace};");
@@ -141,6 +148,27 @@ internal class CSharpCodeEmitter
     private bool ShouldEmitBinaryStreamTypeAliasConverters()
     {
         return !_options.InlinePrimitiveTypeAliases && _allSchemas.Values.Any(schema => TypeResolver.IsTypeAlias(schema) && _typeResolver.IsBinaryStreamPropertyType(schema));
+    }
+
+    private bool ShouldEmitValidationAttributes()
+    {
+        if (!_options.EmitValidationAttributes)
+        {
+            return false;
+        }
+
+        return _allSchemas.Values.Any(schema => CollectProperties(schema).Values.Any(HasValidationConstraints));
+    }
+
+    private static bool HasValidationConstraints(IOpenApiSchema schema)
+    {
+        return schema.MinLength.HasValue ||
+               schema.MaxLength.HasValue ||
+               !string.IsNullOrEmpty(schema.Pattern) ||
+               !string.IsNullOrEmpty(schema.Minimum) ||
+               !string.IsNullOrEmpty(schema.Maximum) ||
+               schema.MinItems.HasValue ||
+               schema.MaxItems.HasValue;
     }
 
     private void EmitTypeAliasInterface()
@@ -749,6 +777,7 @@ internal class CSharpCodeEmitter
         string typeName = typeNameOverride ?? NameHelper.ToTypeName(schemaName, _options.ModelPrefix);
 
         EmitDocComment(schema.Description);
+        EmitObsoleteAttribute(schema);
 
         if (TypeResolver.HasTypeFlag(schema, JsonSchemaType.String))
         {
@@ -857,6 +886,7 @@ internal class CSharpCodeEmitter
         }
 
         EmitDocComment(schema.Description);
+        EmitObsoleteAttribute(schema);
 
         string declaration = baseType != null
             ? $"public partial record {typeName} : {baseType}"
@@ -897,6 +927,7 @@ internal class CSharpCodeEmitter
     private void EmitProperty(string propertyName, IOpenApiSchema propertySchema, bool isRequired, string? schemaName = null, string? enclosingTypeName = null, string? csharpNameOverride = null)
     {
         EmitDocComment(propertySchema.Description);
+        EmitObsoleteAttribute(propertySchema);
 
         string csharpPropertyName = csharpNameOverride ?? NameHelper.ToPropertyName(propertyName, enclosingTypeName);
         string? jsonName = NameHelper.GetJsonPropertyName(propertyName, csharpPropertyName);
@@ -923,6 +954,9 @@ internal class CSharpCodeEmitter
         {
             typeName = _typeResolver.ResolveWithNullability(propertySchema, isRequired);
         }
+
+        // Add validation attributes
+        EmitValidationAttributes(propertySchema);
 
         // Add JSON attribute
         if (!_options.OmitJsonPropertyNameAttributes && jsonName != null)
@@ -1095,6 +1129,8 @@ internal class CSharpCodeEmitter
         AppendLine($"/// Type alias for {resolvedType}.");
         AppendLine($"/// </summary>");
 
+        EmitObsoleteAttribute(schema);
+
         if (!_options.InlinePrimitiveTypeAliases)
         {
             string converterType = _typeResolver.IsBinaryStreamPropertyType(schema)
@@ -1121,6 +1157,7 @@ internal class CSharpCodeEmitter
         IList<IOpenApiSchema> variants = schema.OneOf ?? schema.AnyOf ?? [];
 
         EmitDocComment(schema.Description);
+        EmitObsoleteAttribute(schema);
 
         if (schema.Discriminator is { PropertyName: not null } disc)
         {
@@ -1447,6 +1484,87 @@ internal class CSharpCodeEmitter
             AppendLine($"/// {EscapeXmlDocComment(line)}");
         }
         AppendLine("/// </summary>");
+    }
+
+    private void EmitValidationAttributes(IOpenApiSchema schema)
+    {
+        if (!_options.EmitValidationAttributes)
+        {
+            return;
+        }
+
+        bool isString = TypeResolver.HasTypeFlag(schema, JsonSchemaType.String);
+        bool isArray = TypeResolver.HasTypeFlag(schema, JsonSchemaType.Array);
+        bool isNumber = TypeResolver.HasTypeFlag(schema, JsonSchemaType.Number) || TypeResolver.HasTypeFlag(schema, JsonSchemaType.Integer);
+
+        if (isString)
+        {
+            int? minLength = schema.MinLength;
+            int? maxLength = schema.MaxLength;
+
+            if (minLength.HasValue || maxLength.HasValue)
+            {
+                if (minLength.HasValue && maxLength.HasValue)
+                {
+                    AppendLine($"[StringLength({maxLength.Value}, MinimumLength = {minLength.Value})]");
+                }
+                else if (maxLength.HasValue)
+                {
+                    AppendLine($"[StringLength({maxLength.Value})]");
+                }
+                else
+                {
+                    AppendLine($"[MinLength({minLength!.Value})]");
+                }
+            }
+        }
+        else if (isArray)
+        {
+            if (schema.MinItems.HasValue)
+            {
+                AppendLine($"[MinLength({schema.MinItems.Value})]");
+            }
+
+            if (schema.MaxItems.HasValue)
+            {
+                AppendLine($"[MaxLength({schema.MaxItems.Value})]");
+            }
+        }
+
+        if (isString && !string.IsNullOrEmpty(schema.Pattern))
+        {
+            AppendLine($"[RegularExpression(\"{EscapeCSharpStringLiteral(schema.Pattern)}\")]");
+        }
+
+        if (isNumber && (!string.IsNullOrEmpty(schema.Minimum) || !string.IsNullOrEmpty(schema.Maximum)))
+        {
+            string min = !string.IsNullOrEmpty(schema.Minimum) ? FormatNumberLiteral(schema.Minimum) : "double.MinValue";
+            string max = !string.IsNullOrEmpty(schema.Maximum) ? FormatNumberLiteral(schema.Maximum) : "double.MaxValue";
+            AppendLine($"[Range({min}, {max})]");
+        }
+    }
+
+    private static string FormatNumberLiteral(string value)
+    {
+        if (decimal.TryParse(value, NumberStyles.Any, CultureInfo.InvariantCulture, out decimal dec))
+        {
+            if (dec == decimal.Truncate(dec))
+            {
+                return dec.ToString("0", CultureInfo.InvariantCulture) + "d";
+            }
+
+            return dec.ToString(CultureInfo.InvariantCulture) + "d";
+        }
+
+        return value;
+    }
+
+    private void EmitObsoleteAttribute(IOpenApiSchema schema)
+    {
+        if (_options.EmitObsoleteAttribute && schema.Deprecated)
+        {
+            AppendLine("[Obsolete]");
+        }
     }
 
     private static string EscapeXmlDocComment(string text)

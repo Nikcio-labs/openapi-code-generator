@@ -4,12 +4,13 @@
 // </auto-generated>
 
 #nullable enable
-#pragma warning disable CS8019
+#pragma warning disable CS8019, CS9042
 
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text.Json.Serialization;
+using System.ComponentModel.DataAnnotations;
 
 namespace Generated.StripeApi;
 
@@ -10215,6 +10216,7 @@ public partial record Account
     /// <summary>
     /// The account's country.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("country")]
     public string? Country { get; init; }
 
@@ -10227,6 +10229,7 @@ public partial record Account
     /// <summary>
     /// Three-letter ISO currency code representing the default currency for the account. This must be a currency that [Stripe supports in the account's country](https://stripe.com/docs/payouts).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("default_currency")]
     public string? DefaultCurrency { get; init; }
 
@@ -10239,6 +10242,7 @@ public partial record Account
     /// <summary>
     /// An email address associated with the account. It's not used for authentication and Stripe doesn't market to this field without explicit approval from the platform.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("email")]
     public string? Email { get; init; }
 
@@ -10260,6 +10264,7 @@ public partial record Account
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -10328,6 +10333,7 @@ public partial record AccountAnnualRevenue
     /// <summary>
     /// The close-out date of the preceding fiscal year in ISO 8601 format. E.g. 2023-12-31 for the 31st of December, 2023.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("fiscal_year_end")]
     public string? FiscalYearEnd { get; init; }
 
@@ -10338,12 +10344,14 @@ public partial record AccountBacsDebitPaymentsSettings
     /// <summary>
     /// The Bacs Direct Debit display name for this account. For payments made with Bacs Direct Debit, this name appears on the mandate as the statement descriptor. Mobile banking apps display it as the name of the business. To use custom branding, set the Bacs Direct Debit Display Name during or right after creation. Custom branding incurs an additional monthly fee for the platform. The fee appears 5 business days after requesting Bacs. If you don't set the display name before requesting Bacs capability, it's automatically set as "Stripe" and the account is onboarded to Stripe branding, which is free.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("display_name")]
     public string? DisplayName { get; init; }
 
     /// <summary>
     /// The Bacs Direct Debit Service user number for this account. For payments made with Bacs Direct Debit, this number is a unique identifier of the account with our banking partners.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("service_user_number")]
     public string? ServiceUserNumber { get; init; }
 
@@ -10366,12 +10374,14 @@ public partial record AccountBrandingSettings
     /// <summary>
     /// A CSS hex color value representing the primary branding color for this account
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("primary_color")]
     public string? PrimaryColor { get; init; }
 
     /// <summary>
     /// A CSS hex color value representing the secondary branding color for this account
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("secondary_color")]
     public string? SecondaryColor { get; init; }
 
@@ -10394,6 +10404,7 @@ public partial record AccountBusinessProfile
     /// <summary>
     /// [The merchant category code for the account](/connect/setting-mcc). MCCs are used to classify businesses based on the goods or services they provide.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("mcc")]
     public string? Mcc { get; init; }
 
@@ -10409,12 +10420,14 @@ public partial record AccountBusinessProfile
     /// <summary>
     /// The customer-facing business name.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("name")]
     public string? Name { get; init; }
 
     /// <summary>
     /// Internal-only description of the product sold or service provided by the business. It's used by Stripe for risk and underwriting purposes.
     /// </summary>
+    [StringLength(40000)]
     [JsonPropertyName("product_description")]
     public string? ProductDescription { get; init; }
 
@@ -10427,24 +10440,28 @@ public partial record AccountBusinessProfile
     /// <summary>
     /// A publicly available email address for sending support issues to.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("support_email")]
     public string? SupportEmail { get; init; }
 
     /// <summary>
     /// A publicly available phone number to call with support issues.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("support_phone")]
     public string? SupportPhone { get; init; }
 
     /// <summary>
     /// A publicly available website for handling support issues.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("support_url")]
     public string? SupportUrl { get; init; }
 
     /// <summary>
     /// The business's publicly available website.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("url")]
     public string? Url { get; init; }
 
@@ -10969,18 +10986,21 @@ public partial record AccountCardPaymentsSettings
     /// <summary>
     /// The default text that appears on credit card statements when a charge is made. This field prefixes any dynamic `statement_descriptor` specified on the charge. `statement_descriptor_prefix` is useful for maximizing descriptor space for the dynamic portion.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("statement_descriptor_prefix")]
     public string? StatementDescriptorPrefix { get; init; }
 
     /// <summary>
     /// The Kana variation of the default text that appears on credit card statements when a charge is made (Japan only). This field prefixes any dynamic `statement_descriptor_suffix_kana` specified on the charge. `statement_descriptor_prefix_kana` is useful for maximizing descriptor space for the dynamic portion.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("statement_descriptor_prefix_kana")]
     public string? StatementDescriptorPrefixKana { get; init; }
 
     /// <summary>
     /// The Kanji variation of the default text that appears on credit card statements when a charge is made (Japan only). This field prefixes any dynamic `statement_descriptor_suffix_kanji` specified on the charge. `statement_descriptor_prefix_kanji` is useful for maximizing descriptor space for the dynamic portion.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("statement_descriptor_prefix_kanji")]
     public string? StatementDescriptorPrefixKanji { get; init; }
 
@@ -10991,12 +11011,14 @@ public partial record AccountDashboardSettings
     /// <summary>
     /// The display name for this account. This is used on the Stripe Dashboard to differentiate between accounts.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("display_name")]
     public string? DisplayName { get; init; }
 
     /// <summary>
     /// The timezone used in the Stripe Dashboard for this account. A list of possible time zone values is maintained at the [IANA Time Zone Database](http://www.iana.org/time-zones).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("timezone")]
     public string? Timezone { get; init; }
 
@@ -11075,6 +11097,7 @@ public partial record AccountGroupMembership
     /// <summary>
     /// The group the account is in to determine their payments pricing, and null if the account is on customized pricing. [See the Platform pricing tool documentation](https://docs.stripe.com/connect/platform-pricing-tools) for details.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("payments_pricing")]
     public string? PaymentsPricing { get; init; }
 
@@ -11125,6 +11148,7 @@ public partial record AccountLink
     /// <summary>
     /// The URL for the account link.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("url")]
     public required string Url { get; init; }
 
@@ -11151,18 +11175,21 @@ public partial record AccountPaymentsSettings
     /// <summary>
     /// The default text that appears on credit card statements when a charge is made. This field prefixes any dynamic `statement_descriptor` specified on the charge.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("statement_descriptor")]
     public string? StatementDescriptor { get; init; }
 
     /// <summary>
     /// The Kana variation of `statement_descriptor` used for charges in Japan. Japanese statement descriptors have [special requirements](https://docs.stripe.com/get-started/account/statement-descriptors#set-japanese-statement-descriptors).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("statement_descriptor_kana")]
     public string? StatementDescriptorKana { get; init; }
 
     /// <summary>
     /// The Kanji variation of `statement_descriptor` used for charges in Japan. Japanese statement descriptors have [special requirements](https://docs.stripe.com/get-started/account/statement-descriptors#set-japanese-statement-descriptors).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("statement_descriptor_kanji")]
     public string? StatementDescriptorKanji { get; init; }
 
@@ -11182,6 +11209,7 @@ public partial record AccountPayoutSettings
     /// <summary>
     /// The text that appears on the bank account statement for payouts. If not set, this defaults to the platform's bank descriptor as set in the Dashboard.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("statement_descriptor")]
     public string? StatementDescriptor { get; init; }
 
@@ -11266,12 +11294,14 @@ public partial record AccountRequirementsError
     /// <summary>
     /// An informative message that indicates the error type and provides additional details about the error.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reason")]
     public required string Reason { get; init; }
 
     /// <summary>
     /// The specific user onboarding requirement field (in the requirements hash) that needs to be resolved.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("requirement")]
     public required string Requirement { get; init; }
 
@@ -11282,6 +11312,7 @@ public partial record AccountSepaDebitPaymentsSettings
     /// <summary>
     /// SEPA creditor identifier that identifies the company making the payment.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("creditor_id")]
     public string? CreditorId { get; init; }
 
@@ -11301,6 +11332,7 @@ public partial record AccountSession
     /// <summary>
     /// The ID of the account the AccountSession was created for
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("account")]
     public required string Account { get; init; }
 
@@ -11311,6 +11343,7 @@ public partial record AccountSession
     /// 
     /// Refer to our docs to [setup Connect embedded components](https://docs.stripe.com/connect/get-started-connect-embedded-components) and learn about how `client_secret` should be handled.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("client_secret")]
     public required string ClientSecret { get; init; }
 
@@ -11382,12 +11415,14 @@ public partial record AccountTermsOfService
     /// <summary>
     /// The IP address from which the account representative accepted the service agreement.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("ip")]
     public string? Ip { get; init; }
 
     /// <summary>
     /// The user agent of the browser from which the account representative accepted the service agreement.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("user_agent")]
     public string? UserAgent { get; init; }
 
@@ -11404,18 +11439,21 @@ public partial record AccountTosAcceptance
     /// <summary>
     /// The IP address from which the account representative accepted their service agreement
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("ip")]
     public string? Ip { get; init; }
 
     /// <summary>
     /// The user's service agreement type
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("service_agreement")]
     public string? ServiceAgreement { get; init; }
 
     /// <summary>
     /// The user agent of the browser from which the account representative accepted their service agreement
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("user_agent")]
     public string? UserAgent { get; init; }
 
@@ -11494,36 +11532,42 @@ public partial record Address
     /// <summary>
     /// City, district, suburb, town, or village.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("city")]
     public string? City { get; init; }
 
     /// <summary>
     /// Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("country")]
     public string? Country { get; init; }
 
     /// <summary>
     /// Address line 1, such as the street, PO Box, or company name.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("line1")]
     public string? Line1 { get; init; }
 
     /// <summary>
     /// Address line 2, such as the apartment, suite, unit, or building.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("line2")]
     public string? Line2 { get; init; }
 
     /// <summary>
     /// ZIP or postal code.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("postal_code")]
     public string? PostalCode { get; init; }
 
     /// <summary>
     /// State, county, province, or region ([ISO 3166-2](https://en.wikipedia.org/wiki/ISO_3166-2)).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("state")]
     public string? State { get; init; }
 
@@ -11534,36 +11578,42 @@ public partial record AddressApiResourceTerminal
     /// <summary>
     /// City, district, suburb, town, or village.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("city")]
     public string? City { get; init; }
 
     /// <summary>
     /// Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("country")]
     public string? Country { get; init; }
 
     /// <summary>
     /// Address line 1, such as the street, PO Box, or company name.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("line1")]
     public string? Line1 { get; init; }
 
     /// <summary>
     /// Address line 2, such as the apartment, suite, unit, or building.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("line2")]
     public string? Line2 { get; init; }
 
     /// <summary>
     /// ZIP or postal code.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("postal_code")]
     public string? PostalCode { get; init; }
 
     /// <summary>
     /// State, county, province, or region ([ISO 3166-2](https://en.wikipedia.org/wiki/ISO_3166-2)).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("state")]
     public string? State { get; init; }
 
@@ -11587,54 +11637,63 @@ public partial record ApiErrors
     /// <summary>
     /// For card errors resulting from a card issuer decline, a short string indicating [how to proceed with an error](https://docs.stripe.com/declines#retrying-issuer-declines) if they provide one.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("advice_code")]
     public string? AdviceCode { get; init; }
 
     /// <summary>
     /// For card errors, the ID of the failed charge.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("charge")]
     public string? Charge { get; init; }
 
     /// <summary>
     /// For some errors that could be handled programmatically, a short string indicating the [error code](https://docs.stripe.com/error-codes) reported.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("code")]
     public string? Code { get; init; }
 
     /// <summary>
     /// For card errors resulting from a card issuer decline, a short string indicating the [card issuer's reason for the decline](https://docs.stripe.com/declines#issuer-declines) if they provide one.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("decline_code")]
     public string? DeclineCode { get; init; }
 
     /// <summary>
     /// A URL to more information about the [error code](https://docs.stripe.com/error-codes) reported.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("doc_url")]
     public string? DocUrl { get; init; }
 
     /// <summary>
     /// A human-readable message providing more details about the error. For card errors, these messages can be shown to your users.
     /// </summary>
+    [StringLength(40000)]
     [JsonPropertyName("message")]
     public string? Message { get; init; }
 
     /// <summary>
     /// For card errors resulting from a card issuer decline, a 2 digit code which indicates the advice given to merchant by the card network on how to proceed with an error.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("network_advice_code")]
     public string? NetworkAdviceCode { get; init; }
 
     /// <summary>
     /// For payments declined by the network, an alphanumeric code which indicates the reason the payment failed.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("network_decline_code")]
     public string? NetworkDeclineCode { get; init; }
 
     /// <summary>
     /// If the error is parameter-specific, the parameter related to the error. For example, you can use this to display a message near the correct form field.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("param")]
     public string? Param { get; init; }
 
@@ -11667,12 +11726,14 @@ public partial record ApiErrors
     /// <summary>
     /// If the error is specific to the type of payment method, the payment method type that had a problem. This field is only populated for invoice-related errors.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("payment_method_type")]
     public string? PaymentMethodType { get; init; }
 
     /// <summary>
     /// A URL to the request log entry in your dashboard.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("request_log_url")]
     public string? RequestLogUrl { get; init; }
 
@@ -11724,12 +11785,14 @@ public partial record ApplePayDomain
     [JsonPropertyName("created")]
     public required int Created { get; init; }
 
+    [StringLength(5000)]
     [JsonPropertyName("domain_name")]
     public required string DomainName { get; init; }
 
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -11752,12 +11815,14 @@ public partial record Application
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
     /// <summary>
     /// The name of the application.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("name")]
     public string? Name { get; init; }
 
@@ -11828,6 +11893,7 @@ public partial record ApplicationFee
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -11897,6 +11963,7 @@ public partial record AppsSecret
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -11909,6 +11976,7 @@ public partial record AppsSecret
     /// <summary>
     /// A name for the secret that's unique within the scope.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("name")]
     public required string Name { get; init; }
 
@@ -11921,6 +11989,7 @@ public partial record AppsSecret
     /// <summary>
     /// The plaintext secret value to be stored.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("payload")]
     public string? Payload { get; init; }
 
@@ -11952,6 +12021,7 @@ public partial record AutomaticTax
     /// <summary>
     /// The tax provider powering automatic tax.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("provider")]
     public string? Provider { get; init; }
 
@@ -12120,6 +12190,7 @@ public partial record BalanceNetAvailable
     /// <summary>
     /// ID of the external account for this net balance (not expandable).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("destination")]
     public required string Destination { get; init; }
 
@@ -12149,6 +12220,7 @@ public partial record BalanceSettingsResourceAutomaticTransferRule
     /// <summary>
     /// The ID of the FinancialAccount that funds will be transferred to during automatic transfers.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("payout_method")]
     public required string PayoutMethod { get; init; }
 
@@ -12230,6 +12302,7 @@ public partial record BalanceSettingsResourcePayouts
     /// <summary>
     /// The text that appears on the bank account statement for payouts. If not set, this defaults to the platform's bank descriptor as set in the Dashboard.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("statement_descriptor")]
     public string? StatementDescriptor { get; init; }
 
@@ -12280,6 +12353,7 @@ public partial record BalanceSettingsResourceStartOfDay
     /// <summary>
     /// Timezone for the customized start of day. Must be a [supported customized start of day timezone](/connect/customized-start-of-day#available-timezones-and-cutoffs).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("timezone")]
     public required string Timezone { get; init; }
 
@@ -12326,6 +12400,7 @@ public partial record BalanceTransaction
     /// <summary>
     /// An arbitrary string attached to the object. Often useful for displaying to users.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("description")]
     public string? Description { get; init; }
 
@@ -12350,6 +12425,7 @@ public partial record BalanceTransaction
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -12368,6 +12444,7 @@ public partial record BalanceTransaction
     /// <summary>
     /// Learn more about how [reporting categories](https://stripe.com/docs/reports/reporting-categories) can help you understand balance transactions from an accounting perspective.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reporting_category")]
     public required string ReportingCategory { get; init; }
 
@@ -12380,6 +12457,7 @@ public partial record BalanceTransaction
     /// <summary>
     /// The transaction's net funds status in the Stripe balance, which are either `available` or `pending`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("status")]
     public required string Status { get; init; }
 
@@ -12411,18 +12489,21 @@ public partial record BankAccount
     /// <summary>
     /// The name of the person or business that owns the bank account.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("account_holder_name")]
     public string? AccountHolderName { get; init; }
 
     /// <summary>
     /// The type of entity that holds the account. This can be either `individual` or `company`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("account_holder_type")]
     public string? AccountHolderType { get; init; }
 
     /// <summary>
     /// The bank account type. This can only be `checking` or `savings` in most countries. In Japan, this can only be `futsu` or `toza`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("account_type")]
     public string? AccountType { get; init; }
 
@@ -12435,12 +12516,14 @@ public partial record BankAccount
     /// <summary>
     /// Name of the bank associated with the routing number (e.g., `WELLS FARGO`).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("bank_name")]
     public string? BankName { get; init; }
 
     /// <summary>
     /// Two-letter ISO code representing the country the bank account is located in.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("country")]
     public required string Country { get; init; }
 
@@ -12465,6 +12548,7 @@ public partial record BankAccount
     /// <summary>
     /// Uniquely identifies this particular bank account. You can use this attribute to check whether two bank accounts are the same.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("fingerprint")]
     public string? Fingerprint { get; init; }
 
@@ -12477,12 +12561,14 @@ public partial record BankAccount
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
     /// <summary>
     /// The last four digits of the bank account number.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("last4")]
     public required string Last4 { get; init; }
 
@@ -12507,6 +12593,7 @@ public partial record BankAccount
     /// <summary>
     /// The routing transit number for the bank account.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("routing_number")]
     public string? RoutingNumber { get; init; }
 
@@ -12515,6 +12602,7 @@ public partial record BankAccount
     /// 
     /// For external accounts, possible values are `new`, `errored`, `verification_failed`, and `tokenized_account_number_deactivated`. If a payout fails, the status is set to `errored` and scheduled payouts are stopped until account details are updated. In the US and India, if we can't [verify the owner of the bank account](https://support.stripe.com/questions/bank-account-ownership-verification), we'll set the status to `verification_failed`. Other validations aren't run against external accounts because they're only used for payouts. This means the other statuses don't apply.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("status")]
     public required string Status { get; init; }
 
@@ -12591,6 +12679,7 @@ public partial record BankConnectionsResourceAccountholder
     [JsonPropertyName("customer")]
     public object? Customer { get; init; }
 
+    [StringLength(5000)]
     [JsonPropertyName("customer_account")]
     public string? CustomerAccount { get; init; }
 
@@ -12701,6 +12790,7 @@ public partial record BankConnectionsResourceLinkAccountSessionFilters
     /// <summary>
     /// Country from which to filter accounts.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("country")]
     public string? Country { get; init; }
 
@@ -12759,6 +12849,7 @@ public partial record BankConnectionsResourceTransactionRefresh
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -12812,6 +12903,7 @@ public partial record BillingAlert
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -12836,6 +12928,7 @@ public partial record BillingAlert
     /// <summary>
     /// Title of the alert.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("title")]
     public required string Title { get; init; }
 
@@ -12867,6 +12960,7 @@ public partial record BillingCreditBalanceSummary
     /// <summary>
     /// The account the balance is for.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("customer_account")]
     public string? CustomerAccount { get; init; }
 
@@ -12922,6 +13016,7 @@ public partial record BillingCreditBalanceTransaction
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -12985,6 +13080,7 @@ public partial record BillingCreditGrant
     /// <summary>
     /// ID of the account representing the customer receiving the billing credits
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("customer_account")]
     public string? CustomerAccount { get; init; }
 
@@ -13003,6 +13099,7 @@ public partial record BillingCreditGrant
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -13021,6 +13118,7 @@ public partial record BillingCreditGrant
     /// <summary>
     /// A descriptive name shown in dashboard.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("name")]
     public string? Name { get; init; }
 
@@ -13064,12 +13162,14 @@ public partial record BillingFeedbackOption
     /// <summary>
     /// An arbitrary string attached to the object. Often useful for displaying to users.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("description")]
     public required string Description { get; init; }
 
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -13118,12 +13218,14 @@ public partial record BillingMeter
     /// <summary>
     /// The meter's name.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("display_name")]
     public required string DisplayName { get; init; }
 
     /// <summary>
     /// The name of the meter event to record usage for. Corresponds with the `event_name` field on meter events.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("event_name")]
     public required string EventName { get; init; }
 
@@ -13136,6 +13238,7 @@ public partial record BillingMeter
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -13185,12 +13288,14 @@ public partial record BillingMeterEvent
     /// <summary>
     /// The name of the meter event. Corresponds with the `event_name` field on a meter.
     /// </summary>
+    [StringLength(100)]
     [JsonPropertyName("event_name")]
     public required string EventName { get; init; }
 
     /// <summary>
     /// A unique identifier for the event.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("identifier")]
     public required string Identifier { get; init; }
 
@@ -13234,6 +13339,7 @@ public partial record BillingMeterEventAdjustment
     /// <summary>
     /// The name of the meter event. Corresponds with the `event_name` field on a meter.
     /// </summary>
+    [StringLength(100)]
     [JsonPropertyName("event_name")]
     public required string EventName { get; init; }
 
@@ -13286,6 +13392,7 @@ public partial record BillingMeterEventSummary
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -13298,6 +13405,7 @@ public partial record BillingMeterEventSummary
     /// <summary>
     /// The meter associated with this event summary.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("meter")]
     public required string Meter { get; init; }
 
@@ -13336,12 +13444,14 @@ public partial record BillingBillResourceInvoiceItemParentsInvoiceItemSubscripti
     /// <summary>
     /// The subscription that generated this invoice item
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("subscription")]
     public required string Subscription { get; init; }
 
     /// <summary>
     /// The subscription item that generated this invoice item
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("subscription_item")]
     public string? SubscriptionItem { get; init; }
 
@@ -13352,6 +13462,7 @@ public partial record BillingBillResourceInvoicingLinesCommonCreditedItems
     /// <summary>
     /// Invoice containing the credited invoice line items
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("invoice")]
     public required string Invoice { get; init; }
 
@@ -13378,6 +13489,7 @@ public partial record BillingBillResourceInvoicingLinesParentsInvoiceLineItemInv
     /// <summary>
     /// The invoice item that generated this line item
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("invoice_item")]
     public required string InvoiceItem { get; init; }
 
@@ -13396,6 +13508,7 @@ public partial record BillingBillResourceInvoicingLinesParentsInvoiceLineItemInv
     /// <summary>
     /// The subscription that the invoice item belongs to
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("subscription")]
     public string? Subscription { get; init; }
 
@@ -13428,6 +13541,7 @@ public partial record BillingBillResourceInvoicingLinesParentsInvoiceLineItemSub
     /// <summary>
     /// The invoice item that generated this line item
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("invoice_item")]
     public string? InvoiceItem { get; init; }
 
@@ -13446,12 +13560,14 @@ public partial record BillingBillResourceInvoicingLinesParentsInvoiceLineItemSub
     /// <summary>
     /// The subscription that the subscription item belongs to
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("subscription")]
     public string? Subscription { get; init; }
 
     /// <summary>
     /// The subscription item that generated this line item
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("subscription_item")]
     public required string SubscriptionItem { get; init; }
 
@@ -13484,6 +13600,7 @@ public partial record BillingBillResourceInvoicingParentsInvoiceQuoteParent
     /// <summary>
     /// The quote that generated this invoice
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("quote")]
     public required string Quote { get; init; }
 
@@ -13542,6 +13659,7 @@ public partial record BillingBillResourceInvoicingPricingPricingPriceDetails
     /// <summary>
     /// The ID of the product this item is associated with.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("product")]
     public required string Product { get; init; }
 
@@ -13642,6 +13760,7 @@ public partial record BillingCreditGrantsResourceApplicablePrice
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public string? Id { get; init; }
 
@@ -13677,6 +13796,7 @@ public partial record BillingCreditGrantsResourceBalanceCreditsApplicationInvoic
     /// <summary>
     /// The invoice line item to which the reinstated billing credits were originally applied.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("invoice_line_item")]
     public required string InvoiceLineItem { get; init; }
 
@@ -13693,6 +13813,7 @@ public partial record BillingCreditGrantsResourceBalanceCreditsApplied
     /// <summary>
     /// The invoice line item to which the billing credits were applied.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("invoice_line_item")]
     public required string InvoiceLineItem { get; init; }
 
@@ -13722,6 +13843,7 @@ public partial record BillingCreditGrantsResourceMonetaryAmount
     /// <summary>
     /// Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("currency")]
     public required string Currency { get; init; }
 
@@ -13760,24 +13882,28 @@ public partial record BillingDetails
     /// <summary>
     /// Email address.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("email")]
     public string? Email { get; init; }
 
     /// <summary>
     /// Full name.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("name")]
     public string? Name { get; init; }
 
     /// <summary>
     /// Billing phone number (including extension).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("phone")]
     public string? Phone { get; init; }
 
     /// <summary>
     /// Taxpayer identification number. Used only for transactions between LATAM buyers and non-LATAM sellers.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("tax_id")]
     public string? TaxId { get; init; }
 
@@ -13798,6 +13924,7 @@ public partial record BillingMeterResourceBillingMeterEventAdjustmentCancel
     /// <summary>
     /// Unique identifier for the event.
     /// </summary>
+    [StringLength(100)]
     [JsonPropertyName("identifier")]
     public string? Identifier { get; init; }
 
@@ -13818,6 +13945,7 @@ public partial record BillingMeterResourceBillingMeterValue
     /// <summary>
     /// The key in the meter event payload to use as the value for this meter.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("event_payload_key")]
     public required string EventPayloadKey { get; init; }
 
@@ -13828,6 +13956,7 @@ public partial record BillingMeterResourceCustomerMappingSettings
     /// <summary>
     /// The key in the meter event payload to use for mapping the event to a customer.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("event_payload_key")]
     public required string EventPayloadKey { get; init; }
 
@@ -13868,6 +13997,7 @@ public partial record BillingPortalConfiguration
     /// <summary>
     /// The default URL to redirect customers to when they click on the portal's link to return to your website. This can be [overridden](https://docs.stripe.com/api/customer_portal/sessions/create#create_portal_session-return_url) when creating the session.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("default_return_url")]
     public string? DefaultReturnUrl { get; init; }
 
@@ -13877,6 +14007,7 @@ public partial record BillingPortalConfiguration
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -13904,6 +14035,7 @@ public partial record BillingPortalConfiguration
     /// <summary>
     /// The name of the configuration.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("name")]
     public string? Name { get; init; }
 
@@ -13954,12 +14086,14 @@ public partial record BillingPortalSession
     /// <summary>
     /// The ID of the customer for this session.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("customer")]
     public required string Customer { get; init; }
 
     /// <summary>
     /// The ID of the account for this session.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("customer_account")]
     public string? CustomerAccount { get; init; }
 
@@ -13972,6 +14106,7 @@ public partial record BillingPortalSession
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -13996,18 +14131,21 @@ public partial record BillingPortalSession
     /// <summary>
     /// The account for which the session was created on behalf of. When specified, only subscriptions and invoices with this `on_behalf_of` account appear in the portal. For more information, see the [docs](https://docs.stripe.com/connect/separate-charges-and-transfers#settlement-merchant). Use the [Accounts API](https://docs.stripe.com/api/accounts/object#account_object-settings-branding) to modify the `on_behalf_of` account's branding settings, which the portal displays.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("on_behalf_of")]
     public string? OnBehalfOf { get; init; }
 
     /// <summary>
     /// The URL to redirect customers to when they click on the portal's link to return to your website.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("return_url")]
     public string? ReturnUrl { get; init; }
 
     /// <summary>
     /// The short-lived URL of the session that gives customers access to the customer portal.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("url")]
     public required string Url { get; init; }
 
@@ -14018,6 +14156,7 @@ public partial record CancellationDetails
     /// <summary>
     /// Additional comments about why the user canceled the subscription, if the subscription was canceled explicitly by the user.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("comment")]
     public string? Comment { get; init; }
 
@@ -14060,6 +14199,7 @@ public partial record Capability
     /// <summary>
     /// The identifier for the capability.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -14107,48 +14247,56 @@ public partial record Card
     /// <summary>
     /// City/District/Suburb/Town/Village.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("address_city")]
     public string? AddressCity { get; init; }
 
     /// <summary>
     /// Billing address country, if provided when creating card.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("address_country")]
     public string? AddressCountry { get; init; }
 
     /// <summary>
     /// Address line 1 (Street address/PO Box/Company name).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("address_line1")]
     public string? AddressLine1 { get; init; }
 
     /// <summary>
     /// If `address_line1` was provided, results of the check: `pass`, `fail`, `unavailable`, or `unchecked`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("address_line1_check")]
     public string? AddressLine1Check { get; init; }
 
     /// <summary>
     /// Address line 2 (Apartment/Suite/Unit/Building).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("address_line2")]
     public string? AddressLine2 { get; init; }
 
     /// <summary>
     /// State/County/Province/Region.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("address_state")]
     public string? AddressState { get; init; }
 
     /// <summary>
     /// ZIP or postal code.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("address_zip")]
     public string? AddressZip { get; init; }
 
     /// <summary>
     /// If `address_zip` was provided, results of the check: `pass`, `fail`, `unavailable`, or `unchecked`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("address_zip_check")]
     public string? AddressZipCheck { get; init; }
 
@@ -14167,12 +14315,14 @@ public partial record Card
     /// <summary>
     /// Card brand. Can be `American Express`, `Cartes Bancaires`, `Diners Club`, `Discover`, `Eftpos Australia`, `Girocard`, `JCB`, `MasterCard`, `UnionPay`, `Visa`, or `Unknown`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("brand")]
     public required string Brand { get; init; }
 
     /// <summary>
     /// Two-letter ISO code representing the country of the card. You could use this attribute to get a sense of the international breakdown of cards you've collected.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("country")]
     public string? Country { get; init; }
 
@@ -14191,6 +14341,7 @@ public partial record Card
     /// <summary>
     /// If a CVC was provided, results of the check: `pass`, `fail`, `unavailable`, or `unchecked`. A result of unchecked indicates that CVC was provided but hasn't been checked yet. Checks are typically performed when attaching a card to a Customer object, or when creating a charge. For more details, see [Check if a card is valid without a charge](https://support.stripe.com/questions/check-if-a-card-is-valid-without-a-charge).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("cvc_check")]
     public string? CvcCheck { get; init; }
 
@@ -14203,6 +14354,7 @@ public partial record Card
     /// <summary>
     /// (For tokenized numbers only.) The last four digits of the device account number.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("dynamic_last4")]
     public string? DynamicLast4 { get; init; }
 
@@ -14223,24 +14375,28 @@ public partial record Card
     /// 
     /// *As of May 1, 2021, card fingerprint in India for Connect changed to allow two fingerprints for the same card---one for India and one for the rest of the world.*
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("fingerprint")]
     public string? Fingerprint { get; init; }
 
     /// <summary>
     /// Card funding type. Can be `credit`, `debit`, `prepaid`, or `unknown`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("funding")]
     public required string Funding { get; init; }
 
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
     /// <summary>
     /// The last four digits of the card.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("last4")]
     public required string Last4 { get; init; }
 
@@ -14253,6 +14409,7 @@ public partial record Card
     /// <summary>
     /// Cardholder name.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("name")]
     public string? Name { get; init; }
 
@@ -14274,12 +14431,14 @@ public partial record Card
     /// <summary>
     /// For external accounts that are cards, possible values are `new` and `errored`. If a payout fails, the status is set to `errored` and [scheduled payouts](https://stripe.com/docs/payouts#payout-schedule) are stopped until account details are updated.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("status")]
     public string? Status { get; init; }
 
     /// <summary>
     /// If the card number is tokenized, this is the method that was used. Can be `android_pay` (includes Google Pay), `apple_pay`, `masterpass`, `visa_checkout`, or null.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("tokenization_method")]
     public string? TokenizationMethod { get; init; }
 
@@ -14293,6 +14452,7 @@ public partial record CardGeneratedFromPaymentMethodDetails
     /// <summary>
     /// The type of payment method transaction-specific details from the transaction that generated this `card` payment method. Always `card_present`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("type")]
     public required string Type { get; init; }
 
@@ -14309,12 +14469,14 @@ public partial record CardIssuingAccountTermsOfService
     /// <summary>
     /// The IP address from which the account representative accepted the service agreement.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("ip")]
     public string? Ip { get; init; }
 
     /// <summary>
     /// The user agent of the browser from which the account representative accepted the service agreement.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("user_agent")]
     public string? UserAgent { get; init; }
 
@@ -14338,12 +14500,14 @@ public partial record CashBalance
     /// <summary>
     /// The ID of the customer whose cash balance this object represents.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("customer")]
     public required string Customer { get; init; }
 
     /// <summary>
     /// The ID of an Account representing a customer whose cash balance this object represents.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("customer_account")]
     public string? CustomerAccount { get; init; }
 
@@ -14419,6 +14583,7 @@ public partial record Charge
     /// <summary>
     /// The full statement descriptor that is passed to card networks, and that is displayed on your customers' credit card and bank statements. Allows you to see what the statement descriptor looks like after the static and dynamic portions are combined. This value only exists for card payments.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("calculated_statement_descriptor")]
     public string? CalculatedStatementDescriptor { get; init; }
 
@@ -14449,6 +14614,7 @@ public partial record Charge
     /// <summary>
     /// An arbitrary string attached to the object. Often useful for displaying to users.
     /// </summary>
+    [StringLength(40000)]
     [JsonPropertyName("description")]
     public string? Description { get; init; }
 
@@ -14467,12 +14633,14 @@ public partial record Charge
     /// <summary>
     /// Error code explaining reason for charge failure if available (see [the errors section](https://docs.stripe.com/error-codes) for a list of codes).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("failure_code")]
     public string? FailureCode { get; init; }
 
     /// <summary>
     /// Message to user further explaining reason for charge failure if available.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("failure_message")]
     public string? FailureMessage { get; init; }
 
@@ -14485,6 +14653,7 @@ public partial record Charge
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -14533,6 +14702,7 @@ public partial record Charge
     /// <summary>
     /// ID of the payment method used in this charge.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("payment_method")]
     public string? PaymentMethod { get; init; }
 
@@ -14554,18 +14724,21 @@ public partial record Charge
     /// <summary>
     /// This is the email address that the receipt for this charge was sent to.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("receipt_email")]
     public string? ReceiptEmail { get; init; }
 
     /// <summary>
     /// This is the transaction number that appears on email receipts sent for this charge. This attribute will be `null` until a receipt has been sent.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("receipt_number")]
     public string? ReceiptNumber { get; init; }
 
     /// <summary>
     /// This is the URL to view the receipt for this charge. The receipt is kept up-to-date to the latest state of the charge, including any refunds. If the charge is for an Invoice, the receipt will be stylized as an Invoice receipt.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("receipt_url")]
     public string? ReceiptUrl { get; init; }
 
@@ -14604,12 +14777,14 @@ public partial record Charge
     /// 
     /// For a card charge, this value is ignored unless you don't specify a `statement_descriptor_suffix`, in which case this value is used as the suffix.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("statement_descriptor")]
     public string? StatementDescriptor { get; init; }
 
     /// <summary>
     /// Provides information about a card charge. Concatenated to the account's [statement descriptor prefix](https://docs.stripe.com/get-started/account/statement-descriptors#static) to form the complete statement descriptor that appears on the customer's statement. If the account has no prefix value, the suffix is concatenated to the account's statement descriptor.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("statement_descriptor_suffix")]
     public string? StatementDescriptorSuffix { get; init; }
 
@@ -14634,6 +14809,7 @@ public partial record Charge
     /// <summary>
     /// A string that identifies this transaction as part of a group. See the [Connect documentation](https://docs.stripe.com/connect/separate-charges-and-transfers#transfer-options) for details.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("transfer_group")]
     public string? TransferGroup { get; init; }
 
@@ -14644,12 +14820,14 @@ public partial record ChargeFraudDetails
     /// <summary>
     /// Assessments from Stripe. If set, the value is `fraudulent`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("stripe_report")]
     public string? StripeReport { get; init; }
 
     /// <summary>
     /// Assessments reported by you. If set, possible values of are `safe` and `fraudulent`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("user_report")]
     public string? UserReport { get; init; }
 
@@ -14666,30 +14844,35 @@ public partial record ChargeOutcome
     /// <summary>
     /// For charges declined by the network, a 2 digit code which indicates the advice returned by the network on how to proceed with an error.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("network_advice_code")]
     public string? NetworkAdviceCode { get; init; }
 
     /// <summary>
     /// For charges declined by the network, an alphanumeric code which indicates the reason the charge failed.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("network_decline_code")]
     public string? NetworkDeclineCode { get; init; }
 
     /// <summary>
     /// Possible values are `approved_by_network`, `declined_by_network`, `not_sent_to_network`, and `reversed_after_approval`. The value `reversed_after_approval` indicates the payment was [blocked by Stripe](https://docs.stripe.com/declines#blocked-payments) after bank authorization, and may temporarily appear as "pending" on a cardholder's statement.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("network_status")]
     public string? NetworkStatus { get; init; }
 
     /// <summary>
     /// An enumerated value providing a more detailed explanation of the outcome's `type`. Charges blocked by Radar's default block rule have the value `highest_risk_level`. Charges placed in review by Radar's default review rule have the value `elevated_risk_level`. Charges blocked because the payment is unlikely to be authorized have the value `low_probability_of_authorization`. Charges authorized, blocked, or placed in review by custom rules have the value `rule`. See [understanding declines](https://docs.stripe.com/declines) for more details.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reason")]
     public string? Reason { get; init; }
 
     /// <summary>
     /// Stripe Radar's evaluation of the riskiness of the payment. Possible values for evaluated payments are `normal`, `elevated`, `highest`. For non-card payments, and card-based payments predating the public assignment of risk levels, this field will have the value `not_assessed`. In the event of an error in the evaluation, this field will have the value `unknown`. This field is only available with Radar.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("risk_level")]
     public string? RiskLevel { get; init; }
 
@@ -14708,12 +14891,14 @@ public partial record ChargeOutcome
     /// <summary>
     /// A human-readable description of the outcome type and reason, designed for you (the recipient of the payment), not your customer.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("seller_message")]
     public string? SellerMessage { get; init; }
 
     /// <summary>
     /// Possible values are `authorized`, `manual_review`, `issuer_declined`, `blocked`, and `invalid`. See [understanding declines](https://docs.stripe.com/declines) and [Radar reviews](https://docs.stripe.com/radar/reviews) for details.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("type")]
     public required string Type { get; init; }
 
@@ -14798,6 +14983,7 @@ public partial record CheckoutSession
     /// <summary>
     /// If set, Checkout displays a back button and customers will be directed to this URL if they decide to cancel payment and return to your website.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("cancel_url")]
     public string? CancelUrl { get; init; }
 
@@ -14806,6 +14992,7 @@ public partial record CheckoutSession
     /// customer ID, a cart ID, or similar, and can be used to reconcile the
     /// Session with your internal systems.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("client_reference_id")]
     public string? ClientReferenceId { get; init; }
 
@@ -14813,6 +15000,7 @@ public partial record CheckoutSession
     /// The client secret of your Checkout Session. Applies to Checkout Sessions with `ui_mode: embedded_page` or `ui_mode: elements`. For `ui_mode: embedded_page`, the client secret is to be used when initializing Stripe.js embedded checkout.
     ///  For `ui_mode: elements`, use the client secret with [initCheckout](https://docs.stripe.com/js/custom_checkout/init) on your front end.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("client_secret")]
     public string? ClientSecret { get; init; }
 
@@ -14874,6 +15062,7 @@ public partial record CheckoutSession
     /// <summary>
     /// The ID of the account for this Session.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("customer_account")]
     public string? CustomerAccount { get; init; }
 
@@ -14896,6 +15085,7 @@ public partial record CheckoutSession
     /// on file. To access information about the customer once the payment flow is
     /// complete, use the `customer` attribute.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("customer_email")]
     public string? CustomerEmail { get; init; }
 
@@ -14920,12 +15110,14 @@ public partial record CheckoutSession
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
     /// <summary>
     /// The integration identifier for this Checkout Session. Multiple Checkout Sessions can have the same integration identifier.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("integration_identifier")]
     public string? IntegrationIdentifier { get; init; }
 
@@ -15059,6 +15251,7 @@ public partial record CheckoutSession
     /// <summary>
     /// The ID of the original expired Checkout Session that triggered the recovery flow.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("recovered_from")]
     public string? RecoveredFrom { get; init; }
 
@@ -15071,6 +15264,7 @@ public partial record CheckoutSession
     /// <summary>
     /// Applies to Checkout Sessions with `ui_mode: embedded_page` or `ui_mode: elements`. The URL to redirect your customer back to after they authenticate or cancel their payment on the payment method's app or site.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("return_url")]
     public string? ReturnUrl { get; init; }
 
@@ -15128,6 +15322,7 @@ public partial record CheckoutSession
     /// The URL the customer will be directed to after the payment or
     /// subscription creation is successful.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("success_url")]
     public string? SuccessUrl { get; init; }
 
@@ -15150,6 +15345,7 @@ public partial record CheckoutSession
     /// The URL to the Checkout Session. Applies to Checkout Sessions with `ui_mode: hosted_page`. Redirect customers to this URL to take them to Checkout. If you’re using [Custom Domains](https://docs.stripe.com/payments/checkout/custom-domains), the URL will use your subdomain. Otherwise, it’ll use `checkout.stripe.com.`
     /// This value is only present when the session is active.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("url")]
     public string? Url { get; init; }
 
@@ -15166,6 +15362,7 @@ public partial record CheckoutAcssDebitMandateOptions
     /// <summary>
     /// A URL for custom mandate text
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("custom_mandate_url")]
     public string? CustomMandateUrl { get; init; }
 
@@ -15178,6 +15375,7 @@ public partial record CheckoutAcssDebitMandateOptions
     /// <summary>
     /// Description of the interval. Only required if the 'payment_schedule' parameter is 'interval' or 'combined'.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("interval_description")]
     public string? IntervalDescription { get; init; }
 
@@ -15221,6 +15419,7 @@ public partial record CheckoutAcssDebitPaymentMethodOptions
     /// <summary>
     /// Controls when Stripe will attempt to debit the funds from the customer's account. The date must be a string in YYYY-MM-DD format. The date must be in the future and between 3 and 15 calendar days from now.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("target_date")]
     public string? TargetDate { get; init; }
 
@@ -15341,6 +15540,7 @@ public partial record CheckoutAuBecsDebitPaymentMethodOptions
     /// <summary>
     /// Controls when Stripe will attempt to debit the funds from the customer's account. The date must be a string in YYYY-MM-DD format. The date must be in the future and between 3 and 15 calendar days from now.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("target_date")]
     public string? TargetDate { get; init; }
 
@@ -15366,6 +15566,7 @@ public partial record CheckoutBacsDebitPaymentMethodOptions
     /// <summary>
     /// Controls when Stripe will attempt to debit the funds from the customer's account. The date must be a string in YYYY-MM-DD format. The date must be in the future and between 3 and 15 calendar days from now.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("target_date")]
     public string? TargetDate { get; init; }
 
@@ -15488,12 +15689,14 @@ public partial record CheckoutCardPaymentMethodOptions
     /// <summary>
     /// Provides information about a card payment that customers see on their statements. Concatenated with the Kana prefix (shortened Kana descriptor) or Kana statement descriptor that’s set on the account to form the complete statement descriptor. Maximum 22 characters. On card statements, the *concatenation* of both prefix and suffix (including separators) will appear truncated to 22 characters.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("statement_descriptor_suffix_kana")]
     public string? StatementDescriptorSuffixKana { get; init; }
 
     /// <summary>
     /// Provides information about a card payment that customers see on their statements. Concatenated with the Kanji prefix (shortened Kanji descriptor) or Kanji statement descriptor that’s set on the account to form the complete statement descriptor. Maximum 17 characters. On card statements, the *concatenation* of both prefix and suffix (including separators) will appear truncated to 17 characters.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("statement_descriptor_suffix_kanji")]
     public string? StatementDescriptorSuffixKanji { get; init; }
 
@@ -15603,6 +15806,7 @@ public partial record CheckoutFinancialConnectionsPaymentMethodOptions
     /// <summary>
     /// For webview integrations only. Upon completing OAuth login in the native browser, the user will be redirected to this URL to return to your app.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("return_url")]
     public string? ReturnUrl { get; init; }
 
@@ -15927,6 +16131,7 @@ public partial record CheckoutPaymentMethodOptionsMandateOptionsBacsDebit
     /// <summary>
     /// Prefix used to generate the Mandate reference. Must be at most 12 characters long. Must consist of only uppercase letters, numbers, spaces, or the following special characters: '/', '_', '-', '&amp;', '.'. Cannot begin with 'DDIC' or 'STRIPE'.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reference_prefix")]
     public string? ReferencePrefix { get; init; }
 
@@ -15937,6 +16142,7 @@ public partial record CheckoutPaymentMethodOptionsMandateOptionsSepaDebit
     /// <summary>
     /// Prefix used to generate the Mandate reference. Must be at most 12 characters long. Must consist of only uppercase letters, numbers, spaces, or the following special characters: '/', '_', '-', '&amp;', '.'. Cannot begin with 'STRIPE'.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reference_prefix")]
     public string? ReferencePrefix { get; init; }
 
@@ -15969,12 +16175,14 @@ public partial record CheckoutPaypalPaymentMethodOptions
     /// <summary>
     /// Preferred locale of the PayPal checkout page that the customer is redirected to.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("preferred_locale")]
     public string? PreferredLocale { get; init; }
 
     /// <summary>
     /// A reference of the PayPal transaction visible to customer which is mapped to PayPal's invoice ID. This must be a globally unique ID if you have configured in your PayPal settings to block multiple payments per invoice ID.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reference")]
     public string? Reference { get; init; }
 
@@ -16126,6 +16334,7 @@ public partial record CheckoutSepaDebitPaymentMethodOptions
     /// <summary>
     /// Controls when Stripe will attempt to debit the funds from the customer's account. The date must be a string in YYYY-MM-DD format. The date must be in the future and between 3 and 15 calendar days from now.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("target_date")]
     public string? TargetDate { get; init; }
 
@@ -16323,6 +16532,7 @@ public partial record CheckoutSwishPaymentMethodOptions
     /// <summary>
     /// The order reference that will be displayed to customers in the Swish application. Defaults to the `id` of the Payment Intent.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reference")]
     public string? Reference { get; init; }
 
@@ -16383,6 +16593,7 @@ public partial record CheckoutUsBankAccountPaymentMethodOptions
     /// <summary>
     /// Controls when Stripe will attempt to debit the funds from the customer's account. The date must be a string in YYYY-MM-DD format. The date must be in the future and between 3 and 15 calendar days from now.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("target_date")]
     public string? TargetDate { get; init; }
 
@@ -16399,6 +16610,7 @@ public partial record CheckoutWechatPayPaymentMethodOptions
     /// <summary>
     /// The app ID registered with WeChat Pay. Only required when client is iOS or Android.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("app_id")]
     public string? AppId { get; init; }
 
@@ -16464,6 +16676,7 @@ public partial record ClimateOrder
     /// <summary>
     /// For delivered orders, a URL to a delivery certificate for the order.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("certificate")]
     public string? Certificate { get; init; }
 
@@ -16482,6 +16695,7 @@ public partial record ClimateOrder
     /// <summary>
     /// Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase, representing the currency for this order.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("currency")]
     public required string Currency { get; init; }
 
@@ -16512,6 +16726,7 @@ public partial record ClimateOrder
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -16588,6 +16803,7 @@ public partial record ClimateProduct
     /// that start with `climsku_`. See [carbon removal inventory](https://stripe.com/docs/climate/orders/carbon-removal-inventory)
     /// for a list of available carbon removal products.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -16606,6 +16822,7 @@ public partial record ClimateProduct
     /// <summary>
     /// The Climate product's name.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("name")]
     public required string Name { get; init; }
 
@@ -16631,12 +16848,14 @@ public partial record ClimateSupplier
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
     /// <summary>
     /// Link to a webpage to learn more about the supplier.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("info_url")]
     public required string InfoUrl { get; init; }
 
@@ -16655,6 +16874,7 @@ public partial record ClimateSupplier
     /// <summary>
     /// Name of this carbon removal supplier.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("name")]
     public required string Name { get; init; }
 
@@ -16677,6 +16897,7 @@ public partial record ClimateRemovalsBeneficiary
     /// <summary>
     /// Publicly displayable name for the end beneficiary of carbon removal.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("public_name")]
     public required string PublicName { get; init; }
 
@@ -16687,12 +16908,14 @@ public partial record ClimateRemovalsLocation
     /// <summary>
     /// The city where the supplier is located.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("city")]
     public string? City { get; init; }
 
     /// <summary>
     /// Two-letter ISO code representing the country where the supplier is located.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("country")]
     public required string Country { get; init; }
 
@@ -16711,6 +16934,7 @@ public partial record ClimateRemovalsLocation
     /// <summary>
     /// The state/county/province/region where the supplier is located.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("region")]
     public string? Region { get; init; }
 
@@ -16736,12 +16960,14 @@ public partial record ClimateRemovalsOrderDeliveries
     /// <summary>
     /// Quantity of carbon removal supplied by this delivery.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("metric_tons")]
     public required string MetricTons { get; init; }
 
     /// <summary>
     /// Once retired, a URL to the registry entry for the tons from this delivery.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("registry_url")]
     public string? RegistryUrl { get; init; }
 
@@ -16801,6 +17027,7 @@ public partial record ConfirmationToken
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -16831,6 +17058,7 @@ public partial record ConfirmationToken
     /// <summary>
     /// ID of the PaymentIntent that this ConfirmationToken was used to confirm, or null if this ConfirmationToken has not yet been used.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("payment_intent")]
     public string? PaymentIntent { get; init; }
 
@@ -16849,6 +17077,7 @@ public partial record ConfirmationToken
     /// <summary>
     /// Return URL used to confirm the Intent.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("return_url")]
     public string? ReturnUrl { get; init; }
 
@@ -16863,6 +17092,7 @@ public partial record ConfirmationToken
     /// <summary>
     /// ID of the SetupIntent that this ConfirmationToken was used to confirm, or null if this ConfirmationToken has not yet been used.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("setup_intent")]
     public string? SetupIntent { get; init; }
 
@@ -16907,6 +17137,7 @@ public partial record ConfirmationTokensResourceMandateDataResourceCustomerAccep
     /// <summary>
     /// The type of customer acceptance information included with the Mandate.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("type")]
     public required string Type { get; init; }
 
@@ -16920,12 +17151,14 @@ public partial record ConfirmationTokensResourceMandateDataResourceCustomerAccep
     /// <summary>
     /// The IP address from which the Mandate was accepted by the customer.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("ip_address")]
     public string? IpAddress { get; init; }
 
     /// <summary>
     /// The user agent of the browser from which the Mandate was accepted by the customer.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("user_agent")]
     public string? UserAgent { get; init; }
 
@@ -16952,6 +17185,7 @@ public partial record ConfirmationTokensResourcePaymentMethodOptionsResourceCard
     /// <summary>
     /// The `cvc_update` Token collected from the Payment Element.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("cvc_token")]
     public string? CvcToken { get; init; }
 
@@ -17044,6 +17278,7 @@ public partial record ConfirmationTokensResourcePaymentMethodPreview
     [JsonPropertyName("customer")]
     public object? Customer { get; init; }
 
+    [StringLength(5000)]
     [JsonPropertyName("customer_account")]
     public string? CustomerAccount { get; init; }
 
@@ -17180,12 +17415,14 @@ public partial record ConfirmationTokensResourceShipping
     /// <summary>
     /// Recipient name.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("name")]
     public required string Name { get; init; }
 
     /// <summary>
     /// Recipient phone (including extension).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("phone")]
     public string? Phone { get; init; }
 
@@ -17230,6 +17467,7 @@ public partial record ConnectCollectionTransfer
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -17768,12 +18006,14 @@ public partial record CountrySpec
     /// <summary>
     /// The default currency for this country. This applies to both payment methods and bank accounts.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("default_currency")]
     public required string DefaultCurrency { get; init; }
 
     /// <summary>
     /// Unique identifier for the object. Represented as the ISO country code for this country.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -17887,6 +18127,7 @@ public partial record Coupon
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -17911,6 +18152,7 @@ public partial record Coupon
     /// <summary>
     /// Name of the coupon displayed to customers on for instance invoices or receipts.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("name")]
     public string? Name { get; init; }
 
@@ -18016,6 +18258,7 @@ public partial record CreditNote
     /// <summary>
     /// ID of the account representing the customer.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("customer_account")]
     public string? CustomerAccount { get; init; }
 
@@ -18046,6 +18289,7 @@ public partial record CreditNote
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -18070,6 +18314,7 @@ public partial record CreditNote
     /// <summary>
     /// Customer-facing text that appears on the credit note PDF.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("memo")]
     public string? Memo { get; init; }
 
@@ -18082,6 +18327,7 @@ public partial record CreditNote
     /// <summary>
     /// A unique number that identifies this particular credit note and appears on the PDF of the credit note and its associated invoice.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("number")]
     public required string Number { get; init; }
 
@@ -18100,6 +18346,7 @@ public partial record CreditNote
     /// <summary>
     /// The link to download the PDF of the credit note.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("pdf")]
     public required string Pdf { get; init; }
 
@@ -18203,6 +18450,7 @@ public partial record CreditNoteLineItem
     /// <summary>
     /// Description of the item being credited.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("description")]
     public string? Description { get; init; }
 
@@ -18221,12 +18469,14 @@ public partial record CreditNoteLineItem
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
     /// <summary>
     /// ID of the invoice line item being credited
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("invoice_line_item")]
     public string? InvoiceLineItem { get; init; }
 
@@ -18325,12 +18575,14 @@ public partial record CreditNotesPaymentRecordRefund
     /// <summary>
     /// ID of the payment record.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("payment_record")]
     public required string PaymentRecord { get; init; }
 
     /// <summary>
     /// ID of the refund group.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("refund_group")]
     public required string RefundGroup { get; init; }
 
@@ -18369,6 +18621,7 @@ public partial record CreditedItemsInvoiceLineItems
     /// <summary>
     /// The invoice id for the debited line item(s).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("invoice")]
     public required string Invoice { get; init; }
 
@@ -18419,12 +18672,14 @@ public partial record CustomLogo
     /// <summary>
     /// Content type of the Dashboard-only CustomPaymentMethodType logo.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("content_type")]
     public string? ContentType { get; init; }
 
     /// <summary>
     /// URL of the Dashboard-only CustomPaymentMethodType logo.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("url")]
     public required string Url { get; init; }
 
@@ -18473,6 +18728,7 @@ public partial record Customer
     /// <summary>
     /// The customer's business name.
     /// </summary>
+    [StringLength(150)]
     [JsonPropertyName("business_name")]
     public string? BusinessName { get; init; }
 
@@ -18491,12 +18747,14 @@ public partial record Customer
     /// <summary>
     /// Three-letter [ISO code for the currency](https://stripe.com/docs/currencies) the customer can be charged in for recurring billing purposes.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("currency")]
     public string? Currency { get; init; }
 
     /// <summary>
     /// The ID of an Account representing a customer. You can use this ID with any v1 API that accepts a customer_account parameter.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("customer_account")]
     public string? CustomerAccount { get; init; }
 
@@ -18521,6 +18779,7 @@ public partial record Customer
     /// <summary>
     /// An arbitrary string attached to the object. Often useful for displaying to users.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("description")]
     public string? Description { get; init; }
 
@@ -18533,18 +18792,21 @@ public partial record Customer
     /// <summary>
     /// The customer's email address.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("email")]
     public string? Email { get; init; }
 
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
     /// <summary>
     /// The customer's individual name.
     /// </summary>
+    [StringLength(150)]
     [JsonPropertyName("individual_name")]
     public string? IndividualName { get; init; }
 
@@ -18557,6 +18819,7 @@ public partial record Customer
     /// <summary>
     /// The prefix for the customer used to generate unique invoice numbers.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("invoice_prefix")]
     public string? InvoicePrefix { get; init; }
 
@@ -18578,6 +18841,7 @@ public partial record Customer
     /// <summary>
     /// The customer's full name or business name.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("name")]
     public string? Name { get; init; }
 
@@ -18596,6 +18860,7 @@ public partial record Customer
     /// <summary>
     /// The customer's phone number.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("phone")]
     public string? Phone { get; init; }
 
@@ -18731,6 +18996,7 @@ public partial record CustomerBalanceResourceCashBalanceTransactionResourceFunde
     /// <summary>
     /// The user-supplied reference field on the bank transfer.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reference")]
     public string? Reference { get; init; }
 
@@ -18750,18 +19016,21 @@ public partial record CustomerBalanceResourceCashBalanceTransactionResourceFunde
     /// <summary>
     /// The BIC of the bank of the sender of the funding.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("bic")]
     public string? Bic { get; init; }
 
     /// <summary>
     /// The last 4 digits of the IBAN of the sender of the funding.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("iban_last4")]
     public string? IbanLast4 { get; init; }
 
     /// <summary>
     /// The full name of the sender, as supplied by the sending bank.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("sender_name")]
     public string? SenderName { get; init; }
 
@@ -18772,18 +19041,21 @@ public partial record CustomerBalanceResourceCashBalanceTransactionResourceFunde
     /// <summary>
     /// The last 4 digits of the account number of the sender of the funding.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("account_number_last4")]
     public string? AccountNumberLast4 { get; init; }
 
     /// <summary>
     /// The full name of the sender, as supplied by the sending bank.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("sender_name")]
     public string? SenderName { get; init; }
 
     /// <summary>
     /// The sort code of the bank of the sender of the funding
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("sort_code")]
     public string? SortCode { get; init; }
 
@@ -18794,18 +19066,21 @@ public partial record CustomerBalanceResourceCashBalanceTransactionResourceFunde
     /// <summary>
     /// The name of the bank of the sender of the funding.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("sender_bank")]
     public string? SenderBank { get; init; }
 
     /// <summary>
     /// The name of the bank branch of the sender of the funding.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("sender_branch")]
     public string? SenderBranch { get; init; }
 
     /// <summary>
     /// The full name of the sender, as supplied by the sending bank.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("sender_name")]
     public string? SenderName { get; init; }
 
@@ -18822,6 +19097,7 @@ public partial record CustomerBalanceResourceCashBalanceTransactionResourceFunde
     /// <summary>
     /// The full name of the sender, as supplied by the sending bank.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("sender_name")]
     public string? SenderName { get; init; }
 
@@ -18906,12 +19182,14 @@ public partial record CustomerBalanceTransaction
     /// <summary>
     /// The ID of an Account representing a customer that the transaction belongs to.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("customer_account")]
     public string? CustomerAccount { get; init; }
 
     /// <summary>
     /// An arbitrary string attached to the object. Often useful for displaying to users.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("description")]
     public string? Description { get; init; }
 
@@ -18924,6 +19202,7 @@ public partial record CustomerBalanceTransaction
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -18982,6 +19261,7 @@ public partial record CustomerCashBalanceTransaction
     /// <summary>
     /// Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("currency")]
     public required string Currency { get; init; }
 
@@ -18994,6 +19274,7 @@ public partial record CustomerCashBalanceTransaction
     /// <summary>
     /// The ID of an Account representing a customer whose available cash balance changed as a result of this transaction.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("customer_account")]
     public string? CustomerAccount { get; init; }
 
@@ -19009,6 +19290,7 @@ public partial record CustomerCashBalanceTransaction
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -19062,6 +19344,7 @@ public partial record CustomerSession
     /// 
     /// The client secret can be used to provide access to `customer` from your frontend. It should not be stored, logged, or exposed to anyone other than the relevant customer. Make sure that you have TLS enabled on any page that includes the client secret.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("client_secret")]
     public required string ClientSecret { get; init; }
 
@@ -19086,6 +19369,7 @@ public partial record CustomerSession
     /// <summary>
     /// The Account that the Customer Session was created for.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("customer_account")]
     public string? CustomerAccount { get; init; }
 
@@ -19397,6 +19681,7 @@ public partial record CustomerTax
     /// <summary>
     /// A recent IP address of the customer used for tax reporting and tax location inference.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("ip_address")]
     public string? IpAddress { get; init; }
 
@@ -19419,6 +19704,7 @@ public partial record CustomerTaxLocation
     /// <summary>
     /// The identified tax country of the customer.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("country")]
     public required string Country { get; init; }
 
@@ -19431,6 +19717,7 @@ public partial record CustomerTaxLocation
     /// <summary>
     /// The identified tax state, county, province, or region of the customer.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("state")]
     public string? State { get; init; }
 
@@ -19447,6 +19734,7 @@ public partial record DeletedAccount
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -19469,6 +19757,7 @@ public partial record DeletedApplePayDomain
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -19491,12 +19780,14 @@ public partial record DeletedApplication
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
     /// <summary>
     /// The name of the application.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("name")]
     public string? Name { get; init; }
 
@@ -19513,6 +19804,7 @@ public partial record DeletedBankAccount
     /// <summary>
     /// Three-letter [ISO code for the currency](https://stripe.com/docs/payouts) paid out to the bank account.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("currency")]
     public string? Currency { get; init; }
 
@@ -19525,6 +19817,7 @@ public partial record DeletedBankAccount
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -19541,6 +19834,7 @@ public partial record DeletedCard
     /// <summary>
     /// Three-letter [ISO code for the currency](https://stripe.com/docs/payouts) paid out to the bank account.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("currency")]
     public string? Currency { get; init; }
 
@@ -19553,6 +19847,7 @@ public partial record DeletedCard
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -19575,6 +19870,7 @@ public partial record DeletedCoupon
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -19597,6 +19893,7 @@ public partial record DeletedCustomer
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -19613,6 +19910,7 @@ public partial record DeletedDiscount
     /// <summary>
     /// The Checkout session that this coupon is applied to, if it is applied to a particular session in payment mode. Not present for subscription mode.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("checkout_session")]
     public string? CheckoutSession { get; init; }
 
@@ -19625,6 +19923,7 @@ public partial record DeletedDiscount
     /// <summary>
     /// The ID of the account representing the customer associated with this discount.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("customer_account")]
     public string? CustomerAccount { get; init; }
 
@@ -19637,18 +19936,21 @@ public partial record DeletedDiscount
     /// <summary>
     /// The ID of the discount object. Discounts can't be fetched by ID. Use `expand[]=discounts` in API calls to expand discount IDs in an array.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
     /// <summary>
     /// The invoice that the discount's coupon was applied to, if it was applied directly to a particular invoice.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("invoice")]
     public string? Invoice { get; init; }
 
     /// <summary>
     /// The invoice item `id` (or invoice line item `id` for invoice line items of type='subscription') that the discount's coupon was applied to, if it was applied directly to a particular invoice item or invoice line item.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("invoice_item")]
     public string? InvoiceItem { get; init; }
 
@@ -19676,12 +19978,14 @@ public partial record DeletedDiscount
     /// <summary>
     /// The subscription that this coupon is applied to, if it is applied to a particular subscription.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("subscription")]
     public string? Subscription { get; init; }
 
     /// <summary>
     /// The subscription item that this coupon is applied to, if it is applied to a particular subscription item.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("subscription_item")]
     public string? SubscriptionItem { get; init; }
 
@@ -19705,6 +20009,7 @@ public partial record DeletedInvoice
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -19727,6 +20032,7 @@ public partial record DeletedInvoiceitem
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -19756,6 +20062,7 @@ public partial record DeletedPerson
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -19778,6 +20085,7 @@ public partial record DeletedPlan
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -19800,6 +20108,7 @@ public partial record DeletedPrice
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -19822,6 +20131,7 @@ public partial record DeletedProduct
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -19844,6 +20154,7 @@ public partial record DeletedProductFeature
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -19866,6 +20177,7 @@ public partial record DeletedRadarValueList
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -19888,6 +20200,7 @@ public partial record DeletedRadarValueListItem
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -19910,6 +20223,7 @@ public partial record DeletedSubscriptionItem
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -19932,6 +20246,7 @@ public partial record DeletedTaxId
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -19954,6 +20269,7 @@ public partial record DeletedTerminalConfiguration
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -19976,6 +20292,7 @@ public partial record DeletedTerminalLocation
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -20004,6 +20321,7 @@ public partial record DeletedTerminalReader
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -20016,6 +20334,7 @@ public partial record DeletedTerminalReader
     /// <summary>
     /// Serial number of the reader.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("serial_number")]
     public required string SerialNumber { get; init; }
 
@@ -20032,6 +20351,7 @@ public partial record DeletedTestHelpersTestClock
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -20054,6 +20374,7 @@ public partial record DeletedWebhookEndpoint
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -20080,6 +20401,7 @@ public partial record Discount
     /// <summary>
     /// The Checkout session that this coupon is applied to, if it is applied to a particular session in payment mode. Not present for subscription mode.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("checkout_session")]
     public string? CheckoutSession { get; init; }
 
@@ -20092,6 +20414,7 @@ public partial record Discount
     /// <summary>
     /// The ID of the account representing the customer associated with this discount.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("customer_account")]
     public string? CustomerAccount { get; init; }
 
@@ -20104,18 +20427,21 @@ public partial record Discount
     /// <summary>
     /// The ID of the discount object. Discounts can't be fetched by ID. Use `expand[]=discounts` in API calls to expand discount IDs in an array.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
     /// <summary>
     /// The invoice that the discount's coupon was applied to, if it was applied directly to a particular invoice.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("invoice")]
     public string? Invoice { get; init; }
 
     /// <summary>
     /// The invoice item `id` (or invoice line item `id` for invoice line items of type='subscription') that the discount's coupon was applied to, if it was applied directly to a particular invoice item or invoice line item.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("invoice_item")]
     public string? InvoiceItem { get; init; }
 
@@ -20143,12 +20469,14 @@ public partial record Discount
     /// <summary>
     /// The subscription that this coupon is applied to, if it is applied to a particular subscription.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("subscription")]
     public string? Subscription { get; init; }
 
     /// <summary>
     /// The subscription item that this coupon is applied to, if it is applied to a particular subscription item.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("subscription_item")]
     public string? SubscriptionItem { get; init; }
 
@@ -20262,6 +20590,7 @@ public partial record Dispute
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -20301,6 +20630,7 @@ public partial record Dispute
     /// <summary>
     /// Reason given by cardholder for dispute. Possible values are `bank_cannot_process`, `check_returned`, `credit_not_processed`, `customer_initiated`, `debit_not_authorized`, `duplicate`, `fraudulent`, `general`, `incorrect_account_details`, `insufficient_funds`, `noncompliant`, `product_not_received`, `product_unacceptable`, `subscription_canceled`, or `unrecognized`. Learn more about [dispute reasons](https://docs.stripe.com/disputes/categories).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reason")]
     public required string Reason { get; init; }
 
@@ -20415,12 +20745,14 @@ public partial record DisputeEvidence
     /// <summary>
     /// Any server or activity logs showing proof that the customer accessed or downloaded the purchased digital product. This information should include IP addresses, corresponding timestamps, and any detailed recorded activity.
     /// </summary>
+    [StringLength(150000)]
     [JsonPropertyName("access_activity_log")]
     public string? AccessActivityLog { get; init; }
 
     /// <summary>
     /// The billing address provided by the customer.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("billing_address")]
     public string? BillingAddress { get; init; }
 
@@ -20433,12 +20765,14 @@ public partial record DisputeEvidence
     /// <summary>
     /// An explanation of how and when the customer was shown your refund policy prior to purchase.
     /// </summary>
+    [StringLength(150000)]
     [JsonPropertyName("cancellation_policy_disclosure")]
     public string? CancellationPolicyDisclosure { get; init; }
 
     /// <summary>
     /// A justification for why the customer's subscription was not canceled.
     /// </summary>
+    [StringLength(150000)]
     [JsonPropertyName("cancellation_rebuttal")]
     public string? CancellationRebuttal { get; init; }
 
@@ -20451,18 +20785,21 @@ public partial record DisputeEvidence
     /// <summary>
     /// The email address of the customer.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("customer_email_address")]
     public string? CustomerEmailAddress { get; init; }
 
     /// <summary>
     /// The name of the customer.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("customer_name")]
     public string? CustomerName { get; init; }
 
     /// <summary>
     /// The IP address that the customer used when making the purchase.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("customer_purchase_ip")]
     public string? CustomerPurchaseIp { get; init; }
 
@@ -20481,12 +20818,14 @@ public partial record DisputeEvidence
     /// <summary>
     /// An explanation of the difference between the disputed charge versus the prior charge that appears to be a duplicate.
     /// </summary>
+    [StringLength(150000)]
     [JsonPropertyName("duplicate_charge_explanation")]
     public string? DuplicateChargeExplanation { get; init; }
 
     /// <summary>
     /// The Stripe ID for the prior charge which appears to be a duplicate of the disputed charge.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("duplicate_charge_id")]
     public string? DuplicateChargeId { get; init; }
 
@@ -20496,6 +20835,7 @@ public partial record DisputeEvidence
     /// <summary>
     /// A description of the product or service that was sold.
     /// </summary>
+    [StringLength(150000)]
     [JsonPropertyName("product_description")]
     public string? ProductDescription { get; init; }
 
@@ -20514,18 +20854,21 @@ public partial record DisputeEvidence
     /// <summary>
     /// Documentation demonstrating that the customer was shown your refund policy prior to purchase.
     /// </summary>
+    [StringLength(150000)]
     [JsonPropertyName("refund_policy_disclosure")]
     public string? RefundPolicyDisclosure { get; init; }
 
     /// <summary>
     /// A justification for why the customer is not entitled to a refund.
     /// </summary>
+    [StringLength(150000)]
     [JsonPropertyName("refund_refusal_explanation")]
     public string? RefundRefusalExplanation { get; init; }
 
     /// <summary>
     /// The date on which the customer received or began receiving the purchased service, in a clear human-readable format.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("service_date")]
     public string? ServiceDate { get; init; }
 
@@ -20538,18 +20881,21 @@ public partial record DisputeEvidence
     /// <summary>
     /// The address to which a physical product was shipped. You should try to include as complete address information as possible.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("shipping_address")]
     public string? ShippingAddress { get; init; }
 
     /// <summary>
     /// The delivery service that shipped a physical product, such as Fedex, UPS, USPS, etc. If multiple carriers were used for this purchase, please separate them with commas.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("shipping_carrier")]
     public string? ShippingCarrier { get; init; }
 
     /// <summary>
     /// The date on which a physical product began its route to the shipping address, in a clear human-readable format.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("shipping_date")]
     public string? ShippingDate { get; init; }
 
@@ -20562,6 +20908,7 @@ public partial record DisputeEvidence
     /// <summary>
     /// The tracking number for a physical product, obtained from the delivery service. If multiple tracking numbers were generated for this purchase, please separate them with commas.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("shipping_tracking_number")]
     public string? ShippingTrackingNumber { get; init; }
 
@@ -20574,6 +20921,7 @@ public partial record DisputeEvidence
     /// <summary>
     /// Any additional evidence or statements.
     /// </summary>
+    [StringLength(150000)]
     [JsonPropertyName("uncategorized_text")]
     public string? UncategorizedText { get; init; }
 
@@ -20647,6 +20995,7 @@ public partial record DisputePaymentMethodDetailsCard
     /// <summary>
     /// Card brand. Can be `amex`, `cartes_bancaires`, `diners`, `discover`, `eftpos_au`, `jcb`, `link`, `mastercard`, `unionpay`, `visa` or `unknown`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("brand")]
     public required string Brand { get; init; }
 
@@ -20659,12 +21008,14 @@ public partial record DisputePaymentMethodDetailsCard
     /// <summary>
     /// Identifies which network this charge was processed on. Can be `amex`, `cartes_bancaires`, `diners`, `discover`, `eftpos_au`, `interac`, `jcb`, `link`, `mastercard`, `unionpay`, `visa`, or `unknown`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("network")]
     public required string Network { get; init; }
 
     /// <summary>
     /// The card network's specific dispute reason code, which maps to one of Stripe's primary dispute categories to simplify response guidance. The [Network code map](https://stripe.com/docs/disputes/categories#network-code-map) lists all available dispute reason codes by network.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("network_reason_code")]
     public string? NetworkReasonCode { get; init; }
 
@@ -20675,12 +21026,14 @@ public partial record DisputePaymentMethodDetailsKlarna
     /// <summary>
     /// Chargeback loss reason mapped by Stripe from Klarna's chargeback loss reason
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("chargeback_loss_reason_code")]
     public string? ChargebackLossReasonCode { get; init; }
 
     /// <summary>
     /// The reason for the dispute as defined by Klarna
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reason_code")]
     public string? ReasonCode { get; init; }
 
@@ -20691,12 +21044,14 @@ public partial record DisputePaymentMethodDetailsPaypal
     /// <summary>
     /// The ID of the dispute in PayPal.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("case_id")]
     public string? CaseId { get; init; }
 
     /// <summary>
     /// The reason for the dispute as defined by PayPal
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reason_code")]
     public string? ReasonCode { get; init; }
 
@@ -20707,36 +21062,42 @@ public partial record DisputeTransactionShippingAddress
     /// <summary>
     /// City, district, suburb, town, or village.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("city")]
     public string? City { get; init; }
 
     /// <summary>
     /// Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("country")]
     public string? Country { get; init; }
 
     /// <summary>
     /// Address line 1, such as the street, PO Box, or company name.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("line1")]
     public string? Line1 { get; init; }
 
     /// <summary>
     /// Address line 2, such as the apartment, suite, unit, or building.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("line2")]
     public string? Line2 { get; init; }
 
     /// <summary>
     /// ZIP or postal code.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("postal_code")]
     public string? PostalCode { get; init; }
 
     /// <summary>
     /// State, county, province, or region ([ISO 3166-2](https://en.wikipedia.org/wiki/ISO_3166-2)).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("state")]
     public string? State { get; init; }
 
@@ -20747,30 +21108,35 @@ public partial record DisputeVisaCompellingEvidence3DisputedTransaction
     /// <summary>
     /// User Account ID used to log into business platform. Must be recognizable by the user.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("customer_account_id")]
     public string? CustomerAccountId { get; init; }
 
     /// <summary>
     /// Unique identifier of the cardholder’s device derived from a combination of at least two hardware and software attributes. Must be at least 20 characters.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("customer_device_fingerprint")]
     public string? CustomerDeviceFingerprint { get; init; }
 
     /// <summary>
     /// Unique identifier of the cardholder’s device such as a device serial number (e.g., International Mobile Equipment Identity [IMEI]). Must be at least 15 characters.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("customer_device_id")]
     public string? CustomerDeviceId { get; init; }
 
     /// <summary>
     /// The email address of the customer.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("customer_email_address")]
     public string? CustomerEmailAddress { get; init; }
 
     /// <summary>
     /// The IP address that the customer used when making the purchase.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("customer_purchase_ip")]
     public string? CustomerPurchaseIp { get; init; }
 
@@ -20783,6 +21149,7 @@ public partial record DisputeVisaCompellingEvidence3DisputedTransaction
     /// <summary>
     /// A description of the product or service that was sold.
     /// </summary>
+    [StringLength(150000)]
     [JsonPropertyName("product_description")]
     public string? ProductDescription { get; init; }
 
@@ -20799,42 +21166,49 @@ public partial record DisputeVisaCompellingEvidence3PriorUndisputedTransaction
     /// <summary>
     /// Stripe charge ID for the Visa Compelling Evidence 3.0 eligible prior charge.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("charge")]
     public required string Charge { get; init; }
 
     /// <summary>
     /// User Account ID used to log into business platform. Must be recognizable by the user.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("customer_account_id")]
     public string? CustomerAccountId { get; init; }
 
     /// <summary>
     /// Unique identifier of the cardholder’s device derived from a combination of at least two hardware and software attributes. Must be at least 20 characters.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("customer_device_fingerprint")]
     public string? CustomerDeviceFingerprint { get; init; }
 
     /// <summary>
     /// Unique identifier of the cardholder’s device such as a device serial number (e.g., International Mobile Equipment Identity [IMEI]). Must be at least 15 characters.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("customer_device_id")]
     public string? CustomerDeviceId { get; init; }
 
     /// <summary>
     /// The email address of the customer.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("customer_email_address")]
     public string? CustomerEmailAddress { get; init; }
 
     /// <summary>
     /// The IP address that the customer used when making the purchase.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("customer_purchase_ip")]
     public string? CustomerPurchaseIp { get; init; }
 
     /// <summary>
     /// A description of the product or service that was sold.
     /// </summary>
+    [StringLength(150000)]
     [JsonPropertyName("product_description")]
     public string? ProductDescription { get; init; }
 
@@ -20857,6 +21231,7 @@ public partial record EmailSent
     /// <summary>
     /// The recipient's email address.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("email_sent_to")]
     public required string EmailSentTo { get; init; }
 
@@ -20876,6 +21251,7 @@ public partial record EntitlementsActiveEntitlement
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -20888,6 +21264,7 @@ public partial record EntitlementsActiveEntitlement
     /// <summary>
     /// A unique key you provide as your own system identifier. This may be up to 80 characters.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("lookup_key")]
     public required string LookupKey { get; init; }
 
@@ -20914,6 +21291,7 @@ public partial record EntitlementsFeature
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -20926,6 +21304,7 @@ public partial record EntitlementsFeature
     /// <summary>
     /// A unique key you provide as your own system identifier. This may be up to 80 characters.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("lookup_key")]
     public required string LookupKey { get; init; }
 
@@ -20938,6 +21317,7 @@ public partial record EntitlementsFeature
     /// <summary>
     /// The feature's name, for your own purpose, not meant to be displayable to the customer.
     /// </summary>
+    [StringLength(80)]
     [JsonPropertyName("name")]
     public required string Name { get; init; }
 
@@ -20972,6 +21352,7 @@ public partial record EphemeralKey
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -20990,6 +21371,7 @@ public partial record EphemeralKey
     /// <summary>
     /// The key's secret. You can use this value to make authorized requests to the Stripe API.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("secret")]
     public string? Secret { get; init; }
 
@@ -21030,18 +21412,21 @@ public partial record Event
     /// <summary>
     /// The connected account that originates the event.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("account")]
     public string? Account { get; init; }
 
     /// <summary>
     /// The Stripe API version used to render `data` when the event was created. The contents of `data` never change, so this value remains static regardless of the API version currently in use. This property is populated only for events created on or after October 31, 2014.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("api_version")]
     public string? ApiVersion { get; init; }
 
     /// <summary>
     /// Authentication context needed to fetch the event or related object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("context")]
     public string? Context { get; init; }
 
@@ -21057,6 +21442,7 @@ public partial record Event
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -21087,6 +21473,7 @@ public partial record Event
     /// <summary>
     /// Description of the event (for example, `invoice.created` or `charge.refunded`).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("type")]
     public required string Type { get; init; }
 
@@ -21127,6 +21514,7 @@ public partial record ExchangeRate
     /// <summary>
     /// Unique identifier for the object. Represented as the three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html) in lowercase.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -21190,6 +21578,7 @@ public partial record Fee
     /// <summary>
     /// ID of the Connect application that earned the fee.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("application")]
     public string? Application { get; init; }
 
@@ -21202,12 +21591,14 @@ public partial record Fee
     /// <summary>
     /// An arbitrary string attached to the object. Often useful for displaying to users.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("description")]
     public string? Description { get; init; }
 
     /// <summary>
     /// Type of the fee, one of: `application_fee`, `payment_method_passthrough_fee`, `stripe_fee`, `tax`, or `withheld_tax`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("type")]
     public required string Type { get; init; }
 
@@ -21255,6 +21646,7 @@ public partial record FeeRefund
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -21308,12 +21700,14 @@ public partial record File
     /// <summary>
     /// The suitable name for saving the file to a filesystem.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("filename")]
     public string? Filename { get; init; }
 
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -21344,18 +21738,21 @@ public partial record File
     /// <summary>
     /// A suitable title for the document.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("title")]
     public string? Title { get; init; }
 
     /// <summary>
     /// The returned file type (for example, `csv`, `pdf`, `jpg`, or `png`).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("type")]
     public string? Type { get; init; }
 
     /// <summary>
     /// Use your live secret API key to download the file from this URL.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("url")]
     public string? Url { get; init; }
 
@@ -21395,6 +21792,7 @@ public partial record FileLink
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -21419,6 +21817,7 @@ public partial record FileLink
     /// <summary>
     /// The publicly accessible URL to download the file.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("url")]
     public string? Url { get; init; }
 
@@ -21468,24 +21867,28 @@ public partial record FinancialConnectionsAccount
     /// <summary>
     /// A human-readable name that has been assigned to this account, either by the account holder or by the institution.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("display_name")]
     public string? DisplayName { get; init; }
 
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
     /// <summary>
     /// The name of the institution that holds this account.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("institution_name")]
     public required string InstitutionName { get; init; }
 
     /// <summary>
     /// The last 4 digits of the account number. If present, this will be 4 numeric characters.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("last4")]
     public string? Last4 { get; init; }
 
@@ -21575,18 +21978,21 @@ public partial record FinancialConnectionsAccountOwner
     /// <summary>
     /// The email address of the owner.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("email")]
     public string? Email { get; init; }
 
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
     /// <summary>
     /// The full name of the owner.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("name")]
     public required string Name { get; init; }
 
@@ -21599,18 +22005,21 @@ public partial record FinancialConnectionsAccountOwner
     /// <summary>
     /// The ownership object that this owner belongs to.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("ownership")]
     public required string Ownership { get; init; }
 
     /// <summary>
     /// The raw phone number of the owner.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("phone")]
     public string? Phone { get; init; }
 
     /// <summary>
     /// The raw physical address of the owner.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("raw_address")]
     public string? RawAddress { get; init; }
 
@@ -21636,6 +22045,7 @@ public partial record FinancialConnectionsAccountOwnership
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -21698,6 +22108,7 @@ public partial record FinancialConnectionsSession
     /// <summary>
     /// A value that will be passed to the client to launch the authentication flow.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("client_secret")]
     public string? ClientSecret { get; init; }
 
@@ -21707,6 +22118,7 @@ public partial record FinancialConnectionsSession
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -21743,6 +22155,7 @@ public partial record FinancialConnectionsSession
     /// <summary>
     /// For webview integrations only. Upon completing OAuth login in the native browser, the user will be redirected to this URL to return to your app.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("return_url")]
     public string? ReturnUrl { get; init; }
 
@@ -21756,6 +22169,7 @@ public partial record FinancialConnectionsTransaction
     /// <summary>
     /// The ID of the Financial Connections Account this transaction belongs to.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("account")]
     public required string Account { get; init; }
 
@@ -21768,18 +22182,21 @@ public partial record FinancialConnectionsTransaction
     /// <summary>
     /// Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("currency")]
     public required string Currency { get; init; }
 
     /// <summary>
     /// The description of this transaction.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("description")]
     public required string Description { get; init; }
 
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -21813,6 +22230,7 @@ public partial record FinancialConnectionsTransaction
     /// <summary>
     /// The token of the transaction refresh that last updated or created this transaction.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("transaction_refresh")]
     public required string TransactionRefresh { get; init; }
 
@@ -21835,6 +22253,7 @@ public partial record FinancialReportingFinanceReportRunRunParameters
     /// <summary>
     /// Connected account ID by which to filter the report run.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("connected_account")]
     public string? ConnectedAccount { get; init; }
 
@@ -21859,18 +22278,21 @@ public partial record FinancialReportingFinanceReportRunRunParameters
     /// <summary>
     /// Payout ID by which to filter the report run.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("payout")]
     public string? Payout { get; init; }
 
     /// <summary>
     /// Category of balance transactions to be included in the report run.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reporting_category")]
     public string? ReportingCategory { get; init; }
 
     /// <summary>
     /// Defaults to `Etc/UTC`. The output timezone for all timestamps in the report. A list of possible time zone values is maintained at the [IANA Time Zone Database](http://www.iana.org/time-zones). Has no effect on `interval_start` or `interval_end`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("timezone")]
     public string? Timezone { get; init; }
 
@@ -21890,6 +22312,7 @@ public partial record ForwardedRequestContext
     /// <summary>
     /// The IP address of the destination.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("destination_ip_address")]
     public required string DestinationIpAddress { get; init; }
 
@@ -21903,6 +22326,7 @@ public partial record ForwardedRequestDetails
     /// <summary>
     /// The body payload to send to the destination endpoint.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("body")]
     public required string Body { get; init; }
 
@@ -21928,12 +22352,14 @@ public partial record ForwardedRequestHeader
     /// <summary>
     /// The header name.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("name")]
     public required string Name { get; init; }
 
     /// <summary>
     /// The header value.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("value")]
     public required string Value { get; init; }
 
@@ -21947,6 +22373,7 @@ public partial record ForwardedResponseDetails
     /// <summary>
     /// The response body from the destination endpoint to Stripe.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("body")]
     public required string Body { get; init; }
 
@@ -21993,6 +22420,7 @@ public partial record ForwardingRequest
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -22017,6 +22445,7 @@ public partial record ForwardingRequest
     /// <summary>
     /// The PaymentMethod to insert into the forwarded request. Forwarding previously consumed PaymentMethods is allowed.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("payment_method")]
     public required string PaymentMethod { get; init; }
 
@@ -22047,6 +22476,7 @@ public partial record ForwardingRequest
     /// <summary>
     /// The destination URL for the forwarded request. Must be supported by the config.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("url")]
     public string? Url { get; init; }
 
@@ -22067,6 +22497,7 @@ public partial record FundingInstructions
     /// <summary>
     /// Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("currency")]
     public required string Currency { get; init; }
 
@@ -22095,6 +22526,7 @@ public partial record FundingInstructionsBankTransfer
     /// <summary>
     /// The country of the bank account to fund
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("country")]
     public required string Country { get; init; }
 
@@ -22123,18 +22555,21 @@ public partial record FundingInstructionsBankTransferAbaRecord
     /// <summary>
     /// The account holder name
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("account_holder_name")]
     public required string AccountHolderName { get; init; }
 
     /// <summary>
     /// The ABA account number
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("account_number")]
     public required string AccountNumber { get; init; }
 
     /// <summary>
     /// The account type
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("account_type")]
     public required string AccountType { get; init; }
 
@@ -22144,12 +22579,14 @@ public partial record FundingInstructionsBankTransferAbaRecord
     /// <summary>
     /// The bank name
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("bank_name")]
     public required string BankName { get; init; }
 
     /// <summary>
     /// The ABA routing number
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("routing_number")]
     public required string RoutingNumber { get; init; }
 
@@ -22221,6 +22658,7 @@ public partial record FundingInstructionsBankTransferIbanRecord
     /// <summary>
     /// The name of the person or business that owns the bank account
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("account_holder_name")]
     public required string AccountHolderName { get; init; }
 
@@ -22230,18 +22668,21 @@ public partial record FundingInstructionsBankTransferIbanRecord
     /// <summary>
     /// The BIC/SWIFT code of the account.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("bic")]
     public required string Bic { get; init; }
 
     /// <summary>
     /// Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("country")]
     public required string Country { get; init; }
 
     /// <summary>
     /// The IBAN of the account.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("iban")]
     public required string Iban { get; init; }
 
@@ -22258,12 +22699,14 @@ public partial record FundingInstructionsBankTransferSortCodeRecord
     /// <summary>
     /// The name of the person or business that owns the bank account
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("account_holder_name")]
     public required string AccountHolderName { get; init; }
 
     /// <summary>
     /// The account number
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("account_number")]
     public required string AccountNumber { get; init; }
 
@@ -22273,6 +22716,7 @@ public partial record FundingInstructionsBankTransferSortCodeRecord
     /// <summary>
     /// The six-digit sort code
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("sort_code")]
     public required string SortCode { get; init; }
 
@@ -22289,6 +22733,7 @@ public partial record FundingInstructionsBankTransferSpeiRecord
     /// <summary>
     /// The account holder name
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("account_holder_name")]
     public required string AccountHolderName { get; init; }
 
@@ -22298,18 +22743,21 @@ public partial record FundingInstructionsBankTransferSpeiRecord
     /// <summary>
     /// The three-digit bank code
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("bank_code")]
     public required string BankCode { get; init; }
 
     /// <summary>
     /// The short banking institution name
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("bank_name")]
     public required string BankName { get; init; }
 
     /// <summary>
     /// The CLABE number
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("clabe")]
     public required string Clabe { get; init; }
 
@@ -22326,18 +22774,21 @@ public partial record FundingInstructionsBankTransferSwiftRecord
     /// <summary>
     /// The account holder name
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("account_holder_name")]
     public required string AccountHolderName { get; init; }
 
     /// <summary>
     /// The account number
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("account_number")]
     public required string AccountNumber { get; init; }
 
     /// <summary>
     /// The account type
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("account_type")]
     public required string AccountType { get; init; }
 
@@ -22347,12 +22798,14 @@ public partial record FundingInstructionsBankTransferSwiftRecord
     /// <summary>
     /// The bank name
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("bank_name")]
     public required string BankName { get; init; }
 
     /// <summary>
     /// The SWIFT code
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("swift_code")]
     public required string SwiftCode { get; init; }
 
@@ -22369,18 +22822,21 @@ public partial record FundingInstructionsBankTransferZenginRecord
     /// <summary>
     /// The account holder name
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("account_holder_name")]
     public string? AccountHolderName { get; init; }
 
     /// <summary>
     /// The account number
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("account_number")]
     public string? AccountNumber { get; init; }
 
     /// <summary>
     /// The bank account type. In Japan, this can only be `futsu` or `toza`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("account_type")]
     public string? AccountType { get; init; }
 
@@ -22390,24 +22846,28 @@ public partial record FundingInstructionsBankTransferZenginRecord
     /// <summary>
     /// The bank code of the account
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("bank_code")]
     public string? BankCode { get; init; }
 
     /// <summary>
     /// The bank name of the account
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("bank_name")]
     public string? BankName { get; init; }
 
     /// <summary>
     /// The branch code of the account
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("branch_code")]
     public string? BranchCode { get; init; }
 
     /// <summary>
     /// The branch name of the account
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("branch_name")]
     public string? BranchName { get; init; }
 
@@ -22576,6 +23036,7 @@ public partial record GelatoDocumentReport
     /// <summary>
     /// First name as it appears in the document.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("first_name")]
     public string? FirstName { get; init; }
 
@@ -22588,18 +23049,21 @@ public partial record GelatoDocumentReport
     /// <summary>
     /// Issuing country of the document.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("issuing_country")]
     public string? IssuingCountry { get; init; }
 
     /// <summary>
     /// Last name as it appears in the document.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("last_name")]
     public string? LastName { get; init; }
 
     /// <summary>
     /// Document ID number.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("number")]
     public string? Number { get; init; }
 
@@ -22624,12 +23088,14 @@ public partial record GelatoDocumentReport
     /// <summary>
     /// Place of birth as it appears in the document.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("unparsed_place_of_birth")]
     public string? UnparsedPlaceOfBirth { get; init; }
 
     /// <summary>
     /// Sex as it appears in the document.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("unparsed_sex")]
     public string? UnparsedSex { get; init; }
 
@@ -22646,6 +23112,7 @@ public partial record GelatoDocumentReportError
     /// <summary>
     /// A human-readable message giving the reason for the failure. These messages can be shown to your users.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reason")]
     public string? Reason { get; init; }
 
@@ -22659,6 +23126,7 @@ public partial record GelatoEmailReport
     /// <summary>
     /// Email to be verified.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("email")]
     public string? Email { get; init; }
 
@@ -22687,6 +23155,7 @@ public partial record GelatoEmailReportError
     /// <summary>
     /// A human-readable message giving the reason for the failure. These messages can be shown to your users.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reason")]
     public string? Reason { get; init; }
 
@@ -22712,12 +23181,14 @@ public partial record GelatoIdNumberReport
     /// <summary>
     /// First name.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("first_name")]
     public string? FirstName { get; init; }
 
     /// <summary>
     /// ID number. When `id_number_type` is `us_ssn`, only the last 4 digits are present.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id_number")]
     public string? IdNumber { get; init; }
 
@@ -22730,6 +23201,7 @@ public partial record GelatoIdNumberReport
     /// <summary>
     /// Last name.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("last_name")]
     public string? LastName { get; init; }
 
@@ -22752,6 +23224,7 @@ public partial record GelatoIdNumberReportError
     /// <summary>
     /// A human-readable message giving the reason for the failure. These messages can be shown to your users.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reason")]
     public string? Reason { get; init; }
 
@@ -22771,6 +23244,7 @@ public partial record GelatoPhoneReport
     /// <summary>
     /// Phone to be verified.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("phone")]
     public string? Phone { get; init; }
 
@@ -22793,6 +23267,7 @@ public partial record GelatoPhoneReportError
     /// <summary>
     /// A human-readable message giving the reason for the failure. These messages can be shown to your users.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reason")]
     public string? Reason { get; init; }
 
@@ -22803,12 +23278,14 @@ public partial record GelatoProvidedDetails
     /// <summary>
     /// Email of user being verified
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("email")]
     public string? Email { get; init; }
 
     /// <summary>
     /// Phone number of user being verified
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("phone")]
     public string? Phone { get; init; }
 
@@ -22819,12 +23296,14 @@ public partial record GelatoRelatedPerson
     /// <summary>
     /// Token referencing the associated Account of the related Person resource.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("account")]
     public required string Account { get; init; }
 
     /// <summary>
     /// Token referencing the related Person resource.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("person")]
     public required string Person { get; init; }
 
@@ -22870,6 +23349,7 @@ public partial record GelatoSelfieReport
     /// <summary>
     /// ID of the [File](https://docs.stripe.com/api/files) holding the image of the identity document used in this check.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("document")]
     public string? Document { get; init; }
 
@@ -22882,6 +23362,7 @@ public partial record GelatoSelfieReport
     /// <summary>
     /// ID of the [File](https://docs.stripe.com/api/files) holding the image of the selfie used in this check.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("selfie")]
     public string? Selfie { get; init; }
 
@@ -22904,6 +23385,7 @@ public partial record GelatoSelfieReportError
     /// <summary>
     /// A human-readable message giving the reason for the failure. These messages can be shown to your users.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reason")]
     public string? Reason { get; init; }
 
@@ -22965,6 +23447,7 @@ public partial record GelatoSessionLastError
     /// <summary>
     /// A message that explains the reason for verification or user-session failure.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reason")]
     public string? Reason { get; init; }
 
@@ -23042,18 +23525,21 @@ public partial record GelatoVerifiedOutputs
     /// <summary>
     /// The user's verified email address
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("email")]
     public string? Email { get; init; }
 
     /// <summary>
     /// The user's verified first name.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("first_name")]
     public string? FirstName { get; init; }
 
     /// <summary>
     /// The user's verified id number.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id_number")]
     public string? IdNumber { get; init; }
 
@@ -23066,12 +23552,14 @@ public partial record GelatoVerifiedOutputs
     /// <summary>
     /// The user's verified last name.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("last_name")]
     public string? LastName { get; init; }
 
     /// <summary>
     /// The user's verified phone number
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("phone")]
     public string? Phone { get; init; }
 
@@ -23084,12 +23572,14 @@ public partial record GelatoVerifiedOutputs
     /// <summary>
     /// The user's verified place of birth as it appears in the document.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("unparsed_place_of_birth")]
     public string? UnparsedPlaceOfBirth { get; init; }
 
     /// <summary>
     /// The user's verified sex as it appears in the document.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("unparsed_sex")]
     public string? UnparsedSex { get; init; }
 
@@ -23113,6 +23603,7 @@ public partial record IdentityVerificationReport
     /// <summary>
     /// A string to reference this user. This can be a customer ID, a session ID, or similar, and can be used to reconcile this verification with your internal systems.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("client_reference_id")]
     public string? ClientReferenceId { get; init; }
 
@@ -23137,6 +23628,7 @@ public partial record IdentityVerificationReport
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -23182,12 +23674,14 @@ public partial record IdentityVerificationReport
     /// <summary>
     /// The configuration token of a verification flow from the dashboard.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("verification_flow")]
     public string? VerificationFlow { get; init; }
 
     /// <summary>
     /// ID of the VerificationSession that created this report.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("verification_session")]
     public string? VerificationSession { get; init; }
 
@@ -23211,12 +23705,14 @@ public partial record IdentityVerificationSession
     /// <summary>
     /// A string to reference this user. This can be a customer ID, a session ID, or similar, and can be used to reconcile this verification with your internal systems.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("client_reference_id")]
     public string? ClientReferenceId { get; init; }
 
     /// <summary>
     /// The short-lived client secret used by Stripe.js to [show a verification modal](https://docs.stripe.com/js/identity/modal) inside your app. This client secret expires after 24 hours and can only be used once. Don’t store it, log it, embed it in a URL, or expose it to anyone other than the user. Make sure that you have TLS enabled on any page that includes the client secret. Refer to our docs on [passing the client secret to the frontend](https://docs.stripe.com/identity/verification-sessions#client-secret) to learn more.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("client_secret")]
     public string? ClientSecret { get; init; }
 
@@ -23229,6 +23725,7 @@ public partial record IdentityVerificationSession
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -23283,12 +23780,14 @@ public partial record IdentityVerificationSession
     /// <summary>
     /// Customer ID
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("related_customer")]
     public string? RelatedCustomer { get; init; }
 
     /// <summary>
     /// The ID of the Account representing a customer.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("related_customer_account")]
     public string? RelatedCustomerAccount { get; init; }
 
@@ -23310,12 +23809,14 @@ public partial record IdentityVerificationSession
     /// <summary>
     /// The short-lived URL that you use to redirect a user to Stripe to submit their identity information. This URL expires after 48 hours and can only be used once. Don’t store it, log it, send it in emails or expose it to anyone other than the user. Refer to our docs on [verifying identity documents](https://docs.stripe.com/identity/verify-identity-documents?platform=web&amp;type=redirect) to learn how to redirect users to Stripe.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("url")]
     public string? Url { get; init; }
 
     /// <summary>
     /// The configuration token of a verification flow from the dashboard.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("verification_flow")]
     public string? VerificationFlow { get; init; }
 
@@ -23360,18 +23861,21 @@ public partial record InboundTransfersPaymentMethodDetailsUsBankAccount
     /// <summary>
     /// Name of the bank associated with the bank account.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("bank_name")]
     public string? BankName { get; init; }
 
     /// <summary>
     /// Uniquely identifies this particular bank account. You can use this attribute to check whether two bank accounts are the same.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("fingerprint")]
     public string? Fingerprint { get; init; }
 
     /// <summary>
     /// Last four digits of the bank account number.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("last4")]
     public string? Last4 { get; init; }
 
@@ -23390,6 +23894,7 @@ public partial record InboundTransfersPaymentMethodDetailsUsBankAccount
     /// <summary>
     /// Routing number of the bank account.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("routing_number")]
     public string? RoutingNumber { get; init; }
 
@@ -23403,36 +23908,42 @@ public partial record InsightsResourcesPaymentEvaluationAddress
     /// <summary>
     /// City, district, suburb, town, or village.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("city")]
     public string? City { get; init; }
 
     /// <summary>
     /// Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("country")]
     public string? Country { get; init; }
 
     /// <summary>
     /// Address line 1, such as the street, PO Box, or company name.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("line1")]
     public string? Line1 { get; init; }
 
     /// <summary>
     /// Address line 2, such as the apartment, suite, unit, or building.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("line2")]
     public string? Line2 { get; init; }
 
     /// <summary>
     /// ZIP or postal code.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("postal_code")]
     public string? PostalCode { get; init; }
 
     /// <summary>
     /// State, county, province, or region ([ISO 3166-2](https://en.wikipedia.org/wiki/ISO_3166-2)).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("state")]
     public string? State { get; init; }
 
@@ -23452,18 +23963,21 @@ public partial record InsightsResourcesPaymentEvaluationBillingDetails
     /// <summary>
     /// Email address.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("email")]
     public string? Email { get; init; }
 
     /// <summary>
     /// Full name.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("name")]
     public string? Name { get; init; }
 
     /// <summary>
     /// Billing phone number (including extension).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("phone")]
     public string? Phone { get; init; }
 
@@ -23477,6 +23991,7 @@ public partial record InsightsResourcesPaymentEvaluationClientDeviceMetadata
     /// <summary>
     /// ID for the Radar Session associated with the payment evaluation. A [Radar Session](https://docs.stripe.com/radar/radar-session) is a snapshot of the browser metadata and device details that help Radar make more accurate predictions on your payments.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("radar_session")]
     public required string RadarSession { get; init; }
 
@@ -23490,30 +24005,35 @@ public partial record InsightsResourcesPaymentEvaluationCustomerDetails
     /// <summary>
     /// The ID of the customer associated with the payment evaluation.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("customer")]
     public string? Customer { get; init; }
 
     /// <summary>
     /// The ID of the Account representing the customer associated with the payment evaluation.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("customer_account")]
     public string? CustomerAccount { get; init; }
 
     /// <summary>
     /// The customer's email address.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("email")]
     public string? Email { get; init; }
 
     /// <summary>
     /// The customer's full name or business name.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("name")]
     public string? Name { get; init; }
 
     /// <summary>
     /// The customer's phone number.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("phone")]
     public string? Phone { get; init; }
 
@@ -23671,6 +24191,7 @@ public partial record InsightsResourcesPaymentEvaluationOutcome
     /// <summary>
     /// The PaymentIntent ID associated with the payment evaluation.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("payment_intent_id")]
     public string? PaymentIntentId { get; init; }
 
@@ -23714,6 +24235,7 @@ public partial record InsightsResourcesPaymentEvaluationPaymentDetails
     /// <summary>
     /// An arbitrary string attached to the object. Often useful for displaying to users.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("description")]
     public string? Description { get; init; }
 
@@ -23738,6 +24260,7 @@ public partial record InsightsResourcesPaymentEvaluationPaymentDetails
     /// <summary>
     /// Payment statement descriptor.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("statement_descriptor")]
     public string? StatementDescriptor { get; init; }
 
@@ -23845,12 +24368,14 @@ public partial record InsightsResourcesPaymentEvaluationShipping
     /// <summary>
     /// Shipping name.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("name")]
     public string? Name { get; init; }
 
     /// <summary>
     /// Shipping phone number.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("phone")]
     public string? Phone { get; init; }
 
@@ -23946,6 +24471,7 @@ public partial record InsightsResourcesPaymentEvaluationUserInterventionRaised
     /// <summary>
     /// Unique identifier for the user intervention event.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("key")]
     public required string Key { get; init; }
 
@@ -23965,6 +24491,7 @@ public partial record InsightsResourcesPaymentEvaluationUserInterventionRaisedCu
     /// <summary>
     /// Custom type of user intervention raised. The string must use a snake case description for the type of intervention performed.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("type")]
     public required string Type { get; init; }
 
@@ -23978,6 +24505,7 @@ public partial record InsightsResourcesPaymentEvaluationUserInterventionResolved
     /// <summary>
     /// Unique ID of this intervention. Use this to provide the result.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("key")]
     public required string Key { get; init; }
 
@@ -23994,12 +24522,14 @@ public partial record InternalCard
     /// <summary>
     /// Brand of the card used in the transaction
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("brand")]
     public string? Brand { get; init; }
 
     /// <summary>
     /// Two-letter ISO code representing the country of the card
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("country")]
     public string? Country { get; init; }
 
@@ -24018,6 +24548,7 @@ public partial record InternalCard
     /// <summary>
     /// The last 4 digits of the card
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("last4")]
     public string? Last4 { get; init; }
 
@@ -24062,12 +24593,14 @@ public partial record Invoice
     /// <summary>
     /// The country of the business associated with this invoice, most often the business creating the invoice.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("account_country")]
     public string? AccountCountry { get; init; }
 
     /// <summary>
     /// The public name of the business associated with this invoice, most often the business creating the invoice.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("account_name")]
     public string? AccountName { get; init; }
 
@@ -24199,6 +24732,7 @@ public partial record Invoice
     /// <summary>
     /// The ID of the account representing the customer to bill.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("customer_account")]
     public string? CustomerAccount { get; init; }
 
@@ -24211,18 +24745,21 @@ public partial record Invoice
     /// <summary>
     /// The customer's email. Until the invoice is finalized, this field will equal `customer.email`. Once the invoice is finalized, this field will no longer be updated.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("customer_email")]
     public string? CustomerEmail { get; init; }
 
     /// <summary>
     /// The customer's name. Until the invoice is finalized, this field will equal `customer.name`. Once the invoice is finalized, this field will no longer be updated.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("customer_name")]
     public string? CustomerName { get; init; }
 
     /// <summary>
     /// The customer's phone number. Until the invoice is finalized, this field will equal `customer.phone`. Once the invoice is finalized, this field will no longer be updated.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("customer_phone")]
     public string? CustomerPhone { get; init; }
 
@@ -24265,6 +24802,7 @@ public partial record Invoice
     /// <summary>
     /// An arbitrary string attached to the object. Often useful for displaying to users. Referenced as 'memo' in the Dashboard.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("description")]
     public string? Description { get; init; }
 
@@ -24295,6 +24833,7 @@ public partial record Invoice
     /// <summary>
     /// Footer displayed on the invoice.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("footer")]
     public string? Footer { get; init; }
 
@@ -24307,18 +24846,21 @@ public partial record Invoice
     /// <summary>
     /// The URL for the hosted invoice page, which allows customers to view and pay an invoice. If the invoice has not been finalized yet, this will be null.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("hosted_invoice_url")]
     public string? HostedInvoiceUrl { get; init; }
 
     /// <summary>
     /// Unique identifier for the object. For preview invoices created using the [create preview](https://stripe.com/docs/api/invoices/create_preview) endpoint, this id will be prefixed with `upcoming_in`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
     /// <summary>
     /// The link to download the PDF for the invoice. If the invoice has not been finalized yet, this will be null.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("invoice_pdf")]
     public string? InvoicePdf { get; init; }
 
@@ -24364,6 +24906,7 @@ public partial record Invoice
     /// <summary>
     /// A unique, identifying string that appears on emails sent to the customer for this invoice. This starts with the customer's unique invoice_prefix if it is specified.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("number")]
     public string? Number { get; init; }
 
@@ -24421,6 +24964,7 @@ public partial record Invoice
     /// <summary>
     /// This is the transaction number that appears on email receipts sent for this invoice.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("receipt_number")]
     public string? ReceiptNumber { get; init; }
 
@@ -24451,6 +24995,7 @@ public partial record Invoice
     /// <summary>
     /// Extra information about an invoice for the customer's credit card statement.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("statement_descriptor")]
     public string? StatementDescriptor { get; init; }
 
@@ -24537,6 +25082,7 @@ public partial record InvoiceItemProrationCreditedItems
     /// <summary>
     /// When `type` is `invoice_item`, the invoice item id for the debited invoice item corresponding to this credit proration.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("invoice_item")]
     public string? InvoiceItem { get; init; }
 
@@ -24600,6 +25146,7 @@ public partial record InvoiceMandateOptionsCard
     /// <summary>
     /// A description of the mandate or subscription that is meant to be displayed to the customer.
     /// </summary>
+    [StringLength(200)]
     [JsonPropertyName("description")]
     public string? Description { get; init; }
 
@@ -24660,12 +25207,14 @@ public partial record InvoicePayment
     /// <summary>
     /// Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("currency")]
     public required string Currency { get; init; }
 
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -24699,6 +25248,7 @@ public partial record InvoicePayment
     /// <summary>
     /// The status of the payment, one of `open`, `paid`, or `canceled`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("status")]
     public required string Status { get; init; }
 
@@ -24814,6 +25364,7 @@ public partial record InvoicePaymentMethodOptionsMandateOptionsUpi
     /// <summary>
     /// A description of the mandate or subscription that is meant to be displayed to the customer.
     /// </summary>
+    [StringLength(20)]
     [JsonPropertyName("description")]
     public string? Description { get; init; }
 
@@ -24926,6 +25477,7 @@ public partial record InvoiceRenderingTemplate
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -24944,6 +25496,7 @@ public partial record InvoiceRenderingTemplate
     /// <summary>
     /// A brief description of the template, hidden from customers
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("nickname")]
     public string? Nickname { get; init; }
 
@@ -24972,12 +25525,14 @@ public partial record InvoiceSettingCheckoutRenderingOptions
     /// <summary>
     /// How line-item prices and amounts will be displayed with respect to tax on invoice PDFs.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("amount_tax_display")]
     public string? AmountTaxDisplay { get; init; }
 
     /// <summary>
     /// ID of the invoice rendering template to be used for the generated invoice.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("template")]
     public string? Template { get; init; }
 
@@ -24988,12 +25543,14 @@ public partial record InvoiceSettingCustomField
     /// <summary>
     /// The name of the custom field.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("name")]
     public required string Name { get; init; }
 
     /// <summary>
     /// The value of the custom field.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("value")]
     public required string Value { get; init; }
 
@@ -25004,12 +25561,14 @@ public partial record InvoiceSettingCustomerRenderingOptions
     /// <summary>
     /// How line-item prices and amounts will be displayed with respect to tax on invoice PDFs.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("amount_tax_display")]
     public string? AmountTaxDisplay { get; init; }
 
     /// <summary>
     /// ID of the invoice rendering template to be used for this customer's invoices. If set, the template will be used on all invoices for this customer unless a template is set directly on the invoice.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("template")]
     public string? Template { get; init; }
 
@@ -25032,6 +25591,7 @@ public partial record InvoiceSettingCustomerSetting
     /// <summary>
     /// Default footer to be displayed on invoices for this customer.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("footer")]
     public string? Footer { get; init; }
 
@@ -25060,12 +25620,14 @@ public partial record InvoiceSettingQuoteSetting
     /// <summary>
     /// An arbitrary string attached to the object. Often useful for displaying to users.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("description")]
     public string? Description { get; init; }
 
     /// <summary>
     /// Footer to be displayed on the invoice.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("footer")]
     public string? Footer { get; init; }
 
@@ -25097,12 +25659,14 @@ public partial record InvoiceSettingSubscriptionSchedulePhaseSetting
     /// <summary>
     /// An arbitrary string attached to the object. Often useful for displaying to users.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("description")]
     public string? Description { get; init; }
 
     /// <summary>
     /// Footer to be displayed on the invoice.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("footer")]
     public string? Footer { get; init; }
 
@@ -25137,12 +25701,14 @@ public partial record InvoiceSettingSubscriptionScheduleSetting
     /// <summary>
     /// An arbitrary string attached to the object. Often useful for displaying to users.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("description")]
     public string? Description { get; init; }
 
     /// <summary>
     /// Footer to be displayed on the invoice.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("footer")]
     public string? Footer { get; init; }
 
@@ -25200,6 +25766,7 @@ public partial record Invoiceitem
     /// <summary>
     /// The ID of the account to bill for this invoice item.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("customer_account")]
     public string? CustomerAccount { get; init; }
 
@@ -25212,6 +25779,7 @@ public partial record Invoiceitem
     /// <summary>
     /// An arbitrary string attached to the object. Often useful for displaying to users.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("description")]
     public string? Description { get; init; }
 
@@ -25236,6 +25804,7 @@ public partial record Invoiceitem
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -25394,6 +25963,7 @@ public partial record InvoicesPaymentSettings
     /// <summary>
     /// ID of the mandate to be used for this invoice. It must correspond to the payment method used to pay the invoice, including the invoice's default_payment_method or default_source, if set.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("default_mandate")]
     public string? DefaultMandate { get; init; }
 
@@ -25460,12 +26030,14 @@ public partial record InvoicesResourceConfirmationSecret
     /// <summary>
     /// The client_secret of the payment that Stripe creates for the invoice after finalization.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("client_secret")]
     public required string ClientSecret { get; init; }
 
     /// <summary>
     /// The type of client_secret. Currently this is always payment_intent, referencing the default payment_intent that Stripe creates during invoice finalization
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("type")]
     public required string Type { get; init; }
 
@@ -25476,6 +26048,7 @@ public partial record InvoicesResourceFromInvoice
     /// <summary>
     /// The relation between this invoice and the cloned invoice
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("action")]
     public required string Action { get; init; }
 
@@ -25492,6 +26065,7 @@ public partial record InvoicesResourceInvoiceRendering
     /// <summary>
     /// How line-item prices and amounts will be displayed with respect to tax on invoice PDFs.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("amount_tax_display")]
     public string? AmountTaxDisplay { get; init; }
 
@@ -25504,6 +26078,7 @@ public partial record InvoicesResourceInvoiceRendering
     /// <summary>
     /// ID of the rendering template that the invoice is formatted by.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("template")]
     public string? Template { get; init; }
 
@@ -25526,6 +26101,7 @@ public partial record InvoicesResourceInvoiceTaxId
     /// <summary>
     /// The value of the tax ID.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("value")]
     public string? Value { get; init; }
 
@@ -25711,6 +26287,7 @@ public partial record IssuingAuthorization
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -25801,6 +26378,7 @@ public partial record IssuingAuthorization
     /// <summary>
     /// The digital wallet used for this transaction. One of `apple_pay`, `google_pay`, or `samsung_pay`. Will populate as `null` when no digital wallet was utilized.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("wallet")]
     public string? Wallet { get; init; }
 
@@ -25814,6 +26392,7 @@ public partial record IssuingCard
     /// <summary>
     /// The brand of the card.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("brand")]
     public required string Brand { get; init; }
 
@@ -25846,6 +26425,7 @@ public partial record IssuingCard
     /// <summary>
     /// The card's CVC. For security reasons, this is only available for virtual cards, and will be omitted unless you explicitly request it with [the `expand` parameter](https://docs.stripe.com/api/expanding_objects). Additionally, it's only available via the ["Retrieve a card" endpoint](https://docs.stripe.com/api/issuing/cards/retrieve), not via "List all cards" or any other endpoint.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("cvc")]
     public string? Cvc { get; init; }
 
@@ -25864,18 +26444,21 @@ public partial record IssuingCard
     /// <summary>
     /// The financial account this card is attached to.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("financial_account")]
     public string? FinancialAccount { get; init; }
 
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
     /// <summary>
     /// The last 4 digits of the card number.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("last4")]
     public required string Last4 { get; init; }
 
@@ -25906,6 +26489,7 @@ public partial record IssuingCard
     /// <summary>
     /// The full unredacted card number. For security reasons, this is only available for virtual cards, and will be omitted unless you explicitly request it with [the `expand` parameter](https://docs.stripe.com/api/expanding_objects). Additionally, it's only available via the ["Retrieve a card" endpoint](https://docs.stripe.com/api/issuing/cards/retrieve), not via "List all cards" or any other endpoint.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("number")]
     public string? Number { get; init; }
 
@@ -25942,6 +26526,7 @@ public partial record IssuingCard
     /// <summary>
     /// Text separate from cardholder name, printed on the card.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("second_line")]
     public string? SecondLine { get; init; }
 
@@ -25999,12 +26584,14 @@ public partial record IssuingCardholder
     /// <summary>
     /// The cardholder's email address.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("email")]
     public string? Email { get; init; }
 
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -26029,6 +26616,7 @@ public partial record IssuingCardholder
     /// <summary>
     /// The cardholder's name. This will be printed on cards issued to them.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("name")]
     public required string Name { get; init; }
 
@@ -26041,6 +26629,7 @@ public partial record IssuingCardholder
     /// <summary>
     /// The cardholder's phone number. This is required for all cardholders who will be creating EU cards. See the [3D Secure documentation](https://docs.stripe.com/issuing/3d-secure#when-is-3d-secure-applied) for more details.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("phone_number")]
     public string? PhoneNumber { get; init; }
 
@@ -26111,6 +26700,7 @@ public partial record IssuingDispute
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -26184,6 +26774,7 @@ public partial record IssuingPersonalizationDesign
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -26196,6 +26787,7 @@ public partial record IssuingPersonalizationDesign
     /// <summary>
     /// A lookup key used to retrieve personalization designs dynamically from a static string. This may be up to 200 characters.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("lookup_key")]
     public string? LookupKey { get; init; }
 
@@ -26208,6 +26800,7 @@ public partial record IssuingPersonalizationDesign
     /// <summary>
     /// Friendly display name.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("name")]
     public string? Name { get; init; }
 
@@ -26248,6 +26841,7 @@ public partial record IssuingPhysicalBundle
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -26260,6 +26854,7 @@ public partial record IssuingPhysicalBundle
     /// <summary>
     /// Friendly display name.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("name")]
     public required string Name { get; init; }
 
@@ -26291,6 +26886,7 @@ public partial record IssuingSettlement
     /// <summary>
     /// The Bank Identification Number reflecting this settlement record.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("bin")]
     public required string Bin { get; init; }
 
@@ -26315,6 +26911,7 @@ public partial record IssuingSettlement
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -26357,6 +26954,7 @@ public partial record IssuingSettlement
     /// <summary>
     /// The Settlement Identification Number assigned by the network.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("network_settlement_identifier")]
     public required string NetworkSettlementIdentifier { get; init; }
 
@@ -26369,6 +26967,7 @@ public partial record IssuingSettlement
     /// <summary>
     /// One of `international` or `uk_national_net`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("settlement_service")]
     public required string SettlementService { get; init; }
 
@@ -26412,18 +27011,21 @@ public partial record IssuingToken
     /// <summary>
     /// The hashed ID derived from the device ID from the card network associated with the token.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("device_fingerprint")]
     public string? DeviceFingerprint { get; init; }
 
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
     /// <summary>
     /// The last four digits of the token.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("last4")]
     public string? Last4 { get; init; }
 
@@ -26534,6 +27136,7 @@ public partial record IssuingTransaction
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -26645,12 +27248,14 @@ public partial record IssuingAuthorizationFleetCardholderPromptData
     /// <summary>
     /// [Deprecated] An alphanumeric ID, though typical point of sales only support numeric entry. The card program can be configured to prompt for a vehicle ID, driver ID, or generic ID.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("alphanumeric_id")]
     public string? AlphanumericId { get; init; }
 
     /// <summary>
     /// Driver ID.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("driver_id")]
     public string? DriverId { get; init; }
 
@@ -26663,18 +27268,21 @@ public partial record IssuingAuthorizationFleetCardholderPromptData
     /// <summary>
     /// An alphanumeric ID. This field is used when a vehicle ID, driver ID, or generic ID is entered by the cardholder, but the merchant or card network did not specify the prompt type.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("unspecified_id")]
     public string? UnspecifiedId { get; init; }
 
     /// <summary>
     /// User ID.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("user_id")]
     public string? UserId { get; init; }
 
     /// <summary>
     /// Vehicle number.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("vehicle_number")]
     public string? VehicleNumber { get; init; }
 
@@ -26793,6 +27401,7 @@ public partial record IssuingAuthorizationFuelData
     /// <summary>
     /// [Conexxus Payment System Product Code](https://www.conexxus.org/conexxus-payment-system-product-codes) identifying the primary fuel product purchased.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("industry_product_code")]
     public string? IndustryProductCode { get; init; }
 
@@ -26827,66 +27436,77 @@ public partial record IssuingAuthorizationMerchantData
     /// <summary>
     /// A categorization of the seller's type of business. See our [merchant categories guide](https://docs.stripe.com/issuing/merchant-categories) for a list of possible values.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("category")]
     public required string Category { get; init; }
 
     /// <summary>
     /// The merchant category code for the seller’s business
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("category_code")]
     public required string CategoryCode { get; init; }
 
     /// <summary>
     /// City where the seller is located
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("city")]
     public string? City { get; init; }
 
     /// <summary>
     /// Country where the seller is located
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("country")]
     public string? Country { get; init; }
 
     /// <summary>
     /// Name of the seller
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("name")]
     public string? Name { get; init; }
 
     /// <summary>
     /// Identifier assigned to the seller by the card network. Different card networks may assign different network_id fields to the same merchant.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("network_id")]
     public required string NetworkId { get; init; }
 
     /// <summary>
     /// Postal code where the seller is located
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("postal_code")]
     public string? PostalCode { get; init; }
 
     /// <summary>
     /// State where the seller is located
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("state")]
     public string? State { get; init; }
 
     /// <summary>
     /// The seller's tax identification number. Currently populated for French merchants only.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("tax_id")]
     public string? TaxId { get; init; }
 
     /// <summary>
     /// An ID assigned by the seller to the location of the sale.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("terminal_id")]
     public string? TerminalId { get; init; }
 
     /// <summary>
     /// URL provided by the merchant on a 3DS request
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("url")]
     public string? Url { get; init; }
 
@@ -26897,18 +27517,21 @@ public partial record IssuingAuthorizationNetworkData
     /// <summary>
     /// Identifier assigned to the acquirer by the card network. Sometimes this value is not provided by the network; in this case, the value will be `null`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("acquiring_institution_id")]
     public string? AcquiringInstitutionId { get; init; }
 
     /// <summary>
     /// The System Trace Audit Number (STAN) is a 6-digit identifier assigned by the acquirer. Prefer `network_data.transaction_id` if present, unless you have special requirements.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("system_trace_audit_number")]
     public string? SystemTraceAuditNumber { get; init; }
 
     /// <summary>
     /// Unique identifier for the authorization assigned by the card network used to match subsequent messages, disputes, and transactions.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("transaction_id")]
     public string? TransactionId { get; init; }
 
@@ -26983,6 +27606,7 @@ public partial record IssuingAuthorizationRequest
     /// <summary>
     /// A code created by Stripe which is shared with the merchant to validate the authorization. This field will be populated if the authorization message was approved. The code typically starts with the letter "S", followed by a six-digit number. For example, "S498162". Please note that the code is not guaranteed to be unique across authorizations.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("authorization_code")]
     public string? AuthorizationCode { get; init; }
 
@@ -26995,6 +27619,7 @@ public partial record IssuingAuthorizationRequest
     /// <summary>
     /// Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("currency")]
     public required string Currency { get; init; }
 
@@ -27007,6 +27632,7 @@ public partial record IssuingAuthorizationRequest
     /// <summary>
     /// The currency that was collected by the merchant and presented to the cardholder for the authorization. Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("merchant_currency")]
     public required string MerchantCurrency { get; init; }
 
@@ -27025,6 +27651,7 @@ public partial record IssuingAuthorizationRequest
     /// <summary>
     /// If the `request_history.reason` is `webhook_error` because the direct webhook response is invalid (for example, parsing errors or missing parameters), we surface a more detailed error message via this field.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reason_message")]
     public string? ReasonMessage { get; init; }
 
@@ -27063,6 +27690,7 @@ public partial record IssuingAuthorizationTreasury
     /// <summary>
     /// The Treasury [Transaction](https://docs.stripe.com/api/treasury/transactions) associated with this authorization
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("transaction")]
     public string? Transaction { get; init; }
 
@@ -27103,6 +27731,7 @@ public partial record IssuingAuthorizationVerificationData
     /// <summary>
     /// The postal code submitted as part of the authorization used for postal code verification.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("postal_code")]
     public string? PostalCode { get; init; }
 
@@ -27245,6 +27874,7 @@ public partial record IssuingCardShipping
     /// <summary>
     /// The name of the business at the shipping address, used on the shipping label to ensure delivery when the card is shipped to a cardholder's workplace.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("business_name")]
     public string? BusinessName { get; init; }
 
@@ -27269,12 +27899,14 @@ public partial record IssuingCardShipping
     /// <summary>
     /// Recipient name.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("name")]
     public required string Name { get; init; }
 
     /// <summary>
     /// The phone number of the receiver of the shipment. Our courier partners will use this number to contact you in the event of card delivery issues. For individual shipments to the EU/UK, if this field is empty, we will provide them with the phone number provided when the cardholder was initially created.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("phone_number")]
     public string? PhoneNumber { get; init; }
 
@@ -27299,12 +27931,14 @@ public partial record IssuingCardShipping
     /// <summary>
     /// A tracking number for a card shipment.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("tracking_number")]
     public string? TrackingNumber { get; init; }
 
     /// <summary>
     /// A link to the shipping carrier's site where you can view detailed information about a card shipment.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("tracking_url")]
     public string? TrackingUrl { get; init; }
 
@@ -27343,6 +27977,7 @@ public partial record IssuingCardShippingCustoms
     /// <summary>
     /// A registration number used for customs in Europe. See [https://www.gov.uk/eori](https://www.gov.uk/eori) for the UK and [https://ec.europa.eu/taxation_customs/business/customs-procedures-import-and-export/customs-procedures/economic-operators-registration-and-identification-number-eori_en](https://ec.europa.eu/taxation_customs/business/customs-procedures-import-and-export/customs-procedures/economic-operators-registration-and-identification-number-eori_en) for the EU.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("eori_number")]
     public string? EoriNumber { get; init; }
 
@@ -27381,6 +28016,7 @@ public partial record IssuingCardWallets
     /// <summary>
     /// Unique identifier for a card used with digital wallets
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("primary_account_identifier")]
     public string? PrimaryAccountIdentifier { get; init; }
 
@@ -27498,12 +28134,14 @@ public partial record IssuingCardholderIndividual
     /// <summary>
     /// The first name of this cardholder. Required before activating Cards. This field cannot contain any numbers, special characters (except periods, commas, hyphens, spaces and apostrophes) or non-latin letters.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("first_name")]
     public string? FirstName { get; init; }
 
     /// <summary>
     /// The last name of this cardholder. Required before activating Cards. This field cannot contain any numbers, special characters (except periods, commas, hyphens, spaces and apostrophes) or non-latin letters.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("last_name")]
     public string? LastName { get; init; }
 
@@ -27586,12 +28224,14 @@ public partial record IssuingCardholderUserTermsAcceptance
     /// <summary>
     /// The IP address from which the cardholder accepted the Authorized User Terms.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("ip")]
     public string? Ip { get; init; }
 
     /// <summary>
     /// The user agent of the browser from which the cardholder accepted the Authorized User Terms.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("user_agent")]
     public string? UserAgent { get; init; }
 
@@ -27630,6 +28270,7 @@ public partial record IssuingDisputeCanceledEvidence
     /// <summary>
     /// Reason for canceling the order.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("cancellation_reason")]
     public string? CancellationReason { get; init; }
 
@@ -27642,12 +28283,14 @@ public partial record IssuingDisputeCanceledEvidence
     /// <summary>
     /// Explanation of why the cardholder is disputing this transaction.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("explanation")]
     public string? Explanation { get; init; }
 
     /// <summary>
     /// Description of the merchandise or service that was purchased.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("product_description")]
     public string? ProductDescription { get; init; }
 
@@ -27700,12 +28343,14 @@ public partial record IssuingDisputeDuplicateEvidence
     /// <summary>
     /// Explanation of why the cardholder is disputing this transaction.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("explanation")]
     public string? Explanation { get; init; }
 
     /// <summary>
     /// Transaction (e.g., ipi_...) that the disputed transaction is a duplicate of. Of the two or more transactions that are copies of each other, this is original undisputed one.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("original_transaction")]
     public string? OriginalTransaction { get; init; }
 
@@ -27756,6 +28401,7 @@ public partial record IssuingDisputeFraudulentEvidence
     /// <summary>
     /// Explanation of why the cardholder is disputing this transaction.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("explanation")]
     public string? Explanation { get; init; }
 
@@ -27772,6 +28418,7 @@ public partial record IssuingDisputeMerchandiseNotAsDescribedEvidence
     /// <summary>
     /// Explanation of why the cardholder is disputing this transaction.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("explanation")]
     public string? Explanation { get; init; }
 
@@ -27784,6 +28431,7 @@ public partial record IssuingDisputeMerchandiseNotAsDescribedEvidence
     /// <summary>
     /// Description of the cardholder's attempt to return the product.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("return_description")]
     public string? ReturnDescription { get; init; }
 
@@ -27812,6 +28460,7 @@ public partial record IssuingDisputeNoValidAuthorizationEvidence
     /// <summary>
     /// Explanation of why the cardholder is disputing this transaction.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("explanation")]
     public string? Explanation { get; init; }
 
@@ -27834,12 +28483,14 @@ public partial record IssuingDisputeNotReceivedEvidence
     /// <summary>
     /// Explanation of why the cardholder is disputing this transaction.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("explanation")]
     public string? Explanation { get; init; }
 
     /// <summary>
     /// Description of the merchandise or service that was purchased.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("product_description")]
     public string? ProductDescription { get; init; }
 
@@ -27862,12 +28513,14 @@ public partial record IssuingDisputeOtherEvidence
     /// <summary>
     /// Explanation of why the cardholder is disputing this transaction.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("explanation")]
     public string? Explanation { get; init; }
 
     /// <summary>
     /// Description of the merchandise or service that was purchased.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("product_description")]
     public string? ProductDescription { get; init; }
 
@@ -27896,12 +28549,14 @@ public partial record IssuingDisputeServiceNotAsDescribedEvidence
     /// <summary>
     /// Reason for canceling the order.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("cancellation_reason")]
     public string? CancellationReason { get; init; }
 
     /// <summary>
     /// Explanation of why the cardholder is disputing this transaction.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("explanation")]
     public string? Explanation { get; init; }
 
@@ -27918,12 +28573,14 @@ public partial record IssuingDisputeTreasury
     /// <summary>
     /// The Treasury [DebitReversal](https://docs.stripe.com/api/treasury/debit_reversals) representing this Issuing dispute
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("debit_reversal")]
     public string? DebitReversal { get; init; }
 
     /// <summary>
     /// The Treasury [ReceivedDebit](https://docs.stripe.com/api/treasury/received_debits) that is being disputed.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("received_debit")]
     public required string ReceivedDebit { get; init; }
 
@@ -27934,12 +28591,14 @@ public partial record IssuingNetworkTokenAddress
     /// <summary>
     /// The street address of the cardholder tokenizing the card.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("line1")]
     public required string Line1 { get; init; }
 
     /// <summary>
     /// The postal code of the cardholder tokenizing the card.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("postal_code")]
     public required string PostalCode { get; init; }
 
@@ -27950,30 +28609,35 @@ public partial record IssuingNetworkTokenDevice
     /// <summary>
     /// An obfuscated ID derived from the device ID.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("device_fingerprint")]
     public string? DeviceFingerprint { get; init; }
 
     /// <summary>
     /// The IP address of the device at provisioning time.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("ip_address")]
     public string? IpAddress { get; init; }
 
     /// <summary>
     /// The geographic latitude/longitude coordinates of the device at provisioning time. The format is [+-]decimal/[+-]decimal.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("location")]
     public string? Location { get; init; }
 
     /// <summary>
     /// The name of the device used for tokenization.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("name")]
     public string? Name { get; init; }
 
     /// <summary>
     /// The phone number of the device used for tokenization.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("phone_number")]
     public string? PhoneNumber { get; init; }
 
@@ -27990,24 +28654,28 @@ public partial record IssuingNetworkTokenMastercard
     /// <summary>
     /// A unique reference ID from MasterCard to represent the card account number.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("card_reference_id")]
     public string? CardReferenceId { get; init; }
 
     /// <summary>
     /// The network-unique identifier for the token.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("token_reference_id")]
     public required string TokenReferenceId { get; init; }
 
     /// <summary>
     /// The ID of the entity requesting tokenization, specific to MasterCard.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("token_requestor_id")]
     public required string TokenRequestorId { get; init; }
 
     /// <summary>
     /// The name of the entity requesting tokenization, if known. This is directly provided from MasterCard.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("token_requestor_name")]
     public string? TokenRequestorName { get; init; }
 
@@ -28040,24 +28708,28 @@ public partial record IssuingNetworkTokenVisa
     /// <summary>
     /// A unique reference ID from Visa to represent the card account number.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("card_reference_id")]
     public string? CardReferenceId { get; init; }
 
     /// <summary>
     /// The network-unique identifier for the token.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("token_reference_id")]
     public required string TokenReferenceId { get; init; }
 
     /// <summary>
     /// The ID of the entity requesting tokenization, specific to Visa.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("token_requestor_id")]
     public required string TokenRequestorId { get; init; }
 
     /// <summary>
     /// Degree of risk associated with the token between `01` and `99`, with higher number indicating higher risk. A `00` value indicates the token was not scored by Visa.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("token_risk_score")]
     public string? TokenRiskScore { get; init; }
 
@@ -28068,6 +28740,7 @@ public partial record IssuingNetworkTokenWalletProvider
     /// <summary>
     /// The wallet provider-given account ID of the digital wallet the token belongs to.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("account_id")]
     public string? AccountId { get; init; }
 
@@ -28089,6 +28762,7 @@ public partial record IssuingNetworkTokenWalletProvider
     /// <summary>
     /// The name of the cardholder tokenizing the card.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("cardholder_name")]
     public string? CardholderName { get; init; }
 
@@ -28101,6 +28775,7 @@ public partial record IssuingNetworkTokenWalletProvider
     /// <summary>
     /// The hashed email address of the cardholder's account with the wallet provider.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("hashed_account_email_address")]
     public string? HashedAccountEmailAddress { get; init; }
 
@@ -28119,6 +28794,7 @@ public partial record IssuingNetworkTokenWalletProvider
     /// <summary>
     /// The version of the standard for mapping reason codes followed by the wallet provider.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("suggested_decision_version")]
     public string? SuggestedDecisionVersion { get; init; }
 
@@ -28129,24 +28805,28 @@ public partial record IssuingPersonalizationDesignCarrierText
     /// <summary>
     /// The footer body text of the carrier letter.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("footer_body")]
     public string? FooterBody { get; init; }
 
     /// <summary>
     /// The footer title text of the carrier letter.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("footer_title")]
     public string? FooterTitle { get; init; }
 
     /// <summary>
     /// The header body text of the carrier letter.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("header_body")]
     public string? HeaderBody { get; init; }
 
     /// <summary>
     /// The header title text of the carrier letter.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("header_title")]
     public string? HeaderTitle { get; init; }
 
@@ -28227,6 +28907,7 @@ public partial record IssuingTransactionFleetCardholderPromptData
     /// <summary>
     /// Driver ID.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("driver_id")]
     public string? DriverId { get; init; }
 
@@ -28239,18 +28920,21 @@ public partial record IssuingTransactionFleetCardholderPromptData
     /// <summary>
     /// An alphanumeric ID. This field is used when a vehicle ID, driver ID, or generic ID is entered by the cardholder, but the merchant or card network did not specify the prompt type.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("unspecified_id")]
     public string? UnspecifiedId { get; init; }
 
     /// <summary>
     /// User ID.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("user_id")]
     public string? UserId { get; init; }
 
     /// <summary>
     /// Vehicle number.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("vehicle_number")]
     public string? VehicleNumber { get; init; }
 
@@ -28267,6 +28951,7 @@ public partial record IssuingTransactionFleetData
     /// <summary>
     /// The type of purchase. One of `fuel_purchase`, `non_fuel_purchase`, or `fuel_and_non_fuel_purchase`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("purchase_type")]
     public string? PurchaseType { get; init; }
 
@@ -28279,6 +28964,7 @@ public partial record IssuingTransactionFleetData
     /// <summary>
     /// The type of fuel service. One of `non_fuel_transaction`, `full_service`, or `self_service`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("service_type")]
     public string? ServiceType { get; init; }
 
@@ -28353,6 +29039,7 @@ public partial record IssuingTransactionFlightData
     /// <summary>
     /// The name of the passenger.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("passenger_name")]
     public string? PassengerName { get; init; }
 
@@ -28371,6 +29058,7 @@ public partial record IssuingTransactionFlightData
     /// <summary>
     /// The travel agency that issued the ticket.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("travel_agency")]
     public string? TravelAgency { get; init; }
 
@@ -28381,30 +29069,35 @@ public partial record IssuingTransactionFlightDataLeg
     /// <summary>
     /// The three-letter IATA airport code of the flight's destination.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("arrival_airport_code")]
     public string? ArrivalAirportCode { get; init; }
 
     /// <summary>
     /// The airline carrier code.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("carrier")]
     public string? Carrier { get; init; }
 
     /// <summary>
     /// The three-letter IATA airport code that the flight departed from.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("departure_airport_code")]
     public string? DepartureAirportCode { get; init; }
 
     /// <summary>
     /// The flight number.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("flight_number")]
     public string? FlightNumber { get; init; }
 
     /// <summary>
     /// The flight's service class.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("service_class")]
     public string? ServiceClass { get; init; }
 
@@ -28421,6 +29114,7 @@ public partial record IssuingTransactionFuelData
     /// <summary>
     /// [Conexxus Payment System Product Code](https://www.conexxus.org/conexxus-payment-system-product-codes) identifying the primary fuel product purchased.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("industry_product_code")]
     public string? IndustryProductCode { get; init; }
 
@@ -28433,12 +29127,14 @@ public partial record IssuingTransactionFuelData
     /// <summary>
     /// The type of fuel that was purchased. One of `diesel`, `unleaded_plus`, `unleaded_regular`, `unleaded_super`, or `other`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("type")]
     public required string Type { get; init; }
 
     /// <summary>
     /// The units for `quantity_decimal`. One of `charging_minute`, `imperial_gallon`, `kilogram`, `kilowatt_hour`, `liter`, `pound`, `us_gallon`, or `other`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("unit")]
     public required string Unit { get; init; }
 
@@ -28471,18 +29167,21 @@ public partial record IssuingTransactionNetworkData
     /// <summary>
     /// A code created by Stripe which is shared with the merchant to validate the authorization. This field will be populated if the authorization message was approved. The code typically starts with the letter "S", followed by a six-digit number. For example, "S498162". Please note that the code is not guaranteed to be unique across authorizations.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("authorization_code")]
     public string? AuthorizationCode { get; init; }
 
     /// <summary>
     /// The date the transaction was processed by the card network. This can be different from the date the seller recorded the transaction depending on when the acquirer submits the transaction to the network.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("processing_date")]
     public string? ProcessingDate { get; init; }
 
     /// <summary>
     /// Unique identifier for the authorization assigned by the card network used to match subsequent messages, disputes, and transactions.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("transaction_id")]
     public string? TransactionId { get; init; }
 
@@ -28523,6 +29222,7 @@ public partial record IssuingTransactionPurchaseDetails
     /// <summary>
     /// A merchant-specific order number.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reference")]
     public string? Reference { get; init; }
 
@@ -28533,6 +29233,7 @@ public partial record IssuingTransactionReceiptData
     /// <summary>
     /// The description of the item. The maximum length of this field is 26 characters.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("description")]
     public string? Description { get; init; }
 
@@ -28561,12 +29262,14 @@ public partial record IssuingTransactionTreasury
     /// <summary>
     /// The Treasury [ReceivedCredit](https://docs.stripe.com/api/treasury/received_credits) representing this Issuing transaction if it is a refund
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("received_credit")]
     public string? ReceivedCredit { get; init; }
 
     /// <summary>
     /// The Treasury [ReceivedDebit](https://docs.stripe.com/api/treasury/received_debits) representing this Issuing transaction if it is a capture
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("received_debit")]
     public string? ReceivedDebit { get; init; }
 
@@ -28613,6 +29316,7 @@ public partial record Item
     /// <summary>
     /// An arbitrary string attached to the object. Often useful for displaying to users. Defaults to product name.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("description")]
     public string? Description { get; init; }
 
@@ -28625,6 +29329,7 @@ public partial record Item
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -28665,6 +29370,7 @@ public partial record KlarnaAddress
     /// <summary>
     /// The payer address country
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("country")]
     public string? Country { get; init; }
 
@@ -28721,30 +29427,35 @@ public partial record LegalEntityCompany
     /// <summary>
     /// The export license ID number of the company, also referred as Import Export Code (India only).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("export_license_id")]
     public string? ExportLicenseId { get; init; }
 
     /// <summary>
     /// The purpose code to use for export transactions (India only).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("export_purpose_code")]
     public string? ExportPurposeCode { get; init; }
 
     /// <summary>
     /// The company's legal name. Also available for accounts where [controller.requirement_collection](/api/accounts/object#account_object-controller-requirement_collection) is `stripe`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("name")]
     public string? Name { get; init; }
 
     /// <summary>
     /// The Kana variation of the company's legal name (Japan only). Also available for accounts where [controller.requirement_collection](/api/accounts/object#account_object-controller-requirement_collection) is `stripe`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("name_kana")]
     public string? NameKana { get; init; }
 
     /// <summary>
     /// The Kanji variation of the company's legal name (Japan only). Also available for accounts where [controller.requirement_collection](/api/accounts/object#account_object-controller-requirement_collection) is `stripe`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("name_kanji")]
     public string? NameKanji { get; init; }
 
@@ -28769,6 +29480,7 @@ public partial record LegalEntityCompany
     /// <summary>
     /// The company's phone number (used for verification).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("phone")]
     public string? Phone { get; init; }
 
@@ -28799,6 +29511,7 @@ public partial record LegalEntityCompany
     /// <summary>
     /// The jurisdiction in which the `tax_id` is registered (Germany-based companies only).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("tax_id_registrar")]
     public string? TaxIdRegistrar { get; init; }
 
@@ -28834,12 +29547,14 @@ public partial record LegalEntityCompanyVerificationDocument
     /// <summary>
     /// A user-displayable string describing the verification state of this document.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("details")]
     public string? Details { get; init; }
 
     /// <summary>
     /// One of `document_corrupt`, `document_expired`, `document_failed_copy`, `document_failed_greyscale`, `document_failed_other`, `document_failed_test_mode`, `document_fraudulent`, `document_incomplete`, `document_invalid`, `document_manipulated`, `document_not_readable`, `document_not_uploaded`, `document_type_not_supported`, or `document_too_large`. A machine-readable code specifying the verification state for this document.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("details_code")]
     public string? DetailsCode { get; init; }
 
@@ -28862,12 +29577,14 @@ public partial record LegalEntityDirectorshipDeclaration
     /// <summary>
     /// The IP address from which the directorship declaration attestation was made.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("ip")]
     public string? Ip { get; init; }
 
     /// <summary>
     /// The user-agent string from the browser where the directorship declaration attestation was made.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("user_agent")]
     public string? UserAgent { get; init; }
 
@@ -28900,42 +29617,49 @@ public partial record LegalEntityJapanAddress
     /// <summary>
     /// City/Ward.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("city")]
     public string? City { get; init; }
 
     /// <summary>
     /// Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("country")]
     public string? Country { get; init; }
 
     /// <summary>
     /// Block/Building number.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("line1")]
     public string? Line1 { get; init; }
 
     /// <summary>
     /// Building details.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("line2")]
     public string? Line2 { get; init; }
 
     /// <summary>
     /// ZIP or postal code.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("postal_code")]
     public string? PostalCode { get; init; }
 
     /// <summary>
     /// Prefecture.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("state")]
     public string? State { get; init; }
 
     /// <summary>
     /// Town/cho-me.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("town")]
     public string? Town { get; init; }
 
@@ -28952,12 +29676,14 @@ public partial record LegalEntityPersonVerification
     /// <summary>
     /// A user-displayable string describing the verification state for the person. For example, this may say "Provided identity information could not be verified".
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("details")]
     public string? Details { get; init; }
 
     /// <summary>
     /// One of `document_address_mismatch`, `document_dob_mismatch`, `document_duplicate_type`, `document_id_number_mismatch`, `document_name_mismatch`, `document_nationality_mismatch`, `failed_keyed_identity`, or `failed_other`. A machine-readable code specifying the verification state for the person.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("details_code")]
     public string? DetailsCode { get; init; }
 
@@ -28967,6 +29693,7 @@ public partial record LegalEntityPersonVerification
     /// <summary>
     /// The state of verification for the person. Possible values are `unverified`, `pending`, or `verified`. Please refer [guide](https://docs.stripe.com/connect/handling-api-verification) to handle verification updates.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("status")]
     public required string Status { get; init; }
 
@@ -28983,12 +29710,14 @@ public partial record LegalEntityPersonVerificationDocument
     /// <summary>
     /// A user-displayable string describing the verification state of this document. For example, if a document is uploaded and the picture is too fuzzy, this may say "Identity document is too unclear to read".
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("details")]
     public string? Details { get; init; }
 
     /// <summary>
     /// One of `document_corrupt`, `document_country_not_supported`, `document_expired`, `document_failed_copy`, `document_failed_other`, `document_failed_test_mode`, `document_fraudulent`, `document_failed_greyscale`, `document_incomplete`, `document_invalid`, `document_manipulated`, `document_missing_back`, `document_missing_front`, `document_not_readable`, `document_not_uploaded`, `document_photo_mismatch`, `document_too_large`, or `document_type_not_supported`. A machine-readable code specifying the verification state for this document.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("details_code")]
     public string? DetailsCode { get; init; }
 
@@ -29033,12 +29762,14 @@ public partial record LegalEntityRepresentativeDeclaration
     /// <summary>
     /// The IP address from which the representative declaration attestation was made.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("ip")]
     public string? Ip { get; init; }
 
     /// <summary>
     /// The user-agent string from the browser where the representative declaration attestation was made.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("user_agent")]
     public string? UserAgent { get; init; }
 
@@ -29055,12 +29786,14 @@ public partial record LegalEntityUboDeclaration
     /// <summary>
     /// The IP address from which the beneficial owner attestation was made.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("ip")]
     public string? Ip { get; init; }
 
     /// <summary>
     /// The user-agent string from the browser where the beneficial owner attestation was made.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("user_agent")]
     public string? UserAgent { get; init; }
 
@@ -29088,6 +29821,7 @@ public partial record LineItem
     /// <summary>
     /// An arbitrary string attached to the object. Often useful for displaying to users.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("description")]
     public string? Description { get; init; }
 
@@ -29112,12 +29846,14 @@ public partial record LineItem
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
     /// <summary>
     /// The ID of the invoice that contains this line item.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("invoice")]
     public string? Invoice { get; init; }
 
@@ -29271,6 +30007,7 @@ public partial record LinkedAccountOptionsCommon
     /// <summary>
     /// For webview integrations only. Upon completing OAuth login in the native browser, the user will be redirected to this URL to return to your app.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("return_url")]
     public string? ReturnUrl { get; init; }
 
@@ -29297,6 +30034,7 @@ public partial record LoginLink
     /// <summary>
     /// The URL for the login link.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("url")]
     public required string Url { get; init; }
 
@@ -29313,6 +30051,7 @@ public partial record Mandate
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -29334,6 +30073,7 @@ public partial record Mandate
     /// <summary>
     /// The account (if any) that the mandate is intended for.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("on_behalf_of")]
     public string? OnBehalfOf { get; init; }
 
@@ -29374,6 +30114,7 @@ public partial record MandateAcssDebit
     /// <summary>
     /// Description of the interval. Only required if the 'payment_schedule' parameter is 'interval' or 'combined'.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("interval_description")]
     public string? IntervalDescription { get; init; }
 
@@ -29400,6 +30141,7 @@ public partial record MandateAuBecsDebit
     /// <summary>
     /// The URL of the mandate. This URL generally contains sensitive information about the customer and should be shared with them exclusively.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("url")]
     public required string Url { get; init; }
 
@@ -29410,6 +30152,7 @@ public partial record MandateBacsDebit
     /// <summary>
     /// The display name for the account on this mandate.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("display_name")]
     public string? DisplayName { get; init; }
 
@@ -29422,6 +30165,7 @@ public partial record MandateBacsDebit
     /// <summary>
     /// The unique reference identifying the mandate on the Bacs network.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reference")]
     public required string Reference { get; init; }
 
@@ -29434,12 +30178,14 @@ public partial record MandateBacsDebit
     /// <summary>
     /// The service user number for the account on this mandate.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("service_user_number")]
     public string? ServiceUserNumber { get; init; }
 
     /// <summary>
     /// The URL that will contain the mandate that the customer has signed.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("url")]
     public required string Url { get; init; }
 
@@ -29506,6 +30252,7 @@ public partial record MandateOptionsPayto
     /// <summary>
     /// Date, in YYYY-MM-DD format, after which payments will not be collected. Defaults to no end date.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("end_date")]
     public string? EndDate { get; init; }
 
@@ -29530,6 +30277,7 @@ public partial record MandateOptionsPayto
     /// <summary>
     /// Date, in YYYY-MM-DD format, from which payments will be collected. Defaults to confirmation time.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("start_date")]
     public string? StartDate { get; init; }
 
@@ -29552,6 +30300,7 @@ public partial record MandateOptionsUpi
     /// <summary>
     /// A description of the mandate or subscription that is meant to be displayed to the customer.
     /// </summary>
+    [StringLength(20)]
     [JsonPropertyName("description")]
     public string? Description { get; init; }
 
@@ -29622,6 +30371,7 @@ public partial record MandatePaymentMethodDetails
     /// <summary>
     /// This mandate corresponds with a specific payment method type. The `payment_method_details` includes an additional hash with the same name and contains mandate information that's specific to that payment method.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("type")]
     public required string Type { get; init; }
 
@@ -29638,12 +30388,14 @@ public partial record MandatePaypal
     /// <summary>
     /// The PayPal Billing Agreement ID (BAID). This is an ID generated by PayPal which represents the mandate between the merchant and the customer.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("billing_agreement_id")]
     public string? BillingAgreementId { get; init; }
 
     /// <summary>
     /// PayPal account PayerID. This identifier uniquely identifies the PayPal customer.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("payer_id")]
     public string? PayerId { get; init; }
 
@@ -29666,6 +30418,7 @@ public partial record MandatePayto
     /// <summary>
     /// Date, in YYYY-MM-DD format, after which payments will not be collected. Defaults to no end date.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("end_date")]
     public string? EndDate { get; init; }
 
@@ -29690,6 +30443,7 @@ public partial record MandatePayto
     /// <summary>
     /// Date, in YYYY-MM-DD format, from which payments will be collected. Defaults to confirmation time.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("start_date")]
     public string? StartDate { get; init; }
 
@@ -29712,6 +30466,7 @@ public partial record MandatePix
     /// <summary>
     /// Date when the mandate expires and no further payments will be charged, in `YYYY-MM-DD`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("end_date")]
     public string? EndDate { get; init; }
 
@@ -29724,12 +30479,14 @@ public partial record MandatePix
     /// <summary>
     /// Subscription name displayed to buyers in their bank app.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reference")]
     public string? Reference { get; init; }
 
     /// <summary>
     /// Start date of the mandate, in `YYYY-MM-DD`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("start_date")]
     public string? StartDate { get; init; }
 
@@ -29744,12 +30501,14 @@ public partial record MandateSepaDebit
     /// <summary>
     /// The unique reference of the mandate.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reference")]
     public required string Reference { get; init; }
 
     /// <summary>
     /// The URL of the mandate. This URL generally contains sensitive information about the customer and should be shared with them exclusively.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("url")]
     public required string Url { get; init; }
 
@@ -29792,6 +30551,7 @@ public partial record MandateUpi
     /// <summary>
     /// A description of the mandate or subscription that is meant to be displayed to the customer.
     /// </summary>
+    [StringLength(20)]
     [JsonPropertyName("description")]
     public string? Description { get; init; }
 
@@ -29824,6 +30584,7 @@ public partial record Networks
     /// <summary>
     /// The preferred network for co-branded cards. Can be `cartes_bancaires`, `mastercard`, `visa` or `invalid_preference` if requested network is not valid for the card.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("preferred")]
     public string? Preferred { get; init; }
 
@@ -29850,12 +30611,14 @@ public partial record NotificationEventRequest
     /// <summary>
     /// ID of the API request that caused the event. If null, the event was automatic (e.g., Stripe's automatic subscription handling). Request logs are available in the [dashboard](https://dashboard.stripe.com/logs), but currently not in the API.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public string? Id { get; init; }
 
     /// <summary>
     /// The idempotency key transmitted during the request, if any. *Note: This property is populated only for events on or after May 23, 2017*.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("idempotency_key")]
     public string? IdempotencyKey { get; init; }
 
@@ -29870,12 +30633,14 @@ public partial record OnlineAcceptance
     /// <summary>
     /// The customer accepts the mandate from this IP address.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("ip_address")]
     public string? IpAddress { get; init; }
 
     /// <summary>
     /// The customer accepts the mandate using the user agent of the browser.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("user_agent")]
     public string? UserAgent { get; init; }
 
@@ -29905,6 +30670,7 @@ public partial record OutboundPaymentsPaymentMethodDetailsFinancialAccount
     /// <summary>
     /// Token of the FinancialAccount.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -29933,18 +30699,21 @@ public partial record OutboundPaymentsPaymentMethodDetailsUsBankAccount
     /// <summary>
     /// Name of the bank associated with the bank account.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("bank_name")]
     public string? BankName { get; init; }
 
     /// <summary>
     /// Uniquely identifies this particular bank account. You can use this attribute to check whether two bank accounts are the same.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("fingerprint")]
     public string? Fingerprint { get; init; }
 
     /// <summary>
     /// Last four digits of the bank account number.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("last4")]
     public string? Last4 { get; init; }
 
@@ -29963,6 +30732,7 @@ public partial record OutboundPaymentsPaymentMethodDetailsUsBankAccount
     /// <summary>
     /// Routing number of the bank account.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("routing_number")]
     public string? RoutingNumber { get; init; }
 
@@ -29992,6 +30762,7 @@ public partial record OutboundTransfersPaymentMethodDetailsFinancialAccount
     /// <summary>
     /// Token of the FinancialAccount.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -30020,18 +30791,21 @@ public partial record OutboundTransfersPaymentMethodDetailsUsBankAccount
     /// <summary>
     /// Name of the bank associated with the bank account.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("bank_name")]
     public string? BankName { get; init; }
 
     /// <summary>
     /// Uniquely identifies this particular bank account. You can use this attribute to check whether two bank accounts are the same.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("fingerprint")]
     public string? Fingerprint { get; init; }
 
     /// <summary>
     /// Last four digits of the bank account number.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("last4")]
     public string? Last4 { get; init; }
 
@@ -30050,6 +30824,7 @@ public partial record OutboundTransfersPaymentMethodDetailsUsBankAccount
     /// <summary>
     /// Routing number of the bank account.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("routing_number")]
     public string? RoutingNumber { get; init; }
 
@@ -30136,6 +30911,7 @@ public partial record PaymentAttemptRecord
     /// <summary>
     /// ID of the Connect application that created the PaymentAttemptRecord.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("application")]
     public string? Application { get; init; }
 
@@ -30160,12 +30936,14 @@ public partial record PaymentAttemptRecord
     /// <summary>
     /// An arbitrary string attached to the object. Often useful for displaying to users.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("description")]
     public string? Description { get; init; }
 
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -30196,6 +30974,7 @@ public partial record PaymentAttemptRecord
     /// <summary>
     /// ID of the Payment Record this Payment Attempt Record belongs to.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("payment_record")]
     public string? PaymentRecord { get; init; }
 
@@ -30224,6 +31003,7 @@ public partial record PaymentData
     /// <summary>
     /// An arbitrary string attached to the destination payment. Often useful for displaying to users.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("description")]
     public string? Description { get; init; }
 
@@ -30293,6 +31073,7 @@ public partial record PaymentFlowsAmountDetailsResourceError
     /// <summary>
     /// A message providing more details about the error.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("message")]
     public string? Message { get; init; }
 
@@ -30337,12 +31118,14 @@ public partial record PaymentFlowsAmountDetailsResourceShipping
     /// <summary>
     /// If a physical good is being shipped, the postal code of where it is being shipped from. At most 10 alphanumeric characters long, hyphens and spaces are allowed.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("from_postal_code")]
     public string? FromPostalCode { get; init; }
 
     /// <summary>
     /// If a physical good is being shipped, the postal code of where it is being shipped to. At most 10 alphanumeric characters long, hyphens and spaces are allowed.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("to_postal_code")]
     public string? ToPostalCode { get; init; }
 
@@ -30413,6 +31196,7 @@ public partial record PaymentFlowsPaymentDetails
     /// 
     /// This field is truncated to 25 alphanumeric characters, excluding spaces, before being sent to card networks.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("customer_reference")]
     public string? CustomerReference { get; init; }
 
@@ -30421,6 +31205,7 @@ public partial record PaymentFlowsPaymentDetails
     /// 
     /// For Cards, this field is truncated to 25 alphanumeric characters, excluding spaces, before being sent to card networks. For Klarna, this field is truncated to 255 characters and is visible to customers when they view the order in the Klarna app.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("order_reference")]
     public string? OrderReference { get; init; }
 
@@ -30445,6 +31230,7 @@ public partial record PaymentFlowsPaymentIntentAsyncWorkflowsResourceInputsResou
     /// <summary>
     /// The [TaxCalculation](https://docs.stripe.com/api/tax/calculations) id
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("calculation")]
     public required string Calculation { get; init; }
 
@@ -30461,6 +31247,7 @@ public partial record PaymentFlowsPaymentIntentPresentmentDetails
     /// <summary>
     /// Currency presented to the customer during payment.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("presentment_currency")]
     public required string PresentmentCurrency { get; init; }
 
@@ -30528,6 +31315,7 @@ public partial record PaymentFlowsPrivatePaymentMethodsCardDetailsApiResourceMul
 
 public partial record PaymentFlowsPrivatePaymentMethodsCardPaymentIntentAmountDetailsLineItemPaymentMethodOptions
 {
+    [StringLength(5000)]
     [JsonPropertyName("commodity_code")]
     public string? CommodityCode { get; init; }
 
@@ -30535,6 +31323,7 @@ public partial record PaymentFlowsPrivatePaymentMethodsCardPaymentIntentAmountDe
 
 public partial record PaymentFlowsPrivatePaymentMethodsCardPresentAmountDetailsLineItemPaymentMethodOptions
 {
+    [StringLength(5000)]
     [JsonPropertyName("commodity_code")]
     public string? CommodityCode { get; init; }
 
@@ -30606,15 +31395,19 @@ public partial record PaymentFlowsPrivatePaymentMethodsKlarnaDob
 
 public partial record PaymentFlowsPrivatePaymentMethodsKlarnaPaymentIntentAmountDetailsLineItemPaymentMethodOptions
 {
+    [StringLength(2048)]
     [JsonPropertyName("image_url")]
     public string? ImageUrl { get; init; }
 
+    [StringLength(2048)]
     [JsonPropertyName("product_url")]
     public string? ProductUrl { get; init; }
 
+    [StringLength(255)]
     [JsonPropertyName("reference")]
     public string? Reference { get; init; }
 
+    [StringLength(2048)]
     [JsonPropertyName("subscription_reference")]
     public string? SubscriptionReference { get; init; }
 
@@ -30685,12 +31478,14 @@ public partial record PaymentFlowsPrivatePaymentMethodsPaypalAmountDetailsLineIt
     /// <summary>
     /// Description of the line item.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("description")]
     public string? Description { get; init; }
 
     /// <summary>
     /// The Stripe account ID of the connected account that sells the item. This is only needed when using [Separate Charges and Transfers](https://docs.stripe.com/connect/separate-charges-and-transfers).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("sold_by")]
     public string? SoldBy { get; init; }
 
@@ -30807,6 +31602,7 @@ public partial record PaymentIntent
     /// 
     /// Refer to our docs to [accept a payment](https://docs.stripe.com/payments/accept-a-payment?ui=elements) and learn about how `client_secret` should be handled.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("client_secret")]
     public string? ClientSecret { get; init; }
 
@@ -30845,12 +31641,14 @@ public partial record PaymentIntent
     /// 
     /// If [setup_future_usage](https://api.stripe.com#payment_intent_object-setup_future_usage) is set and this PaymentIntent's payment method is not `card_present`, then the payment method attaches to the Account after the PaymentIntent has been confirmed and any required actions from the user are complete. If the payment method is `card_present` and isn't a digital wallet, then a [generated_card](https://docs.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card) payment method representing the card is created and attached to the Account instead.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("customer_account")]
     public string? CustomerAccount { get; init; }
 
     /// <summary>
     /// An arbitrary string attached to the object. Often useful for displaying to users.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("description")]
     public string? Description { get; init; }
 
@@ -30866,6 +31664,7 @@ public partial record PaymentIntent
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -30957,6 +31756,7 @@ public partial record PaymentIntent
     /// <summary>
     /// Email address that the receipt for the resulting payment will be sent to. If `receipt_email` is specified for a payment in live mode, a receipt will be sent regardless of your [email settings](https://dashboard.stripe.com/account/emails).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("receipt_email")]
     public string? ReceiptEmail { get; init; }
 
@@ -30989,12 +31789,14 @@ public partial record PaymentIntent
     /// 
     /// Setting this value for a card charge returns an error. For card charges, set the [statement_descriptor_suffix](https://docs.stripe.com/get-started/account/statement-descriptors#dynamic) instead.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("statement_descriptor")]
     public string? StatementDescriptor { get; init; }
 
     /// <summary>
     /// Provides information about a card charge. Concatenated to the account's [statement descriptor prefix](https://docs.stripe.com/get-started/account/statement-descriptors#static) to form the complete statement descriptor that appears on the customer's statement.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("statement_descriptor_suffix")]
     public string? StatementDescriptorSuffix { get; init; }
 
@@ -31013,6 +31815,7 @@ public partial record PaymentIntent
     /// <summary>
     /// A string that identifies the resulting payment as part of a group. Learn more about the [use case for connected accounts](https://docs.stripe.com/connect/separate-charges-and-transfers).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("transfer_group")]
     public string? TransferGroup { get; init; }
 
@@ -31031,6 +31834,7 @@ public partial record PaymentIntentAmountDetailsLineItem
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -31049,6 +31853,7 @@ public partial record PaymentIntentAmountDetailsLineItem
     /// <summary>
     /// The product code of the line item, such as an SKU. Required for L3 rates. At most 12 characters long.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("product_code")]
     public string? ProductCode { get; init; }
 
@@ -31057,6 +31862,7 @@ public partial record PaymentIntentAmountDetailsLineItem
     /// 
     /// For Cards, this field is truncated to 26 alphanumeric characters before being sent to the card networks. For PayPal, this field is truncated to 127 characters.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("product_name")]
     public required string ProductName { get; init; }
 
@@ -31081,6 +31887,7 @@ public partial record PaymentIntentAmountDetailsLineItem
     /// <summary>
     /// A unit of measure for the line item, such as gallons, feet, meters, etc. Required for L3 rates. At most 12 alphanumeric characters long.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("unit_of_measure")]
     public string? UnitOfMeasure { get; init; }
 
@@ -31143,6 +31950,7 @@ public partial record PaymentIntentNextAction
     /// <summary>
     /// Type of the next action to perform. Refer to the other child attributes under `next_action` for available values. Examples include: `redirect_to_url`, `use_stripe_sdk`, `alipay_handle_redirect`, `oxxo_display_details`, or `verify_with_microdeposits`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("type")]
     public required string Type { get; init; }
 
@@ -31174,24 +31982,28 @@ public partial record PaymentIntentNextActionAlipayHandleRedirect
     /// <summary>
     /// The native data to be used with Alipay SDK you must redirect your customer to in order to authenticate the payment in an Android App.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("native_data")]
     public string? NativeData { get; init; }
 
     /// <summary>
     /// The native URL you must redirect your customer to in order to authenticate the payment in an iOS App.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("native_url")]
     public string? NativeUrl { get; init; }
 
     /// <summary>
     /// If the customer does not exit their browser while authenticating, they will be redirected to this specified URL after completion.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("return_url")]
     public string? ReturnUrl { get; init; }
 
     /// <summary>
     /// The URL you must redirect your customer to in order to authenticate the payment.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("url")]
     public string? Url { get; init; }
 
@@ -31212,18 +32024,21 @@ public partial record PaymentIntentNextActionBoleto
     /// <summary>
     /// The URL to the hosted boleto voucher page, which allows customers to view the boleto voucher.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("hosted_voucher_url")]
     public string? HostedVoucherUrl { get; init; }
 
     /// <summary>
     /// The boleto number.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("number")]
     public string? Number { get; init; }
 
     /// <summary>
     /// The URL to the downloadable boleto voucher PDF.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("pdf")]
     public string? Pdf { get; init; }
 
@@ -31250,12 +32065,14 @@ public partial record PaymentIntentNextActionCashappHandleRedirectOrDisplayQrCod
     /// <summary>
     /// The URL to the hosted Cash App Pay instructions page, which allows customers to view the QR code, and supports QR code refreshing on expiration.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("hosted_instructions_url")]
     public required string HostedInstructionsUrl { get; init; }
 
     /// <summary>
     /// The url for mobile redirect based auth
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("mobile_auth_url")]
     public required string MobileAuthUrl { get; init; }
 
@@ -31275,12 +32092,14 @@ public partial record PaymentIntentNextActionCashappQrCode
     /// <summary>
     /// The image_url_png string used to render QR code
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("image_url_png")]
     public required string ImageUrlPng { get; init; }
 
     /// <summary>
     /// The image_url_svg string used to render QR code
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("image_url_svg")]
     public required string ImageUrlSvg { get; init; }
 
@@ -31309,12 +32128,14 @@ public partial record PaymentIntentNextActionDisplayBankTransferInstructions
     /// <summary>
     /// A link to a hosted page that guides your customer through completing the transfer.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("hosted_instructions_url")]
     public string? HostedInstructionsUrl { get; init; }
 
     /// <summary>
     /// A string identifying this payment. Instruct your customer to include this code in the reference or memo field of their bank transfer.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reference")]
     public string? Reference { get; init; }
 
@@ -31331,6 +32152,7 @@ public partial record PaymentIntentNextActionDisplayMultibancoDetails
     /// <summary>
     /// Entity number associated with this Multibanco payment.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("entity")]
     public string? Entity { get; init; }
 
@@ -31343,12 +32165,14 @@ public partial record PaymentIntentNextActionDisplayMultibancoDetails
     /// <summary>
     /// The URL for the hosted Multibanco voucher page, which allows customers to view a Multibanco voucher.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("hosted_voucher_url")]
     public string? HostedVoucherUrl { get; init; }
 
     /// <summary>
     /// Reference number associated with this Multibanco payment.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reference")]
     public string? Reference { get; init; }
 
@@ -31365,12 +32189,14 @@ public partial record PaymentIntentNextActionDisplayOxxoDetails
     /// <summary>
     /// The URL for the hosted OXXO voucher page, which allows customers to view and print an OXXO voucher.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("hosted_voucher_url")]
     public string? HostedVoucherUrl { get; init; }
 
     /// <summary>
     /// OXXO reference number.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("number")]
     public string? Number { get; init; }
 
@@ -31381,6 +32207,7 @@ public partial record PaymentIntentNextActionKlarnaDisplayQrCode
     /// <summary>
     /// The data being used to generate QR code
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("data")]
     public required string Data { get; init; }
 
@@ -31393,12 +32220,14 @@ public partial record PaymentIntentNextActionKlarnaDisplayQrCode
     /// <summary>
     /// The image_url_png string used to render QR code
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("image_url_png")]
     public required string ImageUrlPng { get; init; }
 
     /// <summary>
     /// The image_url_svg string used to render QR code
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("image_url_svg")]
     public required string ImageUrlSvg { get; init; }
 
@@ -31415,6 +32244,7 @@ public partial record PaymentIntentNextActionKonbini
     /// <summary>
     /// The URL for the Konbini payment instructions page, which allows customers to view and print a Konbini voucher.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("hosted_voucher_url")]
     public string? HostedVoucherUrl { get; init; }
 
@@ -31428,12 +32258,14 @@ public partial record PaymentIntentNextActionKonbiniFamilymart
     /// <summary>
     /// The confirmation number.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("confirmation_number")]
     public string? ConfirmationNumber { get; init; }
 
     /// <summary>
     /// The payment code.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("payment_code")]
     public required string PaymentCode { get; init; }
 
@@ -31444,12 +32276,14 @@ public partial record PaymentIntentNextActionKonbiniLawson
     /// <summary>
     /// The confirmation number.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("confirmation_number")]
     public string? ConfirmationNumber { get; init; }
 
     /// <summary>
     /// The payment code.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("payment_code")]
     public required string PaymentCode { get; init; }
 
@@ -31460,12 +32294,14 @@ public partial record PaymentIntentNextActionKonbiniMinistop
     /// <summary>
     /// The confirmation number.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("confirmation_number")]
     public string? ConfirmationNumber { get; init; }
 
     /// <summary>
     /// The payment code.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("payment_code")]
     public required string PaymentCode { get; init; }
 
@@ -31476,12 +32312,14 @@ public partial record PaymentIntentNextActionKonbiniSeicomart
     /// <summary>
     /// The confirmation number.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("confirmation_number")]
     public string? ConfirmationNumber { get; init; }
 
     /// <summary>
     /// The payment code.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("payment_code")]
     public required string PaymentCode { get; init; }
 
@@ -31520,24 +32358,28 @@ public partial record PaymentIntentNextActionPaynowDisplayQrCode
     /// <summary>
     /// The raw data string used to generate QR code, it should be used together with QR code library.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("data")]
     public required string Data { get; init; }
 
     /// <summary>
     /// The URL to the hosted PayNow instructions page, which allows customers to view the PayNow QR code.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("hosted_instructions_url")]
     public string? HostedInstructionsUrl { get; init; }
 
     /// <summary>
     /// The image_url_png string used to render QR code
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("image_url_png")]
     public required string ImageUrlPng { get; init; }
 
     /// <summary>
     /// The image_url_svg string used to render QR code
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("image_url_svg")]
     public required string ImageUrlSvg { get; init; }
 
@@ -31548,6 +32390,7 @@ public partial record PaymentIntentNextActionPixDisplayQrCode
     /// <summary>
     /// The raw data string used to generate QR code, it should be used together with QR code library.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("data")]
     public string? Data { get; init; }
 
@@ -31560,18 +32403,21 @@ public partial record PaymentIntentNextActionPixDisplayQrCode
     /// <summary>
     /// The URL to the hosted pix instructions page, which allows customers to view the pix QR code.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("hosted_instructions_url")]
     public string? HostedInstructionsUrl { get; init; }
 
     /// <summary>
     /// The image_url_png string used to render png QR code
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("image_url_png")]
     public string? ImageUrlPng { get; init; }
 
     /// <summary>
     /// The image_url_svg string used to render svg QR code
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("image_url_svg")]
     public string? ImageUrlSvg { get; init; }
 
@@ -31582,24 +32428,28 @@ public partial record PaymentIntentNextActionPromptpayDisplayQrCode
     /// <summary>
     /// The raw data string used to generate QR code, it should be used together with QR code library.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("data")]
     public required string Data { get; init; }
 
     /// <summary>
     /// The URL to the hosted PromptPay instructions page, which allows customers to view the PromptPay QR code.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("hosted_instructions_url")]
     public required string HostedInstructionsUrl { get; init; }
 
     /// <summary>
     /// The PNG path used to render the QR code, can be used as the source in an HTML img tag
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("image_url_png")]
     public required string ImageUrlPng { get; init; }
 
     /// <summary>
     /// The SVG path used to render the QR code, can be used as the source in an HTML img tag
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("image_url_svg")]
     public required string ImageUrlSvg { get; init; }
 
@@ -31610,12 +32460,14 @@ public partial record PaymentIntentNextActionRedirectToUrl
     /// <summary>
     /// If the customer does not exit their browser while authenticating, they will be redirected to this specified URL after completion.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("return_url")]
     public string? ReturnUrl { get; init; }
 
     /// <summary>
     /// The URL you must redirect your customer to in order to authenticate the payment.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("url")]
     public string? Url { get; init; }
 
@@ -31626,6 +32478,7 @@ public partial record PaymentIntentNextActionSwishHandleRedirectOrDisplayQrCode
     /// <summary>
     /// The URL to the hosted Swish instructions page, which allows customers to view the QR code.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("hosted_instructions_url")]
     public required string HostedInstructionsUrl { get; init; }
 
@@ -31639,18 +32492,21 @@ public partial record PaymentIntentNextActionSwishQrCode
     /// <summary>
     /// The raw data string used to generate QR code, it should be used together with QR code library.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("data")]
     public required string Data { get; init; }
 
     /// <summary>
     /// The image_url_png string used to render QR code
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("image_url_png")]
     public required string ImageUrlPng { get; init; }
 
     /// <summary>
     /// The image_url_svg string used to render QR code
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("image_url_svg")]
     public required string ImageUrlSvg { get; init; }
 
@@ -31661,6 +32517,7 @@ public partial record PaymentIntentNextActionUpiHandleRedirectOrDisplayQrCode
     /// <summary>
     /// The URL to the hosted UPI instructions page, which allows customers to view the QR code.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("hosted_instructions_url")]
     public required string HostedInstructionsUrl { get; init; }
 
@@ -31680,12 +32537,14 @@ public partial record PaymentIntentNextActionUpiqrCode
     /// <summary>
     /// The image_url_png string used to render QR code
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("image_url_png")]
     public required string ImageUrlPng { get; init; }
 
     /// <summary>
     /// The image_url_svg string used to render QR code
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("image_url_svg")]
     public required string ImageUrlSvg { get; init; }
 
@@ -31702,6 +32561,7 @@ public partial record PaymentIntentNextActionVerifyWithMicrodeposits
     /// <summary>
     /// The URL for the hosted verification page, which allows customers to verify their bank account.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("hosted_verification_url")]
     public required string HostedVerificationUrl { get; init; }
 
@@ -31718,30 +32578,35 @@ public partial record PaymentIntentNextActionWechatPayDisplayQrCode
     /// <summary>
     /// The data being used to generate QR code
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("data")]
     public required string Data { get; init; }
 
     /// <summary>
     /// The URL to the hosted WeChat Pay instructions page, which allows customers to view the WeChat Pay QR code.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("hosted_instructions_url")]
     public required string HostedInstructionsUrl { get; init; }
 
     /// <summary>
     /// The base64 image data for a pre-generated QR code
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("image_data_url")]
     public required string ImageDataUrl { get; init; }
 
     /// <summary>
     /// The image_url_png string used to render QR code
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("image_url_png")]
     public required string ImageUrlPng { get; init; }
 
     /// <summary>
     /// The image_url_svg string used to render QR code
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("image_url_svg")]
     public required string ImageUrlSvg { get; init; }
 
@@ -31752,42 +32617,49 @@ public partial record PaymentIntentNextActionWechatPayRedirectToAndroidApp
     /// <summary>
     /// app_id is the APP ID registered on WeChat open platform
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("app_id")]
     public required string AppId { get; init; }
 
     /// <summary>
     /// nonce_str is a random string
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("nonce_str")]
     public required string NonceStr { get; init; }
 
     /// <summary>
     /// package is static value
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("package")]
     public required string Package { get; init; }
 
     /// <summary>
     /// an unique merchant ID assigned by WeChat Pay
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("partner_id")]
     public required string PartnerId { get; init; }
 
     /// <summary>
     /// an unique trading ID assigned by WeChat Pay
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("prepay_id")]
     public required string PrepayId { get; init; }
 
     /// <summary>
     /// A signature
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("sign")]
     public required string Sign { get; init; }
 
     /// <summary>
     /// Specifies the current time in epoch format
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("timestamp")]
     public required string Timestamp { get; init; }
 
@@ -31798,6 +32670,7 @@ public partial record PaymentIntentNextActionWechatPayRedirectToIosApp
     /// <summary>
     /// An universal link that redirect to WeChat Pay app
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("native_url")]
     public required string NativeUrl { get; init; }
 
@@ -31995,6 +32868,7 @@ public partial record PaymentIntentPaymentMethodOptionsAcssDebit
     /// <summary>
     /// Controls when Stripe will attempt to debit the funds from the customer's account. The date must be a string in YYYY-MM-DD format. The date must be in the future and between 3 and 15 calendar days from now.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("target_date")]
     public string? TargetDate { get; init; }
 
@@ -32023,6 +32897,7 @@ public partial record PaymentIntentPaymentMethodOptionsAuBecsDebit
     /// <summary>
     /// Controls when Stripe will attempt to debit the funds from the customer's account. The date must be a string in YYYY-MM-DD format. The date must be in the future and between 3 and 15 calendar days from now.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("target_date")]
     public string? TargetDate { get; init; }
 
@@ -32048,6 +32923,7 @@ public partial record PaymentIntentPaymentMethodOptionsBacsDebit
     /// <summary>
     /// Controls when Stripe will attempt to debit the funds from the customer's account. The date must be a string in YYYY-MM-DD format. The date must be in the future and between 3 and 15 calendar days from now.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("target_date")]
     public string? TargetDate { get; init; }
 
@@ -32148,12 +33024,14 @@ public partial record PaymentIntentPaymentMethodOptionsCard
     /// <summary>
     /// Provides information about a card payment that customers see on their statements. Concatenated with the Kana prefix (shortened Kana descriptor) or Kana statement descriptor that’s set on the account to form the complete statement descriptor. Maximum 22 characters. On card statements, the *concatenation* of both prefix and suffix (including separators) will appear truncated to 22 characters.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("statement_descriptor_suffix_kana")]
     public string? StatementDescriptorSuffixKana { get; init; }
 
     /// <summary>
     /// Provides information about a card payment that customers see on their statements. Concatenated with the Kanji prefix (shortened Kanji descriptor) or Kanji statement descriptor that’s set on the account to form the complete statement descriptor. Maximum 17 characters. On card statements, the *concatenation* of both prefix and suffix (including separators) will appear truncated to 17 characters.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("statement_descriptor_suffix_kanji")]
     public string? StatementDescriptorSuffixKanji { get; init; }
 
@@ -32202,12 +33080,14 @@ public partial record PaymentIntentPaymentMethodOptionsMandateOptionsAcssDebit
     /// <summary>
     /// A URL for custom mandate text
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("custom_mandate_url")]
     public string? CustomMandateUrl { get; init; }
 
     /// <summary>
     /// Description of the interval. Only required if the 'payment_schedule' parameter is 'interval' or 'combined'.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("interval_description")]
     public string? IntervalDescription { get; init; }
 
@@ -32230,6 +33110,7 @@ public partial record PaymentIntentPaymentMethodOptionsMandateOptionsBacsDebit
     /// <summary>
     /// Prefix used to generate the Mandate reference. Must be at most 12 characters long. Must consist of only uppercase letters, numbers, spaces, or the following special characters: '/', '_', '-', '&amp;', '.'. Cannot begin with 'DDIC' or 'STRIPE'.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reference_prefix")]
     public string? ReferencePrefix { get; init; }
 
@@ -32252,6 +33133,7 @@ public partial record PaymentIntentPaymentMethodOptionsMandateOptionsPayto
     /// <summary>
     /// Date, in YYYY-MM-DD format, after which payments will not be collected. Defaults to no end date.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("end_date")]
     public string? EndDate { get; init; }
 
@@ -32280,6 +33162,7 @@ public partial record PaymentIntentPaymentMethodOptionsMandateOptionsSepaDebit
     /// <summary>
     /// Prefix used to generate the Mandate reference. Must be at most 12 characters long. Must consist of only uppercase letters, numbers, spaces, or the following special characters: '/', '_', '-', '&amp;', '.'. Cannot begin with 'STRIPE'.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reference_prefix")]
     public string? ReferencePrefix { get; init; }
 
@@ -32324,6 +33207,7 @@ public partial record PaymentIntentPaymentMethodOptionsNzBankAccount
     /// <summary>
     /// Controls when Stripe will attempt to debit the funds from the customer's account. The date must be a string in YYYY-MM-DD format. The date must be in the future and between 3 and 15 calendar days from now.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("target_date")]
     public string? TargetDate { get; init; }
 
@@ -32368,6 +33252,7 @@ public partial record PaymentIntentPaymentMethodOptionsSepaDebit
     /// <summary>
     /// Controls when Stripe will attempt to debit the funds from the customer's account. The date must be a string in YYYY-MM-DD format. The date must be in the future and between 3 and 15 calendar days from now.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("target_date")]
     public string? TargetDate { get; init; }
 
@@ -32378,6 +33263,7 @@ public partial record PaymentIntentPaymentMethodOptionsSwish
     /// <summary>
     /// A reference for this payment to be displayed in the Swish app.
     /// </summary>
+    [StringLength(35)]
     [JsonPropertyName("reference")]
     public string? Reference { get; init; }
 
@@ -32418,6 +33304,7 @@ public partial record PaymentIntentPaymentMethodOptionsUsBankAccount
     /// <summary>
     /// Controls when Stripe will attempt to debit the funds from the customer's account. The date must be a string in YYYY-MM-DD format. The date must be in the future and between 3 and 15 calendar days from now.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("target_date")]
     public string? TargetDate { get; init; }
 
@@ -32594,12 +33481,14 @@ public partial record PaymentLink
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
     /// <summary>
     /// The custom message to be displayed to a customer when a payment link is no longer active.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("inactive_message")]
     public string? InactiveMessage { get; init; }
 
@@ -32723,6 +33612,7 @@ public partial record PaymentLink
     /// <summary>
     /// The public URL that can be shared with customers.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("url")]
     public required string Url { get; init; }
 
@@ -32817,6 +33707,7 @@ public partial record PaymentLinksResourceCompletionBehaviorConfirmationPage
     /// <summary>
     /// The custom message that is displayed to the customer after the purchase is complete.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("custom_message")]
     public string? CustomMessage { get; init; }
 
@@ -32827,6 +33718,7 @@ public partial record PaymentLinksResourceCompletionBehaviorRedirect
     /// <summary>
     /// The URL the customer will be redirected to after the purchase is complete.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("url")]
     public required string Url { get; init; }
 
@@ -32862,6 +33754,7 @@ public partial record PaymentLinksResourceCustomFields
     /// <summary>
     /// String of your choice that your integration can use to reconcile this field. Must be unique to this field, alphanumeric, and up to 200 characters.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("key")]
     public required string Key { get; init; }
 
@@ -32893,6 +33786,7 @@ public partial record PaymentLinksResourceCustomFieldsDropdown
     /// <summary>
     /// The value that pre-fills on the payment page.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("default_value")]
     public string? DefaultValue { get; init; }
 
@@ -32909,12 +33803,14 @@ public partial record PaymentLinksResourceCustomFieldsDropdownOption
     /// <summary>
     /// The label for the option, displayed to the customer. Up to 100 characters.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("label")]
     public required string Label { get; init; }
 
     /// <summary>
     /// The value for this option, not displayed to the customer, used by your integration to reconcile the option selected by the customer. Must be unique to this option, alphanumeric, and up to 100 characters.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("value")]
     public required string Value { get; init; }
 
@@ -32925,6 +33821,7 @@ public partial record PaymentLinksResourceCustomFieldsLabel
     /// <summary>
     /// Custom text for the label, displayed to the customer. Up to 50 characters.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("custom")]
     public string? Custom { get; init; }
 
@@ -32941,6 +33838,7 @@ public partial record PaymentLinksResourceCustomFieldsNumeric
     /// <summary>
     /// The value that pre-fills the field on the payment page.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("default_value")]
     public string? DefaultValue { get; init; }
 
@@ -32963,6 +33861,7 @@ public partial record PaymentLinksResourceCustomFieldsText
     /// <summary>
     /// The value that pre-fills the field on the payment page.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("default_value")]
     public string? DefaultValue { get; init; }
 
@@ -33013,6 +33912,7 @@ public partial record PaymentLinksResourceCustomTextPosition
     /// <summary>
     /// Text can be up to 1200 characters in length.
     /// </summary>
+    [StringLength(1200)]
     [JsonPropertyName("message")]
     public required string Message { get; init; }
 
@@ -33067,12 +33967,14 @@ public partial record PaymentLinksResourceInvoiceSettings
     /// <summary>
     /// An arbitrary string attached to the object. Often useful for displaying to users.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("description")]
     public string? Description { get; init; }
 
     /// <summary>
     /// Footer to be displayed on the invoice.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("footer")]
     public string? Footer { get; init; }
 
@@ -33111,6 +34013,7 @@ public partial record PaymentLinksResourceOptionalItem
     [JsonPropertyName("adjustable_quantity")]
     public PaymentLinksResourceOptionalItemAdjustableQuantity? AdjustableQuantity { get; init; }
 
+    [StringLength(5000)]
     [JsonPropertyName("price")]
     public required string Price { get; init; }
 
@@ -33152,6 +34055,7 @@ public partial record PaymentLinksResourcePaymentIntentData
     /// <summary>
     /// An arbitrary string attached to the object. Often useful for displaying to users.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("description")]
     public string? Description { get; init; }
 
@@ -33170,18 +34074,21 @@ public partial record PaymentLinksResourcePaymentIntentData
     /// <summary>
     /// For a non-card payment, information about the charge that appears on the customer's statement when this payment succeeds in creating a charge.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("statement_descriptor")]
     public string? StatementDescriptor { get; init; }
 
     /// <summary>
     /// For a card payment, information about the charge that appears on the customer's statement when this payment succeeds in creating a charge. Concatenated with the account's statement descriptor prefix to form the complete statement descriptor.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("statement_descriptor_suffix")]
     public string? StatementDescriptorSuffix { get; init; }
 
     /// <summary>
     /// A string that identifies the resulting payment as part of a group. See the PaymentIntents [use case for connected accounts](https://docs.stripe.com/connect/separate-charges-and-transfers) for details.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("transfer_group")]
     public string? TransferGroup { get; init; }
 
@@ -33257,6 +34164,7 @@ public partial record PaymentLinksResourceSubscriptionData
     /// <summary>
     /// The subscription's description, meant to be displayable to the customer. Use this field to optionally store an explanation of the subscription for rendering in Stripe surfaces and certain local payment methods UIs.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("description")]
     public string? Description { get; init; }
 
@@ -33403,6 +34311,7 @@ public partial record PaymentMethod
     [JsonPropertyName("customer")]
     public object? Customer { get; init; }
 
+    [StringLength(5000)]
     [JsonPropertyName("customer_account")]
     public string? CustomerAccount { get; init; }
 
@@ -33424,6 +34333,7 @@ public partial record PaymentMethod
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -33566,30 +34476,35 @@ public partial record PaymentMethodAcssDebit
     /// <summary>
     /// Name of the bank associated with the bank account.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("bank_name")]
     public string? BankName { get; init; }
 
     /// <summary>
     /// Uniquely identifies this particular bank account. You can use this attribute to check whether two bank accounts are the same.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("fingerprint")]
     public string? Fingerprint { get; init; }
 
     /// <summary>
     /// Institution number of the bank account.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("institution_number")]
     public string? InstitutionNumber { get; init; }
 
     /// <summary>
     /// Last four digits of the bank account number.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("last4")]
     public string? Last4 { get; init; }
 
     /// <summary>
     /// Transit number of the bank account.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("transit_number")]
     public string? TransitNumber { get; init; }
 
@@ -33616,18 +34531,21 @@ public partial record PaymentMethodAuBecsDebit
     /// <summary>
     /// Six-digit number identifying bank and branch associated with this bank account.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("bsb_number")]
     public string? BsbNumber { get; init; }
 
     /// <summary>
     /// Uniquely identifies this particular bank account. You can use this attribute to check whether two bank accounts are the same.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("fingerprint")]
     public string? Fingerprint { get; init; }
 
     /// <summary>
     /// Last four digits of the bank account number.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("last4")]
     public string? Last4 { get; init; }
 
@@ -33638,18 +34556,21 @@ public partial record PaymentMethodBacsDebit
     /// <summary>
     /// Uniquely identifies this particular bank account. You can use this attribute to check whether two bank accounts are the same.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("fingerprint")]
     public string? Fingerprint { get; init; }
 
     /// <summary>
     /// Last four digits of the bank account number.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("last4")]
     public string? Last4 { get; init; }
 
     /// <summary>
     /// Sort code of the bank account. (e.g., `10-20-30`)
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("sort_code")]
     public string? SortCode { get; init; }
 
@@ -33668,6 +34589,7 @@ public partial record PaymentMethodBizum
     /// <summary>
     /// A unique identifier for the buyer as determined by the local payment processor.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("buyer_id")]
     public string? BuyerId { get; init; }
 
@@ -33678,6 +34600,7 @@ public partial record PaymentMethodBlik
     /// <summary>
     /// A unique and immutable identifier assigned by BLIK to every buyer.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("buyer_id")]
     public string? BuyerId { get; init; }
 
@@ -33688,6 +34611,7 @@ public partial record PaymentMethodBoleto
     /// <summary>
     /// Uniquely identifies the customer tax id (CNPJ or CPF)
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("tax_id")]
     public required string TaxId { get; init; }
 
@@ -33698,6 +34622,7 @@ public partial record PaymentMethodCard
     /// <summary>
     /// Card brand. Can be `amex`, `cartes_bancaires`, `diners`, `discover`, `eftpos_au`, `jcb`, `link`, `mastercard`, `unionpay`, `visa` or `unknown`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("brand")]
     public required string Brand { get; init; }
 
@@ -33710,12 +34635,14 @@ public partial record PaymentMethodCard
     /// <summary>
     /// Two-letter ISO code representing the country of the card. You could use this attribute to get a sense of the international breakdown of cards you've collected.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("country")]
     public string? Country { get; init; }
 
     /// <summary>
     /// The brand to use when displaying the card, this accounts for customer's brand choice on dual-branded cards. Can be `american_express`, `cartes_bancaires`, `diners_club`, `discover`, `eftpos_australia`, `interac`, `jcb`, `mastercard`, `union_pay`, `visa`, or `other` and may contain more values in the future.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("display_brand")]
     public string? DisplayBrand { get; init; }
 
@@ -33736,12 +34663,14 @@ public partial record PaymentMethodCard
     /// 
     /// *As of May 1, 2021, card fingerprint in India for Connect changed to allow two fingerprints for the same card---one for India and one for the rest of the world.*
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("fingerprint")]
     public string? Fingerprint { get; init; }
 
     /// <summary>
     /// Card funding type. Can be `credit`, `debit`, `prepaid`, or `unknown`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("funding")]
     public required string Funding { get; init; }
 
@@ -33754,6 +34683,7 @@ public partial record PaymentMethodCard
     /// <summary>
     /// The last four digits of the card.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("last4")]
     public required string Last4 { get; init; }
 
@@ -33788,18 +34718,21 @@ public partial record PaymentMethodCardChecks
     /// <summary>
     /// If a address line1 was provided, results of the check, one of `pass`, `fail`, `unavailable`, or `unchecked`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("address_line1_check")]
     public string? AddressLine1Check { get; init; }
 
     /// <summary>
     /// If a address postal code was provided, results of the check, one of `pass`, `fail`, `unavailable`, or `unchecked`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("address_postal_code_check")]
     public string? AddressPostalCodeCheck { get; init; }
 
     /// <summary>
     /// If a CVC was provided, results of the check, one of `pass`, `fail`, `unavailable`, or `unchecked`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("cvc_check")]
     public string? CvcCheck { get; init; }
 
@@ -33810,6 +34743,7 @@ public partial record PaymentMethodCardGeneratedCard
     /// <summary>
     /// The charge that created this object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("charge")]
     public string? Charge { get; init; }
 
@@ -33832,30 +34766,35 @@ public partial record PaymentMethodCardPresent
     /// <summary>
     /// Card brand. Can be `amex`, `cartes_bancaires`, `diners`, `discover`, `eftpos_au`, `jcb`, `link`, `mastercard`, `unionpay`, `visa` or `unknown`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("brand")]
     public string? Brand { get; init; }
 
     /// <summary>
     /// The [product code](https://stripe.com/docs/card-product-codes) that identifies the specific program or product associated with a card.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("brand_product")]
     public string? BrandProduct { get; init; }
 
     /// <summary>
     /// The cardholder name as read from the card, in [ISO 7813](https://en.wikipedia.org/wiki/ISO/IEC_7813) format. May include alphanumeric characters, special characters and first/last name separator (`/`). In some cases, the cardholder name may not be available depending on how the issuer has configured the card. Cardholder name is typically not available on swipe or contactless payments, such as those made with Apple Pay and Google Pay.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("cardholder_name")]
     public string? CardholderName { get; init; }
 
     /// <summary>
     /// Two-letter ISO code representing the country of the card. You could use this attribute to get a sense of the international breakdown of cards you've collected.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("country")]
     public string? Country { get; init; }
 
     /// <summary>
     /// A high-level description of the type of cards issued in this range.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("description")]
     public string? Description { get; init; }
 
@@ -33876,24 +34815,28 @@ public partial record PaymentMethodCardPresent
     /// 
     /// *As of May 1, 2021, card fingerprint in India for Connect changed to allow two fingerprints for the same card---one for India and one for the rest of the world.*
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("fingerprint")]
     public string? Fingerprint { get; init; }
 
     /// <summary>
     /// Card funding type. Can be `credit`, `debit`, `prepaid`, or `unknown`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("funding")]
     public string? Funding { get; init; }
 
     /// <summary>
     /// The name of the card's issuing bank.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("issuer")]
     public string? Issuer { get; init; }
 
     /// <summary>
     /// The last four digits of the card.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("last4")]
     public string? Last4 { get; init; }
 
@@ -33937,6 +34880,7 @@ public partial record PaymentMethodCardPresentNetworks
     /// <summary>
     /// The preferred network for the card.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("preferred")]
     public string? Preferred { get; init; }
 
@@ -33953,6 +34897,7 @@ public partial record PaymentMethodCardWallet
     /// <summary>
     /// (For tokenized numbers only.) The last four digits of the device account number.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("dynamic_last4")]
     public string? DynamicLast4 { get; init; }
 
@@ -34006,12 +34951,14 @@ public partial record PaymentMethodCardWalletMasterpass
     /// <summary>
     /// Owner's verified email. Values are verified or provided by the wallet directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("email")]
     public string? Email { get; init; }
 
     /// <summary>
     /// Owner's verified full name. Values are verified or provided by the wallet directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("name")]
     public string? Name { get; init; }
 
@@ -34038,12 +34985,14 @@ public partial record PaymentMethodCardWalletVisaCheckout
     /// <summary>
     /// Owner's verified email. Values are verified or provided by the wallet directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("email")]
     public string? Email { get; init; }
 
     /// <summary>
     /// Owner's verified full name. Values are verified or provided by the wallet directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("name")]
     public string? Name { get; init; }
 
@@ -34060,12 +35009,14 @@ public partial record PaymentMethodCashapp
     /// <summary>
     /// A unique and immutable identifier assigned by Cash App to every buyer.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("buyer_id")]
     public string? BuyerId { get; init; }
 
     /// <summary>
     /// A public identifier for buyers using Cash App.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("cashtag")]
     public string? Cashtag { get; init; }
 
@@ -34076,12 +35027,14 @@ public partial record PaymentMethodConfigBizPaymentMethodConfigurationDetails
     /// <summary>
     /// ID of the payment method configuration used.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
     /// <summary>
     /// ID of the parent payment method configuration used.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("parent")]
     public string? Parent { get; init; }
 
@@ -34170,6 +35123,7 @@ public partial record PaymentMethodConfiguration
     /// <summary>
     /// For child configs, the Connect application associated with the configuration.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("application")]
     public string? Application { get; init; }
 
@@ -34227,6 +35181,7 @@ public partial record PaymentMethodConfiguration
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -34275,6 +35230,7 @@ public partial record PaymentMethodConfiguration
     /// <summary>
     /// The configuration's name.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("name")]
     public required string Name { get; init; }
 
@@ -34299,6 +35255,7 @@ public partial record PaymentMethodConfiguration
     /// <summary>
     /// For child configs, the configuration's parent configuration.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("parent")]
     public string? Parent { get; init; }
 
@@ -34373,6 +35330,7 @@ public partial record PaymentMethodCustom
     /// <summary>
     /// Display name of the Dashboard-only CustomPaymentMethodType.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("display_name")]
     public string? DisplayName { get; init; }
 
@@ -34385,6 +35343,7 @@ public partial record PaymentMethodCustom
     /// <summary>
     /// ID of the Dashboard-only CustomPaymentMethodType. Not expandable.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("type")]
     public required string Type { get; init; }
 
@@ -34566,6 +35525,7 @@ public partial record PaymentMethodDetails
     /// An additional hash is included on `payment_method_details` with a name matching this value.
     /// It contains information specific to the payment method.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("type")]
     public required string Type { get; init; }
 
@@ -34591,24 +35551,28 @@ public partial record PaymentMethodDetailsAchCreditTransfer
     /// <summary>
     /// Account number to transfer funds to.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("account_number")]
     public string? AccountNumber { get; init; }
 
     /// <summary>
     /// Name of the bank associated with the routing number.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("bank_name")]
     public string? BankName { get; init; }
 
     /// <summary>
     /// Routing transit number for the bank account to transfer funds to.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("routing_number")]
     public string? RoutingNumber { get; init; }
 
     /// <summary>
     /// SWIFT code of the bank associated with the routing number.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("swift_code")]
     public string? SwiftCode { get; init; }
 
@@ -34625,30 +35589,35 @@ public partial record PaymentMethodDetailsAchDebit
     /// <summary>
     /// Name of the bank associated with the bank account.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("bank_name")]
     public string? BankName { get; init; }
 
     /// <summary>
     /// Two-letter ISO code representing the country the bank account is located in.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("country")]
     public string? Country { get; init; }
 
     /// <summary>
     /// Uniquely identifies this particular bank account. You can use this attribute to check whether two bank accounts are the same.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("fingerprint")]
     public string? Fingerprint { get; init; }
 
     /// <summary>
     /// Last four digits of the bank account number.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("last4")]
     public string? Last4 { get; init; }
 
     /// <summary>
     /// Routing transit number of the bank account.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("routing_number")]
     public string? RoutingNumber { get; init; }
 
@@ -34659,42 +35628,49 @@ public partial record PaymentMethodDetailsAcssDebit
     /// <summary>
     /// Name of the bank associated with the bank account.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("bank_name")]
     public string? BankName { get; init; }
 
     /// <summary>
     /// Estimated date to debit the customer's bank account. A date string in YYYY-MM-DD format.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("expected_debit_date")]
     public string? ExpectedDebitDate { get; init; }
 
     /// <summary>
     /// Uniquely identifies this particular bank account. You can use this attribute to check whether two bank accounts are the same.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("fingerprint")]
     public string? Fingerprint { get; init; }
 
     /// <summary>
     /// Institution number of the bank account
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("institution_number")]
     public string? InstitutionNumber { get; init; }
 
     /// <summary>
     /// Last four digits of the bank account number.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("last4")]
     public string? Last4 { get; init; }
 
     /// <summary>
     /// ID of the mandate used to make this payment.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("mandate")]
     public string? Mandate { get; init; }
 
     /// <summary>
     /// Transit number of the bank account.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("transit_number")]
     public string? TransitNumber { get; init; }
 
@@ -34705,18 +35681,21 @@ public partial record PaymentMethodDetailsAffirm
     /// <summary>
     /// ID of the location that this reader is assigned to.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("location")]
     public string? Location { get; init; }
 
     /// <summary>
     /// ID of the reader this transaction was made on.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reader")]
     public string? Reader { get; init; }
 
     /// <summary>
     /// The Affirm transaction ID associated with this payment.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("transaction_id")]
     public string? TransactionId { get; init; }
 
@@ -34727,12 +35706,14 @@ public partial record PaymentMethodDetailsAfterpayClearpay
     /// <summary>
     /// The Afterpay order ID associated with this payment intent.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("order_id")]
     public string? OrderId { get; init; }
 
     /// <summary>
     /// Order identifier shown to the merchant in Afterpay's online portal.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reference")]
     public string? Reference { get; init; }
 
@@ -34743,18 +35724,21 @@ public partial record PaymentMethodDetailsAlipay
     /// <summary>
     /// Uniquely identifies this particular Alipay account. You can use this attribute to check whether two Alipay accounts are the same.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("buyer_id")]
     public string? BuyerId { get; init; }
 
     /// <summary>
     /// Uniquely identifies this particular Alipay account. You can use this attribute to check whether two Alipay accounts are the same.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("fingerprint")]
     public string? Fingerprint { get; init; }
 
     /// <summary>
     /// Transaction ID of this particular Alipay transaction.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("transaction_id")]
     public string? TransactionId { get; init; }
 
@@ -34768,6 +35752,7 @@ public partial record PaymentMethodDetailsAlma
     /// <summary>
     /// The Alma transaction ID associated with this payment.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("transaction_id")]
     public string? TransactionId { get; init; }
 
@@ -34781,6 +35766,7 @@ public partial record PaymentMethodDetailsAmazonPay
     /// <summary>
     /// The Amazon Pay transaction ID associated with this payment.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("transaction_id")]
     public string? TransactionId { get; init; }
 
@@ -34791,30 +35777,35 @@ public partial record PaymentMethodDetailsAuBecsDebit
     /// <summary>
     /// Bank-State-Branch number of the bank account.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("bsb_number")]
     public string? BsbNumber { get; init; }
 
     /// <summary>
     /// Estimated date to debit the customer's bank account. A date string in YYYY-MM-DD format.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("expected_debit_date")]
     public string? ExpectedDebitDate { get; init; }
 
     /// <summary>
     /// Uniquely identifies this particular bank account. You can use this attribute to check whether two bank accounts are the same.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("fingerprint")]
     public string? Fingerprint { get; init; }
 
     /// <summary>
     /// Last four digits of the bank account number.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("last4")]
     public string? Last4 { get; init; }
 
     /// <summary>
     /// ID of the mandate used to make this payment.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("mandate")]
     public string? Mandate { get; init; }
 
@@ -34825,30 +35816,35 @@ public partial record PaymentMethodDetailsBacsDebit
     /// <summary>
     /// Estimated date to debit the customer's bank account. A date string in YYYY-MM-DD format.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("expected_debit_date")]
     public string? ExpectedDebitDate { get; init; }
 
     /// <summary>
     /// Uniquely identifies this particular bank account. You can use this attribute to check whether two bank accounts are the same.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("fingerprint")]
     public string? Fingerprint { get; init; }
 
     /// <summary>
     /// Last four digits of the bank account number.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("last4")]
     public string? Last4 { get; init; }
 
     /// <summary>
     /// ID of the mandate used to make this payment.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("mandate")]
     public string? Mandate { get; init; }
 
     /// <summary>
     /// Sort code of the bank account. (e.g., `10-20-30`)
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("sort_code")]
     public string? SortCode { get; init; }
 
@@ -34859,18 +35855,21 @@ public partial record PaymentMethodDetailsBancontact
     /// <summary>
     /// Bank code of bank associated with the bank account.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("bank_code")]
     public string? BankCode { get; init; }
 
     /// <summary>
     /// Name of the bank associated with the bank account.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("bank_name")]
     public string? BankName { get; init; }
 
     /// <summary>
     /// Bank Identifier Code of the bank associated with the bank account.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("bic")]
     public string? Bic { get; init; }
 
@@ -34889,6 +35888,7 @@ public partial record PaymentMethodDetailsBancontact
     /// <summary>
     /// Last four characters of the IBAN.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("iban_last4")]
     public string? IbanLast4 { get; init; }
 
@@ -34903,6 +35903,7 @@ public partial record PaymentMethodDetailsBancontact
     /// Owner's verified full name. Values are verified or provided by Bancontact directly
     /// (if supported) at the time of authorization or settlement. They cannot be set or mutated.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("verified_name")]
     public string? VerifiedName { get; init; }
 
@@ -34913,6 +35914,7 @@ public partial record PaymentMethodDetailsBillie
     /// <summary>
     /// The Billie transaction ID associated with this payment.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("transaction_id")]
     public string? TransactionId { get; init; }
 
@@ -34923,12 +35925,14 @@ public partial record PaymentMethodDetailsBizum
     /// <summary>
     /// A unique identifier for the buyer as determined by the local payment processor.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("buyer_id")]
     public string? BuyerId { get; init; }
 
     /// <summary>
     /// The Bizum transaction ID associated with this payment.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("transaction_id")]
     public string? TransactionId { get; init; }
 
@@ -34939,6 +35943,7 @@ public partial record PaymentMethodDetailsBlik
     /// <summary>
     /// A unique and immutable identifier assigned by BLIK to every buyer.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("buyer_id")]
     public string? BuyerId { get; init; }
 
@@ -34949,6 +35954,7 @@ public partial record PaymentMethodDetailsBoleto
     /// <summary>
     /// The tax ID of the customer (CPF for individuals consumers or CNPJ for businesses consumers)
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("tax_id")]
     public required string TaxId { get; init; }
 
@@ -34965,12 +35971,14 @@ public partial record PaymentMethodDetailsCard
     /// <summary>
     /// Authorization code on the charge.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("authorization_code")]
     public string? AuthorizationCode { get; init; }
 
     /// <summary>
     /// Card brand. Can be `amex`, `cartes_bancaires`, `diners`, `discover`, `eftpos_au`, `jcb`, `link`, `mastercard`, `unionpay`, `visa` or `unknown`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("brand")]
     public string? Brand { get; init; }
 
@@ -34989,6 +35997,7 @@ public partial record PaymentMethodDetailsCard
     /// <summary>
     /// Two-letter ISO code representing the country of the card. You could use this attribute to get a sense of the international breakdown of cards you've collected.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("country")]
     public string? Country { get; init; }
 
@@ -35012,12 +36021,14 @@ public partial record PaymentMethodDetailsCard
     /// 
     /// *As of May 1, 2021, card fingerprint in India for Connect changed to allow two fingerprints for the same card---one for India and one for the rest of the world.*
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("fingerprint")]
     public string? Fingerprint { get; init; }
 
     /// <summary>
     /// Card funding type. Can be `credit`, `debit`, `prepaid`, or `unknown`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("funding")]
     public string? Funding { get; init; }
 
@@ -35035,12 +36046,14 @@ public partial record PaymentMethodDetailsCard
     /// <summary>
     /// The last four digits of the card.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("last4")]
     public string? Last4 { get; init; }
 
     /// <summary>
     /// ID of the mandate used to make this payment or created by it.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("mandate")]
     public string? Mandate { get; init; }
 
@@ -35050,6 +36063,7 @@ public partial record PaymentMethodDetailsCard
     /// <summary>
     /// Identifies which network this charge was processed on. Can be `amex`, `cartes_bancaires`, `diners`, `discover`, `eftpos_au`, `interac`, `jcb`, `link`, `mastercard`, `unionpay`, `visa`, or `unknown`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("network")]
     public string? Network { get; init; }
 
@@ -35062,6 +36076,7 @@ public partial record PaymentMethodDetailsCard
     /// <summary>
     /// This is used by the financial networks to identify a transaction. Visa calls this the Transaction ID, Mastercard calls this the Trace ID, and American Express calls this the Acquirer Reference Data. This value will be present if it is returned by the financial network in the authorization response, and null otherwise.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("network_transaction_id")]
     public string? NetworkTransactionId { get; init; }
 
@@ -35083,6 +36098,7 @@ public partial record PaymentMethodDetailsCard
     /// <summary>
     /// Transaction Link ID (TLID) is a unique identifier for a transaction. This is used by some card networks, such as Mastercard, for transaction linking, in addition to Network Transaction IDs. This value will be present if it is returned by the financial network in the authorization response, and null otherwise.
     /// </summary>
+    [StringLength(22)]
     [JsonPropertyName("transaction_link_id")]
     public string? TransactionLinkId { get; init; }
 
@@ -35099,18 +36115,21 @@ public partial record PaymentMethodDetailsCardChecks
     /// <summary>
     /// If a address line1 was provided, results of the check, one of `pass`, `fail`, `unavailable`, or `unchecked`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("address_line1_check")]
     public string? AddressLine1Check { get; init; }
 
     /// <summary>
     /// If a address postal code was provided, results of the check, one of `pass`, `fail`, `unavailable`, or `unchecked`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("address_postal_code_check")]
     public string? AddressPostalCodeCheck { get; init; }
 
     /// <summary>
     /// If a CVC was provided, results of the check, one of `pass`, `fail`, `unavailable`, or `unchecked`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("cvc_check")]
     public string? CvcCheck { get; init; }
 
@@ -35170,12 +36189,14 @@ public partial record PaymentMethodDetailsCardPresent
     /// <summary>
     /// Card brand. Can be `amex`, `cartes_bancaires`, `diners`, `discover`, `eftpos_au`, `jcb`, `link`, `mastercard`, `unionpay`, `visa` or `unknown`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("brand")]
     public string? Brand { get; init; }
 
     /// <summary>
     /// The [product code](https://stripe.com/docs/card-product-codes) that identifies the specific program or product associated with a card.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("brand_product")]
     public string? BrandProduct { get; init; }
 
@@ -35188,24 +36209,28 @@ public partial record PaymentMethodDetailsCardPresent
     /// <summary>
     /// The cardholder name as read from the card, in [ISO 7813](https://en.wikipedia.org/wiki/ISO/IEC_7813) format. May include alphanumeric characters, special characters and first/last name separator (`/`). In some cases, the cardholder name may not be available depending on how the issuer has configured the card. Cardholder name is typically not available on swipe or contactless payments, such as those made with Apple Pay and Google Pay.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("cardholder_name")]
     public string? CardholderName { get; init; }
 
     /// <summary>
     /// Two-letter ISO code representing the country of the card. You could use this attribute to get a sense of the international breakdown of cards you've collected.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("country")]
     public string? Country { get; init; }
 
     /// <summary>
     /// A high-level description of the type of cards issued in this range.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("description")]
     public string? Description { get; init; }
 
     /// <summary>
     /// Authorization response cryptogram.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("emv_auth_data")]
     public string? EmvAuthData { get; init; }
 
@@ -35226,18 +36251,21 @@ public partial record PaymentMethodDetailsCardPresent
     /// 
     /// *As of May 1, 2021, card fingerprint in India for Connect changed to allow two fingerprints for the same card---one for India and one for the rest of the world.*
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("fingerprint")]
     public string? Fingerprint { get; init; }
 
     /// <summary>
     /// Card funding type. Can be `credit`, `debit`, `prepaid`, or `unknown`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("funding")]
     public string? Funding { get; init; }
 
     /// <summary>
     /// ID of a card PaymentMethod generated from the card_present PaymentMethod that may be attached to a Customer for future transactions. Only present if it was possible to generate a card PaymentMethod.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("generated_card")]
     public string? GeneratedCard { get; init; }
 
@@ -35250,30 +36278,35 @@ public partial record PaymentMethodDetailsCardPresent
     /// <summary>
     /// The name of the card's issuing bank.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("issuer")]
     public string? Issuer { get; init; }
 
     /// <summary>
     /// The last four digits of the card.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("last4")]
     public string? Last4 { get; init; }
 
     /// <summary>
     /// ID of the [location](https://docs.stripe.com/api/terminal/locations) that this transaction's reader is assigned to.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("location")]
     public string? Location { get; init; }
 
     /// <summary>
     /// Identifies which network this charge was processed on. Can be `amex`, `cartes_bancaires`, `diners`, `discover`, `eftpos_au`, `interac`, `jcb`, `link`, `mastercard`, `unionpay`, `visa`, or `unknown`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("network")]
     public string? Network { get; init; }
 
     /// <summary>
     /// This is used by the financial networks to identify a transaction. Visa calls this the Transaction ID, Mastercard calls this the Trace ID, and American Express calls this the Acquirer Reference Data. This value will be present if it is returned by the financial network in the authorization response, and null otherwise.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("network_transaction_id")]
     public string? NetworkTransactionId { get; init; }
 
@@ -35304,6 +36337,7 @@ public partial record PaymentMethodDetailsCardPresent
     /// <summary>
     /// ID of the [reader](https://docs.stripe.com/api/terminal/readers) this transaction was made on.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reader")]
     public string? Reader { get; init; }
 
@@ -35345,48 +36379,56 @@ public partial record PaymentMethodDetailsCardPresentReceipt
     /// <summary>
     /// The Application Cryptogram, a unique value generated by the card to authenticate the transaction with issuers.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("application_cryptogram")]
     public string? ApplicationCryptogram { get; init; }
 
     /// <summary>
     /// The Application Identifier (AID) on the card used to determine which networks are eligible to process the transaction. Referenced from EMV tag 9F12, data encoded on the card's chip.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("application_preferred_name")]
     public string? ApplicationPreferredName { get; init; }
 
     /// <summary>
     /// Identifier for this transaction.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("authorization_code")]
     public string? AuthorizationCode { get; init; }
 
     /// <summary>
     /// EMV tag 8A. A code returned by the card issuer.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("authorization_response_code")]
     public string? AuthorizationResponseCode { get; init; }
 
     /// <summary>
     /// Describes the method used by the cardholder to verify ownership of the card. One of the following: `approval`, `failure`, `none`, `offline_pin`, `offline_pin_and_signature`, `online_pin`, or `signature`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("cardholder_verification_method")]
     public string? CardholderVerificationMethod { get; init; }
 
     /// <summary>
     /// Similar to the application_preferred_name, identifying the applications (AIDs) available on the card. Referenced from EMV tag 84.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("dedicated_file_name")]
     public string? DedicatedFileName { get; init; }
 
     /// <summary>
     /// A 5-byte string that records the checks and validations that occur between the card and the terminal. These checks determine how the terminal processes the transaction and what risk tolerance is acceptable. Referenced from EMV Tag 95.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("terminal_verification_results")]
     public string? TerminalVerificationResults { get; init; }
 
     /// <summary>
     /// An indication of which steps were completed during the card read process. Referenced from EMV Tag 9B.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("transaction_status_information")]
     public string? TransactionStatusInformation { get; init; }
 
@@ -35403,6 +36445,7 @@ public partial record PaymentMethodDetailsCardWallet
     /// <summary>
     /// (For tokenized numbers only.) The last four digits of the device account number.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("dynamic_last4")]
     public string? DynamicLast4 { get; init; }
 
@@ -35446,6 +36489,7 @@ public partial record PaymentMethodDetailsCardWalletLink
     /// <summary>
     /// The [funding source group code](https://docs.stripe.com/payments/link/link-payment-methods) applied to this Link payment at confirmation time.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("funding_source_group")]
     public string? FundingSourceGroup { get; init; }
 
@@ -35462,12 +36506,14 @@ public partial record PaymentMethodDetailsCardWalletMasterpass
     /// <summary>
     /// Owner's verified email. Values are verified or provided by the wallet directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("email")]
     public string? Email { get; init; }
 
     /// <summary>
     /// Owner's verified full name. Values are verified or provided by the wallet directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("name")]
     public string? Name { get; init; }
 
@@ -35494,12 +36540,14 @@ public partial record PaymentMethodDetailsCardWalletVisaCheckout
     /// <summary>
     /// Owner's verified email. Values are verified or provided by the wallet directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("email")]
     public string? Email { get; init; }
 
     /// <summary>
     /// Owner's verified full name. Values are verified or provided by the wallet directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("name")]
     public string? Name { get; init; }
 
@@ -35516,18 +36564,21 @@ public partial record PaymentMethodDetailsCashapp
     /// <summary>
     /// A unique and immutable identifier assigned by Cash App to every buyer.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("buyer_id")]
     public string? BuyerId { get; init; }
 
     /// <summary>
     /// A public identifier for buyers using Cash App.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("cashtag")]
     public string? Cashtag { get; init; }
 
     /// <summary>
     /// A unique and immutable identifier of payments assigned by Cash App
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("transaction_id")]
     public string? TransactionId { get; init; }
 
@@ -35538,6 +36589,7 @@ public partial record PaymentMethodDetailsCrypto
     /// <summary>
     /// The wallet address of the customer.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("buyer_address")]
     public string? BuyerAddress { get; init; }
 
@@ -35556,6 +36608,7 @@ public partial record PaymentMethodDetailsCrypto
     /// <summary>
     /// The blockchain transaction hash of the crypto payment.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("transaction_hash")]
     public string? TransactionHash { get; init; }
 
@@ -35578,6 +36631,7 @@ public partial record PaymentMethodDetailsEps
     /// (if supported) at the time of authorization or settlement. They cannot be set or mutated.
     /// EPS rarely provides this information so the attribute is usually empty.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("verified_name")]
     public string? VerifiedName { get; init; }
 
@@ -35594,6 +36648,7 @@ public partial record PaymentMethodDetailsFpx
     /// <summary>
     /// Unique transaction id generated by FPX for every request from the merchant
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("transaction_id")]
     public string? TransactionId { get; init; }
 
@@ -35604,18 +36659,21 @@ public partial record PaymentMethodDetailsGiropay
     /// <summary>
     /// Bank code of bank associated with the bank account.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("bank_code")]
     public string? BankCode { get; init; }
 
     /// <summary>
     /// Name of the bank associated with the bank account.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("bank_name")]
     public string? BankName { get; init; }
 
     /// <summary>
     /// Bank Identifier Code of the bank associated with the bank account.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("bic")]
     public string? Bic { get; init; }
 
@@ -35624,6 +36682,7 @@ public partial record PaymentMethodDetailsGiropay
     /// (if supported) at the time of authorization or settlement. They cannot be set or mutated.
     /// Giropay rarely provides this information so the attribute is usually empty.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("verified_name")]
     public string? VerifiedName { get; init; }
 
@@ -35634,6 +36693,7 @@ public partial record PaymentMethodDetailsGrabpay
     /// <summary>
     /// Unique transaction id generated by GrabPay
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("transaction_id")]
     public string? TransactionId { get; init; }
 
@@ -35668,12 +36728,14 @@ public partial record PaymentMethodDetailsIdeal
     /// <summary>
     /// Last four characters of the IBAN.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("iban_last4")]
     public string? IbanLast4 { get; init; }
 
     /// <summary>
     /// Unique transaction ID generated by iDEAL.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("transaction_id")]
     public string? TransactionId { get; init; }
 
@@ -35681,6 +36743,7 @@ public partial record PaymentMethodDetailsIdeal
     /// Owner's verified full name. Values are verified or provided by iDEAL directly
     /// (if supported) at the time of authorization or settlement. They cannot be set or mutated.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("verified_name")]
     public string? VerifiedName { get; init; }
 
@@ -35691,30 +36754,35 @@ public partial record PaymentMethodDetailsInteracPresent
     /// <summary>
     /// Card brand. Can be `interac`, `mastercard` or `visa`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("brand")]
     public string? Brand { get; init; }
 
     /// <summary>
     /// The cardholder name as read from the card, in [ISO 7813](https://en.wikipedia.org/wiki/ISO/IEC_7813) format. May include alphanumeric characters, special characters and first/last name separator (`/`). In some cases, the cardholder name may not be available depending on how the issuer has configured the card. Cardholder name is typically not available on swipe or contactless payments, such as those made with Apple Pay and Google Pay.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("cardholder_name")]
     public string? CardholderName { get; init; }
 
     /// <summary>
     /// Two-letter ISO code representing the country of the card. You could use this attribute to get a sense of the international breakdown of cards you've collected.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("country")]
     public string? Country { get; init; }
 
     /// <summary>
     /// A high-level description of the type of cards issued in this range.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("description")]
     public string? Description { get; init; }
 
     /// <summary>
     /// Authorization response cryptogram.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("emv_auth_data")]
     public string? EmvAuthData { get; init; }
 
@@ -35735,48 +36803,56 @@ public partial record PaymentMethodDetailsInteracPresent
     /// 
     /// *As of May 1, 2021, card fingerprint in India for Connect changed to allow two fingerprints for the same card---one for India and one for the rest of the world.*
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("fingerprint")]
     public string? Fingerprint { get; init; }
 
     /// <summary>
     /// Card funding type. Can be `credit`, `debit`, `prepaid`, or `unknown`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("funding")]
     public string? Funding { get; init; }
 
     /// <summary>
     /// ID of a card PaymentMethod generated from the card_present PaymentMethod that may be attached to a Customer for future transactions. Only present if it was possible to generate a card PaymentMethod.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("generated_card")]
     public string? GeneratedCard { get; init; }
 
     /// <summary>
     /// The name of the card's issuing bank.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("issuer")]
     public string? Issuer { get; init; }
 
     /// <summary>
     /// The last four digits of the card.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("last4")]
     public string? Last4 { get; init; }
 
     /// <summary>
     /// ID of the [location](https://docs.stripe.com/api/terminal/locations) that this transaction's reader is assigned to.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("location")]
     public string? Location { get; init; }
 
     /// <summary>
     /// Identifies which network this charge was processed on. Can be `amex`, `cartes_bancaires`, `diners`, `discover`, `eftpos_au`, `interac`, `jcb`, `link`, `mastercard`, `unionpay`, `visa`, or `unknown`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("network")]
     public string? Network { get; init; }
 
     /// <summary>
     /// This is used by the financial networks to identify a transaction. Visa calls this the Transaction ID, Mastercard calls this the Trace ID, and American Express calls this the Acquirer Reference Data. This value will be present if it is returned by the financial network in the authorization response, and null otherwise.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("network_transaction_id")]
     public string? NetworkTransactionId { get; init; }
 
@@ -35795,6 +36871,7 @@ public partial record PaymentMethodDetailsInteracPresent
     /// <summary>
     /// ID of the [reader](https://docs.stripe.com/api/terminal/readers) this transaction was made on.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reader")]
     public string? Reader { get; init; }
 
@@ -35817,48 +36894,56 @@ public partial record PaymentMethodDetailsInteracPresentReceipt
     /// <summary>
     /// The Application Cryptogram, a unique value generated by the card to authenticate the transaction with issuers.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("application_cryptogram")]
     public string? ApplicationCryptogram { get; init; }
 
     /// <summary>
     /// The Application Identifier (AID) on the card used to determine which networks are eligible to process the transaction. Referenced from EMV tag 9F12, data encoded on the card's chip.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("application_preferred_name")]
     public string? ApplicationPreferredName { get; init; }
 
     /// <summary>
     /// Identifier for this transaction.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("authorization_code")]
     public string? AuthorizationCode { get; init; }
 
     /// <summary>
     /// EMV tag 8A. A code returned by the card issuer.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("authorization_response_code")]
     public string? AuthorizationResponseCode { get; init; }
 
     /// <summary>
     /// Describes the method used by the cardholder to verify ownership of the card. One of the following: `approval`, `failure`, `none`, `offline_pin`, `offline_pin_and_signature`, `online_pin`, or `signature`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("cardholder_verification_method")]
     public string? CardholderVerificationMethod { get; init; }
 
     /// <summary>
     /// Similar to the application_preferred_name, identifying the applications (AIDs) available on the card. Referenced from EMV tag 84.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("dedicated_file_name")]
     public string? DedicatedFileName { get; init; }
 
     /// <summary>
     /// A 5-byte string that records the checks and validations that occur between the card and the terminal. These checks determine how the terminal processes the transaction and what risk tolerance is acceptable. Referenced from EMV Tag 95.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("terminal_verification_results")]
     public string? TerminalVerificationResults { get; init; }
 
     /// <summary>
     /// An indication of which steps were completed during the card read process. Referenced from EMV Tag 9B.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("transaction_status_information")]
     public string? TransactionStatusInformation { get; init; }
 
@@ -35869,12 +36954,14 @@ public partial record PaymentMethodDetailsKakaoPay
     /// <summary>
     /// A unique identifier for the buyer as determined by the local payment processor.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("buyer_id")]
     public string? BuyerId { get; init; }
 
     /// <summary>
     /// The Kakao Pay transaction ID associated with this payment.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("transaction_id")]
     public string? TransactionId { get; init; }
 
@@ -35885,6 +36972,7 @@ public partial record PaymentMethodDetailsKlarna
     /// <summary>
     /// ID of the [location](https://docs.stripe.com/api/terminal/locations) that this transaction's reader is assigned to.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("location")]
     public string? Location { get; init; }
 
@@ -35898,6 +36986,7 @@ public partial record PaymentMethodDetailsKlarna
     /// The Klarna payment method used for this transaction.
     /// Can be one of `pay_later`, `pay_now`, `pay_with_financing`, or `pay_in_installments`
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("payment_method_category")]
     public string? PaymentMethodCategory { get; init; }
 
@@ -35905,12 +36994,14 @@ public partial record PaymentMethodDetailsKlarna
     /// Preferred language of the Klarna authorization page that the customer is redirected to.
     /// Can be one of `de-AT`, `en-AT`, `nl-BE`, `fr-BE`, `en-BE`, `de-DE`, `en-DE`, `da-DK`, `en-DK`, `es-ES`, `en-ES`, `fi-FI`, `sv-FI`, `en-FI`, `en-GB`, `en-IE`, `it-IT`, `en-IT`, `nl-NL`, `en-NL`, `nb-NO`, `en-NO`, `sv-SE`, `en-SE`, `en-US`, `es-US`, `fr-FR`, `en-FR`, `cs-CZ`, `en-CZ`, `ro-RO`, `en-RO`, `el-GR`, `en-GR`, `en-AU`, `en-NZ`, `en-CA`, `fr-CA`, `pl-PL`, `en-PL`, `pt-PT`, `en-PT`, `de-CH`, `fr-CH`, `it-CH`, or `en-CH`
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("preferred_locale")]
     public string? PreferredLocale { get; init; }
 
     /// <summary>
     /// ID of the [reader](https://docs.stripe.com/api/terminal/readers) this transaction was made on.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reader")]
     public string? Reader { get; init; }
 
@@ -35937,18 +37028,21 @@ public partial record PaymentMethodDetailsKrCard
     /// <summary>
     /// A unique identifier for the buyer as determined by the local payment processor.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("buyer_id")]
     public string? BuyerId { get; init; }
 
     /// <summary>
     /// The last four digits of the card. This may not be present for American Express cards.
     /// </summary>
+    [StringLength(4)]
     [JsonPropertyName("last4")]
     public string? Last4 { get; init; }
 
     /// <summary>
     /// The Korean Card transaction ID associated with this payment.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("transaction_id")]
     public string? TransactionId { get; init; }
 
@@ -35960,12 +37054,14 @@ public partial record PaymentMethodDetailsLink
     /// Two-letter ISO code representing the funding source country beneath the Link payment.
     /// You could use this attribute to get a sense of international fees.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("country")]
     public string? Country { get; init; }
 
     /// <summary>
     /// The [funding source group code](https://docs.stripe.com/payments/link/link-payment-methods) applied to this Link payment at confirmation time.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("funding_source_group")]
     public string? FundingSourceGroup { get; init; }
 
@@ -35990,12 +37086,14 @@ public partial record PaymentMethodDetailsMultibanco
     /// <summary>
     /// Entity number associated with this Multibanco payment.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("entity")]
     public string? Entity { get; init; }
 
     /// <summary>
     /// Reference number associated with this Multibanco payment.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reference")]
     public string? Reference { get; init; }
 
@@ -36006,12 +37104,14 @@ public partial record PaymentMethodDetailsNaverPay
     /// <summary>
     /// A unique identifier for the buyer as determined by the local payment processor.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("buyer_id")]
     public string? BuyerId { get; init; }
 
     /// <summary>
     /// The Naver Pay transaction ID associated with this payment.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("transaction_id")]
     public string? TransactionId { get; init; }
 
@@ -36022,42 +37122,49 @@ public partial record PaymentMethodDetailsNzBankAccount
     /// <summary>
     /// The name on the bank account. Only present if the account holder name is different from the name of the authorized signatory collected in the PaymentMethod’s billing details.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("account_holder_name")]
     public string? AccountHolderName { get; init; }
 
     /// <summary>
     /// The numeric code for the bank account's bank.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("bank_code")]
     public required string BankCode { get; init; }
 
     /// <summary>
     /// The name of the bank.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("bank_name")]
     public required string BankName { get; init; }
 
     /// <summary>
     /// The numeric code for the bank account's bank branch.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("branch_code")]
     public required string BranchCode { get; init; }
 
     /// <summary>
     /// Estimated date to debit the customer's bank account. A date string in YYYY-MM-DD format.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("expected_debit_date")]
     public string? ExpectedDebitDate { get; init; }
 
     /// <summary>
     /// Last four digits of the bank account number.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("last4")]
     public required string Last4 { get; init; }
 
     /// <summary>
     /// The suffix of the bank account number.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("suffix")]
     public string? Suffix { get; init; }
 
@@ -36068,6 +37175,7 @@ public partial record PaymentMethodDetailsOxxo
     /// <summary>
     /// OXXO reference number
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("number")]
     public string? Number { get; init; }
 
@@ -36084,6 +37192,7 @@ public partial record PaymentMethodDetailsP24
     /// <summary>
     /// Unique reference for this Przelewy24 payment.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reference")]
     public string? Reference { get; init; }
 
@@ -36092,6 +37201,7 @@ public partial record PaymentMethodDetailsP24
     /// (if supported) at the time of authorization or settlement. They cannot be set or mutated.
     /// Przelewy24 rarely provides this information so the attribute is usually empty.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("verified_name")]
     public string? VerifiedName { get; init; }
 
@@ -36102,12 +37212,14 @@ public partial record PaymentMethodDetailsPassthroughCard
     /// <summary>
     /// Card brand. Can be `American Express`, `Cartes Bancaires`, `Diners Club`, `Discover`, `Eftpos Australia`, `Girocard`, `JCB`, `MasterCard`, `UnionPay`, `Visa`, or `Unknown`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("brand")]
     public string? Brand { get; init; }
 
     /// <summary>
     /// Two-letter ISO code representing the country of the card. You could use this attribute to get a sense of the international breakdown of cards you've collected.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("country")]
     public string? Country { get; init; }
 
@@ -36126,12 +37238,14 @@ public partial record PaymentMethodDetailsPassthroughCard
     /// <summary>
     /// Card funding type. Can be `credit`, `debit`, `prepaid`, or `unknown`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("funding")]
     public string? Funding { get; init; }
 
     /// <summary>
     /// The last four digits of the card.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("last4")]
     public string? Last4 { get; init; }
 
@@ -36146,12 +37260,14 @@ public partial record PaymentMethodDetailsPayco
     /// <summary>
     /// A unique identifier for the buyer as determined by the local payment processor.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("buyer_id")]
     public string? BuyerId { get; init; }
 
     /// <summary>
     /// The Payco transaction ID associated with this payment.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("transaction_id")]
     public string? TransactionId { get; init; }
 
@@ -36162,42 +37278,49 @@ public partial record PaymentMethodDetailsPaymentRecordAcssDebit
     /// <summary>
     /// Name of the bank associated with the bank account.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("bank_name")]
     public string? BankName { get; init; }
 
     /// <summary>
     /// Estimated date to debit the customer's bank account. A date string in YYYY-MM-DD format.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("expected_debit_date")]
     public string? ExpectedDebitDate { get; init; }
 
     /// <summary>
     /// Uniquely identifies this particular bank account. You can use this attribute to check whether two bank accounts are the same.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("fingerprint")]
     public string? Fingerprint { get; init; }
 
     /// <summary>
     /// Institution number of the bank account
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("institution_number")]
     public string? InstitutionNumber { get; init; }
 
     /// <summary>
     /// Last four digits of the bank account number.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("last4")]
     public string? Last4 { get; init; }
 
     /// <summary>
     /// ID of the mandate used to make this payment.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("mandate")]
     public string? Mandate { get; init; }
 
     /// <summary>
     /// Transit number of the bank account.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("transit_number")]
     public string? TransitNumber { get; init; }
 
@@ -36208,18 +37331,21 @@ public partial record PaymentMethodDetailsPaymentRecordAffirm
     /// <summary>
     /// ID of the location that this reader is assigned to.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("location")]
     public string? Location { get; init; }
 
     /// <summary>
     /// ID of the reader this transaction was made on.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reader")]
     public string? Reader { get; init; }
 
     /// <summary>
     /// The Affirm transaction ID associated with this payment.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("transaction_id")]
     public string? TransactionId { get; init; }
 
@@ -36230,12 +37356,14 @@ public partial record PaymentMethodDetailsPaymentRecordAfterpayClearpay
     /// <summary>
     /// The Afterpay order ID associated with this payment intent.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("order_id")]
     public string? OrderId { get; init; }
 
     /// <summary>
     /// Order identifier shown to the merchant in Afterpay's online portal.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reference")]
     public string? Reference { get; init; }
 
@@ -36246,18 +37374,21 @@ public partial record PaymentMethodDetailsPaymentRecordAlipay
     /// <summary>
     /// Uniquely identifies this particular Alipay account. You can use this attribute to check whether two Alipay accounts are the same.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("buyer_id")]
     public string? BuyerId { get; init; }
 
     /// <summary>
     /// Uniquely identifies this particular Alipay account. You can use this attribute to check whether two Alipay accounts are the same.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("fingerprint")]
     public string? Fingerprint { get; init; }
 
     /// <summary>
     /// Transaction ID of this particular Alipay transaction.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("transaction_id")]
     public string? TransactionId { get; init; }
 
@@ -36271,6 +37402,7 @@ public partial record PaymentMethodDetailsPaymentRecordAlma
     /// <summary>
     /// The Alma transaction ID associated with this payment.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("transaction_id")]
     public string? TransactionId { get; init; }
 
@@ -36284,6 +37416,7 @@ public partial record PaymentMethodDetailsPaymentRecordAmazonPay
     /// <summary>
     /// The Amazon Pay transaction ID associated with this payment.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("transaction_id")]
     public string? TransactionId { get; init; }
 
@@ -36294,30 +37427,35 @@ public partial record PaymentMethodDetailsPaymentRecordAuBecsDebit
     /// <summary>
     /// Bank-State-Branch number of the bank account.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("bsb_number")]
     public string? BsbNumber { get; init; }
 
     /// <summary>
     /// Estimated date to debit the customer's bank account. A date string in YYYY-MM-DD format.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("expected_debit_date")]
     public string? ExpectedDebitDate { get; init; }
 
     /// <summary>
     /// Uniquely identifies this particular bank account. You can use this attribute to check whether two bank accounts are the same.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("fingerprint")]
     public string? Fingerprint { get; init; }
 
     /// <summary>
     /// Last four digits of the bank account number.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("last4")]
     public string? Last4 { get; init; }
 
     /// <summary>
     /// ID of the mandate used to make this payment.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("mandate")]
     public string? Mandate { get; init; }
 
@@ -36328,30 +37466,35 @@ public partial record PaymentMethodDetailsPaymentRecordBacsDebit
     /// <summary>
     /// Estimated date to debit the customer's bank account. A date string in YYYY-MM-DD format.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("expected_debit_date")]
     public string? ExpectedDebitDate { get; init; }
 
     /// <summary>
     /// Uniquely identifies this particular bank account. You can use this attribute to check whether two bank accounts are the same.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("fingerprint")]
     public string? Fingerprint { get; init; }
 
     /// <summary>
     /// Last four digits of the bank account number.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("last4")]
     public string? Last4 { get; init; }
 
     /// <summary>
     /// ID of the mandate used to make this payment.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("mandate")]
     public string? Mandate { get; init; }
 
     /// <summary>
     /// Sort code of the bank account. (e.g., `10-20-30`)
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("sort_code")]
     public string? SortCode { get; init; }
 
@@ -36362,18 +37505,21 @@ public partial record PaymentMethodDetailsPaymentRecordBancontact
     /// <summary>
     /// Bank code of bank associated with the bank account.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("bank_code")]
     public string? BankCode { get; init; }
 
     /// <summary>
     /// Name of the bank associated with the bank account.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("bank_name")]
     public string? BankName { get; init; }
 
     /// <summary>
     /// Bank Identifier Code of the bank associated with the bank account.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("bic")]
     public string? Bic { get; init; }
 
@@ -36392,6 +37538,7 @@ public partial record PaymentMethodDetailsPaymentRecordBancontact
     /// <summary>
     /// Last four characters of the IBAN.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("iban_last4")]
     public string? IbanLast4 { get; init; }
 
@@ -36404,6 +37551,7 @@ public partial record PaymentMethodDetailsPaymentRecordBancontact
     /// <summary>
     /// Owner's verified full name. Values are verified or provided by Bancontact directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("verified_name")]
     public string? VerifiedName { get; init; }
 
@@ -36414,6 +37562,7 @@ public partial record PaymentMethodDetailsPaymentRecordBillie
     /// <summary>
     /// The Billie transaction ID associated with this payment.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("transaction_id")]
     public string? TransactionId { get; init; }
 
@@ -36424,12 +37573,14 @@ public partial record PaymentMethodDetailsPaymentRecordBizum
     /// <summary>
     /// A unique identifier for the buyer as determined by the local payment processor.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("buyer_id")]
     public string? BuyerId { get; init; }
 
     /// <summary>
     /// The Bizum transaction ID associated with this payment.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("transaction_id")]
     public string? TransactionId { get; init; }
 
@@ -36440,6 +37591,7 @@ public partial record PaymentMethodDetailsPaymentRecordBlik
     /// <summary>
     /// A unique and immutable identifier assigned by BLIK to every buyer.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("buyer_id")]
     public string? BuyerId { get; init; }
 
@@ -36450,6 +37602,7 @@ public partial record PaymentMethodDetailsPaymentRecordBoleto
     /// <summary>
     /// The tax ID of the customer (CPF for individuals consumers or CNPJ for businesses consumers)
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("tax_id")]
     public string? TaxId { get; init; }
 
@@ -36460,18 +37613,21 @@ public partial record PaymentMethodDetailsPaymentRecordCashapp
     /// <summary>
     /// A unique and immutable identifier assigned by Cash App to every buyer.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("buyer_id")]
     public string? BuyerId { get; init; }
 
     /// <summary>
     /// A public identifier for buyers using Cash App.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("cashtag")]
     public string? Cashtag { get; init; }
 
     /// <summary>
     /// A unique and immutable identifier of payments assigned by Cash App.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("transaction_id")]
     public string? TransactionId { get; init; }
 
@@ -36488,6 +37644,7 @@ public partial record PaymentMethodDetailsPaymentRecordEps
     /// <summary>
     /// Owner's verified full name. Values are verified or provided by EPS directly (if supported) at the time of authorization or settlement. They cannot be set or mutated. EPS rarely provides this information so the attribute is usually empty.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("verified_name")]
     public string? VerifiedName { get; init; }
 
@@ -36498,24 +37655,28 @@ public partial record PaymentMethodDetailsPaymentRecordGiropay
     /// <summary>
     /// Bank code of bank associated with the bank account.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("bank_code")]
     public string? BankCode { get; init; }
 
     /// <summary>
     /// Name of the bank associated with the bank account.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("bank_name")]
     public string? BankName { get; init; }
 
     /// <summary>
     /// Bank Identifier Code of the bank associated with the bank account.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("bic")]
     public string? Bic { get; init; }
 
     /// <summary>
     /// Owner's verified full name. Values are verified or provided by Giropay directly (if supported) at the time of authorization or settlement. They cannot be set or mutated. Giropay rarely provides this information so the attribute is usually empty.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("verified_name")]
     public string? VerifiedName { get; init; }
 
@@ -36550,18 +37711,21 @@ public partial record PaymentMethodDetailsPaymentRecordIdeal
     /// <summary>
     /// Last four characters of the IBAN.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("iban_last4")]
     public string? IbanLast4 { get; init; }
 
     /// <summary>
     /// Unique transaction ID generated by iDEAL.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("transaction_id")]
     public string? TransactionId { get; init; }
 
     /// <summary>
     /// Owner's verified full name. Values are verified or provided by iDEAL directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("verified_name")]
     public string? VerifiedName { get; init; }
 
@@ -36572,12 +37736,14 @@ public partial record PaymentMethodDetailsPaymentRecordKakaoPay
     /// <summary>
     /// A unique identifier for the buyer as determined by the local payment processor.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("buyer_id")]
     public string? BuyerId { get; init; }
 
     /// <summary>
     /// The Kakao Pay transaction ID associated with this payment.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("transaction_id")]
     public string? TransactionId { get; init; }
 
@@ -36588,6 +37754,7 @@ public partial record PaymentMethodDetailsPaymentRecordKlarna
     /// <summary>
     /// ID of the [location](https://docs.stripe.com/api/terminal/locations) that this transaction's reader is assigned to.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("location")]
     public string? Location { get; init; }
 
@@ -36600,18 +37767,21 @@ public partial record PaymentMethodDetailsPaymentRecordKlarna
     /// <summary>
     /// The Klarna payment method used for this transaction. Can be one of `pay_later`, `pay_now`, `pay_with_financing`, or `pay_in_installments`
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("payment_method_category")]
     public string? PaymentMethodCategory { get; init; }
 
     /// <summary>
     /// Preferred language of the Klarna authorization page that the customer is redirected to. Can be one of `de-AT`, `en-AT`, `nl-BE`, `fr-BE`, `en-BE`, `de-DE`, `en-DE`, `da-DK`, `en-DK`, `es-ES`, `en-ES`, `fi-FI`, `sv-FI`, `en-FI`, `en-GB`, `en-IE`, `it-IT`, `en-IT`, `nl-NL`, `en-NL`, `nb-NO`, `en-NO`, `sv-SE`, `en-SE`, `en-US`, `es-US`, `fr-FR`, `en-FR`, `cs-CZ`, `en-CZ`, `ro-RO`, `en-RO`, `el-GR`, `en-GR`, `en-AU`, `en-NZ`, `en-CA`, `fr-CA`, `pl-PL`, `en-PL`, `pt-PT`, `en-PT`, `de-CH`, `fr-CH`, `it-CH`, or `en-CH`
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("preferred_locale")]
     public string? PreferredLocale { get; init; }
 
     /// <summary>
     /// ID of the [reader](https://docs.stripe.com/api/terminal/readers) this transaction was made on.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reader")]
     public string? Reader { get; init; }
 
@@ -36632,6 +37802,7 @@ public partial record PaymentMethodDetailsPaymentRecordLink
     /// <summary>
     /// Two-letter ISO code representing the funding source country beneath the Link payment. You could use this attribute to get a sense of international fees.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("country")]
     public string? Country { get; init; }
 
@@ -36656,12 +37827,14 @@ public partial record PaymentMethodDetailsPaymentRecordMultibanco
     /// <summary>
     /// Entity number associated with this Multibanco payment.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("entity")]
     public string? Entity { get; init; }
 
     /// <summary>
     /// Reference number associated with this Multibanco payment.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reference")]
     public string? Reference { get; init; }
 
@@ -36672,12 +37845,14 @@ public partial record PaymentMethodDetailsPaymentRecordNaverPay
     /// <summary>
     /// A unique identifier for the buyer as determined by the local payment processor.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("buyer_id")]
     public string? BuyerId { get; init; }
 
     /// <summary>
     /// The Naver Pay transaction ID associated with this payment.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("transaction_id")]
     public string? TransactionId { get; init; }
 
@@ -36688,42 +37863,49 @@ public partial record PaymentMethodDetailsPaymentRecordNzBankAccount
     /// <summary>
     /// The name on the bank account. Only present if the account holder name is different from the name of the authorized signatory collected in the PaymentMethod's billing details.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("account_holder_name")]
     public string? AccountHolderName { get; init; }
 
     /// <summary>
     /// The numeric code for the bank account's bank.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("bank_code")]
     public required string BankCode { get; init; }
 
     /// <summary>
     /// The name of the bank.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("bank_name")]
     public required string BankName { get; init; }
 
     /// <summary>
     /// The numeric code for the bank account's bank branch.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("branch_code")]
     public required string BranchCode { get; init; }
 
     /// <summary>
     /// Estimated date to debit the customer's bank account. A date string in YYYY-MM-DD format.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("expected_debit_date")]
     public string? ExpectedDebitDate { get; init; }
 
     /// <summary>
     /// Last four digits of the bank account number.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("last4")]
     public required string Last4 { get; init; }
 
     /// <summary>
     /// The suffix of the bank account number.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("suffix")]
     public string? Suffix { get; init; }
 
@@ -36734,6 +37916,7 @@ public partial record PaymentMethodDetailsPaymentRecordOxxo
     /// <summary>
     /// OXXO reference number
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("number")]
     public string? Number { get; init; }
 
@@ -36750,12 +37933,14 @@ public partial record PaymentMethodDetailsPaymentRecordP24
     /// <summary>
     /// Unique reference for this Przelewy24 payment.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reference")]
     public string? Reference { get; init; }
 
     /// <summary>
     /// Owner's verified full name. Values are verified or provided by Przelewy24 directly (if supported) at the time of authorization or settlement. They cannot be set or mutated. Przelewy24 rarely provides this information so the attribute is usually empty.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("verified_name")]
     public string? VerifiedName { get; init; }
 
@@ -36770,12 +37955,14 @@ public partial record PaymentMethodDetailsPaymentRecordPayco
     /// <summary>
     /// A unique identifier for the buyer as determined by the local payment processor.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("buyer_id")]
     public string? BuyerId { get; init; }
 
     /// <summary>
     /// The Payco transaction ID associated with this payment.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("transaction_id")]
     public string? TransactionId { get; init; }
 
@@ -36786,18 +37973,21 @@ public partial record PaymentMethodDetailsPaymentRecordPaynow
     /// <summary>
     /// ID of the [location](https://docs.stripe.com/api/terminal/locations) that this transaction's reader is assigned to.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("location")]
     public string? Location { get; init; }
 
     /// <summary>
     /// ID of the [reader](https://docs.stripe.com/api/terminal/readers) this transaction was made on.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reader")]
     public string? Reader { get; init; }
 
     /// <summary>
     /// Reference number associated with this PayNow payment
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reference")]
     public string? Reference { get; init; }
 
@@ -36808,24 +37998,28 @@ public partial record PaymentMethodDetailsPaymentRecordPayto
     /// <summary>
     /// Bank-State-Branch number of the bank account.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("bsb_number")]
     public string? BsbNumber { get; init; }
 
     /// <summary>
     /// Last four digits of the bank account number.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("last4")]
     public string? Last4 { get; init; }
 
     /// <summary>
     /// ID of the mandate used to make this payment.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("mandate")]
     public string? Mandate { get; init; }
 
     /// <summary>
     /// The PayID alias for the bank account.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("pay_id")]
     public string? PayId { get; init; }
 
@@ -36836,12 +38030,14 @@ public partial record PaymentMethodDetailsPaymentRecordPix
     /// <summary>
     /// Unique transaction id generated by BCB
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("bank_transaction_id")]
     public string? BankTransactionId { get; init; }
 
     /// <summary>
     /// ID of the multi use Mandate generated by the PaymentIntent or SetupIntent.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("mandate")]
     public string? Mandate { get; init; }
 
@@ -36852,6 +38048,7 @@ public partial record PaymentMethodDetailsPaymentRecordPromptpay
     /// <summary>
     /// Bill reference generated by PromptPay
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reference")]
     public string? Reference { get; init; }
 
@@ -36865,6 +38062,7 @@ public partial record PaymentMethodDetailsPaymentRecordRevolutPay
     /// <summary>
     /// The Revolut Pay transaction ID associated with this payment.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("transaction_id")]
     public string? TransactionId { get; init; }
 
@@ -36875,12 +38073,14 @@ public partial record PaymentMethodDetailsPaymentRecordSamsungPay
     /// <summary>
     /// A unique identifier for the buyer as determined by the local payment processor.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("buyer_id")]
     public string? BuyerId { get; init; }
 
     /// <summary>
     /// The Samsung Pay transaction ID associated with this payment.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("transaction_id")]
     public string? TransactionId { get; init; }
 
@@ -36891,6 +38091,7 @@ public partial record PaymentMethodDetailsPaymentRecordSatispay
     /// <summary>
     /// The Satispay transaction ID associated with this payment.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("transaction_id")]
     public string? TransactionId { get; init; }
 
@@ -36901,6 +38102,7 @@ public partial record PaymentMethodDetailsPaymentRecordScalapay
     /// <summary>
     /// The Scalapay transaction ID associated with this payment.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("transaction_id")]
     public string? TransactionId { get; init; }
 
@@ -36911,42 +38113,49 @@ public partial record PaymentMethodDetailsPaymentRecordSepaDebit
     /// <summary>
     /// Bank code of bank associated with the bank account.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("bank_code")]
     public string? BankCode { get; init; }
 
     /// <summary>
     /// Branch code of bank associated with the bank account.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("branch_code")]
     public string? BranchCode { get; init; }
 
     /// <summary>
     /// Two-letter ISO code representing the country the bank account is located in.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("country")]
     public string? Country { get; init; }
 
     /// <summary>
     /// Estimated date to debit the customer's bank account. A date string in YYYY-MM-DD format.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("expected_debit_date")]
     public string? ExpectedDebitDate { get; init; }
 
     /// <summary>
     /// Uniquely identifies this particular bank account. You can use this attribute to check whether two bank accounts are the same.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("fingerprint")]
     public string? Fingerprint { get; init; }
 
     /// <summary>
     /// Last four characters of the IBAN.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("last4")]
     public string? Last4 { get; init; }
 
     /// <summary>
     /// Find the ID of the mandate used for this payment under the [payment_method_details.sepa_debit.mandate](https://docs.stripe.com/api/charges/object#charge_object-payment_method_details-sepa_debit-mandate) property on the Charge. Use this mandate ID to [retrieve the Mandate](https://docs.stripe.com/api/mandates/retrieve).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("mandate")]
     public string? Mandate { get; init; }
 
@@ -36957,24 +38166,28 @@ public partial record PaymentMethodDetailsPaymentRecordSofort
     /// <summary>
     /// Bank code of bank associated with the bank account.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("bank_code")]
     public string? BankCode { get; init; }
 
     /// <summary>
     /// Name of the bank associated with the bank account.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("bank_name")]
     public string? BankName { get; init; }
 
     /// <summary>
     /// Bank Identifier Code of the bank associated with the bank account.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("bic")]
     public string? Bic { get; init; }
 
     /// <summary>
     /// Two-letter ISO code representing the country the bank account is located in.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("country")]
     public string? Country { get; init; }
 
@@ -36993,6 +38206,7 @@ public partial record PaymentMethodDetailsPaymentRecordSofort
     /// <summary>
     /// Last four characters of the IBAN.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("iban_last4")]
     public string? IbanLast4 { get; init; }
 
@@ -37005,6 +38219,7 @@ public partial record PaymentMethodDetailsPaymentRecordSofort
     /// <summary>
     /// Owner's verified full name. Values are verified or provided by SOFORT directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("verified_name")]
     public string? VerifiedName { get; init; }
 
@@ -37015,6 +38230,7 @@ public partial record PaymentMethodDetailsPaymentRecordSunbit
     /// <summary>
     /// The Sunbit transaction ID associated with this payment.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("transaction_id")]
     public string? TransactionId { get; init; }
 
@@ -37025,18 +38241,21 @@ public partial record PaymentMethodDetailsPaymentRecordSwish
     /// <summary>
     /// Uniquely identifies the payer's Swish account. You can use this attribute to check whether two Swish transactions were paid for by the same payer
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("fingerprint")]
     public string? Fingerprint { get; init; }
 
     /// <summary>
     /// Payer bank reference number for the payment
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("payment_reference")]
     public string? PaymentReference { get; init; }
 
     /// <summary>
     /// The last four digits of the Swish account phone number
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("verified_phone_last4")]
     public string? VerifiedPhoneLast4 { get; init; }
 
@@ -37047,6 +38266,7 @@ public partial record PaymentMethodDetailsPaymentRecordTwint
     /// <summary>
     /// ID of the multi use Mandate generated by the PaymentIntent or SetupIntent.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("mandate")]
     public string? Mandate { get; init; }
 
@@ -37057,6 +38277,7 @@ public partial record PaymentMethodDetailsPaymentRecordUpi
     /// <summary>
     /// Customer's unique Virtual Payment Address.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("vpa")]
     public string? Vpa { get; init; }
 
@@ -37079,24 +38300,28 @@ public partial record PaymentMethodDetailsPaymentRecordUsBankAccount
     /// <summary>
     /// Name of the bank associated with the bank account.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("bank_name")]
     public string? BankName { get; init; }
 
     /// <summary>
     /// Estimated date to debit the customer's bank account. A date string in YYYY-MM-DD format.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("expected_debit_date")]
     public string? ExpectedDebitDate { get; init; }
 
     /// <summary>
     /// Uniquely identifies this particular bank account. You can use this attribute to check whether two bank accounts are the same.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("fingerprint")]
     public string? Fingerprint { get; init; }
 
     /// <summary>
     /// Last four digits of the bank account number.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("last4")]
     public string? Last4 { get; init; }
 
@@ -37109,12 +38334,14 @@ public partial record PaymentMethodDetailsPaymentRecordUsBankAccount
     /// <summary>
     /// The ACH payment reference for this transaction.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("payment_reference")]
     public string? PaymentReference { get; init; }
 
     /// <summary>
     /// The routing number for the bank account.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("routing_number")]
     public string? RoutingNumber { get; init; }
 
@@ -37125,24 +38352,28 @@ public partial record PaymentMethodDetailsPaymentRecordWechatPay
     /// <summary>
     /// Uniquely identifies this particular WeChat Pay account. You can use this attribute to check whether two WeChat accounts are the same.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("fingerprint")]
     public string? Fingerprint { get; init; }
 
     /// <summary>
     /// ID of the [location](https://docs.stripe.com/api/terminal/locations) that this transaction's reader is assigned to.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("location")]
     public string? Location { get; init; }
 
     /// <summary>
     /// ID of the [reader](https://docs.stripe.com/api/terminal/readers) this transaction was made on.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reader")]
     public string? Reader { get; init; }
 
     /// <summary>
     /// Transaction ID of this particular WeChat Pay transaction.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("transaction_id")]
     public string? TransactionId { get; init; }
 
@@ -37157,18 +38388,21 @@ public partial record PaymentMethodDetailsPaynow
     /// <summary>
     /// ID of the [location](https://docs.stripe.com/api/terminal/locations) that this transaction's reader is assigned to.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("location")]
     public string? Location { get; init; }
 
     /// <summary>
     /// ID of the [reader](https://docs.stripe.com/api/terminal/readers) this transaction was made on.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reader")]
     public string? Reader { get; init; }
 
     /// <summary>
     /// Reference number associated with this PayNow payment
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reference")]
     public string? Reference { get; init; }
 
@@ -37179,6 +38413,7 @@ public partial record PaymentMethodDetailsPaypal
     /// <summary>
     /// Two-letter ISO code representing the buyer's country. Values are provided by PayPal directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("country")]
     public string? Country { get; init; }
 
@@ -37186,12 +38421,14 @@ public partial record PaymentMethodDetailsPaypal
     /// Owner's email. Values are provided by PayPal directly
     /// (if supported) at the time of authorization or settlement. They cannot be set or mutated.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("payer_email")]
     public string? PayerEmail { get; init; }
 
     /// <summary>
     /// PayPal account PayerID. This identifier uniquely identifies the PayPal customer.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("payer_id")]
     public string? PayerId { get; init; }
 
@@ -37199,6 +38436,7 @@ public partial record PaymentMethodDetailsPaypal
     /// Owner's full name. Values provided by PayPal directly
     /// (if supported) at the time of authorization or settlement. They cannot be set or mutated.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("payer_name")]
     public string? PayerName { get; init; }
 
@@ -37211,6 +38449,7 @@ public partial record PaymentMethodDetailsPaypal
     /// <summary>
     /// A unique ID generated by PayPal for this transaction.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("transaction_id")]
     public string? TransactionId { get; init; }
 
@@ -37221,24 +38460,28 @@ public partial record PaymentMethodDetailsPayto
     /// <summary>
     /// Bank-State-Branch number of the bank account.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("bsb_number")]
     public string? BsbNumber { get; init; }
 
     /// <summary>
     /// Last four digits of the bank account number.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("last4")]
     public string? Last4 { get; init; }
 
     /// <summary>
     /// ID of the mandate used to make this payment.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("mandate")]
     public string? Mandate { get; init; }
 
     /// <summary>
     /// The PayID alias for the bank account.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("pay_id")]
     public string? PayId { get; init; }
 
@@ -37249,18 +38492,21 @@ public partial record PaymentMethodDetailsPix
     /// <summary>
     /// Unique transaction id generated by BCB
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("bank_transaction_id")]
     public string? BankTransactionId { get; init; }
 
     /// <summary>
     /// Uniquely identifies this particular Pix account. You can use this attribute to check whether two Pix accounts are the same.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("fingerprint")]
     public string? Fingerprint { get; init; }
 
     /// <summary>
     /// ID of the multi use Mandate generated by the PaymentIntent or SetupIntent.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("mandate")]
     public string? Mandate { get; init; }
 
@@ -37271,6 +38517,7 @@ public partial record PaymentMethodDetailsPromptpay
     /// <summary>
     /// Bill reference generated by PromptPay
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reference")]
     public string? Reference { get; init; }
 
@@ -37284,6 +38531,7 @@ public partial record PaymentMethodDetailsRevolutPay
     /// <summary>
     /// The Revolut Pay transaction ID associated with this payment.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("transaction_id")]
     public string? TransactionId { get; init; }
 
@@ -37294,12 +38542,14 @@ public partial record PaymentMethodDetailsSamsungPay
     /// <summary>
     /// A unique identifier for the buyer as determined by the local payment processor.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("buyer_id")]
     public string? BuyerId { get; init; }
 
     /// <summary>
     /// The Samsung Pay transaction ID associated with this payment.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("transaction_id")]
     public string? TransactionId { get; init; }
 
@@ -37310,6 +38560,7 @@ public partial record PaymentMethodDetailsSatispay
     /// <summary>
     /// The Satispay transaction ID associated with this payment.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("transaction_id")]
     public string? TransactionId { get; init; }
 
@@ -37320,6 +38571,7 @@ public partial record PaymentMethodDetailsScalapay
     /// <summary>
     /// The Scalapay transaction ID associated with this payment.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("transaction_id")]
     public string? TransactionId { get; init; }
 
@@ -37330,42 +38582,49 @@ public partial record PaymentMethodDetailsSepaDebit
     /// <summary>
     /// Bank code of bank associated with the bank account.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("bank_code")]
     public string? BankCode { get; init; }
 
     /// <summary>
     /// Branch code of bank associated with the bank account.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("branch_code")]
     public string? BranchCode { get; init; }
 
     /// <summary>
     /// Two-letter ISO code representing the country the bank account is located in.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("country")]
     public string? Country { get; init; }
 
     /// <summary>
     /// Estimated date to debit the customer's bank account. A date string in YYYY-MM-DD format.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("expected_debit_date")]
     public string? ExpectedDebitDate { get; init; }
 
     /// <summary>
     /// Uniquely identifies this particular bank account. You can use this attribute to check whether two bank accounts are the same.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("fingerprint")]
     public string? Fingerprint { get; init; }
 
     /// <summary>
     /// Last four characters of the IBAN.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("last4")]
     public string? Last4 { get; init; }
 
     /// <summary>
     /// Find the ID of the mandate used for this payment under the [payment_method_details.sepa_debit.mandate](https://docs.stripe.com/api/charges/object#charge_object-payment_method_details-sepa_debit-mandate) property on the Charge. Use this mandate ID to [retrieve the Mandate](https://docs.stripe.com/api/mandates/retrieve).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("mandate")]
     public string? Mandate { get; init; }
 
@@ -37376,24 +38635,28 @@ public partial record PaymentMethodDetailsSofort
     /// <summary>
     /// Bank code of bank associated with the bank account.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("bank_code")]
     public string? BankCode { get; init; }
 
     /// <summary>
     /// Name of the bank associated with the bank account.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("bank_name")]
     public string? BankName { get; init; }
 
     /// <summary>
     /// Bank Identifier Code of the bank associated with the bank account.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("bic")]
     public string? Bic { get; init; }
 
     /// <summary>
     /// Two-letter ISO code representing the country the bank account is located in.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("country")]
     public string? Country { get; init; }
 
@@ -37412,6 +38675,7 @@ public partial record PaymentMethodDetailsSofort
     /// <summary>
     /// Last four characters of the IBAN.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("iban_last4")]
     public string? IbanLast4 { get; init; }
 
@@ -37426,6 +38690,7 @@ public partial record PaymentMethodDetailsSofort
     /// Owner's verified full name. Values are verified or provided by SOFORT directly
     /// (if supported) at the time of authorization or settlement. They cannot be set or mutated.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("verified_name")]
     public string? VerifiedName { get; init; }
 
@@ -37440,6 +38705,7 @@ public partial record PaymentMethodDetailsSunbit
     /// <summary>
     /// The Sunbit transaction ID associated with this payment.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("transaction_id")]
     public string? TransactionId { get; init; }
 
@@ -37450,18 +38716,21 @@ public partial record PaymentMethodDetailsSwish
     /// <summary>
     /// Uniquely identifies the payer's Swish account. You can use this attribute to check whether two Swish transactions were paid for by the same payer
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("fingerprint")]
     public string? Fingerprint { get; init; }
 
     /// <summary>
     /// Payer bank reference number for the payment
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("payment_reference")]
     public string? PaymentReference { get; init; }
 
     /// <summary>
     /// The last four digits of the Swish account phone number
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("verified_phone_last4")]
     public string? VerifiedPhoneLast4 { get; init; }
 
@@ -37472,6 +38741,7 @@ public partial record PaymentMethodDetailsTwint
     /// <summary>
     /// ID of the multi use Mandate generated by the PaymentIntent or SetupIntent.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("mandate")]
     public string? Mandate { get; init; }
 
@@ -37482,6 +38752,7 @@ public partial record PaymentMethodDetailsUpi
     /// <summary>
     /// Customer's unique Virtual Payment Address.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("vpa")]
     public string? Vpa { get; init; }
 
@@ -37504,24 +38775,28 @@ public partial record PaymentMethodDetailsUsBankAccount
     /// <summary>
     /// Name of the bank associated with the bank account.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("bank_name")]
     public string? BankName { get; init; }
 
     /// <summary>
     /// Estimated date to debit the customer's bank account. A date string in YYYY-MM-DD format.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("expected_debit_date")]
     public string? ExpectedDebitDate { get; init; }
 
     /// <summary>
     /// Uniquely identifies this particular bank account. You can use this attribute to check whether two bank accounts are the same.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("fingerprint")]
     public string? Fingerprint { get; init; }
 
     /// <summary>
     /// Last four digits of the bank account number.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("last4")]
     public string? Last4 { get; init; }
 
@@ -37534,12 +38809,14 @@ public partial record PaymentMethodDetailsUsBankAccount
     /// <summary>
     /// Reference number to locate ACH payments with customer's bank.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("payment_reference")]
     public string? PaymentReference { get; init; }
 
     /// <summary>
     /// Routing number of the bank account.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("routing_number")]
     public string? RoutingNumber { get; init; }
 
@@ -37554,24 +38831,28 @@ public partial record PaymentMethodDetailsWechatPay
     /// <summary>
     /// Uniquely identifies this particular WeChat Pay account. You can use this attribute to check whether two WeChat accounts are the same.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("fingerprint")]
     public string? Fingerprint { get; init; }
 
     /// <summary>
     /// ID of the [location](https://docs.stripe.com/api/terminal/locations) that this transaction's reader is assigned to.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("location")]
     public string? Location { get; init; }
 
     /// <summary>
     /// ID of the [reader](https://docs.stripe.com/api/terminal/readers) this transaction was made on.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reader")]
     public string? Reader { get; init; }
 
     /// <summary>
     /// Transaction ID of this particular WeChat Pay transaction.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("transaction_id")]
     public string? TransactionId { get; init; }
 
@@ -37610,6 +38891,7 @@ public partial record PaymentMethodDomain
     /// <summary>
     /// The domain name that this payment method domain object represents.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("domain_name")]
     public required string DomainName { get; init; }
 
@@ -37628,6 +38910,7 @@ public partial record PaymentMethodDomain
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -37690,6 +38973,7 @@ public partial record PaymentMethodDomainResourcePaymentMethodStatusDetails
     /// <summary>
     /// The error message associated with the status of the payment method on the domain.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("error_message")]
     public required string ErrorMessage { get; init; }
 
@@ -37744,24 +39028,28 @@ public partial record PaymentMethodInteracPresent
     /// <summary>
     /// Card brand. Can be `interac`, `mastercard` or `visa`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("brand")]
     public string? Brand { get; init; }
 
     /// <summary>
     /// The cardholder name as read from the card, in [ISO 7813](https://en.wikipedia.org/wiki/ISO/IEC_7813) format. May include alphanumeric characters, special characters and first/last name separator (`/`). In some cases, the cardholder name may not be available depending on how the issuer has configured the card. Cardholder name is typically not available on swipe or contactless payments, such as those made with Apple Pay and Google Pay.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("cardholder_name")]
     public string? CardholderName { get; init; }
 
     /// <summary>
     /// Two-letter ISO code representing the country of the card. You could use this attribute to get a sense of the international breakdown of cards you've collected.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("country")]
     public string? Country { get; init; }
 
     /// <summary>
     /// A high-level description of the type of cards issued in this range.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("description")]
     public string? Description { get; init; }
 
@@ -37782,24 +39070,28 @@ public partial record PaymentMethodInteracPresent
     /// 
     /// *As of May 1, 2021, card fingerprint in India for Connect changed to allow two fingerprints for the same card---one for India and one for the rest of the world.*
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("fingerprint")]
     public string? Fingerprint { get; init; }
 
     /// <summary>
     /// Card funding type. Can be `credit`, `debit`, `prepaid`, or `unknown`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("funding")]
     public string? Funding { get; init; }
 
     /// <summary>
     /// The name of the card's issuing bank.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("issuer")]
     public string? Issuer { get; init; }
 
     /// <summary>
     /// The last four digits of the card.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("last4")]
     public string? Last4 { get; init; }
 
@@ -37852,6 +39144,7 @@ public partial record PaymentMethodKrCard
     /// <summary>
     /// The last four digits of the card. This may not be present for American Express cards.
     /// </summary>
+    [StringLength(4)]
     [JsonPropertyName("last4")]
     public string? Last4 { get; init; }
 
@@ -37862,6 +39155,7 @@ public partial record PaymentMethodLink
     /// <summary>
     /// Account owner's email address.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("email")]
     public string? Email { get; init; }
 
@@ -37884,6 +39178,7 @@ public partial record PaymentMethodNaverPay
     /// <summary>
     /// Uniquely identifies this particular Naver Pay account. You can use this attribute to check whether two Naver Pay accounts are the same.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("buyer_id")]
     public string? BuyerId { get; init; }
 
@@ -37900,36 +39195,42 @@ public partial record PaymentMethodNzBankAccount
     /// <summary>
     /// The name on the bank account. Only present if the account holder name is different from the name of the authorized signatory collected in the PaymentMethod’s billing details.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("account_holder_name")]
     public string? AccountHolderName { get; init; }
 
     /// <summary>
     /// The numeric code for the bank account's bank.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("bank_code")]
     public required string BankCode { get; init; }
 
     /// <summary>
     /// The name of the bank.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("bank_name")]
     public required string BankName { get; init; }
 
     /// <summary>
     /// The numeric code for the bank account's bank branch.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("branch_code")]
     public required string BranchCode { get; init; }
 
     /// <summary>
     /// Last four digits of the bank account number.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("last4")]
     public required string Last4 { get; init; }
 
     /// <summary>
     /// The suffix of the bank account number.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("suffix")]
     public string? Suffix { get; init; }
 
@@ -37946,6 +39247,7 @@ public partial record PaymentMethodOptionsAffirm
     /// <summary>
     /// Preferred language of the Affirm authorization page that the customer is redirected to.
     /// </summary>
+    [StringLength(30)]
     [JsonPropertyName("preferred_locale")]
     public string? PreferredLocale { get; init; }
 
@@ -37975,6 +39277,7 @@ public partial record PaymentMethodOptionsAfterpayClearpay
     /// An internal identifier or reference that this payment corresponds to. You must limit the identifier to 128 characters, and it can only contain letters, numbers, underscores, backslashes, and dashes.
     /// This field differs from the statement descriptor and item name.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reference")]
     public string? Reference { get; init; }
 
@@ -38137,6 +39440,7 @@ public partial record PaymentMethodOptionsCardMandateOptions
     /// <summary>
     /// A description of the mandate or subscription that is meant to be displayed to the customer.
     /// </summary>
+    [StringLength(200)]
     [JsonPropertyName("description")]
     public string? Description { get; init; }
 
@@ -38161,6 +39465,7 @@ public partial record PaymentMethodOptionsCardMandateOptions
     /// <summary>
     /// Unique identifier for the mandate or subscription.
     /// </summary>
+    [StringLength(80)]
     [JsonPropertyName("reference")]
     public required string Reference { get; init; }
 
@@ -38386,6 +39691,7 @@ public partial record PaymentMethodOptionsKlarna
     /// <summary>
     /// Preferred locale of the Klarna checkout page that the customer is redirected to.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("preferred_locale")]
     public string? PreferredLocale { get; init; }
 
@@ -38408,6 +39714,7 @@ public partial record PaymentMethodOptionsKonbini
     /// <summary>
     /// An optional 10 to 11 digit numeric-only string determining the confirmation code at applicable convenience stores.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("confirmation_number")]
     public string? ConfirmationNumber { get; init; }
 
@@ -38426,6 +39733,7 @@ public partial record PaymentMethodOptionsKonbini
     /// <summary>
     /// A product descriptor of up to 22 characters, which will appear to customers at the convenience store.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("product_description")]
     public string? ProductDescription { get; init; }
 
@@ -38494,6 +39802,7 @@ public partial record PaymentMethodOptionsMandateOptionsPix
     /// <summary>
     /// Date when the mandate expires and no further payments will be charged, in `YYYY-MM-DD`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("end_date")]
     public string? EndDate { get; init; }
 
@@ -38506,12 +39815,14 @@ public partial record PaymentMethodOptionsMandateOptionsPix
     /// <summary>
     /// Subscription name displayed to buyers in their bank app.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reference")]
     public string? Reference { get; init; }
 
     /// <summary>
     /// Start date of the mandate, in `YYYY-MM-DD`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("start_date")]
     public string? StartDate { get; init; }
 
@@ -38534,6 +39845,7 @@ public partial record PaymentMethodOptionsMandateOptionsUpi
     /// <summary>
     /// A description of the mandate or subscription that is meant to be displayed to the customer.
     /// </summary>
+    [StringLength(20)]
     [JsonPropertyName("description")]
     public string? Description { get; init; }
 
@@ -38646,12 +39958,14 @@ public partial record PaymentMethodOptionsPaypal
     /// <summary>
     /// Preferred locale of the PayPal checkout page that the customer is redirected to.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("preferred_locale")]
     public string? PreferredLocale { get; init; }
 
     /// <summary>
     /// A reference of the PayPal transaction visible to customer which is mapped to PayPal's invoice ID. This must be a globally unique ID if you have configured in your PayPal settings to block multiple payments per invoice ID.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reference")]
     public string? Reference { get; init; }
 
@@ -38867,6 +40181,7 @@ public partial record PaymentMethodOptionsWechatPay
     /// <summary>
     /// The app ID registered with WeChat Pay. Only required when client is ios, android, or mini_program.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("app_id")]
     public string? AppId { get; init; }
 
@@ -38937,6 +40252,7 @@ public partial record PaymentMethodPaypal
     /// <summary>
     /// Two-letter ISO code representing the buyer's country. Values are provided by PayPal directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("country")]
     public string? Country { get; init; }
 
@@ -38944,12 +40260,14 @@ public partial record PaymentMethodPaypal
     /// Owner's email. Values are provided by PayPal directly
     /// (if supported) at the time of authorization or settlement. They cannot be set or mutated.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("payer_email")]
     public string? PayerEmail { get; init; }
 
     /// <summary>
     /// PayPal account PayerID. This identifier uniquely identifies the PayPal customer.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("payer_id")]
     public string? PayerId { get; init; }
 
@@ -38960,18 +40278,21 @@ public partial record PaymentMethodPayto
     /// <summary>
     /// Bank-State-Branch number of the bank account.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("bsb_number")]
     public string? BsbNumber { get; init; }
 
     /// <summary>
     /// Last four digits of the bank account number.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("last4")]
     public string? Last4 { get; init; }
 
     /// <summary>
     /// The PayID alias for the bank account.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("pay_id")]
     public string? PayId { get; init; }
 
@@ -38982,6 +40303,7 @@ public partial record PaymentMethodPix
     /// <summary>
     /// Uniquely identifies this particular Pix account. You can use this attribute to check whether two Pix accounts are the same.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("fingerprint")]
     public string? Fingerprint { get; init; }
 
@@ -39012,24 +40334,28 @@ public partial record PaymentMethodSepaDebit
     /// <summary>
     /// Bank code of bank associated with the bank account.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("bank_code")]
     public string? BankCode { get; init; }
 
     /// <summary>
     /// Branch code of bank associated with the bank account.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("branch_code")]
     public string? BranchCode { get; init; }
 
     /// <summary>
     /// Two-letter ISO code representing the country the bank account is located in.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("country")]
     public string? Country { get; init; }
 
     /// <summary>
     /// Uniquely identifies this particular bank account. You can use this attribute to check whether two bank accounts are the same.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("fingerprint")]
     public string? Fingerprint { get; init; }
 
@@ -39042,6 +40368,7 @@ public partial record PaymentMethodSepaDebit
     /// <summary>
     /// Last four characters of the IBAN.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("last4")]
     public string? Last4 { get; init; }
 
@@ -39052,6 +40379,7 @@ public partial record PaymentMethodSofort
     /// <summary>
     /// Two-letter ISO code representing the country the bank account is located in.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("country")]
     public string? Country { get; init; }
 
@@ -39074,6 +40402,7 @@ public partial record PaymentMethodUpi
     /// <summary>
     /// Customer's unique Virtual Payment Address
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("vpa")]
     public string? Vpa { get; init; }
 
@@ -39096,24 +40425,28 @@ public partial record PaymentMethodUsBankAccount
     /// <summary>
     /// The name of the bank.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("bank_name")]
     public string? BankName { get; init; }
 
     /// <summary>
     /// The ID of the Financial Connections Account used to create the payment method.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("financial_connections_account")]
     public string? FinancialConnectionsAccount { get; init; }
 
     /// <summary>
     /// Uniquely identifies this particular bank account. You can use this attribute to check whether two bank accounts are the same.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("fingerprint")]
     public string? Fingerprint { get; init; }
 
     /// <summary>
     /// Last four digits of the bank account number.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("last4")]
     public string? Last4 { get; init; }
 
@@ -39126,6 +40459,7 @@ public partial record PaymentMethodUsBankAccount
     /// <summary>
     /// Routing number of the bank account.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("routing_number")]
     public string? RoutingNumber { get; init; }
 
@@ -39213,6 +40547,7 @@ public partial record PaymentPagesCheckoutSessionAfterExpirationRecovery
     /// <summary>
     /// URL that creates a new Checkout Session when clicked that is a copy of this expired Checkout Session
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("url")]
     public string? Url { get; init; }
 
@@ -39235,6 +40570,7 @@ public partial record PaymentPagesCheckoutSessionAutomaticTax
     /// <summary>
     /// The tax provider powering automatic tax.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("provider")]
     public string? Provider { get; init; }
 
@@ -39251,6 +40587,7 @@ public partial record PaymentPagesCheckoutSessionBrandingSettings
     /// <summary>
     /// A hex color value starting with `#` representing the background color for the Checkout Session.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("background_color")]
     public required string BackgroundColor { get; init; }
 
@@ -39263,18 +40600,21 @@ public partial record PaymentPagesCheckoutSessionBrandingSettings
     /// <summary>
     /// A hex color value starting with `#` representing the button color for the Checkout Session.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("button_color")]
     public required string ButtonColor { get; init; }
 
     /// <summary>
     /// The display name shown on the Checkout Session.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("display_name")]
     public required string DisplayName { get; init; }
 
     /// <summary>
     /// The font family for the Checkout Session. Must be one of the [supported font families](https://docs.stripe.com/payments/checkout/customization/appearance?payment-ui=stripe-hosted#font-compatibility).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("font_family")]
     public required string FontFamily { get; init; }
 
@@ -39297,6 +40637,7 @@ public partial record PaymentPagesCheckoutSessionBrandingSettingsIcon
     /// <summary>
     /// The ID of a [File upload](https://stripe.com/docs/api/files) representing the icon. Purpose must be `business_icon`. Required if `type` is `file` and disallowed otherwise.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("file")]
     public string? File { get; init; }
 
@@ -39309,6 +40650,7 @@ public partial record PaymentPagesCheckoutSessionBrandingSettingsIcon
     /// <summary>
     /// The URL of the image. Present when `type` is `url`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("url")]
     public string? Url { get; init; }
 
@@ -39319,6 +40661,7 @@ public partial record PaymentPagesCheckoutSessionBrandingSettingsLogo
     /// <summary>
     /// The ID of a [File upload](https://stripe.com/docs/api/files) representing the logo. Purpose must be `business_logo`. Required if `type` is `file` and disallowed otherwise.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("file")]
     public string? File { get; init; }
 
@@ -39331,6 +40674,7 @@ public partial record PaymentPagesCheckoutSessionBrandingSettingsLogo
     /// <summary>
     /// The URL of the image. Present when `type` is `url`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("url")]
     public string? Url { get; init; }
 
@@ -39360,6 +40704,7 @@ public partial record PaymentPagesCheckoutSessionCheckoutAddressDetails
     /// <summary>
     /// Customer name.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("name")]
     public required string Name { get; init; }
 
@@ -39370,12 +40715,14 @@ public partial record PaymentPagesCheckoutSessionCollectedInformation
     /// <summary>
     /// Customer’s business name for this Checkout Session
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("business_name")]
     public string? BusinessName { get; init; }
 
     /// <summary>
     /// Customer’s individual name for this Checkout Session
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("individual_name")]
     public string? IndividualName { get; init; }
 
@@ -39451,6 +40798,7 @@ public partial record PaymentPagesCheckoutSessionCurrencyConversion
     /// <summary>
     /// Creation currency of the CheckoutSession before localization
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("source_currency")]
     public required string SourceCurrency { get; init; }
 
@@ -39464,6 +40812,7 @@ public partial record PaymentPagesCheckoutSessionCustomFields
     /// <summary>
     /// String of your choice that your integration can use to reconcile this field. Must be unique to this field, alphanumeric, and up to 200 characters.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("key")]
     public required string Key { get; init; }
 
@@ -39495,6 +40844,7 @@ public partial record PaymentPagesCheckoutSessionCustomFieldsDropdown
     /// <summary>
     /// The value that pre-fills on the payment page.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("default_value")]
     public string? DefaultValue { get; init; }
 
@@ -39507,6 +40857,7 @@ public partial record PaymentPagesCheckoutSessionCustomFieldsDropdown
     /// <summary>
     /// The option selected by the customer. This will be the `value` for the option.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("value")]
     public string? Value { get; init; }
 
@@ -39517,6 +40868,7 @@ public partial record PaymentPagesCheckoutSessionCustomFieldsLabel
     /// <summary>
     /// Custom text for the label, displayed to the customer. Up to 50 characters.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("custom")]
     public string? Custom { get; init; }
 
@@ -39533,6 +40885,7 @@ public partial record PaymentPagesCheckoutSessionCustomFieldsNumeric
     /// <summary>
     /// The value that pre-fills the field on the payment page.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("default_value")]
     public string? DefaultValue { get; init; }
 
@@ -39551,6 +40904,7 @@ public partial record PaymentPagesCheckoutSessionCustomFieldsNumeric
     /// <summary>
     /// The value entered by the customer, containing only digits.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("value")]
     public string? Value { get; init; }
 
@@ -39561,12 +40915,14 @@ public partial record PaymentPagesCheckoutSessionCustomFieldsOption
     /// <summary>
     /// The label for the option, displayed to the customer. Up to 100 characters.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("label")]
     public required string Label { get; init; }
 
     /// <summary>
     /// The value for this option, not displayed to the customer, used by your integration to reconcile the option selected by the customer. Must be unique to this option, alphanumeric, and up to 100 characters.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("value")]
     public required string Value { get; init; }
 
@@ -39577,6 +40933,7 @@ public partial record PaymentPagesCheckoutSessionCustomFieldsText
     /// <summary>
     /// The value that pre-fills the field on the payment page.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("default_value")]
     public string? DefaultValue { get; init; }
 
@@ -39595,6 +40952,7 @@ public partial record PaymentPagesCheckoutSessionCustomFieldsText
     /// <summary>
     /// The value entered by the customer.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("value")]
     public string? Value { get; init; }
 
@@ -39633,6 +40991,7 @@ public partial record PaymentPagesCheckoutSessionCustomTextPosition
     /// <summary>
     /// Text can be up to 1200 characters in length.
     /// </summary>
+    [StringLength(1200)]
     [JsonPropertyName("message")]
     public required string Message { get; init; }
 
@@ -39649,6 +41008,7 @@ public partial record PaymentPagesCheckoutSessionCustomerDetails
     /// <summary>
     /// The customer's business name after a completed Checkout Session.
     /// </summary>
+    [StringLength(150)]
     [JsonPropertyName("business_name")]
     public string? BusinessName { get; init; }
 
@@ -39656,24 +41016,28 @@ public partial record PaymentPagesCheckoutSessionCustomerDetails
     /// The email associated with the Customer, if one exists, on the Checkout Session after a completed Checkout Session or at time of session expiry.
     /// Otherwise, if the customer has consented to promotional content, this value is the most recent valid email provided by the customer on the Checkout form.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("email")]
     public string? Email { get; init; }
 
     /// <summary>
     /// The customer's individual name after a completed Checkout Session.
     /// </summary>
+    [StringLength(150)]
     [JsonPropertyName("individual_name")]
     public string? IndividualName { get; init; }
 
     /// <summary>
     /// The customer's name after a completed Checkout Session. Note: This property is populated only for sessions on or after March 30, 2022.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("name")]
     public string? Name { get; init; }
 
     /// <summary>
     /// The customer's phone number after a completed Checkout Session.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("phone")]
     public string? Phone { get; init; }
 
@@ -39753,12 +41117,14 @@ public partial record PaymentPagesCheckoutSessionInvoiceSettings
     /// <summary>
     /// An arbitrary string attached to the object. Often useful for displaying to users.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("description")]
     public string? Description { get; init; }
 
     /// <summary>
     /// Footer displayed on the invoice.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("footer")]
     public string? Footer { get; init; }
 
@@ -39807,6 +41173,7 @@ public partial record PaymentPagesCheckoutSessionOptionalItem
     [JsonPropertyName("adjustable_quantity")]
     public PaymentPagesCheckoutSessionOptionalItemAdjustableQuantity? AdjustableQuantity { get; init; }
 
+    [StringLength(5000)]
     [JsonPropertyName("price")]
     public required string Price { get; init; }
 
@@ -39967,6 +41334,7 @@ public partial record PaymentPagesCheckoutSessionTaxId
     /// <summary>
     /// The value of the tax ID.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("value")]
     public string? Value { get; init; }
 
@@ -40098,6 +41466,7 @@ public partial record PaymentRecord
     /// <summary>
     /// ID of the Connect application that created the PaymentRecord.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("application")]
     public string? Application { get; init; }
 
@@ -40122,18 +41491,21 @@ public partial record PaymentRecord
     /// <summary>
     /// An arbitrary string attached to the object. Often useful for displaying to users.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("description")]
     public string? Description { get; init; }
 
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
     /// <summary>
     /// ID of the latest Payment Attempt Record attached to this Payment Record.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("latest_payment_attempt_record")]
     public string? LatestPaymentAttemptRecord { get; init; }
 
@@ -40198,36 +41570,42 @@ public partial record PaymentsPrimitivesPaymentRecordsResourceAddress
     /// <summary>
     /// City, district, suburb, town, or village.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("city")]
     public string? City { get; init; }
 
     /// <summary>
     /// Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("country")]
     public string? Country { get; init; }
 
     /// <summary>
     /// Address line 1, such as the street, PO Box, or company name.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("line1")]
     public string? Line1 { get; init; }
 
     /// <summary>
     /// Address line 2, such as the apartment, suite, unit, or building.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("line2")]
     public string? Line2 { get; init; }
 
     /// <summary>
     /// ZIP or postal code.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("postal_code")]
     public string? PostalCode { get; init; }
 
     /// <summary>
     /// State, county, province, or region ([ISO 3166-2](https://en.wikipedia.org/wiki/ISO_3166-2)).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("state")]
     public string? State { get; init; }
 
@@ -40266,18 +41644,21 @@ public partial record PaymentsPrimitivesPaymentRecordsResourceBillingDetails
     /// <summary>
     /// The billing email associated with the method of payment.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("email")]
     public string? Email { get; init; }
 
     /// <summary>
     /// The billing name associated with the method of payment.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("name")]
     public string? Name { get; init; }
 
     /// <summary>
     /// The billing phone number associated with the method of payment.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("phone")]
     public string? Phone { get; init; }
 
@@ -40291,24 +41672,28 @@ public partial record PaymentsPrimitivesPaymentRecordsResourceCustomerDetails
     /// <summary>
     /// ID of the Stripe Customer associated with this payment.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("customer")]
     public string? Customer { get; init; }
 
     /// <summary>
     /// The customer's email address.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("email")]
     public string? Email { get; init; }
 
     /// <summary>
     /// The customer's name.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("name")]
     public string? Name { get; init; }
 
     /// <summary>
     /// The customer's phone number.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("phone")]
     public string? Phone { get; init; }
 
@@ -40342,12 +41727,14 @@ public partial record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodAmazo
     /// <summary>
     /// Card brand. Can be `American Express`, `Cartes Bancaires`, `Diners Club`, `Discover`, `Eftpos Australia`, `Girocard`, `JCB`, `MasterCard`, `UnionPay`, `Visa`, or `Unknown`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("brand")]
     public string? Brand { get; init; }
 
     /// <summary>
     /// Two-letter ISO code representing the country of the card. You could use this attribute to get a sense of the international breakdown of cards you've collected.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("country")]
     public string? Country { get; init; }
 
@@ -40366,12 +41753,14 @@ public partial record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodAmazo
     /// <summary>
     /// Card funding type. Can be `credit`, `debit`, `prepaid`, or `unknown`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("funding")]
     public string? Funding { get; init; }
 
     /// <summary>
     /// The last four digits of the card.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("last4")]
     public string? Last4 { get; init; }
 
@@ -40385,6 +41774,7 @@ public partial record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardD
     /// <summary>
     /// The authorization code of the payment.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("authorization_code")]
     public string? AuthorizationCode { get; init; }
 
@@ -40409,6 +41799,7 @@ public partial record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardD
     /// <summary>
     /// Two-letter ISO code representing the country of the card. You could use this attribute to get a sense of the international breakdown of cards you've collected.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("country")]
     public string? Country { get; init; }
 
@@ -40429,6 +41820,7 @@ public partial record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardD
     /// 
     /// *As of May 1, 2021, card fingerprint in India for Connect changed to allow two fingerprints for the same card---one for India and one for the rest of the world.*
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("fingerprint")]
     public string? Fingerprint { get; init; }
 
@@ -40447,6 +41839,7 @@ public partial record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardD
     /// <summary>
     /// The last four digits of the card.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("last4")]
     public string? Last4 { get; init; }
 
@@ -40459,12 +41852,14 @@ public partial record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardD
     /// <summary>
     /// Advice code from the card network for the failed payment.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("network_advice_code")]
     public string? NetworkAdviceCode { get; init; }
 
     /// <summary>
     /// Decline code from the card network for the failed payment.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("network_decline_code")]
     public string? NetworkDeclineCode { get; init; }
 
@@ -40477,6 +41872,7 @@ public partial record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardD
     /// <summary>
     /// This is used by the financial networks to identify a transaction. Visa calls this the Transaction ID, Mastercard calls this the Trace ID, and American Express calls this the Acquirer Reference Data. This value will be present if it is returned by the financial network in the authorization response, and null otherwise.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("network_transaction_id")]
     public string? NetworkTransactionId { get; init; }
 
@@ -40612,6 +42008,7 @@ public partial record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardD
     /// <summary>
     /// (For tokenized numbers only.) The last four digits of the device account number.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("dynamic_last4")]
     public string? DynamicLast4 { get; init; }
 
@@ -40621,6 +42018,7 @@ public partial record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardD
     /// <summary>
     /// The type of the card wallet, one of `apple_pay` or `google_pay`. An additional hash is included on the Wallet subhash with a name matching this value. It contains additional information specific to the card wallet type.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("type")]
     public required string Type { get; init; }
 
@@ -40631,6 +42029,7 @@ public partial record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardD
     /// <summary>
     /// Type of the apple_pay transaction, one of `apple_pay` or `apple_pay_later`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("type")]
     public required string Type { get; init; }
 
@@ -40650,12 +42049,14 @@ public partial record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCusto
     /// <summary>
     /// Display name for the custom (user-defined) payment method type used to make this payment.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("display_name")]
     public required string DisplayName { get; init; }
 
     /// <summary>
     /// The custom payment method type associated with this payment.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("type")]
     public string? Type { get; init; }
 
@@ -40806,6 +42207,7 @@ public partial record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodDetai
     /// <summary>
     /// ID of the Stripe PaymentMethod used to make this payment.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("payment_method")]
     public string? PaymentMethod { get; init; }
 
@@ -40859,6 +42261,7 @@ public partial record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodDetai
     /// An additional hash is included on `payment_method_details` with a name matching this value.
     /// It contains information specific to the payment method.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("type")]
     public required string Type { get; init; }
 
@@ -40894,6 +42297,7 @@ public partial record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodKlarn
     /// <summary>
     /// The payer address country
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("country")]
     public string? Country { get; init; }
 
@@ -40914,12 +42318,14 @@ public partial record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodMobil
     /// <summary>
     /// Brand of the card used in the transaction
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("brand")]
     public string? Brand { get; init; }
 
     /// <summary>
     /// Two-letter ISO code representing the country of the card
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("country")]
     public string? Country { get; init; }
 
@@ -40938,6 +42344,7 @@ public partial record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodMobil
     /// <summary>
     /// The last 4 digits of the card
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("last4")]
     public string? Last4 { get; init; }
 
@@ -40961,12 +42368,14 @@ public partial record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodRevol
     /// <summary>
     /// Card brand. Can be `amex`, `cartes_bancaires`, `diners`, `discover`, `eftpos_au`, `jcb`, `link`, `mastercard`, `unionpay`, `visa` or `unknown`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("brand")]
     public string? Brand { get; init; }
 
     /// <summary>
     /// Two-letter ISO code representing the country of the card. You could use this attribute to get a sense of the international breakdown of cards you've collected.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("country")]
     public string? Country { get; init; }
 
@@ -40985,12 +42394,14 @@ public partial record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodRevol
     /// <summary>
     /// Card funding type. Can be `credit`, `debit`, `prepaid`, or `unknown`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("funding")]
     public string? Funding { get; init; }
 
     /// <summary>
     /// The last four digits of the card.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("last4")]
     public string? Last4 { get; init; }
 
@@ -41027,6 +42438,7 @@ public partial record PaymentsPrimitivesPaymentRecordsResourceProcessorDetailsRe
     /// <summary>
     /// An opaque string for manual reconciliation of this payment, for example a check number or a payment processor ID.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("payment_reference")]
     public string? PaymentReference { get; init; }
 
@@ -41046,12 +42458,14 @@ public partial record PaymentsPrimitivesPaymentRecordsResourceShippingDetails
     /// <summary>
     /// The shipping recipient's name.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("name")]
     public string? Name { get; init; }
 
     /// <summary>
     /// The shipping recipient's phone number.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("phone")]
     public string? Phone { get; init; }
 
@@ -41120,6 +42534,7 @@ public partial record Payout
     /// <summary>
     /// An arbitrary string attached to the object. Often useful for displaying to users.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("description")]
     public string? Description { get; init; }
 
@@ -41138,18 +42553,21 @@ public partial record Payout
     /// <summary>
     /// Error code that provides a reason for a payout failure, if available. View our [list of failure codes](https://docs.stripe.com/api#payout_failures).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("failure_code")]
     public string? FailureCode { get; init; }
 
     /// <summary>
     /// Message that provides the reason for a payout failure, if available.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("failure_message")]
     public string? FailureMessage { get; init; }
 
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -41168,6 +42586,7 @@ public partial record Payout
     /// <summary>
     /// The method used to send this payout, which can be `standard` or `instant`. `instant` is supported for payouts to debit cards and bank accounts in certain countries. Learn more about [bank support for Instant Payouts](https://stripe.com/docs/payouts/instant-payouts-banks).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("method")]
     public required string Method { get; init; }
 
@@ -41186,6 +42605,7 @@ public partial record Payout
     /// <summary>
     /// ID of the v2 FinancialAccount the funds are sent to.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("payout_method")]
     public string? PayoutMethod { get; init; }
 
@@ -41204,18 +42624,21 @@ public partial record Payout
     /// <summary>
     /// The source balance this payout came from, which can be one of the following: `card`, `fpx`, or `bank_account`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("source_type")]
     public required string SourceType { get; init; }
 
     /// <summary>
     /// Extra information about a payout that displays on the user's bank statement.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("statement_descriptor")]
     public string? StatementDescriptor { get; init; }
 
     /// <summary>
     /// Current status of the payout: `paid`, `pending`, `in_transit`, `canceled` or `failed`. A payout is `pending` until it's submitted to the bank, when it becomes `in_transit`. The status changes to `paid` if the transaction succeeds, or to `failed` or `canceled` (within 5 business days). Some payouts that fail might initially show as `paid`, then change to `failed`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("status")]
     public required string Status { get; init; }
 
@@ -41238,12 +42661,14 @@ public partial record PayoutsTraceId
     /// <summary>
     /// Possible values are `pending`, `supported`, and `unsupported`. When `payout.status` is `pending` or `in_transit`, this will be `pending`. When the payout transitions to `paid`, `failed`, or `canceled`, this status will become `supported` or `unsupported` shortly after in most cases. In some cases, this may appear as `pending` for up to 10 days after `arrival_date` until transitioning to `supported` or `unsupported`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("status")]
     public required string Status { get; init; }
 
     /// <summary>
     /// The trace ID value if `trace_id.status` is `supported`, otherwise `nil`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("value")]
     public string? Value { get; init; }
 
@@ -41277,6 +42702,7 @@ public partial record Person
     /// <summary>
     /// The account the person is associated with.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("account")]
     public required string Account { get; init; }
 
@@ -41304,24 +42730,28 @@ public partial record Person
     /// <summary>
     /// The person's email address. Also available for accounts where [controller.requirement_collection](/api/accounts/object#account_object-controller-requirement_collection) is `stripe`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("email")]
     public string? Email { get; init; }
 
     /// <summary>
     /// The person's first name. Also available for accounts where [controller.requirement_collection](/api/accounts/object#account_object-controller-requirement_collection) is `stripe`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("first_name")]
     public string? FirstName { get; init; }
 
     /// <summary>
     /// The Kana variation of the person's first name (Japan only). Also available for accounts where [controller.requirement_collection](/api/accounts/object#account_object-controller-requirement_collection) is `stripe`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("first_name_kana")]
     public string? FirstNameKana { get; init; }
 
     /// <summary>
     /// The Kanji variation of the person's first name (Japan only). Also available for accounts where [controller.requirement_collection](/api/accounts/object#account_object-controller-requirement_collection) is `stripe`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("first_name_kanji")]
     public string? FirstNameKanji { get; init; }
 
@@ -41343,6 +42773,7 @@ public partial record Person
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -41361,24 +42792,28 @@ public partial record Person
     /// <summary>
     /// The person's last name. Also available for accounts where [controller.requirement_collection](/api/accounts/object#account_object-controller-requirement_collection) is `stripe`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("last_name")]
     public string? LastName { get; init; }
 
     /// <summary>
     /// The Kana variation of the person's last name (Japan only). Also available for accounts where [controller.requirement_collection](/api/accounts/object#account_object-controller-requirement_collection) is `stripe`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("last_name_kana")]
     public string? LastNameKana { get; init; }
 
     /// <summary>
     /// The Kanji variation of the person's last name (Japan only). Also available for accounts where [controller.requirement_collection](/api/accounts/object#account_object-controller-requirement_collection) is `stripe`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("last_name_kanji")]
     public string? LastNameKanji { get; init; }
 
     /// <summary>
     /// The person's maiden name.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("maiden_name")]
     public string? MaidenName { get; init; }
 
@@ -41391,6 +42826,7 @@ public partial record Person
     /// <summary>
     /// The country where the person is a national.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("nationality")]
     public string? Nationality { get; init; }
 
@@ -41403,6 +42839,7 @@ public partial record Person
     /// <summary>
     /// The person's phone number.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("phone")]
     public string? Phone { get; init; }
 
@@ -41449,12 +42886,14 @@ public partial record PersonAdditionalTosAcceptance
     /// <summary>
     /// The IP address from which the legal guardian accepted the service agreement.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("ip")]
     public string? Ip { get; init; }
 
     /// <summary>
     /// The user agent of the browser from which the legal guardian accepted the service agreement.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("user_agent")]
     public string? UserAgent { get; init; }
 
@@ -41481,6 +42920,7 @@ public partial record PersonEthnicityDetails
     /// <summary>
     /// Please specify your origin, when other is selected.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("ethnicity_other")]
     public string? EthnicityOther { get; init; }
 
@@ -41537,6 +42977,7 @@ public partial record PersonRaceDetails
     /// <summary>
     /// Please specify your race, when other is selected.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("race_other")]
     public string? RaceOther { get; init; }
 
@@ -41589,6 +43030,7 @@ public partial record PersonRelationship
     /// <summary>
     /// The person's title (e.g., CEO, Support Engineer).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("title")]
     public string? Title { get; init; }
 
@@ -41651,6 +43093,7 @@ public partial record PersonUsCfpbData
     /// <summary>
     /// The persons self-identified gender
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("self_identified_gender")]
     public string? SelfIdentifiedGender { get; init; }
 
@@ -41707,6 +43150,7 @@ public partial record Plan
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -41737,12 +43181,14 @@ public partial record Plan
     /// <summary>
     /// The meter tracking the usage of a metered price
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("meter")]
     public string? Meter { get; init; }
 
     /// <summary>
     /// A brief description of the plan, hidden from customers.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("nickname")]
     public string? Nickname { get; init; }
 
@@ -41829,12 +43275,14 @@ public partial record PlatformEarningFeeSource
     /// <summary>
     /// Charge ID that created this application fee.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("charge")]
     public string? Charge { get; init; }
 
     /// <summary>
     /// Payout ID that created this application fee.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("payout")]
     public string? Payout { get; init; }
 
@@ -41851,18 +43299,21 @@ public partial record PortalBusinessProfile
     /// <summary>
     /// The messaging shown to customers in the portal.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("headline")]
     public string? Headline { get; init; }
 
     /// <summary>
     /// A link to the business’s publicly available privacy policy.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("privacy_policy_url")]
     public string? PrivacyPolicyUrl { get; init; }
 
     /// <summary>
     /// A link to the business’s publicly available terms of service.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("terms_of_service_url")]
     public string? TermsOfServiceUrl { get; init; }
 
@@ -41908,6 +43359,7 @@ public partial record PortalFlowsAfterCompletionHostedConfirmation
     /// <summary>
     /// A custom message to display to the customer after the flow is completed.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("custom_message")]
     public string? CustomMessage { get; init; }
 
@@ -41918,6 +43370,7 @@ public partial record PortalFlowsAfterCompletionRedirect
     /// <summary>
     /// The URL the customer will be redirected to after the flow is completed.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("return_url")]
     public required string ReturnUrl { get; init; }
 
@@ -41928,6 +43381,7 @@ public partial record PortalFlowsCouponOffer
     /// <summary>
     /// The ID of the coupon to be offered.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("coupon")]
     public required string Coupon { get; init; }
 
@@ -42007,6 +43461,7 @@ public partial record PortalFlowsFlowSubscriptionCancel
     /// <summary>
     /// The ID of the subscription to be canceled.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("subscription")]
     public required string Subscription { get; init; }
 
@@ -42017,6 +43472,7 @@ public partial record PortalFlowsFlowSubscriptionUpdate
     /// <summary>
     /// The ID of the subscription to be updated.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("subscription")]
     public required string Subscription { get; init; }
 
@@ -42039,6 +43495,7 @@ public partial record PortalFlowsFlowSubscriptionUpdateConfirm
     /// <summary>
     /// The ID of the subscription to be updated.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("subscription")]
     public required string Subscription { get; init; }
 
@@ -42065,12 +43522,14 @@ public partial record PortalFlowsSubscriptionUpdateConfirmDiscount
     /// <summary>
     /// The ID of the coupon to apply to this subscription update.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("coupon")]
     public string? Coupon { get; init; }
 
     /// <summary>
     /// The ID of a promotion code to apply to this subscription update.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("promotion_code")]
     public string? PromotionCode { get; init; }
 
@@ -42081,12 +43540,14 @@ public partial record PortalFlowsSubscriptionUpdateConfirmItem
     /// <summary>
     /// The ID of the [subscription item](https://docs.stripe.com/api/subscriptions/object#subscription_object-items-data-id) to be updated.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public string? Id { get; init; }
 
     /// <summary>
     /// The price the customer should subscribe to through this flow. The price must also be included in the configuration's [`features.subscription_update.products`](https://docs.stripe.com/api/customer_portal/configuration#portal_configuration_object-features-subscription_update-products).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("price")]
     public string? Price { get; init; }
 
@@ -42121,6 +43582,7 @@ public partial record PortalLoginPage
     /// <summary>
     /// A shareable URL to the hosted portal login page. Your customers will be able to log in with their [email](https://docs.stripe.com/api/customers/object#customer_object-email) and receive a link to their customer portal.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("url")]
     public string? Url { get; init; }
 
@@ -42137,6 +43599,7 @@ public partial record PortalPaymentMethodUpdate
     /// <summary>
     /// The [Payment Method Configuration](/api/payment_method_configurations) to use for this portal session. When specified, customers will be able to update their payment method to one of the options specified by the payment method configuration. If not set, the default payment method configuration is used.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("payment_method_configuration")]
     public string? PaymentMethodConfiguration { get; init; }
 
@@ -42266,6 +43729,7 @@ public partial record PortalSubscriptionUpdateProduct
     /// <summary>
     /// The product ID.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("product")]
     public required string Product { get; init; }
 
@@ -42342,6 +43806,7 @@ public partial record Price
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -42354,6 +43819,7 @@ public partial record Price
     /// <summary>
     /// A lookup key used to retrieve prices dynamically from a static string. This may be up to 200 characters.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("lookup_key")]
     public string? LookupKey { get; init; }
 
@@ -42366,6 +43832,7 @@ public partial record Price
     /// <summary>
     /// A brief description of the price, hidden from customers.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("nickname")]
     public string? Nickname { get; init; }
 
@@ -42498,12 +43965,14 @@ public partial record Product
     /// <summary>
     /// The product's description, meant to be displayable to the customer. Use this field to optionally store a long form explanation of the product being sold for your own rendering purposes.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("description")]
     public string? Description { get; init; }
 
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -42534,6 +44003,7 @@ public partial record Product
     /// <summary>
     /// The product's name, meant to be displayable to the customer.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("name")]
     public required string Name { get; init; }
 
@@ -42558,6 +44028,7 @@ public partial record Product
     /// <summary>
     /// Extra information about a product which will appear on your customer's credit card statement. In the case that multiple products are billed at once, the first statement descriptor will be used. Only used for subscription payments.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("statement_descriptor")]
     public string? StatementDescriptor { get; init; }
 
@@ -42570,6 +44041,7 @@ public partial record Product
     /// <summary>
     /// A label that represents units of this product. When set, this will be included in customers' receipts, invoices, Checkout, and the customer portal.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("unit_label")]
     public string? UnitLabel { get; init; }
 
@@ -42582,6 +44054,7 @@ public partial record Product
     /// <summary>
     /// A URL of a publicly-accessible webpage for this product.
     /// </summary>
+    [StringLength(2048)]
     [JsonPropertyName("url")]
     public string? Url { get; init; }
 
@@ -42603,6 +44076,7 @@ public partial record ProductFeature
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -42625,6 +44099,7 @@ public partial record ProductMarketingFeature
     /// <summary>
     /// The marketing feature name. Up to 80 characters long.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("name")]
     public string? Name { get; init; }
 
@@ -42648,6 +44123,7 @@ public partial record PromotionCode
     /// <summary>
     /// The customer-facing code. Regardless of case, this code must be unique across all active promotion codes for each customer. Valid characters are lower case letters (a-z), upper case letters (A-Z), digits (0-9), and dashes (-).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("code")]
     public required string Code { get; init; }
 
@@ -42666,6 +44142,7 @@ public partial record PromotionCode
     /// <summary>
     /// The account representing the customer who can use this promotion code.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("customer_account")]
     public string? CustomerAccount { get; init; }
 
@@ -42678,6 +44155,7 @@ public partial record PromotionCode
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -42768,6 +44246,7 @@ public partial record PromotionCodesResourceRestrictions
     /// <summary>
     /// Three-letter [ISO code](https://stripe.com/docs/currencies) for minimum_amount
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("minimum_amount_currency")]
     public string? MinimumAmountCurrency { get; init; }
 
@@ -42846,6 +44325,7 @@ public partial record Quote
     /// <summary>
     /// Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("currency")]
     public string? Currency { get; init; }
 
@@ -42858,6 +44338,7 @@ public partial record Quote
     /// <summary>
     /// The account representing the customer who received this quote. A customer or account is required to finalize the quote. Once specified, you can't change it.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("customer_account")]
     public string? CustomerAccount { get; init; }
 
@@ -42870,6 +44351,7 @@ public partial record Quote
     /// <summary>
     /// A description that will be displayed on the quote PDF.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("description")]
     public string? Description { get; init; }
 
@@ -42888,6 +44370,7 @@ public partial record Quote
     /// <summary>
     /// A footer that will be displayed on the quote PDF.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("footer")]
     public string? Footer { get; init; }
 
@@ -42900,12 +44383,14 @@ public partial record Quote
     /// <summary>
     /// A header that will be displayed on the quote PDF.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("header")]
     public string? Header { get; init; }
 
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -42939,6 +44424,7 @@ public partial record Quote
     /// <summary>
     /// A unique number that identifies this particular quote. This number is assigned once the quote is [finalized](https://docs.stripe.com/quotes/overview#finalize).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("number")]
     public string? Number { get; init; }
 
@@ -43012,6 +44498,7 @@ public partial record QuotesResourceAutomaticTax
     /// <summary>
     /// The tax provider powering automatic tax.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("provider")]
     public string? Provider { get; init; }
 
@@ -43132,6 +44619,7 @@ public partial record QuotesResourceSubscriptionDataSubscriptionData
     /// <summary>
     /// The subscription's description, meant to be displayable to the customer. Use this field to optionally store an explanation of the subscription for rendering in Stripe surfaces and certain local payment methods UIs.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("description")]
     public string? Description { get; init; }
 
@@ -43272,12 +44760,14 @@ public partial record RadarEarlyFraudWarning
     /// <summary>
     /// The type of fraud labelled by the issuer. One of `card_never_received`, `fraudulent_card_application`, `made_with_counterfeit_card`, `made_with_lost_card`, `made_with_stolen_card`, `misc`, `unauthorized_use_of_card`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("fraud_type")]
     public required string FraudType { get; init; }
 
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -43333,6 +44823,7 @@ public partial record RadarPaymentEvaluation
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -43390,6 +44881,7 @@ public partial record RadarValueList
     /// <summary>
     /// The name of the value list for use in rules.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("alias")]
     public required string Alias { get; init; }
 
@@ -43402,12 +44894,14 @@ public partial record RadarValueList
     /// <summary>
     /// The name or email address of the user who created this value list.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("created_by")]
     public required string CreatedBy { get; init; }
 
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -43438,6 +44932,7 @@ public partial record RadarValueList
     /// <summary>
     /// The name of the value list.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("name")]
     public required string Name { get; init; }
 
@@ -43465,12 +44960,14 @@ public partial record RadarValueListItem
     /// <summary>
     /// The name or email address of the user who added this item to the value list.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("created_by")]
     public required string CreatedBy { get; init; }
 
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -43489,12 +44986,14 @@ public partial record RadarValueListItem
     /// <summary>
     /// The value of the item.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("value")]
     public required string Value { get; init; }
 
     /// <summary>
     /// The identifier of the value list this item belongs to.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("value_list")]
     public required string ValueList { get; init; }
 
@@ -43508,6 +45007,7 @@ public partial record RadarRadarOptions
     /// <summary>
     /// A [Radar Session](https://docs.stripe.com/radar/radar-session) is a snapshot of the browser metadata and device details that help Radar make more accurate predictions on your payments.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("session")]
     public string? Session { get; init; }
 
@@ -43518,12 +45018,14 @@ public partial record RadarReviewResourceLocation
     /// <summary>
     /// The city where the payment originated.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("city")]
     public string? City { get; init; }
 
     /// <summary>
     /// Two-letter ISO code representing the country where the payment originated.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("country")]
     public string? Country { get; init; }
 
@@ -43542,6 +45044,7 @@ public partial record RadarReviewResourceLocation
     /// <summary>
     /// The state/county/province/region where the payment originated.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("region")]
     public string? Region { get; init; }
 
@@ -43552,24 +45055,28 @@ public partial record RadarReviewResourceSession
     /// <summary>
     /// The browser used in this browser session (e.g., `Chrome`).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("browser")]
     public string? Browser { get; init; }
 
     /// <summary>
     /// Information about the device used for the browser session (e.g., `Samsung SM-G930T`).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("device")]
     public string? Device { get; init; }
 
     /// <summary>
     /// The platform for the browser session (e.g., `Macintosh`).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("platform")]
     public string? Platform { get; init; }
 
     /// <summary>
     /// The version for the browser session (e.g., `61.0.3163.100`).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("version")]
     public string? Version { get; init; }
 
@@ -43580,6 +45087,7 @@ public partial record ReceivedPaymentMethodDetailsFinancialAccount
     /// <summary>
     /// The FinancialAccount ID.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -43608,6 +45116,7 @@ public partial record Recurring
     /// <summary>
     /// The meter tracking the usage of a metered price
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("meter")]
     public string? Meter { get; init; }
 
@@ -43667,12 +45176,14 @@ public partial record Refund
     /// <summary>
     /// ID of the account of this refund.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("customer_account")]
     public string? CustomerAccount { get; init; }
 
     /// <summary>
     /// An arbitrary string attached to the object. You can use this for displaying to users (available on non-card refunds only).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("description")]
     public string? Description { get; init; }
 
@@ -43688,18 +45199,21 @@ public partial record Refund
     /// <summary>
     /// Provides the reason for the refund failure. Possible values are: `lost_or_stolen_card`, `expired_or_canceled_card`, `charge_for_pending_refund_disputed`, `insufficient_funds`, `declined`, `merchant_request`, or `unknown`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("failure_reason")]
     public string? FailureReason { get; init; }
 
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
     /// <summary>
     /// For payment methods without native refund support (for example, Konbini, PromptPay), provide an email address for the customer to receive refund instructions.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("instructions_email")]
     public string? InstructionsEmail { get; init; }
 
@@ -43748,6 +45262,7 @@ public partial record Refund
     /// <summary>
     /// This is the transaction number that appears on email receipts sent for this refund.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("receipt_number")]
     public string? ReceiptNumber { get; init; }
 
@@ -43760,6 +45275,7 @@ public partial record Refund
     /// <summary>
     /// Status of the refund. This can be `pending`, `requires_action`, `succeeded`, `failed`, or `canceled`. Learn more about [failed refunds](https://docs.stripe.com/refunds#failed-refunds).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("status")]
     public string? Status { get; init; }
 
@@ -43875,6 +45391,7 @@ public partial record RefundDestinationDetails
     /// <summary>
     /// The type of transaction-specific details of the payment method used in the refund (e.g., `card`). An additional hash is included on `destination_details` with a name matching this value. It contains information specific to the refund transaction.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("type")]
     public required string Type { get; init; }
 
@@ -43894,18 +45411,21 @@ public partial record RefundDestinationDetailsBlik
     /// <summary>
     /// For refunds declined by the network, a decline code provided by the network which indicates the reason the refund failed.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("network_decline_code")]
     public string? NetworkDeclineCode { get; init; }
 
     /// <summary>
     /// The reference assigned to the refund.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reference")]
     public string? Reference { get; init; }
 
     /// <summary>
     /// Status of the reference on the refund. This can be `pending`, `available` or `unavailable`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reference_status")]
     public string? ReferenceStatus { get; init; }
 
@@ -43916,12 +45436,14 @@ public partial record RefundDestinationDetailsBrBankTransfer
     /// <summary>
     /// The reference assigned to the refund.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reference")]
     public string? Reference { get; init; }
 
     /// <summary>
     /// Status of the reference on the refund. This can be `pending`, `available` or `unavailable`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reference_status")]
     public string? ReferenceStatus { get; init; }
 
@@ -43932,18 +45454,21 @@ public partial record RefundDestinationDetailsCard
     /// <summary>
     /// Value of the reference number assigned to the refund.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reference")]
     public string? Reference { get; init; }
 
     /// <summary>
     /// Status of the reference number on the refund. This can be `pending`, `available` or `unavailable`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reference_status")]
     public string? ReferenceStatus { get; init; }
 
     /// <summary>
     /// Type of the reference number assigned to the refund.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reference_type")]
     public string? ReferenceType { get; init; }
 
@@ -43960,6 +45485,7 @@ public partial record RefundDestinationDetailsCrypto
     /// <summary>
     /// The transaction hash of the refund.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reference")]
     public string? Reference { get; init; }
 
@@ -43970,12 +45496,14 @@ public partial record RefundDestinationDetailsEuBankTransfer
     /// <summary>
     /// The reference assigned to the refund.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reference")]
     public string? Reference { get; init; }
 
     /// <summary>
     /// Status of the reference on the refund. This can be `pending`, `available` or `unavailable`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reference_status")]
     public string? ReferenceStatus { get; init; }
 
@@ -43986,12 +45514,14 @@ public partial record RefundDestinationDetailsGbBankTransfer
     /// <summary>
     /// The reference assigned to the refund.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reference")]
     public string? Reference { get; init; }
 
     /// <summary>
     /// Status of the reference on the refund. This can be `pending`, `available` or `unavailable`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reference_status")]
     public string? ReferenceStatus { get; init; }
 
@@ -44002,12 +45532,14 @@ public partial record RefundDestinationDetailsJpBankTransfer
     /// <summary>
     /// The reference assigned to the refund.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reference")]
     public string? Reference { get; init; }
 
     /// <summary>
     /// Status of the reference on the refund. This can be `pending`, `available` or `unavailable`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reference_status")]
     public string? ReferenceStatus { get; init; }
 
@@ -44018,12 +45550,14 @@ public partial record RefundDestinationDetailsMbWay
     /// <summary>
     /// The reference assigned to the refund.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reference")]
     public string? Reference { get; init; }
 
     /// <summary>
     /// Status of the reference on the refund. This can be `pending`, `available` or `unavailable`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reference_status")]
     public string? ReferenceStatus { get; init; }
 
@@ -44034,12 +45568,14 @@ public partial record RefundDestinationDetailsMultibanco
     /// <summary>
     /// The reference assigned to the refund.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reference")]
     public string? Reference { get; init; }
 
     /// <summary>
     /// Status of the reference on the refund. This can be `pending`, `available` or `unavailable`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reference_status")]
     public string? ReferenceStatus { get; init; }
 
@@ -44050,12 +45586,14 @@ public partial record RefundDestinationDetailsMxBankTransfer
     /// <summary>
     /// The reference assigned to the refund.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reference")]
     public string? Reference { get; init; }
 
     /// <summary>
     /// Status of the reference on the refund. This can be `pending`, `available` or `unavailable`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reference_status")]
     public string? ReferenceStatus { get; init; }
 
@@ -44066,12 +45604,14 @@ public partial record RefundDestinationDetailsP24
     /// <summary>
     /// The reference assigned to the refund.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reference")]
     public string? Reference { get; init; }
 
     /// <summary>
     /// Status of the reference on the refund. This can be `pending`, `available` or `unavailable`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reference_status")]
     public string? ReferenceStatus { get; init; }
 
@@ -44082,6 +45622,7 @@ public partial record RefundDestinationDetailsPaypal
     /// <summary>
     /// For refunds declined by the network, a decline code provided by the network which indicates the reason the refund failed.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("network_decline_code")]
     public string? NetworkDeclineCode { get; init; }
 
@@ -44092,18 +45633,21 @@ public partial record RefundDestinationDetailsSwish
     /// <summary>
     /// For refunds declined by the network, a decline code provided by the network which indicates the reason the refund failed.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("network_decline_code")]
     public string? NetworkDeclineCode { get; init; }
 
     /// <summary>
     /// The reference assigned to the refund.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reference")]
     public string? Reference { get; init; }
 
     /// <summary>
     /// Status of the reference on the refund. This can be `pending`, `available` or `unavailable`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reference_status")]
     public string? ReferenceStatus { get; init; }
 
@@ -44114,12 +45658,14 @@ public partial record RefundDestinationDetailsThBankTransfer
     /// <summary>
     /// The reference assigned to the refund.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reference")]
     public string? Reference { get; init; }
 
     /// <summary>
     /// Status of the reference on the refund. This can be `pending`, `available` or `unavailable`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reference_status")]
     public string? ReferenceStatus { get; init; }
 
@@ -44130,12 +45676,14 @@ public partial record RefundDestinationDetailsUsBankTransfer
     /// <summary>
     /// The reference assigned to the refund.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reference")]
     public string? Reference { get; init; }
 
     /// <summary>
     /// Status of the reference on the refund. This can be `pending`, `available` or `unavailable`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reference_status")]
     public string? ReferenceStatus { get; init; }
 
@@ -44149,6 +45697,7 @@ public partial record RefundNextAction
     /// <summary>
     /// Type of the next action to perform.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("type")]
     public required string Type { get; init; }
 
@@ -44189,12 +45738,14 @@ public partial record ReportingReportRun
     /// If something should go wrong during the run, a message about the failure (populated when
     ///  `status=failed`).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("error")]
     public string? Error { get; init; }
 
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -44216,6 +45767,7 @@ public partial record ReportingReportRun
     /// <summary>
     /// The ID of the [report type](https://docs.stripe.com/reports/report-types) to run, such as `"balance.summary.1"`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("report_type")]
     public required string ReportType { get; init; }
 
@@ -44231,6 +45783,7 @@ public partial record ReportingReportRun
     ///  When the run finishes, this will be set to `succeeded` and the `result` field will be populated.
     ///  Rarely, we may encounter an error, at which point this will be set to `failed` and the `error` field will be populated.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("status")]
     public required string Status { get; init; }
 
@@ -44276,6 +45829,7 @@ public partial record ReportingReportType
     /// <summary>
     /// The [ID of the Report Type](https://docs.stripe.com/reporting/statements/api#available-report-types), such as `balance.summary.1`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -44288,6 +45842,7 @@ public partial record ReportingReportType
     /// <summary>
     /// Human-readable name of the Report Type
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("name")]
     public required string Name { get; init; }
 
@@ -44325,12 +45880,14 @@ public partial record ReserveTransaction
     /// <summary>
     /// An arbitrary string attached to the object. Often useful for displaying to users.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("description")]
     public string? Description { get; init; }
 
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -44353,6 +45910,7 @@ public partial record Review
     /// <summary>
     /// The ZIP or postal code of the card used, if applicable.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("billing_zip")]
     public string? BillingZip { get; init; }
 
@@ -44377,12 +45935,14 @@ public partial record Review
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
     /// <summary>
     /// The IP address where the payment originated.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("ip_address")]
     public string? IpAddress { get; init; }
 
@@ -44425,6 +45985,7 @@ public partial record Review
     /// <summary>
     /// The reason the review is currently open or closed. One of `rule`, `manual`, `approved`, `refunded`, `refunded_as_fraud`, `disputed`, `redacted`, `canceled`, `payment_never_settled`, or `acknowledged`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reason")]
     public required string Reason { get; init; }
 
@@ -44454,18 +46015,21 @@ public partial record Rule
     /// <summary>
     /// The action taken on the payment.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("action")]
     public required string Action { get; init; }
 
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
     /// <summary>
     /// The predicate to evaluate the payment against.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("predicate")]
     public required string Predicate { get; init; }
 
@@ -44503,6 +46067,7 @@ public partial record ScheduledQueryRun
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -44527,18 +46092,21 @@ public partial record ScheduledQueryRun
     /// <summary>
     /// SQL for the query.
     /// </summary>
+    [StringLength(100000)]
     [JsonPropertyName("sql")]
     public required string Sql { get; init; }
 
     /// <summary>
     /// The query's execution status, which will be `completed` for successful runs, and `canceled`, `failed`, or `timed_out` otherwise.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("status")]
     public required string Status { get; init; }
 
     /// <summary>
     /// Title of the query.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("title")]
     public required string Title { get; init; }
 
@@ -44577,6 +46145,7 @@ public partial record SecretServiceResourceScope
     /// <summary>
     /// The user ID, if type is set to "user"
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("user")]
     public string? User { get; init; }
 
@@ -44635,6 +46204,7 @@ public partial record SetupAttempt
     /// <summary>
     /// The value of [customer_account](https://docs.stripe.com/api/setup_intents/object#setup_intent_object-customer_account) on the SetupIntent at the time of this confirmation.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("customer_account")]
     public string? CustomerAccount { get; init; }
 
@@ -44649,6 +46219,7 @@ public partial record SetupAttempt
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -44694,12 +46265,14 @@ public partial record SetupAttempt
     /// <summary>
     /// Status of this SetupAttempt, one of `requires_confirmation`, `requires_action`, `processing`, `succeeded`, `failed`, or `abandoned`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("status")]
     public required string Status { get; init; }
 
     /// <summary>
     /// The value of [usage](https://docs.stripe.com/api/setup_intents/object#setup_intent_object-usage) on the SetupIntent at the time of this confirmation, one of `off_session` or `on_session`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("usage")]
     public required string Usage { get; init; }
 
@@ -44782,6 +46355,7 @@ public partial record SetupAttemptPaymentMethodDetails
     /// <summary>
     /// The type of the payment method used in the SetupIntent (e.g., `card`). An additional hash is included on `payment_method_details` with a name matching this value. It contains confirmation-specific information for the payment method.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("type")]
     public required string Type { get; init; }
 
@@ -44814,18 +46388,21 @@ public partial record SetupAttemptPaymentMethodDetailsBancontact
     /// <summary>
     /// Bank code of bank associated with the bank account.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("bank_code")]
     public string? BankCode { get; init; }
 
     /// <summary>
     /// Name of the bank associated with the bank account.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("bank_name")]
     public string? BankName { get; init; }
 
     /// <summary>
     /// Bank Identifier Code of the bank associated with the bank account.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("bic")]
     public string? Bic { get; init; }
 
@@ -44844,6 +46421,7 @@ public partial record SetupAttemptPaymentMethodDetailsBancontact
     /// <summary>
     /// Last four characters of the IBAN.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("iban_last4")]
     public string? IbanLast4 { get; init; }
 
@@ -44858,6 +46436,7 @@ public partial record SetupAttemptPaymentMethodDetailsBancontact
     /// Owner's verified full name. Values are verified or provided by Bancontact directly
     /// (if supported) at the time of authorization or settlement. They cannot be set or mutated.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("verified_name")]
     public string? VerifiedName { get; init; }
 
@@ -44872,6 +46451,7 @@ public partial record SetupAttemptPaymentMethodDetailsCard
     /// <summary>
     /// Card brand. Can be `amex`, `cartes_bancaires`, `diners`, `discover`, `eftpos_au`, `jcb`, `link`, `mastercard`, `unionpay`, `visa` or `unknown`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("brand")]
     public string? Brand { get; init; }
 
@@ -44884,6 +46464,7 @@ public partial record SetupAttemptPaymentMethodDetailsCard
     /// <summary>
     /// Two-letter ISO code representing the country of the card. You could use this attribute to get a sense of the international breakdown of cards you've collected.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("country")]
     public string? Country { get; init; }
 
@@ -44904,24 +46485,28 @@ public partial record SetupAttemptPaymentMethodDetailsCard
     /// 
     /// *As of May 1, 2021, card fingerprint in India for Connect changed to allow two fingerprints for the same card---one for India and one for the rest of the world.*
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("fingerprint")]
     public string? Fingerprint { get; init; }
 
     /// <summary>
     /// Card funding type. Can be `credit`, `debit`, `prepaid`, or `unknown`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("funding")]
     public string? Funding { get; init; }
 
     /// <summary>
     /// The last four digits of the card.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("last4")]
     public string? Last4 { get; init; }
 
     /// <summary>
     /// Identifies which network this charge was processed on. Can be `amex`, `cartes_bancaires`, `diners`, `discover`, `eftpos_au`, `interac`, `jcb`, `link`, `mastercard`, `unionpay`, `visa`, or `unknown`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("network")]
     public string? Network { get; init; }
 
@@ -44944,18 +46529,21 @@ public partial record SetupAttemptPaymentMethodDetailsCardChecks
     /// <summary>
     /// If a address line1 was provided, results of the check, one of `pass`, `fail`, `unavailable`, or `unchecked`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("address_line1_check")]
     public string? AddressLine1Check { get; init; }
 
     /// <summary>
     /// If a address postal code was provided, results of the check, one of `pass`, `fail`, `unavailable`, or `unchecked`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("address_postal_code_check")]
     public string? AddressPostalCodeCheck { get; init; }
 
     /// <summary>
     /// If a CVC was provided, results of the check, one of `pass`, `fail`, `unavailable`, or `unchecked`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("cvc_check")]
     public string? CvcCheck { get; init; }
 
@@ -45026,6 +46614,7 @@ public partial record SetupAttemptPaymentMethodDetailsIdeal
     /// <summary>
     /// Last four characters of the IBAN.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("iban_last4")]
     public string? IbanLast4 { get; init; }
 
@@ -45033,6 +46622,7 @@ public partial record SetupAttemptPaymentMethodDetailsIdeal
     /// Owner's verified full name. Values are verified or provided by iDEAL directly
     /// (if supported) at the time of authorization or settlement. They cannot be set or mutated.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("verified_name")]
     public string? VerifiedName { get; init; }
 
@@ -45059,6 +46649,7 @@ public partial record SetupAttemptPaymentMethodDetailsNaverPay
     /// <summary>
     /// Uniquely identifies this particular Naver Pay account. You can use this attribute to check whether two Naver Pay accounts are the same.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("buyer_id")]
     public string? BuyerId { get; init; }
 
@@ -45081,6 +46672,7 @@ public partial record SetupAttemptPaymentMethodDetailsPix
     /// <summary>
     /// Uniquely identifies this particular Pix account. You can use this attribute to check whether two Pix accounts are the same.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("fingerprint")]
     public string? Fingerprint { get; init; }
 
@@ -45099,18 +46691,21 @@ public partial record SetupAttemptPaymentMethodDetailsSofort
     /// <summary>
     /// Bank code of bank associated with the bank account.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("bank_code")]
     public string? BankCode { get; init; }
 
     /// <summary>
     /// Name of the bank associated with the bank account.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("bank_name")]
     public string? BankName { get; init; }
 
     /// <summary>
     /// Bank Identifier Code of the bank associated with the bank account.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("bic")]
     public string? Bic { get; init; }
 
@@ -45129,6 +46724,7 @@ public partial record SetupAttemptPaymentMethodDetailsSofort
     /// <summary>
     /// Last four characters of the IBAN.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("iban_last4")]
     public string? IbanLast4 { get; init; }
 
@@ -45143,6 +46739,7 @@ public partial record SetupAttemptPaymentMethodDetailsSofort
     /// Owner's verified full name. Values are verified or provided by Sofort directly
     /// (if supported) at the time of authorization or settlement. They cannot be set or mutated.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("verified_name")]
     public string? VerifiedName { get; init; }
 
@@ -45222,6 +46819,7 @@ public partial record SetupIntent
     /// 
     /// The client secret can be used to complete payment setup from your frontend. It should not be stored, logged, or exposed to anyone other than the customer. Make sure that you have TLS enabled on any page that includes the client secret.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("client_secret")]
     public string? ClientSecret { get; init; }
 
@@ -45244,12 +46842,14 @@ public partial record SetupIntent
     /// 
     /// If present, the SetupIntent's payment method will be attached to the Account on successful setup. Payment methods attached to other Accounts cannot be used with this SetupIntent.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("customer_account")]
     public string? CustomerAccount { get; init; }
 
     /// <summary>
     /// An arbitrary string attached to the object. Often useful for displaying to users.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("description")]
     public string? Description { get; init; }
 
@@ -45270,6 +46870,7 @@ public partial record SetupIntent
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -45365,6 +46966,7 @@ public partial record SetupIntent
     /// 
     /// Use `on_session` if you intend to only reuse the payment method when the customer is in your checkout flow. Use `off_session` if your customer may or may not be in your checkout flow. If not provided, this value defaults to `off_session`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("usage")]
     public required string Usage { get; init; }
 
@@ -45387,6 +46989,7 @@ public partial record SetupIntentNextAction
     /// <summary>
     /// Type of the next action to perform. Refer to the other child attributes under `next_action` for available values. Examples include: `redirect_to_url`, `use_stripe_sdk`, `alipay_handle_redirect`, `oxxo_display_details`, or `verify_with_microdeposits`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("type")]
     public required string Type { get; init; }
 
@@ -45409,6 +47012,7 @@ public partial record SetupIntentNextActionPixDisplayQrCode
     /// <summary>
     /// The raw data string used to generate QR code, it should be used together with QR code library.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("data")]
     public required string Data { get; init; }
 
@@ -45421,18 +47025,21 @@ public partial record SetupIntentNextActionPixDisplayQrCode
     /// <summary>
     /// The URL to the hosted pix instructions page, which allows customers to view the pix QR code.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("hosted_instructions_url")]
     public required string HostedInstructionsUrl { get; init; }
 
     /// <summary>
     /// The image_url_png string used to render png QR code
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("image_url_png")]
     public required string ImageUrlPng { get; init; }
 
     /// <summary>
     /// The image_url_svg string used to render svg QR code
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("image_url_svg")]
     public required string ImageUrlSvg { get; init; }
 
@@ -45443,12 +47050,14 @@ public partial record SetupIntentNextActionRedirectToUrl
     /// <summary>
     /// If the customer does not exit their browser while authenticating, they will be redirected to this specified URL after completion.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("return_url")]
     public string? ReturnUrl { get; init; }
 
     /// <summary>
     /// The URL you must redirect your customer to in order to authenticate.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("url")]
     public string? Url { get; init; }
 
@@ -45465,6 +47074,7 @@ public partial record SetupIntentNextActionVerifyWithMicrodeposits
     /// <summary>
     /// The URL for the hosted verification page, which allows customers to verify their bank account.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("hosted_verification_url")]
     public required string HostedVerificationUrl { get; init; }
 
@@ -45601,6 +47211,7 @@ public partial record SetupIntentPaymentMethodOptionsCardMandateOptions
     /// <summary>
     /// A description of the mandate or subscription that is meant to be displayed to the customer.
     /// </summary>
+    [StringLength(200)]
     [JsonPropertyName("description")]
     public string? Description { get; init; }
 
@@ -45625,6 +47236,7 @@ public partial record SetupIntentPaymentMethodOptionsCardMandateOptions
     /// <summary>
     /// Unique identifier for the mandate or subscription.
     /// </summary>
+    [StringLength(80)]
     [JsonPropertyName("reference")]
     public required string Reference { get; init; }
 
@@ -45657,6 +47269,7 @@ public partial record SetupIntentPaymentMethodOptionsKlarna
     /// <summary>
     /// Preferred locale of the Klarna checkout page that the customer is redirected to.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("preferred_locale")]
     public string? PreferredLocale { get; init; }
 
@@ -45671,6 +47284,7 @@ public partial record SetupIntentPaymentMethodOptionsMandateOptionsAcssDebit
     /// <summary>
     /// A URL for custom mandate text
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("custom_mandate_url")]
     public string? CustomMandateUrl { get; init; }
 
@@ -45683,6 +47297,7 @@ public partial record SetupIntentPaymentMethodOptionsMandateOptionsAcssDebit
     /// <summary>
     /// Description of the interval. Only required if the 'payment_schedule' parameter is 'interval' or 'combined'.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("interval_description")]
     public string? IntervalDescription { get; init; }
 
@@ -45705,6 +47320,7 @@ public partial record SetupIntentPaymentMethodOptionsMandateOptionsBacsDebit
     /// <summary>
     /// Prefix used to generate the Mandate reference. Must be at most 12 characters long. Must consist of only uppercase letters, numbers, spaces, or the following special characters: '/', '_', '-', '&amp;', '.'. Cannot begin with 'DDIC' or 'STRIPE'.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reference_prefix")]
     public string? ReferencePrefix { get; init; }
 
@@ -45727,6 +47343,7 @@ public partial record SetupIntentPaymentMethodOptionsMandateOptionsPayto
     /// <summary>
     /// Date, in YYYY-MM-DD format, after which payments will not be collected. Defaults to no end date.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("end_date")]
     public string? EndDate { get; init; }
 
@@ -45751,6 +47368,7 @@ public partial record SetupIntentPaymentMethodOptionsMandateOptionsPayto
     /// <summary>
     /// Date, in YYYY-MM-DD format, from which payments will be collected. Defaults to confirmation time.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("start_date")]
     public string? StartDate { get; init; }
 
@@ -45761,6 +47379,7 @@ public partial record SetupIntentPaymentMethodOptionsMandateOptionsSepaDebit
     /// <summary>
     /// Prefix used to generate the Mandate reference. Must be at most 12 characters long. Must consist of only uppercase letters, numbers, spaces, or the following special characters: '/', '_', '-', '&amp;', '.'. Cannot begin with 'STRIPE'.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reference_prefix")]
     public string? ReferencePrefix { get; init; }
 
@@ -45771,6 +47390,7 @@ public partial record SetupIntentPaymentMethodOptionsPaypal
     /// <summary>
     /// The PayPal Billing Agreement ID (BAID). This is an ID generated by PayPal which represents the mandate between the merchant and the customer.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("billing_agreement_id")]
     public string? BillingAgreementId { get; init; }
 
@@ -45841,24 +47461,28 @@ public partial record Shipping
     /// <summary>
     /// The delivery service that shipped a physical product, such as Fedex, UPS, USPS, etc.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("carrier")]
     public string? Carrier { get; init; }
 
     /// <summary>
     /// Recipient name.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("name")]
     public string? Name { get; init; }
 
     /// <summary>
     /// Recipient phone (including extension).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("phone")]
     public string? Phone { get; init; }
 
     /// <summary>
     /// The tracking number for a physical product, obtained from the delivery service. If multiple tracking numbers were generated for this purchase, please separate them with commas.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("tracking_number")]
     public string? TrackingNumber { get; init; }
 
@@ -45891,6 +47515,7 @@ public partial record ShippingRate
     /// <summary>
     /// The name of the shipping rate, meant to be displayable to the customer. This will appear on CheckoutSessions.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("display_name")]
     public string? DisplayName { get; init; }
 
@@ -45900,6 +47525,7 @@ public partial record ShippingRate
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -46025,6 +47651,7 @@ public partial record SigmaSigmaApiQuery
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -46037,6 +47664,7 @@ public partial record SigmaSigmaApiQuery
     /// <summary>
     /// The name of the query.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("name")]
     public required string Name { get; init; }
 
@@ -46049,6 +47677,7 @@ public partial record SigmaSigmaApiQuery
     /// <summary>
     /// The sql statement for the query.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("sql")]
     public required string Sql { get; init; }
 
@@ -46059,6 +47688,7 @@ public partial record SigmaScheduledQueryRunError
     /// <summary>
     /// Information about the run failure.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("message")]
     public required string Message { get; init; }
 
@@ -46127,6 +47757,7 @@ public partial record Source
     /// <summary>
     /// The client secret of the source. Used for client-side retrieval using a publishable key.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("client_secret")]
     public required string ClientSecret { get; init; }
 
@@ -46148,6 +47779,7 @@ public partial record Source
     /// <summary>
     /// The ID of the customer to which this source is attached. This will not be present when the source has not been attached to a customer.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("customer")]
     public string? Customer { get; init; }
 
@@ -46157,6 +47789,7 @@ public partial record Source
     /// <summary>
     /// The authentication `flow` of the source. `flow` is one of `redirect`, `receiver`, `code_verification`, `none`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("flow")]
     public required string Flow { get; init; }
 
@@ -46166,6 +47799,7 @@ public partial record Source
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -46223,12 +47857,14 @@ public partial record Source
     /// <summary>
     /// Extra information about a source. This will appear on your customer's statement every time you charge the source.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("statement_descriptor")]
     public string? StatementDescriptor { get; init; }
 
     /// <summary>
     /// The status of the source, one of `canceled`, `chargeable`, `consumed`, `failed`, or `pending`. Only `chargeable` sources can be used to create a charge.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("status")]
     public required string Status { get; init; }
 
@@ -46244,6 +47880,7 @@ public partial record Source
     /// <summary>
     /// Either `reusable` or `single_use`. Whether this source should be reusable or not. Some source types may or may not be reusable by construction, while others may leave the option at creation. If an incompatible value is passed, an error will be returned.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("usage")]
     public string? Usage { get; init; }
 
@@ -46263,6 +47900,7 @@ public partial record SourceCodeVerificationFlow
     /// <summary>
     /// The status of the code verification, either `pending` (awaiting verification, `attempts_remaining` should be greater than 0), `succeeded` (successful verification) or `failed` (failed verification, cannot be verified anymore as `attempts_remaining` should be 0).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("status")]
     public required string Status { get; init; }
 
@@ -46296,6 +47934,7 @@ public partial record SourceMandateNotification
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -46314,6 +47953,7 @@ public partial record SourceMandateNotification
     /// <summary>
     /// The reason of the mandate notification. Valid reasons are `mandate_confirmed` or `debit_initiated`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reason")]
     public required string Reason { get; init; }
 
@@ -46338,12 +47978,14 @@ public partial record SourceMandateNotification
     /// <summary>
     /// The status of the mandate notification. Valid statuses are `pending` or `submitted`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("status")]
     public required string Status { get; init; }
 
     /// <summary>
     /// The type of source this mandate notification is attached to. Should be the source type identifier code for the payment method, such as `three_d_secure`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("type")]
     public required string Type { get; init; }
 
@@ -46354,6 +47996,7 @@ public partial record SourceMandateNotificationAcssDebitData
     /// <summary>
     /// The statement descriptor associate with the debit.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("statement_descriptor")]
     public string? StatementDescriptor { get; init; }
 
@@ -46364,6 +48007,7 @@ public partial record SourceMandateNotificationBacsDebitData
     /// <summary>
     /// Last 4 digits of the account number associated with the debit.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("last4")]
     public string? Last4 { get; init; }
 
@@ -46374,18 +48018,21 @@ public partial record SourceMandateNotificationSepaDebitData
     /// <summary>
     /// SEPA creditor ID.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("creditor_identifier")]
     public string? CreditorIdentifier { get; init; }
 
     /// <summary>
     /// Last 4 digits of the account number associated with the debit.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("last4")]
     public string? Last4 { get; init; }
 
     /// <summary>
     /// Mandate reference associated with the debit.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("mandate_reference")]
     public string? MandateReference { get; init; }
 
@@ -46408,6 +48055,7 @@ public partial record SourceOrder
     /// <summary>
     /// The email address of the customer placing the order.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("email")]
     public string? Email { get; init; }
 
@@ -46433,18 +48081,21 @@ public partial record SourceOrderItem
     /// <summary>
     /// This currency of this order item. Required when `amount` is present.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("currency")]
     public string? Currency { get; init; }
 
     /// <summary>
     /// Human-readable description for this order item.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("description")]
     public string? Description { get; init; }
 
     /// <summary>
     /// The ID of the associated object for this line item. Expandable if not null (e.g., expandable to a SKU).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("parent")]
     public string? Parent { get; init; }
 
@@ -46457,6 +48108,7 @@ public partial record SourceOrderItem
     /// <summary>
     /// The type of this order item. Must be `sku`, `tax`, or `shipping`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("type")]
     public string? Type { get; init; }
 
@@ -46473,18 +48125,21 @@ public partial record SourceOwner
     /// <summary>
     /// Owner's email address.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("email")]
     public string? Email { get; init; }
 
     /// <summary>
     /// Owner's full name.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("name")]
     public string? Name { get; init; }
 
     /// <summary>
     /// Owner's phone number (including extension).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("phone")]
     public string? Phone { get; init; }
 
@@ -46497,18 +48152,21 @@ public partial record SourceOwner
     /// <summary>
     /// Verified owner's email address. Verified values are verified or provided by the payment method directly (and if supported) at the time of authorization or settlement. They cannot be set or mutated.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("verified_email")]
     public string? VerifiedEmail { get; init; }
 
     /// <summary>
     /// Verified owner's full name. Verified values are verified or provided by the payment method directly (and if supported) at the time of authorization or settlement. They cannot be set or mutated.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("verified_name")]
     public string? VerifiedName { get; init; }
 
     /// <summary>
     /// Verified owner's phone number (including extension). Verified values are verified or provided by the payment method directly (and if supported) at the time of authorization or settlement. They cannot be set or mutated.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("verified_phone")]
     public string? VerifiedPhone { get; init; }
 
@@ -46519,6 +48177,7 @@ public partial record SourceReceiverFlow
     /// <summary>
     /// The address of the receiver source. This is the value that should be communicated to the customer to send their funds to.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("address")]
     public string? Address { get; init; }
 
@@ -46543,12 +48202,14 @@ public partial record SourceReceiverFlow
     /// <summary>
     /// Type of refund attribute method, one of `email`, `manual`, or `none`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("refund_attributes_method")]
     public required string RefundAttributesMethod { get; init; }
 
     /// <summary>
     /// Type of refund attribute status, one of `missing`, `requested`, or `available`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("refund_attributes_status")]
     public required string RefundAttributesStatus { get; init; }
 
@@ -46559,24 +48220,28 @@ public partial record SourceRedirectFlow
     /// <summary>
     /// The failure reason for the redirect, either `user_abort` (the customer aborted or dropped out of the redirect flow), `declined` (the authentication failed or the transaction was declined), or `processing_error` (the redirect failed due to a technical error). Present only if the redirect status is `failed`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("failure_reason")]
     public string? FailureReason { get; init; }
 
     /// <summary>
     /// The URL you provide to redirect the customer to after they authenticated their payment.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("return_url")]
     public required string ReturnUrl { get; init; }
 
     /// <summary>
     /// The status of the redirect, either `pending` (ready to be used by your customer to authenticate the transaction), `succeeded` (successful authentication, cannot be reused) or `not_required` (redirect should not be used) or `failed` (failed authentication, cannot be reused).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("status")]
     public required string Status { get; init; }
 
     /// <summary>
     /// The URL provided to you to redirect a customer to as part of a `redirect` authentication flow.
     /// </summary>
+    [StringLength(2048)]
     [JsonPropertyName("url")]
     public required string Url { get; init; }
 
@@ -46620,6 +48285,7 @@ public partial record SourceTransaction
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -46644,12 +48310,14 @@ public partial record SourceTransaction
     /// <summary>
     /// The ID of the source this transaction is attached to.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("source")]
     public required string Source { get; init; }
 
     /// <summary>
     /// The status of the transaction, one of `succeeded`, `pending`, or `failed`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("status")]
     public required string Status { get; init; }
 
@@ -46666,24 +48334,28 @@ public partial record SourceTransactionAchCreditTransferData
     /// <summary>
     /// Customer data associated with the transfer.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("customer_data")]
     public string? CustomerData { get; init; }
 
     /// <summary>
     /// Bank account fingerprint associated with the transfer.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("fingerprint")]
     public string? Fingerprint { get; init; }
 
     /// <summary>
     /// Last 4 digits of the account number associated with the transfer.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("last4")]
     public string? Last4 { get; init; }
 
     /// <summary>
     /// Routing number associated with the transfer.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("routing_number")]
     public string? RoutingNumber { get; init; }
 
@@ -46694,30 +48366,35 @@ public partial record SourceTransactionChfCreditTransferData
     /// <summary>
     /// Reference associated with the transfer.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reference")]
     public string? Reference { get; init; }
 
     /// <summary>
     /// Sender's country address.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("sender_address_country")]
     public string? SenderAddressCountry { get; init; }
 
     /// <summary>
     /// Sender's line 1 address.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("sender_address_line1")]
     public string? SenderAddressLine1 { get; init; }
 
     /// <summary>
     /// Sender's bank account IBAN.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("sender_iban")]
     public string? SenderIban { get; init; }
 
     /// <summary>
     /// Sender's name.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("sender_name")]
     public string? SenderName { get; init; }
 
@@ -46728,42 +48405,49 @@ public partial record SourceTransactionGbpCreditTransferData
     /// <summary>
     /// Bank account fingerprint associated with the Stripe owned bank account receiving the transfer.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("fingerprint")]
     public string? Fingerprint { get; init; }
 
     /// <summary>
     /// The credit transfer rails the sender used to push this transfer. The possible rails are: Faster Payments, BACS, CHAPS, and wire transfers. Currently only Faster Payments is supported.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("funding_method")]
     public string? FundingMethod { get; init; }
 
     /// <summary>
     /// Last 4 digits of sender account number associated with the transfer.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("last4")]
     public string? Last4 { get; init; }
 
     /// <summary>
     /// Sender entered arbitrary information about the transfer.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reference")]
     public string? Reference { get; init; }
 
     /// <summary>
     /// Sender account number associated with the transfer.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("sender_account_number")]
     public string? SenderAccountNumber { get; init; }
 
     /// <summary>
     /// Sender name associated with the transfer.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("sender_name")]
     public string? SenderName { get; init; }
 
     /// <summary>
     /// Sender sort code associated with the transfer.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("sender_sort_code")]
     public string? SenderSortCode { get; init; }
 
@@ -46774,12 +48458,14 @@ public partial record SourceTransactionPaperCheckData
     /// <summary>
     /// Time at which the deposited funds will be available for use. Measured in seconds since the Unix epoch.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("available_at")]
     public string? AvailableAt { get; init; }
 
     /// <summary>
     /// Comma-separated list of invoice IDs associated with the paper check.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("invoices")]
     public string? Invoices { get; init; }
 
@@ -46790,18 +48476,21 @@ public partial record SourceTransactionSepaCreditTransferData
     /// <summary>
     /// Reference associated with the transfer.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reference")]
     public string? Reference { get; init; }
 
     /// <summary>
     /// Sender's bank account IBAN.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("sender_iban")]
     public string? SenderIban { get; init; }
 
     /// <summary>
     /// Sender's name.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("sender_name")]
     public string? SenderName { get; init; }
 
@@ -47488,6 +49177,7 @@ public partial record Subscription
     /// <summary>
     /// ID of the account representing the customer who owns the subscription.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("customer_account")]
     public string? CustomerAccount { get; init; }
 
@@ -47518,6 +49208,7 @@ public partial record Subscription
     /// <summary>
     /// The subscription's description, meant to be displayable to the customer. Use this field to optionally store an explanation of the subscription for rendering in Stripe surfaces and certain local payment methods UIs.
     /// </summary>
+    [StringLength(500)]
     [JsonPropertyName("description")]
     public string? Description { get; init; }
 
@@ -47536,6 +49227,7 @@ public partial record Subscription
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -47766,6 +49458,7 @@ public partial record SubscriptionItem
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -47801,6 +49494,7 @@ public partial record SubscriptionItem
     /// <summary>
     /// The `subscription` this `subscription_item` belongs to.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("subscription")]
     public required string Subscription { get; init; }
 
@@ -47862,6 +49556,7 @@ public partial record SubscriptionPaymentMethodOptionsMandateOptionsPix
     /// <summary>
     /// Date when the mandate expires and no further payments will be charged, in `YYYY-MM-DD`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("end_date")]
     public string? EndDate { get; init; }
 
@@ -47954,6 +49649,7 @@ public partial record SubscriptionSchedule
     /// <summary>
     /// ID of the account who owns the subscription schedule.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("customer_account")]
     public string? CustomerAccount { get; init; }
 
@@ -47969,6 +49665,7 @@ public partial record SubscriptionSchedule
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -48005,6 +49702,7 @@ public partial record SubscriptionSchedule
     /// <summary>
     /// ID of the subscription once managed by the subscription schedule (if it is released).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("released_subscription")]
     public string? ReleasedSubscription { get; init; }
 
@@ -48202,6 +49900,7 @@ public partial record SubscriptionSchedulePhaseConfiguration
     /// <summary>
     /// Subscription description, meant to be displayable to the customer. Use this field to optionally store an explanation of the subscription for rendering in Stripe surfaces and certain local payment methods UIs.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("description")]
     public string? Description { get; init; }
 
@@ -48311,6 +50010,7 @@ public partial record SubscriptionSchedulesResourceDefaultSettings
     /// <summary>
     /// Subscription description, meant to be displayable to the customer. Use this field to optionally store an explanation of the subscription for rendering in Stripe surfaces and certain local payment methods UIs.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("description")]
     public string? Description { get; init; }
 
@@ -48490,6 +50190,7 @@ public partial record SubscriptionsResourceBillingSchedules
     /// <summary>
     /// Unique identifier for the billing schedule.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("key")]
     public required string Key { get; init; }
 
@@ -48749,12 +50450,14 @@ public partial record SubscriptionsResourceSubscriptionInvoiceSettings
     /// <summary>
     /// An arbitrary string attached to the object. Often useful for displaying to users.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("description")]
     public string? Description { get; init; }
 
     /// <summary>
     /// Footer to be displayed on the invoice.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("footer")]
     public string? Footer { get; init; }
 
@@ -48768,6 +50471,7 @@ public partial record SubscriptionsResourceSubscriptionPresentmentDetails
     /// <summary>
     /// Currency used for customer payments.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("presentment_currency")]
     public required string PresentmentCurrency { get; init; }
 
@@ -48833,12 +50537,14 @@ public partial record TaxAssociation
     /// <summary>
     /// The [Tax Calculation](https://docs.stripe.com/api/tax/calculations/object) that was included in PaymentIntent.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("calculation")]
     public required string Calculation { get; init; }
 
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -48851,6 +50557,7 @@ public partial record TaxAssociation
     /// <summary>
     /// The [PaymentIntent](https://docs.stripe.com/api/payment_intents/object) that this Tax Association is tracking.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("payment_intent")]
     public required string PaymentIntent { get; init; }
 
@@ -48878,12 +50585,14 @@ public partial record TaxCalculation
     /// <summary>
     /// Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("currency")]
     public required string Currency { get; init; }
 
     /// <summary>
     /// The ID of an existing [Customer](https://docs.stripe.com/api/customers/object) used for the resource.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("customer")]
     public string? Customer { get; init; }
 
@@ -48899,6 +50608,7 @@ public partial record TaxCalculation
     /// <summary>
     /// Unique identifier for the calculation.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public string? Id { get; init; }
 
@@ -48975,6 +50685,7 @@ public partial record TaxCalculationLineItem
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -48999,6 +50710,7 @@ public partial record TaxCalculationLineItem
     /// <summary>
     /// The ID of an existing [Product](https://docs.stripe.com/api/products/object).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("product")]
     public string? Product { get; init; }
 
@@ -49011,6 +50723,7 @@ public partial record TaxCalculationLineItem
     /// <summary>
     /// A custom identifier for this line item.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reference")]
     public required string Reference { get; init; }
 
@@ -49029,6 +50742,7 @@ public partial record TaxCalculationLineItem
     /// <summary>
     /// The [tax code](https://docs.stripe.com/tax/tax-categories) ID used for this resource.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("tax_code")]
     public required string TaxCode { get; init; }
 
@@ -49052,6 +50766,7 @@ public partial record TaxRegistration
     /// <summary>
     /// Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("country")]
     public required string Country { get; init; }
 
@@ -49073,6 +50788,7 @@ public partial record TaxRegistration
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -49151,12 +50867,14 @@ public partial record TaxTransaction
     /// <summary>
     /// Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("currency")]
     public required string Currency { get; init; }
 
     /// <summary>
     /// The ID of an existing [Customer](https://docs.stripe.com/api/customers/object) used for the resource.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("customer")]
     public string? Customer { get; init; }
 
@@ -49166,6 +50884,7 @@ public partial record TaxTransaction
     /// <summary>
     /// Unique identifier for the transaction.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -49202,6 +50921,7 @@ public partial record TaxTransaction
     /// <summary>
     /// A custom unique identifier, such as 'myOrder_123'.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reference")]
     public required string Reference { get; init; }
 
@@ -49254,6 +50974,7 @@ public partial record TaxTransactionLineItem
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -49278,6 +50999,7 @@ public partial record TaxTransactionLineItem
     /// <summary>
     /// The ID of an existing [Product](https://docs.stripe.com/api/products/object).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("product")]
     public string? Product { get; init; }
 
@@ -49290,6 +51012,7 @@ public partial record TaxTransactionLineItem
     /// <summary>
     /// A custom identifier for this line item in the transaction.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("reference")]
     public required string Reference { get; init; }
 
@@ -49308,6 +51031,7 @@ public partial record TaxTransactionLineItem
     /// <summary>
     /// The [tax code](https://docs.stripe.com/tax/tax-categories) ID used for this resource.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("tax_code")]
     public required string TaxCode { get; init; }
 
@@ -49327,18 +51051,21 @@ public partial record TaxCode
     /// <summary>
     /// A detailed description of which types of products the tax code represents.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("description")]
     public required string Description { get; init; }
 
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
     /// <summary>
     /// A short name for the tax code.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("name")]
     public required string Name { get; init; }
 
@@ -49355,6 +51082,7 @@ public partial record TaxDeductedAtSource
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -49379,6 +51107,7 @@ public partial record TaxDeductedAtSource
     /// <summary>
     /// The TAN that was supplied to Stripe when TDS was assessed
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("tax_deduction_account_number")]
     public required string TaxDeductionAccountNumber { get; init; }
 
@@ -49407,6 +51136,7 @@ public partial record TaxIDsOwner
     /// <summary>
     /// The Account representing the customer being referenced when `type` is `customer`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("customer_account")]
     public string? CustomerAccount { get; init; }
 
@@ -49429,6 +51159,7 @@ public partial record TaxId
     /// <summary>
     /// Two-letter ISO code representing the country of the tax ID.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("country")]
     public string? Country { get; init; }
 
@@ -49447,12 +51178,14 @@ public partial record TaxId
     /// <summary>
     /// ID of the Account representing the customer.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("customer_account")]
     public string? CustomerAccount { get; init; }
 
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -49483,6 +51216,7 @@ public partial record TaxId
     /// <summary>
     /// Value of the tax ID.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("value")]
     public required string Value { get; init; }
 
@@ -49505,12 +51239,14 @@ public partial record TaxIdVerification
     /// <summary>
     /// Verified address.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("verified_address")]
     public string? VerifiedAddress { get; init; }
 
     /// <summary>
     /// Verified name.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("verified_name")]
     public string? VerifiedName { get; init; }
 
@@ -49828,6 +51564,7 @@ public partial record TaxProductRegistrationsResourceCountryOptionsCaProvinceSta
     /// <summary>
     /// Two-letter CA province code ([ISO 3166-2](https://en.wikipedia.org/wiki/ISO_3166-2)).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("province")]
     public required string Province { get; init; }
 
@@ -49952,6 +51689,7 @@ public partial record TaxProductRegistrationsResourceCountryOptionsUnitedStates
     /// <summary>
     /// Two-letter US state code ([ISO 3166-2](https://en.wikipedia.org/wiki/ISO_3166-2)).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("state")]
     public required string State { get; init; }
 
@@ -49971,6 +51709,7 @@ public partial record TaxProductRegistrationsResourceCountryOptionsUsLocalAmusem
     /// <summary>
     /// A [FIPS code](https://www.census.gov/library/reference/code-lists/ansi.html) representing the local jurisdiction.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("jurisdiction")]
     public required string Jurisdiction { get; init; }
 
@@ -49981,6 +51720,7 @@ public partial record TaxProductRegistrationsResourceCountryOptionsUsLocalLeaseT
     /// <summary>
     /// A [FIPS code](https://www.census.gov/library/reference/code-lists/ansi.html) representing the local jurisdiction.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("jurisdiction")]
     public required string Jurisdiction { get; init; }
 
@@ -49991,6 +51731,7 @@ public partial record TaxProductRegistrationsResourceCountryOptionsUsMassTransit
     /// <summary>
     /// A [jurisdiction code](https://docs.stripe.com/tax/registering?type=mass_transit_parking_tax#registration-types) representing the local jurisdiction.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("jurisdiction")]
     public required string Jurisdiction { get; init; }
 
@@ -50001,6 +51742,7 @@ public partial record TaxProductRegistrationsResourceCountryOptionsUsParkingTax
     /// <summary>
     /// A [jurisdiction code](https://docs.stripe.com/tax/registering?type=parking_tax#registration-types) representing the local jurisdiction.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("jurisdiction")]
     public required string Jurisdiction { get; init; }
 
@@ -50021,6 +51763,7 @@ public partial record TaxProductRegistrationsResourceCountryOptionsUsStateSalesT
     /// <summary>
     /// A [FIPS code](https://www.census.gov/library/reference/code-lists/ansi.html) representing the local jurisdiction.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("jurisdiction")]
     public string? Jurisdiction { get; init; }
 
@@ -50049,6 +51792,7 @@ public partial record TaxProductResourceCustomerDetails
     /// <summary>
     /// The customer's IP address (IPv4 or IPv6).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("ip_address")]
     public string? IpAddress { get; init; }
 
@@ -50077,6 +51821,7 @@ public partial record TaxProductResourceCustomerDetailsResourceTaxId
     /// <summary>
     /// The value of the tax ID.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("value")]
     public required string Value { get; init; }
 
@@ -50087,12 +51832,14 @@ public partial record TaxProductResourceJurisdiction
     /// <summary>
     /// Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("country")]
     public required string Country { get; init; }
 
     /// <summary>
     /// A human-readable name for the jurisdiction imposing the tax.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("display_name")]
     public required string DisplayName { get; init; }
 
@@ -50105,6 +51852,7 @@ public partial record TaxProductResourceJurisdiction
     /// <summary>
     /// [ISO 3166-2 subdivision code](https://en.wikipedia.org/wiki/ISO_3166-2), without country prefix. For example, "NY" for New York, United States.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("state")]
     public string? State { get; init; }
 
@@ -50152,12 +51900,14 @@ public partial record TaxProductResourceLineItemTaxRateDetails
     /// <summary>
     /// A localized display name for tax type, intended to be human-readable. For example, "Local Sales and Use Tax", "Value-added tax (VAT)", or "Umsatzsteuer (USt.)".
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("display_name")]
     public required string DisplayName { get; init; }
 
     /// <summary>
     /// The tax rate percentage as a string. For example, 8.5% is represented as "8.5".
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("percentage_decimal")]
     public required string PercentageDecimal { get; init; }
 
@@ -50174,36 +51924,42 @@ public partial record TaxProductResourcePostalAddress
     /// <summary>
     /// City, district, suburb, town, or village.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("city")]
     public string? City { get; init; }
 
     /// <summary>
     /// Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("country")]
     public required string Country { get; init; }
 
     /// <summary>
     /// Address line 1, such as the street, PO Box, or company name.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("line1")]
     public string? Line1 { get; init; }
 
     /// <summary>
     /// Address line 2, such as the apartment, suite, unit, or building.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("line2")]
     public string? Line2 { get; init; }
 
     /// <summary>
     /// ZIP or postal code.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("postal_code")]
     public string? PostalCode { get; init; }
 
     /// <summary>
     /// State/province as an [ISO 3166-2](https://en.wikipedia.org/wiki/ISO_3166-2) subdivision code, without country prefix, such as "NY" or "TX".
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("state")]
     public string? State { get; init; }
 
@@ -50227,12 +51983,14 @@ public partial record TaxProductResourceTaxAssociationTransactionAttempts
     /// <summary>
     /// The source of the tax transaction attempt. This is either a refund or a payment intent.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("source")]
     public required string Source { get; init; }
 
     /// <summary>
     /// The status of the transaction attempt. This can be `errored` or `committed`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("status")]
     public required string Status { get; init; }
 
@@ -50243,6 +52001,7 @@ public partial record TaxProductResourceTaxAssociationTransactionAttemptsResourc
     /// <summary>
     /// The [Tax Transaction](https://docs.stripe.com/api/tax/transaction/object)
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("transaction")]
     public required string Transaction { get; init; }
 
@@ -50306,6 +52065,7 @@ public partial record TaxProductResourceTaxCalculationShippingCost
     /// <summary>
     /// The ID of an existing [ShippingRate](https://docs.stripe.com/api/shipping_rates/object).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("shipping_rate")]
     public string? ShippingRate { get; init; }
 
@@ -50324,6 +52084,7 @@ public partial record TaxProductResourceTaxCalculationShippingCost
     /// <summary>
     /// The [tax code](https://docs.stripe.com/tax/tax-categories) ID used for shipping.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("tax_code")]
     public required string TaxCode { get; init; }
 
@@ -50334,6 +52095,7 @@ public partial record TaxProductResourceTaxRateDetails
     /// <summary>
     /// Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("country")]
     public string? Country { get; init; }
 
@@ -50346,6 +52108,7 @@ public partial record TaxProductResourceTaxRateDetails
     /// <summary>
     /// The tax rate percentage as a string. For example, 8.5% is represented as `"8.5"`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("percentage_decimal")]
     public required string PercentageDecimal { get; init; }
 
@@ -50358,6 +52121,7 @@ public partial record TaxProductResourceTaxRateDetails
     /// <summary>
     /// State, county, province, or region ([ISO 3166-2](https://en.wikipedia.org/wiki/ISO_3166-2)).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("state")]
     public string? State { get; init; }
 
@@ -50386,6 +52150,7 @@ public partial record TaxProductResourceTaxSettingsDefaults
     /// <summary>
     /// Default [tax code](https://stripe.com/docs/tax/tax-categories) used to classify your products and prices.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("tax_code")]
     public string? TaxCode { get; init; }
 
@@ -50427,6 +52192,7 @@ public partial record TaxProductResourceTaxTransactionLineItemResourceReversal
     /// <summary>
     /// The `id` of the line item to reverse in the original transaction.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("original_line_item")]
     public required string OriginalLineItem { get; init; }
 
@@ -50437,6 +52203,7 @@ public partial record TaxProductResourceTaxTransactionResourceReversal
     /// <summary>
     /// The `id` of the reversed `Transaction` object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("original_transaction")]
     public string? OriginalTransaction { get; init; }
 
@@ -50459,6 +52226,7 @@ public partial record TaxProductResourceTaxTransactionShippingCost
     /// <summary>
     /// The ID of an existing [ShippingRate](https://docs.stripe.com/api/shipping_rates/object).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("shipping_rate")]
     public string? ShippingRate { get; init; }
 
@@ -50471,6 +52239,7 @@ public partial record TaxProductResourceTaxTransactionShippingCost
     /// <summary>
     /// The [tax code](https://docs.stripe.com/tax/tax-categories) ID used for shipping.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("tax_code")]
     public required string TaxCode { get; init; }
 
@@ -50492,6 +52261,7 @@ public partial record TaxRate
     /// <summary>
     /// Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("country")]
     public string? Country { get; init; }
 
@@ -50504,12 +52274,14 @@ public partial record TaxRate
     /// <summary>
     /// An arbitrary string attached to the tax rate for your internal use only. It will not be visible to your customers.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("description")]
     public string? Description { get; init; }
 
     /// <summary>
     /// The display name of the tax rates as it will appear to your customer on their receipt email, PDF, and the hosted invoice page.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("display_name")]
     public required string DisplayName { get; init; }
 
@@ -50530,6 +52302,7 @@ public partial record TaxRate
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -50542,6 +52315,7 @@ public partial record TaxRate
     /// <summary>
     /// The jurisdiction for the tax rate. You can use this label field for tax reporting purposes. It also appears on your customer’s invoice.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("jurisdiction")]
     public string? Jurisdiction { get; init; }
 
@@ -50584,6 +52358,7 @@ public partial record TaxRate
     /// <summary>
     /// [ISO 3166-2 subdivision code](https://en.wikipedia.org/wiki/ISO_3166-2), without country prefix. For example, "NY" for New York, United States.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("state")]
     public string? State { get; init; }
 
@@ -50609,6 +52384,7 @@ public partial record TaxRateFlatAmount
     /// <summary>
     /// Three-letter ISO currency code, in lowercase.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("currency")]
     public required string Currency { get; init; }
 
@@ -50632,6 +52408,7 @@ public partial record TerminalConfiguration
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -50650,6 +52427,7 @@ public partial record TerminalConfiguration
     /// <summary>
     /// String indicating the name of the Configuration object, set by the user
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("name")]
     public string? Name { get; init; }
 
@@ -50704,6 +52482,7 @@ public partial record TerminalConnectionToken
     /// <summary>
     /// The id of the location that this connection token is scoped to. Note that location scoping only applies to internet-connected readers. For more details, see [the docs on scoping connection tokens](https://docs.stripe.com/terminal/fleet/locations-and-zones?dashboard-or-api=api#connection-tokens).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("location")]
     public string? Location { get; init; }
 
@@ -50716,6 +52495,7 @@ public partial record TerminalConnectionToken
     /// <summary>
     /// Your application should pass this token to the Stripe Terminal SDK.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("secret")]
     public required string Secret { get; init; }
 
@@ -50740,30 +52520,35 @@ public partial record TerminalLocation
     /// <summary>
     /// The ID of a configuration that will be used to customize all readers in this location.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("configuration_overrides")]
     public string? ConfigurationOverrides { get; init; }
 
     /// <summary>
     /// The display name of the location.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("display_name")]
     public required string DisplayName { get; init; }
 
     /// <summary>
     /// The Kana variation of the display name of the location.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("display_name_kana")]
     public string? DisplayNameKana { get; init; }
 
     /// <summary>
     /// The Kanji variation of the display name of the location.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("display_name_kanji")]
     public string? DisplayNameKanji { get; init; }
 
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -50788,6 +52573,7 @@ public partial record TerminalLocation
     /// <summary>
     /// The phone number of the location.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("phone")]
     public string? Phone { get; init; }
 
@@ -50816,12 +52602,14 @@ public partial record TerminalOnboardingLink
     /// <summary>
     /// Stripe account ID to generate the link for.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("on_behalf_of")]
     public string? OnBehalfOf { get; init; }
 
     /// <summary>
     /// The link passed back to the user for their onboarding.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("redirect_url")]
     public required string RedirectUrl { get; init; }
 
@@ -50843,6 +52631,7 @@ public partial record TerminalReader
     /// <summary>
     /// The current software version of the reader.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("device_sw_version")]
     public string? DeviceSwVersion { get; init; }
 
@@ -50855,18 +52644,21 @@ public partial record TerminalReader
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
     /// <summary>
     /// The local IP address of the reader.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("ip_address")]
     public string? IpAddress { get; init; }
 
     /// <summary>
     /// Custom label given to the reader for easier identification.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("label")]
     public required string Label { get; init; }
 
@@ -50903,6 +52695,7 @@ public partial record TerminalReader
     /// <summary>
     /// Serial number of the reader.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("serial_number")]
     public required string SerialNumber { get; init; }
 
@@ -50968,24 +52761,28 @@ public partial record TerminalConfigurationConfigurationResourceEnterprisePeapWi
     /// <summary>
     /// A File ID representing a PEM file containing the server certificate
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("ca_certificate_file")]
     public string? CaCertificateFile { get; init; }
 
     /// <summary>
     /// Password for connecting to the WiFi network
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("password")]
     public required string Password { get; init; }
 
     /// <summary>
     /// Name of the WiFi network
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("ssid")]
     public required string Ssid { get; init; }
 
     /// <summary>
     /// Username for connecting to the WiFi network
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("username")]
     public required string Username { get; init; }
 
@@ -50996,30 +52793,35 @@ public partial record TerminalConfigurationConfigurationResourceEnterpriseTlsWif
     /// <summary>
     /// A File ID representing a PEM file containing the server certificate
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("ca_certificate_file")]
     public string? CaCertificateFile { get; init; }
 
     /// <summary>
     /// A File ID representing a PEM file containing the client certificate
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("client_certificate_file")]
     public required string ClientCertificateFile { get; init; }
 
     /// <summary>
     /// A File ID representing a PEM file containing the client RSA private key
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("private_key_file")]
     public required string PrivateKeyFile { get; init; }
 
     /// <summary>
     /// Password for the private key file
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("private_key_file_password")]
     public string? PrivateKeyFilePassword { get; init; }
 
     /// <summary>
     /// Name of the WiFi network
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("ssid")]
     public required string Ssid { get; init; }
 
@@ -51040,12 +52842,14 @@ public partial record TerminalConfigurationConfigurationResourcePersonalPskWifi
     /// <summary>
     /// Password for connecting to the WiFi network
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("password")]
     public required string Password { get; init; }
 
     /// <summary>
     /// Name of the WiFi network
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("ssid")]
     public required string Ssid { get; init; }
 
@@ -51167,6 +52971,7 @@ public partial record TerminalOnboardingLinkAppleTermsAndConditions
     /// <summary>
     /// The business name of the merchant accepting Apple's Terms and Conditions.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("merchant_display_name")]
     public required string MerchantDisplayName { get; init; }
 
@@ -51224,6 +53029,7 @@ public partial record TerminalReaderReaderResourceChoice
     /// <summary>
     /// The identifier for the selected choice. Maximum 50 characters.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public string? Id { get; init; }
 
@@ -51236,6 +53042,7 @@ public partial record TerminalReaderReaderResourceChoice
     /// <summary>
     /// The text to be selected. Maximum 30 characters.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("text")]
     public required string Text { get; init; }
 
@@ -51322,6 +53129,7 @@ public partial record TerminalReaderReaderResourceConfirmConfig
     /// <summary>
     /// If the customer doesn't abandon authenticating the payment, they're redirected to this URL after completion.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("return_url")]
     public string? ReturnUrl { get; init; }
 
@@ -51354,24 +53162,28 @@ public partial record TerminalReaderReaderResourceCustomText
     /// <summary>
     /// Customize the default description for this input
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("description")]
     public string? Description { get; init; }
 
     /// <summary>
     /// Customize the default label for this input's skip button
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("skip_button")]
     public string? SkipButton { get; init; }
 
     /// <summary>
     /// Customize the default label for this input's submit button
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("submit_button")]
     public string? SubmitButton { get; init; }
 
     /// <summary>
     /// Customize the default title for this input
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("title")]
     public string? Title { get; init; }
 
@@ -51385,6 +53197,7 @@ public partial record TerminalReaderReaderResourceEmail
     /// <summary>
     /// The collected email address
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("value")]
     public string? Value { get; init; }
 
@@ -51404,6 +53217,7 @@ public partial record TerminalReaderReaderResourceFileMetadata
     /// <summary>
     /// The original name of the uploaded file (e.g. `receipt.png`).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("filename")]
     public required string Filename { get; init; }
 
@@ -51416,6 +53230,7 @@ public partial record TerminalReaderReaderResourceFileMetadata
     /// <summary>
     /// The format of the uploaded file.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("type")]
     public required string Type { get; init; }
 
@@ -51508,6 +53323,7 @@ public partial record TerminalReaderReaderResourceLineItem
     /// <summary>
     /// Description of the line item.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("description")]
     public required string Description { get; init; }
 
@@ -51527,6 +53343,7 @@ public partial record TerminalReaderReaderResourceNumeric
     /// <summary>
     /// The collected number
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("value")]
     public string? Value { get; init; }
 
@@ -51540,6 +53357,7 @@ public partial record TerminalReaderReaderResourcePhone
     /// <summary>
     /// The collected phone number
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("value")]
     public string? Value { get; init; }
 
@@ -51578,6 +53396,7 @@ public partial record TerminalReaderReaderResourceProcessConfig
     /// <summary>
     /// If the customer doesn't abandon authenticating the payment, they're redirected to this URL after completion.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("return_url")]
     public string? ReturnUrl { get; init; }
 
@@ -51635,6 +53454,7 @@ public partial record TerminalReaderReaderResourceProcessSetupIntentAction
     /// <summary>
     /// ID of a card PaymentMethod generated from the card_present PaymentMethod that may be attached to a Customer for future transactions. Only present if it was possible to generate a card PaymentMethod.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("generated_card")]
     public string? GeneratedCard { get; init; }
 
@@ -51684,12 +53504,14 @@ public partial record TerminalReaderReaderResourceReaderAction
     /// <summary>
     /// Failure code, only set if status is `failed`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("failure_code")]
     public string? FailureCode { get; init; }
 
     /// <summary>
     /// Detailed failure message, only set if status is `failed`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("failure_message")]
     public string? FailureMessage { get; init; }
 
@@ -51825,12 +53647,14 @@ public partial record TerminalReaderReaderResourceSelection
     /// <summary>
     /// The id of the selected choice
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public string? Id { get; init; }
 
     /// <summary>
     /// The text of the selected choice
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("text")]
     public string? Text { get; init; }
 
@@ -51863,6 +53687,7 @@ public partial record TerminalReaderReaderResourceSignature
     /// <summary>
     /// The File ID of a collected signature image
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("value")]
     public string? Value { get; init; }
 
@@ -51876,6 +53701,7 @@ public partial record TerminalReaderReaderResourceText
     /// <summary>
     /// The collected text value
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("value")]
     public string? Value { get; init; }
 
@@ -51908,12 +53734,14 @@ public partial record TerminalReaderReaderResourceToggle
     /// <summary>
     /// The toggle's description text. Maximum 50 characters.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("description")]
     public string? Description { get; init; }
 
     /// <summary>
     /// The toggle's title text. Maximum 50 characters.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("title")]
     public string? Title { get; init; }
 
@@ -51953,6 +53781,7 @@ public partial record TestHelpersTestClock
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -51965,6 +53794,7 @@ public partial record TestHelpersTestClock
     /// <summary>
     /// The custom name supplied at creation.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("name")]
     public string? Name { get; init; }
 
@@ -52018,6 +53848,7 @@ public partial record ThreeDSecureDetails
     /// The 3D Secure 1 XID or 3D Secure 2 Directory Server Transaction ID
     /// (dsTransId) for this payment.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("transaction_id")]
     public string? TransactionId { get; init; }
 
@@ -52075,6 +53906,7 @@ public partial record ThreeDSecureDetailsCharge
     /// The 3D Secure 1 XID or 3D Secure 2 Directory Server Transaction ID
     /// (dsTransId) for this payment.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("transaction_id")]
     public string? TransactionId { get; init; }
 
@@ -52189,6 +54021,7 @@ public partial record Token
     /// <summary>
     /// IP address of the client that generates the token.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("client_ip")]
     public string? ClientIp { get; init; }
 
@@ -52201,6 +54034,7 @@ public partial record Token
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -52219,6 +54053,7 @@ public partial record Token
     /// <summary>
     /// Type of the token: `account`, `bank_account`, `card`, or `pii`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("type")]
     public required string Type { get; init; }
 
@@ -52235,6 +54070,7 @@ public partial record TokenCardNetworks
     /// <summary>
     /// The preferred network for co-branded cards. Can be `cartes_bancaires`, `mastercard`, `visa` or `invalid_preference` if requested network is not valid for the card.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("preferred")]
     public string? Preferred { get; init; }
 
@@ -52270,12 +54106,14 @@ public partial record Topup
     /// <summary>
     /// Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("currency")]
     public required string Currency { get; init; }
 
     /// <summary>
     /// An arbitrary string attached to the object. Often useful for displaying to users.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("description")]
     public string? Description { get; init; }
 
@@ -52288,18 +54126,21 @@ public partial record Topup
     /// <summary>
     /// Error code explaining reason for top-up failure if available (see [the errors section](/api/errors) for a list of codes).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("failure_code")]
     public string? FailureCode { get; init; }
 
     /// <summary>
     /// Message to user further explaining reason for top-up failure if available.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("failure_message")]
     public string? FailureMessage { get; init; }
 
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -52348,6 +54189,7 @@ public partial record Topup
     /// <summary>
     /// Extra information about a top-up. This will appear on your source's bank statement. It must contain at least one letter.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("statement_descriptor")]
     public string? StatementDescriptor { get; init; }
 
@@ -52360,6 +54202,7 @@ public partial record Topup
     /// <summary>
     /// A string that identifies this top-up as part of a group.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("transfer_group")]
     public string? TransferGroup { get; init; }
 
@@ -52432,6 +54275,7 @@ public partial record Transfer
     /// <summary>
     /// An arbitrary string attached to the object. Often useful for displaying to users.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("description")]
     public string? Description { get; init; }
 
@@ -52450,6 +54294,7 @@ public partial record Transfer
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -52492,12 +54337,14 @@ public partial record Transfer
     /// <summary>
     /// The source balance this transfer came from. One of `card`, `fpx`, or `bank_account`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("source_type")]
     public string? SourceType { get; init; }
 
     /// <summary>
     /// A string that identifies this transaction as part of a group. See the [Connect documentation](https://docs.stripe.com/connect/separate-charges-and-transfers#transfer-options) for details.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("transfer_group")]
     public string? TransferGroup { get; init; }
 
@@ -52516,6 +54363,7 @@ public partial record TransferData
     /// <summary>
     /// An arbitrary string attached to the transfer. Often useful for displaying to users.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("description")]
     public string? Description { get; init; }
 
@@ -52586,6 +54434,7 @@ public partial record TransferReversal
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -52626,6 +54475,7 @@ public partial record TransferSchedule
     /// <summary>
     /// How frequently funds will be paid out. One of `manual` (payouts only created via API call), `daily`, `weekly`, or `monthly`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("interval")]
     public required string Interval { get; init; }
 
@@ -52644,6 +54494,7 @@ public partial record TransferSchedule
     /// <summary>
     /// The day of the week funds will be paid out, of the style 'monday', 'tuesday', etc. Only shown if `interval` is weekly.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("weekly_anchor")]
     public string? WeeklyAnchor { get; init; }
 
@@ -52713,18 +54564,21 @@ public partial record TreasuryCreditReversal
     /// <summary>
     /// The FinancialAccount to reverse funds from.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("financial_account")]
     public required string FinancialAccount { get; init; }
 
     /// <summary>
     /// A [hosted transaction receipt](https://docs.stripe.com/treasury/moving-money/regulatory-receipts) URL that is provided when money movement is considered regulated under Stripe's money transmission licenses.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("hosted_regulatory_receipt_url")]
     public string? HostedRegulatoryReceiptUrl { get; init; }
 
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -52755,6 +54609,7 @@ public partial record TreasuryCreditReversal
     /// <summary>
     /// The ReceivedCredit being reversed.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("received_credit")]
     public required string ReceivedCredit { get; init; }
 
@@ -52801,18 +54656,21 @@ public partial record TreasuryDebitReversal
     /// <summary>
     /// The FinancialAccount to reverse funds from.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("financial_account")]
     public string? FinancialAccount { get; init; }
 
     /// <summary>
     /// A [hosted transaction receipt](https://docs.stripe.com/treasury/moving-money/regulatory-receipts) URL that is provided when money movement is considered regulated under Stripe's money transmission licenses.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("hosted_regulatory_receipt_url")]
     public string? HostedRegulatoryReceiptUrl { get; init; }
 
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -52849,6 +54707,7 @@ public partial record TreasuryDebitReversal
     /// <summary>
     /// The ReceivedDebit being reversed.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("received_debit")]
     public required string ReceivedDebit { get; init; }
 
@@ -52890,6 +54749,7 @@ public partial record TreasuryFinancialAccount
     /// <summary>
     /// Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("country")]
     public required string Country { get; init; }
 
@@ -52915,6 +54775,7 @@ public partial record TreasuryFinancialAccount
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -52936,6 +54797,7 @@ public partial record TreasuryFinancialAccount
     /// <summary>
     /// The nickname for the FinancialAccount.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("nickname")]
     public string? Nickname { get; init; }
 
@@ -53070,6 +54932,7 @@ public partial record TreasuryInboundTransfer
     /// <summary>
     /// An arbitrary string attached to the object. Often useful for displaying to users.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("description")]
     public string? Description { get; init; }
 
@@ -53082,18 +54945,21 @@ public partial record TreasuryInboundTransfer
     /// <summary>
     /// The FinancialAccount that received the funds.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("financial_account")]
     public required string FinancialAccount { get; init; }
 
     /// <summary>
     /// A [hosted transaction receipt](https://docs.stripe.com/treasury/moving-money/regulatory-receipts) URL that is provided when money movement is considered regulated under Stripe's money transmission licenses.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("hosted_regulatory_receipt_url")]
     public string? HostedRegulatoryReceiptUrl { get; init; }
 
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -53121,6 +54987,7 @@ public partial record TreasuryInboundTransfer
     /// <summary>
     /// The origin payment method to be debited for an InboundTransfer.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("origin_payment_method")]
     public string? OriginPaymentMethod { get; init; }
 
@@ -53139,6 +55006,7 @@ public partial record TreasuryInboundTransfer
     /// <summary>
     /// Statement descriptor shown when funds are debited from the source. Not all payment networks support `statement_descriptor`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("statement_descriptor")]
     public required string StatementDescriptor { get; init; }
 
@@ -53195,18 +55063,21 @@ public partial record TreasuryOutboundPayment
     /// <summary>
     /// ID of the [customer](https://docs.stripe.com/api/customers) to whom an OutboundPayment is sent.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("customer")]
     public string? Customer { get; init; }
 
     /// <summary>
     /// An arbitrary string attached to the object. Often useful for displaying to users.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("description")]
     public string? Description { get; init; }
 
     /// <summary>
     /// The PaymentMethod via which an OutboundPayment is sent. This field can be empty if the OutboundPayment was created using `destination_payment_method_data`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("destination_payment_method")]
     public string? DestinationPaymentMethod { get; init; }
 
@@ -53231,18 +55102,21 @@ public partial record TreasuryOutboundPayment
     /// <summary>
     /// The FinancialAccount that funds were pulled from.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("financial_account")]
     public required string FinancialAccount { get; init; }
 
     /// <summary>
     /// A [hosted transaction receipt](https://docs.stripe.com/treasury/moving-money/regulatory-receipts) URL that is provided when money movement is considered regulated under Stripe's money transmission licenses.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("hosted_regulatory_receipt_url")]
     public string? HostedRegulatoryReceiptUrl { get; init; }
 
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -53273,6 +55147,7 @@ public partial record TreasuryOutboundPayment
     /// <summary>
     /// The description that appears on the receiving end for an OutboundPayment (for example, bank statement for external bank transfer).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("statement_descriptor")]
     public required string StatementDescriptor { get; init; }
 
@@ -53335,12 +55210,14 @@ public partial record TreasuryOutboundTransfer
     /// <summary>
     /// An arbitrary string attached to the object. Often useful for displaying to users.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("description")]
     public string? Description { get; init; }
 
     /// <summary>
     /// The PaymentMethod used as the payment instrument for an OutboundTransfer.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("destination_payment_method")]
     public string? DestinationPaymentMethod { get; init; }
 
@@ -53356,18 +55233,21 @@ public partial record TreasuryOutboundTransfer
     /// <summary>
     /// The FinancialAccount that funds were pulled from.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("financial_account")]
     public required string FinancialAccount { get; init; }
 
     /// <summary>
     /// A [hosted transaction receipt](https://docs.stripe.com/treasury/moving-money/regulatory-receipts) URL that is provided when money movement is considered regulated under Stripe's money transmission licenses.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("hosted_regulatory_receipt_url")]
     public string? HostedRegulatoryReceiptUrl { get; init; }
 
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -53398,6 +55278,7 @@ public partial record TreasuryOutboundTransfer
     /// <summary>
     /// Information about the OutboundTransfer to be sent to the recipient account.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("statement_descriptor")]
     public required string StatementDescriptor { get; init; }
 
@@ -53450,6 +55331,7 @@ public partial record TreasuryReceivedCredit
     /// <summary>
     /// An arbitrary string attached to the object. Often useful for displaying to users.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("description")]
     public required string Description { get; init; }
 
@@ -53462,18 +55344,21 @@ public partial record TreasuryReceivedCredit
     /// <summary>
     /// The FinancialAccount that received the funds.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("financial_account")]
     public string? FinancialAccount { get; init; }
 
     /// <summary>
     /// A [hosted transaction receipt](https://docs.stripe.com/treasury/moving-money/regulatory-receipts) URL that is provided when money movement is considered regulated under Stripe's money transmission licenses.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("hosted_regulatory_receipt_url")]
     public string? HostedRegulatoryReceiptUrl { get; init; }
 
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -53547,6 +55432,7 @@ public partial record TreasuryReceivedDebit
     /// <summary>
     /// An arbitrary string attached to the object. Often useful for displaying to users.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("description")]
     public required string Description { get; init; }
 
@@ -53559,18 +55445,21 @@ public partial record TreasuryReceivedDebit
     /// <summary>
     /// The FinancialAccount that funds were pulled from.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("financial_account")]
     public string? FinancialAccount { get; init; }
 
     /// <summary>
     /// A [hosted transaction receipt](https://docs.stripe.com/treasury/moving-money/regulatory-receipts) URL that is provided when money movement is considered regulated under Stripe's money transmission licenses.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("hosted_regulatory_receipt_url")]
     public string? HostedRegulatoryReceiptUrl { get; init; }
 
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -53650,6 +55539,7 @@ public partial record TreasuryTransaction
     /// <summary>
     /// An arbitrary string attached to the object. Often useful for displaying to users.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("description")]
     public required string Description { get; init; }
 
@@ -53662,12 +55552,14 @@ public partial record TreasuryTransaction
     /// <summary>
     /// The FinancialAccount associated with this object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("financial_account")]
     public required string FinancialAccount { get; init; }
 
     /// <summary>
     /// ID of the flow that created the Transaction.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("flow")]
     public string? Flow { get; init; }
 
@@ -53686,6 +55578,7 @@ public partial record TreasuryTransaction
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -53744,12 +55637,14 @@ public partial record TreasuryTransactionEntry
     /// <summary>
     /// The FinancialAccount associated with this object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("financial_account")]
     public required string FinancialAccount { get; init; }
 
     /// <summary>
     /// Token of the flow associated with the TransactionEntry.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("flow")]
     public string? Flow { get; init; }
 
@@ -53768,6 +55663,7 @@ public partial record TreasuryTransactionEntry
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -53805,30 +55701,35 @@ public partial record TreasuryFinancialAccountsResourceAbaRecord
     /// <summary>
     /// The name of the person or business that owns the bank account.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("account_holder_name")]
     public required string AccountHolderName { get; init; }
 
     /// <summary>
     /// The account number.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("account_number")]
     public string? AccountNumber { get; init; }
 
     /// <summary>
     /// The last four characters of the account number.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("account_number_last4")]
     public required string AccountNumberLast4 { get; init; }
 
     /// <summary>
     /// Name of the bank.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("bank_name")]
     public required string BankName { get; init; }
 
     /// <summary>
     /// Routing number for the account.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("routing_number")]
     public required string RoutingNumber { get; init; }
 
@@ -54127,6 +56028,7 @@ public partial record TreasuryInboundTransfersResourceInboundTransferResourceLin
     /// <summary>
     /// If funds for this flow were returned after the flow went to the `succeeded` state, this field contains a reference to the ReceivedDebit return.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("received_debit")]
     public string? ReceivedDebit { get; init; }
 
@@ -54159,6 +56061,7 @@ public partial record TreasuryOutboundPaymentsResourceAchTrackingDetails
     /// <summary>
     /// ACH trace ID of the OutboundPayment for payments sent over the `ach` network.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("trace_id")]
     public required string TraceId { get; init; }
 
@@ -54169,6 +56072,7 @@ public partial record TreasuryOutboundPaymentsResourceOutboundPaymentResourceEnd
     /// <summary>
     /// IP address of the user initiating the OutboundPayment. Set if `present` is set to `true`. IP address collection is required for risk and compliance reasons. This will be used to help determine if the OutboundPayment is authorized or should be blocked.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("ip_address")]
     public string? IpAddress { get; init; }
 
@@ -54245,18 +56149,21 @@ public partial record TreasuryOutboundPaymentsResourceUsDomesticWireTrackingDeta
     /// <summary>
     /// CHIPS System Sequence Number (SSN) of the OutboundPayment for payments sent over the `us_domestic_wire` network.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("chips")]
     public string? Chips { get; init; }
 
     /// <summary>
     /// IMAD of the OutboundPayment for payments sent over the `us_domestic_wire` network.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("imad")]
     public string? Imad { get; init; }
 
     /// <summary>
     /// OMAD of the OutboundPayment for payments sent over the `us_domestic_wire` network.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("omad")]
     public string? Omad { get; init; }
 
@@ -54267,6 +56174,7 @@ public partial record TreasuryOutboundTransfersResourceAchTrackingDetails
     /// <summary>
     /// ACH trace ID of the OutboundTransfer for transfers sent over the `ach` network.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("trace_id")]
     public required string TraceId { get; init; }
 
@@ -54337,18 +56245,21 @@ public partial record TreasuryOutboundTransfersResourceUsDomesticWireTrackingDet
     /// <summary>
     /// CHIPS System Sequence Number (SSN) of the OutboundTransfer for transfers sent over the `us_domestic_wire` network.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("chips")]
     public string? Chips { get; init; }
 
     /// <summary>
     /// IMAD of the OutboundTransfer for transfers sent over the `us_domestic_wire` network.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("imad")]
     public string? Imad { get; init; }
 
     /// <summary>
     /// OMAD of the OutboundTransfer for transfers sent over the `us_domestic_wire` network.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("omad")]
     public string? Omad { get; init; }
 
@@ -54359,24 +56270,28 @@ public partial record TreasuryReceivedCreditsResourceLinkedFlows
     /// <summary>
     /// The CreditReversal created as a result of this ReceivedCredit being reversed.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("credit_reversal")]
     public string? CreditReversal { get; init; }
 
     /// <summary>
     /// Set if the ReceivedCredit was created due to an [Issuing Authorization](https://api.stripe.com#issuing_authorizations) object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("issuing_authorization")]
     public string? IssuingAuthorization { get; init; }
 
     /// <summary>
     /// Set if the ReceivedCredit is also viewable as an [Issuing transaction](https://api.stripe.com#issuing_transactions) object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("issuing_transaction")]
     public string? IssuingTransaction { get; init; }
 
     /// <summary>
     /// ID of the source flow. Set if `network` is `stripe` and the source flow is visible to the user. Examples of source flows include OutboundPayments, payouts, or CreditReversals.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("source_flow")]
     public string? SourceFlow { get; init; }
 
@@ -54389,6 +56304,7 @@ public partial record TreasuryReceivedCreditsResourceLinkedFlows
     /// <summary>
     /// The type of flow that originated the ReceivedCredit (for example, `outbound_payment`).
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("source_flow_type")]
     public string? SourceFlowType { get; init; }
 
@@ -54474,6 +56390,7 @@ public partial record TreasuryReceivedDebitsResourceDebitReversalLinkedFlows
     /// <summary>
     /// Set if there is an Issuing dispute associated with the DebitReversal.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("issuing_dispute")]
     public string? IssuingDispute { get; init; }
 
@@ -54484,36 +56401,42 @@ public partial record TreasuryReceivedDebitsResourceLinkedFlows
     /// <summary>
     /// The DebitReversal created as a result of this ReceivedDebit being reversed.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("debit_reversal")]
     public string? DebitReversal { get; init; }
 
     /// <summary>
     /// Set if the ReceivedDebit is associated with an InboundTransfer's return of funds.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("inbound_transfer")]
     public string? InboundTransfer { get; init; }
 
     /// <summary>
     /// Set if the ReceivedDebit was created due to an [Issuing Authorization](https://api.stripe.com#issuing_authorizations) object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("issuing_authorization")]
     public string? IssuingAuthorization { get; init; }
 
     /// <summary>
     /// Set if the ReceivedDebit is also viewable as an [Issuing Dispute](https://api.stripe.com#issuing_disputes) object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("issuing_transaction")]
     public string? IssuingTransaction { get; init; }
 
     /// <summary>
     /// Set if the ReceivedDebit was created due to a [Payout](https://api.stripe.com#payouts) object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("payout")]
     public string? Payout { get; init; }
 
     /// <summary>
     /// Set if the ReceivedDebit was created due to a [Topup](https://api.stripe.com#topups) object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("topup")]
     public string? Topup { get; init; }
 
@@ -54553,12 +56476,14 @@ public partial record TreasurySharedResourceBillingDetails
     /// <summary>
     /// Email address.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("email")]
     public string? Email { get; init; }
 
     /// <summary>
     /// Full name.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("name")]
     public string? Name { get; init; }
 
@@ -54581,6 +56506,7 @@ public partial record TreasurySharedResourceInitiatingPaymentMethodDetailsInitia
     /// <summary>
     /// Set when `type` is `issuing_card`. This is an [Issuing Card](https://api.stripe.com#issuing_cards) ID.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("issuing_card")]
     public string? IssuingCard { get; init; }
 
@@ -54600,18 +56526,21 @@ public partial record TreasurySharedResourceInitiatingPaymentMethodDetailsUsBank
     /// <summary>
     /// Bank name.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("bank_name")]
     public string? BankName { get; init; }
 
     /// <summary>
     /// The last four digits of the bank account number.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("last4")]
     public string? Last4 { get; init; }
 
     /// <summary>
     /// The routing number for the bank account.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("routing_number")]
     public string? RoutingNumber { get; init; }
 
@@ -54735,6 +56664,7 @@ public partial record UsBankAccountNetworks
     /// <summary>
     /// The preferred network.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("preferred")]
     public string? Preferred { get; init; }
 
@@ -54770,12 +56700,14 @@ public partial record WebhookEndpoint
     /// <summary>
     /// The API version events are rendered as for this webhook endpoint.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("api_version")]
     public string? ApiVersion { get; init; }
 
     /// <summary>
     /// The ID of the associated Connect application.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("application")]
     public string? Application { get; init; }
 
@@ -54788,6 +56720,7 @@ public partial record WebhookEndpoint
     /// <summary>
     /// An optional description of what the webhook is used for.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("description")]
     public string? Description { get; init; }
 
@@ -54800,6 +56733,7 @@ public partial record WebhookEndpoint
     /// <summary>
     /// Unique identifier for the object.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("id")]
     public required string Id { get; init; }
 
@@ -54824,18 +56758,21 @@ public partial record WebhookEndpoint
     /// <summary>
     /// The endpoint's secret, used to generate [webhook signatures](https://docs.stripe.com/webhooks/signatures). Only returned at creation.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("secret")]
     public string? Secret { get; init; }
 
     /// <summary>
     /// The status of the webhook. It can be `enabled` or `disabled`.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("status")]
     public required string Status { get; init; }
 
     /// <summary>
     /// The URL of the webhook endpoint.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("url")]
     public required string Url { get; init; }
 
@@ -54867,6 +56804,7 @@ public partial record AccountExternalAccounts
     /// <summary>
     /// The URL where this list can be accessed.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("url")]
     public required string Url { get; init; }
 
@@ -54916,6 +56854,7 @@ public partial record ApplicationFeeRefunds
     /// <summary>
     /// The URL where this list can be accessed.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("url")]
     public required string Url { get; init; }
 
@@ -54947,6 +56886,7 @@ public partial record ChargeRefunds
     /// <summary>
     /// The URL where this list can be accessed.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("url")]
     public required string Url { get; init; }
 
@@ -54978,6 +56918,7 @@ public partial record CheckoutSessionLineItems
     /// <summary>
     /// The URL where this list can be accessed.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("url")]
     public required string Url { get; init; }
 
@@ -55009,6 +56950,7 @@ public partial record CreditNoteLines
     /// <summary>
     /// The URL where this list can be accessed.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("url")]
     public required string Url { get; init; }
 
@@ -55040,6 +56982,7 @@ public partial record CustomerSources
     /// <summary>
     /// The URL where this list can be accessed.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("url")]
     public required string Url { get; init; }
 
@@ -55079,6 +57022,7 @@ public partial record CustomerSubscriptions
     /// <summary>
     /// The URL where this list can be accessed.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("url")]
     public required string Url { get; init; }
 
@@ -55110,6 +57054,7 @@ public partial record CustomerTaxIds
     /// <summary>
     /// The URL where this list can be accessed.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("url")]
     public required string Url { get; init; }
 
@@ -55141,6 +57086,8 @@ public partial record FileLinks
     /// <summary>
     /// The URL where this list can be accessed.
     /// </summary>
+    [StringLength(5000)]
+    [RegularExpression("^/v1/file_links")]
     [JsonPropertyName("url")]
     public required string Url { get; init; }
 
@@ -55172,6 +57119,7 @@ public partial record FinancialConnectionsAccountOwnershipOwners
     /// <summary>
     /// The URL where this list can be accessed.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("url")]
     public required string Url { get; init; }
 
@@ -55203,6 +57151,8 @@ public partial record FinancialConnectionsSessionAccounts
     /// <summary>
     /// The URL where this list can be accessed.
     /// </summary>
+    [StringLength(5000)]
+    [RegularExpression("^/v1/financial_connections/accounts")]
     [JsonPropertyName("url")]
     public required string Url { get; init; }
 
@@ -55234,6 +57184,7 @@ public partial record InvoiceLines
     /// <summary>
     /// The URL where this list can be accessed.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("url")]
     public required string Url { get; init; }
 
@@ -55265,6 +57216,7 @@ public partial record InvoicePayments
     /// <summary>
     /// The URL where this list can be accessed.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("url")]
     public required string Url { get; init; }
 
@@ -55296,6 +57248,7 @@ public partial record PaymentFlowsAmountDetailsLineItems
     /// <summary>
     /// The URL where this list can be accessed.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("url")]
     public required string Url { get; init; }
 
@@ -55726,6 +57679,7 @@ public partial record PaymentLinkLineItems
     /// <summary>
     /// The URL where this list can be accessed.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("url")]
     public required string Url { get; init; }
 
@@ -55757,6 +57711,7 @@ public partial record QuoteLineItems
     /// <summary>
     /// The URL where this list can be accessed.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("url")]
     public required string Url { get; init; }
 
@@ -55788,6 +57743,7 @@ public partial record QuotesResourceUpfrontLineItems
     /// <summary>
     /// The URL where this list can be accessed.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("url")]
     public required string Url { get; init; }
 
@@ -55819,6 +57775,7 @@ public partial record RadarValueListListItems
     /// <summary>
     /// The URL where this list can be accessed.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("url")]
     public required string Url { get; init; }
 
@@ -55948,6 +57905,7 @@ public partial record SubscriptionItems
     /// <summary>
     /// The URL where this list can be accessed.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("url")]
     public required string Url { get; init; }
 
@@ -55979,6 +57937,8 @@ public partial record TaxCalculationLineItems
     /// <summary>
     /// The URL where this list can be accessed.
     /// </summary>
+    [StringLength(5000)]
+    [RegularExpression("^/v1/tax/calculations/[^/]+/line_items")]
     [JsonPropertyName("url")]
     public required string Url { get; init; }
 
@@ -56010,6 +57970,8 @@ public partial record TaxTransactionLineItems
     /// <summary>
     /// The URL where this list can be accessed.
     /// </summary>
+    [StringLength(5000)]
+    [RegularExpression("^/v1/tax/transactions/[^/]+/line_items")]
     [JsonPropertyName("url")]
     public required string Url { get; init; }
 
@@ -56041,6 +58003,7 @@ public partial record TransferReversals
     /// <summary>
     /// The URL where this list can be accessed.
     /// </summary>
+    [StringLength(5000)]
     [JsonPropertyName("url")]
     public required string Url { get; init; }
 
@@ -56072,6 +58035,8 @@ public partial record TreasuryTransactionEntries
     /// <summary>
     /// The URL where this list can be accessed.
     /// </summary>
+    [StringLength(5000)]
+    [RegularExpression("^/v1/treasury/transaction_entries")]
     [JsonPropertyName("url")]
     public required string Url { get; init; }
 

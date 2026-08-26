@@ -4,7 +4,7 @@
 // </auto-generated>
 
 #nullable enable
-#pragma warning disable CS8019
+#pragma warning disable CS8019, CS9042
 
 using System;
 using System.Collections.Generic;

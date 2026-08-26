@@ -2717,7 +2717,6 @@ public class CSharpCodeEmitterTests
     }
 
     #endregion
-
     #region Circular References
 
     [Fact]
@@ -2875,6 +2874,444 @@ public class CSharpCodeEmitterTests
 
         Assert.Contains("public partial record LinkedList", result, StringComparison.Ordinal);
         Assert.Contains("public IReadOnlyList<LinkedList>? Next { get; init; }", result, StringComparison.Ordinal);
+    }
+
+    #endregion
+    #region Validation Attributes
+
+    [Fact]
+    public void Emit_StringWithMinLengthAndMaxLength_EmitsStringLengthAttribute()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["User"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["name"] = new OpenApiSchema
+                    {
+                        Type = JsonSchemaType.String,
+                        MinLength = 1,
+                        MaxLength = 100
+                    }
+                }
+            }
+        };
+
+        string result = Generate(schemas);
+
+        Assert.Contains("[StringLength(100, MinimumLength = 1)]", result, StringComparison.Ordinal);
+        Assert.Contains("using System.ComponentModel.DataAnnotations;", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Emit_StringWithOnlyMaxLength_EmitsStringLengthAttribute()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["User"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["name"] = new OpenApiSchema
+                    {
+                        Type = JsonSchemaType.String,
+                        MaxLength = 50
+                    }
+                }
+            }
+        };
+
+        string result = Generate(schemas);
+
+        Assert.Contains("[StringLength(50)]", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Emit_StringWithOnlyMinLength_EmitsMinLengthAttribute()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["User"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["name"] = new OpenApiSchema
+                    {
+                        Type = JsonSchemaType.String,
+                        MinLength = 3
+                    }
+                }
+            }
+        };
+
+        string result = Generate(schemas);
+
+        Assert.Contains("[MinLength(3)]", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Emit_StringWithPattern_EmitsRegularExpressionAttribute()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["User"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["email"] = new OpenApiSchema
+                    {
+                        Type = JsonSchemaType.String,
+                        Pattern = @"^[^@]+@[^@]+$"
+                    }
+                }
+            }
+        };
+
+        string result = Generate(schemas);
+
+        Assert.Contains(@"[RegularExpression(""^[^@]+@[^@]+$"")]", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Emit_NumberWithMinimumAndMaximum_EmitsRangeAttribute()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["Product"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["price"] = new OpenApiSchema
+                    {
+                        Type = JsonSchemaType.Number,
+                        Minimum = "0",
+                        Maximum = "999.99"
+                    }
+                }
+            }
+        };
+
+        string result = Generate(schemas);
+
+        Assert.Contains("[Range(0d, 999.99d)]", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Emit_NumberWithOnlyMinimum_EmitsRangeAttribute()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["Product"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["quantity"] = new OpenApiSchema
+                    {
+                        Type = JsonSchemaType.Integer,
+                        Minimum = "1"
+                    }
+                }
+            }
+        };
+
+        string result = Generate(schemas);
+
+        Assert.Contains("[Range(1d, double.MaxValue)]", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Emit_ArrayWithMinItemsAndMaxItems_EmitsMinLengthAndMaxLengthAttributes()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["Collection"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["tags"] = new OpenApiSchema
+                    {
+                        Type = JsonSchemaType.Array,
+                        Items = new OpenApiSchema { Type = JsonSchemaType.String },
+                        MinItems = 1,
+                        MaxItems = 10
+                    }
+                }
+            }
+        };
+
+        string result = Generate(schemas);
+
+        Assert.Contains("[MinLength(1)]", result, StringComparison.Ordinal);
+        Assert.Contains("[MaxLength(10)]", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Emit_NoValidationConstraints_DoesNotEmitDataAnnotationsUsing()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["User"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["name"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                }
+            }
+        };
+
+        string result = Generate(schemas);
+
+        Assert.DoesNotContain("System.ComponentModel.DataAnnotations", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Emit_WithEmitValidationDisabled_DoesNotEmitValidationAttributes()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["User"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["name"] = new OpenApiSchema
+                    {
+                        Type = JsonSchemaType.String,
+                        MinLength = 1,
+                        MaxLength = 100
+                    }
+                }
+            }
+        };
+
+        string result = Generate(schemas, new GeneratorOptions
+        {
+            GenerateFileHeader = false,
+            Namespace = "TestModels",
+            EmitValidationAttributes = false
+        });
+
+        Assert.DoesNotContain("StringLength", result, StringComparison.Ordinal);
+        Assert.DoesNotContain("System.ComponentModel.DataAnnotations", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public async Task Emit_ValidationAttributes_CompilesSuccessfully()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["User"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["name"] = new OpenApiSchema
+                    {
+                        Type = JsonSchemaType.String,
+                        MinLength = 1,
+                        MaxLength = 100,
+                        Pattern = @"^[a-zA-Z]+$"
+                    },
+                    ["age"] = new OpenApiSchema
+                    {
+                        Type = JsonSchemaType.Integer,
+                        Minimum = "0",
+                        Maximum = "150"
+                    },
+                    ["tags"] = new OpenApiSchema
+                    {
+                        Type = JsonSchemaType.Array,
+                        Items = new OpenApiSchema { Type = JsonSchemaType.String },
+                        MinItems = 0,
+                        MaxItems = 5
+                    }
+                }
+            }
+        };
+
+        string result = Generate(schemas);
+
+        // Verify compilation (no implicit usings since we need System.ComponentModel.DataAnnotations)
+        string tempRoot = Path.Combine(
+            AppContext.BaseDirectory, "..", "..", "..", "..",
+            "TestResults", "ValidationCompile", Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(tempRoot);
+        try
+        {
+            await File.WriteAllTextAsync(Path.Combine(tempRoot, "Generated.cs"), result, TestContext.Current.CancellationToken);
+            await File.WriteAllTextAsync(Path.Combine(tempRoot, "Harness.csproj"), """
+                <Project Sdk="Microsoft.NET.Sdk">
+                  <PropertyGroup>
+                    <TargetFramework>net10.0</TargetFramework>
+                    <Nullable>enable</Nullable>
+                    <AnalysisMode>All</AnalysisMode>
+                  </PropertyGroup>
+                </Project>
+                """, TestContext.Current.CancellationToken);
+            using var proc = new System.Diagnostics.Process();
+            proc.StartInfo = new System.Diagnostics.ProcessStartInfo
+            {
+                FileName = "dotnet",
+                Arguments = $"build \"{Path.Combine(tempRoot, "Harness.csproj")}\" -v q --nologo",
+                WorkingDirectory = tempRoot,
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                UseShellExecute = false,
+                CreateNoWindow = true
+            };
+            proc.Start();
+            string stdout = await proc.StandardOutput.ReadToEndAsync(TestContext.Current.CancellationToken);
+            string stderr = await proc.StandardError.ReadToEndAsync(TestContext.Current.CancellationToken);
+            await proc.WaitForExitAsync(TestContext.Current.CancellationToken);
+            Assert.True(proc.ExitCode == 0,
+                $"Validation attributes code failed to compile.{Environment.NewLine}STDOUT:{stdout}{Environment.NewLine}STDERR:{stderr}");
+        }
+        finally
+        {
+            if (Directory.Exists(tempRoot)) Directory.Delete(tempRoot, recursive: true);
+        }
+    }
+
+    #endregion
+
+    #region Deprecated / Obsolete
+
+    [Fact]
+    public void Emit_DeprecatedRecord_EmitsObsoleteAttribute()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["OldModel"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Deprecated = true,
+                Description = "An old model",
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["name"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                }
+            }
+        };
+
+        string result = Generate(schemas);
+
+        Assert.Contains("[Obsolete]", result, StringComparison.Ordinal);
+        Assert.Contains("public partial record OldModel", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Emit_DeprecatedProperty_EmitsObsoleteAttribute()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["User"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["name"] = new OpenApiSchema { Type = JsonSchemaType.String },
+                    ["oldField"] = new OpenApiSchema { Type = JsonSchemaType.String, Deprecated = true }
+                }
+            }
+        };
+
+        string result = Generate(schemas);
+
+        Assert.Contains("[Obsolete]", result, StringComparison.Ordinal);
+        Assert.Contains("public string? OldField { get; init; }", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Emit_DeprecatedEnum_EmitsObsoleteAttribute()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["OldStatus"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.String,
+                Deprecated = true,
+                Enum = [JsonValue.Create("active"), JsonValue.Create("inactive")]
+            }
+        };
+
+        string result = Generate(schemas);
+
+        Assert.Contains("[Obsolete]", result, StringComparison.Ordinal);
+        Assert.Contains("public enum OldStatus", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Emit_DeprecatedTypeAlias_EmitsObsoleteAttribute()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["OldId"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.String,
+                Format = "uuid",
+                Deprecated = true
+            }
+        };
+
+        string result = Generate(schemas);
+
+        Assert.Contains("[Obsolete]", result, StringComparison.Ordinal);
+        Assert.Contains("public readonly partial record struct OldId", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Emit_NonDeprecatedSchema_DoesNotEmitObsoleteAttribute()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["User"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["name"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                }
+            }
+        };
+
+        string result = Generate(schemas);
+
+        Assert.DoesNotContain("[Obsolete]", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Emit_DeprecatedRecord_WithEmitObsoleteDisabled_DoesNotEmitObsolete()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["OldModel"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Deprecated = true,
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["name"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                }
+            }
+        };
+
+        string result = Generate(schemas, new GeneratorOptions
+        {
+            GenerateFileHeader = false,
+            Namespace = "TestModels",
+            EmitObsoleteAttribute = false
+        });
+
+        Assert.DoesNotContain("[Obsolete]", result, StringComparison.Ordinal);
     }
 
     #endregion

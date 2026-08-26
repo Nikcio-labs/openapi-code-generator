@@ -47,6 +47,8 @@ components:
       properties:
         fileName:
           type: string
+          minLength: 1
+          maxLength: 255
         content:
           type: string
           format: binary
@@ -90,9 +92,12 @@ components:
               type: array
               items:
                 type: string
+              minItems: 1
+              maxItems: 50
             note:
               type: string
               nullable: true
+              maxLength: 1000
 
     Circle:
       type: object
@@ -107,6 +112,8 @@ components:
         radius:
           type: number
           format: double
+          minimum: 0
+          maximum: 1000
 
     Rectangle:
       type: object
@@ -144,6 +151,8 @@ components:
         email:
           type: string
           format: email
+          pattern: '^[^@]+@[^@]+\.[^@]+$'
+          maxLength: 254
 
     WebhookContact:
       type: object
@@ -172,3 +181,21 @@ components:
           $ref: '#/components/schemas/Shape'
         contact:
           $ref: '#/components/schemas/ContactMethod'
+        legacyChannel:
+          type: string
+          deprecated: true
+          description: Superseded by contact; retained for backward compatibility.
+
+    LegacyStatus:
+      type: string
+      deprecated: true
+      description: Deprecated enum kept for migration; use DeliveryState instead.
+      enum:
+        - queued
+        - done
+
+    LegacyId:
+      type: string
+      format: uuid
+      deprecated: true
+      description: Deprecated UUID alias kept for migration.

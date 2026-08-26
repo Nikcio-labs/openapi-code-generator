@@ -4,13 +4,14 @@
 // </auto-generated>
 
 #nullable enable
-#pragma warning disable CS8019
+#pragma warning disable CS8019, CS9042
 
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.ComponentModel.DataAnnotations;
 
 namespace Generated.OctokitGhes36DiffToApi;
 
@@ -2554,6 +2555,8 @@ public partial record CodeScanningAnalysis
     /// <summary>
     /// The SHA of the commit to which the analysis you are uploading relates.
     /// </summary>
+    [StringLength(40, MinimumLength = 40)]
+    [RegularExpression("^[0-9a-fA-F]+$")]
     [JsonPropertyName("commit_sha")]
     public required CodeScanningAnalysisCommitSha CommitSha { get; init; }
 
@@ -4261,6 +4264,7 @@ public partial record Repository
     /// <summary>
     /// Whether a squash merge commit can use the pull request title as default. **This property has been deprecated. Please use `squash_merge_commit_title` instead.
     /// </summary>
+    [Obsolete]
     [JsonPropertyName("use_squash_pr_title_as_default")]
     public bool UseSquashPrTitleAsDefault { get; init; } = false;
 
@@ -5552,6 +5556,7 @@ public partial record NullableRepository
     /// <summary>
     /// Whether a squash merge commit can use the pull request title as default. **This property has been deprecated. Please use `squash_merge_commit_title` instead.
     /// </summary>
+    [Obsolete]
     [JsonPropertyName("use_squash_pr_title_as_default")]
     public bool UseSquashPrTitleAsDefault { get; init; } = false;
 
