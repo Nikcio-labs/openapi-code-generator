@@ -182,6 +182,16 @@ public enum BillingCreditGrantObject
 /// <summary>
 /// String representing the object's type. Objects of the same type share the same value.
 /// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter<BillingFeedbackOptionObject>))]
+public enum BillingFeedbackOptionObject
+{
+    [JsonStringEnumMemberName("billing.feedback_option")]
+    BillingFeedbackOption
+}
+
+/// <summary>
+/// String representing the object's type. Objects of the same type share the same value.
+/// </summary>
 [JsonConverter(typeof(JsonStringEnumConverter<BillingMeterObject>))]
 public enum BillingMeterObject
 {
@@ -2794,6 +2804,8 @@ public enum PlatformEarningFeeSourceType
 [JsonConverter(typeof(JsonStringEnumConverter<PortalFlowsFlowType>))]
 public enum PortalFlowsFlowType
 {
+    [JsonStringEnumMemberName("customer_update")]
+    CustomerUpdate,
     [JsonStringEnumMemberName("payment_method_update")]
     PaymentMethodUpdate,
     [JsonStringEnumMemberName("subscription_cancel")]
@@ -4942,10 +4954,10 @@ public enum BillingAlertStatus
 }
 
 /// <summary>
-/// The meter's status.
+/// The feedback option's status.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter<BillingMeterStatus>))]
-public enum BillingMeterStatus
+[JsonConverter(typeof(JsonStringEnumConverter<BillingFeedbackOptionStatus>))]
+public enum BillingFeedbackOptionStatus
 {
     [JsonStringEnumMemberName("active")]
     Active,
@@ -6659,7 +6671,7 @@ public enum OriginContext
 }
 
 /// <summary>
-/// Configure whether a Checkout Session should collect a payment method. Defaults to `always`.
+/// Configure whether a Checkout Session should collect a payment method for sessions with mode `payment`. Defaults to `always`.
 /// </summary>
 [JsonConverter(typeof(JsonStringEnumConverter<PaymentMethodCollection>))]
 public enum PaymentMethodCollection
@@ -8735,6 +8747,22 @@ public enum AllowRedirects
 }
 
 /// <summary>
+/// The name of the convenience store chain where the payment was completed.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter<Chain>))]
+public enum Chain
+{
+    [JsonStringEnumMemberName("familymart")]
+    Familymart,
+    [JsonStringEnumMemberName("lawson")]
+    Lawson,
+    [JsonStringEnumMemberName("ministop")]
+    Ministop,
+    [JsonStringEnumMemberName("seicomart")]
+    Seicomart
+}
+
+/// <summary>
 /// Describes whether we can confirm this PaymentIntent automatically, or if it requires customer action to confirm the payment.
 /// </summary>
 [JsonConverter(typeof(JsonStringEnumConverter<ConfirmationMethod>))]
@@ -9201,22 +9229,6 @@ public enum Bic
 }
 
 /// <summary>
-/// The name of the convenience store chain where the payment was completed.
-/// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter<Chain>))]
-public enum Chain
-{
-    [JsonStringEnumMemberName("familymart")]
-    Familymart,
-    [JsonStringEnumMemberName("lawson")]
-    Lawson,
-    [JsonStringEnumMemberName("ministop")]
-    Ministop,
-    [JsonStringEnumMemberName("seicomart")]
-    Seicomart
-}
-
-/// <summary>
 /// The local credit or debit card brand.
 /// </summary>
 [JsonConverter(typeof(JsonStringEnumConverter<PaymentMethodDetailsKrCardBrand>))]
@@ -9391,7 +9403,7 @@ public enum BorderStyle
 /// 
 /// Default is `client_only`. Stripe Checkout client will automatically update the shipping details. If set to `server_only`, only your server is allowed to update the shipping details.
 /// 
-/// When set to `server_only`, you must add the onShippingDetailsChange event handler when initializing the Stripe Checkout client and manually update the shipping details from your server using the Stripe API.
+/// This parameter is only supported when `ui_mode=elements`.
 /// </summary>
 [JsonConverter(typeof(JsonStringEnumConverter<UpdateShippingDetails>))]
 public enum UpdateShippingDetails
@@ -11517,13 +11529,43 @@ public partial record Address
 
 }
 
-public partial record AlmaInstallments
+public partial record AddressApiResourceTerminal
 {
     /// <summary>
-    /// The number of installments.
+    /// City, district, suburb, town, or village.
     /// </summary>
-    [JsonPropertyName("count")]
-    public required int Count { get; init; }
+    [JsonPropertyName("city")]
+    public string? City { get; init; }
+
+    /// <summary>
+    /// Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+    /// </summary>
+    [JsonPropertyName("country")]
+    public string? Country { get; init; }
+
+    /// <summary>
+    /// Address line 1, such as the street, PO Box, or company name.
+    /// </summary>
+    [JsonPropertyName("line1")]
+    public string? Line1 { get; init; }
+
+    /// <summary>
+    /// Address line 2, such as the apartment, suite, unit, or building.
+    /// </summary>
+    [JsonPropertyName("line2")]
+    public string? Line2 { get; init; }
+
+    /// <summary>
+    /// ZIP or postal code.
+    /// </summary>
+    [JsonPropertyName("postal_code")]
+    public string? PostalCode { get; init; }
+
+    /// <summary>
+    /// State, county, province, or region ([ISO 3166-2](https://en.wikipedia.org/wiki/ISO_3166-2)).
+    /// </summary>
+    [JsonPropertyName("state")]
+    public string? State { get; init; }
 
 }
 
@@ -12657,6 +12699,12 @@ public partial record BankConnectionsResourceLinkAccountSessionFilters
     public IReadOnlyList<string>? Countries { get; init; }
 
     /// <summary>
+    /// Country from which to filter accounts.
+    /// </summary>
+    [JsonPropertyName("country")]
+    public string? Country { get; init; }
+
+    /// <summary>
     /// Whether the Session should require that linked accounts support payments and retrieve account numbers before completion.
     /// </summary>
     [JsonPropertyName("require_payment_method_support")]
@@ -13009,6 +13057,46 @@ public partial record BillingCreditGrant
 }
 
 /// <summary>
+/// A resource for the feedback options model (for custom cancellation reasons)
+/// </summary>
+public partial record BillingFeedbackOption
+{
+    /// <summary>
+    /// An arbitrary string attached to the object. Often useful for displaying to users.
+    /// </summary>
+    [JsonPropertyName("description")]
+    public required string Description { get; init; }
+
+    /// <summary>
+    /// Unique identifier for the object.
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required string Id { get; init; }
+
+    /// <summary>
+    /// If the object exists in live mode, the value is `true`. If the object exists in test mode, the value is `false`.
+    /// </summary>
+    [JsonPropertyName("livemode")]
+    public required bool Livemode { get; init; }
+
+    /// <summary>
+    /// String representing the object's type. Objects of the same type share the same value.
+    /// </summary>
+    [JsonPropertyName("object")]
+    public required BillingFeedbackOptionObject Object { get; init; }
+
+    /// <summary>
+    /// The feedback option's status.
+    /// </summary>
+    [JsonPropertyName("status")]
+    public required BillingFeedbackOptionStatus Status { get; init; }
+
+    [JsonPropertyName("status_transitions")]
+    public required FeedbackOptionsStatusTransitions StatusTransitions { get; init; }
+
+}
+
+/// <summary>
 /// Meters specify how to aggregate meter events over a billing period. Meter events represent the actions that customers take in your system. Meters attach to prices and form the basis of the bill.
 /// 
 /// Related guide: [Usage based billing](https://docs.stripe.com/billing/subscriptions/usage-based)
@@ -13067,7 +13155,7 @@ public partial record BillingMeter
     /// The meter's status.
     /// </summary>
     [JsonPropertyName("status")]
-    public required BillingMeterStatus Status { get; init; }
+    public required BillingFeedbackOptionStatus Status { get; init; }
 
     [JsonPropertyName("status_transitions")]
     public required BillingMeterResourceBillingMeterStatusTransitions StatusTransitions { get; init; }
@@ -13938,6 +14026,12 @@ public partial record CancellationDetails
     /// </summary>
     [JsonPropertyName("feedback")]
     public Feedback? Feedback { get; init; }
+
+    /// <summary>
+    /// Customized feedback options that provide deeper insight into why the subscription was canceled, if the subscription was canceled explicitly by the user.
+    /// </summary>
+    [JsonPropertyName("feedback_option")]
+    public object? FeedbackOption { get; init; }
 
     /// <summary>
     /// Why this subscription was canceled.
@@ -14917,7 +15011,7 @@ public partial record CheckoutSession
     public object? PaymentLink { get; init; }
 
     /// <summary>
-    /// Configure whether a Checkout Session should collect a payment method. Defaults to `always`.
+    /// Configure whether a Checkout Session should collect a payment method for sessions with mode `payment`. Defaults to `always`.
     /// </summary>
     [JsonPropertyName("payment_method_collection")]
     public PaymentMethodCollection? PaymentMethodCollection { get; init; }
@@ -15486,6 +15580,41 @@ public partial record CheckoutEpsPaymentMethodOptions
     /// </summary>
     [JsonPropertyName("setup_future_usage")]
     public CheckoutAffirmPaymentMethodOptionsSetupFutureUsage? SetupFutureUsage { get; init; }
+
+}
+
+public partial record CheckoutFinancialConnectionsPaymentMethodOptions
+{
+    [JsonPropertyName("filters")]
+    public CheckoutFinancialConnectionsPaymentMethodOptionsFilters? Filters { get; init; }
+
+    /// <summary>
+    /// The list of permissions to request. The `payment_method` permission must be included.
+    /// </summary>
+    [JsonPropertyName("permissions")]
+    public IReadOnlyList<string>? Permissions { get; init; }
+
+    /// <summary>
+    /// Data features requested to be retrieved upon account creation.
+    /// </summary>
+    [JsonPropertyName("prefetch")]
+    public IReadOnlyList<string>? Prefetch { get; init; }
+
+    /// <summary>
+    /// For webview integrations only. Upon completing OAuth login in the native browser, the user will be redirected to this URL to return to your app.
+    /// </summary>
+    [JsonPropertyName("return_url")]
+    public string? ReturnUrl { get; init; }
+
+}
+
+public partial record CheckoutFinancialConnectionsPaymentMethodOptionsFilters
+{
+    /// <summary>
+    /// The account subcategories to use to filter for possible accounts to link. Valid subcategories are `checking` and `savings`.
+    /// </summary>
+    [JsonPropertyName("account_subcategories")]
+    public IReadOnlyList<string>? AccountSubcategories { get; init; }
 
 }
 
@@ -16237,7 +16366,7 @@ public partial record CheckoutUpiPaymentMethodOptions
 public partial record CheckoutUsBankAccountPaymentMethodOptions
 {
     [JsonPropertyName("financial_connections")]
-    public LinkedAccountOptionsCommon? FinancialConnections { get; init; }
+    public CheckoutFinancialConnectionsPaymentMethodOptions? FinancialConnections { get; init; }
 
     /// <summary>
     /// Indicates that you intend to make future payments with this PaymentIntent's payment method.
@@ -16375,7 +16504,7 @@ public partial record ClimateOrder
     public required IReadOnlyList<ClimateRemovalsOrderDeliveries> DeliveryDetails { get; init; }
 
     /// <summary>
-    /// The year this order is expected to be delivered.
+    /// The year this order is expected to be delivered. If the year is in the past, the order is a spot purchase and will be delivered within 30 days of purchase.
     /// </summary>
     [JsonPropertyName("expected_delivery_year")]
     public required int ExpectedDeliveryYear { get; init; }
@@ -16449,7 +16578,7 @@ public partial record ClimateProduct
     public required IReadOnlyDictionary<string, ClimateRemovalsProductsPrice> CurrentPricesPerMetricTon { get; init; }
 
     /// <summary>
-    /// The year in which the carbon removal is expected to be delivered.
+    /// The year in which the carbon removal is expected to be delivered. If the year is in the past, this represents spot inventory with guaranteed delivery.
     /// </summary>
     [JsonPropertyName("delivery_year")]
     public int? DeliveryYear { get; init; }
@@ -16686,6 +16815,12 @@ public partial record ConfirmationToken
     /// </summary>
     [JsonPropertyName("mandate_data")]
     public ConfirmationTokensResourceMandateData? MandateData { get; init; }
+
+    /// <summary>
+    /// Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+    /// </summary>
+    [JsonPropertyName("metadata")]
+    public IReadOnlyDictionary<string, string>? Metadata { get; init; }
 
     /// <summary>
     /// String representing the object's type. Objects of the same type share the same value.
@@ -17185,6 +17320,9 @@ public partial record ConnectEmbeddedAccountSessionCreateComponents
     [JsonPropertyName("payment_disputes")]
     public required ConnectEmbeddedPaymentDisputesConfig PaymentDisputes { get; init; }
 
+    [JsonPropertyName("payment_method_settings")]
+    public required ConnectEmbeddedPaymentMethodSettingsConfigClaim PaymentMethodSettings { get; init; }
+
     [JsonPropertyName("payments")]
     public required ConnectEmbeddedPaymentsConfigClaim Payments { get; init; }
 
@@ -17497,6 +17635,29 @@ public partial record ConnectEmbeddedPaymentDisputesFeatures
     /// </summary>
     [JsonPropertyName("smart_disputes_management")]
     public required bool SmartDisputesManagement { get; init; }
+
+}
+
+public partial record ConnectEmbeddedPaymentMethodSettingsConfigClaim
+{
+    /// <summary>
+    /// Whether the embedded component is enabled.
+    /// </summary>
+    [JsonPropertyName("enabled")]
+    public required bool Enabled { get; init; }
+
+    [JsonPropertyName("features")]
+    public required ConnectEmbeddedPaymentMethodSettingsFeatures Features { get; init; }
+
+}
+
+public partial record ConnectEmbeddedPaymentMethodSettingsFeatures
+{
+    /// <summary>
+    /// Whether Stripe user authentication is disabled. This value can only be `true` for accounts where `controller.requirement_collection` is `application` for the account. This is `false` by default.
+    /// </summary>
+    [JsonPropertyName("disable_stripe_user_authentication")]
+    public required bool DisableStripeUserAuthentication { get; init; }
 
 }
 
@@ -18954,10 +19115,22 @@ public partial record CustomerSession
 public partial record CustomerSessionResourceComponents
 {
     /// <summary>
+    /// This hash contains whether the active entitlements is enabled.
+    /// </summary>
+    [JsonPropertyName("active_entitlements")]
+    public required CustomerSessionResourceComponentsResourceActiveEntitlements ActiveEntitlements { get; init; }
+
+    /// <summary>
     /// This hash contains whether the buy button is enabled.
     /// </summary>
     [JsonPropertyName("buy_button")]
     public required CustomerSessionResourceComponentsResourceBuyButton BuyButton { get; init; }
+
+    /// <summary>
+    /// This hash contains whether the customer portal is enabled.
+    /// </summary>
+    [JsonPropertyName("customer_portal")]
+    public required CustomerSessionResourceComponentsResourceCustomerPortal CustomerPortal { get; init; }
 
     /// <summary>
     /// This hash contains whether the customer sheet is enabled and the features it supports.
@@ -18986,12 +19159,38 @@ public partial record CustomerSessionResourceComponents
 }
 
 /// <summary>
+/// This hash contains whether the active entitlements is enabled.
+/// </summary>
+public partial record CustomerSessionResourceComponentsResourceActiveEntitlements
+{
+    /// <summary>
+    /// Whether the active entitlements is enabled.
+    /// </summary>
+    [JsonPropertyName("enabled")]
+    public required bool Enabled { get; init; }
+
+}
+
+/// <summary>
 /// This hash contains whether the buy button is enabled.
 /// </summary>
 public partial record CustomerSessionResourceComponentsResourceBuyButton
 {
     /// <summary>
     /// Whether the buy button is enabled.
+    /// </summary>
+    [JsonPropertyName("enabled")]
+    public required bool Enabled { get; init; }
+
+}
+
+/// <summary>
+/// This hash contains whether the customer portal is enabled.
+/// </summary>
+public partial record CustomerSessionResourceComponentsResourceCustomerPortal
+{
+    /// <summary>
+    /// Whether the customer portal is enabled.
     /// </summary>
     [JsonPropertyName("enabled")]
     public required bool Enabled { get; init; }
@@ -20750,6 +20949,12 @@ public partial record EntitlementsFeature
 
 }
 
+/// <summary>
+/// Ephemeral keys give the SDKs (like Stripe's mobile SDKs and Issuing Elements) temporary, scoped access to a specific
+/// resource, such as a Customer, Issuing Card, or Identity VerificationSession, without exposing your secret API key.
+/// 
+/// Related guides: [Using Issuing Elements](https://docs.stripe.com/issuing/elements).
+/// </summary>
 public partial record EphemeralKey
 {
     /// <summary>
@@ -21064,6 +21269,16 @@ public partial record FeeRefund
     /// </summary>
     [JsonPropertyName("object")]
     public required FeeRefundObject Object { get; init; }
+
+}
+
+public partial record FeedbackOptionsStatusTransitions
+{
+    /// <summary>
+    /// The time the feedback option was deactivated, if any. Measured in seconds since Unix epoch.
+    /// </summary>
+    [JsonPropertyName("deactivated_at")]
+    public int? DeactivatedAt { get; init; }
 
 }
 
@@ -24525,6 +24740,10 @@ public partial record InvoicePaymentMethodOptionsBancontact
 
 }
 
+public partial record InvoicePaymentMethodOptionsBillie
+{
+}
+
 public partial record InvoicePaymentMethodOptionsCard
 {
     [JsonPropertyName("installments")]
@@ -25009,6 +25228,12 @@ public partial record Invoiceitem
     public IReadOnlyList<object>? Discounts { get; init; }
 
     /// <summary>
+    /// Array of field names that can't be modified. Attempting to update a frozen field returns an error.
+    /// </summary>
+    [JsonPropertyName("frozen_fields")]
+    public IReadOnlyList<string>? FrozenFields { get; init; }
+
+    /// <summary>
     /// Unique identifier for the object.
     /// </summary>
     [JsonPropertyName("id")]
@@ -25107,6 +25332,12 @@ public partial record InvoicesPaymentMethodOptions
     /// </summary>
     [JsonPropertyName("bancontact")]
     public InvoicePaymentMethodOptionsBancontact? Bancontact { get; init; }
+
+    /// <summary>
+    /// If paying by `billie`, this sub-hash contains details about the Billie payment method options to pass to the invoice’s PaymentIntent.
+    /// </summary>
+    [JsonPropertyName("billie")]
+    public InvoicePaymentMethodOptionsBillie? Billie { get; init; }
 
     /// <summary>
     /// If paying by `card`, this sub-hash contains details about the Card payment method options to pass to the invoice’s PaymentIntent.
@@ -25814,7 +26045,7 @@ public partial record IssuingCardholder
     public string? PhoneNumber { get; init; }
 
     /// <summary>
-    /// The cardholder’s preferred locales (languages), ordered by preference. Locales can be `da`, `de`, `en`, `es`, `fr`, `it`, `pl`, or `sv`.
+    /// The cardholder’s preferred locales (languages), ordered by preference. Locales can be `de`, `en`, `es`, `fr`, or `it`.
     ///  This changes the language of the [3D Secure flow](https://docs.stripe.com/issuing/3d-secure) and one-time password messages sent to the cardholder.
     /// </summary>
     [JsonPropertyName("preferred_locales")]
@@ -27217,7 +27448,7 @@ public partial record IssuingCardholderAuthorizationControls
 public partial record IssuingCardholderCardIssuing
 {
     /// <summary>
-    /// Information about cardholder acceptance of Celtic [Authorized User Terms](https://stripe.com/docs/issuing/cards#accept-authorized-user-terms). Required for cards backed by a Celtic program.
+    /// Information about cardholder acceptance of Celtic [Authorized User Terms](https://docs.stripe.com/issuing/compliance-us#issuing-terms). Required for cards backed by a Celtic program.
     /// </summary>
     [JsonPropertyName("user_terms_acceptance")]
     public IssuingCardholderUserTermsAcceptance? UserTermsAcceptance { get; init; }
@@ -30239,6 +30470,16 @@ public partial record PaymentFlowsPrivatePaymentMethodsAlipay
 {
 }
 
+public partial record PaymentFlowsPrivatePaymentMethodsAlmaDetailsResourceInstallments
+{
+    /// <summary>
+    /// The number of installments.
+    /// </summary>
+    [JsonPropertyName("count")]
+    public required int Count { get; init; }
+
+}
+
 public partial record PaymentFlowsPrivatePaymentMethodsCardDetailsApiResourceEnterpriseFeaturesExtendedAuthorizationExtendedAuthorization
 {
     /// <summary>
@@ -30376,6 +30617,16 @@ public partial record PaymentFlowsPrivatePaymentMethodsKlarnaPaymentIntentAmount
 
     [JsonPropertyName("subscription_reference")]
     public string? SubscriptionReference { get; init; }
+
+}
+
+public partial record PaymentFlowsPrivatePaymentMethodsKonbiniDetailsResourceStore
+{
+    /// <summary>
+    /// The name of the convenience store chain where the payment was completed.
+    /// </summary>
+    [JsonPropertyName("chain")]
+    public Chain? Chain { get; init; }
 
 }
 
@@ -34512,7 +34763,7 @@ public partial record PaymentMethodDetailsAlipay
 public partial record PaymentMethodDetailsAlma
 {
     [JsonPropertyName("installments")]
-    public AlmaInstallments? Installments { get; init; }
+    public PaymentFlowsPrivatePaymentMethodsAlmaDetailsResourceInstallments? Installments { get; init; }
 
     /// <summary>
     /// The Alma transaction ID associated with this payment.
@@ -35192,6 +35443,12 @@ public partial record PaymentMethodDetailsCardWalletGooglePay
 
 public partial record PaymentMethodDetailsCardWalletLink
 {
+    /// <summary>
+    /// The [funding source group code](https://docs.stripe.com/payments/link/link-payment-methods) applied to this Link payment at confirmation time.
+    /// </summary>
+    [JsonPropertyName("funding_source_group")]
+    public string? FundingSourceGroup { get; init; }
+
 }
 
 public partial record PaymentMethodDetailsCardWalletMasterpass
@@ -35665,17 +35922,7 @@ public partial record PaymentMethodDetailsKonbini
     /// If the payment succeeded, this contains the details of the convenience store where the payment was completed.
     /// </summary>
     [JsonPropertyName("store")]
-    public PaymentMethodDetailsKonbiniStore? Store { get; init; }
-
-}
-
-public partial record PaymentMethodDetailsKonbiniStore
-{
-    /// <summary>
-    /// The name of the convenience store chain where the payment was completed.
-    /// </summary>
-    [JsonPropertyName("chain")]
-    public Chain? Chain { get; init; }
+    public PaymentFlowsPrivatePaymentMethodsKonbiniDetailsResourceStore? Store { get; init; }
 
 }
 
@@ -35715,6 +35962,12 @@ public partial record PaymentMethodDetailsLink
     /// </summary>
     [JsonPropertyName("country")]
     public string? Country { get; init; }
+
+    /// <summary>
+    /// The [funding source group code](https://docs.stripe.com/payments/link/link-payment-methods) applied to this Link payment at confirmation time.
+    /// </summary>
+    [JsonPropertyName("funding_source_group")]
+    public string? FundingSourceGroup { get; init; }
 
 }
 
@@ -36430,6 +36683,52 @@ public partial record PaymentMethodDetailsPaymentRecordNaverPay
 
 }
 
+public partial record PaymentMethodDetailsPaymentRecordNzBankAccount
+{
+    /// <summary>
+    /// The name on the bank account. Only present if the account holder name is different from the name of the authorized signatory collected in the PaymentMethod's billing details.
+    /// </summary>
+    [JsonPropertyName("account_holder_name")]
+    public string? AccountHolderName { get; init; }
+
+    /// <summary>
+    /// The numeric code for the bank account's bank.
+    /// </summary>
+    [JsonPropertyName("bank_code")]
+    public required string BankCode { get; init; }
+
+    /// <summary>
+    /// The name of the bank.
+    /// </summary>
+    [JsonPropertyName("bank_name")]
+    public required string BankName { get; init; }
+
+    /// <summary>
+    /// The numeric code for the bank account's bank branch.
+    /// </summary>
+    [JsonPropertyName("branch_code")]
+    public required string BranchCode { get; init; }
+
+    /// <summary>
+    /// Estimated date to debit the customer's bank account. A date string in YYYY-MM-DD format.
+    /// </summary>
+    [JsonPropertyName("expected_debit_date")]
+    public string? ExpectedDebitDate { get; init; }
+
+    /// <summary>
+    /// Last four digits of the bank account number.
+    /// </summary>
+    [JsonPropertyName("last4")]
+    public required string Last4 { get; init; }
+
+    /// <summary>
+    /// The suffix of the bank account number.
+    /// </summary>
+    [JsonPropertyName("suffix")]
+    public string? Suffix { get; init; }
+
+}
+
 public partial record PaymentMethodDetailsPaymentRecordOxxo
 {
     /// <summary>
@@ -36541,7 +36840,7 @@ public partial record PaymentMethodDetailsPaymentRecordPix
     public string? BankTransactionId { get; init; }
 
     /// <summary>
-    /// ID of the multi use Mandate generated by the PaymentIntent
+    /// ID of the multi use Mandate generated by the PaymentIntent or SetupIntent.
     /// </summary>
     [JsonPropertyName("mandate")]
     public string? Mandate { get; init; }
@@ -36746,7 +37045,7 @@ public partial record PaymentMethodDetailsPaymentRecordSwish
 public partial record PaymentMethodDetailsPaymentRecordTwint
 {
     /// <summary>
-    /// ID of the multi use Mandate generated by the PaymentIntent
+    /// ID of the multi use Mandate generated by the PaymentIntent or SetupIntent.
     /// </summary>
     [JsonPropertyName("mandate")]
     public string? Mandate { get; init; }
@@ -36960,7 +37259,7 @@ public partial record PaymentMethodDetailsPix
     public string? Fingerprint { get; init; }
 
     /// <summary>
-    /// ID of the multi use Mandate generated by the PaymentIntent
+    /// ID of the multi use Mandate generated by the PaymentIntent or SetupIntent.
     /// </summary>
     [JsonPropertyName("mandate")]
     public string? Mandate { get; init; }
@@ -37171,7 +37470,7 @@ public partial record PaymentMethodDetailsSwish
 public partial record PaymentMethodDetailsTwint
 {
     /// <summary>
-    /// ID of the multi use Mandate generated by the PaymentIntent
+    /// ID of the multi use Mandate generated by the PaymentIntent or SetupIntent.
     /// </summary>
     [JsonPropertyName("mandate")]
     public string? Mandate { get; init; }
@@ -37373,7 +37672,7 @@ public partial record PaymentMethodDomainResourcePaymentMethodStatus
     /// The status of the payment method on the domain.
     /// </summary>
     [JsonPropertyName("status")]
-    public required BillingMeterStatus Status { get; init; }
+    public required BillingFeedbackOptionStatus Status { get; init; }
 
     /// <summary>
     /// Contains additional details about the status of a payment method for a specific payment method domain.
@@ -39557,7 +39856,7 @@ public partial record PaymentPagesCheckoutSessionPermissions
     /// 
     /// Default is `client_only`. Stripe Checkout client will automatically update the shipping details. If set to `server_only`, only your server is allowed to update the shipping details.
     /// 
-    /// When set to `server_only`, you must add the onShippingDetailsChange event handler when initializing the Stripe Checkout client and manually update the shipping details from your server using the Stripe API.
+    /// This parameter is only supported when `ui_mode=elements`.
     /// </summary>
     [JsonPropertyName("update_shipping_details")]
     public UpdateShippingDetails? UpdateShippingDetails { get; init; }
@@ -39737,6 +40036,12 @@ public partial record PaymentPagesPrivateCardPaymentMethodOptionsResourceRestric
     /// </summary>
     [JsonPropertyName("brands_blocked")]
     public IReadOnlyList<string>? BrandsBlocked { get; init; }
+
+    /// <summary>
+    /// Card funding types to block for this Checkout Session. Supported values are `credit`, `debit`, and `prepaid`.
+    /// </summary>
+    [JsonPropertyName("funding_types_blocked")]
+    public IReadOnlyList<string>? FundingTypesBlocked { get; init; }
 
 }
 
@@ -40262,12 +40567,6 @@ public partial record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCardD
     public AuthenticationFlow? AuthenticationFlow { get; init; }
 
     /// <summary>
-    /// The 3D Secure cryptogram, also known as the "authentication value" (AAV, CAVV or AEVV).
-    /// </summary>
-    [JsonPropertyName("cryptogram")]
-    public string? Cryptogram { get; init; }
-
-    /// <summary>
     /// The Electronic Commerce Indicator (ECI). A protocol-level field indicating what degree of authentication was performed.
     /// </summary>
     [JsonPropertyName("electronic_commerce_indicator")]
@@ -40490,7 +40789,7 @@ public partial record PaymentsPrimitivesPaymentRecordsResourcePaymentMethodDetai
     public PaymentMethodDetailsPaymentRecordNaverPay? NaverPay { get; init; }
 
     [JsonPropertyName("nz_bank_account")]
-    public PaymentMethodDetailsNzBankAccount? NzBankAccount { get; init; }
+    public PaymentMethodDetailsPaymentRecordNzBankAccount? NzBankAccount { get; init; }
 
     [JsonPropertyName("oxxo")]
     public PaymentMethodDetailsPaymentRecordOxxo? Oxxo { get; init; }
@@ -41640,6 +41939,12 @@ public partial record PortalFlowsFlow
     public required PortalFlowsFlowAfterCompletion AfterCompletion { get; init; }
 
     /// <summary>
+    /// Configuration when `flow.type=customer_update`.
+    /// </summary>
+    [JsonPropertyName("customer_update")]
+    public PortalFlowsFlowCustomerUpdate? CustomerUpdate { get; init; }
+
+    /// <summary>
     /// Configuration when `flow.type=subscription_cancel`.
     /// </summary>
     [JsonPropertyName("subscription_cancel")]
@@ -41685,6 +41990,10 @@ public partial record PortalFlowsFlowAfterCompletion
     [JsonPropertyName("type")]
     public required PortalFlowsFlowAfterCompletionType Type { get; init; }
 
+}
+
+public partial record PortalFlowsFlowCustomerUpdate
+{
 }
 
 public partial record PortalFlowsFlowSubscriptionCancel
@@ -41885,6 +42194,12 @@ public partial record PortalSubscriptionCancellationReason
     /// </summary>
     [JsonPropertyName("enabled")]
     public required bool Enabled { get; init; }
+
+    /// <summary>
+    /// The IDs of custom feedback options configured for this cancellation reason.
+    /// </summary>
+    [JsonPropertyName("feedback_options")]
+    public IReadOnlyList<object>? FeedbackOptions { get; init; }
 
     /// <summary>
     /// Which cancellation reasons will be given as options to the customer.
@@ -47507,6 +47822,10 @@ public partial record SubscriptionItemBillingThresholds
 
 }
 
+public partial record SubscriptionPaymentMethodOptionsBillie
+{
+}
+
 public partial record SubscriptionPaymentMethodOptionsCard
 {
     [JsonPropertyName("mandate_options")]
@@ -48278,6 +48597,12 @@ public partial record SubscriptionsResourcePaymentMethodOptions
     /// </summary>
     [JsonPropertyName("bancontact")]
     public InvoicePaymentMethodOptionsBancontact? Bancontact { get; init; }
+
+    /// <summary>
+    /// This sub-hash contains details about the Billie payment method options to pass to invoices created by the subscription.
+    /// </summary>
+    [JsonPropertyName("billie")]
+    public SubscriptionPaymentMethodOptionsBillie? Billie { get; init; }
 
     /// <summary>
     /// This sub-hash contains details about the Card payment method options to pass to invoices created by the subscription.
@@ -49566,6 +49891,9 @@ public partial record TaxProductRegistrationsResourceCountryOptionsEuStandard
 
 public partial record TaxProductRegistrationsResourceCountryOptionsEurope
 {
+    [JsonPropertyName("igic")]
+    public TaxProductRegistrationsResourceCountryOptionsIgic? Igic { get; init; }
+
     [JsonPropertyName("standard")]
     public TaxProductRegistrationsResourceCountryOptionsEuStandard? Standard { get; init; }
 
@@ -49574,6 +49902,16 @@ public partial record TaxProductRegistrationsResourceCountryOptionsEurope
     /// </summary>
     [JsonPropertyName("type")]
     public required TaxProductRegistrationsResourceCountryOptionsEuropeType Type { get; init; }
+
+}
+
+public partial record TaxProductRegistrationsResourceCountryOptionsIgic
+{
+    /// <summary>
+    /// Place of supply scheme used in an IGIC registration.
+    /// </summary>
+    [JsonPropertyName("place_of_supply_scheme")]
+    public required TaxProductRegistrationsResourceCountryOptionsDefaultStandardPlaceOfSupplyScheme PlaceOfSupplyScheme { get; init; }
 
 }
 
@@ -50391,7 +50729,7 @@ public partial record TerminalConnectionToken
 public partial record TerminalLocation
 {
     [JsonPropertyName("address")]
-    public required Address Address { get; init; }
+    public required AddressApiResourceTerminal Address { get; init; }
 
     [JsonPropertyName("address_kana")]
     public LegalEntityJapanAddress? AddressKana { get; init; }
@@ -52532,8 +52870,8 @@ public partial record TreasuryDebitReversal
 }
 
 /// <summary>
-/// Stripe Treasury provides users with a container for money called a FinancialAccount that is separate from their Payments balance.
-/// FinancialAccounts serve as the source and destination of Treasury’s money movement APIs.
+/// Stripe Treasury for Platforms provides users with a container for money called a FinancialAccount that is separate from their Payments balance.
+/// FinancialAccounts serve as the source and destination of Treasury for Platform’s money movement APIs.
 /// </summary>
 public partial record TreasuryFinancialAccount
 {
