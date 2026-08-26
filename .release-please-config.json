@@ -21,11 +21,7 @@
       ],
       "extra-files": [
         "CHANGELOG.md",
-        {
-          "type": "xml",
-          "path": "src/OpenApiCodeGenerator.Cli/OpenApiCodeGenerator.Cli.csproj",
-          "xpath": "//*[local-name()='PropertyGroup']/*[local-name()='Version']"
-        }
+        "src/OpenApiCodeGenerator.Cli/OpenApiCodeGenerator.Cli.csproj"
       ]
     }
   }
