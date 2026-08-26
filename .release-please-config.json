@@ -8,7 +8,6 @@
   "tag-separator": "v",
   "packages": {
     ".": {
-      "version-file": "src/OpenApiCodeGenerator.Cli/OpenApiCodeGenerator.Cli.csproj",
       "changelog-path": "CHANGELOG.md",
       "changelog-sections": [
         { "type": "feat", "section": "Added" },
@@ -21,7 +20,12 @@
         { "type": "docs", "section": "Changed", "hidden": true }
       ],
       "extra-files": [
-        "CHANGELOG.md"
+        "CHANGELOG.md",
+        {
+          "type": "xml",
+          "path": "src/OpenApiCodeGenerator.Cli/OpenApiCodeGenerator.Cli.csproj",
+          "xpath": "//*[local-name()='PropertyGroup']/*[local-name()='Version']"
+        }
       ]
     }
   }
