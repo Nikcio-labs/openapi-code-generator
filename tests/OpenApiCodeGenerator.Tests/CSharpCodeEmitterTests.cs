@@ -2717,4 +2717,137 @@ public class CSharpCodeEmitterTests
     }
 
     #endregion
+
+    #region Deprecated / Obsolete
+
+    [Fact]
+    public void Emit_DeprecatedRecord_EmitsObsoleteAttribute()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["OldModel"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Deprecated = true,
+                Description = "An old model",
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["name"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                }
+            }
+        };
+
+        string result = Generate(schemas);
+
+        Assert.Contains("[Obsolete]", result, StringComparison.Ordinal);
+        Assert.Contains("public partial record OldModel", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Emit_DeprecatedProperty_EmitsObsoleteAttribute()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["User"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["name"] = new OpenApiSchema { Type = JsonSchemaType.String },
+                    ["oldField"] = new OpenApiSchema { Type = JsonSchemaType.String, Deprecated = true }
+                }
+            }
+        };
+
+        string result = Generate(schemas);
+
+        Assert.Contains("[Obsolete]", result, StringComparison.Ordinal);
+        Assert.Contains("public string? OldField { get; init; }", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Emit_DeprecatedEnum_EmitsObsoleteAttribute()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["OldStatus"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.String,
+                Deprecated = true,
+                Enum = [JsonValue.Create("active"), JsonValue.Create("inactive")]
+            }
+        };
+
+        string result = Generate(schemas);
+
+        Assert.Contains("[Obsolete]", result, StringComparison.Ordinal);
+        Assert.Contains("public enum OldStatus", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Emit_DeprecatedTypeAlias_EmitsObsoleteAttribute()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["OldId"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.String,
+                Format = "uuid",
+                Deprecated = true
+            }
+        };
+
+        string result = Generate(schemas);
+
+        Assert.Contains("[Obsolete]", result, StringComparison.Ordinal);
+        Assert.Contains("public readonly partial record struct OldId", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Emit_NonDeprecatedSchema_DoesNotEmitObsoleteAttribute()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["User"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["name"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                }
+            }
+        };
+
+        string result = Generate(schemas);
+
+        Assert.DoesNotContain("[Obsolete]", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Emit_DeprecatedRecord_WithEmitObsoleteDisabled_DoesNotEmitObsolete()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["OldModel"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Deprecated = true,
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["name"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                }
+            }
+        };
+
+        string result = Generate(schemas, new GeneratorOptions
+        {
+            GenerateFileHeader = false,
+            Namespace = "TestModels",
+            EmitObsoleteAttribute = false
+        });
+
+        Assert.DoesNotContain("[Obsolete]", result, StringComparison.Ordinal);
+    }
+
+    #endregion
 }
