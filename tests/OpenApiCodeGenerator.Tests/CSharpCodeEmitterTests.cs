@@ -2717,7 +2717,166 @@ public class CSharpCodeEmitterTests
     }
 
     #endregion
+    #region Circular References
 
+    [Fact]
+    public void Emit_SelfReferencingSchema_GeneratesCorrectType()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["TreeNode"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["value"] = new OpenApiSchema { Type = JsonSchemaType.String },
+                    ["children"] = new OpenApiSchema
+                    {
+                        Type = JsonSchemaType.Array,
+                        Items = new OpenApiSchemaReference("TreeNode")
+                    }
+                }
+            }
+        };
+
+        string result = Generate(schemas);
+
+        Assert.Contains("public partial record TreeNode", result, StringComparison.Ordinal);
+        Assert.Contains("public IReadOnlyList<TreeNode>? Children { get; init; }", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Emit_MutuallyReferencingSchemas_GeneratesCorrectTypes()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["A"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["name"] = new OpenApiSchema { Type = JsonSchemaType.String },
+                    ["b"] = new OpenApiSchemaReference("B")
+                }
+            },
+            ["B"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["name"] = new OpenApiSchema { Type = JsonSchemaType.String },
+                    ["a"] = new OpenApiSchemaReference("A")
+                }
+            }
+        };
+
+        string result = Generate(schemas);
+
+        Assert.Contains("public partial record A", result, StringComparison.Ordinal);
+        Assert.Contains("public B? B { get; init; }", result, StringComparison.Ordinal);
+        Assert.Contains("public partial record B", result, StringComparison.Ordinal);
+        Assert.Contains("public A? A { get; init; }", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Emit_InlineObjectWithParentRef_GeneratesCorrectTypes()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["Category"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["name"] = new OpenApiSchema { Type = JsonSchemaType.String },
+                    ["subcategory"] = new OpenApiSchema
+                    {
+                        Type = JsonSchemaType.Object,
+                        Properties = new Dictionary<string, IOpenApiSchema>
+                        {
+                            ["label"] = new OpenApiSchema { Type = JsonSchemaType.String },
+                            ["parent"] = new OpenApiSchemaReference("Category")
+                        }
+                    }
+                }
+            }
+        };
+
+        string result = Generate(schemas);
+
+        Assert.Contains("public partial record Category", result, StringComparison.Ordinal);
+        Assert.Contains("public CategorySubcategory? Subcategory { get; init; }", result, StringComparison.Ordinal);
+        Assert.Contains("public partial record CategorySubcategory", result, StringComparison.Ordinal);
+        Assert.Contains("public Category? Parent { get; init; }", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Emit_DeeplyNestedInlineObjects_GeneratesAllLevels()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["Tree"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["value"] = new OpenApiSchema { Type = JsonSchemaType.String },
+                    ["child"] = new OpenApiSchema
+                    {
+                        Type = JsonSchemaType.Object,
+                        Properties = new Dictionary<string, IOpenApiSchema>
+                        {
+                            ["value"] = new OpenApiSchema { Type = JsonSchemaType.String },
+                            ["child"] = new OpenApiSchema
+                            {
+                                Type = JsonSchemaType.Object,
+                                Properties = new Dictionary<string, IOpenApiSchema>
+                                {
+                                    ["value"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        };
+
+        string result = Generate(schemas);
+
+        Assert.Contains("public partial record Tree", result, StringComparison.Ordinal);
+        Assert.Contains("public TreeChild? Child { get; init; }", result, StringComparison.Ordinal);
+        Assert.Contains("public partial record TreeChild", result, StringComparison.Ordinal);
+        Assert.Contains("public TreeChildChild? Child { get; init; }", result, StringComparison.Ordinal);
+        Assert.Contains("public partial record TreeChildChild", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Emit_SelfReferencingThroughArray_GeneratesCorrectType()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["LinkedList"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["value"] = new OpenApiSchema { Type = JsonSchemaType.String },
+                    ["next"] = new OpenApiSchema
+                    {
+                        Type = JsonSchemaType.Array,
+                        Items = new OpenApiSchemaReference("LinkedList")
+                    }
+                }
+            }
+        };
+
+        string result = Generate(schemas);
+
+        Assert.Contains("public partial record LinkedList", result, StringComparison.Ordinal);
+        Assert.Contains("public IReadOnlyList<LinkedList>? Next { get; init; }", result, StringComparison.Ordinal);
+    }
+
+    #endregion
     #region Validation Attributes
 
     [Fact]
