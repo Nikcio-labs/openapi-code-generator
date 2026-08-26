@@ -71,7 +71,7 @@ internal class CSharpCodeEmitter
         }
 
         AppendLine("#nullable enable");
-        AppendLine("#pragma warning disable CS8019");
+        AppendLine("#pragma warning disable CS8019, CS9042");
         AppendLine();
 
         AppendLine("using System;");
