@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.ComponentModel.DataAnnotations;
 
 namespace Generated.OctokitGhes36DiffToApi;
 
@@ -2554,6 +2555,8 @@ public partial record CodeScanningAnalysis
     /// <summary>
     /// The SHA of the commit to which the analysis you are uploading relates.
     /// </summary>
+    [StringLength(40, MinimumLength = 40)]
+    [RegularExpression("^[0-9a-fA-F]+$")]
     [JsonPropertyName("commit_sha")]
     public required CodeScanningAnalysisCommitSha CommitSha { get; init; }
 

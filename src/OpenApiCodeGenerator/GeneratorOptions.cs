@@ -66,6 +66,12 @@ public sealed class GeneratorOptions
     public bool InlinePrimitiveTypeAliases { get; init; }
 
     /// <summary>
+    /// When true, emit validation attributes (<c>[Range]</c>, <c>[StringLength]</c>,
+    /// <c>[RegularExpression]</c>, <c>[MinLength]</c>, <c>[MaxLength]</c>) from OpenAPI constraints.
+    /// </summary>
+    public bool EmitValidationAttributes { get; init; } = true;
+
+    /// <summary>
     /// When true, emit <c>[Obsolete]</c> on schemas and properties marked as deprecated.
     /// </summary>
     public bool EmitObsoleteAttribute { get; init; } = true;
