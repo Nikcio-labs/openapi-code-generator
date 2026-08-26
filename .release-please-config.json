@@ -8,6 +8,7 @@
   "tag-separator": "v",
   "packages": {
     ".": {
+      "version-file": ".release-please-manifest.json",
       "changelog-path": "CHANGELOG.md",
       "changelog-sections": [
         { "type": "feat", "section": "Added" },
