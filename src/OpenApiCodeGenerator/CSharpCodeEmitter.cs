@@ -312,9 +312,23 @@ internal class CSharpCodeEmitter
 
         foreach ((string? schemaName, IOpenApiSchema? schema) in _allSchemas)
         {
+            // If this schema is a variant of a discriminated union, its discriminator
+            // property is handled by the polymorphic serializer and skipped in EmitRecord.
+            // Don't collect it as an inline enum — it would be emitted but never referenced.
+            string? skipDiscriminator = null;
+            if (_unionVariantBaseTypes.TryGetValue(schema, out (string BaseTypeName, string DiscriminatorPropertyName) unionInfo))
+            {
+                skipDiscriminator = unionInfo.DiscriminatorPropertyName;
+            }
+
             Dictionary<string, IOpenApiSchema> properties = CollectProperties(schema);
             foreach ((string? propName, IOpenApiSchema? propSchema) in properties)
             {
+                if (skipDiscriminator != null && string.Equals(propName, skipDiscriminator, StringComparison.Ordinal))
+                {
+                    continue;
+                }
+
                 if (TypeResolver.IsEnum(propSchema) && !_knownSchemas.Contains(propSchema))
                 {
                     string enumTypeName = NameHelper.ToPropertyName(propName, typeNameMap.GetValueOrDefault(schemaName));
@@ -1327,8 +1341,9 @@ internal class CSharpCodeEmitter
 
     /// <summary>
     /// Extracts the wire discriminator value from an inline variant's discriminator property.
-    /// The property is expected to have an <see cref="OpenApiSchema.Enum"/> with a single
-    /// <see cref="JsonValue"/> (const/enum constraint). Returns null if not found.
+    /// In OpenAPI 3.0 the value is expressed via <see cref="OpenApiSchema.Enum"/> (a single
+    /// <see cref="JsonValue"/>); in OpenAPI 3.1 it is expressed via <see cref="OpenApiSchema.Const"/>.
+    /// Returns null if neither is found.
     /// </summary>
     private static string? TryGetDiscriminatorValue(IOpenApiSchema variant, string discriminatorPropertyName)
     {
@@ -1336,6 +1351,11 @@ internal class CSharpCodeEmitter
         if (!properties.TryGetValue(discriminatorPropertyName, out IOpenApiSchema? discProp))
         {
             return null;
+        }
+
+        if (!string.IsNullOrEmpty(discProp.Const))
+        {
+            return discProp.Const;
         }
 
         if (discProp.Enum is null || discProp.Enum.Count == 0)
@@ -1379,19 +1399,20 @@ internal class CSharpCodeEmitter
             }
         }
 
-        if (variantNames.Count > 0)
+        bool hasInlineVariant = nonNullVariants.Any(v => v is not OpenApiSchemaReference && _typeResolver.GetInlineObjectTypeName(v) != null);
+
+        if (variantNames.Count > 0 || hasInlineVariant)
         {
             AppendLine($"/// <remarks>");
-            AppendLine($"/// Union of: {string.Join(" | ", variantNames)}");
+            if (variantNames.Count > 0)
+            {
+                AppendLine($"/// Union of: {string.Join(" | ", variantNames)}");
+            }
+            if (hasInlineVariant)
+            {
+                AppendLine("/// Inline object variants use the synthesized type name as the discriminator value.");
+            }
             AppendLine($"/// </remarks>");
-        }
-
-        bool hasInlineVariant = nonNullVariants.Any(v => v is not OpenApiSchemaReference && _typeResolver.GetInlineObjectTypeName(v) != null);
-        if (hasInlineVariant)
-        {
-            AppendLine("/// <remarks>");
-            AppendLine("/// Inline object variants use the synthesized type name as the discriminator value.");
-            AppendLine("/// </remarks>");
         }
 
         // Emit [JsonDerivedType] for each resolvable variant
