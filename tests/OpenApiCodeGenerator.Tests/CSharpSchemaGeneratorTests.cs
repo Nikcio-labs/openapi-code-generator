@@ -1040,7 +1040,7 @@ public class CSharpSchemaGeneratorTests
     }
 
     [Fact]
-    public async Task Generate_ComprehensiveApi_OneOfDiscriminatedUnion_DefaultSystemTextJsonReportsUnsupportedDerivedType()
+    public async Task Generate_ComprehensiveApi_OneOfDiscriminatedUnion_RoundTripsWithSystemTextJsonDefaults()
     {
         var generator = new CSharpSchemaGenerator(new GeneratorOptions
         {
@@ -1050,26 +1050,264 @@ public class CSharpSchemaGeneratorTests
 
         string generatedCode = generator.GenerateFromFile(GetFixturePath("comprehensive-api.json"));
         string[] lines = await GetSerializationLinesAsync(generatedCode, """
-                using System;
                 using System.Text.Json;
                 using GeneratedModels;
 
-                try
-                {
-                    Shape? shape = JsonSerializer.Deserialize<Shape>("{\"shapeType\":\"circle\",\"radius\":2.5}");
-                    Console.WriteLine(shape?.GetType().Name ?? "<null>");
-                    Console.WriteLine(JsonSerializer.Serialize(shape));
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.GetType().Name);
-                    Console.WriteLine(ex.Message);
-                }
+                Shape? shape = JsonSerializer.Deserialize<Shape>("{\"shapeType\":\"circle\",\"radius\":2.5}");
+                Console.WriteLine(shape?.GetType().Name ?? "<null>");
+                Console.WriteLine(JsonSerializer.Serialize(shape));
                 """);
 
-        Assert.Equal("InvalidOperationException", lines[^2]);
-        Assert.Contains("not a supported derived type", lines[^1], StringComparison.Ordinal);
-        Assert.Contains("GeneratedModels.Shape", lines[^1], StringComparison.Ordinal);
+        Assert.Equal("Circle", lines[^2]);
+        Assert.Equal("{\"shapeType\":\"circle\",\"radius\":2.5}", lines[^1]);
+    }
+
+    [Fact]
+    public async Task Generate_FromText_DiscriminatedOneOfWithRefAndInlineObject_RoundTripsWithSystemTextJsonDefaults()
+    {
+        const string spec = """
+                        {
+                            "openapi": "3.0.3",
+                            "info": { "title": "Pet Union Test", "version": "1.0.0" },
+                            "components": {
+                                "schemas": {
+                                    "Cat": {
+                                        "type": "object",
+                                        "required": ["petType"],
+                                        "properties": {
+                                            "petType": { "type": "string", "enum": ["cat"] },
+                                            "meow": { "type": "string" }
+                                        }
+                                    },
+                                    "Pet": {
+                                        "oneOf": [
+                                            { "$ref": "#/components/schemas/Cat" },
+                                            {
+                                                "type": "object",
+                                                "required": ["petType"],
+                                                "properties": {
+                                                    "petType": { "type": "string", "enum": ["dog"] },
+                                                    "bark": { "type": "string" }
+                                                }
+                                            }
+                                        ],
+                                        "discriminator": {
+                                            "propertyName": "petType",
+                                            "mapping": { "cat": "#/components/schemas/Cat" }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        """;
+
+        var generator = new CSharpSchemaGenerator(new GeneratorOptions
+        {
+            GenerateFileHeader = false,
+            Namespace = "GeneratedModels"
+        });
+
+        string generatedCode = generator.GenerateFromText(spec);
+        string[] lines = await GetSerializationLinesAsync(generatedCode, """
+                using System.Text.Json;
+                using GeneratedModels;
+
+                Pet? cat = JsonSerializer.Deserialize<Pet>("{\"petType\":\"cat\",\"meow\":\"purr\"}");
+                Pet? dog = JsonSerializer.Deserialize<Pet>("{\"petType\":\"dog\",\"bark\":\"woof\"}");
+                Console.WriteLine(cat?.GetType().Name ?? "<null>");
+                Console.WriteLine(JsonSerializer.Serialize(cat));
+                Console.WriteLine(dog?.GetType().Name ?? "<null>");
+                Console.WriteLine(JsonSerializer.Serialize(dog));
+                """);
+
+        Assert.Equal("Cat", lines[^4]);
+        Assert.Equal("{\"petType\":\"cat\",\"meow\":\"purr\"}", lines[^3]);
+        Assert.Equal("PetVariant2", lines[^2]);
+        Assert.Equal("{\"petType\":\"dog\",\"bark\":\"woof\"}", lines[^1]);
+    }
+
+    [Fact]
+    public async Task Generate_FromText_DiscriminatedOneOfAllInlineObjects_RoundTripsWithSystemTextJsonDefaults()
+    {
+        const string spec = """
+                        {
+                            "openapi": "3.0.3",
+                            "info": { "title": "Animal Union Test", "version": "1.0.0" },
+                            "components": {
+                                "schemas": {
+                                    "Animal": {
+                                        "oneOf": [
+                                            {
+                                                "type": "object",
+                                                "required": ["animalType"],
+                                                "properties": {
+                                                    "animalType": { "type": "string", "enum": ["cat"] },
+                                                    "meow": { "type": "string" }
+                                                }
+                                            },
+                                            {
+                                                "type": "object",
+                                                "required": ["animalType"],
+                                                "properties": {
+                                                    "animalType": { "type": "string", "enum": ["dog"] },
+                                                    "bark": { "type": "string" }
+                                                }
+                                            }
+                                        ],
+                                        "discriminator": {
+                                            "propertyName": "animalType"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        """;
+
+        var generator = new CSharpSchemaGenerator(new GeneratorOptions
+        {
+            GenerateFileHeader = false,
+            Namespace = "GeneratedModels"
+        });
+
+        string generatedCode = generator.GenerateFromText(spec);
+        string[] lines = await GetSerializationLinesAsync(generatedCode, """
+                using System.Text.Json;
+                using GeneratedModels;
+
+                Animal? cat = JsonSerializer.Deserialize<Animal>("{\"animalType\":\"cat\",\"meow\":\"purr\"}");
+                Animal? dog = JsonSerializer.Deserialize<Animal>("{\"animalType\":\"dog\",\"bark\":\"woof\"}");
+                Console.WriteLine(cat?.GetType().Name ?? "<null>");
+                Console.WriteLine(JsonSerializer.Serialize(cat));
+                Console.WriteLine(dog?.GetType().Name ?? "<null>");
+                Console.WriteLine(JsonSerializer.Serialize(dog));
+                """);
+
+        Assert.Equal("AnimalVariant1", lines[^4]);
+        Assert.Equal("{\"animalType\":\"cat\",\"meow\":\"purr\"}", lines[^3]);
+        Assert.Equal("AnimalVariant2", lines[^2]);
+        Assert.Equal("{\"animalType\":\"dog\",\"bark\":\"woof\"}", lines[^1]);
+    }
+
+    [Fact]
+    public async Task Generate_FromText_PropertyLevelDiscriminatedUnion_RoundTripsWithSystemTextJsonDefaults()
+    {
+        const string spec = """
+                        {
+                            "openapi": "3.0.3",
+                            "info": { "title": "Property Union Test", "version": "1.0.0" },
+                            "components": {
+                                "schemas": {
+                                    "Cat": {
+                                        "type": "object",
+                                        "required": ["petType"],
+                                        "properties": {
+                                            "petType": { "type": "string", "enum": ["cat"] },
+                                            "meow": { "type": "string" }
+                                        }
+                                    },
+                                    "Owner": {
+                                        "type": "object",
+                                        "required": ["pet"],
+                                        "properties": {
+                                            "pet": {
+                                                "oneOf": [
+                                                    { "$ref": "#/components/schemas/Cat" },
+                                                    {
+                                                        "type": "object",
+                                                        "required": ["petType"],
+                                                        "properties": {
+                                                            "petType": { "type": "string", "enum": ["dog"] },
+                                                            "bark": { "type": "string" }
+                                                        }
+                                                    }
+                                                ],
+                                                "discriminator": {
+                                                    "propertyName": "petType",
+                                                    "mapping": {
+                                                        "cat": "#/components/schemas/Cat"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        """;
+
+        var generator = new CSharpSchemaGenerator(new GeneratorOptions
+        {
+            GenerateFileHeader = false,
+            Namespace = "GeneratedModels"
+        });
+
+        string generatedCode = generator.GenerateFromText(spec);
+        string[] lines = await GetSerializationLinesAsync(generatedCode, """
+                using System.Text.Json;
+                using GeneratedModels;
+
+                Owner? catOwner = JsonSerializer.Deserialize<Owner>("{\"pet\":{\"petType\":\"cat\",\"meow\":\"purr\"}}");
+                Owner? dogOwner = JsonSerializer.Deserialize<Owner>("{\"pet\":{\"petType\":\"dog\",\"bark\":\"woof\"}}");
+                Console.WriteLine(catOwner?.Pet?.GetType().Name ?? "<null>");
+                Console.WriteLine(JsonSerializer.Serialize(catOwner?.Pet));
+                Console.WriteLine(dogOwner?.Pet?.GetType().Name ?? "<null>");
+                Console.WriteLine(JsonSerializer.Serialize(dogOwner?.Pet));
+                """);
+
+        Assert.Equal("Cat", lines[^4]);
+        Assert.Equal("{\"petType\":\"cat\",\"meow\":\"purr\"}", lines[^3]);
+        Assert.Equal("OwnerPetVariant2", lines[^2]);
+        Assert.Equal("{\"petType\":\"dog\",\"bark\":\"woof\"}", lines[^1]);
+    }
+
+    [Fact]
+    public async Task Generate_FromText_DiscriminatedOneOfWithRefAndInlineObject_CompilesWithWarningsAsErrors()
+    {
+        const string spec = """
+                        {
+                            "openapi": "3.0.3",
+                            "info": { "title": "Pet Union Test", "version": "1.0.0" },
+                            "components": {
+                                "schemas": {
+                                    "Cat": {
+                                        "type": "object",
+                                        "required": ["petType"],
+                                        "properties": {
+                                            "petType": { "type": "string", "enum": ["cat"] },
+                                            "meow": { "type": "string" }
+                                        }
+                                    },
+                                    "Pet": {
+                                        "oneOf": [
+                                            { "$ref": "#/components/schemas/Cat" },
+                                            {
+                                                "type": "object",
+                                                "required": ["petType"],
+                                                "properties": {
+                                                    "petType": { "type": "string", "enum": ["dog"] },
+                                                    "bark": { "type": "string" }
+                                                }
+                                            }
+                                        ],
+                                        "discriminator": {
+                                            "propertyName": "petType",
+                                            "mapping": { "cat": "#/components/schemas/Cat" }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        """;
+
+        var generator = new CSharpSchemaGenerator(new GeneratorOptions
+        {
+            GenerateFileHeader = false,
+            Namespace = "GeneratedModels"
+        });
+
+        string generatedCode = generator.GenerateFromText(spec);
+
+        await AssertGeneratedCodeCompilesAsync(generatedCode, implicitUsings: true, treatWarningsAsErrors: true);
     }
 
     [Fact]

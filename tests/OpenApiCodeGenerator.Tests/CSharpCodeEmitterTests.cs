@@ -2197,6 +2197,608 @@ public class CSharpCodeEmitterTests
 
     #endregion
 
+    #region oneOf/anyOf with Inline Object Variants
+
+    [Fact]
+    public void Emit_InlineOneOfWithRefAndInlineObject_NotDiscriminated_ResolvesToObject()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["A"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["name"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                }
+            },
+            ["MyRecord"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["value"] = new OpenApiSchema
+                    {
+                        OneOf = new List<IOpenApiSchema>
+                        {
+                            new OpenApiSchemaReference("A"),
+                            new OpenApiSchema
+                            {
+                                Type = JsonSchemaType.Object,
+                                Properties = new Dictionary<string, IOpenApiSchema>
+                                {
+                                    ["x"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        };
+
+        string result = Generate(schemas);
+
+        // Non-discriminated union with inline variants resolves to object —
+        // System.Text.Json can't determine the variant without a discriminator.
+        Assert.Contains("public object? Value { get; init; }", result, StringComparison.Ordinal);
+
+        // No hoisted union type or inline variant record should be emitted
+        Assert.DoesNotContain("MyRecordValue", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Emit_InlineOneOfAllInlineObjects_NotDiscriminated_ResolvesToObject()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["MyRecord"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["value"] = new OpenApiSchema
+                    {
+                        OneOf = new List<IOpenApiSchema>
+                        {
+                            new OpenApiSchema
+                            {
+                                Type = JsonSchemaType.Object,
+                                Properties = new Dictionary<string, IOpenApiSchema>
+                                {
+                                    ["type"] = new OpenApiSchema { Type = JsonSchemaType.String },
+                                    ["name"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                                }
+                            },
+                            new OpenApiSchema
+                            {
+                                Type = JsonSchemaType.Object,
+                                Properties = new Dictionary<string, IOpenApiSchema>
+                                {
+                                    ["type"] = new OpenApiSchema { Type = JsonSchemaType.String },
+                                    ["count"] = new OpenApiSchema { Type = JsonSchemaType.Integer }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        };
+
+        string result = Generate(schemas);
+
+        // Non-discriminated union with all inline variants resolves to object
+        Assert.Contains("public object? Value { get; init; }", result, StringComparison.Ordinal);
+        Assert.DoesNotContain("MyRecordValue", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Emit_ComponentLevelOneOfWithRefAndInlineObject_NotDiscriminated_SkipsInlineVariant()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["A"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["name"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                }
+            },
+            ["MyUnion"] = new OpenApiSchema
+            {
+                OneOf = new List<IOpenApiSchema>
+                {
+                    new OpenApiSchemaReference("A"),
+                    new OpenApiSchema
+                    {
+                        Type = JsonSchemaType.Object,
+                        Properties = new Dictionary<string, IOpenApiSchema>
+                        {
+                            ["label"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                        }
+                    }
+                }
+            }
+        };
+
+        string result = Generate(schemas);
+
+        // Component-level non-discriminated union is still emitted as an abstract record
+        Assert.Contains("public abstract partial record MyUnion;", result, StringComparison.Ordinal);
+        // The $ref variant gets [JsonDerivedType]
+        Assert.Contains("[JsonDerivedType(typeof(A), \"A\")]", result, StringComparison.Ordinal);
+        // Inline variant is NOT hoisted (no discriminator → can't deserialize)
+        Assert.DoesNotContain("MyUnionVariant2", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public async Task Emit_InlineOneOfWithRefAndInlineObject_NotDiscriminated_CompilesSuccessfully()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["A"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["name"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                }
+            },
+            ["MyRecord"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["value"] = new OpenApiSchema
+                    {
+                        OneOf = new List<IOpenApiSchema>
+                        {
+                            new OpenApiSchemaReference("A"),
+                            new OpenApiSchema
+                            {
+                                Type = JsonSchemaType.Object,
+                                Properties = new Dictionary<string, IOpenApiSchema>
+                                {
+                                    ["x"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        };
+
+        string result = Generate(schemas);
+
+        string tempRoot = Path.Combine(
+            AppContext.BaseDirectory, "..", "..", "..", "..",
+            "TestResults", "InlineUnionCompile", Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(tempRoot);
+        try
+        {
+            await File.WriteAllTextAsync(Path.Combine(tempRoot, "Generated.cs"), result, TestContext.Current.CancellationToken);
+            await File.WriteAllTextAsync(Path.Combine(tempRoot, "Harness.csproj"), """
+                <Project Sdk="Microsoft.NET.Sdk">
+                  <PropertyGroup>
+                    <TargetFramework>net10.0</TargetFramework>
+                    <Nullable>enable</Nullable>
+                    <AnalysisMode>All</AnalysisMode>
+                    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+                  </PropertyGroup>
+                </Project>
+                """, TestContext.Current.CancellationToken);
+            using var proc = new System.Diagnostics.Process();
+            proc.StartInfo = new System.Diagnostics.ProcessStartInfo
+            {
+                FileName = "dotnet",
+                Arguments = $"build \"{Path.Combine(tempRoot, "Harness.csproj")}\" -v q --nologo",
+                WorkingDirectory = tempRoot,
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                UseShellExecute = false,
+                CreateNoWindow = true
+            };
+            proc.Start();
+            string stdout = await proc.StandardOutput.ReadToEndAsync(TestContext.Current.CancellationToken);
+            string stderr = await proc.StandardError.ReadToEndAsync(TestContext.Current.CancellationToken);
+            await proc.WaitForExitAsync(TestContext.Current.CancellationToken);
+            Assert.True(proc.ExitCode == 0,
+                $"Inline union code failed to compile.{Environment.NewLine}STDOUT:{stdout}{Environment.NewLine}STDERR:{stderr}");
+        }
+        finally
+        {
+            if (Directory.Exists(tempRoot)) Directory.Delete(tempRoot, recursive: true);
+        }
+    }
+
+    [Fact]
+    public void Emit_InlineAnyOfWithRefAndInlineObject_NotDiscriminated_ResolvesToObject()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["A"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["name"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                }
+            },
+            ["MyRecord"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["value"] = new OpenApiSchema
+                    {
+                        AnyOf = new List<IOpenApiSchema>
+                        {
+                            new OpenApiSchemaReference("A"),
+                            new OpenApiSchema
+                            {
+                                Type = JsonSchemaType.Object,
+                                Properties = new Dictionary<string, IOpenApiSchema>
+                                {
+                                    ["x"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        };
+
+        string result = Generate(schemas);
+
+        // Non-discriminated anyOf with inline variants resolves to object
+        Assert.Contains("public object? Value { get; init; }", result, StringComparison.Ordinal);
+        Assert.DoesNotContain("MyRecordValue", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Emit_InlineOneOfWithNestedInlineObject_NotDiscriminated_ResolvesToObject()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["A"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["name"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                }
+            },
+            ["MyRecord"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["value"] = new OpenApiSchema
+                    {
+                        OneOf = new List<IOpenApiSchema>
+                        {
+                            new OpenApiSchemaReference("A"),
+                            new OpenApiSchema
+                            {
+                                Type = JsonSchemaType.Object,
+                                Properties = new Dictionary<string, IOpenApiSchema>
+                                {
+                                    ["nested"] = new OpenApiSchema
+                                    {
+                                        Type = JsonSchemaType.Object,
+                                        Properties = new Dictionary<string, IOpenApiSchema>
+                                        {
+                                            ["deep"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        };
+
+        string result = Generate(schemas);
+
+        // Non-discriminated union with inline variants resolves to object
+        Assert.Contains("public object? Value { get; init; }", result, StringComparison.Ordinal);
+        Assert.DoesNotContain("MyRecordValue", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Emit_InlineOneOfWithTwoSameShapedInlineObjects_NotDiscriminated_ResolvesToObject()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["MyRecord"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["value"] = new OpenApiSchema
+                    {
+                        OneOf = new List<IOpenApiSchema>
+                        {
+                            new OpenApiSchema
+                            {
+                                Type = JsonSchemaType.Object,
+                                Properties = new Dictionary<string, IOpenApiSchema>
+                                {
+                                    ["label"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                                }
+                            },
+                            new OpenApiSchema
+                            {
+                                Type = JsonSchemaType.Object,
+                                Properties = new Dictionary<string, IOpenApiSchema>
+                                {
+                                    ["label"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        };
+
+        string result = Generate(schemas);
+
+        // Non-discriminated union with all inline variants resolves to object
+        Assert.Contains("public object? Value { get; init; }", result, StringComparison.Ordinal);
+        Assert.DoesNotContain("MyRecordValue", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Emit_DiscriminatedOneOfWithRefAndInlineObject_EmitsBothDerivedTypes()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["Cat"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Required = new HashSet<string> { "petType" },
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["petType"] = new OpenApiSchema { Type = JsonSchemaType.String, Enum = [JsonValue.Create("cat")] },
+                    ["meow"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                }
+            },
+            ["Pet"] = new OpenApiSchema
+            {
+                OneOf =
+                [
+                    new OpenApiSchemaReference("Cat"),
+                    new OpenApiSchema
+                    {
+                        Type = JsonSchemaType.Object,
+                        Required = new HashSet<string> { "petType" },
+                        Properties = new Dictionary<string, IOpenApiSchema>
+                        {
+                            ["petType"] = new OpenApiSchema { Type = JsonSchemaType.String, Enum = [JsonValue.Create("dog")] },
+                            ["bark"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                        }
+                    }
+                ],
+                Discriminator = new OpenApiDiscriminator
+                {
+                    PropertyName = "petType",
+                    Mapping = new Dictionary<string, OpenApiSchemaReference>
+                    {
+                        ["cat"] = new OpenApiSchemaReference("Cat")
+                    }
+                }
+            }
+        };
+
+        string result = Generate(schemas);
+
+        Assert.Contains("public abstract partial record Pet;", result, StringComparison.Ordinal);
+        Assert.Contains("[JsonPolymorphic(TypeDiscriminatorPropertyName = \"petType\")]", result, StringComparison.Ordinal);
+        Assert.Contains("[JsonDerivedType(typeof(Cat), \"cat\")]", result, StringComparison.Ordinal);
+        Assert.Contains("[JsonDerivedType(typeof(PetVariant2), \"dog\")]", result, StringComparison.Ordinal);
+        Assert.Contains("public partial record PetVariant2", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Emit_DiscriminatedUnion_InlineVariantCollidingDiscriminatorValue_DoesNotOverwriteMapping()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["Cat"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Required = new HashSet<string> { "petType" },
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["petType"] = new OpenApiSchema { Type = JsonSchemaType.String, Enum = [JsonValue.Create("cat")] },
+                    ["meow"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                }
+            },
+            ["Pet"] = new OpenApiSchema
+            {
+                OneOf =
+                [
+                    new OpenApiSchemaReference("Cat"),
+                    new OpenApiSchema
+                    {
+                        Type = JsonSchemaType.Object,
+                        Required = new HashSet<string> { "petType" },
+                        Properties = new Dictionary<string, IOpenApiSchema>
+                        {
+                            ["petType"] = new OpenApiSchema { Type = JsonSchemaType.String, Enum = [JsonValue.Create("cat")] },
+                            ["bark"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                        }
+                    }
+                ],
+                Discriminator = new OpenApiDiscriminator
+                {
+                    PropertyName = "petType",
+                    Mapping = new Dictionary<string, OpenApiSchemaReference>
+                    {
+                        ["cat"] = new OpenApiSchemaReference("Cat")
+                    }
+                }
+            }
+        };
+
+        string result = Generate(schemas);
+
+        // Explicit mapping entry should be preserved
+        Assert.Contains("[JsonDerivedType(typeof(Cat), \"cat\")]", result, StringComparison.Ordinal);
+        // The inline variant's discriminator value "cat" collides with the explicit mapping
+        // so it should NOT overwrite the mapping entry
+        Assert.DoesNotContain("[JsonDerivedType(typeof(PetVariant2), \"cat\")]", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Emit_PropertyLevelDiscriminatedUnion_InlineVariantInheritsFromUnionBase()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["Cat"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Required = new HashSet<string> { "petType" },
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["petType"] = new OpenApiSchema { Type = JsonSchemaType.String, Enum = [JsonValue.Create("cat")] },
+                    ["meow"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                }
+            },
+            ["Owner"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Required = new HashSet<string> { "pet" },
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["pet"] = new OpenApiSchema
+                    {
+                        OneOf = new List<IOpenApiSchema>
+                        {
+                            new OpenApiSchemaReference("Cat"),
+                            new OpenApiSchema
+                            {
+                                Type = JsonSchemaType.Object,
+                                Required = new HashSet<string> { "petType" },
+                                Properties = new Dictionary<string, IOpenApiSchema>
+                                {
+                                    ["petType"] = new OpenApiSchema { Type = JsonSchemaType.String, Enum = [JsonValue.Create("dog")] },
+                                    ["bark"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                                }
+                            }
+                        },
+                        Discriminator = new OpenApiDiscriminator
+                        {
+                            PropertyName = "petType"
+                        }
+                    }
+                }
+            }
+        };
+
+        string result = Generate(schemas);
+
+        // The property-level union should be an abstract record
+        Assert.Contains("public abstract partial record OwnerPet;", result, StringComparison.Ordinal);
+        // The Cat component schema should inherit from the union base type
+        Assert.Contains("public partial record Cat : OwnerPet", result, StringComparison.Ordinal);
+        // The inline variant should also inherit from the union base type
+        Assert.Contains("public partial record OwnerPetVariant2 : OwnerPet", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Emit_AnyOfWithNullVariantBetweenInlineObjects_NotDiscriminated_ResolvesToObject()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["Container"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Required = new HashSet<string> { "value" },
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["value"] = new OpenApiSchema
+                    {
+                        AnyOf = new List<IOpenApiSchema>
+                        {
+                            new OpenApiSchema
+                            {
+                                Type = JsonSchemaType.Object,
+                                Properties = new Dictionary<string, IOpenApiSchema>
+                                {
+                                    ["label"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                                }
+                            },
+                            new OpenApiSchema { Type = JsonSchemaType.Null },
+                            new OpenApiSchema
+                            {
+                                Type = JsonSchemaType.Object,
+                                Properties = new Dictionary<string, IOpenApiSchema>
+                                {
+                                    ["count"] = new OpenApiSchema { Type = JsonSchemaType.Integer, Format = "int32" }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        };
+
+        string result = Generate(schemas);
+
+        // Non-discriminated anyOf with inline variants resolves to object
+        Assert.Contains("public required object Value { get; init; }", result, StringComparison.Ordinal);
+        Assert.DoesNotContain("ContainerValue", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Emit_OneOfWithNullVariantBetweenInlineObjects_NotDiscriminated_ResolvesToObject()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["Container"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Required = new HashSet<string> { "value" },
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["value"] = new OpenApiSchema
+                    {
+                        OneOf = new List<IOpenApiSchema>
+                        {
+                            new OpenApiSchema
+                            {
+                                Type = JsonSchemaType.Object,
+                                Properties = new Dictionary<string, IOpenApiSchema>
+                                {
+                                    ["label"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                                }
+                            },
+                            new OpenApiSchema { Type = JsonSchemaType.Null },
+                            new OpenApiSchema
+                            {
+                                Type = JsonSchemaType.Object,
+                                Properties = new Dictionary<string, IOpenApiSchema>
+                                {
+                                    ["count"] = new OpenApiSchema { Type = JsonSchemaType.Integer, Format = "int32" }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        };
+
+        string result = Generate(schemas);
+
+        // Non-discriminated oneOf with inline variants resolves to object
+        Assert.Contains("public required object Value { get; init; }", result, StringComparison.Ordinal);
+        Assert.DoesNotContain("ContainerValue", result, StringComparison.Ordinal);
+    }
+
+    #endregion
+
     #region Default Value Emission
 
     [Fact]

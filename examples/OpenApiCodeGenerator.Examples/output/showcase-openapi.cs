@@ -143,20 +143,6 @@ public enum Status
     Failed
 }
 
-[JsonConverter(typeof(JsonStringEnumConverter<CircleShapeType>))]
-public enum CircleShapeType
-{
-    [JsonStringEnumMemberName("circle")]
-    Circle
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter<RectangleShapeType>))]
-public enum RectangleShapeType
-{
-    [JsonStringEnumMemberName("rectangle")]
-    Rectangle
-}
-
 /// <summary>
 /// Strongly typed UUID alias.
 /// </summary>
@@ -297,22 +283,16 @@ public partial record DeliveryRecord : DeliveryBase
 
 }
 
-public partial record Circle
+public partial record Circle : Shape
 {
-    [JsonPropertyName("shapeType")]
-    public required CircleShapeType ShapeType { get; init; }
-
     [Range(0d, 1000d)]
     [JsonPropertyName("radius")]
     public required double Radius { get; init; }
 
 }
 
-public partial record Rectangle
+public partial record Rectangle : Shape
 {
-    [JsonPropertyName("shapeType")]
-    public required RectangleShapeType ShapeType { get; init; }
-
     [JsonPropertyName("width")]
     public required double Width { get; init; }
 
@@ -359,6 +339,12 @@ public partial record Notification
 
     [JsonPropertyName("contact")]
     public required ContactMethod Contact { get; init; }
+
+    /// <summary>
+    /// oneOf with mixed ref and inline object variants. The inline object is hoisted to a named record and the union is emitted as an abstract record with [JsonDerivedType] attributes.
+    /// </summary>
+    [JsonPropertyName("escalation")]
+    public required object Escalation { get; init; }
 
     /// <summary>
     /// Superseded by contact; retained for backward compatibility.

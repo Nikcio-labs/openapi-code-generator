@@ -31,6 +31,15 @@ internal class TypeResolver
     }
 
     /// <summary>
+    /// Returns the synthesized type name for an inline object schema if it has been
+    /// registered via <see cref="RegisterInlineObjectType"/>, or null otherwise.
+    /// </summary>
+    public string? GetInlineObjectTypeName(IOpenApiSchema schema)
+    {
+        return _inlineObjectTypes.TryGetValue(schema, out string? name) ? name : null;
+    }
+
+    /// <summary>
     /// Resolve an <see cref="IOpenApiSchema"/> to a C# type string.
     /// </summary>
     public string Resolve(IOpenApiSchema schema)
