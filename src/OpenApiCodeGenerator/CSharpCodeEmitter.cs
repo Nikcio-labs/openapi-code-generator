@@ -548,10 +548,9 @@ internal class CSharpCodeEmitter
         IList<IOpenApiSchema>? rawUnionVariants = schema.OneOf ?? schema.AnyOf;
         if (rawUnionVariants != null && properties.Count == 0)
         {
-            // Filter null-type variants from anyOf to keep variant numbering sequential.
-            IEnumerable<IOpenApiSchema> unionVariants = schema.AnyOf is { } anyOf
-                ? anyOf.Where(s => !(s.Type.HasValue && s.Type.Value == JsonSchemaType.Null))
-                : rawUnionVariants;
+            // Filter null-type variants to keep variant numbering sequential.
+            IEnumerable<IOpenApiSchema> unionVariants =
+                rawUnionVariants.Where(s => !(s.Type.HasValue && s.Type.Value == JsonSchemaType.Null));
 
             bool isDiscriminated = schema.Discriminator is { PropertyName: not null };
             string? discPropName = schema.Discriminator?.PropertyName;
@@ -625,14 +624,13 @@ internal class CSharpCodeEmitter
 
             // Hoist any inline object variants within the union before hoisting the union itself.
             // This ensures the inline objects are registered with TypeResolver and emitted as records.
-            // Filter out null-type variants (from nullable anyOf patterns like [type, null]) to
+            // Filter out null-type variants (from nullable [type, null] patterns) to
             // keep variant numbering sequential, consistent with IsInlineUnion's filtering.
             IList<IOpenApiSchema>? rawVariants = propSchema.OneOf ?? propSchema.AnyOf;
             if (rawVariants != null)
             {
-                IEnumerable<IOpenApiSchema> variants = propSchema.AnyOf is { } anyOf
-                    ? anyOf.Where(s => !(s.Type.HasValue && s.Type.Value == JsonSchemaType.Null))
-                    : rawVariants;
+                IEnumerable<IOpenApiSchema> variants =
+                    rawVariants.Where(s => !(s.Type.HasValue && s.Type.Value == JsonSchemaType.Null));
                 int variantIndex = 1;
                 foreach (IOpenApiSchema variant in variants)
                 {
@@ -1443,10 +1441,7 @@ internal class CSharpCodeEmitter
         if (variantNames.Count > 0)
         {
             AppendLine($"/// <remarks>");
-            if (variantNames.Count > 0)
-            {
-                AppendLine($"/// Union of: {string.Join(" | ", variantNames)}");
-            }
+            AppendLine($"/// Union of: {string.Join(" | ", variantNames)}");
             if (hasInlineVariant)
             {
                 AppendLine("/// Inline object variants use the synthesized type name as the discriminator value.");

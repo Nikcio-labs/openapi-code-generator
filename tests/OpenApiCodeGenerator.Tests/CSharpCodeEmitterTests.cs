@@ -2771,6 +2771,53 @@ public class CSharpCodeEmitterTests
         Assert.DoesNotContain("ContainerValueVariant3", result, StringComparison.Ordinal);
     }
 
+    [Fact]
+    public void Emit_OneOfWithNullVariantBetweenInlineObjects_SequentialVariantNames()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["Container"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Required = new HashSet<string> { "value" },
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["value"] = new OpenApiSchema
+                    {
+                        OneOf = new List<IOpenApiSchema>
+                        {
+                            new OpenApiSchema
+                            {
+                                Type = JsonSchemaType.Object,
+                                Properties = new Dictionary<string, IOpenApiSchema>
+                                {
+                                    ["label"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                                }
+                            },
+                            new OpenApiSchema { Type = JsonSchemaType.Null },
+                            new OpenApiSchema
+                            {
+                                Type = JsonSchemaType.Object,
+                                Properties = new Dictionary<string, IOpenApiSchema>
+                                {
+                                    ["count"] = new OpenApiSchema { Type = JsonSchemaType.Integer, Format = "int32" }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        };
+
+        string result = Generate(schemas);
+
+        // Null variant should be filtered from numbering, producing sequential names
+        Assert.Contains("public partial record ContainerValueVariant1", result, StringComparison.Ordinal);
+        Assert.Contains("public partial record ContainerValueVariant2", result, StringComparison.Ordinal);
+        // Variant3 should NOT exist (only 2 non-null inline objects)
+        Assert.DoesNotContain("ContainerValueVariant3", result, StringComparison.Ordinal);
+    }
+
     #endregion
 
     #region Default Value Emission
