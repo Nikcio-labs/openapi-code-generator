@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.5.0](https://github.com/Nikcio-labs/openapi-code-generator/compare/v1.4.0...v1.5.0) (2026-08-26)
+
+
+### Added
+
+* Emit [Obsolete] attribute on deprecated schemas and properties ([#144](https://github.com/Nikcio-labs/openapi-code-generator/issues/144)) ([1e25d83](https://github.com/Nikcio-labs/openapi-code-generator/commit/1e25d832855714196fa04ffc6fb65616ed8e067d))
+* Emit validation attributes from OpenAPI constraints ([#145](https://github.com/Nikcio-labs/openapi-code-generator/issues/145)) ([cf0082d](https://github.com/Nikcio-labs/openapi-code-generator/commit/cf0082dcb3c829274ed6abd8a9de30ce5b86c823))
+
 ## [1.4.0] (2026-08-26)
 
 ### Added
