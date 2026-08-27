@@ -1189,6 +1189,78 @@ public class CSharpSchemaGeneratorTests
     }
 
     [Fact]
+    public async Task Generate_FromText_PropertyLevelDiscriminatedUnion_RoundTripsWithSystemTextJsonDefaults()
+    {
+        const string spec = """
+                        {
+                            "openapi": "3.0.3",
+                            "info": { "title": "Property Union Test", "version": "1.0.0" },
+                            "components": {
+                                "schemas": {
+                                    "Cat": {
+                                        "type": "object",
+                                        "required": ["petType"],
+                                        "properties": {
+                                            "petType": { "type": "string", "enum": ["cat"] },
+                                            "meow": { "type": "string" }
+                                        }
+                                    },
+                                    "Owner": {
+                                        "type": "object",
+                                        "required": ["pet"],
+                                        "properties": {
+                                            "pet": {
+                                                "oneOf": [
+                                                    { "$ref": "#/components/schemas/Cat" },
+                                                    {
+                                                        "type": "object",
+                                                        "required": ["petType"],
+                                                        "properties": {
+                                                            "petType": { "type": "string", "enum": ["dog"] },
+                                                            "bark": { "type": "string" }
+                                                        }
+                                                    }
+                                                ],
+                                                "discriminator": {
+                                                    "propertyName": "petType",
+                                                    "mapping": {
+                                                        "cat": "#/components/schemas/Cat"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        """;
+
+        var generator = new CSharpSchemaGenerator(new GeneratorOptions
+        {
+            GenerateFileHeader = false,
+            Namespace = "GeneratedModels"
+        });
+
+        string generatedCode = generator.GenerateFromText(spec);
+        string[] lines = await GetSerializationLinesAsync(generatedCode, """
+                using System.Text.Json;
+                using GeneratedModels;
+
+                Owner? catOwner = JsonSerializer.Deserialize<Owner>("{\"pet\":{\"petType\":\"cat\",\"meow\":\"purr\"}}");
+                Owner? dogOwner = JsonSerializer.Deserialize<Owner>("{\"pet\":{\"petType\":\"dog\",\"bark\":\"woof\"}}");
+                Console.WriteLine(catOwner?.Pet?.GetType().Name ?? "<null>");
+                Console.WriteLine(JsonSerializer.Serialize(catOwner?.Pet));
+                Console.WriteLine(dogOwner?.Pet?.GetType().Name ?? "<null>");
+                Console.WriteLine(JsonSerializer.Serialize(dogOwner?.Pet));
+                """);
+
+        Assert.Equal("Cat", lines[^4]);
+        Assert.Equal("{\"petType\":\"cat\",\"meow\":\"purr\"}", lines[^3]);
+        Assert.Equal("OwnerPetVariant2", lines[^2]);
+        Assert.Equal("{\"petType\":\"dog\",\"bark\":\"woof\"}", lines[^1]);
+    }
+
+    [Fact]
     public async Task Generate_FromText_DiscriminatedOneOfWithRefAndInlineObject_CompilesWithWarningsAsErrors()
     {
         const string spec = """

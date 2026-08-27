@@ -545,9 +545,14 @@ internal class CSharpCodeEmitter
         // Skip when the schema has its own direct properties — in that case the schema is
         // emitted as a record and the oneOf/anyOf is not consumed, so hoisting would
         // produce orphan types.
-        IList<IOpenApiSchema>? unionVariants = schema.OneOf ?? schema.AnyOf;
-        if (unionVariants != null && properties.Count == 0)
+        IList<IOpenApiSchema>? rawUnionVariants = schema.OneOf ?? schema.AnyOf;
+        if (rawUnionVariants != null && properties.Count == 0)
         {
+            // Filter null-type variants from anyOf to keep variant numbering sequential.
+            IEnumerable<IOpenApiSchema> unionVariants = schema.AnyOf is { } anyOf
+                ? anyOf.Where(s => !(s.Type.HasValue && s.Type.Value == JsonSchemaType.Null))
+                : rawUnionVariants;
+
             bool isDiscriminated = schema.Discriminator is { PropertyName: not null };
             string? discPropName = schema.Discriminator?.PropertyName;
 
@@ -615,11 +620,19 @@ internal class CSharpCodeEmitter
         {
             string inlineTypeName = SynthesizeInlineTypeName(enclosingTypeName, propName, usedNames);
 
+            bool isDiscriminated = propSchema.Discriminator is { PropertyName: not null };
+            string? discPropName = propSchema.Discriminator?.PropertyName;
+
             // Hoist any inline object variants within the union before hoisting the union itself.
             // This ensures the inline objects are registered with TypeResolver and emitted as records.
-            IList<IOpenApiSchema>? variants = propSchema.OneOf ?? propSchema.AnyOf;
-            if (variants != null)
+            // Filter out null-type variants (from nullable anyOf patterns like [type, null]) to
+            // keep variant numbering sequential, consistent with IsInlineUnion's filtering.
+            IList<IOpenApiSchema>? rawVariants = propSchema.OneOf ?? propSchema.AnyOf;
+            if (rawVariants != null)
             {
+                IEnumerable<IOpenApiSchema> variants = propSchema.AnyOf is { } anyOf
+                    ? anyOf.Where(s => !(s.Type.HasValue && s.Type.Value == JsonSchemaType.Null))
+                    : rawVariants;
                 int variantIndex = 1;
                 foreach (IOpenApiSchema variant in variants)
                 {
@@ -628,6 +641,18 @@ internal class CSharpCodeEmitter
                         string variantTypeName = SynthesizeInlineTypeName(inlineTypeName, $"Variant{variantIndex}", usedNames);
                         HoistInlineObject(variant, variantTypeName, typeNameMap, usedNames);
                         DiscoverInlineObjects(variant, variantTypeName, typeNameMap, usedNames, visited);
+
+                        if (isDiscriminated)
+                        {
+                            _unionVariantBaseTypes.TryAdd(variant, (inlineTypeName, discPropName!));
+                        }
+                    }
+                    else if (isDiscriminated && variant is OpenApiSchemaReference refVariant && refVariant.Reference?.Id != null)
+                    {
+                        if (_allSchemas.TryGetValue(refVariant.Reference.Id, out IOpenApiSchema? refSchema))
+                        {
+                            _unionVariantBaseTypes.TryAdd(refSchema, (inlineTypeName, discPropName!));
+                        }
                     }
 
                     variantIndex++;
@@ -1325,6 +1350,11 @@ internal class CSharpCodeEmitter
             }
 
             string discriminatorValue = TryGetDiscriminatorValue(variant, discriminator.PropertyName!) ?? hoistedName;
+            if (mapping.ContainsKey(discriminatorValue))
+            {
+                continue;
+            }
+
             mapping[discriminatorValue] = hoistedName;
         }
 

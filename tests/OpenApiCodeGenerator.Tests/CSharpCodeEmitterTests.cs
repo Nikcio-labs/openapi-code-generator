@@ -2617,6 +2617,160 @@ public class CSharpCodeEmitterTests
         Assert.Contains("public partial record PetVariant2", result, StringComparison.Ordinal);
     }
 
+    [Fact]
+    public void Emit_DiscriminatedUnion_InlineVariantCollidingDiscriminatorValue_DoesNotOverwriteMapping()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["Cat"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Required = new HashSet<string> { "petType" },
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["petType"] = new OpenApiSchema { Type = JsonSchemaType.String, Enum = [JsonValue.Create("cat")] },
+                    ["meow"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                }
+            },
+            ["Pet"] = new OpenApiSchema
+            {
+                OneOf =
+                [
+                    new OpenApiSchemaReference("Cat"),
+                    new OpenApiSchema
+                    {
+                        Type = JsonSchemaType.Object,
+                        Required = new HashSet<string> { "petType" },
+                        Properties = new Dictionary<string, IOpenApiSchema>
+                        {
+                            ["petType"] = new OpenApiSchema { Type = JsonSchemaType.String, Enum = [JsonValue.Create("cat")] },
+                            ["bark"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                        }
+                    }
+                ],
+                Discriminator = new OpenApiDiscriminator
+                {
+                    PropertyName = "petType",
+                    Mapping = new Dictionary<string, OpenApiSchemaReference>
+                    {
+                        ["cat"] = new OpenApiSchemaReference("Cat")
+                    }
+                }
+            }
+        };
+
+        string result = Generate(schemas);
+
+        // Explicit mapping entry should be preserved
+        Assert.Contains("[JsonDerivedType(typeof(Cat), \"cat\")]", result, StringComparison.Ordinal);
+        // The inline variant's discriminator value "cat" collides with the explicit mapping
+        // so it should NOT overwrite the mapping entry
+        Assert.DoesNotContain("[JsonDerivedType(typeof(PetVariant2), \"cat\")]", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Emit_PropertyLevelDiscriminatedUnion_InlineVariantInheritsFromUnionBase()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["Cat"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Required = new HashSet<string> { "petType" },
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["petType"] = new OpenApiSchema { Type = JsonSchemaType.String, Enum = [JsonValue.Create("cat")] },
+                    ["meow"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                }
+            },
+            ["Owner"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Required = new HashSet<string> { "pet" },
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["pet"] = new OpenApiSchema
+                    {
+                        OneOf = new List<IOpenApiSchema>
+                        {
+                            new OpenApiSchemaReference("Cat"),
+                            new OpenApiSchema
+                            {
+                                Type = JsonSchemaType.Object,
+                                Required = new HashSet<string> { "petType" },
+                                Properties = new Dictionary<string, IOpenApiSchema>
+                                {
+                                    ["petType"] = new OpenApiSchema { Type = JsonSchemaType.String, Enum = [JsonValue.Create("dog")] },
+                                    ["bark"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                                }
+                            }
+                        },
+                        Discriminator = new OpenApiDiscriminator
+                        {
+                            PropertyName = "petType"
+                        }
+                    }
+                }
+            }
+        };
+
+        string result = Generate(schemas);
+
+        // The property-level union should be an abstract record
+        Assert.Contains("public abstract partial record OwnerPet;", result, StringComparison.Ordinal);
+        // The Cat component schema should inherit from the union base type
+        Assert.Contains("public partial record Cat : OwnerPet", result, StringComparison.Ordinal);
+        // The inline variant should also inherit from the union base type
+        Assert.Contains("public partial record OwnerPetVariant2 : OwnerPet", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Emit_AnyOfWithNullVariantBetweenInlineObjects_SequentialVariantNames()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["Container"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Required = new HashSet<string> { "value" },
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["value"] = new OpenApiSchema
+                    {
+                        AnyOf = new List<IOpenApiSchema>
+                        {
+                            new OpenApiSchema
+                            {
+                                Type = JsonSchemaType.Object,
+                                Properties = new Dictionary<string, IOpenApiSchema>
+                                {
+                                    ["label"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                                }
+                            },
+                            new OpenApiSchema { Type = JsonSchemaType.Null },
+                            new OpenApiSchema
+                            {
+                                Type = JsonSchemaType.Object,
+                                Properties = new Dictionary<string, IOpenApiSchema>
+                                {
+                                    ["count"] = new OpenApiSchema { Type = JsonSchemaType.Integer, Format = "int32" }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        };
+
+        string result = Generate(schemas);
+
+        // Null variant should be filtered from numbering, producing sequential names
+        Assert.Contains("public partial record ContainerValueVariant1", result, StringComparison.Ordinal);
+        Assert.Contains("public partial record ContainerValueVariant2", result, StringComparison.Ordinal);
+        // Variant3 should NOT exist (only 2 non-null inline objects)
+        Assert.DoesNotContain("ContainerValueVariant3", result, StringComparison.Ordinal);
+    }
+
     #endregion
 
     #region Default Value Emission
