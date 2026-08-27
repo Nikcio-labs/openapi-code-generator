@@ -2385,7 +2385,7 @@ public class CSharpCodeEmitterTests
         Directory.CreateDirectory(tempRoot);
         try
         {
-            await File.WriteAllTextAsync(Path.Combine(tempRoot, "Generated.cs"), result);
+            await File.WriteAllTextAsync(Path.Combine(tempRoot, "Generated.cs"), result, TestContext.Current.CancellationToken);
             await File.WriteAllTextAsync(Path.Combine(tempRoot, "Harness.csproj"), """
                 <Project Sdk="Microsoft.NET.Sdk">
                   <PropertyGroup>
@@ -2395,7 +2395,7 @@ public class CSharpCodeEmitterTests
                     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
                   </PropertyGroup>
                 </Project>
-                """);
+                """, TestContext.Current.CancellationToken);
             using var proc = new System.Diagnostics.Process();
             proc.StartInfo = new System.Diagnostics.ProcessStartInfo
             {
@@ -2408,9 +2408,9 @@ public class CSharpCodeEmitterTests
                 CreateNoWindow = true
             };
             proc.Start();
-            string stdout = await proc.StandardOutput.ReadToEndAsync();
-            string stderr = await proc.StandardError.ReadToEndAsync();
-            await proc.WaitForExitAsync();
+            string stdout = await proc.StandardOutput.ReadToEndAsync(TestContext.Current.CancellationToken);
+            string stderr = await proc.StandardError.ReadToEndAsync(TestContext.Current.CancellationToken);
+            await proc.WaitForExitAsync(TestContext.Current.CancellationToken);
             Assert.True(proc.ExitCode == 0,
                 $"Inline union code failed to compile.{Environment.NewLine}STDOUT:{stdout}{Environment.NewLine}STDERR:{stderr}");
         }
@@ -2418,6 +2418,203 @@ public class CSharpCodeEmitterTests
         {
             if (Directory.Exists(tempRoot)) Directory.Delete(tempRoot, recursive: true);
         }
+    }
+
+    [Fact]
+    public void Emit_InlineAnyOfWithRefAndInlineObject_HoistsInlineObject()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["A"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["name"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                }
+            },
+            ["MyRecord"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["value"] = new OpenApiSchema
+                    {
+                        AnyOf = new List<IOpenApiSchema>
+                        {
+                            new OpenApiSchemaReference("A"),
+                            new OpenApiSchema
+                            {
+                                Type = JsonSchemaType.Object,
+                                Properties = new Dictionary<string, IOpenApiSchema>
+                                {
+                                    ["x"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        };
+
+        string result = Generate(schemas);
+
+        Assert.Contains("public MyRecordValue? Value { get; init; }", result, StringComparison.Ordinal);
+        Assert.Contains("public abstract partial record MyRecordValue;", result, StringComparison.Ordinal);
+        Assert.Contains("[JsonDerivedType(typeof(A), \"A\")]", result, StringComparison.Ordinal);
+        Assert.Contains("[JsonDerivedType(typeof(MyRecordValueVariant2), \"MyRecordValueVariant2\")]", result, StringComparison.Ordinal);
+        Assert.Contains("public partial record MyRecordValueVariant2", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Emit_InlineOneOfWithNestedInlineObject_HoistsNestedObject()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["A"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["name"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                }
+            },
+            ["MyRecord"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["value"] = new OpenApiSchema
+                    {
+                        OneOf = new List<IOpenApiSchema>
+                        {
+                            new OpenApiSchemaReference("A"),
+                            new OpenApiSchema
+                            {
+                                Type = JsonSchemaType.Object,
+                                Properties = new Dictionary<string, IOpenApiSchema>
+                                {
+                                    ["nested"] = new OpenApiSchema
+                                    {
+                                        Type = JsonSchemaType.Object,
+                                        Properties = new Dictionary<string, IOpenApiSchema>
+                                        {
+                                            ["deep"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        };
+
+        string result = Generate(schemas);
+
+        Assert.Contains("public MyRecordValue? Value { get; init; }", result, StringComparison.Ordinal);
+        Assert.Contains("public abstract partial record MyRecordValue;", result, StringComparison.Ordinal);
+        Assert.Contains("public partial record MyRecordValueVariant2", result, StringComparison.Ordinal);
+        Assert.Contains("public MyRecordValueVariant2Nested? Nested { get; init; }", result, StringComparison.Ordinal);
+        Assert.Contains("public partial record MyRecordValueVariant2Nested", result, StringComparison.Ordinal);
+        Assert.Contains("public string? Deep { get; init; }", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Emit_InlineOneOfWithTwoSameShapedInlineObjects_HoistsBothSeparately()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["MyRecord"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["value"] = new OpenApiSchema
+                    {
+                        OneOf = new List<IOpenApiSchema>
+                        {
+                            new OpenApiSchema
+                            {
+                                Type = JsonSchemaType.Object,
+                                Properties = new Dictionary<string, IOpenApiSchema>
+                                {
+                                    ["label"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                                }
+                            },
+                            new OpenApiSchema
+                            {
+                                Type = JsonSchemaType.Object,
+                                Properties = new Dictionary<string, IOpenApiSchema>
+                                {
+                                    ["label"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        };
+
+        string result = Generate(schemas);
+
+        Assert.Contains("public MyRecordValue? Value { get; init; }", result, StringComparison.Ordinal);
+        Assert.Contains("public abstract partial record MyRecordValue;", result, StringComparison.Ordinal);
+        Assert.Contains("public partial record MyRecordValueVariant1", result, StringComparison.Ordinal);
+        Assert.Contains("public partial record MyRecordValueVariant2", result, StringComparison.Ordinal);
+        Assert.Contains("[JsonDerivedType(typeof(MyRecordValueVariant1), \"MyRecordValueVariant1\")]", result, StringComparison.Ordinal);
+        Assert.Contains("[JsonDerivedType(typeof(MyRecordValueVariant2), \"MyRecordValueVariant2\")]", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Emit_DiscriminatedOneOfWithRefAndInlineObject_EmitsBothDerivedTypes()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["Cat"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Required = new HashSet<string> { "petType" },
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["petType"] = new OpenApiSchema { Type = JsonSchemaType.String, Enum = [JsonValue.Create("cat")] },
+                    ["meow"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                }
+            },
+            ["Pet"] = new OpenApiSchema
+            {
+                OneOf =
+                [
+                    new OpenApiSchemaReference("Cat"),
+                    new OpenApiSchema
+                    {
+                        Type = JsonSchemaType.Object,
+                        Required = new HashSet<string> { "petType" },
+                        Properties = new Dictionary<string, IOpenApiSchema>
+                        {
+                            ["petType"] = new OpenApiSchema { Type = JsonSchemaType.String, Enum = [JsonValue.Create("dog")] },
+                            ["bark"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                        }
+                    }
+                ],
+                Discriminator = new OpenApiDiscriminator
+                {
+                    PropertyName = "petType",
+                    Mapping = new Dictionary<string, OpenApiSchemaReference>
+                    {
+                        ["cat"] = new OpenApiSchemaReference("Cat")
+                    }
+                }
+            }
+        };
+
+        string result = Generate(schemas);
+
+        Assert.Contains("public abstract partial record Pet;", result, StringComparison.Ordinal);
+        Assert.Contains("[JsonPolymorphic(TypeDiscriminatorPropertyName = \"petType\")]", result, StringComparison.Ordinal);
+        Assert.Contains("[JsonDerivedType(typeof(Cat), \"cat\")]", result, StringComparison.Ordinal);
+        Assert.Contains("[JsonDerivedType(typeof(PetVariant2), \"PetVariant2\")]", result, StringComparison.Ordinal);
+        Assert.Contains("public partial record PetVariant2", result, StringComparison.Ordinal);
     }
 
     #endregion

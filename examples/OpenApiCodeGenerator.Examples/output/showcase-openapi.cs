@@ -421,6 +421,9 @@ public partial record NotificationEscalationVariant2
 /// <remarks>
 /// Union of: EmailContact | NotificationEscalationVariant2
 /// </remarks>
+/// <remarks>
+/// Inline object variants use the synthesized type name as the discriminator value.
+/// </remarks>
 [JsonDerivedType(typeof(EmailContact), "EmailContact")]
 [JsonDerivedType(typeof(NotificationEscalationVariant2), "NotificationEscalationVariant2")]
 public abstract partial record NotificationEscalation;

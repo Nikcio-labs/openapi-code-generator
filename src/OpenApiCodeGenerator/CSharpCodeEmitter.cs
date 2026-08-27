@@ -1244,6 +1244,25 @@ internal class CSharpCodeEmitter
             }
         }
 
+        // Add hoisted inline object variants not covered by the discriminator mapping.
+        // These have no natural discriminator value, so the synthesized type name is used
+        // as the wire discriminator.
+        foreach (IOpenApiSchema variant in variants)
+        {
+            if (variant is OpenApiSchemaReference)
+            {
+                continue;
+            }
+
+            string? hoistedName = _typeResolver.GetInlineObjectTypeName(variant);
+            if (hoistedName is null || mapping.ContainsValue(hoistedName))
+            {
+                continue;
+            }
+
+            mapping[hoistedName] = hoistedName;
+        }
+
         foreach ((string? discriminatorValue, string? derivedType) in mapping)
         {
             AppendLine($"[JsonDerivedType(typeof({derivedType}), \"{discriminatorValue}\")]");
@@ -1285,6 +1304,14 @@ internal class CSharpCodeEmitter
             AppendLine($"/// <remarks>");
             AppendLine($"/// Union of: {string.Join(" | ", variantNames)}");
             AppendLine($"/// </remarks>");
+        }
+
+        bool hasInlineVariant = nonNullVariants.Any(v => v is not OpenApiSchemaReference && _typeResolver.GetInlineObjectTypeName(v) != null);
+        if (hasInlineVariant)
+        {
+            AppendLine("/// <remarks>");
+            AppendLine("/// Inline object variants use the synthesized type name as the discriminator value.");
+            AppendLine("/// </remarks>");
         }
 
         // Emit [JsonDerivedType] for each resolvable variant

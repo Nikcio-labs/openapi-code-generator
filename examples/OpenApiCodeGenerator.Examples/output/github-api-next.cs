@@ -43049,12 +43049,18 @@ public partial record WebhookPullRequestReviewEdited
 /// <remarks>
 /// Union of: WebhookPullRequestReviewRequestRemovedVariant1 | WebhookPullRequestReviewRequestRemovedVariant2
 /// </remarks>
+/// <remarks>
+/// Inline object variants use the synthesized type name as the discriminator value.
+/// </remarks>
 [JsonDerivedType(typeof(WebhookPullRequestReviewRequestRemovedVariant1), "WebhookPullRequestReviewRequestRemovedVariant1")]
 [JsonDerivedType(typeof(WebhookPullRequestReviewRequestRemovedVariant2), "WebhookPullRequestReviewRequestRemovedVariant2")]
 public abstract partial record WebhookPullRequestReviewRequestRemoved;
 
 /// <remarks>
 /// Union of: WebhookPullRequestReviewRequestedVariant1 | WebhookPullRequestReviewRequestedVariant2
+/// </remarks>
+/// <remarks>
+/// Inline object variants use the synthesized type name as the discriminator value.
 /// </remarks>
 [JsonDerivedType(typeof(WebhookPullRequestReviewRequestedVariant1), "WebhookPullRequestReviewRequestedVariant1")]
 [JsonDerivedType(typeof(WebhookPullRequestReviewRequestedVariant2), "WebhookPullRequestReviewRequestedVariant2")]
@@ -52920,6 +52926,9 @@ public partial record EnvironmentProtectionRulesVariant3
 /// <remarks>
 /// Union of: EnvironmentProtectionRulesVariant1 | EnvironmentProtectionRulesVariant2 | EnvironmentProtectionRulesVariant3
 /// </remarks>
+/// <remarks>
+/// Inline object variants use the synthesized type name as the discriminator value.
+/// </remarks>
 [JsonDerivedType(typeof(EnvironmentProtectionRulesVariant1), "EnvironmentProtectionRulesVariant1")]
 [JsonDerivedType(typeof(EnvironmentProtectionRulesVariant2), "EnvironmentProtectionRulesVariant2")]
 [JsonDerivedType(typeof(EnvironmentProtectionRulesVariant3), "EnvironmentProtectionRulesVariant3")]
@@ -53822,6 +53831,9 @@ public partial record PullRequestMergeAsyncResultDetailsVariant3
 
 /// <remarks>
 /// Union of: PullRequestMergeAsyncResultDetailsVariant1 | PullRequestMergeAsyncResultDetailsVariant2 | PullRequestMergeAsyncResultDetailsVariant3
+/// </remarks>
+/// <remarks>
+/// Inline object variants use the synthesized type name as the discriminator value.
 /// </remarks>
 [JsonDerivedType(typeof(PullRequestMergeAsyncResultDetailsVariant1), "PullRequestMergeAsyncResultDetailsVariant1")]
 [JsonDerivedType(typeof(PullRequestMergeAsyncResultDetailsVariant2), "PullRequestMergeAsyncResultDetailsVariant2")]
@@ -59410,6 +59422,9 @@ public partial record WebhooksPullRequest5RequestedReviewersVariant2Parent
 
 /// <remarks>
 /// Union of: WebhooksPullRequest5RequestedReviewersVariant1 | WebhooksPullRequest5RequestedReviewersVariant2
+/// </remarks>
+/// <remarks>
+/// Inline object variants use the synthesized type name as the discriminator value.
 /// </remarks>
 [JsonDerivedType(typeof(WebhooksPullRequest5RequestedReviewersVariant1), "WebhooksPullRequest5RequestedReviewersVariant1")]
 [JsonDerivedType(typeof(WebhooksPullRequest5RequestedReviewersVariant2), "WebhooksPullRequest5RequestedReviewersVariant2")]
@@ -87669,6 +87684,9 @@ public partial record WebhookProjectsV2ItemEditedChangesVariant2Body
 /// <remarks>
 /// Union of: WebhookProjectsV2ItemEditedChangesVariant1 | WebhookProjectsV2ItemEditedChangesVariant2
 /// </remarks>
+/// <remarks>
+/// Inline object variants use the synthesized type name as the discriminator value.
+/// </remarks>
 [JsonDerivedType(typeof(WebhookProjectsV2ItemEditedChangesVariant1), "WebhookProjectsV2ItemEditedChangesVariant1")]
 [JsonDerivedType(typeof(WebhookProjectsV2ItemEditedChangesVariant2), "WebhookProjectsV2ItemEditedChangesVariant2")]
 public abstract partial record WebhookProjectsV2ItemEditedChanges;
@@ -89849,6 +89867,9 @@ public partial record WebhookPullRequestAssignedPullRequestRequestedReviewersVar
 
 /// <remarks>
 /// Union of: WebhookPullRequestAssignedPullRequestRequestedReviewersVariant1 | WebhookPullRequestAssignedPullRequestRequestedReviewersVariant2
+/// </remarks>
+/// <remarks>
+/// Inline object variants use the synthesized type name as the discriminator value.
 /// </remarks>
 [JsonDerivedType(typeof(WebhookPullRequestAssignedPullRequestRequestedReviewersVariant1), "WebhookPullRequestAssignedPullRequestRequestedReviewersVariant1")]
 [JsonDerivedType(typeof(WebhookPullRequestAssignedPullRequestRequestedReviewersVariant2), "WebhookPullRequestAssignedPullRequestRequestedReviewersVariant2")]
@@ -92138,6 +92159,9 @@ public partial record WebhookPullRequestAutoMergeDisabledPullRequestRequestedRev
 /// <remarks>
 /// Union of: WebhookPullRequestAutoMergeDisabledPullRequestRequestedReviewersVariant1 | WebhookPullRequestAutoMergeDisabledPullRequestRequestedReviewersVariant2
 /// </remarks>
+/// <remarks>
+/// Inline object variants use the synthesized type name as the discriminator value.
+/// </remarks>
 [JsonDerivedType(typeof(WebhookPullRequestAutoMergeDisabledPullRequestRequestedReviewersVariant1), "WebhookPullRequestAutoMergeDisabledPullRequestRequestedReviewersVariant1")]
 [JsonDerivedType(typeof(WebhookPullRequestAutoMergeDisabledPullRequestRequestedReviewersVariant2), "WebhookPullRequestAutoMergeDisabledPullRequestRequestedReviewersVariant2")]
 public abstract partial record WebhookPullRequestAutoMergeDisabledPullRequestRequestedReviewers;
@@ -94426,6 +94450,9 @@ public partial record WebhookPullRequestAutoMergeEnabledPullRequestRequestedRevi
 /// <remarks>
 /// Union of: WebhookPullRequestAutoMergeEnabledPullRequestRequestedReviewersVariant1 | WebhookPullRequestAutoMergeEnabledPullRequestRequestedReviewersVariant2
 /// </remarks>
+/// <remarks>
+/// Inline object variants use the synthesized type name as the discriminator value.
+/// </remarks>
 [JsonDerivedType(typeof(WebhookPullRequestAutoMergeEnabledPullRequestRequestedReviewersVariant1), "WebhookPullRequestAutoMergeEnabledPullRequestRequestedReviewersVariant1")]
 [JsonDerivedType(typeof(WebhookPullRequestAutoMergeEnabledPullRequestRequestedReviewersVariant2), "WebhookPullRequestAutoMergeEnabledPullRequestRequestedReviewersVariant2")]
 public abstract partial record WebhookPullRequestAutoMergeEnabledPullRequestRequestedReviewers;
@@ -96713,6 +96740,9 @@ public partial record WebhookPullRequestDequeuedPullRequestRequestedReviewersVar
 
 /// <remarks>
 /// Union of: WebhookPullRequestDequeuedPullRequestRequestedReviewersVariant1 | WebhookPullRequestDequeuedPullRequestRequestedReviewersVariant2
+/// </remarks>
+/// <remarks>
+/// Inline object variants use the synthesized type name as the discriminator value.
 /// </remarks>
 [JsonDerivedType(typeof(WebhookPullRequestDequeuedPullRequestRequestedReviewersVariant1), "WebhookPullRequestDequeuedPullRequestRequestedReviewersVariant1")]
 [JsonDerivedType(typeof(WebhookPullRequestDequeuedPullRequestRequestedReviewersVariant2), "WebhookPullRequestDequeuedPullRequestRequestedReviewersVariant2")]
@@ -99062,6 +99092,9 @@ public partial record WebhookPullRequestEnqueuedPullRequestRequestedReviewersVar
 /// <remarks>
 /// Union of: WebhookPullRequestEnqueuedPullRequestRequestedReviewersVariant1 | WebhookPullRequestEnqueuedPullRequestRequestedReviewersVariant2
 /// </remarks>
+/// <remarks>
+/// Inline object variants use the synthesized type name as the discriminator value.
+/// </remarks>
 [JsonDerivedType(typeof(WebhookPullRequestEnqueuedPullRequestRequestedReviewersVariant1), "WebhookPullRequestEnqueuedPullRequestRequestedReviewersVariant1")]
 [JsonDerivedType(typeof(WebhookPullRequestEnqueuedPullRequestRequestedReviewersVariant2), "WebhookPullRequestEnqueuedPullRequestRequestedReviewersVariant2")]
 public abstract partial record WebhookPullRequestEnqueuedPullRequestRequestedReviewers;
@@ -101350,6 +101383,9 @@ public partial record WebhookPullRequestLabeledPullRequestRequestedReviewersVari
 /// <remarks>
 /// Union of: WebhookPullRequestLabeledPullRequestRequestedReviewersVariant1 | WebhookPullRequestLabeledPullRequestRequestedReviewersVariant2
 /// </remarks>
+/// <remarks>
+/// Inline object variants use the synthesized type name as the discriminator value.
+/// </remarks>
 [JsonDerivedType(typeof(WebhookPullRequestLabeledPullRequestRequestedReviewersVariant1), "WebhookPullRequestLabeledPullRequestRequestedReviewersVariant1")]
 [JsonDerivedType(typeof(WebhookPullRequestLabeledPullRequestRequestedReviewersVariant2), "WebhookPullRequestLabeledPullRequestRequestedReviewersVariant2")]
 public abstract partial record WebhookPullRequestLabeledPullRequestRequestedReviewers;
@@ -103637,6 +103673,9 @@ public partial record WebhookPullRequestLockedPullRequestRequestedReviewersVaria
 
 /// <remarks>
 /// Union of: WebhookPullRequestLockedPullRequestRequestedReviewersVariant1 | WebhookPullRequestLockedPullRequestRequestedReviewersVariant2
+/// </remarks>
+/// <remarks>
+/// Inline object variants use the synthesized type name as the discriminator value.
 /// </remarks>
 [JsonDerivedType(typeof(WebhookPullRequestLockedPullRequestRequestedReviewersVariant1), "WebhookPullRequestLockedPullRequestRequestedReviewersVariant1")]
 [JsonDerivedType(typeof(WebhookPullRequestLockedPullRequestRequestedReviewersVariant2), "WebhookPullRequestLockedPullRequestRequestedReviewersVariant2")]
@@ -106097,6 +106136,9 @@ public partial record WebhookPullRequestReviewCommentCreatedPullRequestRequested
 /// <remarks>
 /// Union of: WebhookPullRequestReviewCommentCreatedPullRequestRequestedReviewersVariant1 | WebhookPullRequestReviewCommentCreatedPullRequestRequestedReviewersVariant2
 /// </remarks>
+/// <remarks>
+/// Inline object variants use the synthesized type name as the discriminator value.
+/// </remarks>
 [JsonDerivedType(typeof(WebhookPullRequestReviewCommentCreatedPullRequestRequestedReviewersVariant1), "WebhookPullRequestReviewCommentCreatedPullRequestRequestedReviewersVariant1")]
 [JsonDerivedType(typeof(WebhookPullRequestReviewCommentCreatedPullRequestRequestedReviewersVariant2), "WebhookPullRequestReviewCommentCreatedPullRequestRequestedReviewersVariant2")]
 public abstract partial record WebhookPullRequestReviewCommentCreatedPullRequestRequestedReviewers;
@@ -108263,6 +108305,9 @@ public partial record WebhookPullRequestReviewCommentDeletedPullRequestRequested
 
 /// <remarks>
 /// Union of: WebhookPullRequestReviewCommentDeletedPullRequestRequestedReviewersVariant1 | WebhookPullRequestReviewCommentDeletedPullRequestRequestedReviewersVariant2
+/// </remarks>
+/// <remarks>
+/// Inline object variants use the synthesized type name as the discriminator value.
 /// </remarks>
 [JsonDerivedType(typeof(WebhookPullRequestReviewCommentDeletedPullRequestRequestedReviewersVariant1), "WebhookPullRequestReviewCommentDeletedPullRequestRequestedReviewersVariant1")]
 [JsonDerivedType(typeof(WebhookPullRequestReviewCommentDeletedPullRequestRequestedReviewersVariant2), "WebhookPullRequestReviewCommentDeletedPullRequestRequestedReviewersVariant2")]
@@ -110434,6 +110479,9 @@ public partial record WebhookPullRequestReviewCommentEditedPullRequestRequestedR
 /// <remarks>
 /// Union of: WebhookPullRequestReviewCommentEditedPullRequestRequestedReviewersVariant1 | WebhookPullRequestReviewCommentEditedPullRequestRequestedReviewersVariant2
 /// </remarks>
+/// <remarks>
+/// Inline object variants use the synthesized type name as the discriminator value.
+/// </remarks>
 [JsonDerivedType(typeof(WebhookPullRequestReviewCommentEditedPullRequestRequestedReviewersVariant1), "WebhookPullRequestReviewCommentEditedPullRequestRequestedReviewersVariant1")]
 [JsonDerivedType(typeof(WebhookPullRequestReviewCommentEditedPullRequestRequestedReviewersVariant2), "WebhookPullRequestReviewCommentEditedPullRequestRequestedReviewersVariant2")]
 public abstract partial record WebhookPullRequestReviewCommentEditedPullRequestRequestedReviewers;
@@ -112600,6 +112648,9 @@ public partial record WebhookPullRequestReviewDismissedPullRequestRequestedRevie
 
 /// <remarks>
 /// Union of: WebhookPullRequestReviewDismissedPullRequestRequestedReviewersVariant1 | WebhookPullRequestReviewDismissedPullRequestRequestedReviewersVariant2
+/// </remarks>
+/// <remarks>
+/// Inline object variants use the synthesized type name as the discriminator value.
 /// </remarks>
 [JsonDerivedType(typeof(WebhookPullRequestReviewDismissedPullRequestRequestedReviewersVariant1), "WebhookPullRequestReviewDismissedPullRequestRequestedReviewersVariant1")]
 [JsonDerivedType(typeof(WebhookPullRequestReviewDismissedPullRequestRequestedReviewersVariant2), "WebhookPullRequestReviewDismissedPullRequestRequestedReviewersVariant2")]
@@ -114791,6 +114842,9 @@ public partial record WebhookPullRequestReviewEditedPullRequestRequestedReviewer
 
 /// <remarks>
 /// Union of: WebhookPullRequestReviewEditedPullRequestRequestedReviewersVariant1 | WebhookPullRequestReviewEditedPullRequestRequestedReviewersVariant2
+/// </remarks>
+/// <remarks>
+/// Inline object variants use the synthesized type name as the discriminator value.
 /// </remarks>
 [JsonDerivedType(typeof(WebhookPullRequestReviewEditedPullRequestRequestedReviewersVariant1), "WebhookPullRequestReviewEditedPullRequestRequestedReviewersVariant1")]
 [JsonDerivedType(typeof(WebhookPullRequestReviewEditedPullRequestRequestedReviewersVariant2), "WebhookPullRequestReviewEditedPullRequestRequestedReviewersVariant2")]
@@ -117130,6 +117184,9 @@ public partial record WebhookPullRequestReviewRequestRemovedVariant1PullRequestR
 
 /// <remarks>
 /// Union of: WebhookPullRequestReviewRequestRemovedVariant1PullRequestRequestedReviewersVariant1 | WebhookPullRequestReviewRequestRemovedVariant1PullRequestRequestedReviewersVariant2
+/// </remarks>
+/// <remarks>
+/// Inline object variants use the synthesized type name as the discriminator value.
 /// </remarks>
 [JsonDerivedType(typeof(WebhookPullRequestReviewRequestRemovedVariant1PullRequestRequestedReviewersVariant1), "WebhookPullRequestReviewRequestRemovedVariant1PullRequestRequestedReviewersVariant1")]
 [JsonDerivedType(typeof(WebhookPullRequestReviewRequestRemovedVariant1PullRequestRequestedReviewersVariant2), "WebhookPullRequestReviewRequestRemovedVariant1PullRequestRequestedReviewersVariant2")]
@@ -119549,6 +119606,9 @@ public partial record WebhookPullRequestReviewRequestRemovedVariant2PullRequestR
 
 /// <remarks>
 /// Union of: WebhookPullRequestReviewRequestRemovedVariant2PullRequestRequestedReviewersVariant1 | WebhookPullRequestReviewRequestRemovedVariant2PullRequestRequestedReviewersVariant2
+/// </remarks>
+/// <remarks>
+/// Inline object variants use the synthesized type name as the discriminator value.
 /// </remarks>
 [JsonDerivedType(typeof(WebhookPullRequestReviewRequestRemovedVariant2PullRequestRequestedReviewersVariant1), "WebhookPullRequestReviewRequestRemovedVariant2PullRequestRequestedReviewersVariant1")]
 [JsonDerivedType(typeof(WebhookPullRequestReviewRequestRemovedVariant2PullRequestRequestedReviewersVariant2), "WebhookPullRequestReviewRequestRemovedVariant2PullRequestRequestedReviewersVariant2")]
@@ -122009,6 +122069,9 @@ public partial record WebhookPullRequestReviewRequestedVariant1PullRequestReques
 /// <remarks>
 /// Union of: WebhookPullRequestReviewRequestedVariant1PullRequestRequestedReviewersVariant1 | WebhookPullRequestReviewRequestedVariant1PullRequestRequestedReviewersVariant2
 /// </remarks>
+/// <remarks>
+/// Inline object variants use the synthesized type name as the discriminator value.
+/// </remarks>
 [JsonDerivedType(typeof(WebhookPullRequestReviewRequestedVariant1PullRequestRequestedReviewersVariant1), "WebhookPullRequestReviewRequestedVariant1PullRequestRequestedReviewersVariant1")]
 [JsonDerivedType(typeof(WebhookPullRequestReviewRequestedVariant1PullRequestRequestedReviewersVariant2), "WebhookPullRequestReviewRequestedVariant1PullRequestRequestedReviewersVariant2")]
 public abstract partial record WebhookPullRequestReviewRequestedVariant1PullRequestRequestedReviewers;
@@ -124428,6 +124491,9 @@ public partial record WebhookPullRequestReviewRequestedVariant2PullRequestReques
 /// <remarks>
 /// Union of: WebhookPullRequestReviewRequestedVariant2PullRequestRequestedReviewersVariant1 | WebhookPullRequestReviewRequestedVariant2PullRequestRequestedReviewersVariant2
 /// </remarks>
+/// <remarks>
+/// Inline object variants use the synthesized type name as the discriminator value.
+/// </remarks>
 [JsonDerivedType(typeof(WebhookPullRequestReviewRequestedVariant2PullRequestRequestedReviewersVariant1), "WebhookPullRequestReviewRequestedVariant2PullRequestRequestedReviewersVariant1")]
 [JsonDerivedType(typeof(WebhookPullRequestReviewRequestedVariant2PullRequestRequestedReviewersVariant2), "WebhookPullRequestReviewRequestedVariant2PullRequestRequestedReviewersVariant2")]
 public abstract partial record WebhookPullRequestReviewRequestedVariant2PullRequestRequestedReviewers;
@@ -126708,6 +126774,9 @@ public partial record WebhookPullRequestReviewSubmittedPullRequestRequestedRevie
 /// <remarks>
 /// Union of: WebhookPullRequestReviewSubmittedPullRequestRequestedReviewersVariant1 | WebhookPullRequestReviewSubmittedPullRequestRequestedReviewersVariant2
 /// </remarks>
+/// <remarks>
+/// Inline object variants use the synthesized type name as the discriminator value.
+/// </remarks>
 [JsonDerivedType(typeof(WebhookPullRequestReviewSubmittedPullRequestRequestedReviewersVariant1), "WebhookPullRequestReviewSubmittedPullRequestRequestedReviewersVariant1")]
 [JsonDerivedType(typeof(WebhookPullRequestReviewSubmittedPullRequestRequestedReviewersVariant2), "WebhookPullRequestReviewSubmittedPullRequestRequestedReviewersVariant2")]
 public abstract partial record WebhookPullRequestReviewSubmittedPullRequestRequestedReviewers;
@@ -128786,6 +128855,9 @@ public partial record WebhookPullRequestReviewThreadResolvedPullRequestRequested
 
 /// <remarks>
 /// Union of: WebhookPullRequestReviewThreadResolvedPullRequestRequestedReviewersVariant1 | WebhookPullRequestReviewThreadResolvedPullRequestRequestedReviewersVariant2
+/// </remarks>
+/// <remarks>
+/// Inline object variants use the synthesized type name as the discriminator value.
 /// </remarks>
 [JsonDerivedType(typeof(WebhookPullRequestReviewThreadResolvedPullRequestRequestedReviewersVariant1), "WebhookPullRequestReviewThreadResolvedPullRequestRequestedReviewersVariant1")]
 [JsonDerivedType(typeof(WebhookPullRequestReviewThreadResolvedPullRequestRequestedReviewersVariant2), "WebhookPullRequestReviewThreadResolvedPullRequestRequestedReviewersVariant2")]
@@ -131167,6 +131239,9 @@ public partial record WebhookPullRequestReviewThreadUnresolvedPullRequestRequest
 
 /// <remarks>
 /// Union of: WebhookPullRequestReviewThreadUnresolvedPullRequestRequestedReviewersVariant1 | WebhookPullRequestReviewThreadUnresolvedPullRequestRequestedReviewersVariant2
+/// </remarks>
+/// <remarks>
+/// Inline object variants use the synthesized type name as the discriminator value.
 /// </remarks>
 [JsonDerivedType(typeof(WebhookPullRequestReviewThreadUnresolvedPullRequestRequestedReviewersVariant1), "WebhookPullRequestReviewThreadUnresolvedPullRequestRequestedReviewersVariant1")]
 [JsonDerivedType(typeof(WebhookPullRequestReviewThreadUnresolvedPullRequestRequestedReviewersVariant2), "WebhookPullRequestReviewThreadUnresolvedPullRequestRequestedReviewersVariant2")]
@@ -133758,6 +133833,9 @@ public partial record WebhookPullRequestStackedPullRequestRequestedReviewersVari
 /// <remarks>
 /// Union of: WebhookPullRequestStackedPullRequestRequestedReviewersVariant1 | WebhookPullRequestStackedPullRequestRequestedReviewersVariant2
 /// </remarks>
+/// <remarks>
+/// Inline object variants use the synthesized type name as the discriminator value.
+/// </remarks>
 [JsonDerivedType(typeof(WebhookPullRequestStackedPullRequestRequestedReviewersVariant1), "WebhookPullRequestStackedPullRequestRequestedReviewersVariant1")]
 [JsonDerivedType(typeof(WebhookPullRequestStackedPullRequestRequestedReviewersVariant2), "WebhookPullRequestStackedPullRequestRequestedReviewersVariant2")]
 public abstract partial record WebhookPullRequestStackedPullRequestRequestedReviewers;
@@ -136038,6 +136116,9 @@ public partial record WebhookPullRequestSynchronizePullRequestRequestedReviewers
 
 /// <remarks>
 /// Union of: WebhookPullRequestSynchronizePullRequestRequestedReviewersVariant1 | WebhookPullRequestSynchronizePullRequestRequestedReviewersVariant2
+/// </remarks>
+/// <remarks>
+/// Inline object variants use the synthesized type name as the discriminator value.
 /// </remarks>
 [JsonDerivedType(typeof(WebhookPullRequestSynchronizePullRequestRequestedReviewersVariant1), "WebhookPullRequestSynchronizePullRequestRequestedReviewersVariant1")]
 [JsonDerivedType(typeof(WebhookPullRequestSynchronizePullRequestRequestedReviewersVariant2), "WebhookPullRequestSynchronizePullRequestRequestedReviewersVariant2")]
@@ -138327,6 +138408,9 @@ public partial record WebhookPullRequestUnassignedPullRequestRequestedReviewersV
 /// <remarks>
 /// Union of: WebhookPullRequestUnassignedPullRequestRequestedReviewersVariant1 | WebhookPullRequestUnassignedPullRequestRequestedReviewersVariant2
 /// </remarks>
+/// <remarks>
+/// Inline object variants use the synthesized type name as the discriminator value.
+/// </remarks>
 [JsonDerivedType(typeof(WebhookPullRequestUnassignedPullRequestRequestedReviewersVariant1), "WebhookPullRequestUnassignedPullRequestRequestedReviewersVariant1")]
 [JsonDerivedType(typeof(WebhookPullRequestUnassignedPullRequestRequestedReviewersVariant2), "WebhookPullRequestUnassignedPullRequestRequestedReviewersVariant2")]
 public abstract partial record WebhookPullRequestUnassignedPullRequestRequestedReviewers;
@@ -140607,6 +140691,9 @@ public partial record WebhookPullRequestUnlabeledPullRequestRequestedReviewersVa
 
 /// <remarks>
 /// Union of: WebhookPullRequestUnlabeledPullRequestRequestedReviewersVariant1 | WebhookPullRequestUnlabeledPullRequestRequestedReviewersVariant2
+/// </remarks>
+/// <remarks>
+/// Inline object variants use the synthesized type name as the discriminator value.
 /// </remarks>
 [JsonDerivedType(typeof(WebhookPullRequestUnlabeledPullRequestRequestedReviewersVariant1), "WebhookPullRequestUnlabeledPullRequestRequestedReviewersVariant1")]
 [JsonDerivedType(typeof(WebhookPullRequestUnlabeledPullRequestRequestedReviewersVariant2), "WebhookPullRequestUnlabeledPullRequestRequestedReviewersVariant2")]
@@ -142895,6 +142982,9 @@ public partial record WebhookPullRequestUnlockedPullRequestRequestedReviewersVar
 
 /// <remarks>
 /// Union of: WebhookPullRequestUnlockedPullRequestRequestedReviewersVariant1 | WebhookPullRequestUnlockedPullRequestRequestedReviewersVariant2
+/// </remarks>
+/// <remarks>
+/// Inline object variants use the synthesized type name as the discriminator value.
 /// </remarks>
 [JsonDerivedType(typeof(WebhookPullRequestUnlockedPullRequestRequestedReviewersVariant1), "WebhookPullRequestUnlockedPullRequestRequestedReviewersVariant1")]
 [JsonDerivedType(typeof(WebhookPullRequestUnlockedPullRequestRequestedReviewersVariant2), "WebhookPullRequestUnlockedPullRequestRequestedReviewersVariant2")]
