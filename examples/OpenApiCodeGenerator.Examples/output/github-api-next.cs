@@ -3485,6 +3485,20 @@ public enum TeamMemberRole
 }
 
 /// <summary>
+/// The role granted to the collaborator
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter<CopilotSpaceCollaboratorVariant2Role>))]
+public enum CopilotSpaceCollaboratorVariant2Role
+{
+    [JsonStringEnumMemberName("reader")]
+    Reader,
+    [JsonStringEnumMemberName("writer")]
+    Writer,
+    [JsonStringEnumMemberName("admin")]
+    Admin
+}
+
+/// <summary>
 /// Determines if the team has a direct, indirect, or mixed relationship to a role
 /// </summary>
 [JsonConverter(typeof(JsonStringEnumConverter<Assignment>))]
@@ -3586,6 +3600,19 @@ public enum RepositoryRuleMergeQueueParametersMergeMethod
     Rebase
 }
 
+[JsonConverter(typeof(JsonStringEnumConverter<PullRequestMergeAsyncResultDetailsVariant1MergeMethod>))]
+public enum PullRequestMergeAsyncResultDetailsVariant1MergeMethod
+{
+    [JsonStringEnumMemberName("default")]
+    Default,
+    [JsonStringEnumMemberName("merge")]
+    Merge,
+    [JsonStringEnumMemberName("squash")]
+    Squash,
+    [JsonStringEnumMemberName("rebase")]
+    Rebase
+}
+
 /// <summary>
 /// The type of content tracked in a project item
 /// </summary>
@@ -3684,8 +3711,8 @@ public enum ValuesEditableBy
 /// <summary>
 /// The type of actor that can bypass a ruleset.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter<ActorType>))]
-public enum ActorType
+[JsonConverter(typeof(JsonStringEnumConverter<RepositoryRulesetBypassActorActorType>))]
+public enum RepositoryRulesetBypassActorActorType
 {
     [JsonStringEnumMemberName("Integration")]
     Integration,
@@ -3699,6 +3726,16 @@ public enum ActorType
     DeployKey,
     [JsonStringEnumMemberName("User")]
     User
+}
+
+/// <summary>
+/// The collaborator actor type.
+/// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter<CopilotSpaceCollaboratorVariant2ActorType>))]
+public enum CopilotSpaceCollaboratorVariant2ActorType
+{
+    [JsonStringEnumMemberName("Team")]
+    Team
 }
 
 /// <summary>
@@ -5514,6 +5551,20 @@ public enum WebhookGollumPagesAction
     Edited
 }
 
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookPullRequestReviewRequestRemovedVariant1Action>))]
+public enum WebhookPullRequestReviewRequestRemovedVariant1Action
+{
+    [JsonStringEnumMemberName("review_request_removed")]
+    ReviewRequestRemoved
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<WebhookPullRequestReviewRequestedVariant1Action>))]
+public enum WebhookPullRequestReviewRequestedVariant1Action
+{
+    [JsonStringEnumMemberName("review_requested")]
+    ReviewRequested
+}
+
 /// <summary>
 /// The side of the first line of the range for a multi-line comment.
 /// </summary>
@@ -5949,6 +6000,17 @@ public enum Operator
     Contains,
     [JsonStringEnumMemberName("regex")]
     Regex
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter<MergeAction>))]
+public enum MergeAction
+{
+    [JsonStringEnumMemberName("default")]
+    Default,
+    [JsonStringEnumMemberName("merge_queue")]
+    MergeQueue,
+    [JsonStringEnumMemberName("direct_merge")]
+    DirectMerge
 }
 
 [JsonConverter(typeof(JsonStringEnumConverter<ContentReferences>))]
@@ -17258,7 +17320,7 @@ public partial record RepositoryRulesetBypassActor
     /// The type of actor that can bypass a ruleset.
     /// </summary>
     [JsonPropertyName("actor_type")]
-    public required ActorType ActorType { get; init; }
+    public required RepositoryRulesetBypassActorActorType ActorType { get; init; }
 
     /// <summary>
     /// When the specified actor can bypass the ruleset. `pull_request` means that an actor can only bypass rules on pull requests. `pull_request` is not applicable for the `DeployKey` actor type. Also, `pull_request` is only applicable to branch rulesets. When `bypass_mode` is `exempt`, rules will not be run for that actor and a bypass audit entry will not be created.
@@ -24247,7 +24309,7 @@ public partial record Environment
     /// Built-in deployment protection rules for the environment.
     /// </summary>
     [JsonPropertyName("protection_rules")]
-    public IReadOnlyList<object>? ProtectionRules { get; init; }
+    public IReadOnlyList<EnvironmentProtectionRules>? ProtectionRules { get; init; }
 
     /// <summary>
     /// The type of deployment branch policy for this environment. To allow all branches to deploy, set to `null`.
@@ -27476,7 +27538,7 @@ public partial record PullRequestMergeAsyncResult
     public required PullRequestMergeAsyncResultStatus Status { get; init; }
 
     [JsonPropertyName("details")]
-    public required object Details { get; init; }
+    public required PullRequestMergeAsyncResultDetails Details { get; init; }
 
 }
 
@@ -32671,7 +32733,7 @@ public partial record WebhooksPullRequest5
     public bool? Rebaseable { get; init; }
 
     [JsonPropertyName("requested_reviewers")]
-    public required IReadOnlyList<object> RequestedReviewers { get; init; }
+    public required IReadOnlyList<WebhooksPullRequest5RequestedReviewers> RequestedReviewers { get; init; }
 
     [JsonPropertyName("requested_teams")]
     public required IReadOnlyList<WebhooksPullRequest5RequestedTeams> RequestedTeams { get; init; }
@@ -41646,7 +41708,7 @@ public partial record WebhookProjectsV2ItemEdited
     /// It includes altered values for text, number, date, single select, and iteration fields, along with the GraphQL node ID of the changed field.
     /// </summary>
     [JsonPropertyName("changes")]
-    public object? Changes { get; init; }
+    public WebhookProjectsV2ItemEditedChanges? Changes { get; init; }
 
     /// <summary>
     /// The GitHub App installation. Webhook payloads contain the `installation` property when the event is configured
@@ -42984,8 +43046,18 @@ public partial record WebhookPullRequestReviewEdited
 
 }
 
+/// <remarks>
+/// Union of: WebhookPullRequestReviewRequestRemovedVariant1 | WebhookPullRequestReviewRequestRemovedVariant2
+/// </remarks>
+[JsonDerivedType(typeof(WebhookPullRequestReviewRequestRemovedVariant1), "WebhookPullRequestReviewRequestRemovedVariant1")]
+[JsonDerivedType(typeof(WebhookPullRequestReviewRequestRemovedVariant2), "WebhookPullRequestReviewRequestRemovedVariant2")]
 public abstract partial record WebhookPullRequestReviewRequestRemoved;
 
+/// <remarks>
+/// Union of: WebhookPullRequestReviewRequestedVariant1 | WebhookPullRequestReviewRequestedVariant2
+/// </remarks>
+[JsonDerivedType(typeof(WebhookPullRequestReviewRequestedVariant1), "WebhookPullRequestReviewRequestedVariant1")]
+[JsonDerivedType(typeof(WebhookPullRequestReviewRequestedVariant2), "WebhookPullRequestReviewRequestedVariant2")]
 public abstract partial record WebhookPullRequestReviewRequested;
 
 public partial record WebhookPullRequestReviewSubmitted
@@ -49563,6 +49635,64 @@ public partial record CopilotSpaceResourcesAttributesMetadata
 
 }
 
+public partial record CopilotSpaceCollaboratorVariant2
+{
+    /// <summary>
+    /// The collaborator actor type.
+    /// </summary>
+    [JsonPropertyName("actor_type")]
+    public required CopilotSpaceCollaboratorVariant2ActorType ActorType { get; init; }
+
+    /// <summary>
+    /// The role granted to the collaborator
+    /// </summary>
+    [JsonPropertyName("role")]
+    public required CopilotSpaceCollaboratorVariant2Role Role { get; init; }
+
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("slug")]
+    public required string Slug { get; init; }
+
+    [JsonPropertyName("type")]
+    public required RepositoryRuleParamsReviewerType Type { get; init; }
+
+    [JsonPropertyName("description")]
+    public string? Description { get; init; }
+
+    [JsonPropertyName("privacy")]
+    public string? Privacy { get; init; }
+
+    [JsonPropertyName("notification_setting")]
+    public string? NotificationSetting { get; init; }
+
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    [JsonPropertyName("members_url")]
+    public string? MembersUrl { get; init; }
+
+    [JsonPropertyName("repositories_url")]
+    public Uri? RepositoriesUrl { get; init; }
+
+    [JsonPropertyName("organization_id")]
+    public int? OrganizationId { get; init; }
+
+    [JsonPropertyName("parent")]
+    public object? Parent { get; init; }
+
+}
+
 /// <summary>
 /// The team through which the assignee is granted access to GitHub Copilot, if applicable.
 /// </summary>
@@ -52710,6 +52840,91 @@ public partial record SnapshotDetector
 
 }
 
+public partial record EnvironmentProtectionRulesVariant1
+{
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    [JsonPropertyName("type")]
+    public required string Type { get; init; }
+
+    /// <summary>
+    /// The amount of time to delay a job after the job is initially triggered. The time (in minutes) must be an integer between 0 and 43,200 (30 days).
+    /// </summary>
+    [JsonPropertyName("wait_timer")]
+    public WaitTimer? WaitTimer { get; init; }
+
+}
+
+public partial record EnvironmentProtectionRulesVariant2
+{
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    /// <summary>
+    /// Whether deployments to this environment can be approved by the user who created the deployment.
+    /// </summary>
+    [JsonPropertyName("prevent_self_review")]
+    public bool? PreventSelfReview { get; init; }
+
+    [JsonPropertyName("type")]
+    public required string Type { get; init; }
+
+    /// <summary>
+    /// The people or teams that may approve jobs that reference the environment. You can list up to six users or teams as reviewers. The reviewers must have at least read access to the repository. Only one of the required reviewers needs to approve the job for it to proceed.
+    /// </summary>
+    [JsonPropertyName("reviewers")]
+    public IReadOnlyList<EnvironmentProtectionRulesVariant2Reviewers>? Reviewers { get; init; }
+
+}
+
+public partial record EnvironmentProtectionRulesVariant2Reviewers
+{
+    /// <summary>
+    /// The type of reviewer.
+    /// </summary>
+    [JsonPropertyName("type")]
+    public PendingDeploymentReviewersType? Type { get; init; }
+
+    [JsonPropertyName("reviewer")]
+    public EnvironmentProtectionRulesVariant2ReviewersReviewer? Reviewer { get; init; }
+
+}
+
+/// <remarks>
+/// Union of: SimpleUser | Team
+/// </remarks>
+[JsonDerivedType(typeof(SimpleUser), "simple-user")]
+[JsonDerivedType(typeof(Team), "team")]
+public abstract partial record EnvironmentProtectionRulesVariant2ReviewersReviewer;
+
+public partial record EnvironmentProtectionRulesVariant3
+{
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    [JsonPropertyName("type")]
+    public required string Type { get; init; }
+
+}
+
+/// <remarks>
+/// Union of: EnvironmentProtectionRulesVariant1 | EnvironmentProtectionRulesVariant2 | EnvironmentProtectionRulesVariant3
+/// </remarks>
+[JsonDerivedType(typeof(EnvironmentProtectionRulesVariant1), "EnvironmentProtectionRulesVariant1")]
+[JsonDerivedType(typeof(EnvironmentProtectionRulesVariant2), "EnvironmentProtectionRulesVariant2")]
+[JsonDerivedType(typeof(EnvironmentProtectionRulesVariant3), "EnvironmentProtectionRulesVariant3")]
+public abstract partial record EnvironmentProtectionRules;
+
 /// <summary>
 /// Identifying information for the git-user
 /// </summary>
@@ -53556,6 +53771,62 @@ public partial record PullRequestLinks
     public required Link Self { get; init; }
 
 }
+
+/// <summary>
+/// When an asynchronous merge request was created or already existed
+/// </summary>
+public partial record PullRequestMergeAsyncResultDetailsVariant1
+{
+    [JsonPropertyName("message")]
+    public required string Message { get; init; }
+
+    [JsonPropertyName("uuid")]
+    public required string Uuid { get; init; }
+
+    [JsonPropertyName("merge_method")]
+    public required PullRequestMergeAsyncResultDetailsVariant1MergeMethod MergeMethod { get; init; }
+
+    [JsonPropertyName("merge_action")]
+    public required MergeAction MergeAction { get; init; }
+
+    /// <summary>
+    /// SHA that the pull request head must match for the enqueued merge to proceed.
+    /// </summary>
+    [JsonPropertyName("expected_head_sha")]
+    public required string ExpectedHeadSha { get; init; }
+
+}
+
+/// <summary>
+/// When the pull request cannot be merged
+/// </summary>
+public partial record PullRequestMergeAsyncResultDetailsVariant2
+{
+    [JsonPropertyName("message")]
+    public required string Message { get; init; }
+
+}
+
+/// <summary>
+/// When the pull request is already merged
+/// </summary>
+public partial record PullRequestMergeAsyncResultDetailsVariant3
+{
+    [JsonPropertyName("message")]
+    public required string Message { get; init; }
+
+    [JsonPropertyName("sha")]
+    public required string Sha { get; init; }
+
+}
+
+/// <remarks>
+/// Union of: PullRequestMergeAsyncResultDetailsVariant1 | PullRequestMergeAsyncResultDetailsVariant2 | PullRequestMergeAsyncResultDetailsVariant3
+/// </remarks>
+[JsonDerivedType(typeof(PullRequestMergeAsyncResultDetailsVariant1), "PullRequestMergeAsyncResultDetailsVariant1")]
+[JsonDerivedType(typeof(PullRequestMergeAsyncResultDetailsVariant2), "PullRequestMergeAsyncResultDetailsVariant2")]
+[JsonDerivedType(typeof(PullRequestMergeAsyncResultDetailsVariant3), "PullRequestMergeAsyncResultDetailsVariant3")]
+public abstract partial record PullRequestMergeAsyncResultDetails;
 
 public partial record PullRequestReviewLinks
 {
@@ -58956,6 +59227,193 @@ public partial record WebhooksPullRequest5MilestoneCreator
     public string? UserViewType { get; init; }
 
 }
+
+public partial record WebhooksPullRequest5RequestedReviewersVariant1
+{
+    [JsonPropertyName("avatar_url")]
+    public Uri? AvatarUrl { get; init; }
+
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    [JsonPropertyName("email")]
+    public string? Email { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public string? EventsUrl { get; init; }
+
+    [JsonPropertyName("followers_url")]
+    public Uri? FollowersUrl { get; init; }
+
+    [JsonPropertyName("following_url")]
+    public string? FollowingUrl { get; init; }
+
+    [JsonPropertyName("gists_url")]
+    public string? GistsUrl { get; init; }
+
+    [JsonPropertyName("gravatar_id")]
+    public string? GravatarId { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("login")]
+    public required string Login { get; init; }
+
+    [JsonPropertyName("name")]
+    public string? Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("organizations_url")]
+    public Uri? OrganizationsUrl { get; init; }
+
+    [JsonPropertyName("received_events_url")]
+    public Uri? ReceivedEventsUrl { get; init; }
+
+    [JsonPropertyName("repos_url")]
+    public Uri? ReposUrl { get; init; }
+
+    [JsonPropertyName("site_admin")]
+    public bool? SiteAdmin { get; init; }
+
+    [JsonPropertyName("starred_url")]
+    public string? StarredUrl { get; init; }
+
+    [JsonPropertyName("subscriptions_url")]
+    public Uri? SubscriptionsUrl { get; init; }
+
+    [JsonPropertyName("type")]
+    public WebhooksUserType? Type { get; init; }
+
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+}
+
+/// <summary>
+/// Groups of organization members that gives permissions on specified repositories.
+/// </summary>
+public partial record WebhooksPullRequest5RequestedReviewersVariant2
+{
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    /// <summary>
+    /// Description of the team
+    /// </summary>
+    [JsonPropertyName("description")]
+    public string? Description { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    /// <summary>
+    /// Unique identifier of the team
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("members_url")]
+    public string? MembersUrl { get; init; }
+
+    /// <summary>
+    /// Name of the team
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("parent")]
+    public WebhooksPullRequest5RequestedReviewersVariant2Parent? Parent { get; init; }
+
+    /// <summary>
+    /// Permission that the team will have for its repositories
+    /// </summary>
+    [JsonPropertyName("permission")]
+    public string? Permission { get; init; }
+
+    [JsonPropertyName("privacy")]
+    public WebhooksTeamPrivacy? Privacy { get; init; }
+
+    [JsonPropertyName("repositories_url")]
+    public Uri? RepositoriesUrl { get; init; }
+
+    [JsonPropertyName("slug")]
+    public string? Slug { get; init; }
+
+    /// <summary>
+    /// URL for the team
+    /// </summary>
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+}
+
+public partial record WebhooksPullRequest5RequestedReviewersVariant2Parent
+{
+    /// <summary>
+    /// Description of the team
+    /// </summary>
+    [JsonPropertyName("description")]
+    public required string? Description { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public required Uri HtmlUrl { get; init; }
+
+    /// <summary>
+    /// Unique identifier of the team
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("members_url")]
+    public required string MembersUrl { get; init; }
+
+    /// <summary>
+    /// Name of the team
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    /// <summary>
+    /// Permission that the team will have for its repositories
+    /// </summary>
+    [JsonPropertyName("permission")]
+    public required string Permission { get; init; }
+
+    [JsonPropertyName("privacy")]
+    public required WebhooksTeamPrivacy Privacy { get; init; }
+
+    [JsonPropertyName("repositories_url")]
+    public required Uri RepositoriesUrl { get; init; }
+
+    [JsonPropertyName("slug")]
+    public required string Slug { get; init; }
+
+    /// <summary>
+    /// URL for the team
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+}
+
+/// <remarks>
+/// Union of: WebhooksPullRequest5RequestedReviewersVariant1 | WebhooksPullRequest5RequestedReviewersVariant2
+/// </remarks>
+[JsonDerivedType(typeof(WebhooksPullRequest5RequestedReviewersVariant1), "WebhooksPullRequest5RequestedReviewersVariant1")]
+[JsonDerivedType(typeof(WebhooksPullRequest5RequestedReviewersVariant2), "WebhooksPullRequest5RequestedReviewersVariant2")]
+public abstract partial record WebhooksPullRequest5RequestedReviewers;
 
 /// <summary>
 /// Groups of organization members that gives permissions on specified repositories.
@@ -87158,6 +87616,63 @@ public partial record WebhookProjectsV2ItemConvertedChangesContentType
 
 }
 
+public partial record WebhookProjectsV2ItemEditedChangesVariant1
+{
+    [JsonPropertyName("field_value")]
+    public required WebhookProjectsV2ItemEditedChangesVariant1FieldValue FieldValue { get; init; }
+
+}
+
+public partial record WebhookProjectsV2ItemEditedChangesVariant1FieldValue
+{
+    [JsonPropertyName("field_node_id")]
+    public string? FieldNodeId { get; init; }
+
+    [JsonPropertyName("field_type")]
+    public string? FieldType { get; init; }
+
+    [JsonPropertyName("field_name")]
+    public string? FieldName { get; init; }
+
+    [JsonPropertyName("project_number")]
+    public int? ProjectNumber { get; init; }
+
+    [JsonPropertyName("from")]
+    public object? From { get; init; }
+
+    [JsonPropertyName("to")]
+    public object? To { get; init; }
+
+}
+
+public partial record WebhookProjectsV2ItemEditedChangesVariant2
+{
+    [JsonPropertyName("body")]
+    public required WebhookProjectsV2ItemEditedChangesVariant2Body Body { get; init; }
+
+}
+
+public partial record WebhookProjectsV2ItemEditedChangesVariant2Body
+{
+    [JsonPropertyName("from")]
+    public string? From { get; init; }
+
+    [JsonPropertyName("to")]
+    public string? To { get; init; }
+
+}
+
+/// <summary>
+/// The changes made to the item may involve modifications in the item's fields and draft issue body.
+/// It includes altered values for text, number, date, single select, and iteration fields, along with the GraphQL node ID of the changed field.
+/// </summary>
+/// <remarks>
+/// Union of: WebhookProjectsV2ItemEditedChangesVariant1 | WebhookProjectsV2ItemEditedChangesVariant2
+/// </remarks>
+[JsonDerivedType(typeof(WebhookProjectsV2ItemEditedChangesVariant1), "WebhookProjectsV2ItemEditedChangesVariant1")]
+[JsonDerivedType(typeof(WebhookProjectsV2ItemEditedChangesVariant2), "WebhookProjectsV2ItemEditedChangesVariant2")]
+public abstract partial record WebhookProjectsV2ItemEditedChanges;
+
 public partial record WebhookProjectsV2ItemReorderedChanges
 {
     [JsonPropertyName("previous_projects_v2_item_node_id")]
@@ -87363,7 +87878,7 @@ public partial record WebhookPullRequestAssignedPullRequest
     public bool? Rebaseable { get; init; }
 
     [JsonPropertyName("requested_reviewers")]
-    public required IReadOnlyList<object> RequestedReviewers { get; init; }
+    public required IReadOnlyList<WebhookPullRequestAssignedPullRequestRequestedReviewers> RequestedReviewers { get; init; }
 
     [JsonPropertyName("requested_teams")]
     public required IReadOnlyList<WebhookPullRequestAssignedPullRequestRequestedTeams> RequestedTeams { get; init; }
@@ -89149,6 +89664,196 @@ public partial record WebhookPullRequestAssignedPullRequestMilestoneCreator
 
 }
 
+public partial record WebhookPullRequestAssignedPullRequestRequestedReviewersVariant1
+{
+    [JsonPropertyName("avatar_url")]
+    public Uri? AvatarUrl { get; init; }
+
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    [JsonPropertyName("email")]
+    public string? Email { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public string? EventsUrl { get; init; }
+
+    [JsonPropertyName("followers_url")]
+    public Uri? FollowersUrl { get; init; }
+
+    [JsonPropertyName("following_url")]
+    public string? FollowingUrl { get; init; }
+
+    [JsonPropertyName("gists_url")]
+    public string? GistsUrl { get; init; }
+
+    [JsonPropertyName("gravatar_id")]
+    public string? GravatarId { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("login")]
+    public required string Login { get; init; }
+
+    [JsonPropertyName("name")]
+    public string? Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("organizations_url")]
+    public Uri? OrganizationsUrl { get; init; }
+
+    [JsonPropertyName("received_events_url")]
+    public Uri? ReceivedEventsUrl { get; init; }
+
+    [JsonPropertyName("repos_url")]
+    public Uri? ReposUrl { get; init; }
+
+    [JsonPropertyName("site_admin")]
+    public bool? SiteAdmin { get; init; }
+
+    [JsonPropertyName("starred_url")]
+    public string? StarredUrl { get; init; }
+
+    [JsonPropertyName("subscriptions_url")]
+    public Uri? SubscriptionsUrl { get; init; }
+
+    [JsonPropertyName("type")]
+    public WebhooksUserMannequinType? Type { get; init; }
+
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+    [JsonPropertyName("user_view_type")]
+    public string? UserViewType { get; init; }
+
+}
+
+/// <summary>
+/// Groups of organization members that gives permissions on specified repositories.
+/// </summary>
+public partial record WebhookPullRequestAssignedPullRequestRequestedReviewersVariant2
+{
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    /// <summary>
+    /// Description of the team
+    /// </summary>
+    [JsonPropertyName("description")]
+    public required string? Description { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public required Uri HtmlUrl { get; init; }
+
+    /// <summary>
+    /// Unique identifier of the team
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("members_url")]
+    public required string MembersUrl { get; init; }
+
+    /// <summary>
+    /// Name of the team
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    [JsonPropertyName("parent")]
+    public WebhookPullRequestAssignedPullRequestRequestedReviewersVariant2Parent? Parent { get; init; }
+
+    /// <summary>
+    /// Permission that the team will have for its repositories
+    /// </summary>
+    [JsonPropertyName("permission")]
+    public required string Permission { get; init; }
+
+    [JsonPropertyName("privacy")]
+    public required WebhooksTeamPrivacy Privacy { get; init; }
+
+    [JsonPropertyName("repositories_url")]
+    public required Uri RepositoriesUrl { get; init; }
+
+    [JsonPropertyName("slug")]
+    public required string Slug { get; init; }
+
+    /// <summary>
+    /// URL for the team
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+}
+
+public partial record WebhookPullRequestAssignedPullRequestRequestedReviewersVariant2Parent
+{
+    /// <summary>
+    /// Description of the team
+    /// </summary>
+    [JsonPropertyName("description")]
+    public required string? Description { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public required Uri HtmlUrl { get; init; }
+
+    /// <summary>
+    /// Unique identifier of the team
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("members_url")]
+    public required string MembersUrl { get; init; }
+
+    /// <summary>
+    /// Name of the team
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    /// <summary>
+    /// Permission that the team will have for its repositories
+    /// </summary>
+    [JsonPropertyName("permission")]
+    public required string Permission { get; init; }
+
+    [JsonPropertyName("privacy")]
+    public required WebhooksTeamPrivacy Privacy { get; init; }
+
+    [JsonPropertyName("repositories_url")]
+    public required Uri RepositoriesUrl { get; init; }
+
+    [JsonPropertyName("slug")]
+    public required string Slug { get; init; }
+
+    /// <summary>
+    /// URL for the team
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+}
+
+/// <remarks>
+/// Union of: WebhookPullRequestAssignedPullRequestRequestedReviewersVariant1 | WebhookPullRequestAssignedPullRequestRequestedReviewersVariant2
+/// </remarks>
+[JsonDerivedType(typeof(WebhookPullRequestAssignedPullRequestRequestedReviewersVariant1), "WebhookPullRequestAssignedPullRequestRequestedReviewersVariant1")]
+[JsonDerivedType(typeof(WebhookPullRequestAssignedPullRequestRequestedReviewersVariant2), "WebhookPullRequestAssignedPullRequestRequestedReviewersVariant2")]
+public abstract partial record WebhookPullRequestAssignedPullRequestRequestedReviewers;
+
 /// <summary>
 /// Groups of organization members that gives permissions on specified repositories.
 /// </summary>
@@ -89464,7 +90169,7 @@ public partial record WebhookPullRequestAutoMergeDisabledPullRequest
     public bool? Rebaseable { get; init; }
 
     [JsonPropertyName("requested_reviewers")]
-    public required IReadOnlyList<object> RequestedReviewers { get; init; }
+    public required IReadOnlyList<WebhookPullRequestAutoMergeDisabledPullRequestRequestedReviewers> RequestedReviewers { get; init; }
 
     [JsonPropertyName("requested_teams")]
     public required IReadOnlyList<WebhookPullRequestAutoMergeDisabledPullRequestRequestedTeams> RequestedTeams { get; init; }
@@ -91247,6 +91952,196 @@ public partial record WebhookPullRequestAutoMergeDisabledPullRequestMilestoneCre
 
 }
 
+public partial record WebhookPullRequestAutoMergeDisabledPullRequestRequestedReviewersVariant1
+{
+    [JsonPropertyName("avatar_url")]
+    public Uri? AvatarUrl { get; init; }
+
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    [JsonPropertyName("email")]
+    public string? Email { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public string? EventsUrl { get; init; }
+
+    [JsonPropertyName("followers_url")]
+    public Uri? FollowersUrl { get; init; }
+
+    [JsonPropertyName("following_url")]
+    public string? FollowingUrl { get; init; }
+
+    [JsonPropertyName("gists_url")]
+    public string? GistsUrl { get; init; }
+
+    [JsonPropertyName("gravatar_id")]
+    public string? GravatarId { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("login")]
+    public required string Login { get; init; }
+
+    [JsonPropertyName("name")]
+    public string? Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("organizations_url")]
+    public Uri? OrganizationsUrl { get; init; }
+
+    [JsonPropertyName("received_events_url")]
+    public Uri? ReceivedEventsUrl { get; init; }
+
+    [JsonPropertyName("repos_url")]
+    public Uri? ReposUrl { get; init; }
+
+    [JsonPropertyName("site_admin")]
+    public bool? SiteAdmin { get; init; }
+
+    [JsonPropertyName("starred_url")]
+    public string? StarredUrl { get; init; }
+
+    [JsonPropertyName("subscriptions_url")]
+    public Uri? SubscriptionsUrl { get; init; }
+
+    [JsonPropertyName("type")]
+    public WebhooksUserMannequinType? Type { get; init; }
+
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+    [JsonPropertyName("user_view_type")]
+    public string? UserViewType { get; init; }
+
+}
+
+/// <summary>
+/// Groups of organization members that gives permissions on specified repositories.
+/// </summary>
+public partial record WebhookPullRequestAutoMergeDisabledPullRequestRequestedReviewersVariant2
+{
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    /// <summary>
+    /// Description of the team
+    /// </summary>
+    [JsonPropertyName("description")]
+    public required string? Description { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public required Uri HtmlUrl { get; init; }
+
+    /// <summary>
+    /// Unique identifier of the team
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("members_url")]
+    public required string MembersUrl { get; init; }
+
+    /// <summary>
+    /// Name of the team
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    [JsonPropertyName("parent")]
+    public WebhookPullRequestAutoMergeDisabledPullRequestRequestedReviewersVariant2Parent? Parent { get; init; }
+
+    /// <summary>
+    /// Permission that the team will have for its repositories
+    /// </summary>
+    [JsonPropertyName("permission")]
+    public required string Permission { get; init; }
+
+    [JsonPropertyName("privacy")]
+    public required WebhooksTeamPrivacy Privacy { get; init; }
+
+    [JsonPropertyName("repositories_url")]
+    public required Uri RepositoriesUrl { get; init; }
+
+    [JsonPropertyName("slug")]
+    public required string Slug { get; init; }
+
+    /// <summary>
+    /// URL for the team
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+}
+
+public partial record WebhookPullRequestAutoMergeDisabledPullRequestRequestedReviewersVariant2Parent
+{
+    /// <summary>
+    /// Description of the team
+    /// </summary>
+    [JsonPropertyName("description")]
+    public required string? Description { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public required Uri HtmlUrl { get; init; }
+
+    /// <summary>
+    /// Unique identifier of the team
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("members_url")]
+    public required string MembersUrl { get; init; }
+
+    /// <summary>
+    /// Name of the team
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    /// <summary>
+    /// Permission that the team will have for its repositories
+    /// </summary>
+    [JsonPropertyName("permission")]
+    public required string Permission { get; init; }
+
+    [JsonPropertyName("privacy")]
+    public required WebhooksTeamPrivacy Privacy { get; init; }
+
+    [JsonPropertyName("repositories_url")]
+    public required Uri RepositoriesUrl { get; init; }
+
+    [JsonPropertyName("slug")]
+    public required string Slug { get; init; }
+
+    /// <summary>
+    /// URL for the team
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+}
+
+/// <remarks>
+/// Union of: WebhookPullRequestAutoMergeDisabledPullRequestRequestedReviewersVariant1 | WebhookPullRequestAutoMergeDisabledPullRequestRequestedReviewersVariant2
+/// </remarks>
+[JsonDerivedType(typeof(WebhookPullRequestAutoMergeDisabledPullRequestRequestedReviewersVariant1), "WebhookPullRequestAutoMergeDisabledPullRequestRequestedReviewersVariant1")]
+[JsonDerivedType(typeof(WebhookPullRequestAutoMergeDisabledPullRequestRequestedReviewersVariant2), "WebhookPullRequestAutoMergeDisabledPullRequestRequestedReviewersVariant2")]
+public abstract partial record WebhookPullRequestAutoMergeDisabledPullRequestRequestedReviewers;
+
 /// <summary>
 /// Groups of organization members that gives permissions on specified repositories.
 /// </summary>
@@ -91562,7 +92457,7 @@ public partial record WebhookPullRequestAutoMergeEnabledPullRequest
     public bool? Rebaseable { get; init; }
 
     [JsonPropertyName("requested_reviewers")]
-    public required IReadOnlyList<object> RequestedReviewers { get; init; }
+    public required IReadOnlyList<WebhookPullRequestAutoMergeEnabledPullRequestRequestedReviewers> RequestedReviewers { get; init; }
 
     [JsonPropertyName("requested_teams")]
     public required IReadOnlyList<WebhookPullRequestAutoMergeEnabledPullRequestRequestedTeams> RequestedTeams { get; init; }
@@ -93345,6 +94240,196 @@ public partial record WebhookPullRequestAutoMergeEnabledPullRequestMilestoneCrea
 
 }
 
+public partial record WebhookPullRequestAutoMergeEnabledPullRequestRequestedReviewersVariant1
+{
+    [JsonPropertyName("avatar_url")]
+    public Uri? AvatarUrl { get; init; }
+
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    [JsonPropertyName("email")]
+    public string? Email { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public string? EventsUrl { get; init; }
+
+    [JsonPropertyName("followers_url")]
+    public Uri? FollowersUrl { get; init; }
+
+    [JsonPropertyName("following_url")]
+    public string? FollowingUrl { get; init; }
+
+    [JsonPropertyName("gists_url")]
+    public string? GistsUrl { get; init; }
+
+    [JsonPropertyName("gravatar_id")]
+    public string? GravatarId { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("login")]
+    public required string Login { get; init; }
+
+    [JsonPropertyName("name")]
+    public string? Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("organizations_url")]
+    public Uri? OrganizationsUrl { get; init; }
+
+    [JsonPropertyName("received_events_url")]
+    public Uri? ReceivedEventsUrl { get; init; }
+
+    [JsonPropertyName("repos_url")]
+    public Uri? ReposUrl { get; init; }
+
+    [JsonPropertyName("site_admin")]
+    public bool? SiteAdmin { get; init; }
+
+    [JsonPropertyName("starred_url")]
+    public string? StarredUrl { get; init; }
+
+    [JsonPropertyName("subscriptions_url")]
+    public Uri? SubscriptionsUrl { get; init; }
+
+    [JsonPropertyName("type")]
+    public WebhooksUserMannequinType? Type { get; init; }
+
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+    [JsonPropertyName("user_view_type")]
+    public string? UserViewType { get; init; }
+
+}
+
+/// <summary>
+/// Groups of organization members that gives permissions on specified repositories.
+/// </summary>
+public partial record WebhookPullRequestAutoMergeEnabledPullRequestRequestedReviewersVariant2
+{
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    /// <summary>
+    /// Description of the team
+    /// </summary>
+    [JsonPropertyName("description")]
+    public required string? Description { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public required Uri HtmlUrl { get; init; }
+
+    /// <summary>
+    /// Unique identifier of the team
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("members_url")]
+    public required string MembersUrl { get; init; }
+
+    /// <summary>
+    /// Name of the team
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    [JsonPropertyName("parent")]
+    public WebhookPullRequestAutoMergeEnabledPullRequestRequestedReviewersVariant2Parent? Parent { get; init; }
+
+    /// <summary>
+    /// Permission that the team will have for its repositories
+    /// </summary>
+    [JsonPropertyName("permission")]
+    public required string Permission { get; init; }
+
+    [JsonPropertyName("privacy")]
+    public required WebhooksTeamPrivacy Privacy { get; init; }
+
+    [JsonPropertyName("repositories_url")]
+    public required Uri RepositoriesUrl { get; init; }
+
+    [JsonPropertyName("slug")]
+    public required string Slug { get; init; }
+
+    /// <summary>
+    /// URL for the team
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+}
+
+public partial record WebhookPullRequestAutoMergeEnabledPullRequestRequestedReviewersVariant2Parent
+{
+    /// <summary>
+    /// Description of the team
+    /// </summary>
+    [JsonPropertyName("description")]
+    public required string? Description { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public required Uri HtmlUrl { get; init; }
+
+    /// <summary>
+    /// Unique identifier of the team
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("members_url")]
+    public required string MembersUrl { get; init; }
+
+    /// <summary>
+    /// Name of the team
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    /// <summary>
+    /// Permission that the team will have for its repositories
+    /// </summary>
+    [JsonPropertyName("permission")]
+    public required string Permission { get; init; }
+
+    [JsonPropertyName("privacy")]
+    public required WebhooksTeamPrivacy Privacy { get; init; }
+
+    [JsonPropertyName("repositories_url")]
+    public required Uri RepositoriesUrl { get; init; }
+
+    [JsonPropertyName("slug")]
+    public required string Slug { get; init; }
+
+    /// <summary>
+    /// URL for the team
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+}
+
+/// <remarks>
+/// Union of: WebhookPullRequestAutoMergeEnabledPullRequestRequestedReviewersVariant1 | WebhookPullRequestAutoMergeEnabledPullRequestRequestedReviewersVariant2
+/// </remarks>
+[JsonDerivedType(typeof(WebhookPullRequestAutoMergeEnabledPullRequestRequestedReviewersVariant1), "WebhookPullRequestAutoMergeEnabledPullRequestRequestedReviewersVariant1")]
+[JsonDerivedType(typeof(WebhookPullRequestAutoMergeEnabledPullRequestRequestedReviewersVariant2), "WebhookPullRequestAutoMergeEnabledPullRequestRequestedReviewersVariant2")]
+public abstract partial record WebhookPullRequestAutoMergeEnabledPullRequestRequestedReviewers;
+
 /// <summary>
 /// Groups of organization members that gives permissions on specified repositories.
 /// </summary>
@@ -93660,7 +94745,7 @@ public partial record WebhookPullRequestDequeuedPullRequest
     public bool? Rebaseable { get; init; }
 
     [JsonPropertyName("requested_reviewers")]
-    public required IReadOnlyList<object> RequestedReviewers { get; init; }
+    public required IReadOnlyList<WebhookPullRequestDequeuedPullRequestRequestedReviewers> RequestedReviewers { get; init; }
 
     [JsonPropertyName("requested_teams")]
     public required IReadOnlyList<WebhookPullRequestDequeuedPullRequestRequestedTeams> RequestedTeams { get; init; }
@@ -95443,6 +96528,196 @@ public partial record WebhookPullRequestDequeuedPullRequestMilestoneCreator
 
 }
 
+public partial record WebhookPullRequestDequeuedPullRequestRequestedReviewersVariant1
+{
+    [JsonPropertyName("avatar_url")]
+    public Uri? AvatarUrl { get; init; }
+
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    [JsonPropertyName("email")]
+    public string? Email { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public string? EventsUrl { get; init; }
+
+    [JsonPropertyName("followers_url")]
+    public Uri? FollowersUrl { get; init; }
+
+    [JsonPropertyName("following_url")]
+    public string? FollowingUrl { get; init; }
+
+    [JsonPropertyName("gists_url")]
+    public string? GistsUrl { get; init; }
+
+    [JsonPropertyName("gravatar_id")]
+    public string? GravatarId { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("login")]
+    public required string Login { get; init; }
+
+    [JsonPropertyName("name")]
+    public string? Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("organizations_url")]
+    public Uri? OrganizationsUrl { get; init; }
+
+    [JsonPropertyName("received_events_url")]
+    public Uri? ReceivedEventsUrl { get; init; }
+
+    [JsonPropertyName("repos_url")]
+    public Uri? ReposUrl { get; init; }
+
+    [JsonPropertyName("site_admin")]
+    public bool? SiteAdmin { get; init; }
+
+    [JsonPropertyName("starred_url")]
+    public string? StarredUrl { get; init; }
+
+    [JsonPropertyName("subscriptions_url")]
+    public Uri? SubscriptionsUrl { get; init; }
+
+    [JsonPropertyName("type")]
+    public WebhooksUserType? Type { get; init; }
+
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+    [JsonPropertyName("user_view_type")]
+    public string? UserViewType { get; init; }
+
+}
+
+/// <summary>
+/// Groups of organization members that gives permissions on specified repositories.
+/// </summary>
+public partial record WebhookPullRequestDequeuedPullRequestRequestedReviewersVariant2
+{
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    /// <summary>
+    /// Description of the team
+    /// </summary>
+    [JsonPropertyName("description")]
+    public string? Description { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    /// <summary>
+    /// Unique identifier of the team
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("members_url")]
+    public string? MembersUrl { get; init; }
+
+    /// <summary>
+    /// Name of the team
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("parent")]
+    public WebhookPullRequestDequeuedPullRequestRequestedReviewersVariant2Parent? Parent { get; init; }
+
+    /// <summary>
+    /// Permission that the team will have for its repositories
+    /// </summary>
+    [JsonPropertyName("permission")]
+    public string? Permission { get; init; }
+
+    [JsonPropertyName("privacy")]
+    public WebhooksTeamPrivacy? Privacy { get; init; }
+
+    [JsonPropertyName("repositories_url")]
+    public Uri? RepositoriesUrl { get; init; }
+
+    [JsonPropertyName("slug")]
+    public string? Slug { get; init; }
+
+    /// <summary>
+    /// URL for the team
+    /// </summary>
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+}
+
+public partial record WebhookPullRequestDequeuedPullRequestRequestedReviewersVariant2Parent
+{
+    /// <summary>
+    /// Description of the team
+    /// </summary>
+    [JsonPropertyName("description")]
+    public required string? Description { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public required Uri HtmlUrl { get; init; }
+
+    /// <summary>
+    /// Unique identifier of the team
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("members_url")]
+    public required string MembersUrl { get; init; }
+
+    /// <summary>
+    /// Name of the team
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    /// <summary>
+    /// Permission that the team will have for its repositories
+    /// </summary>
+    [JsonPropertyName("permission")]
+    public required string Permission { get; init; }
+
+    [JsonPropertyName("privacy")]
+    public required WebhooksTeamPrivacy Privacy { get; init; }
+
+    [JsonPropertyName("repositories_url")]
+    public required Uri RepositoriesUrl { get; init; }
+
+    [JsonPropertyName("slug")]
+    public required string Slug { get; init; }
+
+    /// <summary>
+    /// URL for the team
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+}
+
+/// <remarks>
+/// Union of: WebhookPullRequestDequeuedPullRequestRequestedReviewersVariant1 | WebhookPullRequestDequeuedPullRequestRequestedReviewersVariant2
+/// </remarks>
+[JsonDerivedType(typeof(WebhookPullRequestDequeuedPullRequestRequestedReviewersVariant1), "WebhookPullRequestDequeuedPullRequestRequestedReviewersVariant1")]
+[JsonDerivedType(typeof(WebhookPullRequestDequeuedPullRequestRequestedReviewersVariant2), "WebhookPullRequestDequeuedPullRequestRequestedReviewersVariant2")]
+public abstract partial record WebhookPullRequestDequeuedPullRequestRequestedReviewers;
+
 /// <summary>
 /// Groups of organization members that gives permissions on specified repositories.
 /// </summary>
@@ -95818,7 +97093,7 @@ public partial record WebhookPullRequestEnqueuedPullRequest
     public bool? Rebaseable { get; init; }
 
     [JsonPropertyName("requested_reviewers")]
-    public required IReadOnlyList<object> RequestedReviewers { get; init; }
+    public required IReadOnlyList<WebhookPullRequestEnqueuedPullRequestRequestedReviewers> RequestedReviewers { get; init; }
 
     [JsonPropertyName("requested_teams")]
     public required IReadOnlyList<WebhookPullRequestEnqueuedPullRequestRequestedTeams> RequestedTeams { get; init; }
@@ -97601,6 +98876,196 @@ public partial record WebhookPullRequestEnqueuedPullRequestMilestoneCreator
 
 }
 
+public partial record WebhookPullRequestEnqueuedPullRequestRequestedReviewersVariant1
+{
+    [JsonPropertyName("avatar_url")]
+    public Uri? AvatarUrl { get; init; }
+
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    [JsonPropertyName("email")]
+    public string? Email { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public string? EventsUrl { get; init; }
+
+    [JsonPropertyName("followers_url")]
+    public Uri? FollowersUrl { get; init; }
+
+    [JsonPropertyName("following_url")]
+    public string? FollowingUrl { get; init; }
+
+    [JsonPropertyName("gists_url")]
+    public string? GistsUrl { get; init; }
+
+    [JsonPropertyName("gravatar_id")]
+    public string? GravatarId { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("login")]
+    public required string Login { get; init; }
+
+    [JsonPropertyName("name")]
+    public string? Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("organizations_url")]
+    public Uri? OrganizationsUrl { get; init; }
+
+    [JsonPropertyName("received_events_url")]
+    public Uri? ReceivedEventsUrl { get; init; }
+
+    [JsonPropertyName("repos_url")]
+    public Uri? ReposUrl { get; init; }
+
+    [JsonPropertyName("site_admin")]
+    public bool? SiteAdmin { get; init; }
+
+    [JsonPropertyName("starred_url")]
+    public string? StarredUrl { get; init; }
+
+    [JsonPropertyName("subscriptions_url")]
+    public Uri? SubscriptionsUrl { get; init; }
+
+    [JsonPropertyName("type")]
+    public WebhooksUserType? Type { get; init; }
+
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+    [JsonPropertyName("user_view_type")]
+    public string? UserViewType { get; init; }
+
+}
+
+/// <summary>
+/// Groups of organization members that gives permissions on specified repositories.
+/// </summary>
+public partial record WebhookPullRequestEnqueuedPullRequestRequestedReviewersVariant2
+{
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    /// <summary>
+    /// Description of the team
+    /// </summary>
+    [JsonPropertyName("description")]
+    public string? Description { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    /// <summary>
+    /// Unique identifier of the team
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("members_url")]
+    public string? MembersUrl { get; init; }
+
+    /// <summary>
+    /// Name of the team
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("parent")]
+    public WebhookPullRequestEnqueuedPullRequestRequestedReviewersVariant2Parent? Parent { get; init; }
+
+    /// <summary>
+    /// Permission that the team will have for its repositories
+    /// </summary>
+    [JsonPropertyName("permission")]
+    public string? Permission { get; init; }
+
+    [JsonPropertyName("privacy")]
+    public WebhooksTeamPrivacy? Privacy { get; init; }
+
+    [JsonPropertyName("repositories_url")]
+    public Uri? RepositoriesUrl { get; init; }
+
+    [JsonPropertyName("slug")]
+    public string? Slug { get; init; }
+
+    /// <summary>
+    /// URL for the team
+    /// </summary>
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+}
+
+public partial record WebhookPullRequestEnqueuedPullRequestRequestedReviewersVariant2Parent
+{
+    /// <summary>
+    /// Description of the team
+    /// </summary>
+    [JsonPropertyName("description")]
+    public required string? Description { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public required Uri HtmlUrl { get; init; }
+
+    /// <summary>
+    /// Unique identifier of the team
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("members_url")]
+    public required string MembersUrl { get; init; }
+
+    /// <summary>
+    /// Name of the team
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    /// <summary>
+    /// Permission that the team will have for its repositories
+    /// </summary>
+    [JsonPropertyName("permission")]
+    public required string Permission { get; init; }
+
+    [JsonPropertyName("privacy")]
+    public required WebhooksTeamPrivacy Privacy { get; init; }
+
+    [JsonPropertyName("repositories_url")]
+    public required Uri RepositoriesUrl { get; init; }
+
+    [JsonPropertyName("slug")]
+    public required string Slug { get; init; }
+
+    /// <summary>
+    /// URL for the team
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+}
+
+/// <remarks>
+/// Union of: WebhookPullRequestEnqueuedPullRequestRequestedReviewersVariant1 | WebhookPullRequestEnqueuedPullRequestRequestedReviewersVariant2
+/// </remarks>
+[JsonDerivedType(typeof(WebhookPullRequestEnqueuedPullRequestRequestedReviewersVariant1), "WebhookPullRequestEnqueuedPullRequestRequestedReviewersVariant1")]
+[JsonDerivedType(typeof(WebhookPullRequestEnqueuedPullRequestRequestedReviewersVariant2), "WebhookPullRequestEnqueuedPullRequestRequestedReviewersVariant2")]
+public abstract partial record WebhookPullRequestEnqueuedPullRequestRequestedReviewers;
+
 /// <summary>
 /// Groups of organization members that gives permissions on specified repositories.
 /// </summary>
@@ -97916,7 +99381,7 @@ public partial record WebhookPullRequestLabeledPullRequest
     public bool? Rebaseable { get; init; }
 
     [JsonPropertyName("requested_reviewers")]
-    public required IReadOnlyList<object> RequestedReviewers { get; init; }
+    public required IReadOnlyList<WebhookPullRequestLabeledPullRequestRequestedReviewers> RequestedReviewers { get; init; }
 
     [JsonPropertyName("requested_teams")]
     public required IReadOnlyList<WebhookPullRequestLabeledPullRequestRequestedTeams> RequestedTeams { get; init; }
@@ -99699,6 +101164,196 @@ public partial record WebhookPullRequestLabeledPullRequestMilestoneCreator
 
 }
 
+public partial record WebhookPullRequestLabeledPullRequestRequestedReviewersVariant1
+{
+    [JsonPropertyName("avatar_url")]
+    public Uri? AvatarUrl { get; init; }
+
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    [JsonPropertyName("email")]
+    public string? Email { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public string? EventsUrl { get; init; }
+
+    [JsonPropertyName("followers_url")]
+    public Uri? FollowersUrl { get; init; }
+
+    [JsonPropertyName("following_url")]
+    public string? FollowingUrl { get; init; }
+
+    [JsonPropertyName("gists_url")]
+    public string? GistsUrl { get; init; }
+
+    [JsonPropertyName("gravatar_id")]
+    public string? GravatarId { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("login")]
+    public required string Login { get; init; }
+
+    [JsonPropertyName("name")]
+    public string? Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("organizations_url")]
+    public Uri? OrganizationsUrl { get; init; }
+
+    [JsonPropertyName("received_events_url")]
+    public Uri? ReceivedEventsUrl { get; init; }
+
+    [JsonPropertyName("repos_url")]
+    public Uri? ReposUrl { get; init; }
+
+    [JsonPropertyName("site_admin")]
+    public bool? SiteAdmin { get; init; }
+
+    [JsonPropertyName("starred_url")]
+    public string? StarredUrl { get; init; }
+
+    [JsonPropertyName("subscriptions_url")]
+    public Uri? SubscriptionsUrl { get; init; }
+
+    [JsonPropertyName("type")]
+    public WebhooksUserMannequinType? Type { get; init; }
+
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+    [JsonPropertyName("user_view_type")]
+    public string? UserViewType { get; init; }
+
+}
+
+/// <summary>
+/// Groups of organization members that gives permissions on specified repositories.
+/// </summary>
+public partial record WebhookPullRequestLabeledPullRequestRequestedReviewersVariant2
+{
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    /// <summary>
+    /// Description of the team
+    /// </summary>
+    [JsonPropertyName("description")]
+    public required string? Description { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public required Uri HtmlUrl { get; init; }
+
+    /// <summary>
+    /// Unique identifier of the team
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("members_url")]
+    public required string MembersUrl { get; init; }
+
+    /// <summary>
+    /// Name of the team
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    [JsonPropertyName("parent")]
+    public WebhookPullRequestLabeledPullRequestRequestedReviewersVariant2Parent? Parent { get; init; }
+
+    /// <summary>
+    /// Permission that the team will have for its repositories
+    /// </summary>
+    [JsonPropertyName("permission")]
+    public required string Permission { get; init; }
+
+    [JsonPropertyName("privacy")]
+    public required WebhooksTeamPrivacy Privacy { get; init; }
+
+    [JsonPropertyName("repositories_url")]
+    public required Uri RepositoriesUrl { get; init; }
+
+    [JsonPropertyName("slug")]
+    public required string Slug { get; init; }
+
+    /// <summary>
+    /// URL for the team
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+}
+
+public partial record WebhookPullRequestLabeledPullRequestRequestedReviewersVariant2Parent
+{
+    /// <summary>
+    /// Description of the team
+    /// </summary>
+    [JsonPropertyName("description")]
+    public required string? Description { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public required Uri HtmlUrl { get; init; }
+
+    /// <summary>
+    /// Unique identifier of the team
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("members_url")]
+    public required string MembersUrl { get; init; }
+
+    /// <summary>
+    /// Name of the team
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    /// <summary>
+    /// Permission that the team will have for its repositories
+    /// </summary>
+    [JsonPropertyName("permission")]
+    public required string Permission { get; init; }
+
+    [JsonPropertyName("privacy")]
+    public required WebhooksTeamPrivacy Privacy { get; init; }
+
+    [JsonPropertyName("repositories_url")]
+    public required Uri RepositoriesUrl { get; init; }
+
+    [JsonPropertyName("slug")]
+    public required string Slug { get; init; }
+
+    /// <summary>
+    /// URL for the team
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+}
+
+/// <remarks>
+/// Union of: WebhookPullRequestLabeledPullRequestRequestedReviewersVariant1 | WebhookPullRequestLabeledPullRequestRequestedReviewersVariant2
+/// </remarks>
+[JsonDerivedType(typeof(WebhookPullRequestLabeledPullRequestRequestedReviewersVariant1), "WebhookPullRequestLabeledPullRequestRequestedReviewersVariant1")]
+[JsonDerivedType(typeof(WebhookPullRequestLabeledPullRequestRequestedReviewersVariant2), "WebhookPullRequestLabeledPullRequestRequestedReviewersVariant2")]
+public abstract partial record WebhookPullRequestLabeledPullRequestRequestedReviewers;
+
 /// <summary>
 /// Groups of organization members that gives permissions on specified repositories.
 /// </summary>
@@ -100014,7 +101669,7 @@ public partial record WebhookPullRequestLockedPullRequest
     public bool? Rebaseable { get; init; }
 
     [JsonPropertyName("requested_reviewers")]
-    public required IReadOnlyList<object> RequestedReviewers { get; init; }
+    public required IReadOnlyList<WebhookPullRequestLockedPullRequestRequestedReviewers> RequestedReviewers { get; init; }
 
     [JsonPropertyName("requested_teams")]
     public required IReadOnlyList<WebhookPullRequestLockedPullRequestRequestedTeams> RequestedTeams { get; init; }
@@ -101797,6 +103452,196 @@ public partial record WebhookPullRequestLockedPullRequestMilestoneCreator
 
 }
 
+public partial record WebhookPullRequestLockedPullRequestRequestedReviewersVariant1
+{
+    [JsonPropertyName("avatar_url")]
+    public Uri? AvatarUrl { get; init; }
+
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    [JsonPropertyName("email")]
+    public string? Email { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public string? EventsUrl { get; init; }
+
+    [JsonPropertyName("followers_url")]
+    public Uri? FollowersUrl { get; init; }
+
+    [JsonPropertyName("following_url")]
+    public string? FollowingUrl { get; init; }
+
+    [JsonPropertyName("gists_url")]
+    public string? GistsUrl { get; init; }
+
+    [JsonPropertyName("gravatar_id")]
+    public string? GravatarId { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("login")]
+    public required string Login { get; init; }
+
+    [JsonPropertyName("name")]
+    public string? Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("organizations_url")]
+    public Uri? OrganizationsUrl { get; init; }
+
+    [JsonPropertyName("received_events_url")]
+    public Uri? ReceivedEventsUrl { get; init; }
+
+    [JsonPropertyName("repos_url")]
+    public Uri? ReposUrl { get; init; }
+
+    [JsonPropertyName("site_admin")]
+    public bool? SiteAdmin { get; init; }
+
+    [JsonPropertyName("starred_url")]
+    public string? StarredUrl { get; init; }
+
+    [JsonPropertyName("subscriptions_url")]
+    public Uri? SubscriptionsUrl { get; init; }
+
+    [JsonPropertyName("type")]
+    public WebhooksUserMannequinType? Type { get; init; }
+
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+    [JsonPropertyName("user_view_type")]
+    public string? UserViewType { get; init; }
+
+}
+
+/// <summary>
+/// Groups of organization members that gives permissions on specified repositories.
+/// </summary>
+public partial record WebhookPullRequestLockedPullRequestRequestedReviewersVariant2
+{
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    /// <summary>
+    /// Description of the team
+    /// </summary>
+    [JsonPropertyName("description")]
+    public required string? Description { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public required Uri HtmlUrl { get; init; }
+
+    /// <summary>
+    /// Unique identifier of the team
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("members_url")]
+    public required string MembersUrl { get; init; }
+
+    /// <summary>
+    /// Name of the team
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    [JsonPropertyName("parent")]
+    public WebhookPullRequestLockedPullRequestRequestedReviewersVariant2Parent? Parent { get; init; }
+
+    /// <summary>
+    /// Permission that the team will have for its repositories
+    /// </summary>
+    [JsonPropertyName("permission")]
+    public required string Permission { get; init; }
+
+    [JsonPropertyName("privacy")]
+    public required WebhooksTeamPrivacy Privacy { get; init; }
+
+    [JsonPropertyName("repositories_url")]
+    public required Uri RepositoriesUrl { get; init; }
+
+    [JsonPropertyName("slug")]
+    public required string Slug { get; init; }
+
+    /// <summary>
+    /// URL for the team
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+}
+
+public partial record WebhookPullRequestLockedPullRequestRequestedReviewersVariant2Parent
+{
+    /// <summary>
+    /// Description of the team
+    /// </summary>
+    [JsonPropertyName("description")]
+    public required string? Description { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public required Uri HtmlUrl { get; init; }
+
+    /// <summary>
+    /// Unique identifier of the team
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("members_url")]
+    public required string MembersUrl { get; init; }
+
+    /// <summary>
+    /// Name of the team
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    /// <summary>
+    /// Permission that the team will have for its repositories
+    /// </summary>
+    [JsonPropertyName("permission")]
+    public required string Permission { get; init; }
+
+    [JsonPropertyName("privacy")]
+    public required WebhooksTeamPrivacy Privacy { get; init; }
+
+    [JsonPropertyName("repositories_url")]
+    public required Uri RepositoriesUrl { get; init; }
+
+    [JsonPropertyName("slug")]
+    public required string Slug { get; init; }
+
+    /// <summary>
+    /// URL for the team
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+}
+
+/// <remarks>
+/// Union of: WebhookPullRequestLockedPullRequestRequestedReviewersVariant1 | WebhookPullRequestLockedPullRequestRequestedReviewersVariant2
+/// </remarks>
+[JsonDerivedType(typeof(WebhookPullRequestLockedPullRequestRequestedReviewersVariant1), "WebhookPullRequestLockedPullRequestRequestedReviewersVariant1")]
+[JsonDerivedType(typeof(WebhookPullRequestLockedPullRequestRequestedReviewersVariant2), "WebhookPullRequestLockedPullRequestRequestedReviewersVariant2")]
+public abstract partial record WebhookPullRequestLockedPullRequestRequestedReviewers;
+
 /// <summary>
 /// Groups of organization members that gives permissions on specified repositories.
 /// </summary>
@@ -102362,7 +104207,7 @@ public partial record WebhookPullRequestReviewCommentCreatedPullRequest
     public required Uri PatchUrl { get; init; }
 
     [JsonPropertyName("requested_reviewers")]
-    public required IReadOnlyList<object> RequestedReviewers { get; init; }
+    public required IReadOnlyList<WebhookPullRequestReviewCommentCreatedPullRequestRequestedReviewers> RequestedReviewers { get; init; }
 
     [JsonPropertyName("requested_teams")]
     public required IReadOnlyList<WebhookPullRequestReviewCommentCreatedPullRequestRequestedTeams> RequestedTeams { get; init; }
@@ -104066,6 +105911,196 @@ public partial record WebhookPullRequestReviewCommentCreatedPullRequestMilestone
 
 }
 
+public partial record WebhookPullRequestReviewCommentCreatedPullRequestRequestedReviewersVariant1
+{
+    [JsonPropertyName("avatar_url")]
+    public Uri? AvatarUrl { get; init; }
+
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    [JsonPropertyName("email")]
+    public string? Email { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public string? EventsUrl { get; init; }
+
+    [JsonPropertyName("followers_url")]
+    public Uri? FollowersUrl { get; init; }
+
+    [JsonPropertyName("following_url")]
+    public string? FollowingUrl { get; init; }
+
+    [JsonPropertyName("gists_url")]
+    public string? GistsUrl { get; init; }
+
+    [JsonPropertyName("gravatar_id")]
+    public string? GravatarId { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("login")]
+    public required string Login { get; init; }
+
+    [JsonPropertyName("name")]
+    public string? Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("organizations_url")]
+    public Uri? OrganizationsUrl { get; init; }
+
+    [JsonPropertyName("received_events_url")]
+    public Uri? ReceivedEventsUrl { get; init; }
+
+    [JsonPropertyName("repos_url")]
+    public Uri? ReposUrl { get; init; }
+
+    [JsonPropertyName("site_admin")]
+    public bool? SiteAdmin { get; init; }
+
+    [JsonPropertyName("starred_url")]
+    public string? StarredUrl { get; init; }
+
+    [JsonPropertyName("subscriptions_url")]
+    public Uri? SubscriptionsUrl { get; init; }
+
+    [JsonPropertyName("type")]
+    public WebhooksUserMannequinType? Type { get; init; }
+
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+    [JsonPropertyName("user_view_type")]
+    public string? UserViewType { get; init; }
+
+}
+
+/// <summary>
+/// Groups of organization members that gives permissions on specified repositories.
+/// </summary>
+public partial record WebhookPullRequestReviewCommentCreatedPullRequestRequestedReviewersVariant2
+{
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    /// <summary>
+    /// Description of the team
+    /// </summary>
+    [JsonPropertyName("description")]
+    public required string? Description { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public required Uri HtmlUrl { get; init; }
+
+    /// <summary>
+    /// Unique identifier of the team
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("members_url")]
+    public required string MembersUrl { get; init; }
+
+    /// <summary>
+    /// Name of the team
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    [JsonPropertyName("parent")]
+    public WebhookPullRequestReviewCommentCreatedPullRequestRequestedReviewersVariant2Parent? Parent { get; init; }
+
+    /// <summary>
+    /// Permission that the team will have for its repositories
+    /// </summary>
+    [JsonPropertyName("permission")]
+    public required string Permission { get; init; }
+
+    [JsonPropertyName("privacy")]
+    public required WebhooksTeamPrivacy Privacy { get; init; }
+
+    [JsonPropertyName("repositories_url")]
+    public required Uri RepositoriesUrl { get; init; }
+
+    [JsonPropertyName("slug")]
+    public required string Slug { get; init; }
+
+    /// <summary>
+    /// URL for the team
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewCommentCreatedPullRequestRequestedReviewersVariant2Parent
+{
+    /// <summary>
+    /// Description of the team
+    /// </summary>
+    [JsonPropertyName("description")]
+    public required string? Description { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public required Uri HtmlUrl { get; init; }
+
+    /// <summary>
+    /// Unique identifier of the team
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("members_url")]
+    public required string MembersUrl { get; init; }
+
+    /// <summary>
+    /// Name of the team
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    /// <summary>
+    /// Permission that the team will have for its repositories
+    /// </summary>
+    [JsonPropertyName("permission")]
+    public required string Permission { get; init; }
+
+    [JsonPropertyName("privacy")]
+    public required WebhooksTeamPrivacy Privacy { get; init; }
+
+    [JsonPropertyName("repositories_url")]
+    public required Uri RepositoriesUrl { get; init; }
+
+    [JsonPropertyName("slug")]
+    public required string Slug { get; init; }
+
+    /// <summary>
+    /// URL for the team
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+}
+
+/// <remarks>
+/// Union of: WebhookPullRequestReviewCommentCreatedPullRequestRequestedReviewersVariant1 | WebhookPullRequestReviewCommentCreatedPullRequestRequestedReviewersVariant2
+/// </remarks>
+[JsonDerivedType(typeof(WebhookPullRequestReviewCommentCreatedPullRequestRequestedReviewersVariant1), "WebhookPullRequestReviewCommentCreatedPullRequestRequestedReviewersVariant1")]
+[JsonDerivedType(typeof(WebhookPullRequestReviewCommentCreatedPullRequestRequestedReviewersVariant2), "WebhookPullRequestReviewCommentCreatedPullRequestRequestedReviewersVariant2")]
+public abstract partial record WebhookPullRequestReviewCommentCreatedPullRequestRequestedReviewers;
+
 /// <summary>
 /// Groups of organization members that gives permissions on specified repositories.
 /// </summary>
@@ -104339,7 +106374,7 @@ public partial record WebhookPullRequestReviewCommentDeletedPullRequest
     public required Uri PatchUrl { get; init; }
 
     [JsonPropertyName("requested_reviewers")]
-    public required IReadOnlyList<object> RequestedReviewers { get; init; }
+    public required IReadOnlyList<WebhookPullRequestReviewCommentDeletedPullRequestRequestedReviewers> RequestedReviewers { get; init; }
 
     [JsonPropertyName("requested_teams")]
     public required IReadOnlyList<WebhookPullRequestReviewCommentDeletedPullRequestRequestedTeams> RequestedTeams { get; init; }
@@ -106043,6 +108078,196 @@ public partial record WebhookPullRequestReviewCommentDeletedPullRequestMilestone
 
 }
 
+public partial record WebhookPullRequestReviewCommentDeletedPullRequestRequestedReviewersVariant1
+{
+    [JsonPropertyName("avatar_url")]
+    public Uri? AvatarUrl { get; init; }
+
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    [JsonPropertyName("email")]
+    public string? Email { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public string? EventsUrl { get; init; }
+
+    [JsonPropertyName("followers_url")]
+    public Uri? FollowersUrl { get; init; }
+
+    [JsonPropertyName("following_url")]
+    public string? FollowingUrl { get; init; }
+
+    [JsonPropertyName("gists_url")]
+    public string? GistsUrl { get; init; }
+
+    [JsonPropertyName("gravatar_id")]
+    public string? GravatarId { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("login")]
+    public required string Login { get; init; }
+
+    [JsonPropertyName("name")]
+    public string? Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("organizations_url")]
+    public Uri? OrganizationsUrl { get; init; }
+
+    [JsonPropertyName("received_events_url")]
+    public Uri? ReceivedEventsUrl { get; init; }
+
+    [JsonPropertyName("repos_url")]
+    public Uri? ReposUrl { get; init; }
+
+    [JsonPropertyName("site_admin")]
+    public bool? SiteAdmin { get; init; }
+
+    [JsonPropertyName("starred_url")]
+    public string? StarredUrl { get; init; }
+
+    [JsonPropertyName("subscriptions_url")]
+    public Uri? SubscriptionsUrl { get; init; }
+
+    [JsonPropertyName("type")]
+    public WebhooksUserType? Type { get; init; }
+
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+    [JsonPropertyName("user_view_type")]
+    public string? UserViewType { get; init; }
+
+}
+
+/// <summary>
+/// Groups of organization members that gives permissions on specified repositories.
+/// </summary>
+public partial record WebhookPullRequestReviewCommentDeletedPullRequestRequestedReviewersVariant2
+{
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    /// <summary>
+    /// Description of the team
+    /// </summary>
+    [JsonPropertyName("description")]
+    public string? Description { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    /// <summary>
+    /// Unique identifier of the team
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("members_url")]
+    public string? MembersUrl { get; init; }
+
+    /// <summary>
+    /// Name of the team
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("parent")]
+    public WebhookPullRequestReviewCommentDeletedPullRequestRequestedReviewersVariant2Parent? Parent { get; init; }
+
+    /// <summary>
+    /// Permission that the team will have for its repositories
+    /// </summary>
+    [JsonPropertyName("permission")]
+    public string? Permission { get; init; }
+
+    [JsonPropertyName("privacy")]
+    public WebhooksTeamPrivacy? Privacy { get; init; }
+
+    [JsonPropertyName("repositories_url")]
+    public Uri? RepositoriesUrl { get; init; }
+
+    [JsonPropertyName("slug")]
+    public string? Slug { get; init; }
+
+    /// <summary>
+    /// URL for the team
+    /// </summary>
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewCommentDeletedPullRequestRequestedReviewersVariant2Parent
+{
+    /// <summary>
+    /// Description of the team
+    /// </summary>
+    [JsonPropertyName("description")]
+    public required string? Description { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public required Uri HtmlUrl { get; init; }
+
+    /// <summary>
+    /// Unique identifier of the team
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("members_url")]
+    public required string MembersUrl { get; init; }
+
+    /// <summary>
+    /// Name of the team
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    /// <summary>
+    /// Permission that the team will have for its repositories
+    /// </summary>
+    [JsonPropertyName("permission")]
+    public required string Permission { get; init; }
+
+    [JsonPropertyName("privacy")]
+    public required WebhooksTeamPrivacy Privacy { get; init; }
+
+    [JsonPropertyName("repositories_url")]
+    public required Uri RepositoriesUrl { get; init; }
+
+    [JsonPropertyName("slug")]
+    public required string Slug { get; init; }
+
+    /// <summary>
+    /// URL for the team
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+}
+
+/// <remarks>
+/// Union of: WebhookPullRequestReviewCommentDeletedPullRequestRequestedReviewersVariant1 | WebhookPullRequestReviewCommentDeletedPullRequestRequestedReviewersVariant2
+/// </remarks>
+[JsonDerivedType(typeof(WebhookPullRequestReviewCommentDeletedPullRequestRequestedReviewersVariant1), "WebhookPullRequestReviewCommentDeletedPullRequestRequestedReviewersVariant1")]
+[JsonDerivedType(typeof(WebhookPullRequestReviewCommentDeletedPullRequestRequestedReviewersVariant2), "WebhookPullRequestReviewCommentDeletedPullRequestRequestedReviewersVariant2")]
+public abstract partial record WebhookPullRequestReviewCommentDeletedPullRequestRequestedReviewers;
+
 /// <summary>
 /// Groups of organization members that gives permissions on specified repositories.
 /// </summary>
@@ -106316,7 +108541,7 @@ public partial record WebhookPullRequestReviewCommentEditedPullRequest
     public required Uri PatchUrl { get; init; }
 
     [JsonPropertyName("requested_reviewers")]
-    public required IReadOnlyList<object> RequestedReviewers { get; init; }
+    public required IReadOnlyList<WebhookPullRequestReviewCommentEditedPullRequestRequestedReviewers> RequestedReviewers { get; init; }
 
     [JsonPropertyName("requested_teams")]
     public required IReadOnlyList<WebhookPullRequestReviewCommentEditedPullRequestRequestedTeams> RequestedTeams { get; init; }
@@ -108023,6 +110248,196 @@ public partial record WebhookPullRequestReviewCommentEditedPullRequestMilestoneC
 
 }
 
+public partial record WebhookPullRequestReviewCommentEditedPullRequestRequestedReviewersVariant1
+{
+    [JsonPropertyName("avatar_url")]
+    public Uri? AvatarUrl { get; init; }
+
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    [JsonPropertyName("email")]
+    public string? Email { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public string? EventsUrl { get; init; }
+
+    [JsonPropertyName("followers_url")]
+    public Uri? FollowersUrl { get; init; }
+
+    [JsonPropertyName("following_url")]
+    public string? FollowingUrl { get; init; }
+
+    [JsonPropertyName("gists_url")]
+    public string? GistsUrl { get; init; }
+
+    [JsonPropertyName("gravatar_id")]
+    public string? GravatarId { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("login")]
+    public required string Login { get; init; }
+
+    [JsonPropertyName("name")]
+    public string? Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("organizations_url")]
+    public Uri? OrganizationsUrl { get; init; }
+
+    [JsonPropertyName("received_events_url")]
+    public Uri? ReceivedEventsUrl { get; init; }
+
+    [JsonPropertyName("repos_url")]
+    public Uri? ReposUrl { get; init; }
+
+    [JsonPropertyName("site_admin")]
+    public bool? SiteAdmin { get; init; }
+
+    [JsonPropertyName("starred_url")]
+    public string? StarredUrl { get; init; }
+
+    [JsonPropertyName("subscriptions_url")]
+    public Uri? SubscriptionsUrl { get; init; }
+
+    [JsonPropertyName("type")]
+    public WebhooksUserType? Type { get; init; }
+
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+    [JsonPropertyName("user_view_type")]
+    public string? UserViewType { get; init; }
+
+}
+
+/// <summary>
+/// Groups of organization members that gives permissions on specified repositories.
+/// </summary>
+public partial record WebhookPullRequestReviewCommentEditedPullRequestRequestedReviewersVariant2
+{
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    /// <summary>
+    /// Description of the team
+    /// </summary>
+    [JsonPropertyName("description")]
+    public string? Description { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    /// <summary>
+    /// Unique identifier of the team
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("members_url")]
+    public string? MembersUrl { get; init; }
+
+    /// <summary>
+    /// Name of the team
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("parent")]
+    public WebhookPullRequestReviewCommentEditedPullRequestRequestedReviewersVariant2Parent? Parent { get; init; }
+
+    /// <summary>
+    /// Permission that the team will have for its repositories
+    /// </summary>
+    [JsonPropertyName("permission")]
+    public string? Permission { get; init; }
+
+    [JsonPropertyName("privacy")]
+    public WebhooksTeamPrivacy? Privacy { get; init; }
+
+    [JsonPropertyName("repositories_url")]
+    public Uri? RepositoriesUrl { get; init; }
+
+    [JsonPropertyName("slug")]
+    public string? Slug { get; init; }
+
+    /// <summary>
+    /// URL for the team
+    /// </summary>
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewCommentEditedPullRequestRequestedReviewersVariant2Parent
+{
+    /// <summary>
+    /// Description of the team
+    /// </summary>
+    [JsonPropertyName("description")]
+    public required string? Description { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public required Uri HtmlUrl { get; init; }
+
+    /// <summary>
+    /// Unique identifier of the team
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("members_url")]
+    public required string MembersUrl { get; init; }
+
+    /// <summary>
+    /// Name of the team
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    /// <summary>
+    /// Permission that the team will have for its repositories
+    /// </summary>
+    [JsonPropertyName("permission")]
+    public required string Permission { get; init; }
+
+    [JsonPropertyName("privacy")]
+    public required WebhooksTeamPrivacy Privacy { get; init; }
+
+    [JsonPropertyName("repositories_url")]
+    public required Uri RepositoriesUrl { get; init; }
+
+    [JsonPropertyName("slug")]
+    public required string Slug { get; init; }
+
+    /// <summary>
+    /// URL for the team
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+}
+
+/// <remarks>
+/// Union of: WebhookPullRequestReviewCommentEditedPullRequestRequestedReviewersVariant1 | WebhookPullRequestReviewCommentEditedPullRequestRequestedReviewersVariant2
+/// </remarks>
+[JsonDerivedType(typeof(WebhookPullRequestReviewCommentEditedPullRequestRequestedReviewersVariant1), "WebhookPullRequestReviewCommentEditedPullRequestRequestedReviewersVariant1")]
+[JsonDerivedType(typeof(WebhookPullRequestReviewCommentEditedPullRequestRequestedReviewersVariant2), "WebhookPullRequestReviewCommentEditedPullRequestRequestedReviewersVariant2")]
+public abstract partial record WebhookPullRequestReviewCommentEditedPullRequestRequestedReviewers;
+
 /// <summary>
 /// Groups of organization members that gives permissions on specified repositories.
 /// </summary>
@@ -108296,7 +110711,7 @@ public partial record WebhookPullRequestReviewDismissedPullRequest
     public required Uri PatchUrl { get; init; }
 
     [JsonPropertyName("requested_reviewers")]
-    public required IReadOnlyList<object> RequestedReviewers { get; init; }
+    public required IReadOnlyList<WebhookPullRequestReviewDismissedPullRequestRequestedReviewers> RequestedReviewers { get; init; }
 
     [JsonPropertyName("requested_teams")]
     public required IReadOnlyList<WebhookPullRequestReviewDismissedPullRequestRequestedTeams> RequestedTeams { get; init; }
@@ -110000,6 +112415,196 @@ public partial record WebhookPullRequestReviewDismissedPullRequestMilestoneCreat
 
 }
 
+public partial record WebhookPullRequestReviewDismissedPullRequestRequestedReviewersVariant1
+{
+    [JsonPropertyName("avatar_url")]
+    public Uri? AvatarUrl { get; init; }
+
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    [JsonPropertyName("email")]
+    public string? Email { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public string? EventsUrl { get; init; }
+
+    [JsonPropertyName("followers_url")]
+    public Uri? FollowersUrl { get; init; }
+
+    [JsonPropertyName("following_url")]
+    public string? FollowingUrl { get; init; }
+
+    [JsonPropertyName("gists_url")]
+    public string? GistsUrl { get; init; }
+
+    [JsonPropertyName("gravatar_id")]
+    public string? GravatarId { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("login")]
+    public required string Login { get; init; }
+
+    [JsonPropertyName("name")]
+    public string? Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("organizations_url")]
+    public Uri? OrganizationsUrl { get; init; }
+
+    [JsonPropertyName("received_events_url")]
+    public Uri? ReceivedEventsUrl { get; init; }
+
+    [JsonPropertyName("repos_url")]
+    public Uri? ReposUrl { get; init; }
+
+    [JsonPropertyName("site_admin")]
+    public bool? SiteAdmin { get; init; }
+
+    [JsonPropertyName("starred_url")]
+    public string? StarredUrl { get; init; }
+
+    [JsonPropertyName("subscriptions_url")]
+    public Uri? SubscriptionsUrl { get; init; }
+
+    [JsonPropertyName("type")]
+    public WebhooksUserMannequinType? Type { get; init; }
+
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+    [JsonPropertyName("user_view_type")]
+    public string? UserViewType { get; init; }
+
+}
+
+/// <summary>
+/// Groups of organization members that gives permissions on specified repositories.
+/// </summary>
+public partial record WebhookPullRequestReviewDismissedPullRequestRequestedReviewersVariant2
+{
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    /// <summary>
+    /// Description of the team
+    /// </summary>
+    [JsonPropertyName("description")]
+    public required string? Description { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public required Uri HtmlUrl { get; init; }
+
+    /// <summary>
+    /// Unique identifier of the team
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("members_url")]
+    public required string MembersUrl { get; init; }
+
+    /// <summary>
+    /// Name of the team
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    [JsonPropertyName("parent")]
+    public WebhookPullRequestReviewDismissedPullRequestRequestedReviewersVariant2Parent? Parent { get; init; }
+
+    /// <summary>
+    /// Permission that the team will have for its repositories
+    /// </summary>
+    [JsonPropertyName("permission")]
+    public required string Permission { get; init; }
+
+    [JsonPropertyName("privacy")]
+    public required WebhooksTeamPrivacy Privacy { get; init; }
+
+    [JsonPropertyName("repositories_url")]
+    public required Uri RepositoriesUrl { get; init; }
+
+    [JsonPropertyName("slug")]
+    public required string Slug { get; init; }
+
+    /// <summary>
+    /// URL for the team
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewDismissedPullRequestRequestedReviewersVariant2Parent
+{
+    /// <summary>
+    /// Description of the team
+    /// </summary>
+    [JsonPropertyName("description")]
+    public required string? Description { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public required Uri HtmlUrl { get; init; }
+
+    /// <summary>
+    /// Unique identifier of the team
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("members_url")]
+    public required string MembersUrl { get; init; }
+
+    /// <summary>
+    /// Name of the team
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    /// <summary>
+    /// Permission that the team will have for its repositories
+    /// </summary>
+    [JsonPropertyName("permission")]
+    public required string Permission { get; init; }
+
+    [JsonPropertyName("privacy")]
+    public required WebhooksTeamPrivacy Privacy { get; init; }
+
+    [JsonPropertyName("repositories_url")]
+    public required Uri RepositoriesUrl { get; init; }
+
+    [JsonPropertyName("slug")]
+    public required string Slug { get; init; }
+
+    /// <summary>
+    /// URL for the team
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+}
+
+/// <remarks>
+/// Union of: WebhookPullRequestReviewDismissedPullRequestRequestedReviewersVariant1 | WebhookPullRequestReviewDismissedPullRequestRequestedReviewersVariant2
+/// </remarks>
+[JsonDerivedType(typeof(WebhookPullRequestReviewDismissedPullRequestRequestedReviewersVariant1), "WebhookPullRequestReviewDismissedPullRequestRequestedReviewersVariant1")]
+[JsonDerivedType(typeof(WebhookPullRequestReviewDismissedPullRequestRequestedReviewersVariant2), "WebhookPullRequestReviewDismissedPullRequestRequestedReviewersVariant2")]
+public abstract partial record WebhookPullRequestReviewDismissedPullRequestRequestedReviewers;
+
 /// <summary>
 /// Groups of organization members that gives permissions on specified repositories.
 /// </summary>
@@ -110439,7 +113044,7 @@ public partial record WebhookPullRequestReviewEditedPullRequest
     public required Uri PatchUrl { get; init; }
 
     [JsonPropertyName("requested_reviewers")]
-    public required IReadOnlyList<object> RequestedReviewers { get; init; }
+    public required IReadOnlyList<WebhookPullRequestReviewEditedPullRequestRequestedReviewers> RequestedReviewers { get; init; }
 
     [JsonPropertyName("requested_teams")]
     public required IReadOnlyList<WebhookPullRequestReviewEditedPullRequestRequestedTeams> RequestedTeams { get; init; }
@@ -112001,6 +114606,196 @@ public partial record WebhookPullRequestReviewEditedPullRequestMilestoneCreator
 
 }
 
+public partial record WebhookPullRequestReviewEditedPullRequestRequestedReviewersVariant1
+{
+    [JsonPropertyName("avatar_url")]
+    public Uri? AvatarUrl { get; init; }
+
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    [JsonPropertyName("email")]
+    public string? Email { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public string? EventsUrl { get; init; }
+
+    [JsonPropertyName("followers_url")]
+    public Uri? FollowersUrl { get; init; }
+
+    [JsonPropertyName("following_url")]
+    public string? FollowingUrl { get; init; }
+
+    [JsonPropertyName("gists_url")]
+    public string? GistsUrl { get; init; }
+
+    [JsonPropertyName("gravatar_id")]
+    public string? GravatarId { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("login")]
+    public required string Login { get; init; }
+
+    [JsonPropertyName("name")]
+    public string? Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("organizations_url")]
+    public Uri? OrganizationsUrl { get; init; }
+
+    [JsonPropertyName("received_events_url")]
+    public Uri? ReceivedEventsUrl { get; init; }
+
+    [JsonPropertyName("repos_url")]
+    public Uri? ReposUrl { get; init; }
+
+    [JsonPropertyName("site_admin")]
+    public bool? SiteAdmin { get; init; }
+
+    [JsonPropertyName("starred_url")]
+    public string? StarredUrl { get; init; }
+
+    [JsonPropertyName("subscriptions_url")]
+    public Uri? SubscriptionsUrl { get; init; }
+
+    [JsonPropertyName("type")]
+    public WebhooksUserMannequinType? Type { get; init; }
+
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+    [JsonPropertyName("user_view_type")]
+    public string? UserViewType { get; init; }
+
+}
+
+/// <summary>
+/// Groups of organization members that gives permissions on specified repositories.
+/// </summary>
+public partial record WebhookPullRequestReviewEditedPullRequestRequestedReviewersVariant2
+{
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    /// <summary>
+    /// Description of the team
+    /// </summary>
+    [JsonPropertyName("description")]
+    public required string? Description { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public required Uri HtmlUrl { get; init; }
+
+    /// <summary>
+    /// Unique identifier of the team
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("members_url")]
+    public required string MembersUrl { get; init; }
+
+    /// <summary>
+    /// Name of the team
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    [JsonPropertyName("parent")]
+    public WebhookPullRequestReviewEditedPullRequestRequestedReviewersVariant2Parent? Parent { get; init; }
+
+    /// <summary>
+    /// Permission that the team will have for its repositories
+    /// </summary>
+    [JsonPropertyName("permission")]
+    public required string Permission { get; init; }
+
+    [JsonPropertyName("privacy")]
+    public required WebhooksTeamPrivacy Privacy { get; init; }
+
+    [JsonPropertyName("repositories_url")]
+    public required Uri RepositoriesUrl { get; init; }
+
+    [JsonPropertyName("slug")]
+    public required string Slug { get; init; }
+
+    /// <summary>
+    /// URL for the team
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewEditedPullRequestRequestedReviewersVariant2Parent
+{
+    /// <summary>
+    /// Description of the team
+    /// </summary>
+    [JsonPropertyName("description")]
+    public required string? Description { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public required Uri HtmlUrl { get; init; }
+
+    /// <summary>
+    /// Unique identifier of the team
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("members_url")]
+    public required string MembersUrl { get; init; }
+
+    /// <summary>
+    /// Name of the team
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    /// <summary>
+    /// Permission that the team will have for its repositories
+    /// </summary>
+    [JsonPropertyName("permission")]
+    public required string Permission { get; init; }
+
+    [JsonPropertyName("privacy")]
+    public required WebhooksTeamPrivacy Privacy { get; init; }
+
+    [JsonPropertyName("repositories_url")]
+    public required Uri RepositoriesUrl { get; init; }
+
+    [JsonPropertyName("slug")]
+    public required string Slug { get; init; }
+
+    /// <summary>
+    /// URL for the team
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+}
+
+/// <remarks>
+/// Union of: WebhookPullRequestReviewEditedPullRequestRequestedReviewersVariant1 | WebhookPullRequestReviewEditedPullRequestRequestedReviewersVariant2
+/// </remarks>
+[JsonDerivedType(typeof(WebhookPullRequestReviewEditedPullRequestRequestedReviewersVariant1), "WebhookPullRequestReviewEditedPullRequestRequestedReviewersVariant1")]
+[JsonDerivedType(typeof(WebhookPullRequestReviewEditedPullRequestRequestedReviewersVariant2), "WebhookPullRequestReviewEditedPullRequestRequestedReviewersVariant2")]
+public abstract partial record WebhookPullRequestReviewEditedPullRequestRequestedReviewers;
+
 /// <summary>
 /// Groups of organization members that gives permissions on specified repositories.
 /// </summary>
@@ -112184,6 +114979,9755 @@ public partial record WebhookPullRequestReviewEditedPullRequestUser
 
 }
 
+public partial record WebhookPullRequestReviewRequestRemovedVariant1
+{
+    [JsonPropertyName("action")]
+    public required WebhookPullRequestReviewRequestRemovedVariant1Action Action { get; init; }
+
+    /// <summary>
+    /// An enterprise on GitHub. Webhook payloads contain the `enterprise` property when the webhook is configured
+    /// on an enterprise account or an organization that's part of an enterprise account. For more information,
+    /// see "[About enterprise accounts](https://docs.github.com/admin/overview/about-enterprise-accounts)."
+    /// </summary>
+    [JsonPropertyName("enterprise")]
+    public EnterpriseWebhooks? Enterprise { get; init; }
+
+    /// <summary>
+    /// The GitHub App installation. Webhook payloads contain the `installation` property when the event is configured
+    /// for and sent to a GitHub App. For more information,
+    /// see "[Using webhooks with GitHub Apps](https://docs.github.com/apps/creating-github-apps/registering-a-github-app/using-webhooks-with-github-apps)."
+    /// </summary>
+    [JsonPropertyName("installation")]
+    public SimpleInstallation? Installation { get; init; }
+
+    /// <summary>
+    /// The pull request number.
+    /// </summary>
+    [JsonPropertyName("number")]
+    public required int Number { get; init; }
+
+    /// <summary>
+    /// A GitHub organization. Webhook payloads contain the `organization` property when the webhook is configured for an
+    /// organization, or when the event occurs from activity in a repository owned by an organization.
+    /// </summary>
+    [JsonPropertyName("organization")]
+    public OrganizationSimpleWebhooks? Organization { get; init; }
+
+    [JsonPropertyName("pull_request")]
+    public required WebhookPullRequestReviewRequestRemovedVariant1PullRequest PullRequest { get; init; }
+
+    /// <summary>
+    /// The repository on GitHub where the event occurred. Webhook payloads contain the `repository` property
+    /// when the event occurs from activity in a repository.
+    /// </summary>
+    [JsonPropertyName("repository")]
+    public required RepositoryWebhooks Repository { get; init; }
+
+    [JsonPropertyName("requested_reviewer")]
+    public required WebhookPullRequestReviewRequestRemovedVariant1RequestedReviewer? RequestedReviewer { get; init; }
+
+    /// <summary>
+    /// A GitHub user.
+    /// </summary>
+    [JsonPropertyName("sender")]
+    public required SimpleUser Sender { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestRemovedVariant1PullRequest
+{
+    [JsonPropertyName("_links")]
+    public required WebhookPullRequestReviewRequestRemovedVariant1PullRequestLinks Links { get; init; }
+
+    [JsonPropertyName("active_lock_reason")]
+    public required ActiveLockReason ActiveLockReason { get; init; }
+
+    [JsonPropertyName("additions")]
+    public int? Additions { get; init; }
+
+    [JsonPropertyName("assignee")]
+    public required WebhookPullRequestReviewRequestRemovedVariant1PullRequestAssignee? Assignee { get; init; }
+
+    [JsonPropertyName("assignees")]
+    public required IReadOnlyList<WebhookPullRequestReviewRequestRemovedVariant1PullRequestAssignees?> Assignees { get; init; }
+
+    /// <summary>
+    /// How the author is associated with the repository.
+    /// </summary>
+    [JsonPropertyName("author_association")]
+    public required AuthorAssociation2 AuthorAssociation { get; init; }
+
+    /// <summary>
+    /// The status of auto merging a pull request.
+    /// </summary>
+    [JsonPropertyName("auto_merge")]
+    public required WebhookPullRequestReviewRequestRemovedVariant1PullRequestAutoMerge? AutoMerge { get; init; }
+
+    [JsonPropertyName("base")]
+    public required WebhookPullRequestReviewRequestRemovedVariant1PullRequestBase Base { get; init; }
+
+    [JsonPropertyName("body")]
+    public required string? Body { get; init; }
+
+    [JsonPropertyName("changed_files")]
+    public int? ChangedFiles { get; init; }
+
+    [JsonPropertyName("closed_at")]
+    public required DateTimeOffset? ClosedAt { get; init; }
+
+    [JsonPropertyName("comments")]
+    public int? Comments { get; init; }
+
+    [JsonPropertyName("comments_url")]
+    public required Uri CommentsUrl { get; init; }
+
+    [JsonPropertyName("commits")]
+    public int? Commits { get; init; }
+
+    [JsonPropertyName("commits_url")]
+    public required Uri CommitsUrl { get; init; }
+
+    [JsonPropertyName("created_at")]
+    public required DateTimeOffset CreatedAt { get; init; }
+
+    [JsonPropertyName("deletions")]
+    public int? Deletions { get; init; }
+
+    [JsonPropertyName("diff_url")]
+    public required Uri DiffUrl { get; init; }
+
+    /// <summary>
+    /// Indicates whether or not the pull request is a draft.
+    /// </summary>
+    [JsonPropertyName("draft")]
+    public required bool Draft { get; init; }
+
+    [JsonPropertyName("head")]
+    public required WebhookPullRequestReviewRequestRemovedVariant1PullRequestHead Head { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public required Uri HtmlUrl { get; init; }
+
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("issue_url")]
+    public required Uri IssueUrl { get; init; }
+
+    [JsonPropertyName("labels")]
+    public required IReadOnlyList<WebhookPullRequestReviewRequestRemovedVariant1PullRequestLabels> Labels { get; init; }
+
+    [JsonPropertyName("locked")]
+    public required bool Locked { get; init; }
+
+    /// <summary>
+    /// Indicates whether maintainers can modify the pull request.
+    /// </summary>
+    [JsonPropertyName("maintainer_can_modify")]
+    public bool? MaintainerCanModify { get; init; }
+
+    [JsonPropertyName("merge_commit_sha")]
+    public required string? MergeCommitSha { get; init; }
+
+    [JsonPropertyName("mergeable")]
+    public bool? Mergeable { get; init; }
+
+    [JsonPropertyName("mergeable_state")]
+    public string? MergeableState { get; init; }
+
+    [JsonPropertyName("merged")]
+    public bool? Merged { get; init; }
+
+    [JsonPropertyName("merged_at")]
+    public required DateTimeOffset? MergedAt { get; init; }
+
+    [JsonPropertyName("merged_by")]
+    public WebhookPullRequestReviewRequestRemovedVariant1PullRequestMergedBy? MergedBy { get; init; }
+
+    /// <summary>
+    /// A collection of related issues and pull requests.
+    /// </summary>
+    [JsonPropertyName("milestone")]
+    public required WebhookPullRequestReviewRequestRemovedVariant1PullRequestMilestone? Milestone { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    /// <summary>
+    /// Number uniquely identifying the pull request within its repository.
+    /// </summary>
+    [JsonPropertyName("number")]
+    public required int Number { get; init; }
+
+    [JsonPropertyName("patch_url")]
+    public required Uri PatchUrl { get; init; }
+
+    [JsonPropertyName("rebaseable")]
+    public bool? Rebaseable { get; init; }
+
+    [JsonPropertyName("requested_reviewers")]
+    public required IReadOnlyList<WebhookPullRequestReviewRequestRemovedVariant1PullRequestRequestedReviewers> RequestedReviewers { get; init; }
+
+    [JsonPropertyName("requested_teams")]
+    public required IReadOnlyList<WebhookPullRequestReviewRequestRemovedVariant1PullRequestRequestedTeams> RequestedTeams { get; init; }
+
+    [JsonPropertyName("review_comment_url")]
+    public required string ReviewCommentUrl { get; init; }
+
+    [JsonPropertyName("review_comments")]
+    public int? ReviewComments { get; init; }
+
+    [JsonPropertyName("review_comments_url")]
+    public required Uri ReviewCommentsUrl { get; init; }
+
+    /// <summary>
+    /// The stack information associated with a pull request.
+    /// </summary>
+    [JsonPropertyName("stack")]
+    public PullRequestStack? Stack { get; init; }
+
+    /// <summary>
+    /// State of this Pull Request. Either `open` or `closed`.
+    /// </summary>
+    [JsonPropertyName("state")]
+    public required MilestoneState State { get; init; }
+
+    [JsonPropertyName("statuses_url")]
+    public required Uri StatusesUrl { get; init; }
+
+    /// <summary>
+    /// The title of the pull request.
+    /// </summary>
+    [JsonPropertyName("title")]
+    public required string Title { get; init; }
+
+    [JsonPropertyName("updated_at")]
+    public required DateTimeOffset UpdatedAt { get; init; }
+
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+    [JsonPropertyName("user")]
+    public required WebhookPullRequestReviewRequestRemovedVariant1PullRequestUser? User { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestRemovedVariant1PullRequestLinks
+{
+    [JsonPropertyName("comments")]
+    public required WebhookPullRequestReviewRequestRemovedVariant1PullRequestLinksComments Comments { get; init; }
+
+    [JsonPropertyName("commits")]
+    public required WebhookPullRequestReviewRequestRemovedVariant1PullRequestLinksCommits Commits { get; init; }
+
+    [JsonPropertyName("html")]
+    public required WebhookPullRequestReviewRequestRemovedVariant1PullRequestLinksHtml Html { get; init; }
+
+    [JsonPropertyName("issue")]
+    public required WebhookPullRequestReviewRequestRemovedVariant1PullRequestLinksIssue Issue { get; init; }
+
+    [JsonPropertyName("review_comment")]
+    public required WebhookPullRequestReviewRequestRemovedVariant1PullRequestLinksReviewComment ReviewComment { get; init; }
+
+    [JsonPropertyName("review_comments")]
+    public required WebhookPullRequestReviewRequestRemovedVariant1PullRequestLinksReviewComments ReviewComments { get; init; }
+
+    [JsonPropertyName("self")]
+    public required WebhookPullRequestReviewRequestRemovedVariant1PullRequestLinksSelf Self { get; init; }
+
+    [JsonPropertyName("statuses")]
+    public required WebhookPullRequestReviewRequestRemovedVariant1PullRequestLinksStatuses Statuses { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestRemovedVariant1PullRequestLinksComments
+{
+    [JsonPropertyName("href")]
+    public required string Href { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestRemovedVariant1PullRequestLinksCommits
+{
+    [JsonPropertyName("href")]
+    public required string Href { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestRemovedVariant1PullRequestLinksHtml
+{
+    [JsonPropertyName("href")]
+    public required string Href { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestRemovedVariant1PullRequestLinksIssue
+{
+    [JsonPropertyName("href")]
+    public required string Href { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestRemovedVariant1PullRequestLinksReviewComment
+{
+    [JsonPropertyName("href")]
+    public required string Href { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestRemovedVariant1PullRequestLinksReviewComments
+{
+    [JsonPropertyName("href")]
+    public required string Href { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestRemovedVariant1PullRequestLinksSelf
+{
+    [JsonPropertyName("href")]
+    public required string Href { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestRemovedVariant1PullRequestLinksStatuses
+{
+    [JsonPropertyName("href")]
+    public required string Href { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestRemovedVariant1PullRequestAssignee
+{
+    [JsonPropertyName("avatar_url")]
+    public Uri? AvatarUrl { get; init; }
+
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    [JsonPropertyName("email")]
+    public string? Email { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public string? EventsUrl { get; init; }
+
+    [JsonPropertyName("followers_url")]
+    public Uri? FollowersUrl { get; init; }
+
+    [JsonPropertyName("following_url")]
+    public string? FollowingUrl { get; init; }
+
+    [JsonPropertyName("gists_url")]
+    public string? GistsUrl { get; init; }
+
+    [JsonPropertyName("gravatar_id")]
+    public string? GravatarId { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("login")]
+    public required string Login { get; init; }
+
+    [JsonPropertyName("name")]
+    public string? Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("organizations_url")]
+    public Uri? OrganizationsUrl { get; init; }
+
+    [JsonPropertyName("received_events_url")]
+    public Uri? ReceivedEventsUrl { get; init; }
+
+    [JsonPropertyName("repos_url")]
+    public Uri? ReposUrl { get; init; }
+
+    [JsonPropertyName("site_admin")]
+    public bool? SiteAdmin { get; init; }
+
+    [JsonPropertyName("starred_url")]
+    public string? StarredUrl { get; init; }
+
+    [JsonPropertyName("subscriptions_url")]
+    public Uri? SubscriptionsUrl { get; init; }
+
+    [JsonPropertyName("type")]
+    public WebhooksUserType? Type { get; init; }
+
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+    [JsonPropertyName("user_view_type")]
+    public string? UserViewType { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestRemovedVariant1PullRequestAssignees
+{
+    [JsonPropertyName("avatar_url")]
+    public Uri? AvatarUrl { get; init; }
+
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    [JsonPropertyName("email")]
+    public string? Email { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public string? EventsUrl { get; init; }
+
+    [JsonPropertyName("followers_url")]
+    public Uri? FollowersUrl { get; init; }
+
+    [JsonPropertyName("following_url")]
+    public string? FollowingUrl { get; init; }
+
+    [JsonPropertyName("gists_url")]
+    public string? GistsUrl { get; init; }
+
+    [JsonPropertyName("gravatar_id")]
+    public string? GravatarId { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("login")]
+    public required string Login { get; init; }
+
+    [JsonPropertyName("name")]
+    public string? Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("organizations_url")]
+    public Uri? OrganizationsUrl { get; init; }
+
+    [JsonPropertyName("received_events_url")]
+    public Uri? ReceivedEventsUrl { get; init; }
+
+    [JsonPropertyName("repos_url")]
+    public Uri? ReposUrl { get; init; }
+
+    [JsonPropertyName("site_admin")]
+    public bool? SiteAdmin { get; init; }
+
+    [JsonPropertyName("starred_url")]
+    public string? StarredUrl { get; init; }
+
+    [JsonPropertyName("subscriptions_url")]
+    public Uri? SubscriptionsUrl { get; init; }
+
+    [JsonPropertyName("type")]
+    public WebhooksUserType? Type { get; init; }
+
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+    [JsonPropertyName("user_view_type")]
+    public string? UserViewType { get; init; }
+
+}
+
+/// <summary>
+/// The status of auto merging a pull request.
+/// </summary>
+public partial record WebhookPullRequestReviewRequestRemovedVariant1PullRequestAutoMerge
+{
+    /// <summary>
+    /// Commit message for the merge commit.
+    /// </summary>
+    [JsonPropertyName("commit_message")]
+    public required string? CommitMessage { get; init; }
+
+    /// <summary>
+    /// Title for the merge commit message.
+    /// </summary>
+    [JsonPropertyName("commit_title")]
+    public required string? CommitTitle { get; init; }
+
+    [JsonPropertyName("enabled_by")]
+    public required WebhookPullRequestReviewRequestRemovedVariant1PullRequestAutoMergeEnabledBy? EnabledBy { get; init; }
+
+    /// <summary>
+    /// The merge method to use.
+    /// </summary>
+    [JsonPropertyName("merge_method")]
+    public required AutoMergeMergeMethod MergeMethod { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestRemovedVariant1PullRequestAutoMergeEnabledBy
+{
+    [JsonPropertyName("avatar_url")]
+    public Uri? AvatarUrl { get; init; }
+
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    [JsonPropertyName("email")]
+    public string? Email { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public string? EventsUrl { get; init; }
+
+    [JsonPropertyName("followers_url")]
+    public Uri? FollowersUrl { get; init; }
+
+    [JsonPropertyName("following_url")]
+    public string? FollowingUrl { get; init; }
+
+    [JsonPropertyName("gists_url")]
+    public string? GistsUrl { get; init; }
+
+    [JsonPropertyName("gravatar_id")]
+    public string? GravatarId { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("login")]
+    public required string Login { get; init; }
+
+    [JsonPropertyName("name")]
+    public string? Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("organizations_url")]
+    public Uri? OrganizationsUrl { get; init; }
+
+    [JsonPropertyName("received_events_url")]
+    public Uri? ReceivedEventsUrl { get; init; }
+
+    [JsonPropertyName("repos_url")]
+    public Uri? ReposUrl { get; init; }
+
+    [JsonPropertyName("site_admin")]
+    public bool? SiteAdmin { get; init; }
+
+    [JsonPropertyName("starred_url")]
+    public string? StarredUrl { get; init; }
+
+    [JsonPropertyName("subscriptions_url")]
+    public Uri? SubscriptionsUrl { get; init; }
+
+    [JsonPropertyName("type")]
+    public WebhooksUserType? Type { get; init; }
+
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+    [JsonPropertyName("user_view_type")]
+    public string? UserViewType { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestRemovedVariant1PullRequestBase
+{
+    [JsonPropertyName("label")]
+    public required string Label { get; init; }
+
+    [JsonPropertyName("ref")]
+    public required string Ref { get; init; }
+
+    /// <summary>
+    /// A git repository
+    /// </summary>
+    [JsonPropertyName("repo")]
+    public required WebhookPullRequestReviewRequestRemovedVariant1PullRequestBaseRepo Repo { get; init; }
+
+    [JsonPropertyName("sha")]
+    public required string Sha { get; init; }
+
+    [JsonPropertyName("user")]
+    public required WebhookPullRequestReviewRequestRemovedVariant1PullRequestBaseUser? User { get; init; }
+
+}
+
+/// <summary>
+/// A git repository
+/// </summary>
+public partial record WebhookPullRequestReviewRequestRemovedVariant1PullRequestBaseRepo
+{
+    /// <summary>
+    /// Whether to allow auto-merge for pull requests.
+    /// </summary>
+    [JsonPropertyName("allow_auto_merge")]
+    public bool AllowAutoMerge { get; init; } = false;
+
+    /// <summary>
+    /// Whether to allow private forks
+    /// </summary>
+    [JsonPropertyName("allow_forking")]
+    public bool? AllowForking { get; init; }
+
+    /// <summary>
+    /// Whether to allow merge commits for pull requests.
+    /// </summary>
+    [JsonPropertyName("allow_merge_commit")]
+    public bool AllowMergeCommit { get; init; } = true;
+
+    /// <summary>
+    /// Whether to allow rebase merges for pull requests.
+    /// </summary>
+    [JsonPropertyName("allow_rebase_merge")]
+    public bool AllowRebaseMerge { get; init; } = true;
+
+    /// <summary>
+    /// Whether to allow squash merges for pull requests.
+    /// </summary>
+    [JsonPropertyName("allow_squash_merge")]
+    public bool AllowSquashMerge { get; init; } = true;
+
+    [JsonPropertyName("allow_update_branch")]
+    public bool? AllowUpdateBranch { get; init; }
+
+    [JsonPropertyName("archive_url")]
+    public required string ArchiveUrl { get; init; }
+
+    /// <summary>
+    /// Whether the repository is archived.
+    /// </summary>
+    [JsonPropertyName("archived")]
+    public required bool Archived { get; init; } = false;
+
+    [JsonPropertyName("assignees_url")]
+    public required string AssigneesUrl { get; init; }
+
+    [JsonPropertyName("blobs_url")]
+    public required string BlobsUrl { get; init; }
+
+    [JsonPropertyName("branches_url")]
+    public required string BranchesUrl { get; init; }
+
+    [JsonPropertyName("clone_url")]
+    public required Uri CloneUrl { get; init; }
+
+    [JsonPropertyName("collaborators_url")]
+    public required string CollaboratorsUrl { get; init; }
+
+    [JsonPropertyName("comments_url")]
+    public required string CommentsUrl { get; init; }
+
+    [JsonPropertyName("commits_url")]
+    public required string CommitsUrl { get; init; }
+
+    [JsonPropertyName("compare_url")]
+    public required string CompareUrl { get; init; }
+
+    [JsonPropertyName("contents_url")]
+    public required string ContentsUrl { get; init; }
+
+    [JsonPropertyName("contributors_url")]
+    public required Uri ContributorsUrl { get; init; }
+
+    [JsonPropertyName("created_at")]
+    public required object CreatedAt { get; init; }
+
+    /// <summary>
+    /// The default branch of the repository.
+    /// </summary>
+    [JsonPropertyName("default_branch")]
+    public required string DefaultBranch { get; init; }
+
+    /// <summary>
+    /// Whether to delete head branches when pull requests are merged
+    /// </summary>
+    [JsonPropertyName("delete_branch_on_merge")]
+    public bool DeleteBranchOnMerge { get; init; } = false;
+
+    [JsonPropertyName("deployments_url")]
+    public required Uri DeploymentsUrl { get; init; }
+
+    [JsonPropertyName("description")]
+    public required string? Description { get; init; }
+
+    /// <summary>
+    /// Returns whether or not this repository is disabled.
+    /// </summary>
+    [JsonPropertyName("disabled")]
+    public bool? Disabled { get; init; }
+
+    [JsonPropertyName("downloads_url")]
+    public required Uri DownloadsUrl { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public required Uri EventsUrl { get; init; }
+
+    [JsonPropertyName("fork")]
+    public required bool Fork { get; init; }
+
+    [JsonPropertyName("forks")]
+    public required int Forks { get; init; }
+
+    [JsonPropertyName("forks_count")]
+    public required int ForksCount { get; init; }
+
+    [JsonPropertyName("forks_url")]
+    public required Uri ForksUrl { get; init; }
+
+    [JsonPropertyName("full_name")]
+    public required string FullName { get; init; }
+
+    [JsonPropertyName("git_commits_url")]
+    public required string GitCommitsUrl { get; init; }
+
+    [JsonPropertyName("git_refs_url")]
+    public required string GitRefsUrl { get; init; }
+
+    [JsonPropertyName("git_tags_url")]
+    public required string GitTagsUrl { get; init; }
+
+    [JsonPropertyName("git_url")]
+    public required Uri GitUrl { get; init; }
+
+    /// <summary>
+    /// Whether downloads are enabled.
+    /// </summary>
+    [JsonPropertyName("has_downloads")]
+    public required bool HasDownloads { get; init; } = true;
+
+    /// <summary>
+    /// Whether issues are enabled.
+    /// </summary>
+    [JsonPropertyName("has_issues")]
+    public required bool HasIssues { get; init; } = true;
+
+    [JsonPropertyName("has_pages")]
+    public required bool HasPages { get; init; }
+
+    /// <summary>
+    /// Whether projects are enabled.
+    /// </summary>
+    [JsonPropertyName("has_projects")]
+    public required bool HasProjects { get; init; } = true;
+
+    /// <summary>
+    /// Whether the wiki is enabled.
+    /// </summary>
+    [JsonPropertyName("has_wiki")]
+    public required bool HasWiki { get; init; } = true;
+
+    /// <summary>
+    /// Whether discussions are enabled.
+    /// </summary>
+    [JsonPropertyName("has_discussions")]
+    public required bool HasDiscussions { get; init; } = false;
+
+    /// <summary>
+    /// Whether pull requests are enabled.
+    /// </summary>
+    [JsonPropertyName("has_pull_requests")]
+    public bool HasPullRequests { get; init; } = true;
+
+    /// <summary>
+    /// The policy controlling who can create pull requests: all or collaborators_only.
+    /// </summary>
+    [JsonPropertyName("pull_request_creation_policy")]
+    public PullRequestCreationPolicy? PullRequestCreationPolicy { get; init; }
+
+    [JsonPropertyName("homepage")]
+    public required string? Homepage { get; init; }
+
+    [JsonPropertyName("hooks_url")]
+    public required Uri HooksUrl { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public required Uri HtmlUrl { get; init; }
+
+    /// <summary>
+    /// Unique identifier of the repository
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required long Id { get; init; }
+
+    [JsonPropertyName("is_template")]
+    public bool? IsTemplate { get; init; }
+
+    [JsonPropertyName("issue_comment_url")]
+    public required string IssueCommentUrl { get; init; }
+
+    [JsonPropertyName("issue_events_url")]
+    public required string IssueEventsUrl { get; init; }
+
+    [JsonPropertyName("issues_url")]
+    public required string IssuesUrl { get; init; }
+
+    [JsonPropertyName("keys_url")]
+    public required string KeysUrl { get; init; }
+
+    [JsonPropertyName("labels_url")]
+    public required string LabelsUrl { get; init; }
+
+    [JsonPropertyName("language")]
+    public required string? Language { get; init; }
+
+    [JsonPropertyName("languages_url")]
+    public required Uri LanguagesUrl { get; init; }
+
+    [JsonPropertyName("license")]
+    public required WebhookPullRequestReviewRequestRemovedVariant1PullRequestBaseRepoLicense? License { get; init; }
+
+    [JsonPropertyName("master_branch")]
+    public string? MasterBranch { get; init; }
+
+    /// <summary>
+    /// The default value for a merge commit message.
+    /// 
+    /// - `PR_TITLE` - default to the pull request's title.
+    /// - `PR_BODY` - default to the pull request's body.
+    /// - `BLANK` - default to a blank commit message.
+    /// </summary>
+    [JsonPropertyName("merge_commit_message")]
+    public MergeCommitMessage? MergeCommitMessage { get; init; }
+
+    /// <summary>
+    /// The default value for a merge commit title.
+    /// 
+    /// - `PR_TITLE` - default to the pull request's title.
+    /// - `MERGE_MESSAGE` - default to the classic title for a merge message (e.g., Merge pull request #123 from branch-name).
+    /// </summary>
+    [JsonPropertyName("merge_commit_title")]
+    public MergeCommitTitle? MergeCommitTitle { get; init; }
+
+    [JsonPropertyName("merges_url")]
+    public required Uri MergesUrl { get; init; }
+
+    [JsonPropertyName("milestones_url")]
+    public required string MilestonesUrl { get; init; }
+
+    [JsonPropertyName("mirror_url")]
+    public required Uri? MirrorUrl { get; init; }
+
+    /// <summary>
+    /// The name of the repository.
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    [JsonPropertyName("notifications_url")]
+    public required string NotificationsUrl { get; init; }
+
+    [JsonPropertyName("open_issues")]
+    public required int OpenIssues { get; init; }
+
+    [JsonPropertyName("open_issues_count")]
+    public required int OpenIssuesCount { get; init; }
+
+    [JsonPropertyName("organization")]
+    public string? Organization { get; init; }
+
+    [JsonPropertyName("owner")]
+    public required WebhookPullRequestReviewRequestRemovedVariant1PullRequestBaseRepoOwner? Owner { get; init; }
+
+    [JsonPropertyName("permissions")]
+    public WebhookPullRequestReviewRequestRemovedVariant1PullRequestBaseRepoPermissions? Permissions { get; init; }
+
+    /// <summary>
+    /// Whether the repository is private or public.
+    /// </summary>
+    [JsonPropertyName("private")]
+    public required bool Private { get; init; }
+
+    [JsonPropertyName("public")]
+    public bool? Public { get; init; }
+
+    [JsonPropertyName("pulls_url")]
+    public required string PullsUrl { get; init; }
+
+    [JsonPropertyName("pushed_at")]
+    public required object? PushedAt { get; init; }
+
+    [JsonPropertyName("releases_url")]
+    public required string ReleasesUrl { get; init; }
+
+    [JsonPropertyName("role_name")]
+    public string? RoleName { get; init; }
+
+    [JsonPropertyName("size")]
+    public required int Size { get; init; }
+
+    /// <summary>
+    /// The default value for a squash merge commit message.
+    /// </summary>
+    [JsonPropertyName("squash_merge_commit_message")]
+    public SquashMergeCommitMessage? SquashMergeCommitMessage { get; init; }
+
+    /// <summary>
+    /// The default value for a squash merge commit title.
+    /// </summary>
+    [JsonPropertyName("squash_merge_commit_title")]
+    public SquashMergeCommitTitle? SquashMergeCommitTitle { get; init; }
+
+    [JsonPropertyName("ssh_url")]
+    public required string SshUrl { get; init; }
+
+    [JsonPropertyName("stargazers")]
+    public int? Stargazers { get; init; }
+
+    [JsonPropertyName("stargazers_count")]
+    public required int StargazersCount { get; init; }
+
+    [JsonPropertyName("stargazers_url")]
+    public required Uri StargazersUrl { get; init; }
+
+    [JsonPropertyName("statuses_url")]
+    public required string StatusesUrl { get; init; }
+
+    [JsonPropertyName("subscribers_url")]
+    public required Uri SubscribersUrl { get; init; }
+
+    [JsonPropertyName("subscription_url")]
+    public required Uri SubscriptionUrl { get; init; }
+
+    [JsonPropertyName("svn_url")]
+    public required Uri SvnUrl { get; init; }
+
+    [JsonPropertyName("tags_url")]
+    public required Uri TagsUrl { get; init; }
+
+    [JsonPropertyName("teams_url")]
+    public required Uri TeamsUrl { get; init; }
+
+    [JsonPropertyName("topics")]
+    public required IReadOnlyList<string> Topics { get; init; }
+
+    [JsonPropertyName("trees_url")]
+    public required string TreesUrl { get; init; }
+
+    [JsonPropertyName("updated_at")]
+    public required DateTimeOffset UpdatedAt { get; init; }
+
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+    /// <summary>
+    /// Whether a squash merge commit can use the pull request title as default. **This property is closing down. Please use `squash_merge_commit_title` instead.
+    /// </summary>
+    [JsonPropertyName("use_squash_pr_title_as_default")]
+    public bool UseSquashPrTitleAsDefault { get; init; } = false;
+
+    [JsonPropertyName("visibility")]
+    public required WebhooksPullRequest5BaseRepoVisibility Visibility { get; init; }
+
+    [JsonPropertyName("watchers")]
+    public required int Watchers { get; init; }
+
+    [JsonPropertyName("watchers_count")]
+    public required int WatchersCount { get; init; }
+
+    /// <summary>
+    /// Whether to require contributors to sign off on web-based commits
+    /// </summary>
+    [JsonPropertyName("web_commit_signoff_required")]
+    public bool? WebCommitSignoffRequired { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestRemovedVariant1PullRequestBaseRepoLicense
+{
+    [JsonPropertyName("key")]
+    public required string Key { get; init; }
+
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    [JsonPropertyName("spdx_id")]
+    public required string SpdxId { get; init; }
+
+    [JsonPropertyName("url")]
+    public required Uri? Url { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestRemovedVariant1PullRequestBaseRepoOwner
+{
+    [JsonPropertyName("avatar_url")]
+    public Uri? AvatarUrl { get; init; }
+
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    [JsonPropertyName("email")]
+    public string? Email { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public string? EventsUrl { get; init; }
+
+    [JsonPropertyName("followers_url")]
+    public Uri? FollowersUrl { get; init; }
+
+    [JsonPropertyName("following_url")]
+    public string? FollowingUrl { get; init; }
+
+    [JsonPropertyName("gists_url")]
+    public string? GistsUrl { get; init; }
+
+    [JsonPropertyName("gravatar_id")]
+    public string? GravatarId { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("login")]
+    public required string Login { get; init; }
+
+    [JsonPropertyName("name")]
+    public string? Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("organizations_url")]
+    public Uri? OrganizationsUrl { get; init; }
+
+    [JsonPropertyName("received_events_url")]
+    public Uri? ReceivedEventsUrl { get; init; }
+
+    [JsonPropertyName("repos_url")]
+    public Uri? ReposUrl { get; init; }
+
+    [JsonPropertyName("site_admin")]
+    public bool? SiteAdmin { get; init; }
+
+    [JsonPropertyName("starred_url")]
+    public string? StarredUrl { get; init; }
+
+    [JsonPropertyName("subscriptions_url")]
+    public Uri? SubscriptionsUrl { get; init; }
+
+    [JsonPropertyName("type")]
+    public WebhooksUserType? Type { get; init; }
+
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+    [JsonPropertyName("user_view_type")]
+    public string? UserViewType { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestRemovedVariant1PullRequestBaseRepoPermissions
+{
+    [JsonPropertyName("admin")]
+    public required bool Admin { get; init; }
+
+    [JsonPropertyName("maintain")]
+    public bool? Maintain { get; init; }
+
+    [JsonPropertyName("pull")]
+    public required bool Pull { get; init; }
+
+    [JsonPropertyName("push")]
+    public required bool Push { get; init; }
+
+    [JsonPropertyName("triage")]
+    public bool? Triage { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestRemovedVariant1PullRequestBaseUser
+{
+    [JsonPropertyName("avatar_url")]
+    public Uri? AvatarUrl { get; init; }
+
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    [JsonPropertyName("email")]
+    public string? Email { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public string? EventsUrl { get; init; }
+
+    [JsonPropertyName("followers_url")]
+    public Uri? FollowersUrl { get; init; }
+
+    [JsonPropertyName("following_url")]
+    public string? FollowingUrl { get; init; }
+
+    [JsonPropertyName("gists_url")]
+    public string? GistsUrl { get; init; }
+
+    [JsonPropertyName("gravatar_id")]
+    public string? GravatarId { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    [JsonPropertyName("id")]
+    public required long Id { get; init; }
+
+    [JsonPropertyName("login")]
+    public required string Login { get; init; }
+
+    [JsonPropertyName("name")]
+    public string? Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("organizations_url")]
+    public Uri? OrganizationsUrl { get; init; }
+
+    [JsonPropertyName("received_events_url")]
+    public Uri? ReceivedEventsUrl { get; init; }
+
+    [JsonPropertyName("repos_url")]
+    public Uri? ReposUrl { get; init; }
+
+    [JsonPropertyName("site_admin")]
+    public bool? SiteAdmin { get; init; }
+
+    [JsonPropertyName("starred_url")]
+    public string? StarredUrl { get; init; }
+
+    [JsonPropertyName("subscriptions_url")]
+    public Uri? SubscriptionsUrl { get; init; }
+
+    [JsonPropertyName("type")]
+    public WebhooksUserType? Type { get; init; }
+
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+    [JsonPropertyName("user_view_type")]
+    public string? UserViewType { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestRemovedVariant1PullRequestHead
+{
+    [JsonPropertyName("label")]
+    public required string Label { get; init; }
+
+    [JsonPropertyName("ref")]
+    public required string Ref { get; init; }
+
+    /// <summary>
+    /// A git repository
+    /// </summary>
+    [JsonPropertyName("repo")]
+    public required WebhookPullRequestReviewRequestRemovedVariant1PullRequestHeadRepo Repo { get; init; }
+
+    [JsonPropertyName("sha")]
+    public required string Sha { get; init; }
+
+    [JsonPropertyName("user")]
+    public required WebhookPullRequestReviewRequestRemovedVariant1PullRequestHeadUser? User { get; init; }
+
+}
+
+/// <summary>
+/// A git repository
+/// </summary>
+public partial record WebhookPullRequestReviewRequestRemovedVariant1PullRequestHeadRepo
+{
+    /// <summary>
+    /// Whether to allow auto-merge for pull requests.
+    /// </summary>
+    [JsonPropertyName("allow_auto_merge")]
+    public bool AllowAutoMerge { get; init; } = false;
+
+    /// <summary>
+    /// Whether to allow private forks
+    /// </summary>
+    [JsonPropertyName("allow_forking")]
+    public bool? AllowForking { get; init; }
+
+    /// <summary>
+    /// Whether to allow merge commits for pull requests.
+    /// </summary>
+    [JsonPropertyName("allow_merge_commit")]
+    public bool AllowMergeCommit { get; init; } = true;
+
+    /// <summary>
+    /// Whether to allow rebase merges for pull requests.
+    /// </summary>
+    [JsonPropertyName("allow_rebase_merge")]
+    public bool AllowRebaseMerge { get; init; } = true;
+
+    /// <summary>
+    /// Whether to allow squash merges for pull requests.
+    /// </summary>
+    [JsonPropertyName("allow_squash_merge")]
+    public bool AllowSquashMerge { get; init; } = true;
+
+    [JsonPropertyName("allow_update_branch")]
+    public bool? AllowUpdateBranch { get; init; }
+
+    [JsonPropertyName("archive_url")]
+    public required string ArchiveUrl { get; init; }
+
+    /// <summary>
+    /// Whether the repository is archived.
+    /// </summary>
+    [JsonPropertyName("archived")]
+    public required bool Archived { get; init; } = false;
+
+    [JsonPropertyName("assignees_url")]
+    public required string AssigneesUrl { get; init; }
+
+    [JsonPropertyName("blobs_url")]
+    public required string BlobsUrl { get; init; }
+
+    [JsonPropertyName("branches_url")]
+    public required string BranchesUrl { get; init; }
+
+    [JsonPropertyName("clone_url")]
+    public required Uri CloneUrl { get; init; }
+
+    [JsonPropertyName("collaborators_url")]
+    public required string CollaboratorsUrl { get; init; }
+
+    [JsonPropertyName("comments_url")]
+    public required string CommentsUrl { get; init; }
+
+    [JsonPropertyName("commits_url")]
+    public required string CommitsUrl { get; init; }
+
+    [JsonPropertyName("compare_url")]
+    public required string CompareUrl { get; init; }
+
+    [JsonPropertyName("contents_url")]
+    public required string ContentsUrl { get; init; }
+
+    [JsonPropertyName("contributors_url")]
+    public required Uri ContributorsUrl { get; init; }
+
+    [JsonPropertyName("created_at")]
+    public required object CreatedAt { get; init; }
+
+    /// <summary>
+    /// The default branch of the repository.
+    /// </summary>
+    [JsonPropertyName("default_branch")]
+    public required string DefaultBranch { get; init; }
+
+    /// <summary>
+    /// Whether to delete head branches when pull requests are merged
+    /// </summary>
+    [JsonPropertyName("delete_branch_on_merge")]
+    public bool DeleteBranchOnMerge { get; init; } = false;
+
+    [JsonPropertyName("deployments_url")]
+    public required Uri DeploymentsUrl { get; init; }
+
+    [JsonPropertyName("description")]
+    public required string? Description { get; init; }
+
+    /// <summary>
+    /// Returns whether or not this repository is disabled.
+    /// </summary>
+    [JsonPropertyName("disabled")]
+    public bool? Disabled { get; init; }
+
+    [JsonPropertyName("downloads_url")]
+    public required Uri DownloadsUrl { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public required Uri EventsUrl { get; init; }
+
+    [JsonPropertyName("fork")]
+    public required bool Fork { get; init; }
+
+    [JsonPropertyName("forks")]
+    public required int Forks { get; init; }
+
+    [JsonPropertyName("forks_count")]
+    public required int ForksCount { get; init; }
+
+    [JsonPropertyName("forks_url")]
+    public required Uri ForksUrl { get; init; }
+
+    [JsonPropertyName("full_name")]
+    public required string FullName { get; init; }
+
+    [JsonPropertyName("git_commits_url")]
+    public required string GitCommitsUrl { get; init; }
+
+    [JsonPropertyName("git_refs_url")]
+    public required string GitRefsUrl { get; init; }
+
+    [JsonPropertyName("git_tags_url")]
+    public required string GitTagsUrl { get; init; }
+
+    [JsonPropertyName("git_url")]
+    public required Uri GitUrl { get; init; }
+
+    /// <summary>
+    /// Whether downloads are enabled.
+    /// </summary>
+    [JsonPropertyName("has_downloads")]
+    public required bool HasDownloads { get; init; } = true;
+
+    /// <summary>
+    /// Whether issues are enabled.
+    /// </summary>
+    [JsonPropertyName("has_issues")]
+    public required bool HasIssues { get; init; } = true;
+
+    [JsonPropertyName("has_pages")]
+    public required bool HasPages { get; init; }
+
+    /// <summary>
+    /// Whether projects are enabled.
+    /// </summary>
+    [JsonPropertyName("has_projects")]
+    public required bool HasProjects { get; init; } = true;
+
+    /// <summary>
+    /// Whether the wiki is enabled.
+    /// </summary>
+    [JsonPropertyName("has_wiki")]
+    public required bool HasWiki { get; init; } = true;
+
+    /// <summary>
+    /// Whether discussions are enabled.
+    /// </summary>
+    [JsonPropertyName("has_discussions")]
+    public required bool HasDiscussions { get; init; } = false;
+
+    /// <summary>
+    /// Whether pull requests are enabled.
+    /// </summary>
+    [JsonPropertyName("has_pull_requests")]
+    public bool HasPullRequests { get; init; } = true;
+
+    /// <summary>
+    /// The policy controlling who can create pull requests: all or collaborators_only.
+    /// </summary>
+    [JsonPropertyName("pull_request_creation_policy")]
+    public PullRequestCreationPolicy? PullRequestCreationPolicy { get; init; }
+
+    [JsonPropertyName("homepage")]
+    public required string? Homepage { get; init; }
+
+    [JsonPropertyName("hooks_url")]
+    public required Uri HooksUrl { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public required Uri HtmlUrl { get; init; }
+
+    /// <summary>
+    /// Unique identifier of the repository
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required long Id { get; init; }
+
+    [JsonPropertyName("is_template")]
+    public bool? IsTemplate { get; init; }
+
+    [JsonPropertyName("issue_comment_url")]
+    public required string IssueCommentUrl { get; init; }
+
+    [JsonPropertyName("issue_events_url")]
+    public required string IssueEventsUrl { get; init; }
+
+    [JsonPropertyName("issues_url")]
+    public required string IssuesUrl { get; init; }
+
+    [JsonPropertyName("keys_url")]
+    public required string KeysUrl { get; init; }
+
+    [JsonPropertyName("labels_url")]
+    public required string LabelsUrl { get; init; }
+
+    [JsonPropertyName("language")]
+    public required string? Language { get; init; }
+
+    [JsonPropertyName("languages_url")]
+    public required Uri LanguagesUrl { get; init; }
+
+    [JsonPropertyName("license")]
+    public required WebhookPullRequestReviewRequestRemovedVariant1PullRequestHeadRepoLicense? License { get; init; }
+
+    [JsonPropertyName("master_branch")]
+    public string? MasterBranch { get; init; }
+
+    /// <summary>
+    /// The default value for a merge commit message.
+    /// 
+    /// - `PR_TITLE` - default to the pull request's title.
+    /// - `PR_BODY` - default to the pull request's body.
+    /// - `BLANK` - default to a blank commit message.
+    /// </summary>
+    [JsonPropertyName("merge_commit_message")]
+    public MergeCommitMessage? MergeCommitMessage { get; init; }
+
+    /// <summary>
+    /// The default value for a merge commit title.
+    /// 
+    /// - `PR_TITLE` - default to the pull request's title.
+    /// - `MERGE_MESSAGE` - default to the classic title for a merge message (e.g., Merge pull request #123 from branch-name).
+    /// </summary>
+    [JsonPropertyName("merge_commit_title")]
+    public MergeCommitTitle? MergeCommitTitle { get; init; }
+
+    [JsonPropertyName("merges_url")]
+    public required Uri MergesUrl { get; init; }
+
+    [JsonPropertyName("milestones_url")]
+    public required string MilestonesUrl { get; init; }
+
+    [JsonPropertyName("mirror_url")]
+    public required Uri? MirrorUrl { get; init; }
+
+    /// <summary>
+    /// The name of the repository.
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    [JsonPropertyName("notifications_url")]
+    public required string NotificationsUrl { get; init; }
+
+    [JsonPropertyName("open_issues")]
+    public required int OpenIssues { get; init; }
+
+    [JsonPropertyName("open_issues_count")]
+    public required int OpenIssuesCount { get; init; }
+
+    [JsonPropertyName("organization")]
+    public string? Organization { get; init; }
+
+    [JsonPropertyName("owner")]
+    public required WebhookPullRequestReviewRequestRemovedVariant1PullRequestHeadRepoOwner? Owner { get; init; }
+
+    [JsonPropertyName("permissions")]
+    public WebhookPullRequestReviewRequestRemovedVariant1PullRequestHeadRepoPermissions? Permissions { get; init; }
+
+    /// <summary>
+    /// Whether the repository is private or public.
+    /// </summary>
+    [JsonPropertyName("private")]
+    public required bool Private { get; init; }
+
+    [JsonPropertyName("public")]
+    public bool? Public { get; init; }
+
+    [JsonPropertyName("pulls_url")]
+    public required string PullsUrl { get; init; }
+
+    [JsonPropertyName("pushed_at")]
+    public required object? PushedAt { get; init; }
+
+    [JsonPropertyName("releases_url")]
+    public required string ReleasesUrl { get; init; }
+
+    [JsonPropertyName("role_name")]
+    public string? RoleName { get; init; }
+
+    [JsonPropertyName("size")]
+    public required int Size { get; init; }
+
+    /// <summary>
+    /// The default value for a squash merge commit message:
+    /// 
+    /// - `PR_BODY` - default to the pull request's body.
+    /// - `COMMIT_MESSAGES` - default to the branch's commit messages.
+    /// - `BLANK` - default to a blank commit message.
+    /// </summary>
+    [JsonPropertyName("squash_merge_commit_message")]
+    public SquashMergeCommitMessage? SquashMergeCommitMessage { get; init; }
+
+    /// <summary>
+    /// The default value for a squash merge commit title:
+    /// 
+    /// - `PR_TITLE` - default to the pull request's title.
+    /// - `COMMIT_OR_PR_TITLE` - default to the commit's title (if only one commit) or the pull request's title (when more than one commit).
+    /// </summary>
+    [JsonPropertyName("squash_merge_commit_title")]
+    public SquashMergeCommitTitle? SquashMergeCommitTitle { get; init; }
+
+    [JsonPropertyName("ssh_url")]
+    public required string SshUrl { get; init; }
+
+    [JsonPropertyName("stargazers")]
+    public int? Stargazers { get; init; }
+
+    [JsonPropertyName("stargazers_count")]
+    public required int StargazersCount { get; init; }
+
+    [JsonPropertyName("stargazers_url")]
+    public required Uri StargazersUrl { get; init; }
+
+    [JsonPropertyName("statuses_url")]
+    public required string StatusesUrl { get; init; }
+
+    [JsonPropertyName("subscribers_url")]
+    public required Uri SubscribersUrl { get; init; }
+
+    [JsonPropertyName("subscription_url")]
+    public required Uri SubscriptionUrl { get; init; }
+
+    [JsonPropertyName("svn_url")]
+    public required Uri SvnUrl { get; init; }
+
+    [JsonPropertyName("tags_url")]
+    public required Uri TagsUrl { get; init; }
+
+    [JsonPropertyName("teams_url")]
+    public required Uri TeamsUrl { get; init; }
+
+    [JsonPropertyName("topics")]
+    public required IReadOnlyList<string> Topics { get; init; }
+
+    [JsonPropertyName("trees_url")]
+    public required string TreesUrl { get; init; }
+
+    [JsonPropertyName("updated_at")]
+    public required DateTimeOffset UpdatedAt { get; init; }
+
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+    /// <summary>
+    /// Whether a squash merge commit can use the pull request title as default. **This property is closing down. Please use `squash_merge_commit_title` instead.
+    /// </summary>
+    [JsonPropertyName("use_squash_pr_title_as_default")]
+    public bool UseSquashPrTitleAsDefault { get; init; } = false;
+
+    [JsonPropertyName("visibility")]
+    public required WebhooksPullRequest5BaseRepoVisibility Visibility { get; init; }
+
+    [JsonPropertyName("watchers")]
+    public required int Watchers { get; init; }
+
+    [JsonPropertyName("watchers_count")]
+    public required int WatchersCount { get; init; }
+
+    /// <summary>
+    /// Whether to require contributors to sign off on web-based commits
+    /// </summary>
+    [JsonPropertyName("web_commit_signoff_required")]
+    public bool? WebCommitSignoffRequired { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestRemovedVariant1PullRequestHeadRepoLicense
+{
+    [JsonPropertyName("key")]
+    public required string Key { get; init; }
+
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    [JsonPropertyName("spdx_id")]
+    public required string SpdxId { get; init; }
+
+    [JsonPropertyName("url")]
+    public required Uri? Url { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestRemovedVariant1PullRequestHeadRepoOwner
+{
+    [JsonPropertyName("avatar_url")]
+    public Uri? AvatarUrl { get; init; }
+
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    [JsonPropertyName("email")]
+    public string? Email { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public string? EventsUrl { get; init; }
+
+    [JsonPropertyName("followers_url")]
+    public Uri? FollowersUrl { get; init; }
+
+    [JsonPropertyName("following_url")]
+    public string? FollowingUrl { get; init; }
+
+    [JsonPropertyName("gists_url")]
+    public string? GistsUrl { get; init; }
+
+    [JsonPropertyName("gravatar_id")]
+    public string? GravatarId { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("login")]
+    public required string Login { get; init; }
+
+    [JsonPropertyName("name")]
+    public string? Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("organizations_url")]
+    public Uri? OrganizationsUrl { get; init; }
+
+    [JsonPropertyName("received_events_url")]
+    public Uri? ReceivedEventsUrl { get; init; }
+
+    [JsonPropertyName("repos_url")]
+    public Uri? ReposUrl { get; init; }
+
+    [JsonPropertyName("site_admin")]
+    public bool? SiteAdmin { get; init; }
+
+    [JsonPropertyName("starred_url")]
+    public string? StarredUrl { get; init; }
+
+    [JsonPropertyName("subscriptions_url")]
+    public Uri? SubscriptionsUrl { get; init; }
+
+    [JsonPropertyName("type")]
+    public WebhooksUserType? Type { get; init; }
+
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+    [JsonPropertyName("user_view_type")]
+    public string? UserViewType { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestRemovedVariant1PullRequestHeadRepoPermissions
+{
+    [JsonPropertyName("admin")]
+    public required bool Admin { get; init; }
+
+    [JsonPropertyName("maintain")]
+    public bool? Maintain { get; init; }
+
+    [JsonPropertyName("pull")]
+    public required bool Pull { get; init; }
+
+    [JsonPropertyName("push")]
+    public required bool Push { get; init; }
+
+    [JsonPropertyName("triage")]
+    public bool? Triage { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestRemovedVariant1PullRequestHeadUser
+{
+    [JsonPropertyName("avatar_url")]
+    public Uri? AvatarUrl { get; init; }
+
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    [JsonPropertyName("email")]
+    public string? Email { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public string? EventsUrl { get; init; }
+
+    [JsonPropertyName("followers_url")]
+    public Uri? FollowersUrl { get; init; }
+
+    [JsonPropertyName("following_url")]
+    public string? FollowingUrl { get; init; }
+
+    [JsonPropertyName("gists_url")]
+    public string? GistsUrl { get; init; }
+
+    [JsonPropertyName("gravatar_id")]
+    public string? GravatarId { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    [JsonPropertyName("id")]
+    public required long Id { get; init; }
+
+    [JsonPropertyName("login")]
+    public required string Login { get; init; }
+
+    [JsonPropertyName("name")]
+    public string? Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("organizations_url")]
+    public Uri? OrganizationsUrl { get; init; }
+
+    [JsonPropertyName("received_events_url")]
+    public Uri? ReceivedEventsUrl { get; init; }
+
+    [JsonPropertyName("repos_url")]
+    public Uri? ReposUrl { get; init; }
+
+    [JsonPropertyName("site_admin")]
+    public bool? SiteAdmin { get; init; }
+
+    [JsonPropertyName("starred_url")]
+    public string? StarredUrl { get; init; }
+
+    [JsonPropertyName("subscriptions_url")]
+    public Uri? SubscriptionsUrl { get; init; }
+
+    [JsonPropertyName("type")]
+    public WebhooksUserType? Type { get; init; }
+
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+    [JsonPropertyName("user_view_type")]
+    public string? UserViewType { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestRemovedVariant1PullRequestLabels
+{
+    /// <summary>
+    /// 6-character hex code, without the leading #, identifying the color
+    /// </summary>
+    [JsonPropertyName("color")]
+    public required string Color { get; init; }
+
+    [JsonPropertyName("default")]
+    public required bool Default { get; init; }
+
+    [JsonPropertyName("description")]
+    public required string? Description { get; init; }
+
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    /// <summary>
+    /// The name of the label.
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    /// <summary>
+    /// URL for the label
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestRemovedVariant1PullRequestMergedBy
+{
+    [JsonPropertyName("avatar_url")]
+    public Uri? AvatarUrl { get; init; }
+
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    [JsonPropertyName("email")]
+    public string? Email { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public string? EventsUrl { get; init; }
+
+    [JsonPropertyName("followers_url")]
+    public Uri? FollowersUrl { get; init; }
+
+    [JsonPropertyName("following_url")]
+    public string? FollowingUrl { get; init; }
+
+    [JsonPropertyName("gists_url")]
+    public string? GistsUrl { get; init; }
+
+    [JsonPropertyName("gravatar_id")]
+    public string? GravatarId { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("login")]
+    public required string Login { get; init; }
+
+    [JsonPropertyName("name")]
+    public string? Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("organizations_url")]
+    public Uri? OrganizationsUrl { get; init; }
+
+    [JsonPropertyName("received_events_url")]
+    public Uri? ReceivedEventsUrl { get; init; }
+
+    [JsonPropertyName("repos_url")]
+    public Uri? ReposUrl { get; init; }
+
+    [JsonPropertyName("site_admin")]
+    public bool? SiteAdmin { get; init; }
+
+    [JsonPropertyName("starred_url")]
+    public string? StarredUrl { get; init; }
+
+    [JsonPropertyName("subscriptions_url")]
+    public Uri? SubscriptionsUrl { get; init; }
+
+    [JsonPropertyName("type")]
+    public WebhooksUserType? Type { get; init; }
+
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+    [JsonPropertyName("user_view_type")]
+    public string? UserViewType { get; init; }
+
+}
+
+/// <summary>
+/// A collection of related issues and pull requests.
+/// </summary>
+public partial record WebhookPullRequestReviewRequestRemovedVariant1PullRequestMilestone
+{
+    [JsonPropertyName("closed_at")]
+    public required DateTimeOffset? ClosedAt { get; init; }
+
+    [JsonPropertyName("closed_issues")]
+    public required int ClosedIssues { get; init; }
+
+    [JsonPropertyName("created_at")]
+    public required DateTimeOffset CreatedAt { get; init; }
+
+    [JsonPropertyName("creator")]
+    public required WebhookPullRequestReviewRequestRemovedVariant1PullRequestMilestoneCreator? Creator { get; init; }
+
+    [JsonPropertyName("description")]
+    public required string? Description { get; init; }
+
+    [JsonPropertyName("due_on")]
+    public required DateTimeOffset? DueOn { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public required Uri HtmlUrl { get; init; }
+
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("labels_url")]
+    public required Uri LabelsUrl { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    /// <summary>
+    /// The number of the milestone.
+    /// </summary>
+    [JsonPropertyName("number")]
+    public required int Number { get; init; }
+
+    [JsonPropertyName("open_issues")]
+    public required int OpenIssues { get; init; }
+
+    /// <summary>
+    /// The state of the milestone.
+    /// </summary>
+    [JsonPropertyName("state")]
+    public required MilestoneState State { get; init; }
+
+    /// <summary>
+    /// The title of the milestone.
+    /// </summary>
+    [JsonPropertyName("title")]
+    public required string Title { get; init; }
+
+    [JsonPropertyName("updated_at")]
+    public required DateTimeOffset UpdatedAt { get; init; }
+
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestRemovedVariant1PullRequestMilestoneCreator
+{
+    [JsonPropertyName("avatar_url")]
+    public Uri? AvatarUrl { get; init; }
+
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    [JsonPropertyName("email")]
+    public string? Email { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public string? EventsUrl { get; init; }
+
+    [JsonPropertyName("followers_url")]
+    public Uri? FollowersUrl { get; init; }
+
+    [JsonPropertyName("following_url")]
+    public string? FollowingUrl { get; init; }
+
+    [JsonPropertyName("gists_url")]
+    public string? GistsUrl { get; init; }
+
+    [JsonPropertyName("gravatar_id")]
+    public string? GravatarId { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("login")]
+    public required string Login { get; init; }
+
+    [JsonPropertyName("name")]
+    public string? Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("organizations_url")]
+    public Uri? OrganizationsUrl { get; init; }
+
+    [JsonPropertyName("received_events_url")]
+    public Uri? ReceivedEventsUrl { get; init; }
+
+    [JsonPropertyName("repos_url")]
+    public Uri? ReposUrl { get; init; }
+
+    [JsonPropertyName("site_admin")]
+    public bool? SiteAdmin { get; init; }
+
+    [JsonPropertyName("starred_url")]
+    public string? StarredUrl { get; init; }
+
+    [JsonPropertyName("subscriptions_url")]
+    public Uri? SubscriptionsUrl { get; init; }
+
+    [JsonPropertyName("type")]
+    public WebhooksUserType? Type { get; init; }
+
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+    [JsonPropertyName("user_view_type")]
+    public string? UserViewType { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestRemovedVariant1PullRequestRequestedReviewersVariant1
+{
+    [JsonPropertyName("avatar_url")]
+    public Uri? AvatarUrl { get; init; }
+
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    [JsonPropertyName("email")]
+    public string? Email { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public string? EventsUrl { get; init; }
+
+    [JsonPropertyName("followers_url")]
+    public Uri? FollowersUrl { get; init; }
+
+    [JsonPropertyName("following_url")]
+    public string? FollowingUrl { get; init; }
+
+    [JsonPropertyName("gists_url")]
+    public string? GistsUrl { get; init; }
+
+    [JsonPropertyName("gravatar_id")]
+    public string? GravatarId { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("login")]
+    public required string Login { get; init; }
+
+    [JsonPropertyName("name")]
+    public string? Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("organizations_url")]
+    public Uri? OrganizationsUrl { get; init; }
+
+    [JsonPropertyName("received_events_url")]
+    public Uri? ReceivedEventsUrl { get; init; }
+
+    [JsonPropertyName("repos_url")]
+    public Uri? ReposUrl { get; init; }
+
+    [JsonPropertyName("site_admin")]
+    public bool? SiteAdmin { get; init; }
+
+    [JsonPropertyName("starred_url")]
+    public string? StarredUrl { get; init; }
+
+    [JsonPropertyName("subscriptions_url")]
+    public Uri? SubscriptionsUrl { get; init; }
+
+    [JsonPropertyName("type")]
+    public WebhooksUserType? Type { get; init; }
+
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+    [JsonPropertyName("user_view_type")]
+    public string? UserViewType { get; init; }
+
+}
+
+/// <summary>
+/// Groups of organization members that gives permissions on specified repositories.
+/// </summary>
+public partial record WebhookPullRequestReviewRequestRemovedVariant1PullRequestRequestedReviewersVariant2
+{
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    /// <summary>
+    /// Description of the team
+    /// </summary>
+    [JsonPropertyName("description")]
+    public required string? Description { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public required Uri HtmlUrl { get; init; }
+
+    /// <summary>
+    /// Unique identifier of the team
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("members_url")]
+    public required string MembersUrl { get; init; }
+
+    /// <summary>
+    /// Name of the team
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    [JsonPropertyName("parent")]
+    public WebhookPullRequestReviewRequestRemovedVariant1PullRequestRequestedReviewersVariant2Parent? Parent { get; init; }
+
+    /// <summary>
+    /// Permission that the team will have for its repositories
+    /// </summary>
+    [JsonPropertyName("permission")]
+    public required string Permission { get; init; }
+
+    [JsonPropertyName("privacy")]
+    public required WebhooksTeamPrivacy Privacy { get; init; }
+
+    [JsonPropertyName("repositories_url")]
+    public required Uri RepositoriesUrl { get; init; }
+
+    [JsonPropertyName("slug")]
+    public required string Slug { get; init; }
+
+    /// <summary>
+    /// URL for the team
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestRemovedVariant1PullRequestRequestedReviewersVariant2Parent
+{
+    /// <summary>
+    /// Description of the team
+    /// </summary>
+    [JsonPropertyName("description")]
+    public required string? Description { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public required Uri HtmlUrl { get; init; }
+
+    /// <summary>
+    /// Unique identifier of the team
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("members_url")]
+    public required string MembersUrl { get; init; }
+
+    /// <summary>
+    /// Name of the team
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    /// <summary>
+    /// Permission that the team will have for its repositories
+    /// </summary>
+    [JsonPropertyName("permission")]
+    public required string Permission { get; init; }
+
+    [JsonPropertyName("privacy")]
+    public required WebhooksTeamPrivacy Privacy { get; init; }
+
+    [JsonPropertyName("repositories_url")]
+    public required Uri RepositoriesUrl { get; init; }
+
+    [JsonPropertyName("slug")]
+    public required string Slug { get; init; }
+
+    /// <summary>
+    /// URL for the team
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+}
+
+/// <remarks>
+/// Union of: WebhookPullRequestReviewRequestRemovedVariant1PullRequestRequestedReviewersVariant1 | WebhookPullRequestReviewRequestRemovedVariant1PullRequestRequestedReviewersVariant2
+/// </remarks>
+[JsonDerivedType(typeof(WebhookPullRequestReviewRequestRemovedVariant1PullRequestRequestedReviewersVariant1), "WebhookPullRequestReviewRequestRemovedVariant1PullRequestRequestedReviewersVariant1")]
+[JsonDerivedType(typeof(WebhookPullRequestReviewRequestRemovedVariant1PullRequestRequestedReviewersVariant2), "WebhookPullRequestReviewRequestRemovedVariant1PullRequestRequestedReviewersVariant2")]
+public abstract partial record WebhookPullRequestReviewRequestRemovedVariant1PullRequestRequestedReviewers;
+
+/// <summary>
+/// Groups of organization members that gives permissions on specified repositories.
+/// </summary>
+public partial record WebhookPullRequestReviewRequestRemovedVariant1PullRequestRequestedTeams
+{
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    /// <summary>
+    /// Description of the team
+    /// </summary>
+    [JsonPropertyName("description")]
+    public required string? Description { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public required Uri HtmlUrl { get; init; }
+
+    /// <summary>
+    /// Unique identifier of the team
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("members_url")]
+    public required string MembersUrl { get; init; }
+
+    /// <summary>
+    /// Name of the team
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    [JsonPropertyName("parent")]
+    public WebhookPullRequestReviewRequestRemovedVariant1PullRequestRequestedTeamsParent? Parent { get; init; }
+
+    /// <summary>
+    /// Permission that the team will have for its repositories
+    /// </summary>
+    [JsonPropertyName("permission")]
+    public required string Permission { get; init; }
+
+    [JsonPropertyName("privacy")]
+    public required WebhooksTeamPrivacy Privacy { get; init; }
+
+    [JsonPropertyName("repositories_url")]
+    public required Uri RepositoriesUrl { get; init; }
+
+    [JsonPropertyName("slug")]
+    public required string Slug { get; init; }
+
+    /// <summary>
+    /// URL for the team
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestRemovedVariant1PullRequestRequestedTeamsParent
+{
+    /// <summary>
+    /// Description of the team
+    /// </summary>
+    [JsonPropertyName("description")]
+    public required string? Description { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public required Uri HtmlUrl { get; init; }
+
+    /// <summary>
+    /// Unique identifier of the team
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("members_url")]
+    public required string MembersUrl { get; init; }
+
+    /// <summary>
+    /// Name of the team
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    /// <summary>
+    /// Permission that the team will have for its repositories
+    /// </summary>
+    [JsonPropertyName("permission")]
+    public required string Permission { get; init; }
+
+    [JsonPropertyName("privacy")]
+    public required WebhooksTeamPrivacy Privacy { get; init; }
+
+    [JsonPropertyName("repositories_url")]
+    public required Uri RepositoriesUrl { get; init; }
+
+    [JsonPropertyName("slug")]
+    public required string Slug { get; init; }
+
+    /// <summary>
+    /// URL for the team
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestRemovedVariant1PullRequestUser
+{
+    [JsonPropertyName("avatar_url")]
+    public Uri? AvatarUrl { get; init; }
+
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    [JsonPropertyName("email")]
+    public string? Email { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public string? EventsUrl { get; init; }
+
+    [JsonPropertyName("followers_url")]
+    public Uri? FollowersUrl { get; init; }
+
+    [JsonPropertyName("following_url")]
+    public string? FollowingUrl { get; init; }
+
+    [JsonPropertyName("gists_url")]
+    public string? GistsUrl { get; init; }
+
+    [JsonPropertyName("gravatar_id")]
+    public string? GravatarId { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    [JsonPropertyName("id")]
+    public required long Id { get; init; }
+
+    [JsonPropertyName("login")]
+    public required string Login { get; init; }
+
+    [JsonPropertyName("name")]
+    public string? Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("organizations_url")]
+    public Uri? OrganizationsUrl { get; init; }
+
+    [JsonPropertyName("received_events_url")]
+    public Uri? ReceivedEventsUrl { get; init; }
+
+    [JsonPropertyName("repos_url")]
+    public Uri? ReposUrl { get; init; }
+
+    [JsonPropertyName("site_admin")]
+    public bool? SiteAdmin { get; init; }
+
+    [JsonPropertyName("starred_url")]
+    public string? StarredUrl { get; init; }
+
+    [JsonPropertyName("subscriptions_url")]
+    public Uri? SubscriptionsUrl { get; init; }
+
+    [JsonPropertyName("type")]
+    public WebhooksUserType? Type { get; init; }
+
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+    [JsonPropertyName("user_view_type")]
+    public string? UserViewType { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestRemovedVariant1RequestedReviewer
+{
+    [JsonPropertyName("avatar_url")]
+    public Uri? AvatarUrl { get; init; }
+
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    [JsonPropertyName("email")]
+    public string? Email { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public string? EventsUrl { get; init; }
+
+    [JsonPropertyName("followers_url")]
+    public Uri? FollowersUrl { get; init; }
+
+    [JsonPropertyName("following_url")]
+    public string? FollowingUrl { get; init; }
+
+    [JsonPropertyName("gists_url")]
+    public string? GistsUrl { get; init; }
+
+    [JsonPropertyName("gravatar_id")]
+    public string? GravatarId { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("login")]
+    public required string Login { get; init; }
+
+    [JsonPropertyName("name")]
+    public string? Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("organizations_url")]
+    public Uri? OrganizationsUrl { get; init; }
+
+    [JsonPropertyName("received_events_url")]
+    public Uri? ReceivedEventsUrl { get; init; }
+
+    [JsonPropertyName("repos_url")]
+    public Uri? ReposUrl { get; init; }
+
+    [JsonPropertyName("site_admin")]
+    public bool? SiteAdmin { get; init; }
+
+    [JsonPropertyName("starred_url")]
+    public string? StarredUrl { get; init; }
+
+    [JsonPropertyName("subscriptions_url")]
+    public Uri? SubscriptionsUrl { get; init; }
+
+    [JsonPropertyName("type")]
+    public WebhooksUserType? Type { get; init; }
+
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+    [JsonPropertyName("user_view_type")]
+    public string? UserViewType { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestRemovedVariant2
+{
+    [JsonPropertyName("action")]
+    public required WebhookPullRequestReviewRequestRemovedVariant1Action Action { get; init; }
+
+    /// <summary>
+    /// An enterprise on GitHub. Webhook payloads contain the `enterprise` property when the webhook is configured
+    /// on an enterprise account or an organization that's part of an enterprise account. For more information,
+    /// see "[About enterprise accounts](https://docs.github.com/admin/overview/about-enterprise-accounts)."
+    /// </summary>
+    [JsonPropertyName("enterprise")]
+    public EnterpriseWebhooks? Enterprise { get; init; }
+
+    /// <summary>
+    /// The GitHub App installation. Webhook payloads contain the `installation` property when the event is configured
+    /// for and sent to a GitHub App. For more information,
+    /// see "[Using webhooks with GitHub Apps](https://docs.github.com/apps/creating-github-apps/registering-a-github-app/using-webhooks-with-github-apps)."
+    /// </summary>
+    [JsonPropertyName("installation")]
+    public SimpleInstallation? Installation { get; init; }
+
+    /// <summary>
+    /// The pull request number.
+    /// </summary>
+    [JsonPropertyName("number")]
+    public required int Number { get; init; }
+
+    /// <summary>
+    /// A GitHub organization. Webhook payloads contain the `organization` property when the webhook is configured for an
+    /// organization, or when the event occurs from activity in a repository owned by an organization.
+    /// </summary>
+    [JsonPropertyName("organization")]
+    public OrganizationSimpleWebhooks? Organization { get; init; }
+
+    [JsonPropertyName("pull_request")]
+    public required WebhookPullRequestReviewRequestRemovedVariant2PullRequest PullRequest { get; init; }
+
+    /// <summary>
+    /// The repository on GitHub where the event occurred. Webhook payloads contain the `repository` property
+    /// when the event occurs from activity in a repository.
+    /// </summary>
+    [JsonPropertyName("repository")]
+    public required RepositoryWebhooks Repository { get; init; }
+
+    /// <summary>
+    /// Groups of organization members that gives permissions on specified repositories.
+    /// </summary>
+    [JsonPropertyName("requested_team")]
+    public required WebhookPullRequestReviewRequestRemovedVariant2RequestedTeam RequestedTeam { get; init; }
+
+    /// <summary>
+    /// A GitHub user.
+    /// </summary>
+    [JsonPropertyName("sender")]
+    public required SimpleUser Sender { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestRemovedVariant2PullRequest
+{
+    [JsonPropertyName("_links")]
+    public required WebhookPullRequestReviewRequestRemovedVariant2PullRequestLinks Links { get; init; }
+
+    [JsonPropertyName("active_lock_reason")]
+    public required ActiveLockReason ActiveLockReason { get; init; }
+
+    [JsonPropertyName("additions")]
+    public int? Additions { get; init; }
+
+    [JsonPropertyName("assignee")]
+    public required WebhookPullRequestReviewRequestRemovedVariant2PullRequestAssignee? Assignee { get; init; }
+
+    [JsonPropertyName("assignees")]
+    public required IReadOnlyList<WebhookPullRequestReviewRequestRemovedVariant2PullRequestAssignees?> Assignees { get; init; }
+
+    /// <summary>
+    /// How the author is associated with the repository.
+    /// </summary>
+    [JsonPropertyName("author_association")]
+    public required AuthorAssociation2 AuthorAssociation { get; init; }
+
+    /// <summary>
+    /// The status of auto merging a pull request.
+    /// </summary>
+    [JsonPropertyName("auto_merge")]
+    public required WebhookPullRequestReviewRequestRemovedVariant2PullRequestAutoMerge? AutoMerge { get; init; }
+
+    [JsonPropertyName("base")]
+    public required WebhookPullRequestReviewRequestRemovedVariant2PullRequestBase Base { get; init; }
+
+    [JsonPropertyName("body")]
+    public required string? Body { get; init; }
+
+    [JsonPropertyName("changed_files")]
+    public int? ChangedFiles { get; init; }
+
+    [JsonPropertyName("closed_at")]
+    public required DateTimeOffset? ClosedAt { get; init; }
+
+    [JsonPropertyName("comments")]
+    public int? Comments { get; init; }
+
+    [JsonPropertyName("comments_url")]
+    public required Uri CommentsUrl { get; init; }
+
+    [JsonPropertyName("commits")]
+    public int? Commits { get; init; }
+
+    [JsonPropertyName("commits_url")]
+    public required Uri CommitsUrl { get; init; }
+
+    [JsonPropertyName("created_at")]
+    public required DateTimeOffset CreatedAt { get; init; }
+
+    [JsonPropertyName("deletions")]
+    public int? Deletions { get; init; }
+
+    [JsonPropertyName("diff_url")]
+    public required Uri DiffUrl { get; init; }
+
+    /// <summary>
+    /// Indicates whether or not the pull request is a draft.
+    /// </summary>
+    [JsonPropertyName("draft")]
+    public required bool Draft { get; init; }
+
+    [JsonPropertyName("head")]
+    public required WebhookPullRequestReviewRequestRemovedVariant2PullRequestHead Head { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public required Uri HtmlUrl { get; init; }
+
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("issue_url")]
+    public required Uri IssueUrl { get; init; }
+
+    [JsonPropertyName("labels")]
+    public required IReadOnlyList<WebhookPullRequestReviewRequestRemovedVariant2PullRequestLabels> Labels { get; init; }
+
+    [JsonPropertyName("locked")]
+    public required bool Locked { get; init; }
+
+    /// <summary>
+    /// Indicates whether maintainers can modify the pull request.
+    /// </summary>
+    [JsonPropertyName("maintainer_can_modify")]
+    public bool? MaintainerCanModify { get; init; }
+
+    [JsonPropertyName("merge_commit_sha")]
+    public required string? MergeCommitSha { get; init; }
+
+    [JsonPropertyName("mergeable")]
+    public bool? Mergeable { get; init; }
+
+    [JsonPropertyName("mergeable_state")]
+    public string? MergeableState { get; init; }
+
+    [JsonPropertyName("merged")]
+    public bool? Merged { get; init; }
+
+    [JsonPropertyName("merged_at")]
+    public required DateTimeOffset? MergedAt { get; init; }
+
+    [JsonPropertyName("merged_by")]
+    public WebhookPullRequestReviewRequestRemovedVariant2PullRequestMergedBy? MergedBy { get; init; }
+
+    /// <summary>
+    /// A collection of related issues and pull requests.
+    /// </summary>
+    [JsonPropertyName("milestone")]
+    public required WebhookPullRequestReviewRequestRemovedVariant2PullRequestMilestone? Milestone { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    /// <summary>
+    /// Number uniquely identifying the pull request within its repository.
+    /// </summary>
+    [JsonPropertyName("number")]
+    public required int Number { get; init; }
+
+    [JsonPropertyName("patch_url")]
+    public required Uri PatchUrl { get; init; }
+
+    [JsonPropertyName("rebaseable")]
+    public bool? Rebaseable { get; init; }
+
+    [JsonPropertyName("requested_reviewers")]
+    public required IReadOnlyList<WebhookPullRequestReviewRequestRemovedVariant2PullRequestRequestedReviewers> RequestedReviewers { get; init; }
+
+    [JsonPropertyName("requested_teams")]
+    public required IReadOnlyList<WebhookPullRequestReviewRequestRemovedVariant2PullRequestRequestedTeams> RequestedTeams { get; init; }
+
+    [JsonPropertyName("review_comment_url")]
+    public required string ReviewCommentUrl { get; init; }
+
+    [JsonPropertyName("review_comments")]
+    public int? ReviewComments { get; init; }
+
+    [JsonPropertyName("review_comments_url")]
+    public required Uri ReviewCommentsUrl { get; init; }
+
+    /// <summary>
+    /// The stack information associated with a pull request.
+    /// </summary>
+    [JsonPropertyName("stack")]
+    public PullRequestStack? Stack { get; init; }
+
+    /// <summary>
+    /// State of this Pull Request. Either `open` or `closed`.
+    /// </summary>
+    [JsonPropertyName("state")]
+    public required MilestoneState State { get; init; }
+
+    [JsonPropertyName("statuses_url")]
+    public required Uri StatusesUrl { get; init; }
+
+    /// <summary>
+    /// The title of the pull request.
+    /// </summary>
+    [JsonPropertyName("title")]
+    public required string Title { get; init; }
+
+    [JsonPropertyName("updated_at")]
+    public required DateTimeOffset UpdatedAt { get; init; }
+
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+    [JsonPropertyName("user")]
+    public required WebhookPullRequestReviewRequestRemovedVariant2PullRequestUser? User { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestRemovedVariant2PullRequestLinks
+{
+    [JsonPropertyName("comments")]
+    public required WebhookPullRequestReviewRequestRemovedVariant2PullRequestLinksComments Comments { get; init; }
+
+    [JsonPropertyName("commits")]
+    public required WebhookPullRequestReviewRequestRemovedVariant2PullRequestLinksCommits Commits { get; init; }
+
+    [JsonPropertyName("html")]
+    public required WebhookPullRequestReviewRequestRemovedVariant2PullRequestLinksHtml Html { get; init; }
+
+    [JsonPropertyName("issue")]
+    public required WebhookPullRequestReviewRequestRemovedVariant2PullRequestLinksIssue Issue { get; init; }
+
+    [JsonPropertyName("review_comment")]
+    public required WebhookPullRequestReviewRequestRemovedVariant2PullRequestLinksReviewComment ReviewComment { get; init; }
+
+    [JsonPropertyName("review_comments")]
+    public required WebhookPullRequestReviewRequestRemovedVariant2PullRequestLinksReviewComments ReviewComments { get; init; }
+
+    [JsonPropertyName("self")]
+    public required WebhookPullRequestReviewRequestRemovedVariant2PullRequestLinksSelf Self { get; init; }
+
+    [JsonPropertyName("statuses")]
+    public required WebhookPullRequestReviewRequestRemovedVariant2PullRequestLinksStatuses Statuses { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestRemovedVariant2PullRequestLinksComments
+{
+    [JsonPropertyName("href")]
+    public required string Href { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestRemovedVariant2PullRequestLinksCommits
+{
+    [JsonPropertyName("href")]
+    public required string Href { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestRemovedVariant2PullRequestLinksHtml
+{
+    [JsonPropertyName("href")]
+    public required string Href { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestRemovedVariant2PullRequestLinksIssue
+{
+    [JsonPropertyName("href")]
+    public required string Href { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestRemovedVariant2PullRequestLinksReviewComment
+{
+    [JsonPropertyName("href")]
+    public required string Href { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestRemovedVariant2PullRequestLinksReviewComments
+{
+    [JsonPropertyName("href")]
+    public required string Href { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestRemovedVariant2PullRequestLinksSelf
+{
+    [JsonPropertyName("href")]
+    public required string Href { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestRemovedVariant2PullRequestLinksStatuses
+{
+    [JsonPropertyName("href")]
+    public required string Href { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestRemovedVariant2PullRequestAssignee
+{
+    [JsonPropertyName("avatar_url")]
+    public Uri? AvatarUrl { get; init; }
+
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    [JsonPropertyName("email")]
+    public string? Email { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public string? EventsUrl { get; init; }
+
+    [JsonPropertyName("followers_url")]
+    public Uri? FollowersUrl { get; init; }
+
+    [JsonPropertyName("following_url")]
+    public string? FollowingUrl { get; init; }
+
+    [JsonPropertyName("gists_url")]
+    public string? GistsUrl { get; init; }
+
+    [JsonPropertyName("gravatar_id")]
+    public string? GravatarId { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("login")]
+    public required string Login { get; init; }
+
+    [JsonPropertyName("name")]
+    public string? Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("organizations_url")]
+    public Uri? OrganizationsUrl { get; init; }
+
+    [JsonPropertyName("received_events_url")]
+    public Uri? ReceivedEventsUrl { get; init; }
+
+    [JsonPropertyName("repos_url")]
+    public Uri? ReposUrl { get; init; }
+
+    [JsonPropertyName("site_admin")]
+    public bool? SiteAdmin { get; init; }
+
+    [JsonPropertyName("starred_url")]
+    public string? StarredUrl { get; init; }
+
+    [JsonPropertyName("subscriptions_url")]
+    public Uri? SubscriptionsUrl { get; init; }
+
+    [JsonPropertyName("type")]
+    public WebhooksUserType? Type { get; init; }
+
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+    [JsonPropertyName("user_view_type")]
+    public string? UserViewType { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestRemovedVariant2PullRequestAssignees
+{
+    [JsonPropertyName("avatar_url")]
+    public Uri? AvatarUrl { get; init; }
+
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    [JsonPropertyName("email")]
+    public string? Email { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public string? EventsUrl { get; init; }
+
+    [JsonPropertyName("followers_url")]
+    public Uri? FollowersUrl { get; init; }
+
+    [JsonPropertyName("following_url")]
+    public string? FollowingUrl { get; init; }
+
+    [JsonPropertyName("gists_url")]
+    public string? GistsUrl { get; init; }
+
+    [JsonPropertyName("gravatar_id")]
+    public string? GravatarId { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("login")]
+    public required string Login { get; init; }
+
+    [JsonPropertyName("name")]
+    public string? Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("organizations_url")]
+    public Uri? OrganizationsUrl { get; init; }
+
+    [JsonPropertyName("received_events_url")]
+    public Uri? ReceivedEventsUrl { get; init; }
+
+    [JsonPropertyName("repos_url")]
+    public Uri? ReposUrl { get; init; }
+
+    [JsonPropertyName("site_admin")]
+    public bool? SiteAdmin { get; init; }
+
+    [JsonPropertyName("starred_url")]
+    public string? StarredUrl { get; init; }
+
+    [JsonPropertyName("subscriptions_url")]
+    public Uri? SubscriptionsUrl { get; init; }
+
+    [JsonPropertyName("type")]
+    public WebhooksUserType? Type { get; init; }
+
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+    [JsonPropertyName("user_view_type")]
+    public string? UserViewType { get; init; }
+
+}
+
+/// <summary>
+/// The status of auto merging a pull request.
+/// </summary>
+public partial record WebhookPullRequestReviewRequestRemovedVariant2PullRequestAutoMerge
+{
+    /// <summary>
+    /// Commit message for the merge commit.
+    /// </summary>
+    [JsonPropertyName("commit_message")]
+    public required string? CommitMessage { get; init; }
+
+    /// <summary>
+    /// Title for the merge commit message.
+    /// </summary>
+    [JsonPropertyName("commit_title")]
+    public required string? CommitTitle { get; init; }
+
+    [JsonPropertyName("enabled_by")]
+    public required WebhookPullRequestReviewRequestRemovedVariant2PullRequestAutoMergeEnabledBy? EnabledBy { get; init; }
+
+    /// <summary>
+    /// The merge method to use.
+    /// </summary>
+    [JsonPropertyName("merge_method")]
+    public required AutoMergeMergeMethod MergeMethod { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestRemovedVariant2PullRequestAutoMergeEnabledBy
+{
+    [JsonPropertyName("avatar_url")]
+    public Uri? AvatarUrl { get; init; }
+
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    [JsonPropertyName("email")]
+    public string? Email { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public string? EventsUrl { get; init; }
+
+    [JsonPropertyName("followers_url")]
+    public Uri? FollowersUrl { get; init; }
+
+    [JsonPropertyName("following_url")]
+    public string? FollowingUrl { get; init; }
+
+    [JsonPropertyName("gists_url")]
+    public string? GistsUrl { get; init; }
+
+    [JsonPropertyName("gravatar_id")]
+    public string? GravatarId { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("login")]
+    public required string Login { get; init; }
+
+    [JsonPropertyName("name")]
+    public string? Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("organizations_url")]
+    public Uri? OrganizationsUrl { get; init; }
+
+    [JsonPropertyName("received_events_url")]
+    public Uri? ReceivedEventsUrl { get; init; }
+
+    [JsonPropertyName("repos_url")]
+    public Uri? ReposUrl { get; init; }
+
+    [JsonPropertyName("site_admin")]
+    public bool? SiteAdmin { get; init; }
+
+    [JsonPropertyName("starred_url")]
+    public string? StarredUrl { get; init; }
+
+    [JsonPropertyName("subscriptions_url")]
+    public Uri? SubscriptionsUrl { get; init; }
+
+    [JsonPropertyName("type")]
+    public WebhooksUserType? Type { get; init; }
+
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+    [JsonPropertyName("user_view_type")]
+    public string? UserViewType { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestRemovedVariant2PullRequestBase
+{
+    [JsonPropertyName("label")]
+    public required string Label { get; init; }
+
+    [JsonPropertyName("ref")]
+    public required string Ref { get; init; }
+
+    /// <summary>
+    /// A git repository
+    /// </summary>
+    [JsonPropertyName("repo")]
+    public required WebhookPullRequestReviewRequestRemovedVariant2PullRequestBaseRepo Repo { get; init; }
+
+    [JsonPropertyName("sha")]
+    public required string Sha { get; init; }
+
+    [JsonPropertyName("user")]
+    public required WebhookPullRequestReviewRequestRemovedVariant2PullRequestBaseUser? User { get; init; }
+
+}
+
+/// <summary>
+/// A git repository
+/// </summary>
+public partial record WebhookPullRequestReviewRequestRemovedVariant2PullRequestBaseRepo
+{
+    /// <summary>
+    /// Whether to allow auto-merge for pull requests.
+    /// </summary>
+    [JsonPropertyName("allow_auto_merge")]
+    public bool AllowAutoMerge { get; init; } = false;
+
+    /// <summary>
+    /// Whether to allow private forks
+    /// </summary>
+    [JsonPropertyName("allow_forking")]
+    public bool? AllowForking { get; init; }
+
+    /// <summary>
+    /// Whether to allow merge commits for pull requests.
+    /// </summary>
+    [JsonPropertyName("allow_merge_commit")]
+    public bool AllowMergeCommit { get; init; } = true;
+
+    /// <summary>
+    /// Whether to allow rebase merges for pull requests.
+    /// </summary>
+    [JsonPropertyName("allow_rebase_merge")]
+    public bool AllowRebaseMerge { get; init; } = true;
+
+    /// <summary>
+    /// Whether to allow squash merges for pull requests.
+    /// </summary>
+    [JsonPropertyName("allow_squash_merge")]
+    public bool AllowSquashMerge { get; init; } = true;
+
+    [JsonPropertyName("allow_update_branch")]
+    public bool? AllowUpdateBranch { get; init; }
+
+    [JsonPropertyName("archive_url")]
+    public required string ArchiveUrl { get; init; }
+
+    /// <summary>
+    /// Whether the repository is archived.
+    /// </summary>
+    [JsonPropertyName("archived")]
+    public required bool Archived { get; init; } = false;
+
+    [JsonPropertyName("assignees_url")]
+    public required string AssigneesUrl { get; init; }
+
+    [JsonPropertyName("blobs_url")]
+    public required string BlobsUrl { get; init; }
+
+    [JsonPropertyName("branches_url")]
+    public required string BranchesUrl { get; init; }
+
+    [JsonPropertyName("clone_url")]
+    public required Uri CloneUrl { get; init; }
+
+    [JsonPropertyName("collaborators_url")]
+    public required string CollaboratorsUrl { get; init; }
+
+    [JsonPropertyName("comments_url")]
+    public required string CommentsUrl { get; init; }
+
+    [JsonPropertyName("commits_url")]
+    public required string CommitsUrl { get; init; }
+
+    [JsonPropertyName("compare_url")]
+    public required string CompareUrl { get; init; }
+
+    [JsonPropertyName("contents_url")]
+    public required string ContentsUrl { get; init; }
+
+    [JsonPropertyName("contributors_url")]
+    public required Uri ContributorsUrl { get; init; }
+
+    [JsonPropertyName("created_at")]
+    public required object CreatedAt { get; init; }
+
+    /// <summary>
+    /// The default branch of the repository.
+    /// </summary>
+    [JsonPropertyName("default_branch")]
+    public required string DefaultBranch { get; init; }
+
+    /// <summary>
+    /// Whether to delete head branches when pull requests are merged
+    /// </summary>
+    [JsonPropertyName("delete_branch_on_merge")]
+    public bool DeleteBranchOnMerge { get; init; } = false;
+
+    [JsonPropertyName("deployments_url")]
+    public required Uri DeploymentsUrl { get; init; }
+
+    [JsonPropertyName("description")]
+    public required string? Description { get; init; }
+
+    /// <summary>
+    /// Returns whether or not this repository is disabled.
+    /// </summary>
+    [JsonPropertyName("disabled")]
+    public bool? Disabled { get; init; }
+
+    [JsonPropertyName("downloads_url")]
+    public required Uri DownloadsUrl { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public required Uri EventsUrl { get; init; }
+
+    [JsonPropertyName("fork")]
+    public required bool Fork { get; init; }
+
+    [JsonPropertyName("forks")]
+    public required int Forks { get; init; }
+
+    [JsonPropertyName("forks_count")]
+    public required int ForksCount { get; init; }
+
+    [JsonPropertyName("forks_url")]
+    public required Uri ForksUrl { get; init; }
+
+    [JsonPropertyName("full_name")]
+    public required string FullName { get; init; }
+
+    [JsonPropertyName("git_commits_url")]
+    public required string GitCommitsUrl { get; init; }
+
+    [JsonPropertyName("git_refs_url")]
+    public required string GitRefsUrl { get; init; }
+
+    [JsonPropertyName("git_tags_url")]
+    public required string GitTagsUrl { get; init; }
+
+    [JsonPropertyName("git_url")]
+    public required Uri GitUrl { get; init; }
+
+    /// <summary>
+    /// Whether downloads are enabled.
+    /// </summary>
+    [JsonPropertyName("has_downloads")]
+    public required bool HasDownloads { get; init; } = true;
+
+    /// <summary>
+    /// Whether issues are enabled.
+    /// </summary>
+    [JsonPropertyName("has_issues")]
+    public required bool HasIssues { get; init; } = true;
+
+    [JsonPropertyName("has_pages")]
+    public required bool HasPages { get; init; }
+
+    /// <summary>
+    /// Whether projects are enabled.
+    /// </summary>
+    [JsonPropertyName("has_projects")]
+    public required bool HasProjects { get; init; } = true;
+
+    /// <summary>
+    /// Whether the wiki is enabled.
+    /// </summary>
+    [JsonPropertyName("has_wiki")]
+    public required bool HasWiki { get; init; } = true;
+
+    /// <summary>
+    /// Whether discussions are enabled.
+    /// </summary>
+    [JsonPropertyName("has_discussions")]
+    public required bool HasDiscussions { get; init; } = false;
+
+    /// <summary>
+    /// Whether pull requests are enabled.
+    /// </summary>
+    [JsonPropertyName("has_pull_requests")]
+    public bool HasPullRequests { get; init; } = true;
+
+    /// <summary>
+    /// The policy controlling who can create pull requests: all or collaborators_only.
+    /// </summary>
+    [JsonPropertyName("pull_request_creation_policy")]
+    public PullRequestCreationPolicy? PullRequestCreationPolicy { get; init; }
+
+    [JsonPropertyName("homepage")]
+    public required string? Homepage { get; init; }
+
+    [JsonPropertyName("hooks_url")]
+    public required Uri HooksUrl { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public required Uri HtmlUrl { get; init; }
+
+    /// <summary>
+    /// Unique identifier of the repository
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required long Id { get; init; }
+
+    [JsonPropertyName("is_template")]
+    public bool? IsTemplate { get; init; }
+
+    [JsonPropertyName("issue_comment_url")]
+    public required string IssueCommentUrl { get; init; }
+
+    [JsonPropertyName("issue_events_url")]
+    public required string IssueEventsUrl { get; init; }
+
+    [JsonPropertyName("issues_url")]
+    public required string IssuesUrl { get; init; }
+
+    [JsonPropertyName("keys_url")]
+    public required string KeysUrl { get; init; }
+
+    [JsonPropertyName("labels_url")]
+    public required string LabelsUrl { get; init; }
+
+    [JsonPropertyName("language")]
+    public required string? Language { get; init; }
+
+    [JsonPropertyName("languages_url")]
+    public required Uri LanguagesUrl { get; init; }
+
+    [JsonPropertyName("license")]
+    public required WebhookPullRequestReviewRequestRemovedVariant2PullRequestBaseRepoLicense? License { get; init; }
+
+    [JsonPropertyName("master_branch")]
+    public string? MasterBranch { get; init; }
+
+    /// <summary>
+    /// The default value for a merge commit message.
+    /// 
+    /// - `PR_TITLE` - default to the pull request's title.
+    /// - `PR_BODY` - default to the pull request's body.
+    /// - `BLANK` - default to a blank commit message.
+    /// </summary>
+    [JsonPropertyName("merge_commit_message")]
+    public MergeCommitMessage? MergeCommitMessage { get; init; }
+
+    /// <summary>
+    /// The default value for a merge commit title.
+    /// 
+    /// - `PR_TITLE` - default to the pull request's title.
+    /// - `MERGE_MESSAGE` - default to the classic title for a merge message (e.g., Merge pull request #123 from branch-name).
+    /// </summary>
+    [JsonPropertyName("merge_commit_title")]
+    public MergeCommitTitle? MergeCommitTitle { get; init; }
+
+    [JsonPropertyName("merges_url")]
+    public required Uri MergesUrl { get; init; }
+
+    [JsonPropertyName("milestones_url")]
+    public required string MilestonesUrl { get; init; }
+
+    [JsonPropertyName("mirror_url")]
+    public required Uri? MirrorUrl { get; init; }
+
+    /// <summary>
+    /// The name of the repository.
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    [JsonPropertyName("notifications_url")]
+    public required string NotificationsUrl { get; init; }
+
+    [JsonPropertyName("open_issues")]
+    public required int OpenIssues { get; init; }
+
+    [JsonPropertyName("open_issues_count")]
+    public required int OpenIssuesCount { get; init; }
+
+    [JsonPropertyName("organization")]
+    public string? Organization { get; init; }
+
+    [JsonPropertyName("owner")]
+    public required WebhookPullRequestReviewRequestRemovedVariant2PullRequestBaseRepoOwner? Owner { get; init; }
+
+    [JsonPropertyName("permissions")]
+    public WebhookPullRequestReviewRequestRemovedVariant2PullRequestBaseRepoPermissions? Permissions { get; init; }
+
+    /// <summary>
+    /// Whether the repository is private or public.
+    /// </summary>
+    [JsonPropertyName("private")]
+    public required bool Private { get; init; }
+
+    [JsonPropertyName("public")]
+    public bool? Public { get; init; }
+
+    [JsonPropertyName("pulls_url")]
+    public required string PullsUrl { get; init; }
+
+    [JsonPropertyName("pushed_at")]
+    public required object? PushedAt { get; init; }
+
+    [JsonPropertyName("releases_url")]
+    public required string ReleasesUrl { get; init; }
+
+    [JsonPropertyName("role_name")]
+    public string? RoleName { get; init; }
+
+    [JsonPropertyName("size")]
+    public required int Size { get; init; }
+
+    /// <summary>
+    /// The default value for a squash merge commit message:
+    /// 
+    /// - `PR_BODY` - default to the pull request's body.
+    /// - `COMMIT_MESSAGES` - default to the branch's commit messages.
+    /// - `BLANK` - default to a blank commit message.
+    /// </summary>
+    [JsonPropertyName("squash_merge_commit_message")]
+    public SquashMergeCommitMessage? SquashMergeCommitMessage { get; init; }
+
+    /// <summary>
+    /// The default value for a squash merge commit title:
+    /// 
+    /// - `PR_TITLE` - default to the pull request's title.
+    /// - `COMMIT_OR_PR_TITLE` - default to the commit's title (if only one commit) or the pull request's title (when more than one commit).
+    /// </summary>
+    [JsonPropertyName("squash_merge_commit_title")]
+    public SquashMergeCommitTitle? SquashMergeCommitTitle { get; init; }
+
+    [JsonPropertyName("ssh_url")]
+    public required string SshUrl { get; init; }
+
+    [JsonPropertyName("stargazers")]
+    public int? Stargazers { get; init; }
+
+    [JsonPropertyName("stargazers_count")]
+    public required int StargazersCount { get; init; }
+
+    [JsonPropertyName("stargazers_url")]
+    public required Uri StargazersUrl { get; init; }
+
+    [JsonPropertyName("statuses_url")]
+    public required string StatusesUrl { get; init; }
+
+    [JsonPropertyName("subscribers_url")]
+    public required Uri SubscribersUrl { get; init; }
+
+    [JsonPropertyName("subscription_url")]
+    public required Uri SubscriptionUrl { get; init; }
+
+    [JsonPropertyName("svn_url")]
+    public required Uri SvnUrl { get; init; }
+
+    [JsonPropertyName("tags_url")]
+    public required Uri TagsUrl { get; init; }
+
+    [JsonPropertyName("teams_url")]
+    public required Uri TeamsUrl { get; init; }
+
+    [JsonPropertyName("topics")]
+    public required IReadOnlyList<string> Topics { get; init; }
+
+    [JsonPropertyName("trees_url")]
+    public required string TreesUrl { get; init; }
+
+    [JsonPropertyName("updated_at")]
+    public required DateTimeOffset UpdatedAt { get; init; }
+
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+    /// <summary>
+    /// Whether a squash merge commit can use the pull request title as default. **This property is closing down. Please use `squash_merge_commit_title` instead.
+    /// </summary>
+    [JsonPropertyName("use_squash_pr_title_as_default")]
+    public bool UseSquashPrTitleAsDefault { get; init; } = false;
+
+    [JsonPropertyName("visibility")]
+    public required WebhooksPullRequest5BaseRepoVisibility Visibility { get; init; }
+
+    [JsonPropertyName("watchers")]
+    public required int Watchers { get; init; }
+
+    [JsonPropertyName("watchers_count")]
+    public required int WatchersCount { get; init; }
+
+    /// <summary>
+    /// Whether to require contributors to sign off on web-based commits
+    /// </summary>
+    [JsonPropertyName("web_commit_signoff_required")]
+    public bool? WebCommitSignoffRequired { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestRemovedVariant2PullRequestBaseRepoLicense
+{
+    [JsonPropertyName("key")]
+    public required string Key { get; init; }
+
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    [JsonPropertyName("spdx_id")]
+    public required string SpdxId { get; init; }
+
+    [JsonPropertyName("url")]
+    public required Uri? Url { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestRemovedVariant2PullRequestBaseRepoOwner
+{
+    [JsonPropertyName("avatar_url")]
+    public Uri? AvatarUrl { get; init; }
+
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    [JsonPropertyName("email")]
+    public string? Email { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public string? EventsUrl { get; init; }
+
+    [JsonPropertyName("followers_url")]
+    public Uri? FollowersUrl { get; init; }
+
+    [JsonPropertyName("following_url")]
+    public string? FollowingUrl { get; init; }
+
+    [JsonPropertyName("gists_url")]
+    public string? GistsUrl { get; init; }
+
+    [JsonPropertyName("gravatar_id")]
+    public string? GravatarId { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("login")]
+    public required string Login { get; init; }
+
+    [JsonPropertyName("name")]
+    public string? Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("organizations_url")]
+    public Uri? OrganizationsUrl { get; init; }
+
+    [JsonPropertyName("received_events_url")]
+    public Uri? ReceivedEventsUrl { get; init; }
+
+    [JsonPropertyName("repos_url")]
+    public Uri? ReposUrl { get; init; }
+
+    [JsonPropertyName("site_admin")]
+    public bool? SiteAdmin { get; init; }
+
+    [JsonPropertyName("starred_url")]
+    public string? StarredUrl { get; init; }
+
+    [JsonPropertyName("subscriptions_url")]
+    public Uri? SubscriptionsUrl { get; init; }
+
+    [JsonPropertyName("type")]
+    public WebhooksUserType? Type { get; init; }
+
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+    [JsonPropertyName("user_view_type")]
+    public string? UserViewType { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestRemovedVariant2PullRequestBaseRepoPermissions
+{
+    [JsonPropertyName("admin")]
+    public required bool Admin { get; init; }
+
+    [JsonPropertyName("maintain")]
+    public bool? Maintain { get; init; }
+
+    [JsonPropertyName("pull")]
+    public required bool Pull { get; init; }
+
+    [JsonPropertyName("push")]
+    public required bool Push { get; init; }
+
+    [JsonPropertyName("triage")]
+    public bool? Triage { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestRemovedVariant2PullRequestBaseUser
+{
+    [JsonPropertyName("avatar_url")]
+    public Uri? AvatarUrl { get; init; }
+
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    [JsonPropertyName("email")]
+    public string? Email { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public string? EventsUrl { get; init; }
+
+    [JsonPropertyName("followers_url")]
+    public Uri? FollowersUrl { get; init; }
+
+    [JsonPropertyName("following_url")]
+    public string? FollowingUrl { get; init; }
+
+    [JsonPropertyName("gists_url")]
+    public string? GistsUrl { get; init; }
+
+    [JsonPropertyName("gravatar_id")]
+    public string? GravatarId { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    [JsonPropertyName("id")]
+    public required long Id { get; init; }
+
+    [JsonPropertyName("login")]
+    public required string Login { get; init; }
+
+    [JsonPropertyName("name")]
+    public string? Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("organizations_url")]
+    public Uri? OrganizationsUrl { get; init; }
+
+    [JsonPropertyName("received_events_url")]
+    public Uri? ReceivedEventsUrl { get; init; }
+
+    [JsonPropertyName("repos_url")]
+    public Uri? ReposUrl { get; init; }
+
+    [JsonPropertyName("site_admin")]
+    public bool? SiteAdmin { get; init; }
+
+    [JsonPropertyName("starred_url")]
+    public string? StarredUrl { get; init; }
+
+    [JsonPropertyName("subscriptions_url")]
+    public Uri? SubscriptionsUrl { get; init; }
+
+    [JsonPropertyName("type")]
+    public WebhooksUserType? Type { get; init; }
+
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+    [JsonPropertyName("user_view_type")]
+    public string? UserViewType { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestRemovedVariant2PullRequestHead
+{
+    [JsonPropertyName("label")]
+    public required string Label { get; init; }
+
+    [JsonPropertyName("ref")]
+    public required string Ref { get; init; }
+
+    /// <summary>
+    /// A git repository
+    /// </summary>
+    [JsonPropertyName("repo")]
+    public required WebhookPullRequestReviewRequestRemovedVariant2PullRequestHeadRepo Repo { get; init; }
+
+    [JsonPropertyName("sha")]
+    public required string Sha { get; init; }
+
+    [JsonPropertyName("user")]
+    public required WebhookPullRequestReviewRequestRemovedVariant2PullRequestHeadUser? User { get; init; }
+
+}
+
+/// <summary>
+/// A git repository
+/// </summary>
+public partial record WebhookPullRequestReviewRequestRemovedVariant2PullRequestHeadRepo
+{
+    /// <summary>
+    /// Whether to allow auto-merge for pull requests.
+    /// </summary>
+    [JsonPropertyName("allow_auto_merge")]
+    public bool AllowAutoMerge { get; init; } = false;
+
+    /// <summary>
+    /// Whether to allow private forks
+    /// </summary>
+    [JsonPropertyName("allow_forking")]
+    public bool? AllowForking { get; init; }
+
+    /// <summary>
+    /// Whether to allow merge commits for pull requests.
+    /// </summary>
+    [JsonPropertyName("allow_merge_commit")]
+    public bool AllowMergeCommit { get; init; } = true;
+
+    /// <summary>
+    /// Whether to allow rebase merges for pull requests.
+    /// </summary>
+    [JsonPropertyName("allow_rebase_merge")]
+    public bool AllowRebaseMerge { get; init; } = true;
+
+    /// <summary>
+    /// Whether to allow squash merges for pull requests.
+    /// </summary>
+    [JsonPropertyName("allow_squash_merge")]
+    public bool AllowSquashMerge { get; init; } = true;
+
+    [JsonPropertyName("allow_update_branch")]
+    public bool? AllowUpdateBranch { get; init; }
+
+    [JsonPropertyName("archive_url")]
+    public required string ArchiveUrl { get; init; }
+
+    /// <summary>
+    /// Whether the repository is archived.
+    /// </summary>
+    [JsonPropertyName("archived")]
+    public required bool Archived { get; init; } = false;
+
+    [JsonPropertyName("assignees_url")]
+    public required string AssigneesUrl { get; init; }
+
+    [JsonPropertyName("blobs_url")]
+    public required string BlobsUrl { get; init; }
+
+    [JsonPropertyName("branches_url")]
+    public required string BranchesUrl { get; init; }
+
+    [JsonPropertyName("clone_url")]
+    public required Uri CloneUrl { get; init; }
+
+    [JsonPropertyName("collaborators_url")]
+    public required string CollaboratorsUrl { get; init; }
+
+    [JsonPropertyName("comments_url")]
+    public required string CommentsUrl { get; init; }
+
+    [JsonPropertyName("commits_url")]
+    public required string CommitsUrl { get; init; }
+
+    [JsonPropertyName("compare_url")]
+    public required string CompareUrl { get; init; }
+
+    [JsonPropertyName("contents_url")]
+    public required string ContentsUrl { get; init; }
+
+    [JsonPropertyName("contributors_url")]
+    public required Uri ContributorsUrl { get; init; }
+
+    [JsonPropertyName("created_at")]
+    public required object CreatedAt { get; init; }
+
+    /// <summary>
+    /// The default branch of the repository.
+    /// </summary>
+    [JsonPropertyName("default_branch")]
+    public required string DefaultBranch { get; init; }
+
+    /// <summary>
+    /// Whether to delete head branches when pull requests are merged
+    /// </summary>
+    [JsonPropertyName("delete_branch_on_merge")]
+    public bool DeleteBranchOnMerge { get; init; } = false;
+
+    [JsonPropertyName("deployments_url")]
+    public required Uri DeploymentsUrl { get; init; }
+
+    [JsonPropertyName("description")]
+    public required string? Description { get; init; }
+
+    /// <summary>
+    /// Returns whether or not this repository is disabled.
+    /// </summary>
+    [JsonPropertyName("disabled")]
+    public bool? Disabled { get; init; }
+
+    [JsonPropertyName("downloads_url")]
+    public required Uri DownloadsUrl { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public required Uri EventsUrl { get; init; }
+
+    [JsonPropertyName("fork")]
+    public required bool Fork { get; init; }
+
+    [JsonPropertyName("forks")]
+    public required int Forks { get; init; }
+
+    [JsonPropertyName("forks_count")]
+    public required int ForksCount { get; init; }
+
+    [JsonPropertyName("forks_url")]
+    public required Uri ForksUrl { get; init; }
+
+    [JsonPropertyName("full_name")]
+    public required string FullName { get; init; }
+
+    [JsonPropertyName("git_commits_url")]
+    public required string GitCommitsUrl { get; init; }
+
+    [JsonPropertyName("git_refs_url")]
+    public required string GitRefsUrl { get; init; }
+
+    [JsonPropertyName("git_tags_url")]
+    public required string GitTagsUrl { get; init; }
+
+    [JsonPropertyName("git_url")]
+    public required Uri GitUrl { get; init; }
+
+    /// <summary>
+    /// Whether downloads are enabled.
+    /// </summary>
+    [JsonPropertyName("has_downloads")]
+    public required bool HasDownloads { get; init; } = true;
+
+    /// <summary>
+    /// Whether issues are enabled.
+    /// </summary>
+    [JsonPropertyName("has_issues")]
+    public required bool HasIssues { get; init; } = true;
+
+    [JsonPropertyName("has_pages")]
+    public required bool HasPages { get; init; }
+
+    /// <summary>
+    /// Whether projects are enabled.
+    /// </summary>
+    [JsonPropertyName("has_projects")]
+    public required bool HasProjects { get; init; } = true;
+
+    /// <summary>
+    /// Whether the wiki is enabled.
+    /// </summary>
+    [JsonPropertyName("has_wiki")]
+    public required bool HasWiki { get; init; } = true;
+
+    /// <summary>
+    /// Whether discussions are enabled.
+    /// </summary>
+    [JsonPropertyName("has_discussions")]
+    public required bool HasDiscussions { get; init; } = false;
+
+    /// <summary>
+    /// Whether pull requests are enabled.
+    /// </summary>
+    [JsonPropertyName("has_pull_requests")]
+    public bool HasPullRequests { get; init; } = true;
+
+    /// <summary>
+    /// The policy controlling who can create pull requests: all or collaborators_only.
+    /// </summary>
+    [JsonPropertyName("pull_request_creation_policy")]
+    public PullRequestCreationPolicy? PullRequestCreationPolicy { get; init; }
+
+    [JsonPropertyName("homepage")]
+    public required string? Homepage { get; init; }
+
+    [JsonPropertyName("hooks_url")]
+    public required Uri HooksUrl { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public required Uri HtmlUrl { get; init; }
+
+    /// <summary>
+    /// Unique identifier of the repository
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required long Id { get; init; }
+
+    [JsonPropertyName("is_template")]
+    public bool? IsTemplate { get; init; }
+
+    [JsonPropertyName("issue_comment_url")]
+    public required string IssueCommentUrl { get; init; }
+
+    [JsonPropertyName("issue_events_url")]
+    public required string IssueEventsUrl { get; init; }
+
+    [JsonPropertyName("issues_url")]
+    public required string IssuesUrl { get; init; }
+
+    [JsonPropertyName("keys_url")]
+    public required string KeysUrl { get; init; }
+
+    [JsonPropertyName("labels_url")]
+    public required string LabelsUrl { get; init; }
+
+    [JsonPropertyName("language")]
+    public required string? Language { get; init; }
+
+    [JsonPropertyName("languages_url")]
+    public required Uri LanguagesUrl { get; init; }
+
+    [JsonPropertyName("license")]
+    public required WebhookPullRequestReviewRequestRemovedVariant2PullRequestHeadRepoLicense? License { get; init; }
+
+    [JsonPropertyName("master_branch")]
+    public string? MasterBranch { get; init; }
+
+    /// <summary>
+    /// The default value for a merge commit message.
+    /// 
+    /// - `PR_TITLE` - default to the pull request's title.
+    /// - `PR_BODY` - default to the pull request's body.
+    /// - `BLANK` - default to a blank commit message.
+    /// </summary>
+    [JsonPropertyName("merge_commit_message")]
+    public MergeCommitMessage? MergeCommitMessage { get; init; }
+
+    /// <summary>
+    /// The default value for a merge commit title.
+    /// 
+    /// - `PR_TITLE` - default to the pull request's title.
+    /// - `MERGE_MESSAGE` - default to the classic title for a merge message (e.g., Merge pull request #123 from branch-name).
+    /// </summary>
+    [JsonPropertyName("merge_commit_title")]
+    public MergeCommitTitle? MergeCommitTitle { get; init; }
+
+    [JsonPropertyName("merges_url")]
+    public required Uri MergesUrl { get; init; }
+
+    [JsonPropertyName("milestones_url")]
+    public required string MilestonesUrl { get; init; }
+
+    [JsonPropertyName("mirror_url")]
+    public required Uri? MirrorUrl { get; init; }
+
+    /// <summary>
+    /// The name of the repository.
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    [JsonPropertyName("notifications_url")]
+    public required string NotificationsUrl { get; init; }
+
+    [JsonPropertyName("open_issues")]
+    public required int OpenIssues { get; init; }
+
+    [JsonPropertyName("open_issues_count")]
+    public required int OpenIssuesCount { get; init; }
+
+    [JsonPropertyName("organization")]
+    public string? Organization { get; init; }
+
+    [JsonPropertyName("owner")]
+    public required WebhookPullRequestReviewRequestRemovedVariant2PullRequestHeadRepoOwner? Owner { get; init; }
+
+    [JsonPropertyName("permissions")]
+    public WebhookPullRequestReviewRequestRemovedVariant2PullRequestHeadRepoPermissions? Permissions { get; init; }
+
+    /// <summary>
+    /// Whether the repository is private or public.
+    /// </summary>
+    [JsonPropertyName("private")]
+    public required bool Private { get; init; }
+
+    [JsonPropertyName("public")]
+    public bool? Public { get; init; }
+
+    [JsonPropertyName("pulls_url")]
+    public required string PullsUrl { get; init; }
+
+    [JsonPropertyName("pushed_at")]
+    public required object? PushedAt { get; init; }
+
+    [JsonPropertyName("releases_url")]
+    public required string ReleasesUrl { get; init; }
+
+    [JsonPropertyName("role_name")]
+    public string? RoleName { get; init; }
+
+    [JsonPropertyName("size")]
+    public required int Size { get; init; }
+
+    /// <summary>
+    /// The default value for a squash merge commit message:
+    /// 
+    /// - `PR_BODY` - default to the pull request's body.
+    /// - `COMMIT_MESSAGES` - default to the branch's commit messages.
+    /// - `BLANK` - default to a blank commit message.
+    /// </summary>
+    [JsonPropertyName("squash_merge_commit_message")]
+    public SquashMergeCommitMessage? SquashMergeCommitMessage { get; init; }
+
+    /// <summary>
+    /// The default value for a squash merge commit title:
+    /// 
+    /// - `PR_TITLE` - default to the pull request's title.
+    /// - `COMMIT_OR_PR_TITLE` - default to the commit's title (if only one commit) or the pull request's title (when more than one commit).
+    /// </summary>
+    [JsonPropertyName("squash_merge_commit_title")]
+    public SquashMergeCommitTitle? SquashMergeCommitTitle { get; init; }
+
+    [JsonPropertyName("ssh_url")]
+    public required string SshUrl { get; init; }
+
+    [JsonPropertyName("stargazers")]
+    public int? Stargazers { get; init; }
+
+    [JsonPropertyName("stargazers_count")]
+    public required int StargazersCount { get; init; }
+
+    [JsonPropertyName("stargazers_url")]
+    public required Uri StargazersUrl { get; init; }
+
+    [JsonPropertyName("statuses_url")]
+    public required string StatusesUrl { get; init; }
+
+    [JsonPropertyName("subscribers_url")]
+    public required Uri SubscribersUrl { get; init; }
+
+    [JsonPropertyName("subscription_url")]
+    public required Uri SubscriptionUrl { get; init; }
+
+    [JsonPropertyName("svn_url")]
+    public required Uri SvnUrl { get; init; }
+
+    [JsonPropertyName("tags_url")]
+    public required Uri TagsUrl { get; init; }
+
+    [JsonPropertyName("teams_url")]
+    public required Uri TeamsUrl { get; init; }
+
+    [JsonPropertyName("topics")]
+    public required IReadOnlyList<string> Topics { get; init; }
+
+    [JsonPropertyName("trees_url")]
+    public required string TreesUrl { get; init; }
+
+    [JsonPropertyName("updated_at")]
+    public required DateTimeOffset UpdatedAt { get; init; }
+
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+    /// <summary>
+    /// Whether a squash merge commit can use the pull request title as default. **This property is closing down. Please use `squash_merge_commit_title` instead.
+    /// </summary>
+    [JsonPropertyName("use_squash_pr_title_as_default")]
+    public bool UseSquashPrTitleAsDefault { get; init; } = false;
+
+    [JsonPropertyName("visibility")]
+    public required WebhooksPullRequest5BaseRepoVisibility Visibility { get; init; }
+
+    [JsonPropertyName("watchers")]
+    public required int Watchers { get; init; }
+
+    [JsonPropertyName("watchers_count")]
+    public required int WatchersCount { get; init; }
+
+    /// <summary>
+    /// Whether to require contributors to sign off on web-based commits
+    /// </summary>
+    [JsonPropertyName("web_commit_signoff_required")]
+    public bool? WebCommitSignoffRequired { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestRemovedVariant2PullRequestHeadRepoLicense
+{
+    [JsonPropertyName("key")]
+    public required string Key { get; init; }
+
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    [JsonPropertyName("spdx_id")]
+    public required string SpdxId { get; init; }
+
+    [JsonPropertyName("url")]
+    public required Uri? Url { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestRemovedVariant2PullRequestHeadRepoOwner
+{
+    [JsonPropertyName("avatar_url")]
+    public Uri? AvatarUrl { get; init; }
+
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    [JsonPropertyName("email")]
+    public string? Email { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public string? EventsUrl { get; init; }
+
+    [JsonPropertyName("followers_url")]
+    public Uri? FollowersUrl { get; init; }
+
+    [JsonPropertyName("following_url")]
+    public string? FollowingUrl { get; init; }
+
+    [JsonPropertyName("gists_url")]
+    public string? GistsUrl { get; init; }
+
+    [JsonPropertyName("gravatar_id")]
+    public string? GravatarId { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("login")]
+    public required string Login { get; init; }
+
+    [JsonPropertyName("name")]
+    public string? Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("organizations_url")]
+    public Uri? OrganizationsUrl { get; init; }
+
+    [JsonPropertyName("received_events_url")]
+    public Uri? ReceivedEventsUrl { get; init; }
+
+    [JsonPropertyName("repos_url")]
+    public Uri? ReposUrl { get; init; }
+
+    [JsonPropertyName("site_admin")]
+    public bool? SiteAdmin { get; init; }
+
+    [JsonPropertyName("starred_url")]
+    public string? StarredUrl { get; init; }
+
+    [JsonPropertyName("subscriptions_url")]
+    public Uri? SubscriptionsUrl { get; init; }
+
+    [JsonPropertyName("type")]
+    public WebhooksUserType? Type { get; init; }
+
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+    [JsonPropertyName("user_view_type")]
+    public string? UserViewType { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestRemovedVariant2PullRequestHeadRepoPermissions
+{
+    [JsonPropertyName("admin")]
+    public required bool Admin { get; init; }
+
+    [JsonPropertyName("maintain")]
+    public bool? Maintain { get; init; }
+
+    [JsonPropertyName("pull")]
+    public required bool Pull { get; init; }
+
+    [JsonPropertyName("push")]
+    public required bool Push { get; init; }
+
+    [JsonPropertyName("triage")]
+    public bool? Triage { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestRemovedVariant2PullRequestHeadUser
+{
+    [JsonPropertyName("avatar_url")]
+    public Uri? AvatarUrl { get; init; }
+
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    [JsonPropertyName("email")]
+    public string? Email { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public string? EventsUrl { get; init; }
+
+    [JsonPropertyName("followers_url")]
+    public Uri? FollowersUrl { get; init; }
+
+    [JsonPropertyName("following_url")]
+    public string? FollowingUrl { get; init; }
+
+    [JsonPropertyName("gists_url")]
+    public string? GistsUrl { get; init; }
+
+    [JsonPropertyName("gravatar_id")]
+    public string? GravatarId { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    [JsonPropertyName("id")]
+    public required long Id { get; init; }
+
+    [JsonPropertyName("login")]
+    public required string Login { get; init; }
+
+    [JsonPropertyName("name")]
+    public string? Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("organizations_url")]
+    public Uri? OrganizationsUrl { get; init; }
+
+    [JsonPropertyName("received_events_url")]
+    public Uri? ReceivedEventsUrl { get; init; }
+
+    [JsonPropertyName("repos_url")]
+    public Uri? ReposUrl { get; init; }
+
+    [JsonPropertyName("site_admin")]
+    public bool? SiteAdmin { get; init; }
+
+    [JsonPropertyName("starred_url")]
+    public string? StarredUrl { get; init; }
+
+    [JsonPropertyName("subscriptions_url")]
+    public Uri? SubscriptionsUrl { get; init; }
+
+    [JsonPropertyName("type")]
+    public WebhooksUserType? Type { get; init; }
+
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+    [JsonPropertyName("user_view_type")]
+    public string? UserViewType { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestRemovedVariant2PullRequestLabels
+{
+    /// <summary>
+    /// 6-character hex code, without the leading #, identifying the color
+    /// </summary>
+    [JsonPropertyName("color")]
+    public required string Color { get; init; }
+
+    [JsonPropertyName("default")]
+    public required bool Default { get; init; }
+
+    [JsonPropertyName("description")]
+    public required string? Description { get; init; }
+
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    /// <summary>
+    /// The name of the label.
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    /// <summary>
+    /// URL for the label
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestRemovedVariant2PullRequestMergedBy
+{
+    [JsonPropertyName("avatar_url")]
+    public Uri? AvatarUrl { get; init; }
+
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    [JsonPropertyName("email")]
+    public string? Email { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public string? EventsUrl { get; init; }
+
+    [JsonPropertyName("followers_url")]
+    public Uri? FollowersUrl { get; init; }
+
+    [JsonPropertyName("following_url")]
+    public string? FollowingUrl { get; init; }
+
+    [JsonPropertyName("gists_url")]
+    public string? GistsUrl { get; init; }
+
+    [JsonPropertyName("gravatar_id")]
+    public string? GravatarId { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("login")]
+    public required string Login { get; init; }
+
+    [JsonPropertyName("name")]
+    public string? Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("organizations_url")]
+    public Uri? OrganizationsUrl { get; init; }
+
+    [JsonPropertyName("received_events_url")]
+    public Uri? ReceivedEventsUrl { get; init; }
+
+    [JsonPropertyName("repos_url")]
+    public Uri? ReposUrl { get; init; }
+
+    [JsonPropertyName("site_admin")]
+    public bool? SiteAdmin { get; init; }
+
+    [JsonPropertyName("starred_url")]
+    public string? StarredUrl { get; init; }
+
+    [JsonPropertyName("subscriptions_url")]
+    public Uri? SubscriptionsUrl { get; init; }
+
+    [JsonPropertyName("type")]
+    public WebhooksUserType? Type { get; init; }
+
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+    [JsonPropertyName("user_view_type")]
+    public string? UserViewType { get; init; }
+
+}
+
+/// <summary>
+/// A collection of related issues and pull requests.
+/// </summary>
+public partial record WebhookPullRequestReviewRequestRemovedVariant2PullRequestMilestone
+{
+    [JsonPropertyName("closed_at")]
+    public required DateTimeOffset? ClosedAt { get; init; }
+
+    [JsonPropertyName("closed_issues")]
+    public required int ClosedIssues { get; init; }
+
+    [JsonPropertyName("created_at")]
+    public required DateTimeOffset CreatedAt { get; init; }
+
+    [JsonPropertyName("creator")]
+    public required WebhookPullRequestReviewRequestRemovedVariant2PullRequestMilestoneCreator? Creator { get; init; }
+
+    [JsonPropertyName("description")]
+    public required string? Description { get; init; }
+
+    [JsonPropertyName("due_on")]
+    public required DateTimeOffset? DueOn { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public required Uri HtmlUrl { get; init; }
+
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("labels_url")]
+    public required Uri LabelsUrl { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    /// <summary>
+    /// The number of the milestone.
+    /// </summary>
+    [JsonPropertyName("number")]
+    public required int Number { get; init; }
+
+    [JsonPropertyName("open_issues")]
+    public required int OpenIssues { get; init; }
+
+    /// <summary>
+    /// The state of the milestone.
+    /// </summary>
+    [JsonPropertyName("state")]
+    public required MilestoneState State { get; init; }
+
+    /// <summary>
+    /// The title of the milestone.
+    /// </summary>
+    [JsonPropertyName("title")]
+    public required string Title { get; init; }
+
+    [JsonPropertyName("updated_at")]
+    public required DateTimeOffset UpdatedAt { get; init; }
+
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestRemovedVariant2PullRequestMilestoneCreator
+{
+    [JsonPropertyName("avatar_url")]
+    public Uri? AvatarUrl { get; init; }
+
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    [JsonPropertyName("email")]
+    public string? Email { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public string? EventsUrl { get; init; }
+
+    [JsonPropertyName("followers_url")]
+    public Uri? FollowersUrl { get; init; }
+
+    [JsonPropertyName("following_url")]
+    public string? FollowingUrl { get; init; }
+
+    [JsonPropertyName("gists_url")]
+    public string? GistsUrl { get; init; }
+
+    [JsonPropertyName("gravatar_id")]
+    public string? GravatarId { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("login")]
+    public required string Login { get; init; }
+
+    [JsonPropertyName("name")]
+    public string? Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("organizations_url")]
+    public Uri? OrganizationsUrl { get; init; }
+
+    [JsonPropertyName("received_events_url")]
+    public Uri? ReceivedEventsUrl { get; init; }
+
+    [JsonPropertyName("repos_url")]
+    public Uri? ReposUrl { get; init; }
+
+    [JsonPropertyName("site_admin")]
+    public bool? SiteAdmin { get; init; }
+
+    [JsonPropertyName("starred_url")]
+    public string? StarredUrl { get; init; }
+
+    [JsonPropertyName("subscriptions_url")]
+    public Uri? SubscriptionsUrl { get; init; }
+
+    [JsonPropertyName("type")]
+    public WebhooksUserType? Type { get; init; }
+
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+    [JsonPropertyName("user_view_type")]
+    public string? UserViewType { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestRemovedVariant2PullRequestRequestedReviewersVariant1
+{
+    [JsonPropertyName("avatar_url")]
+    public Uri? AvatarUrl { get; init; }
+
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    [JsonPropertyName("email")]
+    public string? Email { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public string? EventsUrl { get; init; }
+
+    [JsonPropertyName("followers_url")]
+    public Uri? FollowersUrl { get; init; }
+
+    [JsonPropertyName("following_url")]
+    public string? FollowingUrl { get; init; }
+
+    [JsonPropertyName("gists_url")]
+    public string? GistsUrl { get; init; }
+
+    [JsonPropertyName("gravatar_id")]
+    public string? GravatarId { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("login")]
+    public required string Login { get; init; }
+
+    [JsonPropertyName("name")]
+    public string? Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("organizations_url")]
+    public Uri? OrganizationsUrl { get; init; }
+
+    [JsonPropertyName("received_events_url")]
+    public Uri? ReceivedEventsUrl { get; init; }
+
+    [JsonPropertyName("repos_url")]
+    public Uri? ReposUrl { get; init; }
+
+    [JsonPropertyName("site_admin")]
+    public bool? SiteAdmin { get; init; }
+
+    [JsonPropertyName("starred_url")]
+    public string? StarredUrl { get; init; }
+
+    [JsonPropertyName("subscriptions_url")]
+    public Uri? SubscriptionsUrl { get; init; }
+
+    [JsonPropertyName("type")]
+    public WebhooksUserType? Type { get; init; }
+
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+    [JsonPropertyName("user_view_type")]
+    public string? UserViewType { get; init; }
+
+}
+
+/// <summary>
+/// Groups of organization members that gives permissions on specified repositories.
+/// </summary>
+public partial record WebhookPullRequestReviewRequestRemovedVariant2PullRequestRequestedReviewersVariant2
+{
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    /// <summary>
+    /// Description of the team
+    /// </summary>
+    [JsonPropertyName("description")]
+    public required string? Description { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public required Uri HtmlUrl { get; init; }
+
+    /// <summary>
+    /// Unique identifier of the team
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("members_url")]
+    public required string MembersUrl { get; init; }
+
+    /// <summary>
+    /// Name of the team
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    [JsonPropertyName("parent")]
+    public WebhookPullRequestReviewRequestRemovedVariant2PullRequestRequestedReviewersVariant2Parent? Parent { get; init; }
+
+    /// <summary>
+    /// Permission that the team will have for its repositories
+    /// </summary>
+    [JsonPropertyName("permission")]
+    public required string Permission { get; init; }
+
+    [JsonPropertyName("privacy")]
+    public required WebhooksTeamPrivacy Privacy { get; init; }
+
+    [JsonPropertyName("repositories_url")]
+    public required Uri RepositoriesUrl { get; init; }
+
+    [JsonPropertyName("slug")]
+    public required string Slug { get; init; }
+
+    /// <summary>
+    /// URL for the team
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestRemovedVariant2PullRequestRequestedReviewersVariant2Parent
+{
+    /// <summary>
+    /// Description of the team
+    /// </summary>
+    [JsonPropertyName("description")]
+    public required string? Description { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public required Uri HtmlUrl { get; init; }
+
+    /// <summary>
+    /// Unique identifier of the team
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("members_url")]
+    public required string MembersUrl { get; init; }
+
+    /// <summary>
+    /// Name of the team
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    /// <summary>
+    /// Permission that the team will have for its repositories
+    /// </summary>
+    [JsonPropertyName("permission")]
+    public required string Permission { get; init; }
+
+    [JsonPropertyName("privacy")]
+    public required WebhooksTeamPrivacy Privacy { get; init; }
+
+    [JsonPropertyName("repositories_url")]
+    public required Uri RepositoriesUrl { get; init; }
+
+    [JsonPropertyName("slug")]
+    public required string Slug { get; init; }
+
+    /// <summary>
+    /// URL for the team
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+}
+
+/// <remarks>
+/// Union of: WebhookPullRequestReviewRequestRemovedVariant2PullRequestRequestedReviewersVariant1 | WebhookPullRequestReviewRequestRemovedVariant2PullRequestRequestedReviewersVariant2
+/// </remarks>
+[JsonDerivedType(typeof(WebhookPullRequestReviewRequestRemovedVariant2PullRequestRequestedReviewersVariant1), "WebhookPullRequestReviewRequestRemovedVariant2PullRequestRequestedReviewersVariant1")]
+[JsonDerivedType(typeof(WebhookPullRequestReviewRequestRemovedVariant2PullRequestRequestedReviewersVariant2), "WebhookPullRequestReviewRequestRemovedVariant2PullRequestRequestedReviewersVariant2")]
+public abstract partial record WebhookPullRequestReviewRequestRemovedVariant2PullRequestRequestedReviewers;
+
+/// <summary>
+/// Groups of organization members that gives permissions on specified repositories.
+/// </summary>
+public partial record WebhookPullRequestReviewRequestRemovedVariant2PullRequestRequestedTeams
+{
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    /// <summary>
+    /// Description of the team
+    /// </summary>
+    [JsonPropertyName("description")]
+    public required string? Description { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public required Uri HtmlUrl { get; init; }
+
+    /// <summary>
+    /// Unique identifier of the team
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("members_url")]
+    public required string MembersUrl { get; init; }
+
+    /// <summary>
+    /// Name of the team
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    [JsonPropertyName("parent")]
+    public WebhookPullRequestReviewRequestRemovedVariant2PullRequestRequestedTeamsParent? Parent { get; init; }
+
+    /// <summary>
+    /// Permission that the team will have for its repositories
+    /// </summary>
+    [JsonPropertyName("permission")]
+    public required string Permission { get; init; }
+
+    [JsonPropertyName("privacy")]
+    public required WebhooksTeamPrivacy Privacy { get; init; }
+
+    [JsonPropertyName("repositories_url")]
+    public required Uri RepositoriesUrl { get; init; }
+
+    [JsonPropertyName("slug")]
+    public required string Slug { get; init; }
+
+    /// <summary>
+    /// URL for the team
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestRemovedVariant2PullRequestRequestedTeamsParent
+{
+    /// <summary>
+    /// Description of the team
+    /// </summary>
+    [JsonPropertyName("description")]
+    public required string? Description { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public required Uri HtmlUrl { get; init; }
+
+    /// <summary>
+    /// Unique identifier of the team
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("members_url")]
+    public required string MembersUrl { get; init; }
+
+    /// <summary>
+    /// Name of the team
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    /// <summary>
+    /// Permission that the team will have for its repositories
+    /// </summary>
+    [JsonPropertyName("permission")]
+    public required string Permission { get; init; }
+
+    [JsonPropertyName("privacy")]
+    public required WebhooksTeamPrivacy Privacy { get; init; }
+
+    [JsonPropertyName("repositories_url")]
+    public required Uri RepositoriesUrl { get; init; }
+
+    [JsonPropertyName("slug")]
+    public required string Slug { get; init; }
+
+    /// <summary>
+    /// URL for the team
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestRemovedVariant2PullRequestUser
+{
+    [JsonPropertyName("avatar_url")]
+    public Uri? AvatarUrl { get; init; }
+
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    [JsonPropertyName("email")]
+    public string? Email { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public string? EventsUrl { get; init; }
+
+    [JsonPropertyName("followers_url")]
+    public Uri? FollowersUrl { get; init; }
+
+    [JsonPropertyName("following_url")]
+    public string? FollowingUrl { get; init; }
+
+    [JsonPropertyName("gists_url")]
+    public string? GistsUrl { get; init; }
+
+    [JsonPropertyName("gravatar_id")]
+    public string? GravatarId { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    [JsonPropertyName("id")]
+    public required long Id { get; init; }
+
+    [JsonPropertyName("login")]
+    public required string Login { get; init; }
+
+    [JsonPropertyName("name")]
+    public string? Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("organizations_url")]
+    public Uri? OrganizationsUrl { get; init; }
+
+    [JsonPropertyName("received_events_url")]
+    public Uri? ReceivedEventsUrl { get; init; }
+
+    [JsonPropertyName("repos_url")]
+    public Uri? ReposUrl { get; init; }
+
+    [JsonPropertyName("site_admin")]
+    public bool? SiteAdmin { get; init; }
+
+    [JsonPropertyName("starred_url")]
+    public string? StarredUrl { get; init; }
+
+    [JsonPropertyName("subscriptions_url")]
+    public Uri? SubscriptionsUrl { get; init; }
+
+    [JsonPropertyName("type")]
+    public WebhooksUserType? Type { get; init; }
+
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+    [JsonPropertyName("user_view_type")]
+    public string? UserViewType { get; init; }
+
+}
+
+/// <summary>
+/// Groups of organization members that gives permissions on specified repositories.
+/// </summary>
+public partial record WebhookPullRequestReviewRequestRemovedVariant2RequestedTeam
+{
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    /// <summary>
+    /// Description of the team
+    /// </summary>
+    [JsonPropertyName("description")]
+    public required string? Description { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public required Uri HtmlUrl { get; init; }
+
+    /// <summary>
+    /// Unique identifier of the team
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("members_url")]
+    public required string MembersUrl { get; init; }
+
+    /// <summary>
+    /// Name of the team
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    [JsonPropertyName("parent")]
+    public WebhookPullRequestReviewRequestRemovedVariant2RequestedTeamParent? Parent { get; init; }
+
+    /// <summary>
+    /// Permission that the team will have for its repositories
+    /// </summary>
+    [JsonPropertyName("permission")]
+    public required string Permission { get; init; }
+
+    [JsonPropertyName("privacy")]
+    public required WebhooksTeamPrivacy Privacy { get; init; }
+
+    [JsonPropertyName("repositories_url")]
+    public required Uri RepositoriesUrl { get; init; }
+
+    [JsonPropertyName("slug")]
+    public required string Slug { get; init; }
+
+    /// <summary>
+    /// URL for the team
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestRemovedVariant2RequestedTeamParent
+{
+    /// <summary>
+    /// Description of the team
+    /// </summary>
+    [JsonPropertyName("description")]
+    public required string? Description { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public required Uri HtmlUrl { get; init; }
+
+    /// <summary>
+    /// Unique identifier of the team
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("members_url")]
+    public required string MembersUrl { get; init; }
+
+    /// <summary>
+    /// Name of the team
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    /// <summary>
+    /// Permission that the team will have for its repositories
+    /// </summary>
+    [JsonPropertyName("permission")]
+    public required string Permission { get; init; }
+
+    [JsonPropertyName("privacy")]
+    public required WebhooksTeamPrivacy Privacy { get; init; }
+
+    [JsonPropertyName("repositories_url")]
+    public required Uri RepositoriesUrl { get; init; }
+
+    [JsonPropertyName("slug")]
+    public required string Slug { get; init; }
+
+    /// <summary>
+    /// URL for the team
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestedVariant1
+{
+    [JsonPropertyName("action")]
+    public required WebhookPullRequestReviewRequestedVariant1Action Action { get; init; }
+
+    /// <summary>
+    /// An enterprise on GitHub. Webhook payloads contain the `enterprise` property when the webhook is configured
+    /// on an enterprise account or an organization that's part of an enterprise account. For more information,
+    /// see "[About enterprise accounts](https://docs.github.com/admin/overview/about-enterprise-accounts)."
+    /// </summary>
+    [JsonPropertyName("enterprise")]
+    public EnterpriseWebhooks? Enterprise { get; init; }
+
+    /// <summary>
+    /// The GitHub App installation. Webhook payloads contain the `installation` property when the event is configured
+    /// for and sent to a GitHub App. For more information,
+    /// see "[Using webhooks with GitHub Apps](https://docs.github.com/apps/creating-github-apps/registering-a-github-app/using-webhooks-with-github-apps)."
+    /// </summary>
+    [JsonPropertyName("installation")]
+    public SimpleInstallation? Installation { get; init; }
+
+    /// <summary>
+    /// The pull request number.
+    /// </summary>
+    [JsonPropertyName("number")]
+    public required int Number { get; init; }
+
+    /// <summary>
+    /// A GitHub organization. Webhook payloads contain the `organization` property when the webhook is configured for an
+    /// organization, or when the event occurs from activity in a repository owned by an organization.
+    /// </summary>
+    [JsonPropertyName("organization")]
+    public OrganizationSimpleWebhooks? Organization { get; init; }
+
+    [JsonPropertyName("pull_request")]
+    public required WebhookPullRequestReviewRequestedVariant1PullRequest PullRequest { get; init; }
+
+    /// <summary>
+    /// The repository on GitHub where the event occurred. Webhook payloads contain the `repository` property
+    /// when the event occurs from activity in a repository.
+    /// </summary>
+    [JsonPropertyName("repository")]
+    public required RepositoryWebhooks Repository { get; init; }
+
+    [JsonPropertyName("requested_reviewer")]
+    public required WebhookPullRequestReviewRequestedVariant1RequestedReviewer? RequestedReviewer { get; init; }
+
+    /// <summary>
+    /// A GitHub user.
+    /// </summary>
+    [JsonPropertyName("sender")]
+    public required SimpleUser Sender { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestedVariant1PullRequest
+{
+    [JsonPropertyName("_links")]
+    public required WebhookPullRequestReviewRequestedVariant1PullRequestLinks Links { get; init; }
+
+    [JsonPropertyName("active_lock_reason")]
+    public required ActiveLockReason ActiveLockReason { get; init; }
+
+    [JsonPropertyName("additions")]
+    public int? Additions { get; init; }
+
+    [JsonPropertyName("assignee")]
+    public required WebhookPullRequestReviewRequestedVariant1PullRequestAssignee? Assignee { get; init; }
+
+    [JsonPropertyName("assignees")]
+    public required IReadOnlyList<WebhookPullRequestReviewRequestedVariant1PullRequestAssignees?> Assignees { get; init; }
+
+    /// <summary>
+    /// How the author is associated with the repository.
+    /// </summary>
+    [JsonPropertyName("author_association")]
+    public required AuthorAssociation2 AuthorAssociation { get; init; }
+
+    /// <summary>
+    /// The status of auto merging a pull request.
+    /// </summary>
+    [JsonPropertyName("auto_merge")]
+    public required WebhookPullRequestReviewRequestedVariant1PullRequestAutoMerge? AutoMerge { get; init; }
+
+    [JsonPropertyName("base")]
+    public required WebhookPullRequestReviewRequestedVariant1PullRequestBase Base { get; init; }
+
+    [JsonPropertyName("body")]
+    public required string? Body { get; init; }
+
+    [JsonPropertyName("changed_files")]
+    public int? ChangedFiles { get; init; }
+
+    [JsonPropertyName("closed_at")]
+    public required DateTimeOffset? ClosedAt { get; init; }
+
+    [JsonPropertyName("comments")]
+    public int? Comments { get; init; }
+
+    [JsonPropertyName("comments_url")]
+    public required Uri CommentsUrl { get; init; }
+
+    [JsonPropertyName("commits")]
+    public int? Commits { get; init; }
+
+    [JsonPropertyName("commits_url")]
+    public required Uri CommitsUrl { get; init; }
+
+    [JsonPropertyName("created_at")]
+    public required DateTimeOffset CreatedAt { get; init; }
+
+    [JsonPropertyName("deletions")]
+    public int? Deletions { get; init; }
+
+    [JsonPropertyName("diff_url")]
+    public required Uri DiffUrl { get; init; }
+
+    /// <summary>
+    /// Indicates whether or not the pull request is a draft.
+    /// </summary>
+    [JsonPropertyName("draft")]
+    public required bool Draft { get; init; }
+
+    [JsonPropertyName("head")]
+    public required WebhookPullRequestReviewRequestedVariant1PullRequestHead Head { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public required Uri HtmlUrl { get; init; }
+
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("issue_url")]
+    public required Uri IssueUrl { get; init; }
+
+    [JsonPropertyName("labels")]
+    public required IReadOnlyList<WebhookPullRequestReviewRequestedVariant1PullRequestLabels> Labels { get; init; }
+
+    [JsonPropertyName("locked")]
+    public required bool Locked { get; init; }
+
+    /// <summary>
+    /// Indicates whether maintainers can modify the pull request.
+    /// </summary>
+    [JsonPropertyName("maintainer_can_modify")]
+    public bool? MaintainerCanModify { get; init; }
+
+    [JsonPropertyName("merge_commit_sha")]
+    public required string? MergeCommitSha { get; init; }
+
+    [JsonPropertyName("mergeable")]
+    public bool? Mergeable { get; init; }
+
+    [JsonPropertyName("mergeable_state")]
+    public string? MergeableState { get; init; }
+
+    [JsonPropertyName("merged")]
+    public bool? Merged { get; init; }
+
+    [JsonPropertyName("merged_at")]
+    public required DateTimeOffset? MergedAt { get; init; }
+
+    [JsonPropertyName("merged_by")]
+    public WebhookPullRequestReviewRequestedVariant1PullRequestMergedBy? MergedBy { get; init; }
+
+    /// <summary>
+    /// A collection of related issues and pull requests.
+    /// </summary>
+    [JsonPropertyName("milestone")]
+    public required WebhookPullRequestReviewRequestedVariant1PullRequestMilestone? Milestone { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    /// <summary>
+    /// Number uniquely identifying the pull request within its repository.
+    /// </summary>
+    [JsonPropertyName("number")]
+    public required int Number { get; init; }
+
+    [JsonPropertyName("patch_url")]
+    public required Uri PatchUrl { get; init; }
+
+    [JsonPropertyName("rebaseable")]
+    public bool? Rebaseable { get; init; }
+
+    [JsonPropertyName("requested_reviewers")]
+    public required IReadOnlyList<WebhookPullRequestReviewRequestedVariant1PullRequestRequestedReviewers> RequestedReviewers { get; init; }
+
+    [JsonPropertyName("requested_teams")]
+    public required IReadOnlyList<WebhookPullRequestReviewRequestedVariant1PullRequestRequestedTeams> RequestedTeams { get; init; }
+
+    [JsonPropertyName("review_comment_url")]
+    public required string ReviewCommentUrl { get; init; }
+
+    [JsonPropertyName("review_comments")]
+    public int? ReviewComments { get; init; }
+
+    [JsonPropertyName("review_comments_url")]
+    public required Uri ReviewCommentsUrl { get; init; }
+
+    /// <summary>
+    /// The stack information associated with a pull request.
+    /// </summary>
+    [JsonPropertyName("stack")]
+    public PullRequestStack? Stack { get; init; }
+
+    /// <summary>
+    /// State of this Pull Request. Either `open` or `closed`.
+    /// </summary>
+    [JsonPropertyName("state")]
+    public required MilestoneState State { get; init; }
+
+    [JsonPropertyName("statuses_url")]
+    public required Uri StatusesUrl { get; init; }
+
+    /// <summary>
+    /// The title of the pull request.
+    /// </summary>
+    [JsonPropertyName("title")]
+    public required string Title { get; init; }
+
+    [JsonPropertyName("updated_at")]
+    public required DateTimeOffset UpdatedAt { get; init; }
+
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+    [JsonPropertyName("user")]
+    public required WebhookPullRequestReviewRequestedVariant1PullRequestUser? User { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestedVariant1PullRequestLinks
+{
+    [JsonPropertyName("comments")]
+    public required WebhookPullRequestReviewRequestedVariant1PullRequestLinksComments Comments { get; init; }
+
+    [JsonPropertyName("commits")]
+    public required WebhookPullRequestReviewRequestedVariant1PullRequestLinksCommits Commits { get; init; }
+
+    [JsonPropertyName("html")]
+    public required WebhookPullRequestReviewRequestedVariant1PullRequestLinksHtml Html { get; init; }
+
+    [JsonPropertyName("issue")]
+    public required WebhookPullRequestReviewRequestedVariant1PullRequestLinksIssue Issue { get; init; }
+
+    [JsonPropertyName("review_comment")]
+    public required WebhookPullRequestReviewRequestedVariant1PullRequestLinksReviewComment ReviewComment { get; init; }
+
+    [JsonPropertyName("review_comments")]
+    public required WebhookPullRequestReviewRequestedVariant1PullRequestLinksReviewComments ReviewComments { get; init; }
+
+    [JsonPropertyName("self")]
+    public required WebhookPullRequestReviewRequestedVariant1PullRequestLinksSelf Self { get; init; }
+
+    [JsonPropertyName("statuses")]
+    public required WebhookPullRequestReviewRequestedVariant1PullRequestLinksStatuses Statuses { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestedVariant1PullRequestLinksComments
+{
+    [JsonPropertyName("href")]
+    public required string Href { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestedVariant1PullRequestLinksCommits
+{
+    [JsonPropertyName("href")]
+    public required string Href { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestedVariant1PullRequestLinksHtml
+{
+    [JsonPropertyName("href")]
+    public required string Href { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestedVariant1PullRequestLinksIssue
+{
+    [JsonPropertyName("href")]
+    public required string Href { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestedVariant1PullRequestLinksReviewComment
+{
+    [JsonPropertyName("href")]
+    public required string Href { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestedVariant1PullRequestLinksReviewComments
+{
+    [JsonPropertyName("href")]
+    public required string Href { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestedVariant1PullRequestLinksSelf
+{
+    [JsonPropertyName("href")]
+    public required string Href { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestedVariant1PullRequestLinksStatuses
+{
+    [JsonPropertyName("href")]
+    public required string Href { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestedVariant1PullRequestAssignee
+{
+    [JsonPropertyName("avatar_url")]
+    public Uri? AvatarUrl { get; init; }
+
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    [JsonPropertyName("email")]
+    public string? Email { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public string? EventsUrl { get; init; }
+
+    [JsonPropertyName("followers_url")]
+    public Uri? FollowersUrl { get; init; }
+
+    [JsonPropertyName("following_url")]
+    public string? FollowingUrl { get; init; }
+
+    [JsonPropertyName("gists_url")]
+    public string? GistsUrl { get; init; }
+
+    [JsonPropertyName("gravatar_id")]
+    public string? GravatarId { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("login")]
+    public required string Login { get; init; }
+
+    [JsonPropertyName("name")]
+    public string? Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("organizations_url")]
+    public Uri? OrganizationsUrl { get; init; }
+
+    [JsonPropertyName("received_events_url")]
+    public Uri? ReceivedEventsUrl { get; init; }
+
+    [JsonPropertyName("repos_url")]
+    public Uri? ReposUrl { get; init; }
+
+    [JsonPropertyName("site_admin")]
+    public bool? SiteAdmin { get; init; }
+
+    [JsonPropertyName("starred_url")]
+    public string? StarredUrl { get; init; }
+
+    [JsonPropertyName("subscriptions_url")]
+    public Uri? SubscriptionsUrl { get; init; }
+
+    [JsonPropertyName("type")]
+    public WebhooksUserMannequinType? Type { get; init; }
+
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+    [JsonPropertyName("user_view_type")]
+    public string? UserViewType { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestedVariant1PullRequestAssignees
+{
+    [JsonPropertyName("avatar_url")]
+    public Uri? AvatarUrl { get; init; }
+
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    [JsonPropertyName("email")]
+    public string? Email { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public string? EventsUrl { get; init; }
+
+    [JsonPropertyName("followers_url")]
+    public Uri? FollowersUrl { get; init; }
+
+    [JsonPropertyName("following_url")]
+    public string? FollowingUrl { get; init; }
+
+    [JsonPropertyName("gists_url")]
+    public string? GistsUrl { get; init; }
+
+    [JsonPropertyName("gravatar_id")]
+    public string? GravatarId { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("login")]
+    public required string Login { get; init; }
+
+    [JsonPropertyName("name")]
+    public string? Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("organizations_url")]
+    public Uri? OrganizationsUrl { get; init; }
+
+    [JsonPropertyName("received_events_url")]
+    public Uri? ReceivedEventsUrl { get; init; }
+
+    [JsonPropertyName("repos_url")]
+    public Uri? ReposUrl { get; init; }
+
+    [JsonPropertyName("site_admin")]
+    public bool? SiteAdmin { get; init; }
+
+    [JsonPropertyName("starred_url")]
+    public string? StarredUrl { get; init; }
+
+    [JsonPropertyName("subscriptions_url")]
+    public Uri? SubscriptionsUrl { get; init; }
+
+    [JsonPropertyName("type")]
+    public WebhooksUserMannequinType? Type { get; init; }
+
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+    [JsonPropertyName("user_view_type")]
+    public string? UserViewType { get; init; }
+
+}
+
+/// <summary>
+/// The status of auto merging a pull request.
+/// </summary>
+public partial record WebhookPullRequestReviewRequestedVariant1PullRequestAutoMerge
+{
+    /// <summary>
+    /// Commit message for the merge commit.
+    /// </summary>
+    [JsonPropertyName("commit_message")]
+    public required string? CommitMessage { get; init; }
+
+    /// <summary>
+    /// Title for the merge commit message.
+    /// </summary>
+    [JsonPropertyName("commit_title")]
+    public required string? CommitTitle { get; init; }
+
+    [JsonPropertyName("enabled_by")]
+    public required WebhookPullRequestReviewRequestedVariant1PullRequestAutoMergeEnabledBy? EnabledBy { get; init; }
+
+    /// <summary>
+    /// The merge method to use.
+    /// </summary>
+    [JsonPropertyName("merge_method")]
+    public required AutoMergeMergeMethod MergeMethod { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestedVariant1PullRequestAutoMergeEnabledBy
+{
+    [JsonPropertyName("avatar_url")]
+    public Uri? AvatarUrl { get; init; }
+
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    [JsonPropertyName("email")]
+    public string? Email { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public string? EventsUrl { get; init; }
+
+    [JsonPropertyName("followers_url")]
+    public Uri? FollowersUrl { get; init; }
+
+    [JsonPropertyName("following_url")]
+    public string? FollowingUrl { get; init; }
+
+    [JsonPropertyName("gists_url")]
+    public string? GistsUrl { get; init; }
+
+    [JsonPropertyName("gravatar_id")]
+    public string? GravatarId { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("login")]
+    public required string Login { get; init; }
+
+    [JsonPropertyName("name")]
+    public string? Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("organizations_url")]
+    public Uri? OrganizationsUrl { get; init; }
+
+    [JsonPropertyName("received_events_url")]
+    public Uri? ReceivedEventsUrl { get; init; }
+
+    [JsonPropertyName("repos_url")]
+    public Uri? ReposUrl { get; init; }
+
+    [JsonPropertyName("site_admin")]
+    public bool? SiteAdmin { get; init; }
+
+    [JsonPropertyName("starred_url")]
+    public string? StarredUrl { get; init; }
+
+    [JsonPropertyName("subscriptions_url")]
+    public Uri? SubscriptionsUrl { get; init; }
+
+    [JsonPropertyName("type")]
+    public WebhooksUserType? Type { get; init; }
+
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+    [JsonPropertyName("user_view_type")]
+    public string? UserViewType { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestedVariant1PullRequestBase
+{
+    [JsonPropertyName("label")]
+    public required string Label { get; init; }
+
+    [JsonPropertyName("ref")]
+    public required string Ref { get; init; }
+
+    /// <summary>
+    /// A git repository
+    /// </summary>
+    [JsonPropertyName("repo")]
+    public required WebhookPullRequestReviewRequestedVariant1PullRequestBaseRepo Repo { get; init; }
+
+    [JsonPropertyName("sha")]
+    public required string Sha { get; init; }
+
+    [JsonPropertyName("user")]
+    public required WebhookPullRequestReviewRequestedVariant1PullRequestBaseUser? User { get; init; }
+
+}
+
+/// <summary>
+/// A git repository
+/// </summary>
+public partial record WebhookPullRequestReviewRequestedVariant1PullRequestBaseRepo
+{
+    /// <summary>
+    /// Whether to allow auto-merge for pull requests.
+    /// </summary>
+    [JsonPropertyName("allow_auto_merge")]
+    public bool AllowAutoMerge { get; init; } = false;
+
+    /// <summary>
+    /// Whether to allow private forks
+    /// </summary>
+    [JsonPropertyName("allow_forking")]
+    public bool? AllowForking { get; init; }
+
+    /// <summary>
+    /// Whether to allow merge commits for pull requests.
+    /// </summary>
+    [JsonPropertyName("allow_merge_commit")]
+    public bool AllowMergeCommit { get; init; } = true;
+
+    /// <summary>
+    /// Whether to allow rebase merges for pull requests.
+    /// </summary>
+    [JsonPropertyName("allow_rebase_merge")]
+    public bool AllowRebaseMerge { get; init; } = true;
+
+    /// <summary>
+    /// Whether to allow squash merges for pull requests.
+    /// </summary>
+    [JsonPropertyName("allow_squash_merge")]
+    public bool AllowSquashMerge { get; init; } = true;
+
+    [JsonPropertyName("allow_update_branch")]
+    public bool? AllowUpdateBranch { get; init; }
+
+    [JsonPropertyName("archive_url")]
+    public required string ArchiveUrl { get; init; }
+
+    /// <summary>
+    /// Whether the repository is archived.
+    /// </summary>
+    [JsonPropertyName("archived")]
+    public required bool Archived { get; init; } = false;
+
+    [JsonPropertyName("assignees_url")]
+    public required string AssigneesUrl { get; init; }
+
+    [JsonPropertyName("blobs_url")]
+    public required string BlobsUrl { get; init; }
+
+    [JsonPropertyName("branches_url")]
+    public required string BranchesUrl { get; init; }
+
+    [JsonPropertyName("clone_url")]
+    public required Uri CloneUrl { get; init; }
+
+    [JsonPropertyName("collaborators_url")]
+    public required string CollaboratorsUrl { get; init; }
+
+    [JsonPropertyName("comments_url")]
+    public required string CommentsUrl { get; init; }
+
+    [JsonPropertyName("commits_url")]
+    public required string CommitsUrl { get; init; }
+
+    [JsonPropertyName("compare_url")]
+    public required string CompareUrl { get; init; }
+
+    [JsonPropertyName("contents_url")]
+    public required string ContentsUrl { get; init; }
+
+    [JsonPropertyName("contributors_url")]
+    public required Uri ContributorsUrl { get; init; }
+
+    [JsonPropertyName("created_at")]
+    public required object CreatedAt { get; init; }
+
+    /// <summary>
+    /// The default branch of the repository.
+    /// </summary>
+    [JsonPropertyName("default_branch")]
+    public required string DefaultBranch { get; init; }
+
+    /// <summary>
+    /// Whether to delete head branches when pull requests are merged
+    /// </summary>
+    [JsonPropertyName("delete_branch_on_merge")]
+    public bool DeleteBranchOnMerge { get; init; } = false;
+
+    [JsonPropertyName("deployments_url")]
+    public required Uri DeploymentsUrl { get; init; }
+
+    [JsonPropertyName("description")]
+    public required string? Description { get; init; }
+
+    /// <summary>
+    /// Returns whether or not this repository is disabled.
+    /// </summary>
+    [JsonPropertyName("disabled")]
+    public bool? Disabled { get; init; }
+
+    [JsonPropertyName("downloads_url")]
+    public required Uri DownloadsUrl { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public required Uri EventsUrl { get; init; }
+
+    [JsonPropertyName("fork")]
+    public required bool Fork { get; init; }
+
+    [JsonPropertyName("forks")]
+    public required int Forks { get; init; }
+
+    [JsonPropertyName("forks_count")]
+    public required int ForksCount { get; init; }
+
+    [JsonPropertyName("forks_url")]
+    public required Uri ForksUrl { get; init; }
+
+    [JsonPropertyName("full_name")]
+    public required string FullName { get; init; }
+
+    [JsonPropertyName("git_commits_url")]
+    public required string GitCommitsUrl { get; init; }
+
+    [JsonPropertyName("git_refs_url")]
+    public required string GitRefsUrl { get; init; }
+
+    [JsonPropertyName("git_tags_url")]
+    public required string GitTagsUrl { get; init; }
+
+    [JsonPropertyName("git_url")]
+    public required Uri GitUrl { get; init; }
+
+    /// <summary>
+    /// Whether downloads are enabled.
+    /// </summary>
+    [JsonPropertyName("has_downloads")]
+    public required bool HasDownloads { get; init; } = true;
+
+    /// <summary>
+    /// Whether issues are enabled.
+    /// </summary>
+    [JsonPropertyName("has_issues")]
+    public required bool HasIssues { get; init; } = true;
+
+    [JsonPropertyName("has_pages")]
+    public required bool HasPages { get; init; }
+
+    /// <summary>
+    /// Whether projects are enabled.
+    /// </summary>
+    [JsonPropertyName("has_projects")]
+    public required bool HasProjects { get; init; } = true;
+
+    /// <summary>
+    /// Whether the wiki is enabled.
+    /// </summary>
+    [JsonPropertyName("has_wiki")]
+    public required bool HasWiki { get; init; } = true;
+
+    /// <summary>
+    /// Whether discussions are enabled.
+    /// </summary>
+    [JsonPropertyName("has_discussions")]
+    public required bool HasDiscussions { get; init; } = false;
+
+    /// <summary>
+    /// Whether pull requests are enabled.
+    /// </summary>
+    [JsonPropertyName("has_pull_requests")]
+    public bool HasPullRequests { get; init; } = true;
+
+    /// <summary>
+    /// The policy controlling who can create pull requests: all or collaborators_only.
+    /// </summary>
+    [JsonPropertyName("pull_request_creation_policy")]
+    public PullRequestCreationPolicy? PullRequestCreationPolicy { get; init; }
+
+    [JsonPropertyName("homepage")]
+    public required string? Homepage { get; init; }
+
+    [JsonPropertyName("hooks_url")]
+    public required Uri HooksUrl { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public required Uri HtmlUrl { get; init; }
+
+    /// <summary>
+    /// Unique identifier of the repository
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required long Id { get; init; }
+
+    [JsonPropertyName("is_template")]
+    public bool? IsTemplate { get; init; }
+
+    [JsonPropertyName("issue_comment_url")]
+    public required string IssueCommentUrl { get; init; }
+
+    [JsonPropertyName("issue_events_url")]
+    public required string IssueEventsUrl { get; init; }
+
+    [JsonPropertyName("issues_url")]
+    public required string IssuesUrl { get; init; }
+
+    [JsonPropertyName("keys_url")]
+    public required string KeysUrl { get; init; }
+
+    [JsonPropertyName("labels_url")]
+    public required string LabelsUrl { get; init; }
+
+    [JsonPropertyName("language")]
+    public required string? Language { get; init; }
+
+    [JsonPropertyName("languages_url")]
+    public required Uri LanguagesUrl { get; init; }
+
+    [JsonPropertyName("license")]
+    public required WebhookPullRequestReviewRequestedVariant1PullRequestBaseRepoLicense? License { get; init; }
+
+    [JsonPropertyName("master_branch")]
+    public string? MasterBranch { get; init; }
+
+    /// <summary>
+    /// The default value for a merge commit message.
+    /// 
+    /// - `PR_TITLE` - default to the pull request's title.
+    /// - `PR_BODY` - default to the pull request's body.
+    /// - `BLANK` - default to a blank commit message.
+    /// </summary>
+    [JsonPropertyName("merge_commit_message")]
+    public MergeCommitMessage? MergeCommitMessage { get; init; }
+
+    /// <summary>
+    /// The default value for a merge commit title.
+    /// 
+    /// - `PR_TITLE` - default to the pull request's title.
+    /// - `MERGE_MESSAGE` - default to the classic title for a merge message (e.g., Merge pull request #123 from branch-name).
+    /// </summary>
+    [JsonPropertyName("merge_commit_title")]
+    public MergeCommitTitle? MergeCommitTitle { get; init; }
+
+    [JsonPropertyName("merges_url")]
+    public required Uri MergesUrl { get; init; }
+
+    [JsonPropertyName("milestones_url")]
+    public required string MilestonesUrl { get; init; }
+
+    [JsonPropertyName("mirror_url")]
+    public required Uri? MirrorUrl { get; init; }
+
+    /// <summary>
+    /// The name of the repository.
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    [JsonPropertyName("notifications_url")]
+    public required string NotificationsUrl { get; init; }
+
+    [JsonPropertyName("open_issues")]
+    public required int OpenIssues { get; init; }
+
+    [JsonPropertyName("open_issues_count")]
+    public required int OpenIssuesCount { get; init; }
+
+    [JsonPropertyName("organization")]
+    public string? Organization { get; init; }
+
+    [JsonPropertyName("owner")]
+    public required WebhookPullRequestReviewRequestedVariant1PullRequestBaseRepoOwner? Owner { get; init; }
+
+    [JsonPropertyName("permissions")]
+    public WebhookPullRequestReviewRequestedVariant1PullRequestBaseRepoPermissions? Permissions { get; init; }
+
+    /// <summary>
+    /// Whether the repository is private or public.
+    /// </summary>
+    [JsonPropertyName("private")]
+    public required bool Private { get; init; }
+
+    [JsonPropertyName("public")]
+    public bool? Public { get; init; }
+
+    [JsonPropertyName("pulls_url")]
+    public required string PullsUrl { get; init; }
+
+    [JsonPropertyName("pushed_at")]
+    public required object? PushedAt { get; init; }
+
+    [JsonPropertyName("releases_url")]
+    public required string ReleasesUrl { get; init; }
+
+    [JsonPropertyName("role_name")]
+    public string? RoleName { get; init; }
+
+    [JsonPropertyName("size")]
+    public required int Size { get; init; }
+
+    /// <summary>
+    /// The default value for a squash merge commit message:
+    /// 
+    /// - `PR_BODY` - default to the pull request's body.
+    /// - `COMMIT_MESSAGES` - default to the branch's commit messages.
+    /// - `BLANK` - default to a blank commit message.
+    /// </summary>
+    [JsonPropertyName("squash_merge_commit_message")]
+    public SquashMergeCommitMessage? SquashMergeCommitMessage { get; init; }
+
+    /// <summary>
+    /// The default value for a squash merge commit title:
+    /// 
+    /// - `PR_TITLE` - default to the pull request's title.
+    /// - `COMMIT_OR_PR_TITLE` - default to the commit's title (if only one commit) or the pull request's title (when more than one commit).
+    /// </summary>
+    [JsonPropertyName("squash_merge_commit_title")]
+    public SquashMergeCommitTitle? SquashMergeCommitTitle { get; init; }
+
+    [JsonPropertyName("ssh_url")]
+    public required string SshUrl { get; init; }
+
+    [JsonPropertyName("stargazers")]
+    public int? Stargazers { get; init; }
+
+    [JsonPropertyName("stargazers_count")]
+    public required int StargazersCount { get; init; }
+
+    [JsonPropertyName("stargazers_url")]
+    public required Uri StargazersUrl { get; init; }
+
+    [JsonPropertyName("statuses_url")]
+    public required string StatusesUrl { get; init; }
+
+    [JsonPropertyName("subscribers_url")]
+    public required Uri SubscribersUrl { get; init; }
+
+    [JsonPropertyName("subscription_url")]
+    public required Uri SubscriptionUrl { get; init; }
+
+    [JsonPropertyName("svn_url")]
+    public required Uri SvnUrl { get; init; }
+
+    [JsonPropertyName("tags_url")]
+    public required Uri TagsUrl { get; init; }
+
+    [JsonPropertyName("teams_url")]
+    public required Uri TeamsUrl { get; init; }
+
+    [JsonPropertyName("topics")]
+    public required IReadOnlyList<string> Topics { get; init; }
+
+    [JsonPropertyName("trees_url")]
+    public required string TreesUrl { get; init; }
+
+    [JsonPropertyName("updated_at")]
+    public required DateTimeOffset UpdatedAt { get; init; }
+
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+    /// <summary>
+    /// Whether a squash merge commit can use the pull request title as default. **This property is closing down. Please use `squash_merge_commit_title` instead.
+    /// </summary>
+    [JsonPropertyName("use_squash_pr_title_as_default")]
+    public bool UseSquashPrTitleAsDefault { get; init; } = false;
+
+    [JsonPropertyName("visibility")]
+    public required WebhooksPullRequest5BaseRepoVisibility Visibility { get; init; }
+
+    [JsonPropertyName("watchers")]
+    public required int Watchers { get; init; }
+
+    [JsonPropertyName("watchers_count")]
+    public required int WatchersCount { get; init; }
+
+    /// <summary>
+    /// Whether to require contributors to sign off on web-based commits
+    /// </summary>
+    [JsonPropertyName("web_commit_signoff_required")]
+    public bool? WebCommitSignoffRequired { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestedVariant1PullRequestBaseRepoLicense
+{
+    [JsonPropertyName("key")]
+    public required string Key { get; init; }
+
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    [JsonPropertyName("spdx_id")]
+    public required string SpdxId { get; init; }
+
+    [JsonPropertyName("url")]
+    public required Uri? Url { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestedVariant1PullRequestBaseRepoOwner
+{
+    [JsonPropertyName("avatar_url")]
+    public Uri? AvatarUrl { get; init; }
+
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    [JsonPropertyName("email")]
+    public string? Email { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public string? EventsUrl { get; init; }
+
+    [JsonPropertyName("followers_url")]
+    public Uri? FollowersUrl { get; init; }
+
+    [JsonPropertyName("following_url")]
+    public string? FollowingUrl { get; init; }
+
+    [JsonPropertyName("gists_url")]
+    public string? GistsUrl { get; init; }
+
+    [JsonPropertyName("gravatar_id")]
+    public string? GravatarId { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("login")]
+    public required string Login { get; init; }
+
+    [JsonPropertyName("name")]
+    public string? Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("organizations_url")]
+    public Uri? OrganizationsUrl { get; init; }
+
+    [JsonPropertyName("received_events_url")]
+    public Uri? ReceivedEventsUrl { get; init; }
+
+    [JsonPropertyName("repos_url")]
+    public Uri? ReposUrl { get; init; }
+
+    [JsonPropertyName("site_admin")]
+    public bool? SiteAdmin { get; init; }
+
+    [JsonPropertyName("starred_url")]
+    public string? StarredUrl { get; init; }
+
+    [JsonPropertyName("subscriptions_url")]
+    public Uri? SubscriptionsUrl { get; init; }
+
+    [JsonPropertyName("type")]
+    public WebhooksUserType? Type { get; init; }
+
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+    [JsonPropertyName("user_view_type")]
+    public string? UserViewType { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestedVariant1PullRequestBaseRepoPermissions
+{
+    [JsonPropertyName("admin")]
+    public required bool Admin { get; init; }
+
+    [JsonPropertyName("maintain")]
+    public bool? Maintain { get; init; }
+
+    [JsonPropertyName("pull")]
+    public required bool Pull { get; init; }
+
+    [JsonPropertyName("push")]
+    public required bool Push { get; init; }
+
+    [JsonPropertyName("triage")]
+    public bool? Triage { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestedVariant1PullRequestBaseUser
+{
+    [JsonPropertyName("avatar_url")]
+    public Uri? AvatarUrl { get; init; }
+
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    [JsonPropertyName("email")]
+    public string? Email { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public string? EventsUrl { get; init; }
+
+    [JsonPropertyName("followers_url")]
+    public Uri? FollowersUrl { get; init; }
+
+    [JsonPropertyName("following_url")]
+    public string? FollowingUrl { get; init; }
+
+    [JsonPropertyName("gists_url")]
+    public string? GistsUrl { get; init; }
+
+    [JsonPropertyName("gravatar_id")]
+    public string? GravatarId { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    [JsonPropertyName("id")]
+    public required long Id { get; init; }
+
+    [JsonPropertyName("login")]
+    public required string Login { get; init; }
+
+    [JsonPropertyName("name")]
+    public string? Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("organizations_url")]
+    public Uri? OrganizationsUrl { get; init; }
+
+    [JsonPropertyName("received_events_url")]
+    public Uri? ReceivedEventsUrl { get; init; }
+
+    [JsonPropertyName("repos_url")]
+    public Uri? ReposUrl { get; init; }
+
+    [JsonPropertyName("site_admin")]
+    public bool? SiteAdmin { get; init; }
+
+    [JsonPropertyName("starred_url")]
+    public string? StarredUrl { get; init; }
+
+    [JsonPropertyName("subscriptions_url")]
+    public Uri? SubscriptionsUrl { get; init; }
+
+    [JsonPropertyName("type")]
+    public WebhooksUserType? Type { get; init; }
+
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+    [JsonPropertyName("user_view_type")]
+    public string? UserViewType { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestedVariant1PullRequestHead
+{
+    [JsonPropertyName("label")]
+    public required string Label { get; init; }
+
+    [JsonPropertyName("ref")]
+    public required string Ref { get; init; }
+
+    /// <summary>
+    /// A git repository
+    /// </summary>
+    [JsonPropertyName("repo")]
+    public required WebhookPullRequestReviewRequestedVariant1PullRequestHeadRepo Repo { get; init; }
+
+    [JsonPropertyName("sha")]
+    public required string Sha { get; init; }
+
+    [JsonPropertyName("user")]
+    public required WebhookPullRequestReviewRequestedVariant1PullRequestHeadUser? User { get; init; }
+
+}
+
+/// <summary>
+/// A git repository
+/// </summary>
+public partial record WebhookPullRequestReviewRequestedVariant1PullRequestHeadRepo
+{
+    /// <summary>
+    /// Whether to allow auto-merge for pull requests.
+    /// </summary>
+    [JsonPropertyName("allow_auto_merge")]
+    public bool AllowAutoMerge { get; init; } = false;
+
+    /// <summary>
+    /// Whether to allow private forks
+    /// </summary>
+    [JsonPropertyName("allow_forking")]
+    public bool? AllowForking { get; init; }
+
+    /// <summary>
+    /// Whether to allow merge commits for pull requests.
+    /// </summary>
+    [JsonPropertyName("allow_merge_commit")]
+    public bool AllowMergeCommit { get; init; } = true;
+
+    /// <summary>
+    /// Whether to allow rebase merges for pull requests.
+    /// </summary>
+    [JsonPropertyName("allow_rebase_merge")]
+    public bool AllowRebaseMerge { get; init; } = true;
+
+    /// <summary>
+    /// Whether to allow squash merges for pull requests.
+    /// </summary>
+    [JsonPropertyName("allow_squash_merge")]
+    public bool AllowSquashMerge { get; init; } = true;
+
+    [JsonPropertyName("allow_update_branch")]
+    public bool? AllowUpdateBranch { get; init; }
+
+    [JsonPropertyName("archive_url")]
+    public required string ArchiveUrl { get; init; }
+
+    /// <summary>
+    /// Whether the repository is archived.
+    /// </summary>
+    [JsonPropertyName("archived")]
+    public required bool Archived { get; init; } = false;
+
+    [JsonPropertyName("assignees_url")]
+    public required string AssigneesUrl { get; init; }
+
+    [JsonPropertyName("blobs_url")]
+    public required string BlobsUrl { get; init; }
+
+    [JsonPropertyName("branches_url")]
+    public required string BranchesUrl { get; init; }
+
+    [JsonPropertyName("clone_url")]
+    public required Uri CloneUrl { get; init; }
+
+    [JsonPropertyName("collaborators_url")]
+    public required string CollaboratorsUrl { get; init; }
+
+    [JsonPropertyName("comments_url")]
+    public required string CommentsUrl { get; init; }
+
+    [JsonPropertyName("commits_url")]
+    public required string CommitsUrl { get; init; }
+
+    [JsonPropertyName("compare_url")]
+    public required string CompareUrl { get; init; }
+
+    [JsonPropertyName("contents_url")]
+    public required string ContentsUrl { get; init; }
+
+    [JsonPropertyName("contributors_url")]
+    public required Uri ContributorsUrl { get; init; }
+
+    [JsonPropertyName("created_at")]
+    public required object CreatedAt { get; init; }
+
+    /// <summary>
+    /// The default branch of the repository.
+    /// </summary>
+    [JsonPropertyName("default_branch")]
+    public required string DefaultBranch { get; init; }
+
+    /// <summary>
+    /// Whether to delete head branches when pull requests are merged
+    /// </summary>
+    [JsonPropertyName("delete_branch_on_merge")]
+    public bool DeleteBranchOnMerge { get; init; } = false;
+
+    [JsonPropertyName("deployments_url")]
+    public required Uri DeploymentsUrl { get; init; }
+
+    [JsonPropertyName("description")]
+    public required string? Description { get; init; }
+
+    /// <summary>
+    /// Returns whether or not this repository is disabled.
+    /// </summary>
+    [JsonPropertyName("disabled")]
+    public bool? Disabled { get; init; }
+
+    [JsonPropertyName("downloads_url")]
+    public required Uri DownloadsUrl { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public required Uri EventsUrl { get; init; }
+
+    [JsonPropertyName("fork")]
+    public required bool Fork { get; init; }
+
+    [JsonPropertyName("forks")]
+    public required int Forks { get; init; }
+
+    [JsonPropertyName("forks_count")]
+    public required int ForksCount { get; init; }
+
+    [JsonPropertyName("forks_url")]
+    public required Uri ForksUrl { get; init; }
+
+    [JsonPropertyName("full_name")]
+    public required string FullName { get; init; }
+
+    [JsonPropertyName("git_commits_url")]
+    public required string GitCommitsUrl { get; init; }
+
+    [JsonPropertyName("git_refs_url")]
+    public required string GitRefsUrl { get; init; }
+
+    [JsonPropertyName("git_tags_url")]
+    public required string GitTagsUrl { get; init; }
+
+    [JsonPropertyName("git_url")]
+    public required Uri GitUrl { get; init; }
+
+    /// <summary>
+    /// Whether downloads are enabled.
+    /// </summary>
+    [JsonPropertyName("has_downloads")]
+    public required bool HasDownloads { get; init; } = true;
+
+    /// <summary>
+    /// Whether issues are enabled.
+    /// </summary>
+    [JsonPropertyName("has_issues")]
+    public required bool HasIssues { get; init; } = true;
+
+    [JsonPropertyName("has_pages")]
+    public required bool HasPages { get; init; }
+
+    /// <summary>
+    /// Whether projects are enabled.
+    /// </summary>
+    [JsonPropertyName("has_projects")]
+    public required bool HasProjects { get; init; } = true;
+
+    /// <summary>
+    /// Whether the wiki is enabled.
+    /// </summary>
+    [JsonPropertyName("has_wiki")]
+    public required bool HasWiki { get; init; } = true;
+
+    /// <summary>
+    /// Whether discussions are enabled.
+    /// </summary>
+    [JsonPropertyName("has_discussions")]
+    public required bool HasDiscussions { get; init; } = false;
+
+    /// <summary>
+    /// Whether pull requests are enabled.
+    /// </summary>
+    [JsonPropertyName("has_pull_requests")]
+    public bool HasPullRequests { get; init; } = true;
+
+    /// <summary>
+    /// The policy controlling who can create pull requests: all or collaborators_only.
+    /// </summary>
+    [JsonPropertyName("pull_request_creation_policy")]
+    public PullRequestCreationPolicy? PullRequestCreationPolicy { get; init; }
+
+    [JsonPropertyName("homepage")]
+    public required string? Homepage { get; init; }
+
+    [JsonPropertyName("hooks_url")]
+    public required Uri HooksUrl { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public required Uri HtmlUrl { get; init; }
+
+    /// <summary>
+    /// Unique identifier of the repository
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required long Id { get; init; }
+
+    [JsonPropertyName("is_template")]
+    public bool? IsTemplate { get; init; }
+
+    [JsonPropertyName("issue_comment_url")]
+    public required string IssueCommentUrl { get; init; }
+
+    [JsonPropertyName("issue_events_url")]
+    public required string IssueEventsUrl { get; init; }
+
+    [JsonPropertyName("issues_url")]
+    public required string IssuesUrl { get; init; }
+
+    [JsonPropertyName("keys_url")]
+    public required string KeysUrl { get; init; }
+
+    [JsonPropertyName("labels_url")]
+    public required string LabelsUrl { get; init; }
+
+    [JsonPropertyName("language")]
+    public required string? Language { get; init; }
+
+    [JsonPropertyName("languages_url")]
+    public required Uri LanguagesUrl { get; init; }
+
+    [JsonPropertyName("license")]
+    public required WebhookPullRequestReviewRequestedVariant1PullRequestHeadRepoLicense? License { get; init; }
+
+    [JsonPropertyName("master_branch")]
+    public string? MasterBranch { get; init; }
+
+    /// <summary>
+    /// The default value for a merge commit message.
+    /// 
+    /// - `PR_TITLE` - default to the pull request's title.
+    /// - `PR_BODY` - default to the pull request's body.
+    /// - `BLANK` - default to a blank commit message.
+    /// </summary>
+    [JsonPropertyName("merge_commit_message")]
+    public MergeCommitMessage? MergeCommitMessage { get; init; }
+
+    /// <summary>
+    /// The default value for a merge commit title.
+    /// 
+    /// - `PR_TITLE` - default to the pull request's title.
+    /// - `MERGE_MESSAGE` - default to the classic title for a merge message (e.g., Merge pull request #123 from branch-name).
+    /// </summary>
+    [JsonPropertyName("merge_commit_title")]
+    public MergeCommitTitle? MergeCommitTitle { get; init; }
+
+    [JsonPropertyName("merges_url")]
+    public required Uri MergesUrl { get; init; }
+
+    [JsonPropertyName("milestones_url")]
+    public required string MilestonesUrl { get; init; }
+
+    [JsonPropertyName("mirror_url")]
+    public required Uri? MirrorUrl { get; init; }
+
+    /// <summary>
+    /// The name of the repository.
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    [JsonPropertyName("notifications_url")]
+    public required string NotificationsUrl { get; init; }
+
+    [JsonPropertyName("open_issues")]
+    public required int OpenIssues { get; init; }
+
+    [JsonPropertyName("open_issues_count")]
+    public required int OpenIssuesCount { get; init; }
+
+    [JsonPropertyName("organization")]
+    public string? Organization { get; init; }
+
+    [JsonPropertyName("owner")]
+    public required WebhookPullRequestReviewRequestedVariant1PullRequestHeadRepoOwner? Owner { get; init; }
+
+    [JsonPropertyName("permissions")]
+    public WebhookPullRequestReviewRequestedVariant1PullRequestHeadRepoPermissions? Permissions { get; init; }
+
+    /// <summary>
+    /// Whether the repository is private or public.
+    /// </summary>
+    [JsonPropertyName("private")]
+    public required bool Private { get; init; }
+
+    [JsonPropertyName("public")]
+    public bool? Public { get; init; }
+
+    [JsonPropertyName("pulls_url")]
+    public required string PullsUrl { get; init; }
+
+    [JsonPropertyName("pushed_at")]
+    public required object? PushedAt { get; init; }
+
+    [JsonPropertyName("releases_url")]
+    public required string ReleasesUrl { get; init; }
+
+    [JsonPropertyName("role_name")]
+    public string? RoleName { get; init; }
+
+    [JsonPropertyName("size")]
+    public required int Size { get; init; }
+
+    /// <summary>
+    /// The default value for a squash merge commit message:
+    /// 
+    /// - `PR_BODY` - default to the pull request's body.
+    /// - `COMMIT_MESSAGES` - default to the branch's commit messages.
+    /// - `BLANK` - default to a blank commit message.
+    /// </summary>
+    [JsonPropertyName("squash_merge_commit_message")]
+    public SquashMergeCommitMessage? SquashMergeCommitMessage { get; init; }
+
+    /// <summary>
+    /// The default value for a squash merge commit title:
+    /// 
+    /// - `PR_TITLE` - default to the pull request's title.
+    /// - `COMMIT_OR_PR_TITLE` - default to the commit's title (if only one commit) or the pull request's title (when more than one commit).
+    /// </summary>
+    [JsonPropertyName("squash_merge_commit_title")]
+    public SquashMergeCommitTitle? SquashMergeCommitTitle { get; init; }
+
+    [JsonPropertyName("ssh_url")]
+    public required string SshUrl { get; init; }
+
+    [JsonPropertyName("stargazers")]
+    public int? Stargazers { get; init; }
+
+    [JsonPropertyName("stargazers_count")]
+    public required int StargazersCount { get; init; }
+
+    [JsonPropertyName("stargazers_url")]
+    public required Uri StargazersUrl { get; init; }
+
+    [JsonPropertyName("statuses_url")]
+    public required string StatusesUrl { get; init; }
+
+    [JsonPropertyName("subscribers_url")]
+    public required Uri SubscribersUrl { get; init; }
+
+    [JsonPropertyName("subscription_url")]
+    public required Uri SubscriptionUrl { get; init; }
+
+    [JsonPropertyName("svn_url")]
+    public required Uri SvnUrl { get; init; }
+
+    [JsonPropertyName("tags_url")]
+    public required Uri TagsUrl { get; init; }
+
+    [JsonPropertyName("teams_url")]
+    public required Uri TeamsUrl { get; init; }
+
+    [JsonPropertyName("topics")]
+    public required IReadOnlyList<string> Topics { get; init; }
+
+    [JsonPropertyName("trees_url")]
+    public required string TreesUrl { get; init; }
+
+    [JsonPropertyName("updated_at")]
+    public required DateTimeOffset UpdatedAt { get; init; }
+
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+    /// <summary>
+    /// Whether a squash merge commit can use the pull request title as default. **This property is closing down. Please use `squash_merge_commit_title` instead.
+    /// </summary>
+    [JsonPropertyName("use_squash_pr_title_as_default")]
+    public bool UseSquashPrTitleAsDefault { get; init; } = false;
+
+    [JsonPropertyName("visibility")]
+    public required WebhooksPullRequest5BaseRepoVisibility Visibility { get; init; }
+
+    [JsonPropertyName("watchers")]
+    public required int Watchers { get; init; }
+
+    [JsonPropertyName("watchers_count")]
+    public required int WatchersCount { get; init; }
+
+    /// <summary>
+    /// Whether to require contributors to sign off on web-based commits
+    /// </summary>
+    [JsonPropertyName("web_commit_signoff_required")]
+    public bool? WebCommitSignoffRequired { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestedVariant1PullRequestHeadRepoLicense
+{
+    [JsonPropertyName("key")]
+    public required string Key { get; init; }
+
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    [JsonPropertyName("spdx_id")]
+    public required string SpdxId { get; init; }
+
+    [JsonPropertyName("url")]
+    public required Uri? Url { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestedVariant1PullRequestHeadRepoOwner
+{
+    [JsonPropertyName("avatar_url")]
+    public Uri? AvatarUrl { get; init; }
+
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    [JsonPropertyName("email")]
+    public string? Email { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public string? EventsUrl { get; init; }
+
+    [JsonPropertyName("followers_url")]
+    public Uri? FollowersUrl { get; init; }
+
+    [JsonPropertyName("following_url")]
+    public string? FollowingUrl { get; init; }
+
+    [JsonPropertyName("gists_url")]
+    public string? GistsUrl { get; init; }
+
+    [JsonPropertyName("gravatar_id")]
+    public string? GravatarId { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("login")]
+    public required string Login { get; init; }
+
+    [JsonPropertyName("name")]
+    public string? Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("organizations_url")]
+    public Uri? OrganizationsUrl { get; init; }
+
+    [JsonPropertyName("received_events_url")]
+    public Uri? ReceivedEventsUrl { get; init; }
+
+    [JsonPropertyName("repos_url")]
+    public Uri? ReposUrl { get; init; }
+
+    [JsonPropertyName("site_admin")]
+    public bool? SiteAdmin { get; init; }
+
+    [JsonPropertyName("starred_url")]
+    public string? StarredUrl { get; init; }
+
+    [JsonPropertyName("subscriptions_url")]
+    public Uri? SubscriptionsUrl { get; init; }
+
+    [JsonPropertyName("type")]
+    public WebhooksUserType? Type { get; init; }
+
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+    [JsonPropertyName("user_view_type")]
+    public string? UserViewType { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestedVariant1PullRequestHeadRepoPermissions
+{
+    [JsonPropertyName("admin")]
+    public required bool Admin { get; init; }
+
+    [JsonPropertyName("maintain")]
+    public bool? Maintain { get; init; }
+
+    [JsonPropertyName("pull")]
+    public required bool Pull { get; init; }
+
+    [JsonPropertyName("push")]
+    public required bool Push { get; init; }
+
+    [JsonPropertyName("triage")]
+    public bool? Triage { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestedVariant1PullRequestHeadUser
+{
+    [JsonPropertyName("avatar_url")]
+    public Uri? AvatarUrl { get; init; }
+
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    [JsonPropertyName("email")]
+    public string? Email { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public string? EventsUrl { get; init; }
+
+    [JsonPropertyName("followers_url")]
+    public Uri? FollowersUrl { get; init; }
+
+    [JsonPropertyName("following_url")]
+    public string? FollowingUrl { get; init; }
+
+    [JsonPropertyName("gists_url")]
+    public string? GistsUrl { get; init; }
+
+    [JsonPropertyName("gravatar_id")]
+    public string? GravatarId { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    [JsonPropertyName("id")]
+    public required long Id { get; init; }
+
+    [JsonPropertyName("login")]
+    public required string Login { get; init; }
+
+    [JsonPropertyName("name")]
+    public string? Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("organizations_url")]
+    public Uri? OrganizationsUrl { get; init; }
+
+    [JsonPropertyName("received_events_url")]
+    public Uri? ReceivedEventsUrl { get; init; }
+
+    [JsonPropertyName("repos_url")]
+    public Uri? ReposUrl { get; init; }
+
+    [JsonPropertyName("site_admin")]
+    public bool? SiteAdmin { get; init; }
+
+    [JsonPropertyName("starred_url")]
+    public string? StarredUrl { get; init; }
+
+    [JsonPropertyName("subscriptions_url")]
+    public Uri? SubscriptionsUrl { get; init; }
+
+    [JsonPropertyName("type")]
+    public WebhooksUserType? Type { get; init; }
+
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+    [JsonPropertyName("user_view_type")]
+    public string? UserViewType { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestedVariant1PullRequestLabels
+{
+    /// <summary>
+    /// 6-character hex code, without the leading #, identifying the color
+    /// </summary>
+    [JsonPropertyName("color")]
+    public required string Color { get; init; }
+
+    [JsonPropertyName("default")]
+    public required bool Default { get; init; }
+
+    [JsonPropertyName("description")]
+    public required string? Description { get; init; }
+
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    /// <summary>
+    /// The name of the label.
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    /// <summary>
+    /// URL for the label
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestedVariant1PullRequestMergedBy
+{
+    [JsonPropertyName("avatar_url")]
+    public Uri? AvatarUrl { get; init; }
+
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    [JsonPropertyName("email")]
+    public string? Email { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public string? EventsUrl { get; init; }
+
+    [JsonPropertyName("followers_url")]
+    public Uri? FollowersUrl { get; init; }
+
+    [JsonPropertyName("following_url")]
+    public string? FollowingUrl { get; init; }
+
+    [JsonPropertyName("gists_url")]
+    public string? GistsUrl { get; init; }
+
+    [JsonPropertyName("gravatar_id")]
+    public string? GravatarId { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("login")]
+    public required string Login { get; init; }
+
+    [JsonPropertyName("name")]
+    public string? Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("organizations_url")]
+    public Uri? OrganizationsUrl { get; init; }
+
+    [JsonPropertyName("received_events_url")]
+    public Uri? ReceivedEventsUrl { get; init; }
+
+    [JsonPropertyName("repos_url")]
+    public Uri? ReposUrl { get; init; }
+
+    [JsonPropertyName("site_admin")]
+    public bool? SiteAdmin { get; init; }
+
+    [JsonPropertyName("starred_url")]
+    public string? StarredUrl { get; init; }
+
+    [JsonPropertyName("subscriptions_url")]
+    public Uri? SubscriptionsUrl { get; init; }
+
+    [JsonPropertyName("type")]
+    public WebhooksUserType? Type { get; init; }
+
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+    [JsonPropertyName("user_view_type")]
+    public string? UserViewType { get; init; }
+
+}
+
+/// <summary>
+/// A collection of related issues and pull requests.
+/// </summary>
+public partial record WebhookPullRequestReviewRequestedVariant1PullRequestMilestone
+{
+    [JsonPropertyName("closed_at")]
+    public required DateTimeOffset? ClosedAt { get; init; }
+
+    [JsonPropertyName("closed_issues")]
+    public required int ClosedIssues { get; init; }
+
+    [JsonPropertyName("created_at")]
+    public required DateTimeOffset CreatedAt { get; init; }
+
+    [JsonPropertyName("creator")]
+    public required WebhookPullRequestReviewRequestedVariant1PullRequestMilestoneCreator? Creator { get; init; }
+
+    [JsonPropertyName("description")]
+    public required string? Description { get; init; }
+
+    [JsonPropertyName("due_on")]
+    public required DateTimeOffset? DueOn { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public required Uri HtmlUrl { get; init; }
+
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("labels_url")]
+    public required Uri LabelsUrl { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    /// <summary>
+    /// The number of the milestone.
+    /// </summary>
+    [JsonPropertyName("number")]
+    public required int Number { get; init; }
+
+    [JsonPropertyName("open_issues")]
+    public required int OpenIssues { get; init; }
+
+    /// <summary>
+    /// The state of the milestone.
+    /// </summary>
+    [JsonPropertyName("state")]
+    public required MilestoneState State { get; init; }
+
+    /// <summary>
+    /// The title of the milestone.
+    /// </summary>
+    [JsonPropertyName("title")]
+    public required string Title { get; init; }
+
+    [JsonPropertyName("updated_at")]
+    public required DateTimeOffset UpdatedAt { get; init; }
+
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestedVariant1PullRequestMilestoneCreator
+{
+    [JsonPropertyName("avatar_url")]
+    public Uri? AvatarUrl { get; init; }
+
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    [JsonPropertyName("email")]
+    public string? Email { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public string? EventsUrl { get; init; }
+
+    [JsonPropertyName("followers_url")]
+    public Uri? FollowersUrl { get; init; }
+
+    [JsonPropertyName("following_url")]
+    public string? FollowingUrl { get; init; }
+
+    [JsonPropertyName("gists_url")]
+    public string? GistsUrl { get; init; }
+
+    [JsonPropertyName("gravatar_id")]
+    public string? GravatarId { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("login")]
+    public required string Login { get; init; }
+
+    [JsonPropertyName("name")]
+    public string? Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("organizations_url")]
+    public Uri? OrganizationsUrl { get; init; }
+
+    [JsonPropertyName("received_events_url")]
+    public Uri? ReceivedEventsUrl { get; init; }
+
+    [JsonPropertyName("repos_url")]
+    public Uri? ReposUrl { get; init; }
+
+    [JsonPropertyName("site_admin")]
+    public bool? SiteAdmin { get; init; }
+
+    [JsonPropertyName("starred_url")]
+    public string? StarredUrl { get; init; }
+
+    [JsonPropertyName("subscriptions_url")]
+    public Uri? SubscriptionsUrl { get; init; }
+
+    [JsonPropertyName("type")]
+    public WebhooksUserMannequinType? Type { get; init; }
+
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+    [JsonPropertyName("user_view_type")]
+    public string? UserViewType { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestedVariant1PullRequestRequestedReviewersVariant1
+{
+    [JsonPropertyName("avatar_url")]
+    public Uri? AvatarUrl { get; init; }
+
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    [JsonPropertyName("email")]
+    public string? Email { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public string? EventsUrl { get; init; }
+
+    [JsonPropertyName("followers_url")]
+    public Uri? FollowersUrl { get; init; }
+
+    [JsonPropertyName("following_url")]
+    public string? FollowingUrl { get; init; }
+
+    [JsonPropertyName("gists_url")]
+    public string? GistsUrl { get; init; }
+
+    [JsonPropertyName("gravatar_id")]
+    public string? GravatarId { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("login")]
+    public required string Login { get; init; }
+
+    [JsonPropertyName("name")]
+    public string? Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("organizations_url")]
+    public Uri? OrganizationsUrl { get; init; }
+
+    [JsonPropertyName("received_events_url")]
+    public Uri? ReceivedEventsUrl { get; init; }
+
+    [JsonPropertyName("repos_url")]
+    public Uri? ReposUrl { get; init; }
+
+    [JsonPropertyName("site_admin")]
+    public bool? SiteAdmin { get; init; }
+
+    [JsonPropertyName("starred_url")]
+    public string? StarredUrl { get; init; }
+
+    [JsonPropertyName("subscriptions_url")]
+    public Uri? SubscriptionsUrl { get; init; }
+
+    [JsonPropertyName("type")]
+    public WebhooksUserType? Type { get; init; }
+
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+    [JsonPropertyName("user_view_type")]
+    public string? UserViewType { get; init; }
+
+}
+
+/// <summary>
+/// Groups of organization members that gives permissions on specified repositories.
+/// </summary>
+public partial record WebhookPullRequestReviewRequestedVariant1PullRequestRequestedReviewersVariant2
+{
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    /// <summary>
+    /// Description of the team
+    /// </summary>
+    [JsonPropertyName("description")]
+    public required string? Description { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public required Uri HtmlUrl { get; init; }
+
+    /// <summary>
+    /// Unique identifier of the team
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("members_url")]
+    public required string MembersUrl { get; init; }
+
+    /// <summary>
+    /// Name of the team
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    [JsonPropertyName("parent")]
+    public WebhookPullRequestReviewRequestedVariant1PullRequestRequestedReviewersVariant2Parent? Parent { get; init; }
+
+    /// <summary>
+    /// Permission that the team will have for its repositories
+    /// </summary>
+    [JsonPropertyName("permission")]
+    public required string Permission { get; init; }
+
+    [JsonPropertyName("privacy")]
+    public required WebhooksTeamPrivacy Privacy { get; init; }
+
+    [JsonPropertyName("repositories_url")]
+    public required Uri RepositoriesUrl { get; init; }
+
+    [JsonPropertyName("slug")]
+    public required string Slug { get; init; }
+
+    /// <summary>
+    /// URL for the team
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestedVariant1PullRequestRequestedReviewersVariant2Parent
+{
+    /// <summary>
+    /// Description of the team
+    /// </summary>
+    [JsonPropertyName("description")]
+    public required string? Description { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public required Uri HtmlUrl { get; init; }
+
+    /// <summary>
+    /// Unique identifier of the team
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("members_url")]
+    public required string MembersUrl { get; init; }
+
+    /// <summary>
+    /// Name of the team
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    /// <summary>
+    /// Permission that the team will have for its repositories
+    /// </summary>
+    [JsonPropertyName("permission")]
+    public required string Permission { get; init; }
+
+    [JsonPropertyName("privacy")]
+    public required WebhooksTeamPrivacy Privacy { get; init; }
+
+    [JsonPropertyName("repositories_url")]
+    public required Uri RepositoriesUrl { get; init; }
+
+    [JsonPropertyName("slug")]
+    public required string Slug { get; init; }
+
+    /// <summary>
+    /// URL for the team
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+}
+
+/// <remarks>
+/// Union of: WebhookPullRequestReviewRequestedVariant1PullRequestRequestedReviewersVariant1 | WebhookPullRequestReviewRequestedVariant1PullRequestRequestedReviewersVariant2
+/// </remarks>
+[JsonDerivedType(typeof(WebhookPullRequestReviewRequestedVariant1PullRequestRequestedReviewersVariant1), "WebhookPullRequestReviewRequestedVariant1PullRequestRequestedReviewersVariant1")]
+[JsonDerivedType(typeof(WebhookPullRequestReviewRequestedVariant1PullRequestRequestedReviewersVariant2), "WebhookPullRequestReviewRequestedVariant1PullRequestRequestedReviewersVariant2")]
+public abstract partial record WebhookPullRequestReviewRequestedVariant1PullRequestRequestedReviewers;
+
+/// <summary>
+/// Groups of organization members that gives permissions on specified repositories.
+/// </summary>
+public partial record WebhookPullRequestReviewRequestedVariant1PullRequestRequestedTeams
+{
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    /// <summary>
+    /// Description of the team
+    /// </summary>
+    [JsonPropertyName("description")]
+    public string? Description { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    /// <summary>
+    /// Unique identifier of the team
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("members_url")]
+    public string? MembersUrl { get; init; }
+
+    /// <summary>
+    /// Name of the team
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("parent")]
+    public WebhookPullRequestReviewRequestedVariant1PullRequestRequestedTeamsParent? Parent { get; init; }
+
+    /// <summary>
+    /// Permission that the team will have for its repositories
+    /// </summary>
+    [JsonPropertyName("permission")]
+    public string? Permission { get; init; }
+
+    [JsonPropertyName("privacy")]
+    public WebhooksTeamPrivacy? Privacy { get; init; }
+
+    [JsonPropertyName("repositories_url")]
+    public Uri? RepositoriesUrl { get; init; }
+
+    [JsonPropertyName("slug")]
+    public string? Slug { get; init; }
+
+    /// <summary>
+    /// URL for the team
+    /// </summary>
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestedVariant1PullRequestRequestedTeamsParent
+{
+    /// <summary>
+    /// Description of the team
+    /// </summary>
+    [JsonPropertyName("description")]
+    public required string? Description { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public required Uri HtmlUrl { get; init; }
+
+    /// <summary>
+    /// Unique identifier of the team
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("members_url")]
+    public required string MembersUrl { get; init; }
+
+    /// <summary>
+    /// Name of the team
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    /// <summary>
+    /// Permission that the team will have for its repositories
+    /// </summary>
+    [JsonPropertyName("permission")]
+    public required string Permission { get; init; }
+
+    [JsonPropertyName("privacy")]
+    public required WebhooksTeamPrivacy Privacy { get; init; }
+
+    [JsonPropertyName("repositories_url")]
+    public required Uri RepositoriesUrl { get; init; }
+
+    [JsonPropertyName("slug")]
+    public required string Slug { get; init; }
+
+    /// <summary>
+    /// URL for the team
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestedVariant1PullRequestUser
+{
+    [JsonPropertyName("avatar_url")]
+    public Uri? AvatarUrl { get; init; }
+
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    [JsonPropertyName("email")]
+    public string? Email { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public string? EventsUrl { get; init; }
+
+    [JsonPropertyName("followers_url")]
+    public Uri? FollowersUrl { get; init; }
+
+    [JsonPropertyName("following_url")]
+    public string? FollowingUrl { get; init; }
+
+    [JsonPropertyName("gists_url")]
+    public string? GistsUrl { get; init; }
+
+    [JsonPropertyName("gravatar_id")]
+    public string? GravatarId { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    [JsonPropertyName("id")]
+    public required long Id { get; init; }
+
+    [JsonPropertyName("login")]
+    public required string Login { get; init; }
+
+    [JsonPropertyName("name")]
+    public string? Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("organizations_url")]
+    public Uri? OrganizationsUrl { get; init; }
+
+    [JsonPropertyName("received_events_url")]
+    public Uri? ReceivedEventsUrl { get; init; }
+
+    [JsonPropertyName("repos_url")]
+    public Uri? ReposUrl { get; init; }
+
+    [JsonPropertyName("site_admin")]
+    public bool? SiteAdmin { get; init; }
+
+    [JsonPropertyName("starred_url")]
+    public string? StarredUrl { get; init; }
+
+    [JsonPropertyName("subscriptions_url")]
+    public Uri? SubscriptionsUrl { get; init; }
+
+    [JsonPropertyName("type")]
+    public WebhooksUserMannequinType? Type { get; init; }
+
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+    [JsonPropertyName("user_view_type")]
+    public string? UserViewType { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestedVariant1RequestedReviewer
+{
+    [JsonPropertyName("avatar_url")]
+    public Uri? AvatarUrl { get; init; }
+
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    [JsonPropertyName("email")]
+    public string? Email { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public string? EventsUrl { get; init; }
+
+    [JsonPropertyName("followers_url")]
+    public Uri? FollowersUrl { get; init; }
+
+    [JsonPropertyName("following_url")]
+    public string? FollowingUrl { get; init; }
+
+    [JsonPropertyName("gists_url")]
+    public string? GistsUrl { get; init; }
+
+    [JsonPropertyName("gravatar_id")]
+    public string? GravatarId { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("login")]
+    public required string Login { get; init; }
+
+    [JsonPropertyName("name")]
+    public string? Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("organizations_url")]
+    public Uri? OrganizationsUrl { get; init; }
+
+    [JsonPropertyName("received_events_url")]
+    public Uri? ReceivedEventsUrl { get; init; }
+
+    [JsonPropertyName("repos_url")]
+    public Uri? ReposUrl { get; init; }
+
+    [JsonPropertyName("site_admin")]
+    public bool? SiteAdmin { get; init; }
+
+    [JsonPropertyName("starred_url")]
+    public string? StarredUrl { get; init; }
+
+    [JsonPropertyName("subscriptions_url")]
+    public Uri? SubscriptionsUrl { get; init; }
+
+    [JsonPropertyName("type")]
+    public WebhooksUserMannequinType? Type { get; init; }
+
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+    [JsonPropertyName("user_view_type")]
+    public string? UserViewType { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestedVariant2
+{
+    [JsonPropertyName("action")]
+    public required WebhookPullRequestReviewRequestedVariant1Action Action { get; init; }
+
+    /// <summary>
+    /// An enterprise on GitHub. Webhook payloads contain the `enterprise` property when the webhook is configured
+    /// on an enterprise account or an organization that's part of an enterprise account. For more information,
+    /// see "[About enterprise accounts](https://docs.github.com/admin/overview/about-enterprise-accounts)."
+    /// </summary>
+    [JsonPropertyName("enterprise")]
+    public EnterpriseWebhooks? Enterprise { get; init; }
+
+    /// <summary>
+    /// The GitHub App installation. Webhook payloads contain the `installation` property when the event is configured
+    /// for and sent to a GitHub App. For more information,
+    /// see "[Using webhooks with GitHub Apps](https://docs.github.com/apps/creating-github-apps/registering-a-github-app/using-webhooks-with-github-apps)."
+    /// </summary>
+    [JsonPropertyName("installation")]
+    public SimpleInstallation? Installation { get; init; }
+
+    /// <summary>
+    /// The pull request number.
+    /// </summary>
+    [JsonPropertyName("number")]
+    public required int Number { get; init; }
+
+    /// <summary>
+    /// A GitHub organization. Webhook payloads contain the `organization` property when the webhook is configured for an
+    /// organization, or when the event occurs from activity in a repository owned by an organization.
+    /// </summary>
+    [JsonPropertyName("organization")]
+    public OrganizationSimpleWebhooks? Organization { get; init; }
+
+    [JsonPropertyName("pull_request")]
+    public required WebhookPullRequestReviewRequestedVariant2PullRequest PullRequest { get; init; }
+
+    /// <summary>
+    /// The repository on GitHub where the event occurred. Webhook payloads contain the `repository` property
+    /// when the event occurs from activity in a repository.
+    /// </summary>
+    [JsonPropertyName("repository")]
+    public required RepositoryWebhooks Repository { get; init; }
+
+    /// <summary>
+    /// Groups of organization members that gives permissions on specified repositories.
+    /// </summary>
+    [JsonPropertyName("requested_team")]
+    public required WebhookPullRequestReviewRequestedVariant2RequestedTeam RequestedTeam { get; init; }
+
+    /// <summary>
+    /// A GitHub user.
+    /// </summary>
+    [JsonPropertyName("sender")]
+    public required SimpleUser Sender { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestedVariant2PullRequest
+{
+    [JsonPropertyName("_links")]
+    public required WebhookPullRequestReviewRequestedVariant2PullRequestLinks Links { get; init; }
+
+    [JsonPropertyName("active_lock_reason")]
+    public required ActiveLockReason ActiveLockReason { get; init; }
+
+    [JsonPropertyName("additions")]
+    public int? Additions { get; init; }
+
+    [JsonPropertyName("assignee")]
+    public required WebhookPullRequestReviewRequestedVariant2PullRequestAssignee? Assignee { get; init; }
+
+    [JsonPropertyName("assignees")]
+    public required IReadOnlyList<WebhookPullRequestReviewRequestedVariant2PullRequestAssignees?> Assignees { get; init; }
+
+    /// <summary>
+    /// How the author is associated with the repository.
+    /// </summary>
+    [JsonPropertyName("author_association")]
+    public required AuthorAssociation2 AuthorAssociation { get; init; }
+
+    /// <summary>
+    /// The status of auto merging a pull request.
+    /// </summary>
+    [JsonPropertyName("auto_merge")]
+    public required WebhookPullRequestReviewRequestedVariant2PullRequestAutoMerge? AutoMerge { get; init; }
+
+    [JsonPropertyName("base")]
+    public required WebhookPullRequestReviewRequestedVariant2PullRequestBase Base { get; init; }
+
+    [JsonPropertyName("body")]
+    public required string? Body { get; init; }
+
+    [JsonPropertyName("changed_files")]
+    public int? ChangedFiles { get; init; }
+
+    [JsonPropertyName("closed_at")]
+    public required DateTimeOffset? ClosedAt { get; init; }
+
+    [JsonPropertyName("comments")]
+    public int? Comments { get; init; }
+
+    [JsonPropertyName("comments_url")]
+    public required Uri CommentsUrl { get; init; }
+
+    [JsonPropertyName("commits")]
+    public int? Commits { get; init; }
+
+    [JsonPropertyName("commits_url")]
+    public required Uri CommitsUrl { get; init; }
+
+    [JsonPropertyName("created_at")]
+    public required DateTimeOffset CreatedAt { get; init; }
+
+    [JsonPropertyName("deletions")]
+    public int? Deletions { get; init; }
+
+    [JsonPropertyName("diff_url")]
+    public required Uri DiffUrl { get; init; }
+
+    /// <summary>
+    /// Indicates whether or not the pull request is a draft.
+    /// </summary>
+    [JsonPropertyName("draft")]
+    public required bool Draft { get; init; }
+
+    [JsonPropertyName("head")]
+    public required WebhookPullRequestReviewRequestedVariant2PullRequestHead Head { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public required Uri HtmlUrl { get; init; }
+
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("issue_url")]
+    public required Uri IssueUrl { get; init; }
+
+    [JsonPropertyName("labels")]
+    public required IReadOnlyList<WebhookPullRequestReviewRequestedVariant2PullRequestLabels> Labels { get; init; }
+
+    [JsonPropertyName("locked")]
+    public required bool Locked { get; init; }
+
+    /// <summary>
+    /// Indicates whether maintainers can modify the pull request.
+    /// </summary>
+    [JsonPropertyName("maintainer_can_modify")]
+    public bool? MaintainerCanModify { get; init; }
+
+    [JsonPropertyName("merge_commit_sha")]
+    public required string? MergeCommitSha { get; init; }
+
+    [JsonPropertyName("mergeable")]
+    public bool? Mergeable { get; init; }
+
+    [JsonPropertyName("mergeable_state")]
+    public string? MergeableState { get; init; }
+
+    [JsonPropertyName("merged")]
+    public bool? Merged { get; init; }
+
+    [JsonPropertyName("merged_at")]
+    public required DateTimeOffset? MergedAt { get; init; }
+
+    [JsonPropertyName("merged_by")]
+    public WebhookPullRequestReviewRequestedVariant2PullRequestMergedBy? MergedBy { get; init; }
+
+    /// <summary>
+    /// A collection of related issues and pull requests.
+    /// </summary>
+    [JsonPropertyName("milestone")]
+    public required WebhookPullRequestReviewRequestedVariant2PullRequestMilestone? Milestone { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    /// <summary>
+    /// Number uniquely identifying the pull request within its repository.
+    /// </summary>
+    [JsonPropertyName("number")]
+    public required int Number { get; init; }
+
+    [JsonPropertyName("patch_url")]
+    public required Uri PatchUrl { get; init; }
+
+    [JsonPropertyName("rebaseable")]
+    public bool? Rebaseable { get; init; }
+
+    [JsonPropertyName("requested_reviewers")]
+    public required IReadOnlyList<WebhookPullRequestReviewRequestedVariant2PullRequestRequestedReviewers> RequestedReviewers { get; init; }
+
+    [JsonPropertyName("requested_teams")]
+    public required IReadOnlyList<WebhookPullRequestReviewRequestedVariant2PullRequestRequestedTeams> RequestedTeams { get; init; }
+
+    [JsonPropertyName("review_comment_url")]
+    public required string ReviewCommentUrl { get; init; }
+
+    [JsonPropertyName("review_comments")]
+    public int? ReviewComments { get; init; }
+
+    [JsonPropertyName("review_comments_url")]
+    public required Uri ReviewCommentsUrl { get; init; }
+
+    /// <summary>
+    /// The stack information associated with a pull request.
+    /// </summary>
+    [JsonPropertyName("stack")]
+    public PullRequestStack? Stack { get; init; }
+
+    /// <summary>
+    /// State of this Pull Request. Either `open` or `closed`.
+    /// </summary>
+    [JsonPropertyName("state")]
+    public required MilestoneState State { get; init; }
+
+    [JsonPropertyName("statuses_url")]
+    public required Uri StatusesUrl { get; init; }
+
+    /// <summary>
+    /// The title of the pull request.
+    /// </summary>
+    [JsonPropertyName("title")]
+    public required string Title { get; init; }
+
+    [JsonPropertyName("updated_at")]
+    public required DateTimeOffset UpdatedAt { get; init; }
+
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+    [JsonPropertyName("user")]
+    public required WebhookPullRequestReviewRequestedVariant2PullRequestUser? User { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestedVariant2PullRequestLinks
+{
+    [JsonPropertyName("comments")]
+    public required WebhookPullRequestReviewRequestedVariant2PullRequestLinksComments Comments { get; init; }
+
+    [JsonPropertyName("commits")]
+    public required WebhookPullRequestReviewRequestedVariant2PullRequestLinksCommits Commits { get; init; }
+
+    [JsonPropertyName("html")]
+    public required WebhookPullRequestReviewRequestedVariant2PullRequestLinksHtml Html { get; init; }
+
+    [JsonPropertyName("issue")]
+    public required WebhookPullRequestReviewRequestedVariant2PullRequestLinksIssue Issue { get; init; }
+
+    [JsonPropertyName("review_comment")]
+    public required WebhookPullRequestReviewRequestedVariant2PullRequestLinksReviewComment ReviewComment { get; init; }
+
+    [JsonPropertyName("review_comments")]
+    public required WebhookPullRequestReviewRequestedVariant2PullRequestLinksReviewComments ReviewComments { get; init; }
+
+    [JsonPropertyName("self")]
+    public required WebhookPullRequestReviewRequestedVariant2PullRequestLinksSelf Self { get; init; }
+
+    [JsonPropertyName("statuses")]
+    public required WebhookPullRequestReviewRequestedVariant2PullRequestLinksStatuses Statuses { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestedVariant2PullRequestLinksComments
+{
+    [JsonPropertyName("href")]
+    public required string Href { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestedVariant2PullRequestLinksCommits
+{
+    [JsonPropertyName("href")]
+    public required string Href { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestedVariant2PullRequestLinksHtml
+{
+    [JsonPropertyName("href")]
+    public required string Href { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestedVariant2PullRequestLinksIssue
+{
+    [JsonPropertyName("href")]
+    public required string Href { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestedVariant2PullRequestLinksReviewComment
+{
+    [JsonPropertyName("href")]
+    public required string Href { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestedVariant2PullRequestLinksReviewComments
+{
+    [JsonPropertyName("href")]
+    public required string Href { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestedVariant2PullRequestLinksSelf
+{
+    [JsonPropertyName("href")]
+    public required string Href { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestedVariant2PullRequestLinksStatuses
+{
+    [JsonPropertyName("href")]
+    public required string Href { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestedVariant2PullRequestAssignee
+{
+    [JsonPropertyName("avatar_url")]
+    public Uri? AvatarUrl { get; init; }
+
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    [JsonPropertyName("email")]
+    public string? Email { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public string? EventsUrl { get; init; }
+
+    [JsonPropertyName("followers_url")]
+    public Uri? FollowersUrl { get; init; }
+
+    [JsonPropertyName("following_url")]
+    public string? FollowingUrl { get; init; }
+
+    [JsonPropertyName("gists_url")]
+    public string? GistsUrl { get; init; }
+
+    [JsonPropertyName("gravatar_id")]
+    public string? GravatarId { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("login")]
+    public required string Login { get; init; }
+
+    [JsonPropertyName("name")]
+    public string? Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("organizations_url")]
+    public Uri? OrganizationsUrl { get; init; }
+
+    [JsonPropertyName("received_events_url")]
+    public Uri? ReceivedEventsUrl { get; init; }
+
+    [JsonPropertyName("repos_url")]
+    public Uri? ReposUrl { get; init; }
+
+    [JsonPropertyName("site_admin")]
+    public bool? SiteAdmin { get; init; }
+
+    [JsonPropertyName("starred_url")]
+    public string? StarredUrl { get; init; }
+
+    [JsonPropertyName("subscriptions_url")]
+    public Uri? SubscriptionsUrl { get; init; }
+
+    [JsonPropertyName("type")]
+    public WebhooksUserMannequinType? Type { get; init; }
+
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+    [JsonPropertyName("user_view_type")]
+    public string? UserViewType { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestedVariant2PullRequestAssignees
+{
+    [JsonPropertyName("avatar_url")]
+    public Uri? AvatarUrl { get; init; }
+
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    [JsonPropertyName("email")]
+    public string? Email { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public string? EventsUrl { get; init; }
+
+    [JsonPropertyName("followers_url")]
+    public Uri? FollowersUrl { get; init; }
+
+    [JsonPropertyName("following_url")]
+    public string? FollowingUrl { get; init; }
+
+    [JsonPropertyName("gists_url")]
+    public string? GistsUrl { get; init; }
+
+    [JsonPropertyName("gravatar_id")]
+    public string? GravatarId { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("login")]
+    public required string Login { get; init; }
+
+    [JsonPropertyName("name")]
+    public string? Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("organizations_url")]
+    public Uri? OrganizationsUrl { get; init; }
+
+    [JsonPropertyName("received_events_url")]
+    public Uri? ReceivedEventsUrl { get; init; }
+
+    [JsonPropertyName("repos_url")]
+    public Uri? ReposUrl { get; init; }
+
+    [JsonPropertyName("site_admin")]
+    public bool? SiteAdmin { get; init; }
+
+    [JsonPropertyName("starred_url")]
+    public string? StarredUrl { get; init; }
+
+    [JsonPropertyName("subscriptions_url")]
+    public Uri? SubscriptionsUrl { get; init; }
+
+    [JsonPropertyName("type")]
+    public WebhooksUserMannequinType? Type { get; init; }
+
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+    [JsonPropertyName("user_view_type")]
+    public string? UserViewType { get; init; }
+
+}
+
+/// <summary>
+/// The status of auto merging a pull request.
+/// </summary>
+public partial record WebhookPullRequestReviewRequestedVariant2PullRequestAutoMerge
+{
+    /// <summary>
+    /// Commit message for the merge commit.
+    /// </summary>
+    [JsonPropertyName("commit_message")]
+    public required string? CommitMessage { get; init; }
+
+    /// <summary>
+    /// Title for the merge commit message.
+    /// </summary>
+    [JsonPropertyName("commit_title")]
+    public required string? CommitTitle { get; init; }
+
+    [JsonPropertyName("enabled_by")]
+    public required WebhookPullRequestReviewRequestedVariant2PullRequestAutoMergeEnabledBy? EnabledBy { get; init; }
+
+    /// <summary>
+    /// The merge method to use.
+    /// </summary>
+    [JsonPropertyName("merge_method")]
+    public required AutoMergeMergeMethod MergeMethod { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestedVariant2PullRequestAutoMergeEnabledBy
+{
+    [JsonPropertyName("avatar_url")]
+    public Uri? AvatarUrl { get; init; }
+
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    [JsonPropertyName("email")]
+    public string? Email { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public string? EventsUrl { get; init; }
+
+    [JsonPropertyName("followers_url")]
+    public Uri? FollowersUrl { get; init; }
+
+    [JsonPropertyName("following_url")]
+    public string? FollowingUrl { get; init; }
+
+    [JsonPropertyName("gists_url")]
+    public string? GistsUrl { get; init; }
+
+    [JsonPropertyName("gravatar_id")]
+    public string? GravatarId { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("login")]
+    public required string Login { get; init; }
+
+    [JsonPropertyName("name")]
+    public string? Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("organizations_url")]
+    public Uri? OrganizationsUrl { get; init; }
+
+    [JsonPropertyName("received_events_url")]
+    public Uri? ReceivedEventsUrl { get; init; }
+
+    [JsonPropertyName("repos_url")]
+    public Uri? ReposUrl { get; init; }
+
+    [JsonPropertyName("site_admin")]
+    public bool? SiteAdmin { get; init; }
+
+    [JsonPropertyName("starred_url")]
+    public string? StarredUrl { get; init; }
+
+    [JsonPropertyName("subscriptions_url")]
+    public Uri? SubscriptionsUrl { get; init; }
+
+    [JsonPropertyName("type")]
+    public WebhooksUserType? Type { get; init; }
+
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+    [JsonPropertyName("user_view_type")]
+    public string? UserViewType { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestedVariant2PullRequestBase
+{
+    [JsonPropertyName("label")]
+    public required string Label { get; init; }
+
+    [JsonPropertyName("ref")]
+    public required string Ref { get; init; }
+
+    /// <summary>
+    /// A git repository
+    /// </summary>
+    [JsonPropertyName("repo")]
+    public required WebhookPullRequestReviewRequestedVariant2PullRequestBaseRepo Repo { get; init; }
+
+    [JsonPropertyName("sha")]
+    public required string Sha { get; init; }
+
+    [JsonPropertyName("user")]
+    public required WebhookPullRequestReviewRequestedVariant2PullRequestBaseUser? User { get; init; }
+
+}
+
+/// <summary>
+/// A git repository
+/// </summary>
+public partial record WebhookPullRequestReviewRequestedVariant2PullRequestBaseRepo
+{
+    /// <summary>
+    /// Whether to allow auto-merge for pull requests.
+    /// </summary>
+    [JsonPropertyName("allow_auto_merge")]
+    public bool AllowAutoMerge { get; init; } = false;
+
+    /// <summary>
+    /// Whether to allow private forks
+    /// </summary>
+    [JsonPropertyName("allow_forking")]
+    public bool? AllowForking { get; init; }
+
+    /// <summary>
+    /// Whether to allow merge commits for pull requests.
+    /// </summary>
+    [JsonPropertyName("allow_merge_commit")]
+    public bool AllowMergeCommit { get; init; } = true;
+
+    /// <summary>
+    /// Whether to allow rebase merges for pull requests.
+    /// </summary>
+    [JsonPropertyName("allow_rebase_merge")]
+    public bool AllowRebaseMerge { get; init; } = true;
+
+    /// <summary>
+    /// Whether to allow squash merges for pull requests.
+    /// </summary>
+    [JsonPropertyName("allow_squash_merge")]
+    public bool AllowSquashMerge { get; init; } = true;
+
+    [JsonPropertyName("allow_update_branch")]
+    public bool? AllowUpdateBranch { get; init; }
+
+    [JsonPropertyName("archive_url")]
+    public required string ArchiveUrl { get; init; }
+
+    /// <summary>
+    /// Whether the repository is archived.
+    /// </summary>
+    [JsonPropertyName("archived")]
+    public required bool Archived { get; init; } = false;
+
+    [JsonPropertyName("assignees_url")]
+    public required string AssigneesUrl { get; init; }
+
+    [JsonPropertyName("blobs_url")]
+    public required string BlobsUrl { get; init; }
+
+    [JsonPropertyName("branches_url")]
+    public required string BranchesUrl { get; init; }
+
+    [JsonPropertyName("clone_url")]
+    public required Uri CloneUrl { get; init; }
+
+    [JsonPropertyName("collaborators_url")]
+    public required string CollaboratorsUrl { get; init; }
+
+    [JsonPropertyName("comments_url")]
+    public required string CommentsUrl { get; init; }
+
+    [JsonPropertyName("commits_url")]
+    public required string CommitsUrl { get; init; }
+
+    [JsonPropertyName("compare_url")]
+    public required string CompareUrl { get; init; }
+
+    [JsonPropertyName("contents_url")]
+    public required string ContentsUrl { get; init; }
+
+    [JsonPropertyName("contributors_url")]
+    public required Uri ContributorsUrl { get; init; }
+
+    [JsonPropertyName("created_at")]
+    public required object CreatedAt { get; init; }
+
+    /// <summary>
+    /// The default branch of the repository.
+    /// </summary>
+    [JsonPropertyName("default_branch")]
+    public required string DefaultBranch { get; init; }
+
+    /// <summary>
+    /// Whether to delete head branches when pull requests are merged
+    /// </summary>
+    [JsonPropertyName("delete_branch_on_merge")]
+    public bool DeleteBranchOnMerge { get; init; } = false;
+
+    [JsonPropertyName("deployments_url")]
+    public required Uri DeploymentsUrl { get; init; }
+
+    [JsonPropertyName("description")]
+    public required string? Description { get; init; }
+
+    /// <summary>
+    /// Returns whether or not this repository is disabled.
+    /// </summary>
+    [JsonPropertyName("disabled")]
+    public bool? Disabled { get; init; }
+
+    [JsonPropertyName("downloads_url")]
+    public required Uri DownloadsUrl { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public required Uri EventsUrl { get; init; }
+
+    [JsonPropertyName("fork")]
+    public required bool Fork { get; init; }
+
+    [JsonPropertyName("forks")]
+    public required int Forks { get; init; }
+
+    [JsonPropertyName("forks_count")]
+    public required int ForksCount { get; init; }
+
+    [JsonPropertyName("forks_url")]
+    public required Uri ForksUrl { get; init; }
+
+    [JsonPropertyName("full_name")]
+    public required string FullName { get; init; }
+
+    [JsonPropertyName("git_commits_url")]
+    public required string GitCommitsUrl { get; init; }
+
+    [JsonPropertyName("git_refs_url")]
+    public required string GitRefsUrl { get; init; }
+
+    [JsonPropertyName("git_tags_url")]
+    public required string GitTagsUrl { get; init; }
+
+    [JsonPropertyName("git_url")]
+    public required Uri GitUrl { get; init; }
+
+    /// <summary>
+    /// Whether downloads are enabled.
+    /// </summary>
+    [JsonPropertyName("has_downloads")]
+    public required bool HasDownloads { get; init; } = true;
+
+    /// <summary>
+    /// Whether issues are enabled.
+    /// </summary>
+    [JsonPropertyName("has_issues")]
+    public required bool HasIssues { get; init; } = true;
+
+    [JsonPropertyName("has_pages")]
+    public required bool HasPages { get; init; }
+
+    /// <summary>
+    /// Whether projects are enabled.
+    /// </summary>
+    [JsonPropertyName("has_projects")]
+    public required bool HasProjects { get; init; } = true;
+
+    /// <summary>
+    /// Whether the wiki is enabled.
+    /// </summary>
+    [JsonPropertyName("has_wiki")]
+    public required bool HasWiki { get; init; } = true;
+
+    /// <summary>
+    /// Whether discussions are enabled.
+    /// </summary>
+    [JsonPropertyName("has_discussions")]
+    public required bool HasDiscussions { get; init; } = false;
+
+    /// <summary>
+    /// Whether pull requests are enabled.
+    /// </summary>
+    [JsonPropertyName("has_pull_requests")]
+    public bool HasPullRequests { get; init; } = true;
+
+    /// <summary>
+    /// The policy controlling who can create pull requests: all or collaborators_only.
+    /// </summary>
+    [JsonPropertyName("pull_request_creation_policy")]
+    public PullRequestCreationPolicy? PullRequestCreationPolicy { get; init; }
+
+    [JsonPropertyName("homepage")]
+    public required string? Homepage { get; init; }
+
+    [JsonPropertyName("hooks_url")]
+    public required Uri HooksUrl { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public required Uri HtmlUrl { get; init; }
+
+    /// <summary>
+    /// Unique identifier of the repository
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required long Id { get; init; }
+
+    [JsonPropertyName("is_template")]
+    public bool? IsTemplate { get; init; }
+
+    [JsonPropertyName("issue_comment_url")]
+    public required string IssueCommentUrl { get; init; }
+
+    [JsonPropertyName("issue_events_url")]
+    public required string IssueEventsUrl { get; init; }
+
+    [JsonPropertyName("issues_url")]
+    public required string IssuesUrl { get; init; }
+
+    [JsonPropertyName("keys_url")]
+    public required string KeysUrl { get; init; }
+
+    [JsonPropertyName("labels_url")]
+    public required string LabelsUrl { get; init; }
+
+    [JsonPropertyName("language")]
+    public required string? Language { get; init; }
+
+    [JsonPropertyName("languages_url")]
+    public required Uri LanguagesUrl { get; init; }
+
+    [JsonPropertyName("license")]
+    public required WebhookPullRequestReviewRequestedVariant2PullRequestBaseRepoLicense? License { get; init; }
+
+    [JsonPropertyName("master_branch")]
+    public string? MasterBranch { get; init; }
+
+    /// <summary>
+    /// The default value for a merge commit message.
+    /// 
+    /// - `PR_TITLE` - default to the pull request's title.
+    /// - `PR_BODY` - default to the pull request's body.
+    /// - `BLANK` - default to a blank commit message.
+    /// </summary>
+    [JsonPropertyName("merge_commit_message")]
+    public MergeCommitMessage? MergeCommitMessage { get; init; }
+
+    /// <summary>
+    /// The default value for a merge commit title.
+    /// 
+    /// - `PR_TITLE` - default to the pull request's title.
+    /// - `MERGE_MESSAGE` - default to the classic title for a merge message (e.g., Merge pull request #123 from branch-name).
+    /// </summary>
+    [JsonPropertyName("merge_commit_title")]
+    public MergeCommitTitle? MergeCommitTitle { get; init; }
+
+    [JsonPropertyName("merges_url")]
+    public required Uri MergesUrl { get; init; }
+
+    [JsonPropertyName("milestones_url")]
+    public required string MilestonesUrl { get; init; }
+
+    [JsonPropertyName("mirror_url")]
+    public required Uri? MirrorUrl { get; init; }
+
+    /// <summary>
+    /// The name of the repository.
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    [JsonPropertyName("notifications_url")]
+    public required string NotificationsUrl { get; init; }
+
+    [JsonPropertyName("open_issues")]
+    public required int OpenIssues { get; init; }
+
+    [JsonPropertyName("open_issues_count")]
+    public required int OpenIssuesCount { get; init; }
+
+    [JsonPropertyName("organization")]
+    public string? Organization { get; init; }
+
+    [JsonPropertyName("owner")]
+    public required WebhookPullRequestReviewRequestedVariant2PullRequestBaseRepoOwner? Owner { get; init; }
+
+    [JsonPropertyName("permissions")]
+    public WebhookPullRequestReviewRequestedVariant2PullRequestBaseRepoPermissions? Permissions { get; init; }
+
+    /// <summary>
+    /// Whether the repository is private or public.
+    /// </summary>
+    [JsonPropertyName("private")]
+    public required bool Private { get; init; }
+
+    [JsonPropertyName("public")]
+    public bool? Public { get; init; }
+
+    [JsonPropertyName("pulls_url")]
+    public required string PullsUrl { get; init; }
+
+    [JsonPropertyName("pushed_at")]
+    public required object? PushedAt { get; init; }
+
+    [JsonPropertyName("releases_url")]
+    public required string ReleasesUrl { get; init; }
+
+    [JsonPropertyName("role_name")]
+    public string? RoleName { get; init; }
+
+    [JsonPropertyName("size")]
+    public required int Size { get; init; }
+
+    /// <summary>
+    /// The default value for a squash merge commit message:
+    /// 
+    /// - `PR_BODY` - default to the pull request's body.
+    /// - `COMMIT_MESSAGES` - default to the branch's commit messages.
+    /// - `BLANK` - default to a blank commit message.
+    /// </summary>
+    [JsonPropertyName("squash_merge_commit_message")]
+    public SquashMergeCommitMessage? SquashMergeCommitMessage { get; init; }
+
+    /// <summary>
+    /// The default value for a squash merge commit title:
+    /// 
+    /// - `PR_TITLE` - default to the pull request's title.
+    /// - `COMMIT_OR_PR_TITLE` - default to the commit's title (if only one commit) or the pull request's title (when more than one commit).
+    /// </summary>
+    [JsonPropertyName("squash_merge_commit_title")]
+    public SquashMergeCommitTitle? SquashMergeCommitTitle { get; init; }
+
+    [JsonPropertyName("ssh_url")]
+    public required string SshUrl { get; init; }
+
+    [JsonPropertyName("stargazers")]
+    public int? Stargazers { get; init; }
+
+    [JsonPropertyName("stargazers_count")]
+    public required int StargazersCount { get; init; }
+
+    [JsonPropertyName("stargazers_url")]
+    public required Uri StargazersUrl { get; init; }
+
+    [JsonPropertyName("statuses_url")]
+    public required string StatusesUrl { get; init; }
+
+    [JsonPropertyName("subscribers_url")]
+    public required Uri SubscribersUrl { get; init; }
+
+    [JsonPropertyName("subscription_url")]
+    public required Uri SubscriptionUrl { get; init; }
+
+    [JsonPropertyName("svn_url")]
+    public required Uri SvnUrl { get; init; }
+
+    [JsonPropertyName("tags_url")]
+    public required Uri TagsUrl { get; init; }
+
+    [JsonPropertyName("teams_url")]
+    public required Uri TeamsUrl { get; init; }
+
+    [JsonPropertyName("topics")]
+    public required IReadOnlyList<string> Topics { get; init; }
+
+    [JsonPropertyName("trees_url")]
+    public required string TreesUrl { get; init; }
+
+    [JsonPropertyName("updated_at")]
+    public required DateTimeOffset UpdatedAt { get; init; }
+
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+    /// <summary>
+    /// Whether a squash merge commit can use the pull request title as default. **This property is closing down. Please use `squash_merge_commit_title` instead.
+    /// </summary>
+    [JsonPropertyName("use_squash_pr_title_as_default")]
+    public bool UseSquashPrTitleAsDefault { get; init; } = false;
+
+    [JsonPropertyName("visibility")]
+    public required WebhooksPullRequest5BaseRepoVisibility Visibility { get; init; }
+
+    [JsonPropertyName("watchers")]
+    public required int Watchers { get; init; }
+
+    [JsonPropertyName("watchers_count")]
+    public required int WatchersCount { get; init; }
+
+    /// <summary>
+    /// Whether to require contributors to sign off on web-based commits
+    /// </summary>
+    [JsonPropertyName("web_commit_signoff_required")]
+    public bool? WebCommitSignoffRequired { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestedVariant2PullRequestBaseRepoLicense
+{
+    [JsonPropertyName("key")]
+    public required string Key { get; init; }
+
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    [JsonPropertyName("spdx_id")]
+    public required string SpdxId { get; init; }
+
+    [JsonPropertyName("url")]
+    public required Uri? Url { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestedVariant2PullRequestBaseRepoOwner
+{
+    [JsonPropertyName("avatar_url")]
+    public Uri? AvatarUrl { get; init; }
+
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    [JsonPropertyName("email")]
+    public string? Email { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public string? EventsUrl { get; init; }
+
+    [JsonPropertyName("followers_url")]
+    public Uri? FollowersUrl { get; init; }
+
+    [JsonPropertyName("following_url")]
+    public string? FollowingUrl { get; init; }
+
+    [JsonPropertyName("gists_url")]
+    public string? GistsUrl { get; init; }
+
+    [JsonPropertyName("gravatar_id")]
+    public string? GravatarId { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("login")]
+    public required string Login { get; init; }
+
+    [JsonPropertyName("name")]
+    public string? Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("organizations_url")]
+    public Uri? OrganizationsUrl { get; init; }
+
+    [JsonPropertyName("received_events_url")]
+    public Uri? ReceivedEventsUrl { get; init; }
+
+    [JsonPropertyName("repos_url")]
+    public Uri? ReposUrl { get; init; }
+
+    [JsonPropertyName("site_admin")]
+    public bool? SiteAdmin { get; init; }
+
+    [JsonPropertyName("starred_url")]
+    public string? StarredUrl { get; init; }
+
+    [JsonPropertyName("subscriptions_url")]
+    public Uri? SubscriptionsUrl { get; init; }
+
+    [JsonPropertyName("type")]
+    public WebhooksUserType? Type { get; init; }
+
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+    [JsonPropertyName("user_view_type")]
+    public string? UserViewType { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestedVariant2PullRequestBaseRepoPermissions
+{
+    [JsonPropertyName("admin")]
+    public required bool Admin { get; init; }
+
+    [JsonPropertyName("maintain")]
+    public bool? Maintain { get; init; }
+
+    [JsonPropertyName("pull")]
+    public required bool Pull { get; init; }
+
+    [JsonPropertyName("push")]
+    public required bool Push { get; init; }
+
+    [JsonPropertyName("triage")]
+    public bool? Triage { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestedVariant2PullRequestBaseUser
+{
+    [JsonPropertyName("avatar_url")]
+    public Uri? AvatarUrl { get; init; }
+
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    [JsonPropertyName("email")]
+    public string? Email { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public string? EventsUrl { get; init; }
+
+    [JsonPropertyName("followers_url")]
+    public Uri? FollowersUrl { get; init; }
+
+    [JsonPropertyName("following_url")]
+    public string? FollowingUrl { get; init; }
+
+    [JsonPropertyName("gists_url")]
+    public string? GistsUrl { get; init; }
+
+    [JsonPropertyName("gravatar_id")]
+    public string? GravatarId { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    [JsonPropertyName("id")]
+    public required long Id { get; init; }
+
+    [JsonPropertyName("login")]
+    public required string Login { get; init; }
+
+    [JsonPropertyName("name")]
+    public string? Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("organizations_url")]
+    public Uri? OrganizationsUrl { get; init; }
+
+    [JsonPropertyName("received_events_url")]
+    public Uri? ReceivedEventsUrl { get; init; }
+
+    [JsonPropertyName("repos_url")]
+    public Uri? ReposUrl { get; init; }
+
+    [JsonPropertyName("site_admin")]
+    public bool? SiteAdmin { get; init; }
+
+    [JsonPropertyName("starred_url")]
+    public string? StarredUrl { get; init; }
+
+    [JsonPropertyName("subscriptions_url")]
+    public Uri? SubscriptionsUrl { get; init; }
+
+    [JsonPropertyName("type")]
+    public WebhooksUserType? Type { get; init; }
+
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+    [JsonPropertyName("user_view_type")]
+    public string? UserViewType { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestedVariant2PullRequestHead
+{
+    [JsonPropertyName("label")]
+    public required string Label { get; init; }
+
+    [JsonPropertyName("ref")]
+    public required string Ref { get; init; }
+
+    /// <summary>
+    /// A git repository
+    /// </summary>
+    [JsonPropertyName("repo")]
+    public required WebhookPullRequestReviewRequestedVariant2PullRequestHeadRepo Repo { get; init; }
+
+    [JsonPropertyName("sha")]
+    public required string Sha { get; init; }
+
+    [JsonPropertyName("user")]
+    public required WebhookPullRequestReviewRequestedVariant2PullRequestHeadUser? User { get; init; }
+
+}
+
+/// <summary>
+/// A git repository
+/// </summary>
+public partial record WebhookPullRequestReviewRequestedVariant2PullRequestHeadRepo
+{
+    /// <summary>
+    /// Whether to allow auto-merge for pull requests.
+    /// </summary>
+    [JsonPropertyName("allow_auto_merge")]
+    public bool AllowAutoMerge { get; init; } = false;
+
+    /// <summary>
+    /// Whether to allow private forks
+    /// </summary>
+    [JsonPropertyName("allow_forking")]
+    public bool? AllowForking { get; init; }
+
+    /// <summary>
+    /// Whether to allow merge commits for pull requests.
+    /// </summary>
+    [JsonPropertyName("allow_merge_commit")]
+    public bool AllowMergeCommit { get; init; } = true;
+
+    /// <summary>
+    /// Whether to allow rebase merges for pull requests.
+    /// </summary>
+    [JsonPropertyName("allow_rebase_merge")]
+    public bool AllowRebaseMerge { get; init; } = true;
+
+    /// <summary>
+    /// Whether to allow squash merges for pull requests.
+    /// </summary>
+    [JsonPropertyName("allow_squash_merge")]
+    public bool AllowSquashMerge { get; init; } = true;
+
+    [JsonPropertyName("allow_update_branch")]
+    public bool? AllowUpdateBranch { get; init; }
+
+    [JsonPropertyName("archive_url")]
+    public required string ArchiveUrl { get; init; }
+
+    /// <summary>
+    /// Whether the repository is archived.
+    /// </summary>
+    [JsonPropertyName("archived")]
+    public required bool Archived { get; init; } = false;
+
+    [JsonPropertyName("assignees_url")]
+    public required string AssigneesUrl { get; init; }
+
+    [JsonPropertyName("blobs_url")]
+    public required string BlobsUrl { get; init; }
+
+    [JsonPropertyName("branches_url")]
+    public required string BranchesUrl { get; init; }
+
+    [JsonPropertyName("clone_url")]
+    public required Uri CloneUrl { get; init; }
+
+    [JsonPropertyName("collaborators_url")]
+    public required string CollaboratorsUrl { get; init; }
+
+    [JsonPropertyName("comments_url")]
+    public required string CommentsUrl { get; init; }
+
+    [JsonPropertyName("commits_url")]
+    public required string CommitsUrl { get; init; }
+
+    [JsonPropertyName("compare_url")]
+    public required string CompareUrl { get; init; }
+
+    [JsonPropertyName("contents_url")]
+    public required string ContentsUrl { get; init; }
+
+    [JsonPropertyName("contributors_url")]
+    public required Uri ContributorsUrl { get; init; }
+
+    [JsonPropertyName("created_at")]
+    public required object CreatedAt { get; init; }
+
+    /// <summary>
+    /// The default branch of the repository.
+    /// </summary>
+    [JsonPropertyName("default_branch")]
+    public required string DefaultBranch { get; init; }
+
+    /// <summary>
+    /// Whether to delete head branches when pull requests are merged
+    /// </summary>
+    [JsonPropertyName("delete_branch_on_merge")]
+    public bool DeleteBranchOnMerge { get; init; } = false;
+
+    [JsonPropertyName("deployments_url")]
+    public required Uri DeploymentsUrl { get; init; }
+
+    [JsonPropertyName("description")]
+    public required string? Description { get; init; }
+
+    /// <summary>
+    /// Returns whether or not this repository is disabled.
+    /// </summary>
+    [JsonPropertyName("disabled")]
+    public bool? Disabled { get; init; }
+
+    [JsonPropertyName("downloads_url")]
+    public required Uri DownloadsUrl { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public required Uri EventsUrl { get; init; }
+
+    [JsonPropertyName("fork")]
+    public required bool Fork { get; init; }
+
+    [JsonPropertyName("forks")]
+    public required int Forks { get; init; }
+
+    [JsonPropertyName("forks_count")]
+    public required int ForksCount { get; init; }
+
+    [JsonPropertyName("forks_url")]
+    public required Uri ForksUrl { get; init; }
+
+    [JsonPropertyName("full_name")]
+    public required string FullName { get; init; }
+
+    [JsonPropertyName("git_commits_url")]
+    public required string GitCommitsUrl { get; init; }
+
+    [JsonPropertyName("git_refs_url")]
+    public required string GitRefsUrl { get; init; }
+
+    [JsonPropertyName("git_tags_url")]
+    public required string GitTagsUrl { get; init; }
+
+    [JsonPropertyName("git_url")]
+    public required Uri GitUrl { get; init; }
+
+    /// <summary>
+    /// Whether downloads are enabled.
+    /// </summary>
+    [JsonPropertyName("has_downloads")]
+    public required bool HasDownloads { get; init; } = true;
+
+    /// <summary>
+    /// Whether issues are enabled.
+    /// </summary>
+    [JsonPropertyName("has_issues")]
+    public required bool HasIssues { get; init; } = true;
+
+    [JsonPropertyName("has_pages")]
+    public required bool HasPages { get; init; }
+
+    /// <summary>
+    /// Whether projects are enabled.
+    /// </summary>
+    [JsonPropertyName("has_projects")]
+    public required bool HasProjects { get; init; } = true;
+
+    /// <summary>
+    /// Whether the wiki is enabled.
+    /// </summary>
+    [JsonPropertyName("has_wiki")]
+    public required bool HasWiki { get; init; } = true;
+
+    /// <summary>
+    /// Whether discussions are enabled.
+    /// </summary>
+    [JsonPropertyName("has_discussions")]
+    public required bool HasDiscussions { get; init; } = false;
+
+    /// <summary>
+    /// Whether pull requests are enabled.
+    /// </summary>
+    [JsonPropertyName("has_pull_requests")]
+    public bool HasPullRequests { get; init; } = true;
+
+    /// <summary>
+    /// The policy controlling who can create pull requests: all or collaborators_only.
+    /// </summary>
+    [JsonPropertyName("pull_request_creation_policy")]
+    public PullRequestCreationPolicy? PullRequestCreationPolicy { get; init; }
+
+    [JsonPropertyName("homepage")]
+    public required string? Homepage { get; init; }
+
+    [JsonPropertyName("hooks_url")]
+    public required Uri HooksUrl { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public required Uri HtmlUrl { get; init; }
+
+    /// <summary>
+    /// Unique identifier of the repository
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required long Id { get; init; }
+
+    [JsonPropertyName("is_template")]
+    public bool? IsTemplate { get; init; }
+
+    [JsonPropertyName("issue_comment_url")]
+    public required string IssueCommentUrl { get; init; }
+
+    [JsonPropertyName("issue_events_url")]
+    public required string IssueEventsUrl { get; init; }
+
+    [JsonPropertyName("issues_url")]
+    public required string IssuesUrl { get; init; }
+
+    [JsonPropertyName("keys_url")]
+    public required string KeysUrl { get; init; }
+
+    [JsonPropertyName("labels_url")]
+    public required string LabelsUrl { get; init; }
+
+    [JsonPropertyName("language")]
+    public required string? Language { get; init; }
+
+    [JsonPropertyName("languages_url")]
+    public required Uri LanguagesUrl { get; init; }
+
+    [JsonPropertyName("license")]
+    public required WebhookPullRequestReviewRequestedVariant2PullRequestHeadRepoLicense? License { get; init; }
+
+    [JsonPropertyName("master_branch")]
+    public string? MasterBranch { get; init; }
+
+    /// <summary>
+    /// The default value for a merge commit message.
+    /// 
+    /// - `PR_TITLE` - default to the pull request's title.
+    /// - `PR_BODY` - default to the pull request's body.
+    /// - `BLANK` - default to a blank commit message.
+    /// </summary>
+    [JsonPropertyName("merge_commit_message")]
+    public MergeCommitMessage? MergeCommitMessage { get; init; }
+
+    /// <summary>
+    /// The default value for a merge commit title.
+    /// 
+    /// - `PR_TITLE` - default to the pull request's title.
+    /// - `MERGE_MESSAGE` - default to the classic title for a merge message (e.g., Merge pull request #123 from branch-name).
+    /// </summary>
+    [JsonPropertyName("merge_commit_title")]
+    public MergeCommitTitle? MergeCommitTitle { get; init; }
+
+    [JsonPropertyName("merges_url")]
+    public required Uri MergesUrl { get; init; }
+
+    [JsonPropertyName("milestones_url")]
+    public required string MilestonesUrl { get; init; }
+
+    [JsonPropertyName("mirror_url")]
+    public required Uri? MirrorUrl { get; init; }
+
+    /// <summary>
+    /// The name of the repository.
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    [JsonPropertyName("notifications_url")]
+    public required string NotificationsUrl { get; init; }
+
+    [JsonPropertyName("open_issues")]
+    public required int OpenIssues { get; init; }
+
+    [JsonPropertyName("open_issues_count")]
+    public required int OpenIssuesCount { get; init; }
+
+    [JsonPropertyName("organization")]
+    public string? Organization { get; init; }
+
+    [JsonPropertyName("owner")]
+    public required WebhookPullRequestReviewRequestedVariant2PullRequestHeadRepoOwner? Owner { get; init; }
+
+    [JsonPropertyName("permissions")]
+    public WebhookPullRequestReviewRequestedVariant2PullRequestHeadRepoPermissions? Permissions { get; init; }
+
+    /// <summary>
+    /// Whether the repository is private or public.
+    /// </summary>
+    [JsonPropertyName("private")]
+    public required bool Private { get; init; }
+
+    [JsonPropertyName("public")]
+    public bool? Public { get; init; }
+
+    [JsonPropertyName("pulls_url")]
+    public required string PullsUrl { get; init; }
+
+    [JsonPropertyName("pushed_at")]
+    public required object? PushedAt { get; init; }
+
+    [JsonPropertyName("releases_url")]
+    public required string ReleasesUrl { get; init; }
+
+    [JsonPropertyName("role_name")]
+    public string? RoleName { get; init; }
+
+    [JsonPropertyName("size")]
+    public required int Size { get; init; }
+
+    /// <summary>
+    /// The default value for a squash merge commit message:
+    /// 
+    /// - `PR_BODY` - default to the pull request's body.
+    /// - `COMMIT_MESSAGES` - default to the branch's commit messages.
+    /// - `BLANK` - default to a blank commit message.
+    /// </summary>
+    [JsonPropertyName("squash_merge_commit_message")]
+    public SquashMergeCommitMessage? SquashMergeCommitMessage { get; init; }
+
+    /// <summary>
+    /// The default value for a squash merge commit title:
+    /// 
+    /// - `PR_TITLE` - default to the pull request's title.
+    /// - `COMMIT_OR_PR_TITLE` - default to the commit's title (if only one commit) or the pull request's title (when more than one commit).
+    /// </summary>
+    [JsonPropertyName("squash_merge_commit_title")]
+    public SquashMergeCommitTitle? SquashMergeCommitTitle { get; init; }
+
+    [JsonPropertyName("ssh_url")]
+    public required string SshUrl { get; init; }
+
+    [JsonPropertyName("stargazers")]
+    public int? Stargazers { get; init; }
+
+    [JsonPropertyName("stargazers_count")]
+    public required int StargazersCount { get; init; }
+
+    [JsonPropertyName("stargazers_url")]
+    public required Uri StargazersUrl { get; init; }
+
+    [JsonPropertyName("statuses_url")]
+    public required string StatusesUrl { get; init; }
+
+    [JsonPropertyName("subscribers_url")]
+    public required Uri SubscribersUrl { get; init; }
+
+    [JsonPropertyName("subscription_url")]
+    public required Uri SubscriptionUrl { get; init; }
+
+    [JsonPropertyName("svn_url")]
+    public required Uri SvnUrl { get; init; }
+
+    [JsonPropertyName("tags_url")]
+    public required Uri TagsUrl { get; init; }
+
+    [JsonPropertyName("teams_url")]
+    public required Uri TeamsUrl { get; init; }
+
+    [JsonPropertyName("topics")]
+    public required IReadOnlyList<string> Topics { get; init; }
+
+    [JsonPropertyName("trees_url")]
+    public required string TreesUrl { get; init; }
+
+    [JsonPropertyName("updated_at")]
+    public required DateTimeOffset UpdatedAt { get; init; }
+
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+    /// <summary>
+    /// Whether a squash merge commit can use the pull request title as default. **This property is closing down. Please use `squash_merge_commit_title` instead.
+    /// </summary>
+    [JsonPropertyName("use_squash_pr_title_as_default")]
+    public bool UseSquashPrTitleAsDefault { get; init; } = false;
+
+    [JsonPropertyName("visibility")]
+    public required WebhooksPullRequest5BaseRepoVisibility Visibility { get; init; }
+
+    [JsonPropertyName("watchers")]
+    public required int Watchers { get; init; }
+
+    [JsonPropertyName("watchers_count")]
+    public required int WatchersCount { get; init; }
+
+    /// <summary>
+    /// Whether to require contributors to sign off on web-based commits
+    /// </summary>
+    [JsonPropertyName("web_commit_signoff_required")]
+    public bool? WebCommitSignoffRequired { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestedVariant2PullRequestHeadRepoLicense
+{
+    [JsonPropertyName("key")]
+    public required string Key { get; init; }
+
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    [JsonPropertyName("spdx_id")]
+    public required string SpdxId { get; init; }
+
+    [JsonPropertyName("url")]
+    public required Uri? Url { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestedVariant2PullRequestHeadRepoOwner
+{
+    [JsonPropertyName("avatar_url")]
+    public Uri? AvatarUrl { get; init; }
+
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    [JsonPropertyName("email")]
+    public string? Email { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public string? EventsUrl { get; init; }
+
+    [JsonPropertyName("followers_url")]
+    public Uri? FollowersUrl { get; init; }
+
+    [JsonPropertyName("following_url")]
+    public string? FollowingUrl { get; init; }
+
+    [JsonPropertyName("gists_url")]
+    public string? GistsUrl { get; init; }
+
+    [JsonPropertyName("gravatar_id")]
+    public string? GravatarId { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("login")]
+    public required string Login { get; init; }
+
+    [JsonPropertyName("name")]
+    public string? Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("organizations_url")]
+    public Uri? OrganizationsUrl { get; init; }
+
+    [JsonPropertyName("received_events_url")]
+    public Uri? ReceivedEventsUrl { get; init; }
+
+    [JsonPropertyName("repos_url")]
+    public Uri? ReposUrl { get; init; }
+
+    [JsonPropertyName("site_admin")]
+    public bool? SiteAdmin { get; init; }
+
+    [JsonPropertyName("starred_url")]
+    public string? StarredUrl { get; init; }
+
+    [JsonPropertyName("subscriptions_url")]
+    public Uri? SubscriptionsUrl { get; init; }
+
+    [JsonPropertyName("type")]
+    public WebhooksUserType? Type { get; init; }
+
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+    [JsonPropertyName("user_view_type")]
+    public string? UserViewType { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestedVariant2PullRequestHeadRepoPermissions
+{
+    [JsonPropertyName("admin")]
+    public required bool Admin { get; init; }
+
+    [JsonPropertyName("maintain")]
+    public bool? Maintain { get; init; }
+
+    [JsonPropertyName("pull")]
+    public required bool Pull { get; init; }
+
+    [JsonPropertyName("push")]
+    public required bool Push { get; init; }
+
+    [JsonPropertyName("triage")]
+    public bool? Triage { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestedVariant2PullRequestHeadUser
+{
+    [JsonPropertyName("avatar_url")]
+    public Uri? AvatarUrl { get; init; }
+
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    [JsonPropertyName("email")]
+    public string? Email { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public string? EventsUrl { get; init; }
+
+    [JsonPropertyName("followers_url")]
+    public Uri? FollowersUrl { get; init; }
+
+    [JsonPropertyName("following_url")]
+    public string? FollowingUrl { get; init; }
+
+    [JsonPropertyName("gists_url")]
+    public string? GistsUrl { get; init; }
+
+    [JsonPropertyName("gravatar_id")]
+    public string? GravatarId { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    [JsonPropertyName("id")]
+    public required long Id { get; init; }
+
+    [JsonPropertyName("login")]
+    public required string Login { get; init; }
+
+    [JsonPropertyName("name")]
+    public string? Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("organizations_url")]
+    public Uri? OrganizationsUrl { get; init; }
+
+    [JsonPropertyName("received_events_url")]
+    public Uri? ReceivedEventsUrl { get; init; }
+
+    [JsonPropertyName("repos_url")]
+    public Uri? ReposUrl { get; init; }
+
+    [JsonPropertyName("site_admin")]
+    public bool? SiteAdmin { get; init; }
+
+    [JsonPropertyName("starred_url")]
+    public string? StarredUrl { get; init; }
+
+    [JsonPropertyName("subscriptions_url")]
+    public Uri? SubscriptionsUrl { get; init; }
+
+    [JsonPropertyName("type")]
+    public WebhooksUserType? Type { get; init; }
+
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+    [JsonPropertyName("user_view_type")]
+    public string? UserViewType { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestedVariant2PullRequestLabels
+{
+    /// <summary>
+    /// 6-character hex code, without the leading #, identifying the color
+    /// </summary>
+    [JsonPropertyName("color")]
+    public required string Color { get; init; }
+
+    [JsonPropertyName("default")]
+    public required bool Default { get; init; }
+
+    [JsonPropertyName("description")]
+    public required string? Description { get; init; }
+
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    /// <summary>
+    /// The name of the label.
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    /// <summary>
+    /// URL for the label
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestedVariant2PullRequestMergedBy
+{
+    [JsonPropertyName("avatar_url")]
+    public Uri? AvatarUrl { get; init; }
+
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    [JsonPropertyName("email")]
+    public string? Email { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public string? EventsUrl { get; init; }
+
+    [JsonPropertyName("followers_url")]
+    public Uri? FollowersUrl { get; init; }
+
+    [JsonPropertyName("following_url")]
+    public string? FollowingUrl { get; init; }
+
+    [JsonPropertyName("gists_url")]
+    public string? GistsUrl { get; init; }
+
+    [JsonPropertyName("gravatar_id")]
+    public string? GravatarId { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("login")]
+    public required string Login { get; init; }
+
+    [JsonPropertyName("name")]
+    public string? Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("organizations_url")]
+    public Uri? OrganizationsUrl { get; init; }
+
+    [JsonPropertyName("received_events_url")]
+    public Uri? ReceivedEventsUrl { get; init; }
+
+    [JsonPropertyName("repos_url")]
+    public Uri? ReposUrl { get; init; }
+
+    [JsonPropertyName("site_admin")]
+    public bool? SiteAdmin { get; init; }
+
+    [JsonPropertyName("starred_url")]
+    public string? StarredUrl { get; init; }
+
+    [JsonPropertyName("subscriptions_url")]
+    public Uri? SubscriptionsUrl { get; init; }
+
+    [JsonPropertyName("type")]
+    public WebhooksUserType? Type { get; init; }
+
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+    [JsonPropertyName("user_view_type")]
+    public string? UserViewType { get; init; }
+
+}
+
+/// <summary>
+/// A collection of related issues and pull requests.
+/// </summary>
+public partial record WebhookPullRequestReviewRequestedVariant2PullRequestMilestone
+{
+    [JsonPropertyName("closed_at")]
+    public required DateTimeOffset? ClosedAt { get; init; }
+
+    [JsonPropertyName("closed_issues")]
+    public required int ClosedIssues { get; init; }
+
+    [JsonPropertyName("created_at")]
+    public required DateTimeOffset CreatedAt { get; init; }
+
+    [JsonPropertyName("creator")]
+    public required WebhookPullRequestReviewRequestedVariant2PullRequestMilestoneCreator? Creator { get; init; }
+
+    [JsonPropertyName("description")]
+    public required string? Description { get; init; }
+
+    [JsonPropertyName("due_on")]
+    public required DateTimeOffset? DueOn { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public required Uri HtmlUrl { get; init; }
+
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("labels_url")]
+    public required Uri LabelsUrl { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    /// <summary>
+    /// The number of the milestone.
+    /// </summary>
+    [JsonPropertyName("number")]
+    public required int Number { get; init; }
+
+    [JsonPropertyName("open_issues")]
+    public required int OpenIssues { get; init; }
+
+    /// <summary>
+    /// The state of the milestone.
+    /// </summary>
+    [JsonPropertyName("state")]
+    public required MilestoneState State { get; init; }
+
+    /// <summary>
+    /// The title of the milestone.
+    /// </summary>
+    [JsonPropertyName("title")]
+    public required string Title { get; init; }
+
+    [JsonPropertyName("updated_at")]
+    public required DateTimeOffset UpdatedAt { get; init; }
+
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestedVariant2PullRequestMilestoneCreator
+{
+    [JsonPropertyName("avatar_url")]
+    public Uri? AvatarUrl { get; init; }
+
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    [JsonPropertyName("email")]
+    public string? Email { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public string? EventsUrl { get; init; }
+
+    [JsonPropertyName("followers_url")]
+    public Uri? FollowersUrl { get; init; }
+
+    [JsonPropertyName("following_url")]
+    public string? FollowingUrl { get; init; }
+
+    [JsonPropertyName("gists_url")]
+    public string? GistsUrl { get; init; }
+
+    [JsonPropertyName("gravatar_id")]
+    public string? GravatarId { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("login")]
+    public required string Login { get; init; }
+
+    [JsonPropertyName("name")]
+    public string? Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("organizations_url")]
+    public Uri? OrganizationsUrl { get; init; }
+
+    [JsonPropertyName("received_events_url")]
+    public Uri? ReceivedEventsUrl { get; init; }
+
+    [JsonPropertyName("repos_url")]
+    public Uri? ReposUrl { get; init; }
+
+    [JsonPropertyName("site_admin")]
+    public bool? SiteAdmin { get; init; }
+
+    [JsonPropertyName("starred_url")]
+    public string? StarredUrl { get; init; }
+
+    [JsonPropertyName("subscriptions_url")]
+    public Uri? SubscriptionsUrl { get; init; }
+
+    [JsonPropertyName("type")]
+    public WebhooksUserMannequinType? Type { get; init; }
+
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+    [JsonPropertyName("user_view_type")]
+    public string? UserViewType { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestedVariant2PullRequestRequestedReviewersVariant1
+{
+    [JsonPropertyName("avatar_url")]
+    public Uri? AvatarUrl { get; init; }
+
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    [JsonPropertyName("email")]
+    public string? Email { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public string? EventsUrl { get; init; }
+
+    [JsonPropertyName("followers_url")]
+    public Uri? FollowersUrl { get; init; }
+
+    [JsonPropertyName("following_url")]
+    public string? FollowingUrl { get; init; }
+
+    [JsonPropertyName("gists_url")]
+    public string? GistsUrl { get; init; }
+
+    [JsonPropertyName("gravatar_id")]
+    public string? GravatarId { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("login")]
+    public required string Login { get; init; }
+
+    [JsonPropertyName("name")]
+    public string? Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("organizations_url")]
+    public Uri? OrganizationsUrl { get; init; }
+
+    [JsonPropertyName("received_events_url")]
+    public Uri? ReceivedEventsUrl { get; init; }
+
+    [JsonPropertyName("repos_url")]
+    public Uri? ReposUrl { get; init; }
+
+    [JsonPropertyName("site_admin")]
+    public bool? SiteAdmin { get; init; }
+
+    [JsonPropertyName("starred_url")]
+    public string? StarredUrl { get; init; }
+
+    [JsonPropertyName("subscriptions_url")]
+    public Uri? SubscriptionsUrl { get; init; }
+
+    [JsonPropertyName("type")]
+    public WebhooksUserType? Type { get; init; }
+
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+    [JsonPropertyName("user_view_type")]
+    public string? UserViewType { get; init; }
+
+}
+
+/// <summary>
+/// Groups of organization members that gives permissions on specified repositories.
+/// </summary>
+public partial record WebhookPullRequestReviewRequestedVariant2PullRequestRequestedReviewersVariant2
+{
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    /// <summary>
+    /// Description of the team
+    /// </summary>
+    [JsonPropertyName("description")]
+    public string? Description { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    /// <summary>
+    /// Unique identifier of the team
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("members_url")]
+    public string? MembersUrl { get; init; }
+
+    /// <summary>
+    /// Name of the team
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("parent")]
+    public WebhookPullRequestReviewRequestedVariant2PullRequestRequestedReviewersVariant2Parent? Parent { get; init; }
+
+    /// <summary>
+    /// Permission that the team will have for its repositories
+    /// </summary>
+    [JsonPropertyName("permission")]
+    public string? Permission { get; init; }
+
+    [JsonPropertyName("privacy")]
+    public WebhooksTeamPrivacy? Privacy { get; init; }
+
+    [JsonPropertyName("repositories_url")]
+    public Uri? RepositoriesUrl { get; init; }
+
+    [JsonPropertyName("slug")]
+    public string? Slug { get; init; }
+
+    /// <summary>
+    /// URL for the team
+    /// </summary>
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestedVariant2PullRequestRequestedReviewersVariant2Parent
+{
+    /// <summary>
+    /// Description of the team
+    /// </summary>
+    [JsonPropertyName("description")]
+    public required string? Description { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public required Uri HtmlUrl { get; init; }
+
+    /// <summary>
+    /// Unique identifier of the team
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("members_url")]
+    public required string MembersUrl { get; init; }
+
+    /// <summary>
+    /// Name of the team
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    /// <summary>
+    /// Permission that the team will have for its repositories
+    /// </summary>
+    [JsonPropertyName("permission")]
+    public required string Permission { get; init; }
+
+    [JsonPropertyName("privacy")]
+    public required WebhooksTeamPrivacy Privacy { get; init; }
+
+    [JsonPropertyName("repositories_url")]
+    public required Uri RepositoriesUrl { get; init; }
+
+    [JsonPropertyName("slug")]
+    public required string Slug { get; init; }
+
+    /// <summary>
+    /// URL for the team
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+}
+
+/// <remarks>
+/// Union of: WebhookPullRequestReviewRequestedVariant2PullRequestRequestedReviewersVariant1 | WebhookPullRequestReviewRequestedVariant2PullRequestRequestedReviewersVariant2
+/// </remarks>
+[JsonDerivedType(typeof(WebhookPullRequestReviewRequestedVariant2PullRequestRequestedReviewersVariant1), "WebhookPullRequestReviewRequestedVariant2PullRequestRequestedReviewersVariant1")]
+[JsonDerivedType(typeof(WebhookPullRequestReviewRequestedVariant2PullRequestRequestedReviewersVariant2), "WebhookPullRequestReviewRequestedVariant2PullRequestRequestedReviewersVariant2")]
+public abstract partial record WebhookPullRequestReviewRequestedVariant2PullRequestRequestedReviewers;
+
+/// <summary>
+/// Groups of organization members that gives permissions on specified repositories.
+/// </summary>
+public partial record WebhookPullRequestReviewRequestedVariant2PullRequestRequestedTeams
+{
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    /// <summary>
+    /// Description of the team
+    /// </summary>
+    [JsonPropertyName("description")]
+    public string? Description { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    /// <summary>
+    /// Unique identifier of the team
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("members_url")]
+    public string? MembersUrl { get; init; }
+
+    /// <summary>
+    /// Name of the team
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("parent")]
+    public WebhookPullRequestReviewRequestedVariant2PullRequestRequestedTeamsParent? Parent { get; init; }
+
+    /// <summary>
+    /// Permission that the team will have for its repositories
+    /// </summary>
+    [JsonPropertyName("permission")]
+    public string? Permission { get; init; }
+
+    [JsonPropertyName("privacy")]
+    public WebhooksTeamPrivacy? Privacy { get; init; }
+
+    [JsonPropertyName("repositories_url")]
+    public Uri? RepositoriesUrl { get; init; }
+
+    [JsonPropertyName("slug")]
+    public string? Slug { get; init; }
+
+    /// <summary>
+    /// URL for the team
+    /// </summary>
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestedVariant2PullRequestRequestedTeamsParent
+{
+    /// <summary>
+    /// Description of the team
+    /// </summary>
+    [JsonPropertyName("description")]
+    public required string? Description { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public required Uri HtmlUrl { get; init; }
+
+    /// <summary>
+    /// Unique identifier of the team
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("members_url")]
+    public required string MembersUrl { get; init; }
+
+    /// <summary>
+    /// Name of the team
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    /// <summary>
+    /// Permission that the team will have for its repositories
+    /// </summary>
+    [JsonPropertyName("permission")]
+    public required string Permission { get; init; }
+
+    [JsonPropertyName("privacy")]
+    public required WebhooksTeamPrivacy Privacy { get; init; }
+
+    [JsonPropertyName("repositories_url")]
+    public required Uri RepositoriesUrl { get; init; }
+
+    [JsonPropertyName("slug")]
+    public required string Slug { get; init; }
+
+    /// <summary>
+    /// URL for the team
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestedVariant2PullRequestUser
+{
+    [JsonPropertyName("avatar_url")]
+    public Uri? AvatarUrl { get; init; }
+
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    [JsonPropertyName("email")]
+    public string? Email { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public string? EventsUrl { get; init; }
+
+    [JsonPropertyName("followers_url")]
+    public Uri? FollowersUrl { get; init; }
+
+    [JsonPropertyName("following_url")]
+    public string? FollowingUrl { get; init; }
+
+    [JsonPropertyName("gists_url")]
+    public string? GistsUrl { get; init; }
+
+    [JsonPropertyName("gravatar_id")]
+    public string? GravatarId { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    [JsonPropertyName("id")]
+    public required long Id { get; init; }
+
+    [JsonPropertyName("login")]
+    public required string Login { get; init; }
+
+    [JsonPropertyName("name")]
+    public string? Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("organizations_url")]
+    public Uri? OrganizationsUrl { get; init; }
+
+    [JsonPropertyName("received_events_url")]
+    public Uri? ReceivedEventsUrl { get; init; }
+
+    [JsonPropertyName("repos_url")]
+    public Uri? ReposUrl { get; init; }
+
+    [JsonPropertyName("site_admin")]
+    public bool? SiteAdmin { get; init; }
+
+    [JsonPropertyName("starred_url")]
+    public string? StarredUrl { get; init; }
+
+    [JsonPropertyName("subscriptions_url")]
+    public Uri? SubscriptionsUrl { get; init; }
+
+    [JsonPropertyName("type")]
+    public WebhooksUserMannequinType? Type { get; init; }
+
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+    [JsonPropertyName("user_view_type")]
+    public string? UserViewType { get; init; }
+
+}
+
+/// <summary>
+/// Groups of organization members that gives permissions on specified repositories.
+/// </summary>
+public partial record WebhookPullRequestReviewRequestedVariant2RequestedTeam
+{
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    /// <summary>
+    /// Description of the team
+    /// </summary>
+    [JsonPropertyName("description")]
+    public string? Description { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    /// <summary>
+    /// Unique identifier of the team
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("members_url")]
+    public string? MembersUrl { get; init; }
+
+    /// <summary>
+    /// Name of the team
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("parent")]
+    public WebhookPullRequestReviewRequestedVariant2RequestedTeamParent? Parent { get; init; }
+
+    /// <summary>
+    /// Permission that the team will have for its repositories
+    /// </summary>
+    [JsonPropertyName("permission")]
+    public string? Permission { get; init; }
+
+    [JsonPropertyName("privacy")]
+    public WebhooksTeamPrivacy? Privacy { get; init; }
+
+    [JsonPropertyName("repositories_url")]
+    public Uri? RepositoriesUrl { get; init; }
+
+    [JsonPropertyName("slug")]
+    public string? Slug { get; init; }
+
+    /// <summary>
+    /// URL for the team
+    /// </summary>
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewRequestedVariant2RequestedTeamParent
+{
+    /// <summary>
+    /// Description of the team
+    /// </summary>
+    [JsonPropertyName("description")]
+    public required string? Description { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public required Uri HtmlUrl { get; init; }
+
+    /// <summary>
+    /// Unique identifier of the team
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("members_url")]
+    public required string MembersUrl { get; init; }
+
+    /// <summary>
+    /// Name of the team
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    /// <summary>
+    /// Permission that the team will have for its repositories
+    /// </summary>
+    [JsonPropertyName("permission")]
+    public required string Permission { get; init; }
+
+    [JsonPropertyName("privacy")]
+    public required WebhooksTeamPrivacy Privacy { get; init; }
+
+    [JsonPropertyName("repositories_url")]
+    public required Uri RepositoriesUrl { get; init; }
+
+    [JsonPropertyName("slug")]
+    public required string Slug { get; init; }
+
+    /// <summary>
+    /// URL for the team
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+}
+
 public partial record WebhookPullRequestReviewSubmittedPullRequest
 {
     [JsonPropertyName("_links")]
@@ -112274,7 +124818,7 @@ public partial record WebhookPullRequestReviewSubmittedPullRequest
     public required Uri PatchUrl { get; init; }
 
     [JsonPropertyName("requested_reviewers")]
-    public required IReadOnlyList<object> RequestedReviewers { get; init; }
+    public required IReadOnlyList<WebhookPullRequestReviewSubmittedPullRequestRequestedReviewers> RequestedReviewers { get; init; }
 
     [JsonPropertyName("requested_teams")]
     public required IReadOnlyList<WebhookPullRequestReviewSubmittedPullRequestRequestedTeams> RequestedTeams { get; init; }
@@ -113978,6 +126522,196 @@ public partial record WebhookPullRequestReviewSubmittedPullRequestMilestoneCreat
 
 }
 
+public partial record WebhookPullRequestReviewSubmittedPullRequestRequestedReviewersVariant1
+{
+    [JsonPropertyName("avatar_url")]
+    public Uri? AvatarUrl { get; init; }
+
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    [JsonPropertyName("email")]
+    public string? Email { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public string? EventsUrl { get; init; }
+
+    [JsonPropertyName("followers_url")]
+    public Uri? FollowersUrl { get; init; }
+
+    [JsonPropertyName("following_url")]
+    public string? FollowingUrl { get; init; }
+
+    [JsonPropertyName("gists_url")]
+    public string? GistsUrl { get; init; }
+
+    [JsonPropertyName("gravatar_id")]
+    public string? GravatarId { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("login")]
+    public required string Login { get; init; }
+
+    [JsonPropertyName("name")]
+    public string? Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("organizations_url")]
+    public Uri? OrganizationsUrl { get; init; }
+
+    [JsonPropertyName("received_events_url")]
+    public Uri? ReceivedEventsUrl { get; init; }
+
+    [JsonPropertyName("repos_url")]
+    public Uri? ReposUrl { get; init; }
+
+    [JsonPropertyName("site_admin")]
+    public bool? SiteAdmin { get; init; }
+
+    [JsonPropertyName("starred_url")]
+    public string? StarredUrl { get; init; }
+
+    [JsonPropertyName("subscriptions_url")]
+    public Uri? SubscriptionsUrl { get; init; }
+
+    [JsonPropertyName("type")]
+    public WebhooksUserMannequinType? Type { get; init; }
+
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+    [JsonPropertyName("user_view_type")]
+    public string? UserViewType { get; init; }
+
+}
+
+/// <summary>
+/// Groups of organization members that gives permissions on specified repositories.
+/// </summary>
+public partial record WebhookPullRequestReviewSubmittedPullRequestRequestedReviewersVariant2
+{
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    /// <summary>
+    /// Description of the team
+    /// </summary>
+    [JsonPropertyName("description")]
+    public required string? Description { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public required Uri HtmlUrl { get; init; }
+
+    /// <summary>
+    /// Unique identifier of the team
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("members_url")]
+    public required string MembersUrl { get; init; }
+
+    /// <summary>
+    /// Name of the team
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    [JsonPropertyName("parent")]
+    public WebhookPullRequestReviewSubmittedPullRequestRequestedReviewersVariant2Parent? Parent { get; init; }
+
+    /// <summary>
+    /// Permission that the team will have for its repositories
+    /// </summary>
+    [JsonPropertyName("permission")]
+    public required string Permission { get; init; }
+
+    [JsonPropertyName("privacy")]
+    public required WebhooksTeamPrivacy Privacy { get; init; }
+
+    [JsonPropertyName("repositories_url")]
+    public required Uri RepositoriesUrl { get; init; }
+
+    [JsonPropertyName("slug")]
+    public required string Slug { get; init; }
+
+    /// <summary>
+    /// URL for the team
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewSubmittedPullRequestRequestedReviewersVariant2Parent
+{
+    /// <summary>
+    /// Description of the team
+    /// </summary>
+    [JsonPropertyName("description")]
+    public required string? Description { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public required Uri HtmlUrl { get; init; }
+
+    /// <summary>
+    /// Unique identifier of the team
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("members_url")]
+    public required string MembersUrl { get; init; }
+
+    /// <summary>
+    /// Name of the team
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    /// <summary>
+    /// Permission that the team will have for its repositories
+    /// </summary>
+    [JsonPropertyName("permission")]
+    public required string Permission { get; init; }
+
+    [JsonPropertyName("privacy")]
+    public required WebhooksTeamPrivacy Privacy { get; init; }
+
+    [JsonPropertyName("repositories_url")]
+    public required Uri RepositoriesUrl { get; init; }
+
+    [JsonPropertyName("slug")]
+    public required string Slug { get; init; }
+
+    /// <summary>
+    /// URL for the team
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+}
+
+/// <remarks>
+/// Union of: WebhookPullRequestReviewSubmittedPullRequestRequestedReviewersVariant1 | WebhookPullRequestReviewSubmittedPullRequestRequestedReviewersVariant2
+/// </remarks>
+[JsonDerivedType(typeof(WebhookPullRequestReviewSubmittedPullRequestRequestedReviewersVariant1), "WebhookPullRequestReviewSubmittedPullRequestRequestedReviewersVariant1")]
+[JsonDerivedType(typeof(WebhookPullRequestReviewSubmittedPullRequestRequestedReviewersVariant2), "WebhookPullRequestReviewSubmittedPullRequestRequestedReviewersVariant2")]
+public abstract partial record WebhookPullRequestReviewSubmittedPullRequestRequestedReviewers;
+
 /// <summary>
 /// Groups of organization members that gives permissions on specified repositories.
 /// </summary>
@@ -114251,7 +126985,7 @@ public partial record WebhookPullRequestReviewThreadResolvedPullRequest
     public required Uri PatchUrl { get; init; }
 
     [JsonPropertyName("requested_reviewers")]
-    public required IReadOnlyList<object> RequestedReviewers { get; init; }
+    public required IReadOnlyList<WebhookPullRequestReviewThreadResolvedPullRequestRequestedReviewers> RequestedReviewers { get; init; }
 
     [JsonPropertyName("requested_teams")]
     public required IReadOnlyList<WebhookPullRequestReviewThreadResolvedPullRequestRequestedTeams> RequestedTeams { get; init; }
@@ -115867,6 +128601,196 @@ public partial record WebhookPullRequestReviewThreadResolvedPullRequestMilestone
 
 }
 
+public partial record WebhookPullRequestReviewThreadResolvedPullRequestRequestedReviewersVariant1
+{
+    [JsonPropertyName("avatar_url")]
+    public Uri? AvatarUrl { get; init; }
+
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    [JsonPropertyName("email")]
+    public string? Email { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public string? EventsUrl { get; init; }
+
+    [JsonPropertyName("followers_url")]
+    public Uri? FollowersUrl { get; init; }
+
+    [JsonPropertyName("following_url")]
+    public string? FollowingUrl { get; init; }
+
+    [JsonPropertyName("gists_url")]
+    public string? GistsUrl { get; init; }
+
+    [JsonPropertyName("gravatar_id")]
+    public string? GravatarId { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("login")]
+    public required string Login { get; init; }
+
+    [JsonPropertyName("name")]
+    public string? Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("organizations_url")]
+    public Uri? OrganizationsUrl { get; init; }
+
+    [JsonPropertyName("received_events_url")]
+    public Uri? ReceivedEventsUrl { get; init; }
+
+    [JsonPropertyName("repos_url")]
+    public Uri? ReposUrl { get; init; }
+
+    [JsonPropertyName("site_admin")]
+    public bool? SiteAdmin { get; init; }
+
+    [JsonPropertyName("starred_url")]
+    public string? StarredUrl { get; init; }
+
+    [JsonPropertyName("subscriptions_url")]
+    public Uri? SubscriptionsUrl { get; init; }
+
+    [JsonPropertyName("type")]
+    public WebhooksUserMannequinType? Type { get; init; }
+
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+    [JsonPropertyName("user_view_type")]
+    public string? UserViewType { get; init; }
+
+}
+
+/// <summary>
+/// Groups of organization members that gives permissions on specified repositories.
+/// </summary>
+public partial record WebhookPullRequestReviewThreadResolvedPullRequestRequestedReviewersVariant2
+{
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    /// <summary>
+    /// Description of the team
+    /// </summary>
+    [JsonPropertyName("description")]
+    public required string? Description { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public required Uri HtmlUrl { get; init; }
+
+    /// <summary>
+    /// Unique identifier of the team
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("members_url")]
+    public required string MembersUrl { get; init; }
+
+    /// <summary>
+    /// Name of the team
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    [JsonPropertyName("parent")]
+    public WebhookPullRequestReviewThreadResolvedPullRequestRequestedReviewersVariant2Parent? Parent { get; init; }
+
+    /// <summary>
+    /// Permission that the team will have for its repositories
+    /// </summary>
+    [JsonPropertyName("permission")]
+    public required string Permission { get; init; }
+
+    [JsonPropertyName("privacy")]
+    public required WebhooksTeamPrivacy Privacy { get; init; }
+
+    [JsonPropertyName("repositories_url")]
+    public required Uri RepositoriesUrl { get; init; }
+
+    [JsonPropertyName("slug")]
+    public required string Slug { get; init; }
+
+    /// <summary>
+    /// URL for the team
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewThreadResolvedPullRequestRequestedReviewersVariant2Parent
+{
+    /// <summary>
+    /// Description of the team
+    /// </summary>
+    [JsonPropertyName("description")]
+    public required string? Description { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public required Uri HtmlUrl { get; init; }
+
+    /// <summary>
+    /// Unique identifier of the team
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("members_url")]
+    public required string MembersUrl { get; init; }
+
+    /// <summary>
+    /// Name of the team
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    /// <summary>
+    /// Permission that the team will have for its repositories
+    /// </summary>
+    [JsonPropertyName("permission")]
+    public required string Permission { get; init; }
+
+    [JsonPropertyName("privacy")]
+    public required WebhooksTeamPrivacy Privacy { get; init; }
+
+    [JsonPropertyName("repositories_url")]
+    public required Uri RepositoriesUrl { get; init; }
+
+    [JsonPropertyName("slug")]
+    public required string Slug { get; init; }
+
+    /// <summary>
+    /// URL for the team
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+}
+
+/// <remarks>
+/// Union of: WebhookPullRequestReviewThreadResolvedPullRequestRequestedReviewersVariant1 | WebhookPullRequestReviewThreadResolvedPullRequestRequestedReviewersVariant2
+/// </remarks>
+[JsonDerivedType(typeof(WebhookPullRequestReviewThreadResolvedPullRequestRequestedReviewersVariant1), "WebhookPullRequestReviewThreadResolvedPullRequestRequestedReviewersVariant1")]
+[JsonDerivedType(typeof(WebhookPullRequestReviewThreadResolvedPullRequestRequestedReviewersVariant2), "WebhookPullRequestReviewThreadResolvedPullRequestRequestedReviewersVariant2")]
+public abstract partial record WebhookPullRequestReviewThreadResolvedPullRequestRequestedReviewers;
+
 /// <summary>
 /// Groups of organization members that gives permissions on specified repositories.
 /// </summary>
@@ -116442,7 +129366,7 @@ public partial record WebhookPullRequestReviewThreadUnresolvedPullRequest
     public required Uri PatchUrl { get; init; }
 
     [JsonPropertyName("requested_reviewers")]
-    public required IReadOnlyList<object> RequestedReviewers { get; init; }
+    public required IReadOnlyList<WebhookPullRequestReviewThreadUnresolvedPullRequestRequestedReviewers> RequestedReviewers { get; init; }
 
     [JsonPropertyName("requested_teams")]
     public required IReadOnlyList<WebhookPullRequestReviewThreadUnresolvedPullRequestRequestedTeams> RequestedTeams { get; init; }
@@ -118058,6 +130982,196 @@ public partial record WebhookPullRequestReviewThreadUnresolvedPullRequestMilesto
 
 }
 
+public partial record WebhookPullRequestReviewThreadUnresolvedPullRequestRequestedReviewersVariant1
+{
+    [JsonPropertyName("avatar_url")]
+    public Uri? AvatarUrl { get; init; }
+
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    [JsonPropertyName("email")]
+    public string? Email { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public string? EventsUrl { get; init; }
+
+    [JsonPropertyName("followers_url")]
+    public Uri? FollowersUrl { get; init; }
+
+    [JsonPropertyName("following_url")]
+    public string? FollowingUrl { get; init; }
+
+    [JsonPropertyName("gists_url")]
+    public string? GistsUrl { get; init; }
+
+    [JsonPropertyName("gravatar_id")]
+    public string? GravatarId { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("login")]
+    public required string Login { get; init; }
+
+    [JsonPropertyName("name")]
+    public string? Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("organizations_url")]
+    public Uri? OrganizationsUrl { get; init; }
+
+    [JsonPropertyName("received_events_url")]
+    public Uri? ReceivedEventsUrl { get; init; }
+
+    [JsonPropertyName("repos_url")]
+    public Uri? ReposUrl { get; init; }
+
+    [JsonPropertyName("site_admin")]
+    public bool? SiteAdmin { get; init; }
+
+    [JsonPropertyName("starred_url")]
+    public string? StarredUrl { get; init; }
+
+    [JsonPropertyName("subscriptions_url")]
+    public Uri? SubscriptionsUrl { get; init; }
+
+    [JsonPropertyName("type")]
+    public WebhooksUserType? Type { get; init; }
+
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+    [JsonPropertyName("user_view_type")]
+    public string? UserViewType { get; init; }
+
+}
+
+/// <summary>
+/// Groups of organization members that gives permissions on specified repositories.
+/// </summary>
+public partial record WebhookPullRequestReviewThreadUnresolvedPullRequestRequestedReviewersVariant2
+{
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    /// <summary>
+    /// Description of the team
+    /// </summary>
+    [JsonPropertyName("description")]
+    public string? Description { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    /// <summary>
+    /// Unique identifier of the team
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("members_url")]
+    public string? MembersUrl { get; init; }
+
+    /// <summary>
+    /// Name of the team
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("parent")]
+    public WebhookPullRequestReviewThreadUnresolvedPullRequestRequestedReviewersVariant2Parent? Parent { get; init; }
+
+    /// <summary>
+    /// Permission that the team will have for its repositories
+    /// </summary>
+    [JsonPropertyName("permission")]
+    public string? Permission { get; init; }
+
+    [JsonPropertyName("privacy")]
+    public WebhooksTeamPrivacy? Privacy { get; init; }
+
+    [JsonPropertyName("repositories_url")]
+    public Uri? RepositoriesUrl { get; init; }
+
+    [JsonPropertyName("slug")]
+    public string? Slug { get; init; }
+
+    /// <summary>
+    /// URL for the team
+    /// </summary>
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+}
+
+public partial record WebhookPullRequestReviewThreadUnresolvedPullRequestRequestedReviewersVariant2Parent
+{
+    /// <summary>
+    /// Description of the team
+    /// </summary>
+    [JsonPropertyName("description")]
+    public required string? Description { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public required Uri HtmlUrl { get; init; }
+
+    /// <summary>
+    /// Unique identifier of the team
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("members_url")]
+    public required string MembersUrl { get; init; }
+
+    /// <summary>
+    /// Name of the team
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    /// <summary>
+    /// Permission that the team will have for its repositories
+    /// </summary>
+    [JsonPropertyName("permission")]
+    public required string Permission { get; init; }
+
+    [JsonPropertyName("privacy")]
+    public required WebhooksTeamPrivacy Privacy { get; init; }
+
+    [JsonPropertyName("repositories_url")]
+    public required Uri RepositoriesUrl { get; init; }
+
+    [JsonPropertyName("slug")]
+    public required string Slug { get; init; }
+
+    /// <summary>
+    /// URL for the team
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+}
+
+/// <remarks>
+/// Union of: WebhookPullRequestReviewThreadUnresolvedPullRequestRequestedReviewersVariant1 | WebhookPullRequestReviewThreadUnresolvedPullRequestRequestedReviewersVariant2
+/// </remarks>
+[JsonDerivedType(typeof(WebhookPullRequestReviewThreadUnresolvedPullRequestRequestedReviewersVariant1), "WebhookPullRequestReviewThreadUnresolvedPullRequestRequestedReviewersVariant1")]
+[JsonDerivedType(typeof(WebhookPullRequestReviewThreadUnresolvedPullRequestRequestedReviewersVariant2), "WebhookPullRequestReviewThreadUnresolvedPullRequestRequestedReviewersVariant2")]
+public abstract partial record WebhookPullRequestReviewThreadUnresolvedPullRequestRequestedReviewers;
+
 /// <summary>
 /// Groups of organization members that gives permissions on specified repositories.
 /// </summary>
@@ -118675,7 +131789,7 @@ public partial record WebhookPullRequestStackedPullRequest
     public bool? Rebaseable { get; init; }
 
     [JsonPropertyName("requested_reviewers")]
-    public required IReadOnlyList<object> RequestedReviewers { get; init; }
+    public required IReadOnlyList<WebhookPullRequestStackedPullRequestRequestedReviewers> RequestedReviewers { get; init; }
 
     [JsonPropertyName("requested_teams")]
     public required IReadOnlyList<WebhookPullRequestStackedPullRequestRequestedTeams> RequestedTeams { get; init; }
@@ -120458,6 +133572,196 @@ public partial record WebhookPullRequestStackedPullRequestMilestoneCreator
 
 }
 
+public partial record WebhookPullRequestStackedPullRequestRequestedReviewersVariant1
+{
+    [JsonPropertyName("avatar_url")]
+    public Uri? AvatarUrl { get; init; }
+
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    [JsonPropertyName("email")]
+    public string? Email { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public string? EventsUrl { get; init; }
+
+    [JsonPropertyName("followers_url")]
+    public Uri? FollowersUrl { get; init; }
+
+    [JsonPropertyName("following_url")]
+    public string? FollowingUrl { get; init; }
+
+    [JsonPropertyName("gists_url")]
+    public string? GistsUrl { get; init; }
+
+    [JsonPropertyName("gravatar_id")]
+    public string? GravatarId { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("login")]
+    public required string Login { get; init; }
+
+    [JsonPropertyName("name")]
+    public string? Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("organizations_url")]
+    public Uri? OrganizationsUrl { get; init; }
+
+    [JsonPropertyName("received_events_url")]
+    public Uri? ReceivedEventsUrl { get; init; }
+
+    [JsonPropertyName("repos_url")]
+    public Uri? ReposUrl { get; init; }
+
+    [JsonPropertyName("site_admin")]
+    public bool? SiteAdmin { get; init; }
+
+    [JsonPropertyName("starred_url")]
+    public string? StarredUrl { get; init; }
+
+    [JsonPropertyName("subscriptions_url")]
+    public Uri? SubscriptionsUrl { get; init; }
+
+    [JsonPropertyName("type")]
+    public WebhooksUserMannequinType? Type { get; init; }
+
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+    [JsonPropertyName("user_view_type")]
+    public string? UserViewType { get; init; }
+
+}
+
+/// <summary>
+/// Groups of organization members that gives permissions on specified repositories.
+/// </summary>
+public partial record WebhookPullRequestStackedPullRequestRequestedReviewersVariant2
+{
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    /// <summary>
+    /// Description of the team
+    /// </summary>
+    [JsonPropertyName("description")]
+    public required string? Description { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public required Uri HtmlUrl { get; init; }
+
+    /// <summary>
+    /// Unique identifier of the team
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("members_url")]
+    public required string MembersUrl { get; init; }
+
+    /// <summary>
+    /// Name of the team
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    [JsonPropertyName("parent")]
+    public WebhookPullRequestStackedPullRequestRequestedReviewersVariant2Parent? Parent { get; init; }
+
+    /// <summary>
+    /// Permission that the team will have for its repositories
+    /// </summary>
+    [JsonPropertyName("permission")]
+    public required string Permission { get; init; }
+
+    [JsonPropertyName("privacy")]
+    public required WebhooksTeamPrivacy Privacy { get; init; }
+
+    [JsonPropertyName("repositories_url")]
+    public required Uri RepositoriesUrl { get; init; }
+
+    [JsonPropertyName("slug")]
+    public required string Slug { get; init; }
+
+    /// <summary>
+    /// URL for the team
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+}
+
+public partial record WebhookPullRequestStackedPullRequestRequestedReviewersVariant2Parent
+{
+    /// <summary>
+    /// Description of the team
+    /// </summary>
+    [JsonPropertyName("description")]
+    public required string? Description { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public required Uri HtmlUrl { get; init; }
+
+    /// <summary>
+    /// Unique identifier of the team
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("members_url")]
+    public required string MembersUrl { get; init; }
+
+    /// <summary>
+    /// Name of the team
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    /// <summary>
+    /// Permission that the team will have for its repositories
+    /// </summary>
+    [JsonPropertyName("permission")]
+    public required string Permission { get; init; }
+
+    [JsonPropertyName("privacy")]
+    public required WebhooksTeamPrivacy Privacy { get; init; }
+
+    [JsonPropertyName("repositories_url")]
+    public required Uri RepositoriesUrl { get; init; }
+
+    [JsonPropertyName("slug")]
+    public required string Slug { get; init; }
+
+    /// <summary>
+    /// URL for the team
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+}
+
+/// <remarks>
+/// Union of: WebhookPullRequestStackedPullRequestRequestedReviewersVariant1 | WebhookPullRequestStackedPullRequestRequestedReviewersVariant2
+/// </remarks>
+[JsonDerivedType(typeof(WebhookPullRequestStackedPullRequestRequestedReviewersVariant1), "WebhookPullRequestStackedPullRequestRequestedReviewersVariant1")]
+[JsonDerivedType(typeof(WebhookPullRequestStackedPullRequestRequestedReviewersVariant2), "WebhookPullRequestStackedPullRequestRequestedReviewersVariant2")]
+public abstract partial record WebhookPullRequestStackedPullRequestRequestedReviewers;
+
 /// <summary>
 /// Groups of organization members that gives permissions on specified repositories.
 /// </summary>
@@ -120773,7 +134077,7 @@ public partial record WebhookPullRequestSynchronizePullRequest
     public bool? Rebaseable { get; init; }
 
     [JsonPropertyName("requested_reviewers")]
-    public required IReadOnlyList<object> RequestedReviewers { get; init; }
+    public required IReadOnlyList<WebhookPullRequestSynchronizePullRequestRequestedReviewers> RequestedReviewers { get; init; }
 
     [JsonPropertyName("requested_teams")]
     public required IReadOnlyList<WebhookPullRequestSynchronizePullRequestRequestedTeams> RequestedTeams { get; init; }
@@ -122549,6 +135853,196 @@ public partial record WebhookPullRequestSynchronizePullRequestMilestoneCreator
 
 }
 
+public partial record WebhookPullRequestSynchronizePullRequestRequestedReviewersVariant1
+{
+    [JsonPropertyName("avatar_url")]
+    public Uri? AvatarUrl { get; init; }
+
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    [JsonPropertyName("email")]
+    public string? Email { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public string? EventsUrl { get; init; }
+
+    [JsonPropertyName("followers_url")]
+    public Uri? FollowersUrl { get; init; }
+
+    [JsonPropertyName("following_url")]
+    public string? FollowingUrl { get; init; }
+
+    [JsonPropertyName("gists_url")]
+    public string? GistsUrl { get; init; }
+
+    [JsonPropertyName("gravatar_id")]
+    public string? GravatarId { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("login")]
+    public required string Login { get; init; }
+
+    [JsonPropertyName("name")]
+    public string? Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("organizations_url")]
+    public Uri? OrganizationsUrl { get; init; }
+
+    [JsonPropertyName("received_events_url")]
+    public Uri? ReceivedEventsUrl { get; init; }
+
+    [JsonPropertyName("repos_url")]
+    public Uri? ReposUrl { get; init; }
+
+    [JsonPropertyName("site_admin")]
+    public bool? SiteAdmin { get; init; }
+
+    [JsonPropertyName("starred_url")]
+    public string? StarredUrl { get; init; }
+
+    [JsonPropertyName("subscriptions_url")]
+    public Uri? SubscriptionsUrl { get; init; }
+
+    [JsonPropertyName("type")]
+    public WebhooksUserMannequinType? Type { get; init; }
+
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+    [JsonPropertyName("user_view_type")]
+    public string? UserViewType { get; init; }
+
+}
+
+/// <summary>
+/// Groups of organization members that gives permissions on specified repositories.
+/// </summary>
+public partial record WebhookPullRequestSynchronizePullRequestRequestedReviewersVariant2
+{
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    /// <summary>
+    /// Description of the team
+    /// </summary>
+    [JsonPropertyName("description")]
+    public required string? Description { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public required Uri HtmlUrl { get; init; }
+
+    /// <summary>
+    /// Unique identifier of the team
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("members_url")]
+    public required string MembersUrl { get; init; }
+
+    /// <summary>
+    /// Name of the team
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    [JsonPropertyName("parent")]
+    public WebhookPullRequestSynchronizePullRequestRequestedReviewersVariant2Parent? Parent { get; init; }
+
+    /// <summary>
+    /// Permission that the team will have for its repositories
+    /// </summary>
+    [JsonPropertyName("permission")]
+    public required string Permission { get; init; }
+
+    [JsonPropertyName("privacy")]
+    public required WebhooksTeamPrivacy Privacy { get; init; }
+
+    [JsonPropertyName("repositories_url")]
+    public required Uri RepositoriesUrl { get; init; }
+
+    [JsonPropertyName("slug")]
+    public required string Slug { get; init; }
+
+    /// <summary>
+    /// URL for the team
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+}
+
+public partial record WebhookPullRequestSynchronizePullRequestRequestedReviewersVariant2Parent
+{
+    /// <summary>
+    /// Description of the team
+    /// </summary>
+    [JsonPropertyName("description")]
+    public required string? Description { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public required Uri HtmlUrl { get; init; }
+
+    /// <summary>
+    /// Unique identifier of the team
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("members_url")]
+    public required string MembersUrl { get; init; }
+
+    /// <summary>
+    /// Name of the team
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    /// <summary>
+    /// Permission that the team will have for its repositories
+    /// </summary>
+    [JsonPropertyName("permission")]
+    public required string Permission { get; init; }
+
+    [JsonPropertyName("privacy")]
+    public required WebhooksTeamPrivacy Privacy { get; init; }
+
+    [JsonPropertyName("repositories_url")]
+    public required Uri RepositoriesUrl { get; init; }
+
+    [JsonPropertyName("slug")]
+    public required string Slug { get; init; }
+
+    /// <summary>
+    /// URL for the team
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+}
+
+/// <remarks>
+/// Union of: WebhookPullRequestSynchronizePullRequestRequestedReviewersVariant1 | WebhookPullRequestSynchronizePullRequestRequestedReviewersVariant2
+/// </remarks>
+[JsonDerivedType(typeof(WebhookPullRequestSynchronizePullRequestRequestedReviewersVariant1), "WebhookPullRequestSynchronizePullRequestRequestedReviewersVariant1")]
+[JsonDerivedType(typeof(WebhookPullRequestSynchronizePullRequestRequestedReviewersVariant2), "WebhookPullRequestSynchronizePullRequestRequestedReviewersVariant2")]
+public abstract partial record WebhookPullRequestSynchronizePullRequestRequestedReviewers;
+
 /// <summary>
 /// Groups of organization members that gives permissions on specified repositories.
 /// </summary>
@@ -122864,7 +136358,7 @@ public partial record WebhookPullRequestUnassignedPullRequest
     public bool? Rebaseable { get; init; }
 
     [JsonPropertyName("requested_reviewers")]
-    public required IReadOnlyList<object> RequestedReviewers { get; init; }
+    public required IReadOnlyList<WebhookPullRequestUnassignedPullRequestRequestedReviewers> RequestedReviewers { get; init; }
 
     [JsonPropertyName("requested_teams")]
     public required IReadOnlyList<WebhookPullRequestUnassignedPullRequestRequestedTeams> RequestedTeams { get; init; }
@@ -124647,6 +138141,196 @@ public partial record WebhookPullRequestUnassignedPullRequestMilestoneCreator
 
 }
 
+public partial record WebhookPullRequestUnassignedPullRequestRequestedReviewersVariant1
+{
+    [JsonPropertyName("avatar_url")]
+    public Uri? AvatarUrl { get; init; }
+
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    [JsonPropertyName("email")]
+    public string? Email { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public string? EventsUrl { get; init; }
+
+    [JsonPropertyName("followers_url")]
+    public Uri? FollowersUrl { get; init; }
+
+    [JsonPropertyName("following_url")]
+    public string? FollowingUrl { get; init; }
+
+    [JsonPropertyName("gists_url")]
+    public string? GistsUrl { get; init; }
+
+    [JsonPropertyName("gravatar_id")]
+    public string? GravatarId { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("login")]
+    public required string Login { get; init; }
+
+    [JsonPropertyName("name")]
+    public string? Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("organizations_url")]
+    public Uri? OrganizationsUrl { get; init; }
+
+    [JsonPropertyName("received_events_url")]
+    public Uri? ReceivedEventsUrl { get; init; }
+
+    [JsonPropertyName("repos_url")]
+    public Uri? ReposUrl { get; init; }
+
+    [JsonPropertyName("site_admin")]
+    public bool? SiteAdmin { get; init; }
+
+    [JsonPropertyName("starred_url")]
+    public string? StarredUrl { get; init; }
+
+    [JsonPropertyName("subscriptions_url")]
+    public Uri? SubscriptionsUrl { get; init; }
+
+    [JsonPropertyName("type")]
+    public WebhooksUserMannequinType? Type { get; init; }
+
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+    [JsonPropertyName("user_view_type")]
+    public string? UserViewType { get; init; }
+
+}
+
+/// <summary>
+/// Groups of organization members that gives permissions on specified repositories.
+/// </summary>
+public partial record WebhookPullRequestUnassignedPullRequestRequestedReviewersVariant2
+{
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    /// <summary>
+    /// Description of the team
+    /// </summary>
+    [JsonPropertyName("description")]
+    public required string? Description { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public required Uri HtmlUrl { get; init; }
+
+    /// <summary>
+    /// Unique identifier of the team
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("members_url")]
+    public required string MembersUrl { get; init; }
+
+    /// <summary>
+    /// Name of the team
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    [JsonPropertyName("parent")]
+    public WebhookPullRequestUnassignedPullRequestRequestedReviewersVariant2Parent? Parent { get; init; }
+
+    /// <summary>
+    /// Permission that the team will have for its repositories
+    /// </summary>
+    [JsonPropertyName("permission")]
+    public required string Permission { get; init; }
+
+    [JsonPropertyName("privacy")]
+    public required WebhooksTeamPrivacy Privacy { get; init; }
+
+    [JsonPropertyName("repositories_url")]
+    public required Uri RepositoriesUrl { get; init; }
+
+    [JsonPropertyName("slug")]
+    public required string Slug { get; init; }
+
+    /// <summary>
+    /// URL for the team
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+}
+
+public partial record WebhookPullRequestUnassignedPullRequestRequestedReviewersVariant2Parent
+{
+    /// <summary>
+    /// Description of the team
+    /// </summary>
+    [JsonPropertyName("description")]
+    public required string? Description { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public required Uri HtmlUrl { get; init; }
+
+    /// <summary>
+    /// Unique identifier of the team
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("members_url")]
+    public required string MembersUrl { get; init; }
+
+    /// <summary>
+    /// Name of the team
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    /// <summary>
+    /// Permission that the team will have for its repositories
+    /// </summary>
+    [JsonPropertyName("permission")]
+    public required string Permission { get; init; }
+
+    [JsonPropertyName("privacy")]
+    public required WebhooksTeamPrivacy Privacy { get; init; }
+
+    [JsonPropertyName("repositories_url")]
+    public required Uri RepositoriesUrl { get; init; }
+
+    [JsonPropertyName("slug")]
+    public required string Slug { get; init; }
+
+    /// <summary>
+    /// URL for the team
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+}
+
+/// <remarks>
+/// Union of: WebhookPullRequestUnassignedPullRequestRequestedReviewersVariant1 | WebhookPullRequestUnassignedPullRequestRequestedReviewersVariant2
+/// </remarks>
+[JsonDerivedType(typeof(WebhookPullRequestUnassignedPullRequestRequestedReviewersVariant1), "WebhookPullRequestUnassignedPullRequestRequestedReviewersVariant1")]
+[JsonDerivedType(typeof(WebhookPullRequestUnassignedPullRequestRequestedReviewersVariant2), "WebhookPullRequestUnassignedPullRequestRequestedReviewersVariant2")]
+public abstract partial record WebhookPullRequestUnassignedPullRequestRequestedReviewers;
+
 /// <summary>
 /// Groups of organization members that gives permissions on specified repositories.
 /// </summary>
@@ -124962,7 +138646,7 @@ public partial record WebhookPullRequestUnlabeledPullRequest
     public bool? Rebaseable { get; init; }
 
     [JsonPropertyName("requested_reviewers")]
-    public required IReadOnlyList<object> RequestedReviewers { get; init; }
+    public required IReadOnlyList<WebhookPullRequestUnlabeledPullRequestRequestedReviewers> RequestedReviewers { get; init; }
 
     [JsonPropertyName("requested_teams")]
     public required IReadOnlyList<WebhookPullRequestUnlabeledPullRequestRequestedTeams> RequestedTeams { get; init; }
@@ -126738,6 +140422,196 @@ public partial record WebhookPullRequestUnlabeledPullRequestMilestoneCreator
 
 }
 
+public partial record WebhookPullRequestUnlabeledPullRequestRequestedReviewersVariant1
+{
+    [JsonPropertyName("avatar_url")]
+    public Uri? AvatarUrl { get; init; }
+
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    [JsonPropertyName("email")]
+    public string? Email { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public string? EventsUrl { get; init; }
+
+    [JsonPropertyName("followers_url")]
+    public Uri? FollowersUrl { get; init; }
+
+    [JsonPropertyName("following_url")]
+    public string? FollowingUrl { get; init; }
+
+    [JsonPropertyName("gists_url")]
+    public string? GistsUrl { get; init; }
+
+    [JsonPropertyName("gravatar_id")]
+    public string? GravatarId { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("login")]
+    public required string Login { get; init; }
+
+    [JsonPropertyName("name")]
+    public string? Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("organizations_url")]
+    public Uri? OrganizationsUrl { get; init; }
+
+    [JsonPropertyName("received_events_url")]
+    public Uri? ReceivedEventsUrl { get; init; }
+
+    [JsonPropertyName("repos_url")]
+    public Uri? ReposUrl { get; init; }
+
+    [JsonPropertyName("site_admin")]
+    public bool? SiteAdmin { get; init; }
+
+    [JsonPropertyName("starred_url")]
+    public string? StarredUrl { get; init; }
+
+    [JsonPropertyName("subscriptions_url")]
+    public Uri? SubscriptionsUrl { get; init; }
+
+    [JsonPropertyName("type")]
+    public WebhooksUserMannequinType? Type { get; init; }
+
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+    [JsonPropertyName("user_view_type")]
+    public string? UserViewType { get; init; }
+
+}
+
+/// <summary>
+/// Groups of organization members that gives permissions on specified repositories.
+/// </summary>
+public partial record WebhookPullRequestUnlabeledPullRequestRequestedReviewersVariant2
+{
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    /// <summary>
+    /// Description of the team
+    /// </summary>
+    [JsonPropertyName("description")]
+    public required string? Description { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public required Uri HtmlUrl { get; init; }
+
+    /// <summary>
+    /// Unique identifier of the team
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("members_url")]
+    public required string MembersUrl { get; init; }
+
+    /// <summary>
+    /// Name of the team
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    [JsonPropertyName("parent")]
+    public WebhookPullRequestUnlabeledPullRequestRequestedReviewersVariant2Parent? Parent { get; init; }
+
+    /// <summary>
+    /// Permission that the team will have for its repositories
+    /// </summary>
+    [JsonPropertyName("permission")]
+    public required string Permission { get; init; }
+
+    [JsonPropertyName("privacy")]
+    public required WebhooksTeamPrivacy Privacy { get; init; }
+
+    [JsonPropertyName("repositories_url")]
+    public required Uri RepositoriesUrl { get; init; }
+
+    [JsonPropertyName("slug")]
+    public required string Slug { get; init; }
+
+    /// <summary>
+    /// URL for the team
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+}
+
+public partial record WebhookPullRequestUnlabeledPullRequestRequestedReviewersVariant2Parent
+{
+    /// <summary>
+    /// Description of the team
+    /// </summary>
+    [JsonPropertyName("description")]
+    public required string? Description { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public required Uri HtmlUrl { get; init; }
+
+    /// <summary>
+    /// Unique identifier of the team
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("members_url")]
+    public required string MembersUrl { get; init; }
+
+    /// <summary>
+    /// Name of the team
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    /// <summary>
+    /// Permission that the team will have for its repositories
+    /// </summary>
+    [JsonPropertyName("permission")]
+    public required string Permission { get; init; }
+
+    [JsonPropertyName("privacy")]
+    public required WebhooksTeamPrivacy Privacy { get; init; }
+
+    [JsonPropertyName("repositories_url")]
+    public required Uri RepositoriesUrl { get; init; }
+
+    [JsonPropertyName("slug")]
+    public required string Slug { get; init; }
+
+    /// <summary>
+    /// URL for the team
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+}
+
+/// <remarks>
+/// Union of: WebhookPullRequestUnlabeledPullRequestRequestedReviewersVariant1 | WebhookPullRequestUnlabeledPullRequestRequestedReviewersVariant2
+/// </remarks>
+[JsonDerivedType(typeof(WebhookPullRequestUnlabeledPullRequestRequestedReviewersVariant1), "WebhookPullRequestUnlabeledPullRequestRequestedReviewersVariant1")]
+[JsonDerivedType(typeof(WebhookPullRequestUnlabeledPullRequestRequestedReviewersVariant2), "WebhookPullRequestUnlabeledPullRequestRequestedReviewersVariant2")]
+public abstract partial record WebhookPullRequestUnlabeledPullRequestRequestedReviewers;
+
 /// <summary>
 /// Groups of organization members that gives permissions on specified repositories.
 /// </summary>
@@ -127053,7 +140927,7 @@ public partial record WebhookPullRequestUnlockedPullRequest
     public bool? Rebaseable { get; init; }
 
     [JsonPropertyName("requested_reviewers")]
-    public required IReadOnlyList<object> RequestedReviewers { get; init; }
+    public required IReadOnlyList<WebhookPullRequestUnlockedPullRequestRequestedReviewers> RequestedReviewers { get; init; }
 
     [JsonPropertyName("requested_teams")]
     public required IReadOnlyList<WebhookPullRequestUnlockedPullRequestRequestedTeams> RequestedTeams { get; init; }
@@ -128835,6 +142709,196 @@ public partial record WebhookPullRequestUnlockedPullRequestMilestoneCreator
     public string? UserViewType { get; init; }
 
 }
+
+public partial record WebhookPullRequestUnlockedPullRequestRequestedReviewersVariant1
+{
+    [JsonPropertyName("avatar_url")]
+    public Uri? AvatarUrl { get; init; }
+
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    [JsonPropertyName("email")]
+    public string? Email { get; init; }
+
+    [JsonPropertyName("events_url")]
+    public string? EventsUrl { get; init; }
+
+    [JsonPropertyName("followers_url")]
+    public Uri? FollowersUrl { get; init; }
+
+    [JsonPropertyName("following_url")]
+    public string? FollowingUrl { get; init; }
+
+    [JsonPropertyName("gists_url")]
+    public string? GistsUrl { get; init; }
+
+    [JsonPropertyName("gravatar_id")]
+    public string? GravatarId { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("login")]
+    public required string Login { get; init; }
+
+    [JsonPropertyName("name")]
+    public string? Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("organizations_url")]
+    public Uri? OrganizationsUrl { get; init; }
+
+    [JsonPropertyName("received_events_url")]
+    public Uri? ReceivedEventsUrl { get; init; }
+
+    [JsonPropertyName("repos_url")]
+    public Uri? ReposUrl { get; init; }
+
+    [JsonPropertyName("site_admin")]
+    public bool? SiteAdmin { get; init; }
+
+    [JsonPropertyName("starred_url")]
+    public string? StarredUrl { get; init; }
+
+    [JsonPropertyName("subscriptions_url")]
+    public Uri? SubscriptionsUrl { get; init; }
+
+    [JsonPropertyName("type")]
+    public WebhooksUserType? Type { get; init; }
+
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+    [JsonPropertyName("user_view_type")]
+    public string? UserViewType { get; init; }
+
+}
+
+/// <summary>
+/// Groups of organization members that gives permissions on specified repositories.
+/// </summary>
+public partial record WebhookPullRequestUnlockedPullRequestRequestedReviewersVariant2
+{
+    [JsonPropertyName("deleted")]
+    public bool? Deleted { get; init; }
+
+    /// <summary>
+    /// Description of the team
+    /// </summary>
+    [JsonPropertyName("description")]
+    public string? Description { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public Uri? HtmlUrl { get; init; }
+
+    /// <summary>
+    /// Unique identifier of the team
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("members_url")]
+    public string? MembersUrl { get; init; }
+
+    /// <summary>
+    /// Name of the team
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public string? NodeId { get; init; }
+
+    [JsonPropertyName("parent")]
+    public WebhookPullRequestUnlockedPullRequestRequestedReviewersVariant2Parent? Parent { get; init; }
+
+    /// <summary>
+    /// Permission that the team will have for its repositories
+    /// </summary>
+    [JsonPropertyName("permission")]
+    public string? Permission { get; init; }
+
+    [JsonPropertyName("privacy")]
+    public WebhooksTeamPrivacy? Privacy { get; init; }
+
+    [JsonPropertyName("repositories_url")]
+    public Uri? RepositoriesUrl { get; init; }
+
+    [JsonPropertyName("slug")]
+    public string? Slug { get; init; }
+
+    /// <summary>
+    /// URL for the team
+    /// </summary>
+    [JsonPropertyName("url")]
+    public Uri? Url { get; init; }
+
+}
+
+public partial record WebhookPullRequestUnlockedPullRequestRequestedReviewersVariant2Parent
+{
+    /// <summary>
+    /// Description of the team
+    /// </summary>
+    [JsonPropertyName("description")]
+    public required string? Description { get; init; }
+
+    [JsonPropertyName("html_url")]
+    public required Uri HtmlUrl { get; init; }
+
+    /// <summary>
+    /// Unique identifier of the team
+    /// </summary>
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+
+    [JsonPropertyName("members_url")]
+    public required string MembersUrl { get; init; }
+
+    /// <summary>
+    /// Name of the team
+    /// </summary>
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("node_id")]
+    public required string NodeId { get; init; }
+
+    /// <summary>
+    /// Permission that the team will have for its repositories
+    /// </summary>
+    [JsonPropertyName("permission")]
+    public required string Permission { get; init; }
+
+    [JsonPropertyName("privacy")]
+    public required WebhooksTeamPrivacy Privacy { get; init; }
+
+    [JsonPropertyName("repositories_url")]
+    public required Uri RepositoriesUrl { get; init; }
+
+    [JsonPropertyName("slug")]
+    public required string Slug { get; init; }
+
+    /// <summary>
+    /// URL for the team
+    /// </summary>
+    [JsonPropertyName("url")]
+    public required Uri Url { get; init; }
+
+}
+
+/// <remarks>
+/// Union of: WebhookPullRequestUnlockedPullRequestRequestedReviewersVariant1 | WebhookPullRequestUnlockedPullRequestRequestedReviewersVariant2
+/// </remarks>
+[JsonDerivedType(typeof(WebhookPullRequestUnlockedPullRequestRequestedReviewersVariant1), "WebhookPullRequestUnlockedPullRequestRequestedReviewersVariant1")]
+[JsonDerivedType(typeof(WebhookPullRequestUnlockedPullRequestRequestedReviewersVariant2), "WebhookPullRequestUnlockedPullRequestRequestedReviewersVariant2")]
+public abstract partial record WebhookPullRequestUnlockedPullRequestRequestedReviewers;
 
 /// <summary>
 /// Groups of organization members that gives permissions on specified repositories.

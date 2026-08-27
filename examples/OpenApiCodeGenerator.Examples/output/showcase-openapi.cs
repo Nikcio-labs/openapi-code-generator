@@ -361,6 +361,12 @@ public partial record Notification
     public required ContactMethod Contact { get; init; }
 
     /// <summary>
+    /// oneOf with mixed ref and inline object variants. The inline object is hoisted to a named record and the union is emitted as an abstract record with [JsonDerivedType] attributes.
+    /// </summary>
+    [JsonPropertyName("escalation")]
+    public required NotificationEscalation Escalation { get; init; }
+
+    /// <summary>
     /// Superseded by contact; retained for backward compatibility.
     /// </summary>
     [Obsolete]
@@ -394,3 +400,27 @@ public readonly partial record struct LegacyId(Guid Value) : IOpenApiGeneratedTy
 {
     public static LegacyId Create(Guid value) => new(value);
 }
+
+/// <summary>
+/// Inline escalation variant hoisted to a named record.
+/// </summary>
+public partial record NotificationEscalationVariant2
+{
+    [RegularExpression("^\\+?[0-9]{6,15}$")]
+    [JsonPropertyName("phone")]
+    public required string Phone { get; init; }
+
+    [JsonPropertyName("afterHours")]
+    public bool? AfterHours { get; init; }
+
+}
+
+/// <summary>
+/// oneOf with mixed ref and inline object variants. The inline object is hoisted to a named record and the union is emitted as an abstract record with [JsonDerivedType] attributes.
+/// </summary>
+/// <remarks>
+/// Union of: EmailContact | NotificationEscalationVariant2
+/// </remarks>
+[JsonDerivedType(typeof(EmailContact), "EmailContact")]
+[JsonDerivedType(typeof(NotificationEscalationVariant2), "NotificationEscalationVariant2")]
+public abstract partial record NotificationEscalation;

@@ -24,6 +24,7 @@ The local showcase spec is intentionally compact and demonstrates:
 - `allOf` inheritance
 - `oneOf` discriminator generation
 - `anyOf` union generation
+- `oneOf` with inline object variants (hoisted to named records with `[JsonDerivedType]`)
 - string enums and inline enums
 - arrays, nullable fields, and `additionalProperties`
 - `deprecated` schemas and properties emitted with `[Obsolete]`
