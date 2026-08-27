@@ -143,20 +143,6 @@ public enum Status
     Failed
 }
 
-[JsonConverter(typeof(JsonStringEnumConverter<CircleShapeType>))]
-public enum CircleShapeType
-{
-    [JsonStringEnumMemberName("circle")]
-    Circle
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter<RectangleShapeType>))]
-public enum RectangleShapeType
-{
-    [JsonStringEnumMemberName("rectangle")]
-    Rectangle
-}
-
 /// <summary>
 /// Strongly typed UUID alias.
 /// </summary>
@@ -297,22 +283,16 @@ public partial record DeliveryRecord : DeliveryBase
 
 }
 
-public partial record Circle
+public partial record Circle : Shape
 {
-    [JsonPropertyName("shapeType")]
-    public required CircleShapeType ShapeType { get; init; }
-
     [Range(0d, 1000d)]
     [JsonPropertyName("radius")]
     public required double Radius { get; init; }
 
 }
 
-public partial record Rectangle
+public partial record Rectangle : Shape
 {
-    [JsonPropertyName("shapeType")]
-    public required RectangleShapeType ShapeType { get; init; }
-
     [JsonPropertyName("width")]
     public required double Width { get; init; }
 
@@ -420,8 +400,6 @@ public partial record NotificationEscalationVariant2
 /// </summary>
 /// <remarks>
 /// Union of: EmailContact | NotificationEscalationVariant2
-/// </remarks>
-/// <remarks>
 /// Inline object variants use the synthesized type name as the discriminator value.
 /// </remarks>
 [JsonDerivedType(typeof(EmailContact), "EmailContact")]
