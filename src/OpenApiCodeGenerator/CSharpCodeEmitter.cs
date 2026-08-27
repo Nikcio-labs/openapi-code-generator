@@ -558,18 +558,14 @@ internal class CSharpCodeEmitter
             int variantIndex = 1;
             foreach (IOpenApiSchema variant in unionVariants)
             {
-                if (variant is not OpenApiSchemaReference && !_knownSchemas.Contains(variant))
+                if (isDiscriminated && variant is not OpenApiSchemaReference && !_knownSchemas.Contains(variant))
                 {
-                    // Try to hoist inline objects within union variants
+                    // Only hoist inline objects for discriminated unions — non-discriminated
+                    // unions with inline variants resolve to object (JsonElement) since
+                    // System.Text.Json can't determine the variant without a discriminator.
                     string variantPropName = $"Variant{variantIndex}";
                     TryHoistPropertySchema(variant, enclosingTypeName, variantPropName, typeNameMap, usedNames, visited);
-
-                    // For discriminated unions, record the union base type so the hoisted
-                    // inline variant can inherit from it (required for polymorphic deserialization).
-                    if (isDiscriminated)
-                    {
-                        _unionVariantBaseTypes.TryAdd(variant, (enclosingTypeName, discPropName!));
-                    }
+                    _unionVariantBaseTypes.TryAdd(variant, (enclosingTypeName, discPropName!));
                 }
                 else if (isDiscriminated && variant is OpenApiSchemaReference refVariant && refVariant.Reference?.Id != null)
                 {
@@ -748,9 +744,13 @@ internal class CSharpCodeEmitter
     }
 
     /// <summary>
-    /// Detects an inline oneOf/anyOf where all variants are $refs or inline objects —
-    /// should be hoisted as an abstract record with [JsonDerivedType] attributes.
+    /// Detects an inline oneOf/anyOf where all variants are $refs (or, for
+    /// discriminated unions, inline objects) — should be hoisted as an abstract
+    /// record with [JsonDerivedType] attributes.
     /// Inline object variants are hoisted to named records before the union is hoisted.
+    /// Non-discriminated unions with inline object variants are NOT hoisted — without
+    /// a discriminator, System.Text.Json cannot determine which variant to deserialize,
+    /// so they resolve to <c>object</c> (JsonElement) instead.
     /// </summary>
     private bool IsInlineUnion(IOpenApiSchema schema)
     {
@@ -798,8 +798,19 @@ internal class CSharpCodeEmitter
             return false;
         }
 
-        // All variants must be $refs or inline objects (hoistable to records)
-        return variants.All(v => v is OpenApiSchemaReference || IsInlineObject(v));
+        bool isDiscriminated = schema.Discriminator is { PropertyName: not null };
+
+        // For discriminated unions, all variants must be $refs or inline objects.
+        // For non-discriminated unions, only $ref-only variants are hoisted —
+        // inline object variants can't be deserialized without a discriminator.
+        if (isDiscriminated)
+        {
+            return variants.All(v => v is OpenApiSchemaReference || IsInlineObject(v));
+        }
+        else
+        {
+            return variants.All(v => v is OpenApiSchemaReference);
+        }
     }
 
     private static string SynthesizeInlineTypeName(string enclosingTypeName, string propName, HashSet<string> usedNames)
@@ -1311,13 +1322,24 @@ internal class CSharpCodeEmitter
         IList<IOpenApiSchema> variants,
         OpenApiDiscriminator discriminator)
     {
-        // Build mapping: discriminator value → type name
+        // Build mapping: discriminator value → type name.
+        // Skip variants that are assigned to a different union base — C# only supports
+        // single inheritance, so a variant can only inherit from one union base type.
         var mapping = new Dictionary<string, string>();
         if (discriminator.Mapping is { Count: > 0 })
         {
             foreach ((string? key, OpenApiSchemaReference? schemaRef) in discriminator.Mapping)
             {
-                mapping[key] = NameHelper.ToTypeName(schemaRef.Reference.Id, _options.ModelPrefix);
+                string? refId = schemaRef.Reference?.Id;
+                if (refId != null &&
+                    _allSchemas.TryGetValue(refId, out IOpenApiSchema? refSchema) &&
+                    _unionVariantBaseTypes.TryGetValue(refSchema, out (string BaseTypeName, string) baseInfo) &&
+                    baseInfo.BaseTypeName != typeName)
+                {
+                    continue; // assigned to a different union — can't inherit from two bases
+                }
+
+                mapping[key] = NameHelper.ToTypeName(refId!, _options.ModelPrefix);
             }
         }
         else
@@ -1332,6 +1354,13 @@ internal class CSharpCodeEmitter
                     if (name is null)
                     {
                         continue;
+                    }
+
+                    if (_allSchemas.TryGetValue(name, out IOpenApiSchema? refSchema) &&
+                        _unionVariantBaseTypes.TryGetValue(refSchema, out (string BaseTypeName, string) baseInfo) &&
+                        baseInfo.BaseTypeName != typeName)
+                    {
+                        continue; // assigned to a different union
                     }
 
                     mapping[name] = NameHelper.ToTypeName(name, _options.ModelPrefix);
@@ -1351,7 +1380,14 @@ internal class CSharpCodeEmitter
             }
 
             string? hoistedName = _typeResolver.GetInlineObjectTypeName(variant);
-            if (hoistedName is null || mapping.ContainsValue(hoistedName))
+            if (hoistedName is null)
+            {
+                continue;
+            }
+
+            // Skip variants assigned to a different union (C# single inheritance)
+            if (_unionVariantBaseTypes.TryGetValue(variant, out (string BaseTypeName, string) baseInfo) &&
+                baseInfo.BaseTypeName != typeName)
             {
                 continue;
             }

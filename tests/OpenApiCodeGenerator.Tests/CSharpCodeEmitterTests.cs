@@ -2200,7 +2200,7 @@ public class CSharpCodeEmitterTests
     #region oneOf/anyOf with Inline Object Variants
 
     [Fact]
-    public void Emit_InlineOneOfWithRefAndInlineObject_HoistsInlineObject()
+    public void Emit_InlineOneOfWithRefAndInlineObject_NotDiscriminated_ResolvesToObject()
     {
         var schemas = new Dictionary<string, IOpenApiSchema>
         {
@@ -2238,23 +2238,16 @@ public class CSharpCodeEmitterTests
 
         string result = Generate(schemas);
 
-        // Property should reference the hoisted union type, not "object"
-        Assert.Contains("public MyRecordValue? Value { get; init; }", result, StringComparison.Ordinal);
+        // Non-discriminated union with inline variants resolves to object —
+        // System.Text.Json can't determine the variant without a discriminator.
+        Assert.Contains("public object? Value { get; init; }", result, StringComparison.Ordinal);
 
-        // Union should have [JsonDerivedType] for both $ref and hoisted inline object
-        Assert.Contains("[JsonDerivedType(typeof(A), \"A\")]", result, StringComparison.Ordinal);
-        Assert.Contains("[JsonDerivedType(typeof(MyRecordValueVariant2), \"MyRecordValueVariant2\")]", result, StringComparison.Ordinal);
-
-        // Inline object variant should be hoisted to a named record
-        Assert.Contains("public partial record MyRecordValueVariant2", result, StringComparison.Ordinal);
-        Assert.Contains("public string? X { get; init; }", result, StringComparison.Ordinal);
-
-        // Union should be an abstract record
-        Assert.Contains("public abstract partial record MyRecordValue;", result, StringComparison.Ordinal);
+        // No hoisted union type or inline variant record should be emitted
+        Assert.DoesNotContain("MyRecordValue", result, StringComparison.Ordinal);
     }
 
     [Fact]
-    public void Emit_InlineOneOfAllInlineObjects_HoistsAllVariants()
+    public void Emit_InlineOneOfAllInlineObjects_NotDiscriminated_ResolvesToObject()
     {
         var schemas = new Dictionary<string, IOpenApiSchema>
         {
@@ -2293,16 +2286,13 @@ public class CSharpCodeEmitterTests
 
         string result = Generate(schemas);
 
-        Assert.Contains("public MyRecordValue? Value { get; init; }", result, StringComparison.Ordinal);
-        Assert.Contains("public abstract partial record MyRecordValue;", result, StringComparison.Ordinal);
-        Assert.Contains("public partial record MyRecordValueVariant1", result, StringComparison.Ordinal);
-        Assert.Contains("public partial record MyRecordValueVariant2", result, StringComparison.Ordinal);
-        Assert.Contains("[JsonDerivedType(typeof(MyRecordValueVariant1), \"MyRecordValueVariant1\")]", result, StringComparison.Ordinal);
-        Assert.Contains("[JsonDerivedType(typeof(MyRecordValueVariant2), \"MyRecordValueVariant2\")]", result, StringComparison.Ordinal);
+        // Non-discriminated union with all inline variants resolves to object
+        Assert.Contains("public object? Value { get; init; }", result, StringComparison.Ordinal);
+        Assert.DoesNotContain("MyRecordValue", result, StringComparison.Ordinal);
     }
 
     [Fact]
-    public void Emit_ComponentLevelOneOfWithRefAndInlineObject_HoistsInlineObject()
+    public void Emit_ComponentLevelOneOfWithRefAndInlineObject_NotDiscriminated_SkipsInlineVariant()
     {
         var schemas = new Dictionary<string, IOpenApiSchema>
         {
@@ -2333,15 +2323,16 @@ public class CSharpCodeEmitterTests
 
         string result = Generate(schemas);
 
+        // Component-level non-discriminated union is still emitted as an abstract record
         Assert.Contains("public abstract partial record MyUnion;", result, StringComparison.Ordinal);
+        // The $ref variant gets [JsonDerivedType]
         Assert.Contains("[JsonDerivedType(typeof(A), \"A\")]", result, StringComparison.Ordinal);
-        Assert.Contains("[JsonDerivedType(typeof(MyUnionVariant2), \"MyUnionVariant2\")]", result, StringComparison.Ordinal);
-        Assert.Contains("public partial record MyUnionVariant2", result, StringComparison.Ordinal);
-        Assert.Contains("public string? Label { get; init; }", result, StringComparison.Ordinal);
+        // Inline variant is NOT hoisted (no discriminator → can't deserialize)
+        Assert.DoesNotContain("MyUnionVariant2", result, StringComparison.Ordinal);
     }
 
     [Fact]
-    public async Task Emit_InlineOneOfWithRefAndInlineObject_CompilesSuccessfully()
+    public async Task Emit_InlineOneOfWithRefAndInlineObject_NotDiscriminated_CompilesSuccessfully()
     {
         var schemas = new Dictionary<string, IOpenApiSchema>
         {
@@ -2421,7 +2412,7 @@ public class CSharpCodeEmitterTests
     }
 
     [Fact]
-    public void Emit_InlineAnyOfWithRefAndInlineObject_HoistsInlineObject()
+    public void Emit_InlineAnyOfWithRefAndInlineObject_NotDiscriminated_ResolvesToObject()
     {
         var schemas = new Dictionary<string, IOpenApiSchema>
         {
@@ -2459,15 +2450,13 @@ public class CSharpCodeEmitterTests
 
         string result = Generate(schemas);
 
-        Assert.Contains("public MyRecordValue? Value { get; init; }", result, StringComparison.Ordinal);
-        Assert.Contains("public abstract partial record MyRecordValue;", result, StringComparison.Ordinal);
-        Assert.Contains("[JsonDerivedType(typeof(A), \"A\")]", result, StringComparison.Ordinal);
-        Assert.Contains("[JsonDerivedType(typeof(MyRecordValueVariant2), \"MyRecordValueVariant2\")]", result, StringComparison.Ordinal);
-        Assert.Contains("public partial record MyRecordValueVariant2", result, StringComparison.Ordinal);
+        // Non-discriminated anyOf with inline variants resolves to object
+        Assert.Contains("public object? Value { get; init; }", result, StringComparison.Ordinal);
+        Assert.DoesNotContain("MyRecordValue", result, StringComparison.Ordinal);
     }
 
     [Fact]
-    public void Emit_InlineOneOfWithNestedInlineObject_HoistsNestedObject()
+    public void Emit_InlineOneOfWithNestedInlineObject_NotDiscriminated_ResolvesToObject()
     {
         var schemas = new Dictionary<string, IOpenApiSchema>
         {
@@ -2512,16 +2501,13 @@ public class CSharpCodeEmitterTests
 
         string result = Generate(schemas);
 
-        Assert.Contains("public MyRecordValue? Value { get; init; }", result, StringComparison.Ordinal);
-        Assert.Contains("public abstract partial record MyRecordValue;", result, StringComparison.Ordinal);
-        Assert.Contains("public partial record MyRecordValueVariant2", result, StringComparison.Ordinal);
-        Assert.Contains("public MyRecordValueVariant2Nested? Nested { get; init; }", result, StringComparison.Ordinal);
-        Assert.Contains("public partial record MyRecordValueVariant2Nested", result, StringComparison.Ordinal);
-        Assert.Contains("public string? Deep { get; init; }", result, StringComparison.Ordinal);
+        // Non-discriminated union with inline variants resolves to object
+        Assert.Contains("public object? Value { get; init; }", result, StringComparison.Ordinal);
+        Assert.DoesNotContain("MyRecordValue", result, StringComparison.Ordinal);
     }
 
     [Fact]
-    public void Emit_InlineOneOfWithTwoSameShapedInlineObjects_HoistsBothSeparately()
+    public void Emit_InlineOneOfWithTwoSameShapedInlineObjects_NotDiscriminated_ResolvesToObject()
     {
         var schemas = new Dictionary<string, IOpenApiSchema>
         {
@@ -2558,12 +2544,9 @@ public class CSharpCodeEmitterTests
 
         string result = Generate(schemas);
 
-        Assert.Contains("public MyRecordValue? Value { get; init; }", result, StringComparison.Ordinal);
-        Assert.Contains("public abstract partial record MyRecordValue;", result, StringComparison.Ordinal);
-        Assert.Contains("public partial record MyRecordValueVariant1", result, StringComparison.Ordinal);
-        Assert.Contains("public partial record MyRecordValueVariant2", result, StringComparison.Ordinal);
-        Assert.Contains("[JsonDerivedType(typeof(MyRecordValueVariant1), \"MyRecordValueVariant1\")]", result, StringComparison.Ordinal);
-        Assert.Contains("[JsonDerivedType(typeof(MyRecordValueVariant2), \"MyRecordValueVariant2\")]", result, StringComparison.Ordinal);
+        // Non-discriminated union with all inline variants resolves to object
+        Assert.Contains("public object? Value { get; init; }", result, StringComparison.Ordinal);
+        Assert.DoesNotContain("MyRecordValue", result, StringComparison.Ordinal);
     }
 
     [Fact]
@@ -2725,7 +2708,7 @@ public class CSharpCodeEmitterTests
     }
 
     [Fact]
-    public void Emit_AnyOfWithNullVariantBetweenInlineObjects_SequentialVariantNames()
+    public void Emit_AnyOfWithNullVariantBetweenInlineObjects_NotDiscriminated_ResolvesToObject()
     {
         var schemas = new Dictionary<string, IOpenApiSchema>
         {
@@ -2764,15 +2747,13 @@ public class CSharpCodeEmitterTests
 
         string result = Generate(schemas);
 
-        // Null variant should be filtered from numbering, producing sequential names
-        Assert.Contains("public partial record ContainerValueVariant1", result, StringComparison.Ordinal);
-        Assert.Contains("public partial record ContainerValueVariant2", result, StringComparison.Ordinal);
-        // Variant3 should NOT exist (only 2 non-null inline objects)
-        Assert.DoesNotContain("ContainerValueVariant3", result, StringComparison.Ordinal);
+        // Non-discriminated anyOf with inline variants resolves to object
+        Assert.Contains("public required object Value { get; init; }", result, StringComparison.Ordinal);
+        Assert.DoesNotContain("ContainerValue", result, StringComparison.Ordinal);
     }
 
     [Fact]
-    public void Emit_OneOfWithNullVariantBetweenInlineObjects_SequentialVariantNames()
+    public void Emit_OneOfWithNullVariantBetweenInlineObjects_NotDiscriminated_ResolvesToObject()
     {
         var schemas = new Dictionary<string, IOpenApiSchema>
         {
@@ -2811,11 +2792,9 @@ public class CSharpCodeEmitterTests
 
         string result = Generate(schemas);
 
-        // Null variant should be filtered from numbering, producing sequential names
-        Assert.Contains("public partial record ContainerValueVariant1", result, StringComparison.Ordinal);
-        Assert.Contains("public partial record ContainerValueVariant2", result, StringComparison.Ordinal);
-        // Variant3 should NOT exist (only 2 non-null inline objects)
-        Assert.DoesNotContain("ContainerValueVariant3", result, StringComparison.Ordinal);
+        // Non-discriminated oneOf with inline variants resolves to object
+        Assert.Contains("public required object Value { get; init; }", result, StringComparison.Ordinal);
+        Assert.DoesNotContain("ContainerValue", result, StringComparison.Ordinal);
     }
 
     #endregion
