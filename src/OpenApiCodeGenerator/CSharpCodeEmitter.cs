@@ -774,8 +774,17 @@ internal class CSharpCodeEmitter
             return false;
         }
 
-        // For anyOf, skip the nullable [type, null] pattern
-        if (schema.AnyOf is { } anyOf)
+        // Filter out null-type variants (from nullable [type, null] patterns)
+        if (schema.OneOf is { } oneOf)
+        {
+            var nonNull = oneOf.Where(s =>
+                !(s.Type.HasValue && s.Type.Value == JsonSchemaType.Null)).ToList();
+            if (nonNull.Count != oneOf.Count)
+            {
+                variants = nonNull;
+            }
+        }
+        else if (schema.AnyOf is { } anyOf)
         {
             var nonNull = anyOf.Where(s =>
                 !(s.Type.HasValue && s.Type.Value == JsonSchemaType.Null)).ToList();
@@ -1431,7 +1440,7 @@ internal class CSharpCodeEmitter
 
         bool hasInlineVariant = nonNullVariants.Any(v => v is not OpenApiSchemaReference && _typeResolver.GetInlineObjectTypeName(v) != null);
 
-        if (variantNames.Count > 0 || hasInlineVariant)
+        if (variantNames.Count > 0)
         {
             AppendLine($"/// <remarks>");
             if (variantNames.Count > 0)
