@@ -2613,7 +2613,7 @@ public class CSharpCodeEmitterTests
         Assert.Contains("public abstract partial record Pet;", result, StringComparison.Ordinal);
         Assert.Contains("[JsonPolymorphic(TypeDiscriminatorPropertyName = \"petType\")]", result, StringComparison.Ordinal);
         Assert.Contains("[JsonDerivedType(typeof(Cat), \"cat\")]", result, StringComparison.Ordinal);
-        Assert.Contains("[JsonDerivedType(typeof(PetVariant2), \"PetVariant2\")]", result, StringComparison.Ordinal);
+        Assert.Contains("[JsonDerivedType(typeof(PetVariant2), \"dog\")]", result, StringComparison.Ordinal);
         Assert.Contains("public partial record PetVariant2", result, StringComparison.Ordinal);
     }
 

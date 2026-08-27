@@ -19,6 +19,14 @@ internal class CSharpCodeEmitter
     private int _indent;
 
     /// <summary>
+    /// Maps a union variant schema → (resolved base type name, discriminator property name).
+    /// Populated during <see cref="DiscoverInlineObjects"/> so that <see cref="EmitRecord"/>
+    /// can emit the correct base type for variants of discriminated unions and skip the
+    /// discriminator property (handled by the polymorphic serializer).
+    /// </summary>
+    private readonly Dictionary<IOpenApiSchema, (string BaseTypeName, string DiscriminatorPropertyName)> _unionVariantBaseTypes = new(ReferenceEqualityComparer.Instance);
+
+    /// <summary>
     /// Maps (schemaName, propertyName) → resolved enum type name for inline enums.
     /// Built during <see cref="Emit"/> so that <see cref="EmitProperty"/> can reference
     /// the correct (possibly deduplicated or differentiated) enum type name.
@@ -519,10 +527,16 @@ internal class CSharpCodeEmitter
         }
 
         // Scan oneOf/anyOf variants for inline objects (handles component-level union schemas
-        // where variants include inline object definitions that need to be hoisted)
+        // where variants include inline object definitions that need to be hoisted).
+        // Skip when the schema has its own direct properties — in that case the schema is
+        // emitted as a record and the oneOf/anyOf is not consumed, so hoisting would
+        // produce orphan types.
         IList<IOpenApiSchema>? unionVariants = schema.OneOf ?? schema.AnyOf;
-        if (unionVariants != null)
+        if (unionVariants != null && properties.Count == 0)
         {
+            bool isDiscriminated = schema.Discriminator is { PropertyName: not null };
+            string? discPropName = schema.Discriminator?.PropertyName;
+
             int variantIndex = 1;
             foreach (IOpenApiSchema variant in unionVariants)
             {
@@ -531,6 +545,22 @@ internal class CSharpCodeEmitter
                     // Try to hoist inline objects within union variants
                     string variantPropName = $"Variant{variantIndex}";
                     TryHoistPropertySchema(variant, enclosingTypeName, variantPropName, typeNameMap, usedNames, visited);
+
+                    // For discriminated unions, record the union base type so the hoisted
+                    // inline variant can inherit from it (required for polymorphic deserialization).
+                    if (isDiscriminated)
+                    {
+                        _unionVariantBaseTypes.TryAdd(variant, (enclosingTypeName, discPropName!));
+                    }
+                }
+                else if (isDiscriminated && variant is OpenApiSchemaReference refVariant && refVariant.Reference?.Id != null)
+                {
+                    // For $ref variants in discriminated unions, record the union base type
+                    // on the referenced schema so it inherits from the union.
+                    if (_allSchemas.TryGetValue(refVariant.Reference.Id, out IOpenApiSchema? refSchema))
+                    {
+                        _unionVariantBaseTypes.TryAdd(refSchema, (enclosingTypeName, discPropName!));
+                    }
                 }
 
                 variantIndex++;
@@ -925,6 +955,16 @@ internal class CSharpCodeEmitter
             }
         }
 
+        // If no allOf base type, check if this schema is a variant of a discriminated
+        // union. Variants must inherit from the union base type for polymorphic
+        // deserialization (JsonDerivedType / JsonPolymorphic) to function.
+        string? unionDiscriminatorPropertyName = null;
+        if (baseType == null && _unionVariantBaseTypes.TryGetValue(schema, out (string BaseTypeName, string DiscriminatorPropertyName) unionInfo))
+        {
+            baseType = unionInfo.BaseTypeName;
+            unionDiscriminatorPropertyName = unionInfo.DiscriminatorPropertyName;
+        }
+
         EmitDocComment(schema.Description);
         EmitObsoleteAttribute(schema);
 
@@ -938,6 +978,15 @@ internal class CSharpCodeEmitter
             var filteredProps = properties
                 .Where(p => basePropertyNames == null || !basePropertyNames.Contains(p.Key))
                 .ToList();
+
+            // When inheriting from a discriminated union, skip the discriminator property
+            // on the derived type — it is handled by the polymorphic serializer.
+            if (unionDiscriminatorPropertyName != null)
+            {
+                filteredProps = filteredProps
+                    .Where(p => !string.Equals(p.Key, unionDiscriminatorPropertyName, StringComparison.Ordinal))
+                    .ToList();
+            }
 
             // Two-pass property name resolution: detect collisions, assign clean names to
             // the most natural property name, differentiate others meaningfully.
@@ -1245,8 +1294,9 @@ internal class CSharpCodeEmitter
         }
 
         // Add hoisted inline object variants not covered by the discriminator mapping.
-        // These have no natural discriminator value, so the synthesized type name is used
-        // as the wire discriminator.
+        // The discriminator value is extracted from the variant's discriminator property
+        // (e.g., petType: "dog"). Falls back to the synthesized type name when no
+        // discriminator property value is found.
         foreach (IOpenApiSchema variant in variants)
         {
             if (variant is OpenApiSchemaReference)
@@ -1260,7 +1310,8 @@ internal class CSharpCodeEmitter
                 continue;
             }
 
-            mapping[hoistedName] = hoistedName;
+            string discriminatorValue = TryGetDiscriminatorValue(variant, discriminator.PropertyName!) ?? hoistedName;
+            mapping[discriminatorValue] = hoistedName;
         }
 
         foreach ((string? discriminatorValue, string? derivedType) in mapping)
@@ -1272,6 +1323,35 @@ internal class CSharpCodeEmitter
 
         AppendLine($"public abstract partial record {typeName};");
         AppendLine();
+    }
+
+    /// <summary>
+    /// Extracts the wire discriminator value from an inline variant's discriminator property.
+    /// The property is expected to have an <see cref="OpenApiSchema.Enum"/> with a single
+    /// <see cref="JsonValue"/> (const/enum constraint). Returns null if not found.
+    /// </summary>
+    private static string? TryGetDiscriminatorValue(IOpenApiSchema variant, string discriminatorPropertyName)
+    {
+        Dictionary<string, IOpenApiSchema> properties = CollectProperties(variant);
+        if (!properties.TryGetValue(discriminatorPropertyName, out IOpenApiSchema? discProp))
+        {
+            return null;
+        }
+
+        if (discProp.Enum is null || discProp.Enum.Count == 0)
+        {
+            return null;
+        }
+
+        foreach (var enumValue in discProp.Enum)
+        {
+            if (enumValue is JsonValue jv && jv.TryGetValue(out string? s))
+            {
+                return s;
+            }
+        }
+
+        return null;
     }
 
     private void EmitSimpleUnion(string typeName, IList<IOpenApiSchema> variants)
