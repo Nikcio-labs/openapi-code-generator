@@ -584,7 +584,7 @@ components:
 	}
 
 	.field input {
-		width: 12rem;
+		width: 14rem;
 		box-sizing: border-box;
 		padding: 0.35rem 0.5rem;
 		border: 1px solid var(--sl-color-gray-5);
@@ -596,7 +596,7 @@ components:
 	}
 
 	#opt-include-schemas {
-		width: 15rem;
+		width: 16rem;
 	}
 
 	.field input:focus,
@@ -668,6 +668,16 @@ components:
 	.tab.active {
 		background: var(--sl-color-accent);
 		color: var(--sl-color-white);
+	}
+
+	#paste-panel {
+		flex: 1 1 auto;
+		min-height: 0;
+	}
+
+	/* Only go flex while visible — a plain display:flex would defeat [hidden]. */
+	#paste-panel:not([hidden]) {
+		display: flex;
 	}
 
 	#spec-input {
