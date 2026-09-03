@@ -295,6 +295,16 @@ public record ApiResponse
 | `EmitValidationAttributes` | `true` | Emit validation attributes (`[Range]`, `[StringLength]`, etc.) from OpenAPI constraints |
 | `EmitObsoleteAttribute` | `true` | Emit `[Obsolete]` on deprecated schemas and properties |
 
+## Native AOT
+
+The CLI is Native AOT compatible. Publish a fast-starting, self-contained native executable with:
+
+```bash
+dotnet publish src/OpenApiCodeGenerator.Cli -c Release -r <RID>
+```
+
+Replace `<RID>` with your target runtime ID, e.g. `win-x64`, `linux-x64`, or `osx-arm64`. Native AOT publishing requires the platform toolchain described in the [Native AOT prerequisites](https://aka.ms/nativeaot-prerequisites). The CI pipeline verifies AOT compatibility on every build.
+
 ## Contributing
 
 Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.

@@ -6,6 +6,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <AssemblyName>OpenApiCodeGen</AssemblyName>
+    <IsAotCompatible>true</IsAotCompatible>
+    <PublishAot>true</PublishAot>
 
     <!-- NuGet Package -->
     <PackageId>Nikcio.OpenApiCodeGen</PackageId>
