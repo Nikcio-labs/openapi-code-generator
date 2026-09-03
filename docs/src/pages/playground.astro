@@ -556,11 +556,15 @@ components:
 		background: var(--sl-color-bg);
 		color: var(--sl-color-white);
 		padding: 1rem;
+		overflow-y: auto;
+		overscroll-behavior: contain;
+	}
+
+	/* Only override the closed state's display:none while open. */
+	.settings-dialog[open] {
 		display: flex;
 		flex-direction: column;
 		gap: 0.9rem;
-		overflow-y: auto;
-		overscroll-behavior: contain;
 	}
 
 	.settings-dialog::backdrop {
