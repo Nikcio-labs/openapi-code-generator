@@ -1,0 +1,136 @@
+---
+import { Code } from "astro:components";
+import { Badge } from "@astrojs/starlight/components";
+import githubDark from "shiki/themes/github-dark.mjs";
+import githubLight from "shiki/themes/github-light.mjs";
+
+interface Props {
+	leftFile: string;
+	rightFile: string;
+	leftBadge?: string;
+	rightBadge?: string;
+	leftLang: string;
+	rightLang: string;
+	leftCode: string;
+	rightCode: string;
+}
+
+const {
+	leftFile,
+	rightFile,
+	leftBadge = "input",
+	rightBadge = "generated",
+	leftLang,
+	rightLang,
+	leftCode,
+	rightCode,
+} = Astro.props;
+---
+
+<div class="spec-to-code">
+	<div class="pane">
+		<div class="pane-header">
+			<span class="filename">{leftFile}</span>
+			<Badge variant="caution" size="small" text={leftBadge} />
+		</div>
+		<Code
+			code={leftCode}
+			lang={leftLang}
+			themes={{ light: githubLight, dark: githubDark }}
+		/>
+	</div>
+	<div class="arrow" aria-hidden="true">→</div>
+	<div class="pane">
+		<div class="pane-header">
+			<span class="filename">{rightFile}</span>
+			<Badge variant="success" size="small" text={rightBadge} />
+		</div>
+		<Code
+			code={rightCode}
+			lang={rightLang}
+			themes={{ light: githubLight, dark: githubDark }}
+		/>
+	</div>
+</div>
+
+<style>
+	.spec-to-code {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+		gap: 1rem;
+		align-items: stretch;
+		margin-block: 1.5rem;
+	}
+
+	.pane {
+		display: flex;
+		flex-direction: column;
+		border: 1px solid var(--sl-color-gray-5);
+		border-radius: 0.75rem;
+		overflow: hidden;
+		background: var(--sl-color-bg);
+	}
+
+	.pane-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 0.5rem 1rem;
+		border-bottom: 1px solid var(--sl-color-gray-5);
+		font-family: var(--sl-font-mono, monospace);
+		font-size: 0.8125rem;
+	}
+
+	.filename {
+		opacity: 0.8;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+	.pane :global(.astro-code) {
+		flex: 1;
+		margin: 0;
+		border-radius: 0;
+		font-size: 0.8125rem;
+		overflow-x: auto;
+	}
+
+	.arrow {
+		align-self: center;
+		justify-self: center;
+		display: grid;
+		place-items: center;
+		width: 2.5rem;
+		height: 2.5rem;
+		border: 1px solid var(--sl-color-gray-5);
+		border-radius: 999px;
+		background: var(--sl-color-bg);
+		color: var(--sl-color-accent);
+		font-size: 1.25rem;
+		line-height: 1;
+		user-select: none;
+	}
+
+	@media (max-width: 50rem) {
+		.spec-to-code {
+			grid-template-columns: 1fr;
+		}
+
+		.arrow {
+			transform: rotate(90deg);
+		}
+	}
+</style>
+
+<style is:global>
+	[data-theme='dark'] .spec-to-code .astro-code {
+		color: var(--shiki-dark) !important;
+		background-color: var(--shiki-dark-bg) !important;
+	}
+
+	[data-theme='dark'] .spec-to-code .astro-code span {
+		color: var(--shiki-dark) !important;
+	}
+</style>
