@@ -5,9 +5,14 @@
 //   node scripts/build-wasm.mjs           # reuse existing output if present, otherwise build
 //   node scripts/build-wasm.mjs --force   # always republish and re-smoke-test
 //   node scripts/build-wasm.mjs --skip-smoke
+//   node scripts/build-wasm.mjs --skip-publish  # copy + smoke-test an existing publish output
 //
 // The bundle is generated output: docs/public/playground/ is gitignored, and CI
 // (.github/workflows/docs.yml) builds it during the docs deploy.
+//
+// On CI the publish runs as a direct workflow step (--skip-publish) instead of
+// from inside this script: NuGet restore silently fails (MSB4181 with no logged
+// error) when dotnet is spawned as a node/pnpm child process on the runner.
 import { execSync, spawnSync } from "node:child_process";
 import {
 	cpSync,
@@ -36,6 +41,7 @@ const outDir = path.join(docsDir, "public", "playground");
 
 const force = process.argv.includes("--force");
 const skipSmoke = process.argv.includes("--skip-smoke");
+const skipPublish = process.argv.includes("--skip-publish");
 
 function hasDotnet() {
 	try {
@@ -55,19 +61,29 @@ if (!force && outputExists) {
 	process.exit(0);
 }
 
-if (!hasDotnet()) {
-	console.error(
-		"error: The .NET SDK is required to build the playground runtime but was not found.\n" +
-			"       Install the .NET SDK (see global.json) and re-run, or build on a machine with dotnet available.",
-	);
-	process.exit(1);
-}
+if (skipPublish) {
+	if (!existsSync(publishDir)) {
+		console.error(
+			"error: --skip-publish requires an existing publish output but none was found.\n" +
+				`       Run 'dotnet publish "${wasmProject}" -c Release' first.`,
+		);
+		process.exit(1);
+	}
+} else {
+	if (!hasDotnet()) {
+		console.error(
+			"error: The .NET SDK is required to build the playground runtime but was not found.\n" +
+				"       Install the .NET SDK (see global.json) and re-run, or build on a machine with dotnet available.",
+		);
+		process.exit(1);
+	}
 
-console.log("Publishing WebAssembly playground runtime…");
-execSync(`dotnet publish "${wasmProject}" -c Release`, {
-	stdio: "inherit",
-	cwd: repoRoot,
-});
+	console.log("Publishing WebAssembly playground runtime…");
+	execSync(`dotnet publish "${wasmProject}" -c Release`, {
+		stdio: "inherit",
+		cwd: repoRoot,
+	});
+}
 
 rmSync(outDir, { recursive: true, force: true });
 cpSync(publishDir, outDir, { recursive: true });

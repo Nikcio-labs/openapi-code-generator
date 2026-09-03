@@ -38,12 +38,15 @@ jobs:
           cache: true
           cache-dependency-path: 'Directory.Packages.props'
 
-      # Restore as its own step: the playground runtime build (run via the
-      # Astro action) also restores implicitly, but a failure there surfaces
-      # only as a silent MSB4181 with no diagnostic. Restoring up front fails
-      # loudly and warms the package cache for the publish inside it.
+      # Restore and publish as direct steps: when dotnet runs as a node/pnpm
+      # child process on the runner, NuGet restore fails silently (MSB4181
+      # with no logged error), so build-wasm.mjs only copies the output and
+      # smoke-tests it in CI (--skip-publish).
       - name: Restore .NET dependencies
         run: dotnet restore src/OpenApiCodeGenerator.Wasm
+
+      - name: Publish WebAssembly playground runtime
+        run: dotnet publish src/OpenApiCodeGenerator.Wasm -c Release
 
       - name: Install, build, and upload your site
         uses: withastro/action@e84f40bd8d2caa9e768ec82ad30dd81f0b280853 # v6.1.2
@@ -51,7 +54,7 @@ jobs:
           path: docs
           node-version: 24
           package-manager: pnpm@latest
-          build-cmd: pnpm run build
+          build-cmd: pnpm run build:ci
 
   deploy:
     environment:
