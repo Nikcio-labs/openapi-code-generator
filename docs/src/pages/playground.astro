@@ -12,7 +12,7 @@ const frontmatter = {
 <StarlightPage frontmatter={frontmatter}>
 	<div class="playground">
 		<h1 class="sr-only">Playground</h1>
-		<section class="panel settings" aria-label="Generator settings">
+		<section class="settings" aria-label="Generator settings">
 			<div class="settings-row">
 				<label class="field">
 					<span>Namespace</span>
@@ -47,8 +47,8 @@ const frontmatter = {
 		</section>
 
 		<div class="workspace">
-			<div class="panel input-panel">
-				<div class="input-header">
+			<section class="editor-pane" aria-label="OpenAPI specification">
+				<div class="pane-header">
 					<div class="tabs" role="tablist" aria-label="Spec source">
 						<button id="tab-paste" class="tab active" role="tab" aria-selected="true" type="button">Paste</button>
 						<button id="tab-url" class="tab" role="tab" aria-selected="false" type="button">URL</button>
@@ -71,21 +71,21 @@ const frontmatter = {
 						headers will fail — download the file and paste it instead.
 					</p>
 				</div>
+			</section>
 
-				<div class="toolbar">
-					<button id="generate" class="primary" type="button">Generate</button>
-					<span id="status" role="status">Initializing…</span>
-				</div>
-			</div>
-
-			<div class="panel output-panel">
-				<div class="output-header">
-					<span>Generated C#</span>
+			<section class="output-pane" aria-label="Generated C# code">
+				<div class="pane-header">
+					<span class="pane-title">Generated C#</span>
 					<button id="copy-output" class="ghost small" type="button" disabled>Copy</button>
 				</div>
 				<div id="error-box" class="error-box" hidden></div>
 				<div id="output" class="output-code" tabindex="0"></div>
-			</div>
+			</section>
+		</div>
+
+		<div class="toolbar">
+			<button id="generate" class="primary" type="button">Generate</button>
+			<span id="status" role="status">Initializing…</span>
 		</div>
 	</div>
 </StarlightPage>
@@ -527,7 +527,6 @@ components:
 	}
 
 	.settings {
-		padding: 0.75rem 1rem;
 		display: flex;
 		flex-direction: column;
 		gap: 0.6rem;
@@ -548,15 +547,8 @@ components:
 		display: grid;
 		grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
 		gap: 1rem;
-		align-items: stretch;
+		height: 62vh;
 		min-width: 0;
-		--pane-height: 62vh;
-	}
-
-	.panel {
-		border: 1px solid var(--sl-color-gray-5);
-		border-radius: 0.5rem;
-		background: var(--sl-color-bg);
 	}
 
 	.settings-title {
@@ -627,20 +619,25 @@ components:
 		margin: 0;
 	}
 
-	.input-panel {
-		padding: 0.6rem;
+	.editor-pane,
+	.output-pane {
 		display: flex;
 		flex-direction: column;
-		height: var(--pane-height);
-		box-sizing: border-box;
+		min-height: 0;
+		min-width: 0;
 	}
 
-	.input-header {
+	.pane-header {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		min-height: 2rem;
-		margin-bottom: 0.6rem;
+		min-height: 2.25rem;
+		margin-bottom: 0.5rem;
+	}
+
+	.pane-title {
+		font-size: 0.8rem;
+		color: var(--sl-color-gray-4);
 	}
 
 	.tabs {
@@ -721,7 +718,6 @@ components:
 		display: flex;
 		align-items: center;
 		gap: 0.9rem;
-		margin-top: 0.6rem;
 	}
 
 	.toolbar button {
@@ -776,27 +772,8 @@ components:
 		cursor: default;
 	}
 
-	.output-panel {
-		padding: 0.6rem;
-		display: flex;
-		flex-direction: column;
-		height: var(--pane-height);
-		box-sizing: border-box;
-		min-width: 0;
-	}
-
-	.output-header {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		min-height: 2rem;
-		margin-bottom: 0.6rem;
-		font-size: 0.8rem;
-		color: var(--sl-color-gray-4);
-	}
-
 	.error-box {
-		margin-bottom: 0.6rem;
+		margin-bottom: 0.5rem;
 		padding: 0.7rem 0.9rem;
 		border-radius: 0.35rem;
 		border: 1px solid var(--sl-color-red);
@@ -818,10 +795,6 @@ components:
 	@media (max-width: 64rem) {
 		.workspace {
 			grid-template-columns: 1fr;
-		}
-
-		.input-panel,
-		.output-panel {
 			height: auto;
 		}
 
