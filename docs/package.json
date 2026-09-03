@@ -10,7 +10,8 @@
 	"scripts": {
 		"dev": "astro dev",
 		"start": "astro dev",
-		"build": "astro build",
+		"build:wasm": "node scripts/build-wasm.mjs",
+		"build": "node scripts/build-wasm.mjs && astro build",
 		"preview": "astro preview",
 		"astro": "astro",
 		"format": "biome format --write",

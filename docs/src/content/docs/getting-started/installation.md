@@ -59,3 +59,7 @@ Or restore and use directly after `dotnet tool restore`:
 dotnet tool restore
 openapi-codegen petstore.yaml -o Models.cs
 ```
+
+## Try It in the Browser
+
+No installation needed to evaluate the generator — paste a spec (or load one from a URL) into the [App](/guides/app/) and generate C# code right on the page.

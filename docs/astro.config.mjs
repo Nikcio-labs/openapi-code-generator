@@ -89,6 +89,7 @@ export default defineConfig({
 					items: [
 						{ label: "CLI Usage", slug: "guides/cli-usage" },
 						{ label: "Configuration", slug: "guides/configuration" },
+						{ label: "App", link: "/guides/app" },
 					],
 				},
 				{
