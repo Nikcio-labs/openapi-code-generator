@@ -12,8 +12,11 @@ const frontmatter = {
 <StarlightPage frontmatter={frontmatter}>
 	<div class="playground">
 		<h1 class="sr-only">Playground</h1>
-		<aside class="settings" aria-label="Generator settings">
-			<h2 class="settings-title">Settings</h2>
+		<dialog id="settings-dialog" class="settings-dialog" aria-labelledby="settings-dialog-title">
+			<div class="dialog-header">
+				<h2 id="settings-dialog-title" class="settings-title">Settings</h2>
+				<button id="close-settings" class="ghost small" type="button" aria-label="Close settings">&#10005;</button>
+			</div>
 
 			<label class="field">
 				<span>Namespace</span>
@@ -44,7 +47,7 @@ const frontmatter = {
 			</div>
 
 			<button id="reset-settings" class="ghost" type="button">Reset to defaults</button>
-		</aside>
+		</dialog>
 
 		<div class="workspace">
 			<div class="panel input-panel">
@@ -53,7 +56,10 @@ const frontmatter = {
 						<button id="tab-paste" class="tab active" role="tab" aria-selected="true" type="button">Paste</button>
 						<button id="tab-url" class="tab" role="tab" aria-selected="false" type="button">URL</button>
 					</div>
-					<button id="load-sample" class="ghost small" type="button">Sample</button>
+					<div class="input-actions">
+						<button id="open-settings" class="ghost small" type="button">Settings</button>
+						<button id="load-sample" class="ghost small" type="button">Sample</button>
+					</div>
 				</div>
 
 				<div id="paste-panel">
@@ -225,6 +231,9 @@ components:
 		output: $("output"),
 		copy: $("copy-output"),
 		reset: $("reset-settings"),
+		settingsDialog: $("settings-dialog"),
+		openSettings: $("open-settings"),
+		closeSettings: $("close-settings"),
 	};
 
 	const STATUS_IDLE = "Ready";
@@ -447,6 +456,22 @@ components:
 	elements.tabPaste.addEventListener("click", () => selectTab(true));
 	elements.tabUrl.addEventListener("click", () => selectTab(false));
 
+	elements.openSettings.addEventListener("click", () => {
+		elements.settingsDialog.showModal();
+	});
+
+	elements.closeSettings.addEventListener("click", () => {
+		elements.settingsDialog.close();
+	});
+
+	// Close when clicking the backdrop (the dialog element itself covers the
+	// whole surface; clicks on its children bubble from the padding box).
+	elements.settingsDialog.addEventListener("click", (event) => {
+		if (event.target === elements.settingsDialog) {
+			elements.settingsDialog.close();
+		}
+	});
+
 	elements.usePetstore.addEventListener("click", () => {
 		elements.specUrl.value = PETSTORE_URL;
 		elements.specUrl.focus();
@@ -508,10 +533,7 @@ components:
 
 <style>
 	.playground {
-		display: grid;
-		grid-template-columns: 260px minmax(0, 1fr);
-		gap: 1.25rem;
-		align-items: start;
+		min-width: 0;
 	}
 
 	.sr-only {
@@ -526,6 +548,31 @@ components:
 		border: 0;
 	}
 
+	.settings-dialog {
+		width: min(22rem, calc(100vw - 2rem));
+		max-height: calc(100vh - 4rem);
+		border: 1px solid var(--sl-color-gray-5);
+		border-radius: 0.5rem;
+		background: var(--sl-color-bg);
+		color: var(--sl-color-white);
+		padding: 1rem;
+		display: flex;
+		flex-direction: column;
+		gap: 0.9rem;
+		overflow-y: auto;
+		overscroll-behavior: contain;
+	}
+
+	.settings-dialog::backdrop {
+		background: rgba(0, 0, 0, 0.55);
+	}
+
+	.dialog-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
 	.workspace {
 		display: flex;
 		flex-direction: column;
@@ -533,22 +580,10 @@ components:
 		min-width: 0;
 	}
 
-	.settings,
 	.panel {
 		border: 1px solid var(--sl-color-gray-5);
 		border-radius: 0.5rem;
 		background: var(--sl-color-bg);
-	}
-
-	.settings {
-		padding: 1rem;
-		display: flex;
-		flex-direction: column;
-		gap: 0.9rem;
-		position: sticky;
-		top: calc(var(--sl-nav-height, 4rem) + 1rem);
-		max-height: calc(100vh - var(--sl-nav-height, 4rem) - 2rem);
-		overflow-y: auto;
 	}
 
 	.settings-title {
@@ -621,6 +656,11 @@ components:
 		justify-content: space-between;
 		align-items: center;
 		margin-bottom: 0.6rem;
+	}
+
+	.input-actions {
+		display: flex;
+		gap: 0.4rem;
 	}
 
 	.tabs {
@@ -780,15 +820,6 @@ components:
 	}
 
 	@media (max-width: 64rem) {
-		.playground {
-			grid-template-columns: 1fr;
-		}
-
-		.settings {
-			position: static;
-			max-height: none;
-		}
-
 		#spec-input {
 			height: 260px;
 		}
