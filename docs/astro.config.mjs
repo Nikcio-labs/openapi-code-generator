@@ -82,6 +82,7 @@ export default defineConfig({
 						{ label: "Introduction", slug: "getting-started/introduction" },
 						{ label: "Installation", slug: "getting-started/installation" },
 						{ label: "Quick Start", slug: "getting-started/quick-start" },
+						{ label: "Playground", link: "/playground" },
 					],
 				},
 				{
@@ -91,7 +92,6 @@ export default defineConfig({
 						{ label: "Configuration", slug: "guides/configuration" },
 					],
 				},
-				{ label: "Playground", link: "/playground" },
 				{
 					label: "Reference",
 					items: [
