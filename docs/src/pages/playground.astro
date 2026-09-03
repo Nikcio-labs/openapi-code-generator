@@ -1,0 +1,911 @@
+---
+import StarlightPage from "@astrojs/starlight/components/StarlightPage.astro";
+
+const frontmatter = {
+	title: "Playground",
+	description:
+		"Generate C# code from an OpenAPI specification right in your browser — paste a spec or load one from a URL, tune the options, and copy the result.",
+	tableOfContents: false,
+};
+---
+
+<StarlightPage frontmatter={frontmatter}>
+	<div class="playground not-content">
+		<h1 class="sr-only">Playground</h1>
+		<section class="settings" aria-label="Generator settings">
+			<div class="settings-row">
+				<label class="field">
+					<span>Namespace</span>
+					<input id="opt-namespace" type="text" value="GeneratedModels" spellcheck="false" />
+				</label>
+
+				<label class="field">
+					<span>Model prefix</span>
+					<input id="opt-model-prefix" type="text" placeholder="none" spellcheck="false" />
+				</label>
+
+				<label class="field">
+					<span>Include schemas <small>comma-separated</small></span>
+					<input id="opt-include-schemas" type="text" placeholder="all schemas" spellcheck="false" />
+				</label>
+
+				<button id="reset-settings" class="ghost" type="button">Reset to defaults</button>
+			</div>
+
+			<div class="toggles">
+				<label class="toggle"><input id="opt-doc-comments" type="checkbox" checked /> <span>Doc comments</span></label>
+				<label class="toggle"><input id="opt-file-header" type="checkbox" checked /> <span>File header</span></label>
+				<label class="toggle"><input id="opt-default-non-nullable" type="checkbox" checked /> <span>Default non-nullable</span></label>
+				<label class="toggle"><input id="opt-add-default-values" type="checkbox" checked /> <span>Default values</span></label>
+				<label class="toggle"><input id="opt-immutable-arrays" type="checkbox" checked /> <span>Immutable arrays</span></label>
+				<label class="toggle"><input id="opt-immutable-dictionaries" type="checkbox" checked /> <span>Immutable dictionaries</span></label>
+				<label class="toggle"><input id="opt-omit-json-attributes" type="checkbox" /> <span>Omit JSON attributes</span></label>
+				<label class="toggle"><input id="opt-inline-type-aliases" type="checkbox" /> <span>Inline type aliases</span></label>
+				<label class="toggle"><input id="opt-validation-attributes" type="checkbox" checked /> <span>Validation attributes</span></label>
+				<label class="toggle"><input id="opt-obsolete-attributes" type="checkbox" checked /> <span>Obsolete attributes</span></label>
+			</div>
+		</section>
+
+		<div class="workspace">
+			<section class="editor-pane" aria-label="OpenAPI specification">
+				<div class="pane-header">
+					<div class="tabs" role="tablist" aria-label="Spec source">
+						<button id="tab-paste" class="tab active" role="tab" aria-selected="true" type="button">Paste</button>
+						<button id="tab-url" class="tab" role="tab" aria-selected="false" type="button">URL</button>
+					</div>
+					<button id="load-sample" class="ghost small" type="button">Sample</button>
+				</div>
+
+				<div id="paste-panel">
+					<textarea id="spec-input" spellcheck="false" aria-label="OpenAPI specification"></textarea>
+				</div>
+
+				<div id="url-panel" hidden>
+					<div class="url-row">
+						<input id="spec-url" type="url" placeholder="https://example.com/openapi.json" spellcheck="false" />
+						<button id="use-petstore" class="ghost" type="button">Petstore</button>
+						<button id="load-url" class="ghost" type="button">Load</button>
+					</div>
+					<p class="hint">
+						The spec is fetched from your browser. Servers without <abbr title="Cross-Origin Resource Sharing">CORS</abbr>
+						headers will fail — download the file and paste it instead.
+					</p>
+				</div>
+			</section>
+
+			<section class="output-pane" aria-label="Generated C# code">
+				<div class="pane-header">
+					<span class="pane-title">Generated C#</span>
+					<button id="copy-output" class="ghost small" type="button" disabled>Copy</button>
+				</div>
+				<div id="error-box" class="error-box" hidden></div>
+				<div id="output" class="output-code" tabindex="0"></div>
+			</section>
+		</div>
+
+		<div class="toolbar">
+			<button id="generate" class="primary" type="button">Generate</button>
+			<span id="status" role="status">Initializing…</span>
+		</div>
+	</div>
+</StarlightPage>
+
+<script>
+	const RUNTIME_BASE = "/playground";
+	const PETSTORE_URL = "https://petstore3.swagger.io/api/v3/openapi.json";
+
+	const SAMPLE_SPEC = `openapi: 3.0.3
+info:
+  title: Pet Store API
+  version: 1.0.0
+  description: A sample API to try the OpenAPI Code Generator.
+paths:
+  /pets:
+    get:
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pet'
+components:
+  schemas:
+    PetStatus:
+      type: string
+      description: The availability of a pet.
+      enum: [available, pending, sold]
+    Category:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+    Tag:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+    Pet:
+      type: object
+      required: [name, photoUrls]
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: The pet's unique identifier.
+        name:
+          type: string
+          maxLength: 100
+        category:
+          $ref: '#/components/schemas/Category'
+        photoUrls:
+          type: array
+          items:
+            type: string
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+        status:
+          $ref: '#/components/schemas/PetStatus'
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+`;
+
+	const DEFAULT_SETTINGS = {
+		namespace: "GeneratedModels",
+		modelPrefix: "",
+		includeSchemas: "",
+		generateDocComments: true,
+		generateFileHeader: true,
+		defaultNonNullable: true,
+		addDefaultValuesToProperties: true,
+		useImmutableArrays: true,
+		useImmutableDictionaries: true,
+		omitJsonPropertyNameAttributes: false,
+		inlinePrimitiveTypeAliases: false,
+		emitValidationAttributes: true,
+		emitObsoleteAttribute: true,
+	};
+
+	const SETTING_IDS = [
+		"namespace",
+		"model-prefix",
+		"include-schemas",
+		"doc-comments",
+		"file-header",
+		"default-non-nullable",
+		"add-default-values",
+		"immutable-arrays",
+		"immutable-dictionaries",
+		"omit-json-attributes",
+		"inline-type-aliases",
+		"validation-attributes",
+		"obsolete-attributes",
+	];
+
+	const SETTINGS_STORAGE_KEY = "octg-app-settings";
+
+	const $ = (id) => document.getElementById(id);
+
+	const elements = {
+		namespace: $("opt-namespace"),
+		modelPrefix: $("opt-model-prefix"),
+		includeSchemas: $("opt-include-schemas"),
+		docComments: $("opt-doc-comments"),
+		fileHeader: $("opt-file-header"),
+		defaultNonNullable: $("opt-default-non-nullable"),
+		addDefaultValues: $("opt-add-default-values"),
+		immutableArrays: $("opt-immutable-arrays"),
+		immutableDictionaries: $("opt-immutable-dictionaries"),
+		omitJsonAttributes: $("opt-omit-json-attributes"),
+		inlineTypeAliases: $("opt-inline-type-aliases"),
+		validationAttributes: $("opt-validation-attributes"),
+		obsoleteAttributes: $("opt-obsolete-attributes"),
+		tabPaste: $("tab-paste"),
+		tabUrl: $("tab-url"),
+		pastePanel: $("paste-panel"),
+		urlPanel: $("url-panel"),
+		loadSample: $("load-sample"),
+		specInput: $("spec-input"),
+		specUrl: $("spec-url"),
+		usePetstore: $("use-petstore"),
+		loadUrl: $("load-url"),
+		generate: $("generate"),
+		status: $("status"),
+		errorBox: $("error-box"),
+		output: $("output"),
+		copy: $("copy-output"),
+		reset: $("reset-settings"),
+	};
+
+	const STATUS_IDLE = "Ready";
+
+	function setStatus(message) {
+		elements.status.textContent = message;
+	}
+
+	function showError(message) {
+		elements.errorBox.textContent = message;
+		elements.errorBox.hidden = false;
+		elements.output.hidden = true;
+	}
+
+	function clearError() {
+		elements.errorBox.hidden = true;
+		elements.output.hidden = false;
+	}
+
+	// --- settings persistence -------------------------------------------------
+
+	function camelCase(id) {
+		return id.replace(/-([a-z])/g, (_, c) => c.toUpperCase());
+	}
+
+	function readSettings() {
+		const settings = {};
+		for (const id of SETTING_IDS) {
+			const el = elements[camelCase(id)];
+			settings[camelCase(id)] =
+				el instanceof HTMLInputElement && el.type === "checkbox" ? el.checked : el.value.trim();
+		}
+		return settings;
+	}
+
+	function applySettings(settings) {
+		for (const id of SETTING_IDS) {
+			const el = elements[camelCase(id)];
+			const value = settings[camelCase(id)];
+			if (value === undefined) continue;
+			if (el instanceof HTMLInputElement && el.type === "checkbox") {
+				el.checked = Boolean(value);
+			} else {
+				el.value = String(value);
+			}
+		}
+	}
+
+	function saveSettings() {
+		try {
+			localStorage.setItem(SETTINGS_STORAGE_KEY, JSON.stringify(readSettings()));
+		} catch {
+			/* storage unavailable — settings simply won't persist */
+		}
+	}
+
+	function loadSettings() {
+		try {
+			const raw = localStorage.getItem(SETTINGS_STORAGE_KEY);
+			if (raw) applySettings({ ...DEFAULT_SETTINGS, ...JSON.parse(raw) });
+		} catch {
+			applySettings(DEFAULT_SETTINGS);
+		}
+	}
+
+	// --- runtime loading ------------------------------------------------------
+
+	let exportsPromise;
+
+	function getGenerateFunction() {
+		exportsPromise ??= (async () => {
+			setStatus("Loading .NET runtime…");
+			const { dotnet } = await import(/* @vite-ignore */ `${RUNTIME_BASE}/dotnet.js`);
+			const api = await dotnet.create();
+			const config = api.getConfig();
+			const exports = await api.getAssemblyExports(config.mainAssemblyName);
+			setStatus(STATUS_IDLE);
+			return exports.OpenApiCodeGenerator.Wasm.WasmInterop.Generate;
+		})();
+		exportsPromise.catch(() => {
+			// Allow a retry after a failed load.
+			exportsPromise = undefined;
+			setStatus("Failed to load the .NET runtime. Reload the page to try again.");
+		});
+		return exportsPromise;
+	}
+
+	// --- syntax highlighting ----------------------------------------------------
+
+	let highlighterPromise;
+
+	function getHighlighter() {
+		highlighterPromise ??= (async () => {
+			const [
+				{ createHighlighterCore },
+				{ createJavaScriptRegexEngine },
+				{ default: githubLight },
+				{ default: githubDark },
+				{ default: csharp },
+			] = await Promise.all([
+				import("shiki/core"),
+				import("shiki/engine/javascript"),
+				import("shiki/themes/github-light.mjs"),
+				import("shiki/themes/github-dark.mjs"),
+				import("shiki/langs/csharp.mjs"),
+			]);
+			return createHighlighterCore({
+				themes: [githubLight, githubDark],
+				langs: [csharp],
+				engine: createJavaScriptRegexEngine(),
+			});
+		})();
+		highlighterPromise.catch(() => {
+			// Allow a retry after a failed load.
+			highlighterPromise = undefined;
+		});
+		return highlighterPromise;
+	}
+
+	let lastCode = "";
+
+	function renderOutput(code) {
+		lastCode = code;
+		getHighlighter()
+			.then((highlighter) => {
+				if (lastCode !== code) return;
+				elements.output.innerHTML = highlighter.codeToHtml(code, {
+					lang: "csharp",
+					themes: { light: "github-light", dark: "github-dark" },
+				});
+			})
+			.catch(() => {
+				if (lastCode !== code) return;
+				const pre = document.createElement("pre");
+				pre.className = "plain";
+				pre.textContent = code;
+				elements.output.replaceChildren(pre);
+			});
+	}
+
+	// --- generation -----------------------------------------------------------
+
+	function collectOptionsJson() {
+		const includeSchemas = elements.includeSchemas.value
+			.split(",")
+			.map((name) => name.trim())
+			.filter(Boolean);
+		return JSON.stringify({
+			namespace: elements.namespace.value.trim() || "GeneratedModels",
+			modelPrefix: elements.modelPrefix.value.trim(),
+			includeSchemas,
+			generateDocComments: elements.docComments.checked,
+			generateFileHeader: elements.fileHeader.checked,
+			defaultNonNullable: elements.defaultNonNullable.checked,
+			addDefaultValuesToProperties: elements.addDefaultValues.checked,
+			useImmutableArrays: elements.immutableArrays.checked,
+			useImmutableDictionaries: elements.immutableDictionaries.checked,
+			omitJsonPropertyNameAttributes: elements.omitJsonAttributes.checked,
+			inlinePrimitiveTypeAliases: elements.inlineTypeAliases.checked,
+			emitValidationAttributes: elements.validationAttributes.checked,
+			emitObsoleteAttribute: elements.obsoleteAttributes.checked,
+		});
+	}
+
+	let generationQueue = Promise.resolve();
+
+	async function generate() {
+		const spec = elements.specInput.value;
+		if (!spec.trim()) {
+			showError("Paste an OpenAPI specification or load one from a URL first.");
+			return;
+		}
+
+		saveSettings();
+		elements.generate.disabled = true;
+		const run = async () => {
+			try {
+				const generateFn = await getGenerateFunction();
+				const started = performance.now();
+				const result = JSON.parse(generateFn(spec, collectOptionsJson()));
+				const elapsed = Math.round(performance.now() - started);
+				if (result.success) {
+					clearError();
+					renderOutput(result.code);
+					elements.copy.disabled = false;
+					const lines = result.code.split("\n").length;
+					setStatus(`${lines} lines in ${elapsed} ms`);
+				} else {
+					showError(result.error);
+					setStatus(STATUS_IDLE);
+				}
+			} catch (error) {
+				showError(`Generation failed: ${error instanceof Error ? error.message : error}`);
+				setStatus(STATUS_IDLE);
+			}
+		};
+		generationQueue = generationQueue.catch(() => {}).then(run);
+		await generationQueue;
+		elements.generate.disabled = false;
+	}
+
+	let autoGenerateTimer;
+
+	function autoGenerate() {
+		clearTimeout(autoGenerateTimer);
+		autoGenerateTimer = setTimeout(() => generate(), 400);
+	}
+
+	// --- wiring ---------------------------------------------------------------
+
+	function selectTab(paste) {
+		elements.tabPaste.classList.toggle("active", paste);
+		elements.tabUrl.classList.toggle("active", !paste);
+		elements.tabPaste.setAttribute("aria-selected", String(paste));
+		elements.tabUrl.setAttribute("aria-selected", String(!paste));
+		elements.pastePanel.hidden = !paste;
+		elements.urlPanel.hidden = paste;
+	}
+
+	elements.tabPaste.addEventListener("click", () => selectTab(true));
+	elements.tabUrl.addEventListener("click", () => selectTab(false));
+
+	elements.usePetstore.addEventListener("click", () => {
+		elements.specUrl.value = PETSTORE_URL;
+		elements.specUrl.focus();
+	});
+
+	elements.loadSample.addEventListener("click", () => {
+		selectTab(true);
+		elements.specInput.value = SAMPLE_SPEC;
+		generate();
+	});
+
+	elements.loadUrl.addEventListener("click", async () => {
+		const url = elements.specUrl.value.trim();
+		if (!url) return;
+		setStatus("Fetching spec…");
+		try {
+			const response = await fetch(url);
+			if (!response.ok) {
+				throw new Error(`HTTP ${response.status} ${response.statusText}`);
+			}
+			elements.specInput.value = await response.text();
+			selectTab(true);
+			generate();
+		} catch (error) {
+			showError(
+				`Could not fetch the spec (${error instanceof Error ? error.message : error}). ` +
+					"The server may not allow cross-origin requests — download the file and paste it instead.",
+			);
+			setStatus(STATUS_IDLE);
+		}
+	});
+
+	elements.generate.addEventListener("click", () => generate());
+
+	elements.copy.addEventListener("click", async () => {
+		await navigator.clipboard.writeText(lastCode);
+		elements.copy.textContent = "Copied!";
+		setTimeout(() => {
+			elements.copy.textContent = "Copy";
+		}, 1500);
+	});
+
+	elements.reset.addEventListener("click", () => {
+		applySettings(DEFAULT_SETTINGS);
+		localStorage.removeItem(SETTINGS_STORAGE_KEY);
+		generate();
+	});
+
+	// Auto-regenerate when settings change.
+	for (const id of SETTING_IDS) {
+		const el = elements[camelCase(id)];
+		el.addEventListener(el instanceof HTMLInputElement && el.type === "checkbox" ? "change" : "input", () => autoGenerate());
+	}
+
+	loadSettings();
+	elements.specInput.value = SAMPLE_SPEC;
+	generate();
+</script>
+
+<style>
+	.playground {
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+		min-width: 0;
+	}
+
+	.sr-only {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		white-space: nowrap;
+		border: 0;
+	}
+
+	.settings {
+		display: flex;
+		flex-direction: column;
+		gap: 0.6rem;
+	}
+
+	.settings-row {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 0.6rem 1rem;
+	}
+
+	.settings-row button.ghost {
+		margin-left: auto;
+	}
+
+	.workspace {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+		gap: 1rem;
+		flex: 1 1 auto;
+		min-height: 14rem;
+		min-width: 0;
+	}
+
+	.settings-title {
+		font-size: 0.85rem;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		color: var(--sl-color-gray-4);
+		margin: 0;
+	}
+
+	.field {
+		display: flex;
+		align-items: center;
+		gap: 0.45rem;
+		font-size: 0.8rem;
+	}
+
+	.field > span {
+		line-height: 1.2;
+		white-space: nowrap;
+	}
+
+	.field span small {
+		color: var(--sl-color-gray-4);
+	}
+
+	.field input {
+		width: 12rem;
+		box-sizing: border-box;
+		padding: 0.35rem 0.5rem;
+		border: 1px solid var(--sl-color-gray-5);
+		border-radius: 0.25rem;
+		background: var(--sl-color-bg);
+		color: var(--sl-color-white);
+		font-size: 0.8rem;
+		font-family: var(--sl-font-mono, monospace);
+	}
+
+	#opt-include-schemas {
+		width: 14rem;
+	}
+
+	.field input:focus,
+	.url-row input:focus,
+	textarea:focus {
+		outline: 2px solid var(--sl-color-accent);
+		border-color: transparent;
+	}
+
+	.toggles {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem 1rem;
+		border-top: 1px solid var(--sl-color-gray-6);
+		padding-top: 0.5rem;
+	}
+
+	.toggle {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		font-size: 0.8rem;
+		cursor: pointer;
+	}
+
+	.toggle input {
+		accent-color: var(--sl-color-accent);
+		margin: 0;
+	}
+
+	.editor-pane,
+	.output-pane {
+		display: flex;
+		flex-direction: column;
+		min-height: 0;
+		min-width: 0;
+	}
+
+	.pane-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		min-height: 2.25rem;
+		margin-bottom: 0.5rem;
+	}
+
+	.pane-title {
+		font-size: 0.8rem;
+		color: var(--sl-color-gray-4);
+	}
+
+	.tabs {
+		display: flex;
+		gap: 0.25rem;
+	}
+
+	.tab {
+		display: inline-flex;
+		align-items: center;
+		border: 1px solid transparent;
+		background: none;
+		color: var(--sl-color-gray-4);
+		padding: 0.3rem 0.75rem;
+		border-radius: 0.35rem;
+		font-size: 0.8rem;
+		line-height: 1.2;
+		cursor: pointer;
+	}
+
+	.tab:hover {
+		color: var(--sl-color-gray-2);
+	}
+
+	.tab.active {
+		background: var(--sl-color-accent);
+		color: var(--sl-color-white);
+	}
+
+	#paste-panel {
+		flex: 1 1 auto;
+		min-height: 0;
+	}
+
+	/* Only go flex while visible — a plain display:flex would defeat [hidden]. */
+	#paste-panel:not([hidden]) {
+		display: flex;
+	}
+
+	#spec-input {
+		flex: 1 1 auto;
+		width: 100%;
+		box-sizing: border-box;
+		min-height: 0;
+		resize: none;
+		border: 1px solid var(--sl-color-gray-6);
+		border-radius: 0.35rem;
+		background: var(--sl-color-bg);
+		color: var(--sl-color-white);
+		padding: 0.6rem;
+		font-family: var(--sl-font-mono, monospace);
+		font-size: 0.78rem;
+		line-height: 1.5;
+	}
+
+	.url-row {
+		display: flex;
+		gap: 0.5rem;
+	}
+
+	.url-row input {
+		flex: 1;
+		padding: 0.4rem 0.6rem;
+		border: 1px solid var(--sl-color-gray-5);
+		border-radius: 0.35rem;
+		background: var(--sl-color-bg);
+		color: var(--sl-color-white);
+		font-size: 0.8rem;
+	}
+
+	.hint {
+		font-size: 0.75rem;
+		color: var(--sl-color-gray-4);
+		margin: 0.5rem 0 0;
+	}
+
+	.toolbar {
+		display: flex;
+		align-items: center;
+		gap: 0.9rem;
+	}
+
+	.toolbar button {
+		flex-shrink: 0;
+	}
+
+	#status {
+		font-size: 0.8rem;
+		color: var(--sl-color-gray-4);
+	}
+
+	button.primary {
+		background: var(--sl-color-accent);
+		color: var(--sl-color-accent-high);
+		border: none;
+		padding: 0.45rem 1.2rem;
+		border-radius: 0.35rem;
+		font-size: 0.85rem;
+		font-weight: 600;
+		cursor: pointer;
+	}
+
+	button.primary:disabled {
+		opacity: 0.6;
+		cursor: wait;
+	}
+
+	button.ghost {
+		background: none;
+		border: 1px solid var(--sl-color-gray-5);
+		color: var(--sl-color-gray-3);
+		padding: 0.3rem 0.8rem;
+		border-radius: 0.35rem;
+		font-size: 0.8rem;
+		cursor: pointer;
+		white-space: nowrap;
+	}
+
+	button.ghost.small {
+		padding: 0.3rem 0.7rem;
+		font-size: 0.75rem;
+		line-height: 1.2;
+	}
+
+	button.ghost:hover:not(:disabled) {
+		border-color: var(--sl-color-accent);
+		color: var(--sl-color-accent-high);
+	}
+
+	button.ghost:disabled {
+		opacity: 0.5;
+		cursor: default;
+	}
+
+	.error-box {
+		margin-bottom: 0.5rem;
+		padding: 0.7rem 0.9rem;
+		border-radius: 0.35rem;
+		border: 1px solid var(--sl-color-red);
+		background: var(--sl-color-red-low);
+		color: var(--sl-color-red-high);
+		font-size: 0.8rem;
+		white-space: pre-wrap;
+	}
+
+	.output-code {
+		flex: 1 1 auto;
+		min-height: 0;
+		overflow: auto;
+		background: var(--sl-color-bg-nav);
+		border: 1px solid var(--sl-color-gray-6);
+		border-radius: 0.35rem;
+	}
+
+	@media (max-width: 64rem) {
+		.workspace {
+			grid-template-columns: 1fr;
+		}
+
+		#spec-input {
+			flex: none;
+			height: 260px;
+		}
+
+		.output-code {
+			max-height: 420px;
+		}
+	}
+</style>
+
+<style is:global>
+	/* Give the playground the full content width and drop the large page-title
+	   panel — the app starts right under the site header. An sr-only h1 in the
+	   markup keeps the document outline intact. */
+	main:has(.playground) {
+		--sl-content-width: 100%;
+	}
+
+	main:has(.playground) > .content-panel:first-of-type {
+		display: none;
+	}
+
+	/* The playground is an app, not a document page — Starlight's prev/next
+	   pagination footer has no business below it. */
+	main:has(.playground) footer {
+		display: none;
+	}
+
+	/* On desktop, fit the whole playground into the viewport below the fixed
+	   site header: settings on top, panes stretching over the remaining height,
+	   and the Generate button always visible. The chain main → content-panel →
+	   .sl-container → .sl-markdown-content must all be flex columns for the
+	   playground to be able to fill the space. The page only scrolls when the
+	   window is too short for the workspace's minimum height. */
+	@media (min-width: 64rem) {
+		main:has(.playground) {
+			display: flex;
+			flex-direction: column;
+			height: calc(100vh - var(--sl-nav-height, 4rem) - var(--sl-mobile-toc-height, 0px));
+			height: calc(100dvh - var(--sl-nav-height, 4rem) - var(--sl-mobile-toc-height, 0px));
+			padding-block-end: 0;
+		}
+
+		main:has(.playground) > .content-panel:last-of-type {
+			flex: 1 1 auto;
+			display: flex;
+			flex-direction: column;
+			min-height: 0;
+			padding-block-end: 0;
+			border-top: 0;
+		}
+
+		main:has(.playground) .content-panel:last-of-type > .sl-container,
+		main:has(.playground) .content-panel:last-of-type .sl-markdown-content {
+			flex: 1 1 auto;
+			display: flex;
+			flex-direction: column;
+			min-height: 0;
+		}
+
+		main:has(.playground) .playground {
+			flex: 1 1 auto;
+			min-height: 0;
+		}
+	}
+
+	/* The generated markup is injected at runtime, so these rules must be global.
+	   Dual-theme Shiki output: light colors are inlined, dark colors live in
+	   custom properties switched by Starlight's data-theme attribute — same
+	   pattern as SpecToCode.astro. */
+	#output pre.shiki {
+		margin: 0;
+		padding: 0.9rem;
+		background-color: transparent !important;
+		font-family: var(--sl-font-mono, monospace);
+		font-size: 0.78rem;
+		line-height: 1.55;
+		color: var(--shiki-light) !important;
+	}
+
+	#output pre.shiki code {
+		font-family: inherit;
+		counter-reset: line;
+	}
+
+	#output pre.shiki span {
+		color: var(--shiki-light);
+		font-style: var(--shiki-light-font-style);
+		font-weight: var(--shiki-light-font-weight);
+		text-decoration: var(--shiki-light-text-decoration);
+	}
+
+	[data-theme='dark'] #output pre.shiki,
+	[data-theme='dark'] #output pre.shiki span {
+		color: var(--shiki-dark) !important;
+		font-style: var(--shiki-dark-font-style);
+		font-weight: var(--shiki-dark-font-weight);
+		text-decoration: var(--shiki-dark-text-decoration);
+	}
+
+	#output pre.plain {
+		margin: 0;
+		padding: 0.9rem;
+		white-space: pre;
+		font-family: var(--sl-font-mono, monospace);
+		font-size: 0.78rem;
+		line-height: 1.55;
+		color: var(--sl-color-white);
+	}
+</style>

@@ -91,6 +91,7 @@ export default defineConfig({
 						{ label: "Configuration", slug: "guides/configuration" },
 					],
 				},
+				{ label: "Playground", link: "/playground" },
 				{
 					label: "Reference",
 					items: [
