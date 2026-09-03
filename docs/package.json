@@ -12,6 +12,7 @@
 		"start": "astro dev",
 		"build:wasm": "node scripts/build-wasm.mjs",
 		"build": "node scripts/build-wasm.mjs && astro build",
+		"build:ci": "node scripts/build-wasm.mjs --skip-publish && astro build",
 		"preview": "astro preview",
 		"astro": "astro",
 		"format": "biome format --write",
