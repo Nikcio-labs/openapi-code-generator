@@ -14,6 +14,7 @@
 #### Web defaults ####
 
 # Source code
+*.astro           text eol=lf
 *.bash            text eol=lf
 *.bat             text eol=crlf
 *.cmd             text eol=crlf
@@ -64,6 +65,7 @@ Dockerfile        text eol=lf
 *.mkdn            text eol=lf diff=markdown
 *.mdtxt           text eol=lf
 *.mdtext          text eol=lf
+*.mdx             text eol=lf
 *.txt             text
 AUTHORS           text
 CHANGELOG         text
