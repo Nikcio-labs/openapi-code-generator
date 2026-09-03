@@ -233,13 +233,8 @@ internal class TypeResolver
             return ResolveReferenceType(refSchema.Reference.Id, nullable);
         }
 
-        // Fallback: pick the first type that has properties
-        IOpenApiSchema? withProps = schema.AllOf!.FirstOrDefault(s => s.Properties is { Count: > 0 });
-        if (withProps != null)
-        {
-            return "object";
-        }
-
+        // Fallback: composition without a $ref member resolves to object
+        // (the emitter hoists such compositions to named inline types).
         return "object";
     }
 
