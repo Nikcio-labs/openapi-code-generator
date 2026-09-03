@@ -20,6 +20,13 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    env:
+      # Match the Build workflow: keep NuGet out of the runner image's
+      # pre-seeded ~/.nuget cache, which restore fails against silently
+      # (MSB4181 with no logged error).
+      NUGET_PACKAGES: ${{ github.workspace }}/.nuget/packages
+
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -28,6 +35,15 @@ jobs:
         uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6.0.0
         with:
           dotnet-version: '10.0.x'
+          cache: true
+          cache-dependency-path: 'Directory.Packages.props'
+
+      # Restore as its own step: the playground runtime build (run via the
+      # Astro action) also restores implicitly, but a failure there surfaces
+      # only as a silent MSB4181 with no diagnostic. Restoring up front fails
+      # loudly and warms the package cache for the publish inside it.
+      - name: Restore .NET dependencies
+        run: dotnet restore src/OpenApiCodeGenerator.Wasm
 
       - name: Install, build, and upload your site
         uses: withastro/action@e84f40bd8d2caa9e768ec82ad30dd81f0b280853 # v6.1.2
