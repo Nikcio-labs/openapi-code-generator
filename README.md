@@ -93,6 +93,8 @@ OPTIONS:
         --mutable-dictionaries  Use Dictionary<K,V> instead of IReadOnlyDictionary<K,V>
         --omit-json-attributes  Skip [JsonPropertyName] on generated properties
         --inline-type-aliases   Inline primitive aliases instead of emitting wrapper types
+        --no-validation-attributes  Skip validation attributes from OpenAPI constraints
+        --no-deprecated-attributes  Skip [Obsolete] on deprecated schemas and properties
     -v, --version               Show version information
     -h, --help                  Show this help message
 ```
@@ -280,12 +282,18 @@ public record ApiResponse
 | Option | Default | Description |
 |--------|---------|-------------|
 | `Namespace` | `GeneratedModels` | C# namespace for generated types |
+| `ModelPrefix` | `null` | Prefix every generated model type name |
 | `GenerateDocComments` | `true` | Include XML doc comments from OpenAPI descriptions |
 | `GenerateFileHeader` | `true` | Include auto-generated file header |
 | `DefaultNonNullable` | `true` | Treat properties with defaults as non-nullable |
-| `AddDefaultValuesToProperties` | `true` | Add default values from OpenAPI to generated properties |
 | `UseImmutableArrays` | `true` | Use `IReadOnlyList<T>` for arrays |
 | `UseImmutableDictionaries` | `true` | Use `IReadOnlyDictionary<string, T>` for maps |
+| `AddDefaultValuesToProperties` | `true` | Add default values from OpenAPI to generated properties |
+| `IncludeSchemas` | `null` | Generate only the named schemas and their dependencies |
+| `OmitJsonPropertyNameAttributes` | `false` | Skip `[JsonPropertyName]` on generated properties |
+| `InlinePrimitiveTypeAliases` | `false` | Inline primitive aliases instead of emitting wrapper types |
+| `EmitValidationAttributes` | `true` | Emit validation attributes (`[Range]`, `[StringLength]`, etc.) from OpenAPI constraints |
+| `EmitObsoleteAttribute` | `true` | Emit `[Obsolete]` on deprecated schemas and properties |
 
 ## Contributing
 
