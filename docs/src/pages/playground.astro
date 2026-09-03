@@ -1,17 +1,17 @@
 ---
-// biome-ignore lint/correctness/noUnusedImports: used in the template below
 import StarlightPage from "@astrojs/starlight/components/StarlightPage.astro";
 
-// biome-ignore lint/correctness/noUnusedVariables: used in the template below
 const frontmatter = {
 	title: "App",
 	description:
 		"Generate C# code from an OpenAPI specification right in your browser — paste a spec or load one from a URL, tune the options, and copy the result.",
+	tableOfContents: false,
 };
 ---
 
 <StarlightPage frontmatter={frontmatter}>
 	<div class="playground">
+		<h1 class="sr-only">App</h1>
 		<aside class="settings" aria-label="Generator settings">
 			<h2 class="settings-title">Settings</h2>
 
@@ -46,11 +46,14 @@ const frontmatter = {
 			<button id="reset-settings" class="ghost" type="button">Reset to defaults</button>
 		</aside>
 
-		<div class="workspace">
+		<div class="editor-column">
 			<div class="panel input-panel">
-				<div class="tabs" role="tablist" aria-label="Spec source">
-					<button id="tab-paste" class="tab active" role="tab" aria-selected="true" type="button">Paste</button>
-					<button id="tab-url" class="tab" role="tab" aria-selected="false" type="button">URL</button>
+				<div class="input-header">
+					<div class="tabs" role="tablist" aria-label="Spec source">
+						<button id="tab-paste" class="tab active" role="tab" aria-selected="true" type="button">Paste</button>
+						<button id="tab-url" class="tab" role="tab" aria-selected="false" type="button">URL</button>
+					</div>
+					<button id="load-sample" class="ghost small" type="button">Sample</button>
 				</div>
 
 				<div id="paste-panel">
@@ -60,6 +63,7 @@ const frontmatter = {
 				<div id="url-panel" hidden>
 					<div class="url-row">
 						<input id="spec-url" type="url" placeholder="https://example.com/openapi.json" spellcheck="false" />
+						<button id="use-petstore" class="ghost" type="button">Petstore</button>
 						<button id="load-url" class="ghost" type="button">Load</button>
 					</div>
 					<p class="hint">
@@ -67,27 +71,28 @@ const frontmatter = {
 						headers will fail — download the file and paste it instead.
 					</p>
 				</div>
-			</div>
 
-			<div class="toolbar">
-				<button id="generate" class="primary" type="button">Generate</button>
-				<span id="status" role="status">Initializing…</span>
-			</div>
-
-			<div class="panel output-panel">
-				<div class="output-header">
-					<span>Generated C#</span>
-					<button id="copy-output" class="ghost" type="button" disabled>Copy</button>
+				<div class="toolbar">
+					<button id="generate" class="primary" type="button">Generate</button>
+					<span id="status" role="status">Initializing…</span>
 				</div>
-				<div id="error-box" class="error-box" hidden></div>
-				<pre id="output" tabindex="0"><code></code></pre>
 			</div>
+		</div>
+
+		<div class="panel output-panel">
+			<div class="output-header">
+				<span>Generated C#</span>
+				<button id="copy-output" class="ghost small" type="button" disabled>Copy</button>
+			</div>
+			<div id="error-box" class="error-box" hidden></div>
+			<div id="output" class="output-code" tabindex="0"></div>
 		</div>
 	</div>
 </StarlightPage>
 
 <script>
 	const RUNTIME_BASE = "/playground";
+	const PETSTORE_URL = "https://petstore3.swagger.io/api/v3/openapi.json";
 
 	const SAMPLE_SPEC = `openapi: 3.0.3
 info:
@@ -209,8 +214,10 @@ components:
 		tabUrl: $("tab-url"),
 		pastePanel: $("paste-panel"),
 		urlPanel: $("url-panel"),
+		loadSample: $("load-sample"),
 		specInput: $("spec-input"),
 		specUrl: $("spec-url"),
+		usePetstore: $("use-petstore"),
 		loadUrl: $("load-url"),
 		generate: $("generate"),
 		status: $("status"),
@@ -305,6 +312,49 @@ components:
 		return exportsPromise;
 	}
 
+	// --- syntax highlighting ----------------------------------------------------
+
+	let highlighterPromise;
+
+	function getHighlighter() {
+		highlighterPromise ??= (async () => {
+			const [{ createHighlighter }, { default: githubLight }, { default: githubDark }, { default: csharp }] =
+				await Promise.all([
+					import("shiki/core"),
+					import("shiki/themes/github-light.mjs"),
+					import("shiki/themes/github-dark.mjs"),
+					import("shiki/langs/csharp.mjs"),
+				]);
+			return createHighlighter({ themes: [githubLight, githubDark], langs: [csharp] });
+		})();
+		highlighterPromise.catch(() => {
+			// Allow a retry after a failed load.
+			highlighterPromise = undefined;
+		});
+		return highlighterPromise;
+	}
+
+	let lastCode = "";
+
+	function renderOutput(code) {
+		lastCode = code;
+		getHighlighter()
+			.then((highlighter) => {
+				if (lastCode !== code) return;
+				elements.output.innerHTML = highlighter.codeToHtml(code, {
+					lang: "csharp",
+					themes: { light: "github-light", dark: "github-dark" },
+				});
+			})
+			.catch(() => {
+				if (lastCode !== code) return;
+				const pre = document.createElement("pre");
+				pre.className = "plain";
+				pre.textContent = code;
+				elements.output.replaceChildren(pre);
+			});
+	}
+
 	// --- generation -----------------------------------------------------------
 
 	function collectOptionsJson() {
@@ -348,9 +398,10 @@ components:
 				const elapsed = Math.round(performance.now() - started);
 				if (result.success) {
 					clearError();
-					elements.output.firstElementChild.textContent = result.code;
+					renderOutput(result.code);
 					elements.copy.disabled = false;
-					setStatus(`Generated in ${elapsed} ms`);
+					const lines = result.code.split("\n").length;
+					setStatus(`${lines} lines in ${elapsed} ms`);
 				} else {
 					showError(result.error);
 					setStatus(STATUS_IDLE);
@@ -386,6 +437,17 @@ components:
 	elements.tabPaste.addEventListener("click", () => selectTab(true));
 	elements.tabUrl.addEventListener("click", () => selectTab(false));
 
+	elements.usePetstore.addEventListener("click", () => {
+		elements.specUrl.value = PETSTORE_URL;
+		elements.specUrl.focus();
+	});
+
+	elements.loadSample.addEventListener("click", () => {
+		selectTab(true);
+		elements.specInput.value = SAMPLE_SPEC;
+		generate();
+	});
+
 	elements.loadUrl.addEventListener("click", async () => {
 		const url = elements.specUrl.value.trim();
 		if (!url) return;
@@ -396,7 +458,7 @@ components:
 				throw new Error(`HTTP ${response.status} ${response.statusText}`);
 			}
 			elements.specInput.value = await response.text();
-			setStatus("Spec loaded");
+			selectTab(true);
 			generate();
 		} catch (error) {
 			showError(
@@ -410,7 +472,7 @@ components:
 	elements.generate.addEventListener("click", () => generate());
 
 	elements.copy.addEventListener("click", async () => {
-		await navigator.clipboard.writeText(elements.output.textContent ?? "");
+		await navigator.clipboard.writeText(lastCode);
 		elements.copy.textContent = "Copied!";
 		setTimeout(() => {
 			elements.copy.textContent = "Copy";
@@ -437,9 +499,21 @@ components:
 <style>
 	.playground {
 		display: grid;
-		grid-template-columns: 260px minmax(0, 1fr);
+		grid-template-columns: 240px minmax(0, 1fr) minmax(0, 1.2fr);
 		gap: 1.25rem;
 		align-items: start;
+	}
+
+	.sr-only {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		white-space: nowrap;
+		border: 0;
 	}
 
 	.settings,
@@ -479,6 +553,7 @@ components:
 
 	.field input {
 		width: 100%;
+		box-sizing: border-box;
 		padding: 0.35rem 0.5rem;
 		border: 1px solid var(--sl-color-gray-5);
 		border-radius: 0.25rem;
@@ -516,7 +591,7 @@ components:
 		margin: 0;
 	}
 
-	.workspace {
+	.editor-column {
 		display: flex;
 		flex-direction: column;
 		gap: 0.9rem;
@@ -525,34 +600,45 @@ components:
 
 	.input-panel {
 		padding: 0.6rem;
+		display: flex;
+		flex-direction: column;
+	}
+
+	.input-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 0.6rem;
 	}
 
 	.tabs {
 		display: flex;
 		gap: 0.25rem;
-		margin-bottom: 0.6rem;
 	}
 
 	.tab {
 		border: 1px solid transparent;
 		background: none;
 		color: var(--sl-color-gray-4);
-		padding: 0.3rem 0.8rem;
+		padding: 0.25rem 0.7rem;
 		border-radius: 0.35rem;
 		font-size: 0.8rem;
 		cursor: pointer;
 	}
 
+	.tab:hover {
+		color: var(--sl-color-gray-2);
+	}
+
 	.tab.active {
-		background: var(--sl-color-bg-accent);
-		color: var(--sl-color-accent-high);
-		border-color: var(--sl-color-accent);
+		background: var(--sl-color-accent);
+		color: var(--sl-color-white);
 	}
 
 	#spec-input {
 		width: 100%;
 		box-sizing: border-box;
-		min-height: 260px;
+		min-height: 420px;
 		resize: vertical;
 		border: 1px solid var(--sl-color-gray-6);
 		border-radius: 0.35rem;
@@ -589,6 +675,7 @@ components:
 		display: flex;
 		align-items: center;
 		gap: 0.9rem;
+		margin-top: 0.6rem;
 	}
 
 	.toolbar button {
@@ -624,6 +711,12 @@ components:
 		border-radius: 0.35rem;
 		font-size: 0.8rem;
 		cursor: pointer;
+		white-space: nowrap;
+	}
+
+	button.ghost.small {
+		padding: 0.2rem 0.6rem;
+		font-size: 0.75rem;
 	}
 
 	button.ghost:hover:not(:disabled) {
@@ -637,8 +730,11 @@ components:
 	}
 
 	.output-panel {
+		position: sticky;
+		top: calc(var(--sl-nav-height, 5rem) + 1rem);
 		display: flex;
 		flex-direction: column;
+		max-height: calc(100vh - var(--sl-nav-height, 5rem) - 2rem);
 		overflow: hidden;
 	}
 
@@ -663,23 +759,14 @@ components:
 		white-space: pre-wrap;
 	}
 
-	#output {
-		margin: 0;
-		padding: 0.9rem;
-		max-height: 480px;
+	.output-code {
+		flex: 1 1 auto;
+		min-height: 420px;
 		overflow: auto;
 		background: var(--sl-color-bg-nav);
-		font-family: var(--sl-font-mono, monospace);
-		font-size: 0.75rem;
-		line-height: 1.55;
-		tab-size: 4;
 	}
 
-	#output code {
-		white-space: pre;
-	}
-
-	@media (max-width: 50rem) {
+	@media (max-width: 64rem) {
 		.playground {
 			grid-template-columns: 1fr;
 		}
@@ -687,5 +774,67 @@ components:
 		.settings {
 			position: static;
 		}
+
+		.output-panel {
+			position: static;
+			max-height: none;
+		}
+
+		.output-code {
+			min-height: 0;
+			max-height: 480px;
+		}
+	}
+</style>
+
+<style is:global>
+	/* Give the playground the full content width and drop the large page-title
+	   panel — the app starts right under the site header. An sr-only h1 in the
+	   markup keeps the document outline intact. */
+	main:has(.playground) {
+		--sl-content-width: 100%;
+	}
+
+	main:has(.playground) > .content-panel:first-of-type {
+		display: none;
+	}
+
+	/* The generated markup is injected at runtime, so these rules must be global.
+	   Dual-theme Shiki output: light colors are inlined, dark colors live in
+	   custom properties switched by Starlight's data-theme attribute — same
+	   pattern as SpecToCode.astro. */
+	#output pre.astro-code {
+		margin: 0;
+		padding: 0.9rem;
+		background-color: transparent !important;
+		font-family: var(--sl-font-mono, monospace);
+		font-size: 0.78rem;
+		line-height: 1.55;
+		color: var(--shiki-light) !important;
+	}
+
+	#output pre.astro-code span {
+		color: var(--shiki-light);
+		font-style: var(--shiki-light-font-style);
+		font-weight: var(--shiki-light-font-weight);
+		text-decoration: var(--shiki-light-text-decoration);
+	}
+
+	[data-theme='dark'] #output pre.astro-code,
+	[data-theme='dark'] #output pre.astro-code span {
+		color: var(--shiki-dark) !important;
+		font-style: var(--shiki-dark-font-style);
+		font-weight: var(--shiki-dark-font-weight);
+		text-decoration: var(--shiki-dark-text-decoration);
+	}
+
+	#output pre.plain {
+		margin: 0;
+		padding: 0.9rem;
+		white-space: pre;
+		font-family: var(--sl-font-mono, monospace);
+		font-size: 0.78rem;
+		line-height: 1.55;
+		color: var(--sl-color-white);
 	}
 </style>
