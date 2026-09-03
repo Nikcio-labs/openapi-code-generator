@@ -2,7 +2,7 @@
 import StarlightPage from "@astrojs/starlight/components/StarlightPage.astro";
 
 const frontmatter = {
-	title: "App",
+	title: "Playground",
 	description:
 		"Generate C# code from an OpenAPI specification right in your browser — paste a spec or load one from a URL, tune the options, and copy the result.",
 	tableOfContents: false,
@@ -11,7 +11,7 @@ const frontmatter = {
 
 <StarlightPage frontmatter={frontmatter}>
 	<div class="playground">
-		<h1 class="sr-only">App</h1>
+		<h1 class="sr-only">Playground</h1>
 		<aside class="settings" aria-label="Generator settings">
 			<h2 class="settings-title">Settings</h2>
 
@@ -318,14 +318,24 @@ components:
 
 	function getHighlighter() {
 		highlighterPromise ??= (async () => {
-			const [{ createHighlighter }, { default: githubLight }, { default: githubDark }, { default: csharp }] =
-				await Promise.all([
-					import("shiki/core"),
-					import("shiki/themes/github-light.mjs"),
-					import("shiki/themes/github-dark.mjs"),
-					import("shiki/langs/csharp.mjs"),
-				]);
-			return createHighlighter({ themes: [githubLight, githubDark], langs: [csharp] });
+			const [
+				{ createHighlighterCore },
+				{ createJavaScriptRegexEngine },
+				{ default: githubLight },
+				{ default: githubDark },
+				{ default: csharp },
+			] = await Promise.all([
+				import("shiki/core"),
+				import("shiki/engine/javascript"),
+				import("shiki/themes/github-light.mjs"),
+				import("shiki/themes/github-dark.mjs"),
+				import("shiki/langs/csharp.mjs"),
+			]);
+			return createHighlighterCore({
+				themes: [githubLight, githubDark],
+				langs: [csharp],
+				engine: createJavaScriptRegexEngine(),
+			});
 		})();
 		highlighterPromise.catch(() => {
 			// Allow a retry after a failed load.
@@ -617,12 +627,15 @@ components:
 	}
 
 	.tab {
+		display: inline-flex;
+		align-items: center;
 		border: 1px solid transparent;
 		background: none;
 		color: var(--sl-color-gray-4);
-		padding: 0.25rem 0.7rem;
+		padding: 0.3rem 0.75rem;
 		border-radius: 0.35rem;
 		font-size: 0.8rem;
+		line-height: 1.2;
 		cursor: pointer;
 	}
 
@@ -730,12 +743,9 @@ components:
 	}
 
 	.output-panel {
-		position: sticky;
-		top: calc(var(--sl-nav-height, 5rem) + 1rem);
 		display: flex;
 		flex-direction: column;
-		max-height: calc(100vh - var(--sl-nav-height, 5rem) - 2rem);
-		overflow: hidden;
+		min-width: 0;
 	}
 
 	.output-header {
@@ -764,6 +774,7 @@ components:
 		min-height: 420px;
 		overflow: auto;
 		background: var(--sl-color-bg-nav);
+		border-radius: 0 0 0.5rem 0.5rem;
 	}
 
 	@media (max-width: 64rem) {
@@ -773,11 +784,6 @@ components:
 
 		.settings {
 			position: static;
-		}
-
-		.output-panel {
-			position: static;
-			max-height: none;
 		}
 
 		.output-code {
@@ -803,7 +809,7 @@ components:
 	   Dual-theme Shiki output: light colors are inlined, dark colors live in
 	   custom properties switched by Starlight's data-theme attribute — same
 	   pattern as SpecToCode.astro. */
-	#output pre.astro-code {
+	#output pre.shiki {
 		margin: 0;
 		padding: 0.9rem;
 		background-color: transparent !important;
@@ -813,15 +819,20 @@ components:
 		color: var(--shiki-light) !important;
 	}
 
-	#output pre.astro-code span {
+	#output pre.shiki code {
+		font-family: inherit;
+		counter-reset: line;
+	}
+
+	#output pre.shiki span {
 		color: var(--shiki-light);
 		font-style: var(--shiki-light-font-style);
 		font-weight: var(--shiki-light-font-weight);
 		text-decoration: var(--shiki-light-text-decoration);
 	}
 
-	[data-theme='dark'] #output pre.astro-code,
-	[data-theme='dark'] #output pre.astro-code span {
+	[data-theme='dark'] #output pre.shiki,
+	[data-theme='dark'] #output pre.shiki span {
 		color: var(--shiki-dark) !important;
 		font-style: var(--shiki-dark-font-style);
 		font-weight: var(--shiki-dark-font-weight);
