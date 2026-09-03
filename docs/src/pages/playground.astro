@@ -46,7 +46,7 @@ const frontmatter = {
 			<button id="reset-settings" class="ghost" type="button">Reset to defaults</button>
 		</aside>
 
-		<div class="editor-column">
+		<div class="workspace">
 			<div class="panel input-panel">
 				<div class="input-header">
 					<div class="tabs" role="tablist" aria-label="Spec source">
@@ -77,15 +77,15 @@ const frontmatter = {
 					<span id="status" role="status">Initializing…</span>
 				</div>
 			</div>
-		</div>
 
-		<div class="panel output-panel">
-			<div class="output-header">
-				<span>Generated C#</span>
-				<button id="copy-output" class="ghost small" type="button" disabled>Copy</button>
+			<div class="panel output-panel">
+				<div class="output-header">
+					<span>Generated C#</span>
+					<button id="copy-output" class="ghost small" type="button" disabled>Copy</button>
+				</div>
+				<div id="error-box" class="error-box" hidden></div>
+				<div id="output" class="output-code" tabindex="0"></div>
 			</div>
-			<div id="error-box" class="error-box" hidden></div>
-			<div id="output" class="output-code" tabindex="0"></div>
 		</div>
 	</div>
 </StarlightPage>
@@ -509,7 +509,7 @@ components:
 <style>
 	.playground {
 		display: grid;
-		grid-template-columns: 240px minmax(0, 1fr) minmax(0, 1.2fr);
+		grid-template-columns: 260px minmax(0, 1fr);
 		gap: 1.25rem;
 		align-items: start;
 	}
@@ -526,6 +526,13 @@ components:
 		border: 0;
 	}
 
+	.workspace {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+		min-width: 0;
+	}
+
 	.settings,
 	.panel {
 		border: 1px solid var(--sl-color-gray-5);
@@ -539,7 +546,9 @@ components:
 		flex-direction: column;
 		gap: 0.9rem;
 		position: sticky;
-		top: var(--sl-nav-height, 4rem);
+		top: calc(var(--sl-nav-height, 4rem) + 1rem);
+		max-height: calc(100vh - var(--sl-nav-height, 4rem) - 2rem);
+		overflow-y: auto;
 	}
 
 	.settings-title {
@@ -601,13 +610,6 @@ components:
 		margin: 0;
 	}
 
-	.editor-column {
-		display: flex;
-		flex-direction: column;
-		gap: 0.9rem;
-		min-width: 0;
-	}
-
 	.input-panel {
 		padding: 0.6rem;
 		display: flex;
@@ -651,7 +653,8 @@ components:
 	#spec-input {
 		width: 100%;
 		box-sizing: border-box;
-		min-height: 420px;
+		height: 40vh;
+		min-height: 260px;
 		resize: vertical;
 		border: 1px solid var(--sl-color-gray-6);
 		border-radius: 0.35rem;
@@ -770,8 +773,7 @@ components:
 	}
 
 	.output-code {
-		flex: 1 1 auto;
-		min-height: 420px;
+		max-height: 50vh;
 		overflow: auto;
 		background: var(--sl-color-bg-nav);
 		border-radius: 0 0 0.5rem 0.5rem;
@@ -784,11 +786,15 @@ components:
 
 		.settings {
 			position: static;
+			max-height: none;
+		}
+
+		#spec-input {
+			height: 260px;
 		}
 
 		.output-code {
-			min-height: 0;
-			max-height: 480px;
+			max-height: 420px;
 		}
 	}
 </style>
