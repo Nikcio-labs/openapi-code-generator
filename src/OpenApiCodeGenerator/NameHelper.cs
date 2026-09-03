@@ -161,8 +161,8 @@ internal static partial class NameHelper
     }
 
     /// <summary>
-    /// Returns the original name if the property name differs after PascalCase conversion.
-    /// Returns null if no JSON attribute is needed.
+    /// Returns the JSON property name to use in <c>[JsonPropertyName]</c> attributes.
+    /// Always returns the original name so JSON serialization uses the original casing.
     /// </summary>
     public static string? GetJsonPropertyName(string originalName, string propertyName)
     {
