@@ -1,5 +1,26 @@
 # Changelog
 
+## [1.6.0](https://github.com/Nikcio-labs/openapi-code-generator/compare/v1.5.0...v1.6.0) (2026-09-03)
+
+
+### Added
+
+* add browser playground app to the docs site ([#180](https://github.com/Nikcio-labs/openapi-code-generator/issues/180)) ([f022f6b](https://github.com/Nikcio-labs/openapi-code-generator/commit/f022f6b156160a201418da80da61f75c7eac5901))
+* enable Native AOT compatibility ([#179](https://github.com/Nikcio-labs/openapi-code-generator/issues/179)) ([6fa7e8a](https://github.com/Nikcio-labs/openapi-code-generator/commit/6fa7e8aa99366741d4281249985ded76839df207))
+
+
+### Fixed
+
+* guard null discriminator mapping references ([#173](https://github.com/Nikcio-labs/openapi-code-generator/issues/173)) ([3716994](https://github.com/Nikcio-labs/openapi-code-generator/commit/3716994639d43d2c4be74cac0188f11f53b837fb))
+* handle missing values for CLI options ([#170](https://github.com/Nikcio-labs/openapi-code-generator/issues/170)) ([34b81fc](https://github.com/Nikcio-labs/openapi-code-generator/commit/34b81fca5a82e97d2a6591f994a1bbca70f663d7))
+* throw InvalidOperationException when OpenAPI document fails to parse ([#169](https://github.com/Nikcio-labs/openapi-code-generator/issues/169)) ([360967d](https://github.com/Nikcio-labs/openapi-code-generator/commit/360967dfbc0b9fd91f3c769bcce39948b2a2a292))
+
+
+### Changed
+
+* remove dead branch in ResolveAllOf ([#175](https://github.com/Nikcio-labs/openapi-code-generator/issues/175)) ([210dc37](https://github.com/Nikcio-labs/openapi-code-generator/commit/210dc3754922de053266b7f80553474a4629db63))
+* reuse ExtractEnumValues in EmitEnum ([#174](https://github.com/Nikcio-labs/openapi-code-generator/issues/174)) ([bf8f36b](https://github.com/Nikcio-labs/openapi-code-generator/commit/bf8f36b60282088473c8458124961b3f41352468))
+
 ## [1.5.0](https://github.com/Nikcio-labs/openapi-code-generator/compare/v1.4.0...v1.5.0) (2026-08-26)
 
 
