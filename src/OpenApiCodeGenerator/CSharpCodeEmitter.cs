@@ -840,22 +840,23 @@ internal class CSharpCodeEmitter
     {
         string typeName = typeNameOverride ?? NameHelper.ToTypeName(schemaName, _options.ModelPrefix);
 
-        // Collect all properties (including from allOf)
-        Dictionary<string, IOpenApiSchema> properties = CollectProperties(schema);
-        HashSet<string> requiredProps = CollectRequired(schema);
-
-        // Determine base type from allOf $ref
+        // Determine base type from allOf $ref (first $ref becomes the base type)
         string? baseType = null;
         HashSet<string>? basePropertyNames = null;
+        OpenApiSchemaReference? baseRefSchema = null;
         if (schema.AllOf is { Count: > 0 })
         {
-            OpenApiSchemaReference? refSchema = schema.AllOf.OfType<OpenApiSchemaReference>().FirstOrDefault();
-            if (refSchema?.Reference?.Id != null)
+            baseRefSchema = schema.AllOf.OfType<OpenApiSchemaReference>().FirstOrDefault();
+            if (baseRefSchema?.Reference?.Id != null)
             {
-                baseType = NameHelper.ToTypeName(refSchema.Reference.Id, _options.ModelPrefix);
-                basePropertyNames = CollectBasePropertyNames(refSchema);
+                baseType = NameHelper.ToTypeName(baseRefSchema.Reference.Id, _options.ModelPrefix);
+                basePropertyNames = CollectBasePropertyNames(baseRefSchema);
             }
         }
+
+        // Collect all properties (including from allOf, resolving additional $ref members)
+        Dictionary<string, IOpenApiSchema> properties = CollectProperties(schema, baseRefSchema);
+        HashSet<string> requiredProps = CollectRequired(schema, baseRefSchema);
 
         EmitDocComment(schema.Description);
         EmitObsoleteAttribute(schema);
@@ -1328,18 +1329,36 @@ internal class CSharpCodeEmitter
 
     #region Helpers
 
-    private static Dictionary<string, IOpenApiSchema> CollectProperties(IOpenApiSchema schema)
+    private Dictionary<string, IOpenApiSchema> CollectProperties(IOpenApiSchema schema, OpenApiSchemaReference? baseRefSchema = null)
     {
         var result = new Dictionary<string, IOpenApiSchema>();
 
-        // Properties from allOf subschemas (excluding $ref ones which become base types)
+        // Properties from allOf subschemas
         if (schema.AllOf is { Count: > 0 })
         {
             foreach (IOpenApiSchema sub in schema.AllOf)
             {
-                if (sub is OpenApiSchemaReference)
+                if (sub is OpenApiSchemaReference refSub)
                 {
-                    continue; // Skip $ref entries, they become base types
+                    // Skip the base type $ref — its properties are inherited
+                    if (baseRefSchema != null && ReferenceEquals(sub, baseRefSchema))
+                    {
+                        continue;
+                    }
+
+                    // Additional $ref members: resolve and include their properties
+                    // (C# doesn't support multiple inheritance, so we flatten them)
+                    if (refSub.Reference?.Id != null &&
+                        _allSchemas.TryGetValue(refSub.Reference.Id, out IOpenApiSchema? resolvedSchema))
+                    {
+                        Dictionary<string, IOpenApiSchema> refProps = CollectProperties(resolvedSchema);
+                        foreach ((string? name, IOpenApiSchema? prop) in refProps)
+                        {
+                            result.TryAdd(name, prop);
+                        }
+                    }
+
+                    continue;
                 }
 
                 if (sub.Properties != null)
@@ -1417,7 +1436,7 @@ internal class CSharpCodeEmitter
         return names;
     }
 
-    private static HashSet<string> CollectRequired(IOpenApiSchema schema)
+    private HashSet<string> CollectRequired(IOpenApiSchema schema, OpenApiSchemaReference? baseRefSchema = null)
     {
         var result = new HashSet<string>(StringComparer.Ordinal);
 
@@ -1434,6 +1453,27 @@ internal class CSharpCodeEmitter
         {
             foreach (IOpenApiSchema sub in schema.AllOf)
             {
+                if (sub is OpenApiSchemaReference refSub)
+                {
+                    // Skip the base type $ref — its required fields are inherited
+                    if (baseRefSchema != null && ReferenceEquals(sub, baseRefSchema))
+                    {
+                        continue;
+                    }
+
+                    // Additional $ref members: resolve and collect their required fields
+                    if (refSub.Reference?.Id != null &&
+                        _allSchemas.TryGetValue(refSub.Reference.Id, out IOpenApiSchema? resolvedSchema))
+                    {
+                        foreach (string r in CollectRequired(resolvedSchema))
+                        {
+                            result.Add(r);
+                        }
+                    }
+
+                    continue;
+                }
+
                 if (sub.Required != null)
                 {
                     foreach (string r in sub.Required)
