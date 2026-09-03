@@ -38,69 +38,78 @@ static async Task<int> RunAsync(string[] args)
 
     for (int i = 0; i < args.Length; i++)
     {
-        switch (args[i])
+        try
         {
-            case "--input" or "-i":
-                inputPath = GetNextArg(args, ref i, "--input");
-                break;
-            case "--output" or "-o":
-                outputPath = GetNextArg(args, ref i, "--output");
-                break;
-            case "--namespace" or "-n":
-                namespaceName = GetNextArg(args, ref i, "--namespace");
-                break;
-            case "--model-prefix":
-                modelPrefix = GetNextArg(args, ref i, "--model-prefix");
-                break;
-            case "--include-schema":
-                includeSchemas.Add(GetNextArg(args, ref i, "--include-schema"));
-                break;
-            case "--no-doc-comments":
-                docComments = false;
-                break;
-            case "--no-header":
-                fileHeader = false;
-                break;
-            case "--no-default-non-nullable":
-                defaultNonNullable = false;
-                break;
-            case "--no-add-default-values":
-                addDefaultValuesToProperties = false;
-                break;
-            case "--mutable-arrays":
-                immutableArrays = false;
-                break;
-            case "--mutable-dictionaries":
-                immutableDictionaries = false;
-                break;
-            case "--omit-json-attributes":
-                omitJsonPropertyNameAttributes = true;
-                break;
-            case "--inline-type-aliases":
-                inlinePrimitiveTypeAliases = true;
-                break;
-            case "--no-validation-attributes":
-                emitValidationAttributes = false;
-                break;
-            case "--no-deprecated-attributes":
-                emitObsoleteAttribute = false;
-                break;
-            default:
-                // Positional: first is input, second is output
-                if (inputPath == null)
-                {
-                    inputPath = args[i];
-                }
-                else if (outputPath == null)
-                {
-                    outputPath = args[i];
-                }
-                else
-                {
-                    await Console.Error.WriteLineAsync($"Unknown argument: {args[i]}").ConfigureAwait(false);
-                    return 1;
-                }
-                break;
+            switch (args[i])
+            {
+                case "--input" or "-i":
+                    inputPath = GetNextArg(args, ref i, "--input");
+                    break;
+                case "--output" or "-o":
+                    outputPath = GetNextArg(args, ref i, "--output");
+                    break;
+                case "--namespace" or "-n":
+                    namespaceName = GetNextArg(args, ref i, "--namespace");
+                    break;
+                case "--model-prefix":
+                    modelPrefix = GetNextArg(args, ref i, "--model-prefix");
+                    break;
+                case "--include-schema":
+                    includeSchemas.Add(GetNextArg(args, ref i, "--include-schema"));
+                    break;
+                case "--no-doc-comments":
+                    docComments = false;
+                    break;
+                case "--no-header":
+                    fileHeader = false;
+                    break;
+                case "--no-default-non-nullable":
+                    defaultNonNullable = false;
+                    break;
+                case "--no-add-default-values":
+                    addDefaultValuesToProperties = false;
+                    break;
+                case "--mutable-arrays":
+                    immutableArrays = false;
+                    break;
+                case "--mutable-dictionaries":
+                    immutableDictionaries = false;
+                    break;
+                case "--omit-json-attributes":
+                    omitJsonPropertyNameAttributes = true;
+                    break;
+                case "--inline-type-aliases":
+                    inlinePrimitiveTypeAliases = true;
+                    break;
+                case "--no-validation-attributes":
+                    emitValidationAttributes = false;
+                    break;
+                case "--no-deprecated-attributes":
+                    emitObsoleteAttribute = false;
+                    break;
+                default:
+                    // Positional: first is input, second is output
+                    if (inputPath == null)
+                    {
+                        inputPath = args[i];
+                    }
+                    else if (outputPath == null)
+                    {
+                        outputPath = args[i];
+                    }
+                    else
+                    {
+                        await Console.Error.WriteLineAsync($"Unknown argument: {args[i]}").ConfigureAwait(false);
+                        return 1;
+                    }
+                    break;
+            }
+        }
+        catch (InvalidOperationException ex)
+        {
+            await Console.Error.WriteLineAsync($"Error: {ex.Message}").ConfigureAwait(false);
+            await Console.Error.WriteLineAsync("Run 'openapi-codegen --help' for usage information.").ConfigureAwait(false);
+            return 1;
         }
     }
 
