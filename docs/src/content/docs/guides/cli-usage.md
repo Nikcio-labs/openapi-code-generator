@@ -63,6 +63,12 @@ openapi-codegen spec.yaml -o Models.cs --no-doc-comments
 
 # No auto-generated file header
 openapi-codegen spec.yaml -o Models.cs --no-header
+
+# No validation attributes ([Range], [StringLength], ...)
+openapi-codegen spec.yaml -o Models.cs --no-validation-attributes
+
+# No [Obsolete] on deprecated schemas and properties
+openapi-codegen spec.yaml -o Models.cs --no-deprecated-attributes
 ```
 
 Combine multiple flags:

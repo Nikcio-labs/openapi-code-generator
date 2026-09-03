@@ -153,6 +153,28 @@ Inline primitive component aliases to their underlying primitive types instead o
 openapi-codegen spec.yaml -o Models.cs --inline-type-aliases
 ```
 
+### `--no-validation-attributes`
+
+Skip validation attributes derived from OpenAPI constraints.
+
+- **Default behavior:** emit `[Range]`, `[StringLength]`, `[RegularExpression]`, `[MinLength]`, and `[MaxLength]` from matching OpenAPI constraints
+- **With this flag:** omit all validation attributes
+
+```bash
+openapi-codegen spec.yaml -o Models.cs --no-validation-attributes
+```
+
+### `--no-deprecated-attributes`
+
+Skip `[Obsolete]` on deprecated schemas and properties.
+
+- **Default behavior:** emit `[Obsolete]` on types and properties marked `deprecated: true`
+- **With this flag:** omit `[Obsolete]` markers
+
+```bash
+openapi-codegen spec.yaml -o Models.cs --no-deprecated-attributes
+```
+
 ### `-v, --version`
 
 Display the tool version and exit.
@@ -200,7 +222,9 @@ openapi-codegen https://example.com/api.json \
   --no-add-default-values \
   --mutable-arrays \
   --mutable-dictionaries \
-  --omit-json-attributes
+  --omit-json-attributes \
+  --no-validation-attributes \
+  --no-deprecated-attributes
 
 # Inline primitive aliases
 openapi-codegen spec.yaml -o Models.cs --inline-type-aliases

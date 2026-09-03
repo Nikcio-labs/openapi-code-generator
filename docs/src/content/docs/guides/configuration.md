@@ -10,6 +10,7 @@ OpenAPI Code Generator provides a rich set of options to customize the generated
 | Option | CLI Flag | Default | Description |
 |--------|----------|---------|-------------|
 | `Namespace` | `-n, --namespace` | `GeneratedModels` | C# namespace for generated types |
+| `ModelPrefix` | `--model-prefix` | `null` | Prefix every generated model type name |
 | `IncludeSchemas` | `--include-schema` | `null` | Generate only selected schemas and their dependencies |
 | `GenerateDocComments` | `--no-doc-comments` | `true` | Include XML doc comments |
 | `GenerateFileHeader` | `--no-header` | `true` | Auto-generated file header |
@@ -19,6 +20,8 @@ OpenAPI Code Generator provides a rich set of options to customize the generated
 | `UseImmutableDictionaries` | `--mutable-dictionaries` | `true` | Use `IReadOnlyDictionary` |
 | `OmitJsonPropertyNameAttributes` | `--omit-json-attributes` | `false` | Skip `[JsonPropertyName]` on generated properties |
 | `InlinePrimitiveTypeAliases` | `--inline-type-aliases` | `false` | Inline primitive aliases instead of emitting wrapper types |
+| `EmitValidationAttributes` | `--no-validation-attributes` | `true` | Emit validation attributes from OpenAPI constraints |
+| `EmitObsoleteAttribute` | `--no-deprecated-attributes` | `true` | Emit `[Obsolete]` on deprecated schemas and properties |
 
 ## Namespace
 
@@ -37,6 +40,28 @@ new GeneratorOptions { Namespace = "MyApp.Api.Models" }
 **Output:**
 ```csharp
 namespace MyApp.Api.Models;
+```
+
+## Model Prefix
+
+Prefixes every generated model type name with the given prefix. The prefix must start with a letter or underscore and can contain only letters, digits, or underscores.
+
+**CLI:**
+```bash
+openapi-codegen spec.yaml -o Models.cs --model-prefix Api
+```
+
+**Library:**
+```csharp
+new GeneratorOptions { ModelPrefix = "Api" }
+```
+
+**Output:**
+```csharp
+public record ApiUser
+{
+    ...
+}
 ```
 
 ## Included Schemas
@@ -215,4 +240,56 @@ public readonly record struct AlertCreatedAt(DateTimeOffset Value) : IOpenApiGen
 ```csharp
 [JsonPropertyName("createdAt")]
 public required DateTimeOffset CreatedAt { get; init; }
+```
+
+## Validation Attributes
+
+When enabled, OpenAPI constraints are emitted as validation attributes on the generated properties: `[Range]`, `[StringLength]`, `[RegularExpression]`, `[MinLength]`, and `[MaxLength]`. The required `using System.ComponentModel.DataAnnotations;` import is added automatically.
+
+**CLI:** Enabled by default. Disable with `--no-validation-attributes`.
+
+**Library:**
+```csharp
+new GeneratorOptions { EmitValidationAttributes = false }
+```
+
+**Default output:**
+```csharp
+[StringLength(100, MinimumLength = 1)]
+[JsonPropertyName("name")]
+public required string Name { get; init; }
+```
+
+**Without validation attributes:**
+```csharp
+[JsonPropertyName("name")]
+public required string Name { get; init; }
+```
+
+## Deprecated Attributes
+
+When enabled, schemas and properties marked as `deprecated: true` in the OpenAPI spec are emitted with `[Obsolete]`.
+
+**CLI:** Enabled by default. Disable with `--no-deprecated-attributes`.
+
+**Library:**
+```csharp
+new GeneratorOptions { EmitObsoleteAttribute = false }
+```
+
+**Default output:**
+```csharp
+[Obsolete]
+public record LegacyPet
+{
+    ...
+}
+```
+
+**Without deprecated attributes:**
+```csharp
+public record LegacyPet
+{
+    ...
+}
 ```
