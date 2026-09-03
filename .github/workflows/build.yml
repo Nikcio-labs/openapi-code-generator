@@ -53,3 +53,34 @@ jobs:
       - name: Test
         run: dotnet test --no-build --configuration Release --verbosity normal
         working-directory: ./
+
+  aot:
+    runs-on: ubuntu-latest
+
+    env:
+      NUGET_PACKAGES: ${{ github.workspace }}/.nuget/packages
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6.0.0
+        with:
+          dotnet-version: '10.0.x'
+          cache: true
+          cache-dependency-path: 'Directory.Packages.props'
+
+      - name: Install NativeAOT prerequisites
+        run: sudo apt-get update && sudo apt-get install -y clang zlib1g-dev
+
+      - name: Publish (Native AOT)
+        run: dotnet publish src/OpenApiCodeGenerator.Cli -c Release -r linux-x64
+        working-directory: ./
+
+      - name: Smoke test AOT binary
+        run: |
+          src/OpenApiCodeGenerator.Cli/bin/Release/net10.0/linux-x64/publish/OpenApiCodeGen --version
+          src/OpenApiCodeGenerator.Cli/bin/Release/net10.0/linux-x64/publish/OpenApiCodeGen tests/OpenApiCodeGenerator.Tests/Fixtures/aot-smoke-test.yaml -o /tmp/aot-smoke.cs
+          grep -q "JsonStringEnumMemberName(\"available\")" /tmp/aot-smoke.cs
+        working-directory: ./
