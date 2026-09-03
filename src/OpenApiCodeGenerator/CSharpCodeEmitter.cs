@@ -1182,7 +1182,12 @@ internal class CSharpCodeEmitter
         {
             foreach ((string? key, OpenApiSchemaReference? schemaRef) in discriminator.Mapping)
             {
-                mapping[key] = NameHelper.ToTypeName(schemaRef.Reference.Id, _options.ModelPrefix);
+                if (schemaRef?.Reference?.Id is not { } mappedId)
+                {
+                    continue;
+                }
+
+                mapping[key] = NameHelper.ToTypeName(mappedId, _options.ModelPrefix);
             }
         }
         else
