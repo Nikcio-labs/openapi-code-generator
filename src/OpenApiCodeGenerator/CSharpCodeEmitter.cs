@@ -786,38 +786,10 @@ internal class CSharpCodeEmitter
 
         AppendBlock($"public enum {typeName}", () =>
         {
-            var enumValues = schema.Enum!
-                .Where(e => e is null || !JsonNullSentinel.IsJsonNullSentinel(e))
-                .Select(e =>
-                {
-                    if (e is JsonValue jv)
-                    {
-                        if (jv.TryGetValue(out string? s))
-                        {
-                            return s;
-                        }
-
-                        if (jv.TryGetValue(out int i))
-                        {
-                            return i.ToString(CultureInfo.InvariantCulture);
-                        }
-
-                        if (jv.TryGetValue(out long l))
-                        {
-                            return l.ToString(CultureInfo.InvariantCulture);
-                        }
-
-                        if (jv.TryGetValue(out double d))
-                        {
-                            return d.ToString(CultureInfo.InvariantCulture);
-                        }
-                    }
-                    return e?.ToString() ?? "Unknown";
-                })
-                .ToList();
+            List<string> enumValues = ExtractEnumValues(schema);
 
             // Resolve duplicate enum member names by appending numeric suffixes
-            var memberNames = new string[enumValues.Count];
+            string[] memberNames = new string[enumValues.Count];
             var usedMemberNames = new HashSet<string>(StringComparer.Ordinal);
             for (int i = 0; i < enumValues.Count; i++)
             {
