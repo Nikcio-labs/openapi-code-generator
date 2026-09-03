@@ -548,8 +548,9 @@ components:
 		display: grid;
 		grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
 		gap: 1rem;
-		align-items: start;
+		align-items: stretch;
 		min-width: 0;
+		--pane-height: 62vh;
 	}
 
 	.panel {
@@ -571,6 +572,11 @@ components:
 		align-items: center;
 		gap: 0.45rem;
 		font-size: 0.8rem;
+	}
+
+	.field > span {
+		line-height: 1.2;
+		white-space: nowrap;
 	}
 
 	.field span small {
@@ -625,12 +631,15 @@ components:
 		padding: 0.6rem;
 		display: flex;
 		flex-direction: column;
+		height: var(--pane-height);
+		box-sizing: border-box;
 	}
 
 	.input-header {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
+		min-height: 2rem;
 		margin-bottom: 0.6rem;
 	}
 
@@ -662,11 +671,11 @@ components:
 	}
 
 	#spec-input {
+		flex: 1 1 auto;
 		width: 100%;
 		box-sizing: border-box;
-		height: 40vh;
-		min-height: 260px;
-		resize: vertical;
+		min-height: 0;
+		resize: none;
 		border: 1px solid var(--sl-color-gray-6);
 		border-radius: 0.35rem;
 		background: var(--sl-color-bg);
@@ -742,8 +751,9 @@ components:
 	}
 
 	button.ghost.small {
-		padding: 0.2rem 0.6rem;
+		padding: 0.3rem 0.7rem;
 		font-size: 0.75rem;
+		line-height: 1.2;
 	}
 
 	button.ghost:hover:not(:disabled) {
@@ -757,8 +767,11 @@ components:
 	}
 
 	.output-panel {
+		padding: 0.6rem;
 		display: flex;
 		flex-direction: column;
+		height: var(--pane-height);
+		box-sizing: border-box;
 		min-width: 0;
 	}
 
@@ -766,14 +779,14 @@ components:
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		padding: 0.5rem 0.8rem;
-		border-bottom: 1px solid var(--sl-color-gray-6);
+		min-height: 2rem;
+		margin-bottom: 0.6rem;
 		font-size: 0.8rem;
 		color: var(--sl-color-gray-4);
 	}
 
 	.error-box {
-		margin: 0.8rem;
+		margin-bottom: 0.6rem;
 		padding: 0.7rem 0.9rem;
 		border-radius: 0.35rem;
 		border: 1px solid var(--sl-color-red);
@@ -784,10 +797,12 @@ components:
 	}
 
 	.output-code {
-		max-height: 50vh;
+		flex: 1 1 auto;
+		min-height: 0;
 		overflow: auto;
 		background: var(--sl-color-bg-nav);
-		border-radius: 0 0 0.5rem 0.5rem;
+		border: 1px solid var(--sl-color-gray-6);
+		border-radius: 0.35rem;
 	}
 
 	@media (max-width: 64rem) {
@@ -795,7 +810,13 @@ components:
 			grid-template-columns: 1fr;
 		}
 
+		.input-panel,
+		.output-panel {
+			height: auto;
+		}
+
 		#spec-input {
+			flex: none;
 			height: 260px;
 		}
 
