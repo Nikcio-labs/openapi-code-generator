@@ -39,9 +39,7 @@ public sealed class CSharpSchemaGenerator
 
         HandleDiagnostics(result);
 
-        ArgumentNullException.ThrowIfNull(result.Document, "Failed to parse OpenAPI document.");
-
-        return GenerateFromDocument(result.Document);
+        return GenerateParsedDocument(result);
     }
 
     /// <summary>
@@ -58,6 +56,19 @@ public sealed class CSharpSchemaGenerator
         HandleDiagnostics(result);
 
         ArgumentNullException.ThrowIfNull(result.Document, "Failed to parse OpenAPI document.");
+
+        return GenerateFromDocument(result.Document);
+    }
+
+    /// <summary>
+    /// Generate C# code from a parsed <see cref="ReadResult"/>.
+    /// </summary>
+    private string GenerateParsedDocument(ReadResult result)
+    {
+        if (result.Document is null)
+        {
+            throw new InvalidOperationException("Failed to parse OpenAPI document.");
+        }
 
         return GenerateFromDocument(result.Document);
     }
