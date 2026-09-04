@@ -307,7 +307,7 @@ internal class CSharpCodeEmitter
             Dictionary<string, IOpenApiSchema> properties = CollectProperties(schema);
             foreach ((string? propName, IOpenApiSchema? propSchema) in properties)
             {
-                if (TypeResolver.IsEnum(propSchema) && !_knownSchemas.Contains(propSchema))
+                if (IsInlineEnum(propSchema))
                 {
                     string enumTypeName = NameHelper.ToPropertyName(propName, typeNameMap.GetValueOrDefault(schemaName));
                     List<string> values = ExtractEnumValues(propSchema);
@@ -449,6 +449,13 @@ internal class CSharpCodeEmitter
             candidate = baseName + suffix;
         }
         return candidate;
+    }
+
+    private bool IsInlineEnum(IOpenApiSchema schema)
+    {
+        return schema is not OpenApiSchemaReference &&
+               TypeResolver.IsEnum(schema) &&
+               !_knownSchemas.Contains(schema);
     }
 
     #endregion
@@ -906,7 +913,7 @@ internal class CSharpCodeEmitter
 
         // Resolve the type
         string typeName;
-        if (TypeResolver.IsEnum(propertySchema) && !_knownSchemas.Contains(propertySchema))
+        if (IsInlineEnum(propertySchema))
         {
             // Inline enum — look up the resolved enum type name from the
             // pre-computed inline enum map (handles dedup & conflict resolution).
