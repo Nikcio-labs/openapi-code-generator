@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.1](https://github.com/Nikcio-labs/openapi-code-generator/compare/v1.6.0...v1.6.1) (2026-09-05)
+
+
+### Fixed
+
+* reuse referenced enum component types ([#189](https://github.com/Nikcio-labs/openapi-code-generator/issues/189)) ([b251aee](https://github.com/Nikcio-labs/openapi-code-generator/commit/b251aeee8eae1051317344cebaa43512ae3af5f8))
+
 ## [1.6.0](https://github.com/Nikcio-labs/openapi-code-generator/compare/v1.5.0...v1.6.0) (2026-09-03)
 
 
