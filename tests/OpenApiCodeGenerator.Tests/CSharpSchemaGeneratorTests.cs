@@ -541,6 +541,45 @@ public class CSharpSchemaGeneratorTests
     }
 
     [Fact]
+    public void Generate_FromText_ReferencedEnumWithMatchingPropertyName_EmitsReferencedEnumOnce()
+    {
+        const string spec = """
+            {
+              "openapi": "3.0.3",
+              "info": { "title": "Referenced Enum Test", "version": "1.0.0" },
+              "paths": {},
+              "components": {
+                "schemas": {
+                  "MessageType": {
+                    "type": "string",
+                    "enum": ["info", "warning", "error"]
+                  },
+                  "SystemMessage": {
+                    "type": "object",
+                    "required": ["messageType"],
+                    "properties": {
+                      "messageType": { "$ref": "#/components/schemas/MessageType" }
+                    }
+                  }
+                }
+              }
+            }
+            """;
+
+        var generator = new CSharpSchemaGenerator(new GeneratorOptions
+        {
+            GenerateFileHeader = false,
+            Namespace = "GeneratedModels"
+        });
+
+        string generatedCode = generator.GenerateFromText(spec);
+
+        Assert.Equal(1, generatedCode.Split("public enum MessageType", StringSplitOptions.None).Length - 1);
+        Assert.DoesNotContain("public enum MessageType2", generatedCode, StringComparison.Ordinal);
+        Assert.Contains("public required MessageType MessageType { get; init; }", generatedCode, StringComparison.Ordinal);
+    }
+
+    [Fact]
     public async Task Generate_FromText_PropertyNameWithBackslash_RoundTripsWithSystemTextJsonDefaults()
     {
         const string spec = """
