@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.2](https://github.com/Nikcio-labs/openapi-code-generator/compare/v1.6.1...v1.6.2) (2026-09-06)
+
+
+### Fixed
+
+* infer omitted enum schema types ([#191](https://github.com/Nikcio-labs/openapi-code-generator/issues/191)) ([e356447](https://github.com/Nikcio-labs/openapi-code-generator/commit/e356447ee03b47e09caf5eee8a14021379248330))
+
 ## [1.6.1](https://github.com/Nikcio-labs/openapi-code-generator/compare/v1.6.0...v1.6.1) (2026-09-05)
 
 
