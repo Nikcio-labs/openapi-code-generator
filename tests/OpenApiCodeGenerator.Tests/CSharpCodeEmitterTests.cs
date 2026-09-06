@@ -445,6 +445,188 @@ public class CSharpCodeEmitterTests
 
     #endregion
 
+    #region allOf with Multiple $refs
+
+    [Fact]
+    public void Emit_AllOfMultipleRefs_FlattensAdditionalRefProperties()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["Base"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["id"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                }
+            },
+            ["Mixin"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["label"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                }
+            },
+            ["Derived"] = new OpenApiSchema
+            {
+                AllOf = new List<IOpenApiSchema>
+                {
+                    new OpenApiSchemaReference("Base"),
+                    new OpenApiSchemaReference("Mixin"),
+                    new OpenApiSchema
+                    {
+                        Type = JsonSchemaType.Object,
+                        Properties = new Dictionary<string, IOpenApiSchema>
+                        {
+                            ["extra"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                        }
+                    }
+                }
+            }
+        };
+
+        string result = Generate(schemas);
+
+        // First $ref becomes the base type
+        Assert.Contains("public partial record Derived : Base", result, StringComparison.Ordinal);
+
+        // Properties from the second $ref (Mixin) should be flattened into Derived
+        Assert.Contains("public string? Label { get; init; }", result, StringComparison.Ordinal);
+
+        // Properties from the inline allOf member should also be present
+        Assert.Contains("public string? Extra { get; init; }", result, StringComparison.Ordinal);
+
+        // Properties from the base type should NOT be re-declared
+        // (they're inherited from Base)
+        var derivedSection = result[result.IndexOf("record Derived", StringComparison.Ordinal)..];
+        Assert.DoesNotContain("public string? Id", derivedSection, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Emit_AllOfMultipleRefs_CollectsRequiredFromAdditionalRefs()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["Base"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["id"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                }
+            },
+            ["Mixin"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Required = new HashSet<string> { "label" },
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["label"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                }
+            },
+            ["Derived"] = new OpenApiSchema
+            {
+                AllOf = new List<IOpenApiSchema>
+                {
+                    new OpenApiSchemaReference("Base"),
+                    new OpenApiSchemaReference("Mixin")
+                }
+            }
+        };
+
+        string result = Generate(schemas);
+
+        // "label" is required in Mixin, so it should be required in Derived
+        Assert.Contains("public required string Label { get; init; }", result, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public async Task Emit_AllOfMultipleRefs_CompilesSuccessfully()
+    {
+        var schemas = new Dictionary<string, IOpenApiSchema>
+        {
+            ["Base"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["id"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                }
+            },
+            ["Mixin"] = new OpenApiSchema
+            {
+                Type = JsonSchemaType.Object,
+                Required = new HashSet<string> { "label" },
+                Properties = new Dictionary<string, IOpenApiSchema>
+                {
+                    ["label"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                }
+            },
+            ["Derived"] = new OpenApiSchema
+            {
+                AllOf = new List<IOpenApiSchema>
+                {
+                    new OpenApiSchemaReference("Base"),
+                    new OpenApiSchemaReference("Mixin"),
+                    new OpenApiSchema
+                    {
+                        Type = JsonSchemaType.Object,
+                        Properties = new Dictionary<string, IOpenApiSchema>
+                        {
+                            ["extra"] = new OpenApiSchema { Type = JsonSchemaType.String }
+                        }
+                    }
+                }
+            }
+        };
+
+        string result = Generate(schemas);
+
+        // Compile in a temp project
+        string tempRoot = Path.Combine(
+            AppContext.BaseDirectory, "..", "..", "..", "..",
+            "TestResults", "AllOfMultiRefCompile", Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(tempRoot);
+        try
+        {
+            await File.WriteAllTextAsync(Path.Combine(tempRoot, "Generated.cs"), result);
+            await File.WriteAllTextAsync(Path.Combine(tempRoot, "Harness.csproj"), """
+                <Project Sdk="Microsoft.NET.Sdk">
+                  <PropertyGroup>
+                    <TargetFramework>net10.0</TargetFramework>
+                    <Nullable>enable</Nullable>
+                    <AnalysisMode>All</AnalysisMode>
+                    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+                  </PropertyGroup>
+                </Project>
+                """);
+            using var proc = new System.Diagnostics.Process();
+            proc.StartInfo = new System.Diagnostics.ProcessStartInfo
+            {
+                FileName = "dotnet",
+                Arguments = $"build \"{Path.Combine(tempRoot, "Harness.csproj")}\" -v q --nologo",
+                WorkingDirectory = tempRoot,
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                UseShellExecute = false,
+                CreateNoWindow = true
+            };
+            proc.Start();
+            string stdout = await proc.StandardOutput.ReadToEndAsync();
+            string stderr = await proc.StandardError.ReadToEndAsync();
+            await proc.WaitForExitAsync();
+            Assert.True(proc.ExitCode == 0,
+                $"allOf multi-ref code failed to compile.{Environment.NewLine}STDOUT:{stdout}{Environment.NewLine}STDERR:{stderr}");
+        }
+        finally
+        {
+            if (Directory.Exists(tempRoot)) Directory.Delete(tempRoot, recursive: true);
+        }
+    }
+
+    #endregion
+
     #region Union Types (oneOf)
 
     [Fact]
