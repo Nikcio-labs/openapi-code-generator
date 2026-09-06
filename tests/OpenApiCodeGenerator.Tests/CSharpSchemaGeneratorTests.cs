@@ -580,6 +580,77 @@ public class CSharpSchemaGeneratorTests
     }
 
     [Fact]
+    public void Generate_FromText_StringEnumWithoutType_InfersStringEnum()
+    {
+        const string spec = """
+            {
+              "openapi": "3.0.3",
+              "info": { "title": "Typeless Enum Test", "version": "1.0.0" },
+              "paths": {},
+              "components": {
+                "schemas": {
+                  "MessageType": {
+                    "enum": ["info", "warning", "error"]
+                  },
+                  "SystemMessage": {
+                    "type": "object",
+                    "required": ["messageType"],
+                    "properties": {
+                      "messageType": { "$ref": "#/components/schemas/MessageType" }
+                    }
+                  }
+                }
+              }
+            }
+            """;
+
+        var generator = new CSharpSchemaGenerator(new GeneratorOptions
+        {
+            GenerateFileHeader = false,
+            Namespace = "GeneratedModels"
+        });
+
+        string generatedCode = generator.GenerateFromText(spec);
+
+        Assert.Contains("[JsonConverter(typeof(JsonStringEnumConverter<MessageType>))]", generatedCode, StringComparison.Ordinal);
+        Assert.Contains("public enum MessageType", generatedCode, StringComparison.Ordinal);
+        Assert.Contains("[JsonStringEnumMemberName(\"info\")]", generatedCode, StringComparison.Ordinal);
+        Assert.Contains("public required MessageType MessageType { get; init; }", generatedCode, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Generate_FromText_IntegerEnumWithoutType_InfersIntegerEnum()
+    {
+        const string spec = """
+            {
+              "openapi": "3.0.3",
+              "info": { "title": "Typeless Integer Enum Test", "version": "1.0.0" },
+              "paths": {},
+              "components": {
+                "schemas": {
+                  "HttpStatusCode": {
+                    "enum": [200, 404, 500]
+                  }
+                }
+              }
+            }
+            """;
+
+        var generator = new CSharpSchemaGenerator(new GeneratorOptions
+        {
+            GenerateFileHeader = false,
+            Namespace = "GeneratedModels"
+        });
+
+        string generatedCode = generator.GenerateFromText(spec);
+
+        Assert.Contains("public enum HttpStatusCode", generatedCode, StringComparison.Ordinal);
+        Assert.Contains("_200 = 200", generatedCode, StringComparison.Ordinal);
+        Assert.Contains("_404 = 404", generatedCode, StringComparison.Ordinal);
+        Assert.Contains("_500 = 500", generatedCode, StringComparison.Ordinal);
+    }
+
+    [Fact]
     public async Task Generate_FromText_PropertyNameWithBackslash_RoundTripsWithSystemTextJsonDefaults()
     {
         const string spec = """

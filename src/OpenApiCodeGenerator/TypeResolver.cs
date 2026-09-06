@@ -1,4 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
+using System.Text.Json;
 using Microsoft.OpenApi;
 
 namespace OpenApiCodeGenerator;
@@ -309,17 +311,58 @@ internal class TypeResolver
     #region Schema Classification Helpers
 
     /// <summary>
-    /// Gets the base type without the Null flag.
+    /// Gets the explicit base type without the Null flag, or infers one from
+    /// homogeneous enum values when the schema omits <c>type</c>.
     /// </summary>
     public static JsonSchemaType? GetBaseType(IOpenApiSchema schema)
     {
         if (schema.Type is not { } type)
         {
-            return null;
+            return InferEnumType(schema);
         }
 
         JsonSchemaType nonNull = type & ~JsonSchemaType.Null;
         return nonNull == 0 ? null : nonNull;
+    }
+
+    private static JsonSchemaType? InferEnumType(IOpenApiSchema schema)
+    {
+        if (schema.Enum is not { Count: > 0 } values)
+        {
+            return null;
+        }
+
+        JsonSchemaType? inferredType = null;
+        foreach (var value in values)
+        {
+            if (value is null || JsonNullSentinel.IsJsonNullSentinel(value))
+            {
+                continue;
+            }
+
+            JsonSchemaType? valueType = value.GetValueKind() switch
+            {
+                JsonValueKind.String => JsonSchemaType.String,
+                JsonValueKind.Number when IsSupportedInteger(value.ToJsonString()) => JsonSchemaType.Integer,
+                _ => null
+            };
+
+            if (valueType is null || inferredType is not null && inferredType != valueType)
+            {
+                return null;
+            }
+
+            inferredType = valueType;
+        }
+
+        return inferredType;
+    }
+
+    private static bool IsSupportedInteger(string value)
+    {
+        return decimal.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out decimal number) &&
+               decimal.Truncate(number) == number &&
+               number is >= int.MinValue and <= int.MaxValue;
     }
 
     /// <summary>
@@ -335,7 +378,7 @@ internal class TypeResolver
     /// </summary>
     public static bool HasTypeFlag(IOpenApiSchema schema, JsonSchemaType flag)
     {
-        return schema.Type.HasValue && (schema.Type.Value & flag) == flag;
+        return GetBaseType(schema) is { } type && (type & flag) == flag;
     }
 
     /// <summary>

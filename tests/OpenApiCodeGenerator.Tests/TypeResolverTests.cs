@@ -327,6 +327,54 @@ public class TypeResolverTests
     }
 
     [Fact]
+    public void GetBaseType_StringEnumWithoutType_InfersString()
+    {
+        var schema = new OpenApiSchema
+        {
+            Enum = new List<JsonNode> { (JsonNode) "info", (JsonNode) "warning" }
+        };
+
+        Assert.Equal(JsonSchemaType.String, TypeResolver.GetBaseType(schema));
+        Assert.True(TypeResolver.IsEnum(schema));
+    }
+
+    [Fact]
+    public void GetBaseType_IntegerEnumWithoutType_InfersInteger()
+    {
+        var schema = new OpenApiSchema
+        {
+            Enum = new List<JsonNode> { (JsonNode) 1, (JsonNode) 2 }
+        };
+
+        Assert.Equal(JsonSchemaType.Integer, TypeResolver.GetBaseType(schema));
+        Assert.True(TypeResolver.IsEnum(schema));
+    }
+
+    [Fact]
+    public void GetBaseType_MixedEnumWithoutType_DoesNotInferType()
+    {
+        var schema = new OpenApiSchema
+        {
+            Enum = new List<JsonNode> { (JsonNode) "info", (JsonNode) 1 }
+        };
+
+        Assert.Null(TypeResolver.GetBaseType(schema));
+        Assert.False(TypeResolver.IsEnum(schema));
+    }
+
+    [Fact]
+    public void GetBaseType_FractionalEnumWithoutType_DoesNotInferType()
+    {
+        var schema = new OpenApiSchema
+        {
+            Enum = new List<JsonNode> { (JsonNode) 1.5, (JsonNode) 2.5 }
+        };
+
+        Assert.Null(TypeResolver.GetBaseType(schema));
+        Assert.False(TypeResolver.IsEnum(schema));
+    }
+
+    [Fact]
     public void IsEnum_NoEnum_ReturnsFalse()
     {
         var schema = new OpenApiSchema { Type = JsonSchemaType.String };
