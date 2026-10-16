@@ -22,7 +22,7 @@
 	"dependencies": {
 		"@astrojs/starlight": "0.42.6",
 		"astro": "7.3.8",
-		"sharp": "0.35.4",
+		"sharp": "0.35.5",
 		"shiki": "4.4.3",
 		"vite": "8.3.4"
 	}
