@@ -45,27 +45,6 @@ updates:
         patterns:
           - "@biomejs/*"
 
-  - package-ecosystem: "npm"
-    directory: "/docs/"
-    schedule:
-      interval: "weekly"
-      day: "monday"
-    versioning-strategy: increase
-    cooldown:
-      default-days: 7
-      semver-major-days: 7
-      semver-minor-days: 7
-      semver-patch-days: 7
-    open-pull-requests-limit: 10
-    commit-message:
-      prefix: "chore(deps-docs)"
-    groups:
-      astro:
-        patterns:
-          - "astro"
-          - "@astrojs/*"
-          - "astro-*"
-
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
