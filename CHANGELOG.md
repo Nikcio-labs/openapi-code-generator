@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.3](https://github.com/Nikcio-labs/openapi-code-generator/compare/v1.6.2...v1.6.3) (2026-10-27)
+
+
+### Fixed
+
+* **ci:** point Dependabot npm ecosystem at pnpm workspace root ([#235](https://github.com/Nikcio-labs/openapi-code-generator/issues/235)) ([152086a](https://github.com/Nikcio-labs/openapi-code-generator/commit/152086a066b9373c26db2e1f3c44315e0a182a9f))
+
 ## [1.6.2](https://github.com/Nikcio-labs/openapi-code-generator/compare/v1.6.1...v1.6.2) (2026-09-06)
 
 
