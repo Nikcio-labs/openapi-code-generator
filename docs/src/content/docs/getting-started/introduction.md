@@ -22,15 +22,19 @@ OpenAPI Code Generator reads your OpenAPI spec and produces idiomatic C# code au
 ## Key Features
 
 ### Modern C# Patterns
+
 Generated code uses `record` types, `required` properties, `init` accessors, and nullable reference types — following current C# best practices.
 
 ### Zero Runtime Dependencies
+
 The generated code only depends on `System.Text.Json`, which is built into .NET. No additional NuGet packages are needed in your consuming project.
 
 ### Primitive Alias Flexibility
+
 Primitive component aliases are emitted as strongly typed wrapper structs by default and include generated `System.Text.Json` converters. If you prefer plain primitives at usage sites, enable `InlinePrimitiveTypeAliases` or pass `--inline-type-aliases` in the CLI.
 
 ### Flexible Usage
+
 Use it as a CLI tool for quick one-off generation, or reference the core library for integration into your own build pipeline or tooling.
 
 ## How It Works

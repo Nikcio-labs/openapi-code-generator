@@ -88,7 +88,8 @@ export default defineConfig({
 					tag: "meta",
 					attrs: {
 						property: "og:image:alt",
-						content: "OpenAPI Code Generator — OpenAPI 3.x to C# records, enums and type aliases",
+						content:
+							"OpenAPI Code Generator — OpenAPI 3.x to C# records, enums and type aliases",
 					},
 				},
 				{
@@ -102,7 +103,8 @@ export default defineConfig({
 					tag: "meta",
 					attrs: {
 						name: "twitter:image:alt",
-						content: "OpenAPI Code Generator — OpenAPI 3.x to C# records, enums and type aliases",
+						content:
+							"OpenAPI Code Generator — OpenAPI 3.x to C# records, enums and type aliases",
 					},
 				},
 			],

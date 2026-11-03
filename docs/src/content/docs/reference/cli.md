@@ -193,10 +193,10 @@ openapi-codegen --help
 
 ## Exit Codes
 
-| Code | Meaning |
-|------|---------|
-| `0` | Success |
-| `1` | Error (missing input, parse failure, etc.) |
+| Code | Meaning                                    |
+| ---- | ------------------------------------------ |
+| `0`  | Success                                    |
+| `1`  | Error (missing input, parse failure, etc.) |
 
 ## Examples
 

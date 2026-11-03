@@ -7,21 +7,21 @@ OpenAPI Code Generator provides a rich set of options to customize the generated
 
 ## Options Overview
 
-| Option | CLI Flag | Default | Description |
-|--------|----------|---------|-------------|
-| `Namespace` | `-n, --namespace` | `GeneratedModels` | C# namespace for generated types |
-| `ModelPrefix` | `--model-prefix` | `null` | Prefix every generated model type name |
-| `IncludeSchemas` | `--include-schema` | `null` | Generate only selected schemas and their dependencies |
-| `GenerateDocComments` | `--no-doc-comments` | `true` | Include XML doc comments |
-| `GenerateFileHeader` | `--no-header` | `true` | Auto-generated file header |
-| `DefaultNonNullable` | `--no-default-non-nullable` | `true` | Defaults as non-nullable |
-| `AddDefaultValuesToProperties` | `--no-add-default-values` | `true` | Add default values from OpenAPI to properties |
-| `UseImmutableArrays` | `--mutable-arrays` | `true` | Use `IReadOnlyList<T>` |
-| `UseImmutableDictionaries` | `--mutable-dictionaries` | `true` | Use `IReadOnlyDictionary` |
-| `OmitJsonPropertyNameAttributes` | `--omit-json-attributes` | `false` | Skip `[JsonPropertyName]` on generated properties |
-| `InlinePrimitiveTypeAliases` | `--inline-type-aliases` | `false` | Inline primitive aliases instead of emitting wrapper types |
-| `EmitValidationAttributes` | `--no-validation-attributes` | `true` | Emit validation attributes from OpenAPI constraints |
-| `EmitObsoleteAttribute` | `--no-deprecated-attributes` | `true` | Emit `[Obsolete]` on deprecated schemas and properties |
+| Option                           | CLI Flag                     | Default           | Description                                                |
+| -------------------------------- | ---------------------------- | ----------------- | ---------------------------------------------------------- |
+| `Namespace`                      | `-n, --namespace`            | `GeneratedModels` | C# namespace for generated types                           |
+| `ModelPrefix`                    | `--model-prefix`             | `null`            | Prefix every generated model type name                     |
+| `IncludeSchemas`                 | `--include-schema`           | `null`            | Generate only selected schemas and their dependencies      |
+| `GenerateDocComments`            | `--no-doc-comments`          | `true`            | Include XML doc comments                                   |
+| `GenerateFileHeader`             | `--no-header`                | `true`            | Auto-generated file header                                 |
+| `DefaultNonNullable`             | `--no-default-non-nullable`  | `true`            | Defaults as non-nullable                                   |
+| `AddDefaultValuesToProperties`   | `--no-add-default-values`    | `true`            | Add default values from OpenAPI to properties              |
+| `UseImmutableArrays`             | `--mutable-arrays`           | `true`            | Use `IReadOnlyList<T>`                                     |
+| `UseImmutableDictionaries`       | `--mutable-dictionaries`     | `true`            | Use `IReadOnlyDictionary`                                  |
+| `OmitJsonPropertyNameAttributes` | `--omit-json-attributes`     | `false`           | Skip `[JsonPropertyName]` on generated properties          |
+| `InlinePrimitiveTypeAliases`     | `--inline-type-aliases`      | `false`           | Inline primitive aliases instead of emitting wrapper types |
+| `EmitValidationAttributes`       | `--no-validation-attributes` | `true`            | Emit validation attributes from OpenAPI constraints        |
+| `EmitObsoleteAttribute`          | `--no-deprecated-attributes` | `true`            | Emit `[Obsolete]` on deprecated schemas and properties     |
 
 ## Namespace
 
