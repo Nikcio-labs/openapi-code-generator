@@ -53,7 +53,7 @@ jobs:
         with:
           path: docs
           node-version: 24
-          package-manager: pnpm@latest
+          package-manager: pnpm@12.15.0
           build-cmd: pnpm run build:ci
 
   deploy:
