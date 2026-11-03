@@ -116,10 +116,6 @@ jobs:
           cache: pnpm
           cache-dependency-path: pnpm-lock.yaml
 
-      # Fresh-runner equivalent of the docs deploy install: a cold store
-      # re-verifies every lockfile entry against the minimumReleaseAge policy
-      # in pnpm-workspace.yaml, so an entry younger than the policy fails here
-      # before merge instead of breaking the Deploy Docs workflow on main.
       - name: Install dependencies (frozen lockfile)
         run: pnpm install --frozen-lockfile
         working-directory: ./docs
