@@ -9,40 +9,40 @@ This reference documents how the code generator maps OpenAPI schema types to C# 
 
 ### String
 
-| OpenAPI Type | Format | C# Type |
-|-------------|--------|---------|
-| `string` | _(none)_ | `string` |
-| `string` | `date-time` | `DateTimeOffset` |
-| `string` | `date` | `DateOnly` |
-| `string` | `time` | `TimeOnly` |
-| `string` | `duration` | `TimeSpan` |
-| `string` | `uuid` | `Guid` |
-| `string` | `uri` | `Uri` |
-| `string` | `byte` | `byte[]` |
-| `string` | `binary` | `Stream` |
+| OpenAPI Type | Format      | C# Type          |
+| ------------ | ----------- | ---------------- |
+| `string`     | _(none)_    | `string`         |
+| `string`     | `date-time` | `DateTimeOffset` |
+| `string`     | `date`      | `DateOnly`       |
+| `string`     | `time`      | `TimeOnly`       |
+| `string`     | `duration`  | `TimeSpan`       |
+| `string`     | `uuid`      | `Guid`           |
+| `string`     | `uri`       | `Uri`            |
+| `string`     | `byte`      | `byte[]`         |
+| `string`     | `binary`    | `Stream`         |
 
 ### Integer
 
-| OpenAPI Type | Format | C# Type |
-|-------------|--------|---------|
-| `integer` | _(none)_ | `int` |
-| `integer` | `int32` | `int` |
-| `integer` | `int64` | `long` |
+| OpenAPI Type | Format   | C# Type |
+| ------------ | -------- | ------- |
+| `integer`    | _(none)_ | `int`   |
+| `integer`    | `int32`  | `int`   |
+| `integer`    | `int64`  | `long`  |
 
 ### Number
 
-| OpenAPI Type | Format | C# Type |
-|-------------|--------|---------|
-| `number` | _(none)_ | `double` |
-| `number` | `float` | `float` |
-| `number` | `double` | `double` |
-| `number` | `decimal` | `decimal` |
+| OpenAPI Type | Format    | C# Type   |
+| ------------ | --------- | --------- |
+| `number`     | _(none)_  | `double`  |
+| `number`     | `float`   | `float`   |
+| `number`     | `double`  | `double`  |
+| `number`     | `decimal` | `decimal` |
 
 ### Boolean
 
 | OpenAPI Type | C# Type |
-|-------------|---------|
-| `boolean` | `bool` |
+| ------------ | ------- |
+| `boolean`    | `bool`  |
 
 ## Complex Types
 
@@ -72,10 +72,10 @@ public record MyModel
 
 Array types are mapped to generic collections:
 
-| Configuration | C# Type |
-|--------------|---------|
+| Configuration                         | C# Type            |
+| ------------------------------------- | ------------------ |
 | `UseImmutableArrays = true` (default) | `IReadOnlyList<T>` |
-| `UseImmutableArrays = false` | `List<T>` |
+| `UseImmutableArrays = false`          | `List<T>`          |
 
 ```yaml
 # Input
@@ -221,10 +221,10 @@ Properties are **non-nullable** (or use `required`) when:
 
 Schema references (`$ref: '#/components/schemas/MyType'`) are resolved to the C# type name of the referenced schema. The reference ID is converted to PascalCase:
 
-| OpenAPI Reference | C# Type |
-|------------------|---------|
-| `$ref: '#/components/schemas/User'` | `User` |
-| `$ref: '#/components/schemas/pet-status'` | `PetStatus` |
+| OpenAPI Reference                           | C# Type       |
+| ------------------------------------------- | ------------- |
+| `$ref: '#/components/schemas/User'`         | `User`        |
+| `$ref: '#/components/schemas/pet-status'`   | `PetStatus`   |
 | `$ref: '#/components/schemas/API_Response'` | `ApiResponse` |
 
 ## Name Conversion
