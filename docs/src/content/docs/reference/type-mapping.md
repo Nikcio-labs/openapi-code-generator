@@ -211,6 +211,7 @@ Properties are made nullable (`T?`) when:
 1. The property is **not** listed in `required`
 2. The schema explicitly includes `nullable: true`
 3. The schema type includes `null` in the type array
+4. The schema is a `oneOf` or `anyOf` of one type and `null`, such as `oneOf: [{ type: null }, { $ref: ... }]`
 
 Properties are **non-nullable** (or use `required`) when:
 

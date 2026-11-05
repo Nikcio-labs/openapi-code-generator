@@ -2012,6 +2012,57 @@ public class CSharpSchemaGeneratorTests
     #region Inline allOf / oneOf / anyOf Hoisting
 
     [Fact]
+    public async Task Generate_FromText_OneOfNullAndRef_GeneratesNullableReference()
+    {
+        // ASP.NET Core 10 emits nullable reference properties in OpenAPI 3.1 this way.
+        const string spec = """
+                        {
+                            "openapi": "3.1.1",
+                            "info": { "title": "Nullable Ref Test", "version": "1.0.0" },
+                            "components": {
+                                "schemas": {
+                                    "Order": {
+                                        "type": "object",
+                                        "properties": {
+                                            "customer": {
+                                                "oneOf": [
+                                                    { "type": "null" },
+                                                    {
+                                                        "description": "The customer, if any.",
+                                                        "$ref": "#/components/schemas/Customer"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "Customer": {
+                                        "type": "object",
+                                        "required": ["name"],
+                                        "properties": {
+                                            "name": { "type": "string" }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        """;
+
+        var generator = new CSharpSchemaGenerator(new GeneratorOptions
+        {
+            GenerateFileHeader = false,
+            Namespace = "GeneratedModels"
+        });
+
+        string generatedCode = generator.GenerateFromText(spec);
+
+        Assert.Contains("public Customer? Customer { get; init; }", generatedCode, StringComparison.Ordinal);
+        Assert.DoesNotContain("object? Customer", generatedCode, StringComparison.Ordinal);
+        Assert.DoesNotContain("OrderCustomer", generatedCode, StringComparison.Ordinal);
+
+        await AssertGeneratedCodeCompilesAsync(generatedCode, implicitUsings: true, treatWarningsAsErrors: true);
+    }
+
+    [Fact]
     public async Task Generate_FromText_InlineOneOfAllRefs_CompilesAndGeneratesCorrectStructure()
     {
         const string spec = """

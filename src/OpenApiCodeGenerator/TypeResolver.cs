@@ -281,6 +281,11 @@ internal class TypeResolver
             return ResolveCore(schema.OneOf[0], nullable);
         }
 
+        if (GetSingleNonNullVariant(schema.OneOf) is { } nonNull)
+        {
+            return ResolveCore(nonNull, nullable: true);
+        }
+
         return "object";
     }
 
@@ -297,15 +302,23 @@ internal class TypeResolver
             return ResolveCore(schema.AnyOf[0], nullable);
         }
 
-        // For nullable anyOf patterns (common in OpenAPI 3.1): [type, null]
-        var nonNull = schema.AnyOf!.Where(s =>
-            !(s.Type.HasValue && s.Type.Value == JsonSchemaType.Null)).ToList();
-        if (nonNull.Count == 1)
+        if (GetSingleNonNullVariant(schema.AnyOf) is { } nonNull)
         {
-            return ResolveCore(nonNull[0], nullable: true);
+            return ResolveCore(nonNull, nullable: true);
         }
 
         return "object";
+    }
+
+    /// <summary>
+    /// Returns the only non-null variant of a oneOf or anyOf, as in the OpenAPI 3.1
+    /// nullable pattern <c>[type, null]</c>, or null when there is not exactly one.
+    /// </summary>
+    private static IOpenApiSchema? GetSingleNonNullVariant(IList<IOpenApiSchema> variants)
+    {
+        var nonNull = variants.Where(s =>
+            !(s.Type.HasValue && s.Type.Value == JsonSchemaType.Null)).ToList();
+        return nonNull.Count == 1 ? nonNull[0] : null;
     }
 
     #region Schema Classification Helpers
