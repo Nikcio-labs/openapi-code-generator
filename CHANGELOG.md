@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.6.4](https://github.com/Nikcio-labs/openapi-code-generator/compare/v1.6.3...v1.6.4) (2026-11-07)
+
+
+### Fixed
+
+* **deps:** lockfile violates minimumReleaseAge policy; add CI check ([#244](https://github.com/Nikcio-labs/openapi-code-generator/issues/244)) ([d89ad37](https://github.com/Nikcio-labs/openapi-code-generator/commit/d89ad371d9258532f12d66d92ab4d167b283f734))
+* resolve nullable oneOf to the referenced type ([#246](https://github.com/Nikcio-labs/openapi-code-generator/issues/246)) ([aebd044](https://github.com/Nikcio-labs/openapi-code-generator/commit/aebd044bf21835568d08686e12cf50b6134514e5))
+
 ## [1.6.3](https://github.com/Nikcio-labs/openapi-code-generator/compare/v1.6.2...v1.6.3) (2026-11-03)
 
 
