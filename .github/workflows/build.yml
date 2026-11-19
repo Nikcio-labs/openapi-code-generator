@@ -25,6 +25,16 @@ on:
   pull_request:
     branches: [ "main" ]
     paths:
+      - 'src/**'
+      - 'tests/**'
+      - 'examples/**'
+      - 'benchmarks/**'
+      - 'Directory.Build.props'
+      - 'Directory.Packages.props'
+      - 'global.json'
+      - '.editorconfig'
+      - 'OpenApiCodeGenerator.slnx'
+      - 'nuget.config'
       - 'pnpm-workspace.yaml'
       - 'pnpm-lock.yaml'
       - 'package.json'
@@ -32,6 +42,9 @@ on:
       - 'docs/src/**'
       - 'docs/astro.config.mjs'
       - '.github/workflows/build.yml'
+      - '.release-please-config.json'
+      - '.release-please-manifest.json'
+      - '.commitlintrc.json'
 
 permissions:
   contents: read
